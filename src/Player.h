@@ -36,11 +36,6 @@ class Player : public PlatformerObject {
     // handle any animation for the player
     void handleAnimation();
 
-    bool m_bFalling;
-    bool m_bOnGround;
-    bool m_bAttack;
-    bool m_bJumping;
-
     player_state m_currentState;
 };
 

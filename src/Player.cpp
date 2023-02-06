@@ -2,21 +2,9 @@
 
 #include "InputHandler.h"
 #include "SoundManager.h"
-#include <SDL2/SDL_scancode.h>
 #include <iostream>
 
-Player::Player() : PlatformerObject() {
-    m_nFrameMap["player idle"] = 11;
-    m_nFrameMap["player run"] = 8;
-    m_nFrameMap["player jump"] = 1;
-    m_nFrameMap["player fall"] = 1;
-    m_nFrameMap["player ground"] = 1;
-    m_nFrameMap["player attack"] = 3;
-    m_nFrameMap["player hit"] = 2;
-    m_nFrameMap["player dead"] = 4;
-    m_nFrameMap["player doorIn"] = 8;
-    m_nFrameMap["player doorOut"] = 8;
-}
+Player::Player() : PlatformerObject() {}
 
 void Player::load(const LoaderParams *pParams) {
     PlatformerObject::load(pParams);

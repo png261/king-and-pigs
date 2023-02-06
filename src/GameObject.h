@@ -2,6 +2,7 @@
 #define GAME_OBJECT_H
 
 #include "LoaderParams.h"
+#include "TextureManager.h"
 #include "Vector2D.h"
 #include <map>
 #include <string>
@@ -25,7 +26,7 @@ class GameObject {
     int getHeight() const { return m_height; }
     virtual void setAnimation(std::string textureID) {
         m_textureID = textureID;
-        m_numFrames = m_nFrameMap[textureID];
+        m_numFrames = TextureManager::Instance()->getNFrames(textureID);
     }
 
   protected:
@@ -34,7 +35,9 @@ class GameObject {
         : m_position(0, 0), m_velocity(0, 0), m_acceleration(0, 0), m_width(0),
           m_height(0), m_currentRow(0), m_currentFrame(0), m_bUpdating(false),
           m_bDead(false), m_bDying(false), m_angle(0), m_alpha(255),
-          m_bFlipped(false) {}
+          m_bFlipped(false) {
+        m_numFrames = TextureManager::Instance()->getNFrames(m_textureID);
+    }
 
     // movement
     Vector2D m_position;
@@ -50,7 +53,6 @@ class GameObject {
     int m_currentFrame;
     int m_numFrames;
     std::string m_textureID;
-    std::map<std::string, int> m_nFrameMap;
 
     // common boolean
     bool m_bUpdating;
