@@ -4,12 +4,15 @@
 #include "TextureManager.h"
 #include <iostream>
 
+#define GRAVITY 0.3
+
 PlatformerObject::PlatformerObject()
-    : GameObject(), m_moveSpeed(0),
-      m_dyingTime(0), m_dyingCounter(0), m_bPlayedDeathSound(false),
-      m_bFlipped(false), m_bMoveLeft(false), m_bMoveRight(false),
-      m_bRunning(false), m_bFalling(false), m_bJumping(false),
-      m_bCanJump(false), m_lastSafePos(0, 0) {}
+    : GameObject(), m_moveSpeed(0), m_dyingTime(0), m_dyingCounter(0),
+      m_bPlayedDeathSound(false), m_bFlipped(false), m_bMoveLeft(false),
+      m_bMoveRight(false), m_bRunning(false), m_bFalling(false),
+      m_bJumping(false), m_bCanJump(false), m_lastSafePos(0, 0) {
+    m_acceleration.setY(GRAVITY);
+}
 
 void PlatformerObject::load(const LoaderParams *pParams) {
     m_position = Vector2D(pParams->getX(), pParams->getY());
@@ -29,14 +32,21 @@ void PlatformerObject::draw() {
 
 void PlatformerObject::update() {
     m_velocity += m_acceleration;
+
+    // on ground
+    if (m_position.getY() + m_velocity.getY() >= Game::Instance()->getHeight() - 400) {
+        m_velocity.setY(0);
+    } 
+
     m_position += m_velocity;
-    if(m_velocity.getX() < 0) {
+
+    if (m_velocity.getX() < 0) {
         m_bFlipped = true;
-    } else if(m_velocity.getX() > 0) {
+    } else if (m_velocity.getX() > 0) {
         m_bFlipped = false;
     }
 
-    m_currentFrame = int(((SDL_GetTicks() / 1000) % m_numFrames));
+    m_currentFrame = int(((SDL_GetTicks() / 100) % m_numFrames));
 }
 
 void PlatformerObject::doDyingAnimation() {

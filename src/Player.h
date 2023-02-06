@@ -3,6 +3,14 @@
 
 #include "PlatformerObject.h"
 
+#include <map>
+#include <string>
+
+enum player_state {
+    ON_GROUND,
+    ON_FLY,
+};
+
 class Player : public PlatformerObject {
   public:
     Player();
@@ -28,10 +36,12 @@ class Player : public PlatformerObject {
     // handle any animation for the player
     void handleAnimation();
 
-    // player can be invulnerable for a time
-    int m_invulnerable;
-    int m_invulnerableTime;
-    int m_invulnerableCounter;
+    bool m_bFalling;
+    bool m_bOnGround;
+    bool m_bAttack;
+    bool m_bJumping;
+
+    player_state m_currentState;
 };
 
 #endif
