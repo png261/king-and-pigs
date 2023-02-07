@@ -20,6 +20,9 @@ class TextureManager {
                    int currentRow, int currentFrame, SDL_Renderer *pRenderer,
                    double angle, int alpha = 255,
                    SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void drawTile(std::string id, int margin, int spacing, int x, int y,
+                  int width, int height, int currentRow, int currentFrame,
+                  SDL_Renderer *pRenderer);
     int getNFrames(std::string textureID) {
         if (m_nFrameMap.find(textureID) == m_nFrameMap.end()) {
             return 1;
@@ -33,5 +36,7 @@ class TextureManager {
     std::map<std::string, SDL_Texture *> m_textureMap;
     std::map<std::string, int> m_nFrameMap;
 };
+
+typedef TextureManager TheTextureManager;
 
 #endif
