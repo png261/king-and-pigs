@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+class TileLayer;
+
 class GameObject {
   public:
     virtual void load(const LoaderParams *pParams) = 0;
@@ -27,6 +29,22 @@ class GameObject {
     virtual void setAnimation(std::string textureID) {
         m_textureID = textureID;
         m_numFrames = TextureManager::Instance()->getNFrames(textureID);
+    }
+
+    // is the object currently being updated?
+    bool updating() { return m_bUpdating; }
+
+    // is the object dead?
+    bool dead() { return m_bDead; }
+
+    // is the object doing a death animation?
+    bool dying() { return m_bDying; }
+
+    // set whether to update the object or not
+    void setUpdating(bool updating) { m_bUpdating = updating; }
+
+    void setCollisionLayers(std::vector<TileLayer *> *layers) {
+        m_pCollisionLayers = layers;
     }
 
   protected:
@@ -65,6 +83,7 @@ class GameObject {
 
     // blending
     int m_alpha;
+    std::vector<TileLayer *> *m_pCollisionLayers;
 };
 
 #endif

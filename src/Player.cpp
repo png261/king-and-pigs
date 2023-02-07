@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include "Camera.h"
+#include "Game.h"
 #include "InputHandler.h"
 #include "SoundManager.h"
 #include <iostream>
@@ -14,6 +16,7 @@ void Player::load(const LoaderParams *pParams) {
 
     m_dyingTime = 100;
     m_currentState = ON_FLY;
+    TheCamera::Instance()->setTarget(this);
 }
 
 void Player::draw() { PlatformerObject::draw(); }

@@ -47,4 +47,6 @@ class InputHandler {
         const Uint8* m_keystates;
 };
 
+typedef InputHandler TheInputHandler;
+
 #endif

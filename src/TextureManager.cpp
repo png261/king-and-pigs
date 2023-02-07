@@ -24,15 +24,16 @@ bool TextureManager::load(std::string filename, std::string textureID,
     return true;
 }
 
-void TextureManager::draw(std::string textureID, int x, int y, int w, int h,
-                          SDL_Renderer *pRenderer, SDL_RendererFlip flip) {
+void TextureManager::draw(std::string textureID, int x, int y, int width,
+                          int height, SDL_Renderer *pRenderer,
+                          SDL_RendererFlip flip) {
     SDL_Rect srcRect;
     SDL_Rect destRect;
 
     srcRect.x = 0;
     srcRect.y = 0;
-    srcRect.w = destRect.w = w;
-    srcRect.h = destRect.h = h;
+    srcRect.w = destRect.w = width;
+    srcRect.h = destRect.h = height;
     destRect.x = x;
     destRect.y = y;
 
@@ -48,10 +49,8 @@ void TextureManager::drawFrame(std::string id, int x, int y, int width,
     SDL_Rect destRect;
     srcRect.x = width * currentFrame;
     srcRect.y = height * currentRow;
-    srcRect.w = width;
-    srcRect.h = height;
-    destRect.w = srcRect.w * 2;
-    destRect.h = srcRect.h * 2;
+    srcRect.w = destRect.w = width;
+    srcRect.h = destRect.h = height;
     destRect.x = x;
     destRect.y = y;
 

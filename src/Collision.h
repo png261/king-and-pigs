@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-const static int s_buffer = 1;
+const static int s_buffer = 4;
 
 static bool RectRect(SDL_Rect *A, SDL_Rect *B) {
     int aHBuf = A->h / s_buffer;

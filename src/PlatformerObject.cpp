@@ -1,7 +1,9 @@
 #include "PlatformerObject.h"
 
+#include "Camera.h"
 #include "Game.h"
 #include "TextureManager.h"
+#include "TileLayer.h"
 #include <iostream>
 
 #define GRAVITY 0.3
@@ -25,20 +27,16 @@ void PlatformerObject::load(const LoaderParams *pParams) {
 
 void PlatformerObject::draw() {
     TextureManager::Instance()->drawFrame(
-        m_textureID, m_position.getX(), m_position.getY(), m_width, m_height,
-        m_currentRow, m_currentFrame, Game::Instance()->getRenderer(), m_angle,
-        m_alpha, m_bFlipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+        m_textureID,
+        m_position.getX() - TheCamera::Instance()->getPosition().m_x,
+        m_position.getY() - TheCamera::Instance()->getPosition().m_y, m_width,
+        m_height, m_currentRow, m_currentFrame, Game::Instance()->getRenderer(),
+        m_angle, m_alpha, m_bFlipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
 
 void PlatformerObject::update() {
     m_velocity += m_acceleration;
-
-    // on ground
-    if (m_position.getY() + m_velocity.getY() >= Game::Instance()->getGameHeight() - 400) {
-        m_velocity.setY(0);
-    } 
-
-    m_position += m_velocity;
+    handleMovement(m_velocity);
 
     if (m_velocity.getX() < 0) {
         m_bFlipped = true;
@@ -56,4 +54,61 @@ void PlatformerObject::doDyingAnimation() {
         m_bDead = true;
     }
     m_dyingCounter++;
+}
+
+void PlatformerObject::handleMovement(Vector2D velocity) {
+    // get the current position
+    Vector2D newPos = m_position;
+
+    newPos.m_x = m_position.m_x + velocity.m_x;
+    if (checkCollideTile(newPos)) {
+        m_velocity.m_x = 0;
+    } else {
+        m_position.m_x = newPos.m_x;
+    }
+
+    newPos = m_position;
+
+    newPos.m_y += velocity.m_y;
+    if (checkCollideTile(newPos)) {
+        m_velocity.m_y = 0;
+    } else {
+        m_position.m_y = newPos.m_y;
+    }
+}
+
+bool PlatformerObject::checkCollideTile(Vector2D newPos) {
+    if (newPos.m_y + m_height >= TheGame::Instance()->getGameHeight() - 32) {
+        return false;
+    } else {
+        for (auto &pTileLayer : *m_pCollisionLayers) {
+            std::vector<std::vector<int>> tiles = pTileLayer->getTileIDs();
+
+            Vector2D layerPos = pTileLayer->getPosition();
+
+            int x, y, tileColumn, tileRow, tileid = 0;
+
+            x = layerPos.getX() / pTileLayer->getTileSize();
+            y = layerPos.getY() / pTileLayer->getTileSize();
+
+            Vector2D startPos = newPos;
+            startPos.m_x += 15;
+            startPos.m_y += 20;
+            Vector2D endPos(newPos.m_x + (m_width - 15),
+                            (newPos.m_y) + m_height - 4);
+
+            for (int i = startPos.m_x; i < endPos.m_x; i++) {
+                for (int j = startPos.m_y; j < endPos.m_y; j++) {
+                    tileColumn = i / pTileLayer->getTileSize();
+                    tileRow = j / pTileLayer->getTileSize();
+
+                    if (tiles[tileRow + y][tileColumn + x] != 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 }

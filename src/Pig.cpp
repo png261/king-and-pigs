@@ -4,7 +4,7 @@
 
 Pig::Pig() : Enemy() {}
 
-void Pig::load(const LoaderParams *pParams) { PlatformerObject::load(pParams); }
+void Pig::load(const LoaderParams *pParams) { Enemy::load(pParams); }
 
 void Pig::update() {
     if (m_currentState == PIG_ON_GROUND) {

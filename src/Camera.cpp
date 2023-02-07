@@ -1,29 +1,35 @@
 #include "Camera.h"
 #include "Game.h"
+#include <iostream>
 
 Camera::Camera() : m_pTarget(0), m_position(0, 0) {}
 
 Camera::~Camera() { delete m_pTarget; }
 
 Vector2D Camera::getPosition() const {
-    if (m_pTarget != 0) {
-        Vector2D pos(m_pTarget->m_x - (Game::Instance()->getGameWidth() / 2.0),
-                     0);
-
-        if (pos.m_x < 0) {
-            pos.m_x = 0;
-        }
-
-        return pos;
+    if (m_pTarget == NULL) {
+        return m_position;
     }
 
-    return m_position;
+    Vector2D pos(m_pTarget->getPosition().m_x -
+                     (Game::Instance()->getGameWidth() / 2.0),
+                 m_pTarget->getPosition().m_y -
+                     (Game::Instance()->getGameHeight() / 2.0));
+
+    if (pos.m_x < 0) {
+        pos.m_x = 0;
+    }
+
+    return pos;
 }
 
-void Camera::update(Vector2D velocity) {
-    m_position += velocity;
+void Camera::update() {
+    m_position += m_pTarget->getVelocity();
 
     if (m_position.m_x < 0) {
         m_position.m_x = 0;
+    }
+    if (m_position.m_y < 0) {
+        m_position.m_y = 0;
     }
 }

@@ -16,8 +16,13 @@ class PlatformerObject : public GameObject {
     virtual void collision() {}
 
     virtual std::string type() { return "SDLGameObject"; }
+
   protected:
     PlatformerObject();
+
+    bool checkCollideTile(Vector2D newPos);
+
+    void handleMovement(Vector2D velocity);
 
     void doDyingAnimation();
 

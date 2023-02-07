@@ -2,6 +2,8 @@
 #define GAME_H
 
 #include <SDL2/SDL.h>
+#include <string>
+#include <vector>
 
 class Game {
   public:
@@ -17,21 +19,47 @@ class Game {
 
     SDL_Renderer *getRenderer() { return m_pRenderer; }
 
-    int getGameWidth() const { return m_width; }
+    void setPlayerLives(int lives) { m_playerLives = lives; }
+    int getPlayerLives() { return m_playerLives; }
 
-    int getGameHeight() const { return m_width; }
+    void setCurrentLevel(int currentLevel);
+    int getCurrentLevel() const { return m_currentLevel; }
 
-    bool running() const { return m_bRunning; }
+    void setNextLevel(int nextLevel) { m_nextLevel = nextLevel; }
+    int getNextLevel() const { return m_nextLevel; }
+
+    void setLevelComplete(bool levelComplete) {
+        m_bLevelComplete = levelComplete;
+    }
+    const bool getLevelComplete() { return m_bLevelComplete; }
+
+    bool running() { return m_bRunning; }
+
     void quit() { m_bRunning = false; }
 
+    int getGameWidth() const { return m_gameWidth; }
+    int getGameHeight() const { return m_gameHeight; }
+
+    std::vector<std::string> getLevelFiles() { return m_levelFiles; }
+
   private:
-    Game(){};
+    Game();
     SDL_Window *m_pWindow;
     SDL_Renderer *m_pRenderer;
-    int m_width;
-    int m_height;
+    int m_gameWidth;
+    int m_gameHeight;
 
     bool m_bRunning;
+
+    int m_playerLives;
+
+    int m_currentLevel;
+    int m_nextLevel;
+    bool m_bLevelComplete;
+
+    std::vector<std::string> m_levelFiles;
 };
+
+typedef Game TheGame;
 
 #endif

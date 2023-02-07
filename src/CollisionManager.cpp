@@ -17,7 +17,6 @@ void CollisionManager::checkPlayerEnemyCollision(Player *pPlayer,
     pRect2->h = pEnemy->getHeight();
 
     if (RectRect(pRect1, pRect2)) {
-        std::cout << "col" << std::endl;
         pPlayer->collision();
     }
 }

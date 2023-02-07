@@ -14,13 +14,15 @@ class BaseCreator {
 
 template <class T> class Creator : public BaseCreator {
   public:
-    virtual GameObject *createGameObject() const { return new T(); };
+    virtual GameObject *createGameObject() const {
+        return new T(); 
+    };
 };
 
 class GameObjectFactory {
   public:
     static GameObjectFactory *Instance() {
-        static GameObjectFactory* s_pInstance = new GameObjectFactory();
+        static GameObjectFactory *s_pInstance = new GameObjectFactory();
         return s_pInstance;
     }
 

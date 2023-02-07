@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "Vector2D.h"
+#include "GameObject.h"
 
 class Camera {
   public:
@@ -10,9 +10,11 @@ class Camera {
         return s_pCamera;
     }
 
-    void update(Vector2D velocity);
+    void update();
 
-    void setTarget(Vector2D *target) { m_pTarget = target; }
+    void setTarget(GameObject *target) { 
+        m_pTarget = target;
+    }
     void setPosition(const Vector2D &position) { m_position = position; }
 
     Vector2D getPosition() const;
@@ -22,7 +24,7 @@ class Camera {
     ~Camera();
 
     // the camera's target
-    Vector2D *m_pTarget;
+    GameObject *m_pTarget;
 
     Vector2D m_position;
 };
