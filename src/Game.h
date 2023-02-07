@@ -17,9 +17,9 @@ class Game {
 
     SDL_Renderer *getRenderer() { return m_pRenderer; }
 
-    int getWidth() const { return m_width; }
+    int getGameWidth() const { return m_width; }
 
-    int getHeight() const { return m_width; }
+    int getGameHeight() const { return m_width; }
 
     bool running() const { return m_bRunning; }
     void quit() { m_bRunning = false; }

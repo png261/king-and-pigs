@@ -34,7 +34,7 @@ void PlatformerObject::update() {
     m_velocity += m_acceleration;
 
     // on ground
-    if (m_position.getY() + m_velocity.getY() >= Game::Instance()->getHeight() - 400) {
+    if (m_position.getY() + m_velocity.getY() >= Game::Instance()->getGameHeight() - 400) {
         m_velocity.setY(0);
     } 
 
