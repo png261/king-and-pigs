@@ -3,7 +3,7 @@
 #include <SDL2/SDL_render.h>
 
 bool TextureManager::load(std::string filename, std::string textureID,
-                          int nFrames, SDL_Renderer *pRenderer) {
+                           SDL_Renderer *pRenderer, int nFrames) {
     SDL_Surface *pTempSurface = IMG_Load(filename.c_str());
     if (pTempSurface == NULL) {
         SDL_Log("fail to load %s", filename.c_str());
@@ -18,7 +18,8 @@ SDL_Texture *pTexture =
         return false;
     }
 
-    m_textureMap[textureID] = Texture {pTexture, nFrames};
+    m_textureMap[textureID] = pTexture;
+    m_nFrameMap[textureID] = nFrames;
 
     return true;
 }
@@ -35,7 +36,7 @@ void TextureManager::draw(std::string textureID, int x, int y, int w, int h,
     destRect.x = x;
     destRect.y = y;
 
-    SDL_RenderCopyEx(pRenderer, m_textureMap[textureID].pTexture, &srcRect,
+    SDL_RenderCopyEx(pRenderer, m_textureMap[textureID], &srcRect,
                      &destRect, 0, 0, flip);
 }
 
@@ -54,8 +55,8 @@ void TextureManager::drawFrame(std::string id, int x, int y, int width,
     destRect.x = x;
     destRect.y = y;
 
-    SDL_SetTextureAlphaMod(m_textureMap[id].pTexture, alpha);
-    SDL_RenderCopyEx(pRenderer, m_textureMap[id].pTexture, &srcRect, &destRect,
+    SDL_SetTextureAlphaMod(m_textureMap[id], alpha);
+    SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect,
                      angle, 0, flip);
 }
 

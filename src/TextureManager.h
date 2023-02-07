@@ -5,11 +5,6 @@
 #include <map>
 #include <string>
 
-struct Texture {
-    SDL_Texture *pTexture;
-    int nFrames;
-};
-
 class TextureManager {
   public:
     static TextureManager *Instance() {
@@ -17,8 +12,8 @@ class TextureManager {
         return s_pInstance;
     }
 
-    bool load(std::string filename, std::string textureID, int nFrames,
-              SDL_Renderer *pRenderer);
+    bool load(std::string filename, std::string textureID,
+              SDL_Renderer *pRenderer, int nFrames = 1);
     void draw(std::string textureID, int x, int y, int width, int height,
               SDL_Renderer *pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
     void drawFrame(std::string id, int x, int y, int width, int height,
@@ -26,20 +21,17 @@ class TextureManager {
                    double angle, int alpha = 255,
                    SDL_RendererFlip flip = SDL_FLIP_NONE);
     int getNFrames(std::string textureID) {
-        if (m_textureMap.find(textureID) == m_textureMap.end()) {
+        if (m_nFrameMap.find(textureID) == m_nFrameMap.end()) {
             return 1;
         }
-        return m_textureMap[textureID].nFrames;
+        return m_nFrameMap[textureID];
     }
     void clean();
 
-    std::map<std::string, Texture> getTextureMap() const {
-        return m_textureMap;
-    }
-
   private:
     TextureManager(){};
-    std::map<std::string, Texture> m_textureMap;
+    std::map<std::string, SDL_Texture *> m_textureMap;
+    std::map<std::string, int> m_nFrameMap;
 };
 
 #endif
