@@ -17,6 +17,10 @@ class PlatformerObject : public GameObject {
 
     virtual std::string type() { return "SDLGameObject"; }
 
+    bool dead() { return m_bDead; }
+
+    bool dying() { return m_bDying; }
+
   protected:
     PlatformerObject();
 
@@ -37,6 +41,9 @@ class PlatformerObject : public GameObject {
     bool m_bPlayedDeathSound;
 
     bool m_bFlipped;
+
+    bool m_bDead;
+    bool m_bDying;
 
     bool m_bMoveLeft;
     bool m_bMoveRight;

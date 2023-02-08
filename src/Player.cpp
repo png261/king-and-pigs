@@ -64,6 +64,8 @@ void Player::handleInput() {
 
 void Player::ressurect() {}
 
-void Player::collision() {}
+void Player::collision() {
+    std::cout << "player collision" << std::endl;
+}
 
 void Player::clean() {}

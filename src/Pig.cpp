@@ -2,7 +2,7 @@
 #include "InputHandler.h"
 #include <iostream>
 
-Pig::Pig() : Enemy() {}
+Pig::Pig() : Enemy(100) {}
 
 void Pig::load(const LoaderParams *pParams) { Enemy::load(pParams); }
 
@@ -19,6 +19,7 @@ void Pig::update() {
             m_currentState = PIG_ON_GROUND;
         }
     }
+
     Enemy::update();
 }
 
@@ -26,4 +27,4 @@ void Pig::draw() { Enemy::draw(); }
 
 void Pig::clean() {}
 
-void Pig::colision() {}
+void Pig::colision() { std::cout << "pig collision" << std::endl; }

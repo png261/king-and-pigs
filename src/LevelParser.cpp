@@ -20,6 +20,10 @@ Level *LevelParser::parseLevel(const char *levelFile) {
 
     m_tileSize = atoi(pRoot->Attribute("tilewidth"));
     m_width = atoi(pRoot->Attribute("width"));
+
+    Game::Instance()->setLevelWidth(m_width * m_tileSize);
+    Game::Instance()->setLevelHeight(m_height * m_tileSize);
+
     m_height = atoi(pRoot->Attribute("height"));
 
     for (XMLElement *e = pRoot->FirstChildElement(); e != NULL;
@@ -118,11 +122,17 @@ void LevelParser::parseTilesets(tinyxml2::XMLElement *pTilesetRoot,
 GameObject *parseObject(XMLElement *pObjectElement, Level *pLevel) {
 
     int x, y, width, height, numFrames, callbackID, animSpeed;
+    int textureWidth;
+    int textureHeight;
     std::string textureID;
     std::string type;
 
     x = atoi(pObjectElement->Attribute("x"));
     y = atoi(pObjectElement->Attribute("y"));
+
+    width = atoi(pObjectElement->Attribute("width"));
+    height = atoi(pObjectElement->Attribute("height"));
+
     type = pObjectElement->Attribute("class");
 
     GameObject *pGameObject = GameObjectFactory::Instance()->create(type);
@@ -137,9 +147,9 @@ GameObject *parseObject(XMLElement *pObjectElement, Level *pLevel) {
                     std::string propertyValue = property->Attribute("value");
 
                     if (propertyName == "textureWidth") {
-                        width = stoi(propertyValue);
+                        textureWidth = stoi(propertyValue);
                     } else if (propertyName == "textureHeight") {
-                        height = stoi(propertyValue);
+                        textureHeight = stoi(propertyValue);
                     } else if (propertyName == "numFrames") {
                         numFrames = stoi(propertyValue);
                     } else if (propertyName == "callbackID") {
@@ -154,8 +164,9 @@ GameObject *parseObject(XMLElement *pObjectElement, Level *pLevel) {
         }
     }
 
-    pGameObject->load(new LoaderParams(x, y, width, height, textureID,
-                                       numFrames, callbackID, animSpeed));
+    pGameObject->load(new LoaderParams(x, y, width, height, textureWidth,
+                                       textureHeight, textureID, numFrames,
+                                       callbackID, animSpeed));
     pGameObject->setCollisionLayers(pLevel->getCollisionLayers());
 
     if (type == "Player") {

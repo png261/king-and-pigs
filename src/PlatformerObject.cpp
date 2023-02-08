@@ -10,9 +10,8 @@
 
 PlatformerObject::PlatformerObject()
     : GameObject(), m_moveSpeed(0), m_dyingTime(0), m_dyingCounter(0),
-      m_bPlayedDeathSound(false), m_bFlipped(false), m_bMoveLeft(false),
-      m_bMoveRight(false), m_bRunning(false), m_bFalling(false),
-      m_bJumping(false), m_bCanJump(false), m_lastSafePos(0, 0) {
+      m_bPlayedDeathSound(false), m_bFlipped(false), m_bRunning(false),
+      m_bDead(false), m_bDying(false) {
     m_acceleration.setY(GRAVITY);
 }
 
@@ -21,7 +20,11 @@ void PlatformerObject::load(const LoaderParams *pParams) {
 
     m_width = pParams->getWidth();
     m_height = pParams->getHeight();
+
     m_textureID = pParams->getTextureID();
+
+    m_textureWidth = pParams->getTextureWidth();
+    m_textureHeight = pParams->getTextureHeight();
     m_numFrames = pParams->getNumFrames();
 }
 
@@ -29,9 +32,26 @@ void PlatformerObject::draw() {
     TextureManager::Instance()->drawFrame(
         m_textureID,
         m_position.getX() - TheCamera::Instance()->getPosition().m_x,
-        m_position.getY() - TheCamera::Instance()->getPosition().m_y, m_width,
-        m_height, m_currentRow, m_currentFrame, Game::Instance()->getRenderer(),
-        m_angle, m_alpha, m_bFlipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+        m_position.getY() - TheCamera::Instance()->getPosition().m_y,
+        m_textureWidth, m_textureHeight, m_currentRow, m_currentFrame,
+        Game::Instance()->getRenderer(), m_angle, m_alpha,
+        m_bFlipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+
+    // debug
+    SDL_Rect srcRect;
+    SDL_Rect destRect;
+
+    srcRect.x = 0;
+    srcRect.y = 0;
+    srcRect.w = destRect.w = m_width;
+    srcRect.h = destRect.h = m_height;
+    destRect.x = m_position.getX() - TheCamera::Instance()->getPosition().m_x;
+    destRect.y = m_position.getY() - TheCamera::Instance()->getPosition().m_y;
+
+    SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), 255, 0, 0, 255);
+    SDL_RenderDrawRect(Game::Instance()->getRenderer(), &destRect);
+    SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), 0, 0, 0, 255);
+    //
 }
 
 void PlatformerObject::update() {
@@ -78,37 +98,33 @@ void PlatformerObject::handleMovement(Vector2D velocity) {
 }
 
 bool PlatformerObject::checkCollideTile(Vector2D newPos) {
-    if (newPos.m_y + m_height >= TheGame::Instance()->getGameHeight() - 32) {
-        return false;
-    } else {
-        for (auto &pTileLayer : *m_pCollisionLayers) {
-            std::vector<std::vector<int>> tiles = pTileLayer->getTileIDs();
+    for (auto &pTileLayer : *m_pCollisionLayers) {
+        std::vector<std::vector<int>> tiles = pTileLayer->getTileIDs();
 
-            Vector2D layerPos = pTileLayer->getPosition();
+        Vector2D layerPos = pTileLayer->getPosition();
 
-            int x, y, tileColumn, tileRow, tileid = 0;
+        int x, y, tileColumn, tileRow, tileid = 0;
 
-            x = layerPos.getX() / pTileLayer->getTileSize();
-            y = layerPos.getY() / pTileLayer->getTileSize();
+        x = layerPos.getX() / pTileLayer->getTileSize();
+        y = layerPos.getY() / pTileLayer->getTileSize();
 
-            Vector2D startPos = newPos;
-            startPos.m_x += 15;
-            startPos.m_y += 20;
-            Vector2D endPos(newPos.m_x + (m_width - 15),
-                            (newPos.m_y) + m_height - 4);
+        Vector2D startPos = newPos;
+        startPos.m_x += 15;
+        startPos.m_y += 20;
+        Vector2D endPos(newPos.m_x + (m_width - 15),
+                        (newPos.m_y) + m_height - 4);
 
-            for (int i = startPos.m_x; i < endPos.m_x; i++) {
-                for (int j = startPos.m_y; j < endPos.m_y; j++) {
-                    tileColumn = i / pTileLayer->getTileSize();
-                    tileRow = j / pTileLayer->getTileSize();
+        for (int i = startPos.m_x; i < endPos.m_x; i++) {
+            for (int j = startPos.m_y; j < endPos.m_y; j++) {
+                tileColumn = i / pTileLayer->getTileSize();
+                tileRow = j / pTileLayer->getTileSize();
 
-                    if (tiles[tileRow + y][tileColumn + x] != 0) {
-                        return true;
-                    }
+                if (tiles[tileRow + y][tileColumn + x] != 0) {
+                    return true;
                 }
             }
         }
-
-        return false;
     }
+
+    return false;
 }

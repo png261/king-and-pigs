@@ -44,6 +44,8 @@ bool Game::init(const char *title, int x, int y, int width, int height,
 
     m_gameWidth = width;
     m_gameHeight = height;
+    m_levelWidth = width;
+    m_levelHeight = height;
     m_bRunning = true;
 
     TextureManager::Instance()->load("assets/01-King Human/Idle (78x58).png",
@@ -87,8 +89,9 @@ bool Game::init(const char *title, int x, int y, int width, int height,
     TextureManager::Instance()->load("assets/03-Pig/Hit (34x28).png",
                                      "enemy_pig hit", m_pRenderer, 2);
 
-    TextureManager::Instance()->load("assets/7-Objects/11-Health Bar/Health Bar.png",
-                                     "health bar", m_pRenderer);
+    TextureManager::Instance()->load(
+        "assets/7-Objects/11-Health Bar/Health Bar.png", "health bar",
+        m_pRenderer);
     TextureManager::Instance()->load("assets/7-Objects/11-Health Bar/Heart.png",
                                      "health heart", m_pRenderer);
 

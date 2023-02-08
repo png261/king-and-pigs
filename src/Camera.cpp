@@ -11,10 +11,12 @@ Vector2D Camera::getPosition() const {
         return m_position;
     }
 
-    Vector2D pos(m_pTarget->getPosition().m_x -
-                     (Game::Instance()->getGameWidth() / 2.0),
-                 m_pTarget->getPosition().m_y -
-                     (Game::Instance()->getGameHeight() / 2.0));
+    Vector2D pos(
+        m_pTarget->getPosition().m_x -
+            ((Game::Instance()->getGameWidth() - m_pTarget->getWidth()) / 2.0),
+        m_pTarget->getPosition().m_y -
+            ((Game::Instance()->getGameHeight() - m_pTarget->getHeight()) /
+             2.0));
 
     if (pos.m_x < 0) {
         pos.m_x = 0;
@@ -29,6 +31,10 @@ void Camera::update() {
     if (m_position.m_x < 0) {
         m_position.m_x = 0;
     }
+    if (m_position.m_y < 0) {
+        m_position.m_y = 0;
+    }
+
     if (m_position.m_y < 0) {
         m_position.m_y = 0;
     }

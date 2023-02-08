@@ -39,6 +39,11 @@ class Game {
 
     int getGameWidth() const { return m_gameWidth; }
     int getGameHeight() const { return m_gameHeight; }
+    void setLevelWidth(int width) { m_levelWidth = width; }
+    void setLevelHeight(int height) { m_levelHeight = height; }
+
+    int getLevelWidth() { return m_levelWidth; }
+    int getLevelHegith() { return m_levelHeight; }
 
     std::vector<std::string> getLevelFiles() { return m_levelFiles; }
 
@@ -48,6 +53,9 @@ class Game {
     SDL_Renderer *m_pRenderer;
     int m_gameWidth;
     int m_gameHeight;
+
+    int m_levelWidth;
+    int m_levelHeight;
 
     bool m_bRunning;
 

@@ -2,6 +2,7 @@
 #define EMENY_H
 
 #include "PlatformerObject.h"
+
 class Enemy : public PlatformerObject {
   public:
     virtual std::string type() { return "Enemy"; }
@@ -12,8 +13,8 @@ class Enemy : public PlatformerObject {
     virtual void update() { PlatformerObject::update(); }
 
   protected:
+    Enemy(int health) : PlatformerObject(), m_health(health){};
     int m_health;
-    Enemy() : PlatformerObject(){};
 };
 
 #endif

@@ -13,34 +13,22 @@ ObjectLayer::~ObjectLayer() {
 }
 
 void ObjectLayer::update(Level *pLevel) {
-    // iterate through the objects
-    if (!m_gameObjects.empty()) {
-        for (std::vector<GameObject *>::iterator it = m_gameObjects.begin();
-             it != m_gameObjects.end();) // < m_gameObjects.size(); i++)
-        {
-            if ((*it)->getPosition().getX() <=
-                TheCamera::Instance()->getPosition().m_x +
-                    Game::Instance()->getGameWidth()) {
-                (*it)->setUpdating(true);
-                (*it)->update();
-            } else {
-                if ((*it)->type() != std::string("Player")) {
-                    (*it)->setUpdating(false);
-                } else {
-                    (*it)->update();
-                }
-            }
+    m_collisionManager.checkPlayerEnemyCollision(
+        pLevel->getPlayer(), (const std::vector<GameObject *> &)m_gameObjects);
 
-            // check if dead or off screen
-            if ((*it)->dead() ||
-                (*it)->getPosition().m_y > Game::Instance()->getGameHeight()) {
-                delete *it;
-                it = m_gameObjects.erase(
-                    it); // erase from vector and get new iterator
-            } else {
-                ++it; // increment if all ok
-            }
+    for (auto &obj : m_gameObjects) {
+        if (obj->getPosition().getX() >
+                TheCamera::Instance()->getPosition().m_x +
+                    Game::Instance()->getGameWidth() &&
+            obj->getPosition().getY() >
+                TheCamera::Instance()->getPosition().m_y +
+                    Game::Instance()->getGameHeight()) {
+            obj->setUpdating(false);
+            continue;
         }
+
+        obj->setUpdating(true);
+        obj->update();
     }
 }
 

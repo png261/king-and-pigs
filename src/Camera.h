@@ -23,7 +23,6 @@ class Camera {
     Camera();
     ~Camera();
 
-    // the camera's target
     GameObject *m_pTarget;
 
     Vector2D m_position;
