@@ -5,19 +5,21 @@
 #include <string>
 #include <vector>
 
-class Game {
-  public:
-    static Game *Instance() {
-        static Game *s_pInstance = new Game();
+class Game
+{
+public:
+    static Game* Instance()
+    {
+        static Game* s_pInstance = new Game();
         return s_pInstance;
     }
-    bool init(const char *title, int x, int y, int w, int h, Uint32 flags);
+    bool init(const char* title, int x, int y, int w, int h, Uint32 flags);
     void handleEvents();
     void update();
     void render();
     void clean();
 
-    SDL_Renderer *getRenderer() { return m_pRenderer; }
+    SDL_Renderer* getRenderer() { return m_pRenderer; }
 
     void setPlayerLives(int lives) { m_playerLives = lives; }
     int getPlayerLives() { return m_playerLives; }
@@ -28,9 +30,7 @@ class Game {
     void setNextLevel(int nextLevel) { m_nextLevel = nextLevel; }
     int getNextLevel() const { return m_nextLevel; }
 
-    void setLevelComplete(bool levelComplete) {
-        m_bLevelComplete = levelComplete;
-    }
+    void setLevelComplete(bool levelComplete) { m_bLevelComplete = levelComplete; }
     const bool getLevelComplete() { return m_bLevelComplete; }
 
     bool running() { return m_bRunning; }
@@ -47,10 +47,10 @@ class Game {
 
     std::vector<std::string> getLevelFiles() { return m_levelFiles; }
 
-  private:
+private:
     Game();
-    SDL_Window *m_pWindow;
-    SDL_Renderer *m_pRenderer;
+    SDL_Window* m_pWindow;
+    SDL_Renderer* m_pRenderer;
     int m_gameWidth;
     int m_gameHeight;
 

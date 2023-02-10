@@ -13,38 +13,36 @@ enum mouse_buttons {
     RIGHT = 2,
 };
 
-class InputHandler {
-    public:
-        static InputHandler* Instance() {
-            static InputHandler* s_pInstance = new InputHandler;
-            return s_pInstance;
-        }
-        void update();
-        Vector2D *getMousePosition() const{
-            return m_pMousePosition;
-        }
+class InputHandler
+{
+public:
+    static InputHandler* Instance()
+    {
+        static InputHandler* s_pInstance = new InputHandler;
+        return s_pInstance;
+    }
+    void update();
+    Vector2D* getMousePosition() const { return m_pMousePosition; }
 
-        bool isMouseButtonDown(mouse_buttons buttonID) {
-            return m_bMouseButtonState[buttonID];
-        }
-        bool isKeyDown(SDL_Scancode key) const;
+    bool isKeyDown(SDL_Scancode key) const;
+    bool getMouseButtonState(mouse_buttons buttonID) { return m_bMouseButtonState[buttonID]; };
 
-        void reset();
+    void reset();
 
-    private:
-        InputHandler();
+private:
+    InputHandler();
 
-        void onKeyDown(SDL_Event &event);
-        void onKeyUp(SDL_Event &event);
+    void onKeyDown(SDL_Event& event);
+    void onKeyUp(SDL_Event& event);
 
-        void onMouseMove(SDL_Event &event);
-        void onMouseButtonDown(SDL_Event &event);
-        void onMouseButtonUp(SDL_Event &event);
+    void onMouseMove(SDL_Event& event);
+    void onMouseButtonDown(SDL_Event& event);
+    void onMouseButtonUp(SDL_Event& event);
 
-        Vector2D *m_pMousePosition;
-        std::vector<bool> m_bMouseButtonState;
+    Vector2D* m_pMousePosition;
+    std::vector<bool> m_bMouseButtonState;
 
-        const Uint8* m_keystates;
+    const Uint8* m_keystates;
 };
 
 typedef InputHandler TheInputHandler;

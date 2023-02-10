@@ -1,14 +1,18 @@
 #include "Player.h"
 
+#include <iostream>
+
 #include "Camera.h"
 #include "Game.h"
 #include "InputHandler.h"
 #include "SoundManager.h"
-#include <iostream>
 
-Player::Player() : PlatformerObject() {}
+Player::Player()
+    : PlatformerObject()
+{}
 
-void Player::load(const LoaderParams *pParams) {
+void Player::load(const LoaderParams* pParams)
+{
     PlatformerObject::load(pParams);
 
     m_moveSpeed = 2;
@@ -19,16 +23,21 @@ void Player::load(const LoaderParams *pParams) {
     TheCamera::Instance()->setTarget(this);
 }
 
-void Player::draw() { PlatformerObject::draw(); }
+void Player::draw()
+{
+    PlatformerObject::draw();
+}
 
 void Player::handleAnimation() {}
 
-void Player::update() {
+void Player::update()
+{
     handleInput();
     PlatformerObject::update();
 }
 
-void Player::handleInput() {
+void Player::handleInput()
+{
     if (m_currentState == ON_GROUND) {
         if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) {
             m_velocity.setX(-m_moveSpeed);
@@ -64,7 +73,8 @@ void Player::handleInput() {
 
 void Player::ressurect() {}
 
-void Player::collision() {
+void Player::collision()
+{
     std::cout << "player collision" << std::endl;
 }
 

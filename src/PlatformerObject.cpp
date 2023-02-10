@@ -1,21 +1,29 @@
 #include "PlatformerObject.h"
 
+#include <iostream>
 #include "Camera.h"
 #include "Game.h"
 #include "TextureManager.h"
 #include "TileLayer.h"
-#include <iostream>
 
 #define GRAVITY 0.3
 
 PlatformerObject::PlatformerObject()
-    : GameObject(), m_moveSpeed(0), m_dyingTime(0), m_dyingCounter(0),
-      m_bPlayedDeathSound(false), m_bFlipped(false), m_bRunning(false),
-      m_bDead(false), m_bDying(false) {
+    : GameObject()
+    , m_moveSpeed(0)
+    , m_dyingTime(0)
+    , m_dyingCounter(0)
+    , m_bPlayedDeathSound(false)
+    , m_bFlipped(false)
+    , m_bRunning(false)
+    , m_bDead(false)
+    , m_bDying(false)
+{
     m_acceleration.setY(GRAVITY);
 }
 
-void PlatformerObject::load(const LoaderParams *pParams) {
+void PlatformerObject::load(const LoaderParams* pParams)
+{
     m_position = Vector2D(pParams->getX(), pParams->getY());
 
     m_width = pParams->getWidth();
@@ -28,13 +36,19 @@ void PlatformerObject::load(const LoaderParams *pParams) {
     m_numFrames = pParams->getNumFrames();
 }
 
-void PlatformerObject::draw() {
+void PlatformerObject::draw()
+{
     TextureManager::Instance()->drawFrame(
         m_textureID,
         m_position.getX() - TheCamera::Instance()->getPosition().m_x,
         m_position.getY() - TheCamera::Instance()->getPosition().m_y,
-        m_textureWidth, m_textureHeight, m_currentRow, m_currentFrame,
-        Game::Instance()->getRenderer(), m_angle, m_alpha,
+        m_textureWidth,
+        m_textureHeight,
+        m_currentRow,
+        m_currentFrame,
+        Game::Instance()->getRenderer(),
+        m_angle,
+        m_alpha,
         m_bFlipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 
     // debug
@@ -48,13 +62,14 @@ void PlatformerObject::draw() {
     destRect.x = m_position.getX() - TheCamera::Instance()->getPosition().m_x;
     destRect.y = m_position.getY() - TheCamera::Instance()->getPosition().m_y;
 
-    SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), 255, 0, 0, 255);
+    SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), 255, 0, 255, 255);
     SDL_RenderDrawRect(Game::Instance()->getRenderer(), &destRect);
     SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), 0, 0, 0, 255);
     //
 }
 
-void PlatformerObject::update() {
+void PlatformerObject::update()
+{
     m_velocity += m_acceleration;
     handleMovement(m_velocity);
 
@@ -67,7 +82,8 @@ void PlatformerObject::update() {
     m_currentFrame = int(((SDL_GetTicks() / 100) % m_numFrames));
 }
 
-void PlatformerObject::doDyingAnimation() {
+void PlatformerObject::doDyingAnimation()
+{
     m_currentFrame = int(((SDL_GetTicks() / (1000 / 10)) % m_numFrames));
 
     if (m_dyingCounter == m_dyingTime) {
@@ -76,7 +92,8 @@ void PlatformerObject::doDyingAnimation() {
     m_dyingCounter++;
 }
 
-void PlatformerObject::handleMovement(Vector2D velocity) {
+void PlatformerObject::handleMovement(Vector2D velocity)
+{
     // get the current position
     Vector2D newPos = m_position;
 
@@ -97,8 +114,9 @@ void PlatformerObject::handleMovement(Vector2D velocity) {
     }
 }
 
-bool PlatformerObject::checkCollideTile(Vector2D newPos) {
-    for (auto &pTileLayer : *m_pCollisionLayers) {
+bool PlatformerObject::checkCollideTile(Vector2D newPos)
+{
+    for (auto& pTileLayer : *m_pCollisionLayers) {
         std::vector<std::vector<int>> tiles = pTileLayer->getTileIDs();
 
         Vector2D layerPos = pTileLayer->getPosition();
@@ -109,10 +127,7 @@ bool PlatformerObject::checkCollideTile(Vector2D newPos) {
         y = layerPos.getY() / pTileLayer->getTileSize();
 
         Vector2D startPos = newPos;
-        startPos.m_x += 15;
-        startPos.m_y += 20;
-        Vector2D endPos(newPos.m_x + (m_width - 15),
-                        (newPos.m_y) + m_height - 4);
+        Vector2D endPos(newPos.m_x + (m_width), (newPos.m_y) + m_height);
 
         for (int i = startPos.m_x; i < endPos.m_x; i++) {
             for (int j = startPos.m_y; j < endPos.m_y; j++) {

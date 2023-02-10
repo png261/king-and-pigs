@@ -3,11 +3,12 @@
 
 #include "GameObject.h"
 
-class PlatformerObject : public GameObject {
-  public:
+class PlatformerObject : public GameObject
+{
+public:
     virtual ~PlatformerObject() {}
 
-    virtual void load(const LoaderParams *pParams);
+    virtual void load(const LoaderParams* pParams);
 
     virtual void draw();
     virtual void update();
@@ -21,7 +22,7 @@ class PlatformerObject : public GameObject {
 
     bool dying() { return m_bDying; }
 
-  protected:
+protected:
     PlatformerObject();
 
     bool checkCollideTile(Vector2D newPos);

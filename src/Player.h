@@ -1,22 +1,23 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "PlatformerObject.h"
-
 #include <map>
 #include <string>
+
+#include "PlatformerObject.h"
 
 enum player_state {
     ON_GROUND,
     ON_FLY,
 };
 
-class Player : public PlatformerObject {
-  public:
+class Player : public PlatformerObject
+{
+public:
     Player();
     virtual ~Player() {}
 
-    virtual void load(const LoaderParams *pParams);
+    virtual void load(const LoaderParams* pParams);
 
     virtual void draw();
     virtual void update();
@@ -26,7 +27,7 @@ class Player : public PlatformerObject {
 
     virtual std::string type() { return "Player"; }
 
-  private:
+private:
     // bring the player back if there are lives left
     void ressurect();
 

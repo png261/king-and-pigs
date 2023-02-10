@@ -1,13 +1,15 @@
 #ifndef GAME_STATE_MACHINE_H
 #define GAME_STATE_MACHINE_H
 
-#include "GameState.h"
 #include <vector>
+#include "GameState.h"
 
-class GameStateMachine {
-  public:
-    static GameStateMachine *Instance() {
-        static GameStateMachine *s_pInstance = new GameStateMachine;
+class GameStateMachine
+{
+public:
+    static GameStateMachine* Instance()
+    {
+        static GameStateMachine* s_pInstance = new GameStateMachine;
         return s_pInstance;
     }
 
@@ -20,9 +22,9 @@ class GameStateMachine {
 
     void clean();
 
-  private:
+private:
     GameStateMachine(){};
-    std::vector<GameState *> m_gameStates;
+    std::vector<GameState*> m_gameStates;
 };
 
 #endif

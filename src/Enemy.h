@@ -3,17 +3,18 @@
 
 #include "PlatformerObject.h"
 
-class Enemy : public PlatformerObject {
-  public:
+class Enemy : public PlatformerObject
+{
+public:
     virtual std::string type() { return "Enemy"; }
-    virtual void load(const LoaderParams *pParams) {
-        PlatformerObject::load(pParams);
-    };
+    virtual void load(const LoaderParams* pParams) { PlatformerObject::load(pParams); };
     virtual void draw() { PlatformerObject::draw(); }
     virtual void update() { PlatformerObject::update(); }
 
-  protected:
-    Enemy(int health) : PlatformerObject(), m_health(health){};
+protected:
+    Enemy(int health)
+        : PlatformerObject()
+        , m_health(health){};
     int m_health;
 };
 

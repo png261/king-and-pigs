@@ -5,7 +5,8 @@
 
 const static int s_buffer = 4;
 
-static bool RectRect(SDL_Rect *A, SDL_Rect *B) {
+static bool RectRect(SDL_Rect* A, SDL_Rect* B)
+{
     int aHBuf = A->h / s_buffer;
     int aWBuf = A->w / s_buffer;
 

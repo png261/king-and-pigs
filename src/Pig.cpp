@@ -1,12 +1,18 @@
 #include "Pig.h"
-#include "InputHandler.h"
 #include <iostream>
+#include "InputHandler.h"
 
-Pig::Pig() : Enemy(100) {}
+Pig::Pig()
+    : Enemy(100)
+{}
 
-void Pig::load(const LoaderParams *pParams) { Enemy::load(pParams); }
+void Pig::load(const LoaderParams* pParams)
+{
+    Enemy::load(pParams);
+}
 
-void Pig::update() {
+void Pig::update()
+{
     if (m_currentState == PIG_ON_GROUND) {
         setAnimation("enemy_pig idle");
     } else if (m_currentState == PIG_ON_FLY) {
@@ -23,8 +29,14 @@ void Pig::update() {
     Enemy::update();
 }
 
-void Pig::draw() { Enemy::draw(); }
+void Pig::draw()
+{
+    Enemy::draw();
+}
 
 void Pig::clean() {}
 
-void Pig::colision() { std::cout << "pig collision" << std::endl; }
+void Pig::collision()
+{
+    std::cout << "pig collision" << std::endl;
+}

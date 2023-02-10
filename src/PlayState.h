@@ -2,24 +2,25 @@
 #define PLAY_STATE_H
 
 #include <vector>
-#include "GameState.h"
 #include "GameObject.h"
+#include "GameState.h"
 #include "Level.h"
 
-class PlayState : public GameState {
-  public:
+class PlayState : public GameState
+{
+public:
     virtual void update();
     virtual void render();
 
-    virtual void exit();
+    virtual bool onExit();
     virtual void resume();
-    virtual void enter();
+    virtual bool onEnter();
     virtual std::string getStateID() const { return s_stateID; }
 
-  private:
+private:
     static const std::string s_stateID;
-    std::vector<GameObject *> m_gameObjects;
-    Level *pLevel;
+    std::vector<GameObject*> m_gameObjects;
+    Level* pLevel;
 };
 
 #endif

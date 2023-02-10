@@ -8,16 +8,17 @@ enum pig_state {
     PIG_ON_FLY,
 };
 
-class Pig : public Enemy {
-  public:
+class Pig : public Enemy
+{
+public:
     Pig();
-    virtual void load(const LoaderParams *pParams);
+    virtual void load(const LoaderParams* pParams);
     virtual void draw();
     virtual void update();
     virtual void clean();
-    virtual void colision();
+    virtual void collision();
 
-  private:
+private:
     pig_state m_currentState;
 };
 
