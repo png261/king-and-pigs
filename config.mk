@@ -1,4 +1,4 @@
-PROJECT_NAME = YOUR_PROJECT_NAME
+PROJECT_NAME = king and pigs
 
 # Directories
 BINDIR = bin
