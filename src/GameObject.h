@@ -13,13 +13,12 @@ class TileLayer;
 class GameObject
 {
 public:
+    virtual ~GameObject(){};
+
     virtual void load(const LoaderParams* pParams) = 0;
     virtual void update() = 0;
     virtual void draw() = 0;
     virtual void clean() = 0;
-
-    virtual void collision() = 0;
-
     virtual std::string type() = 0;
 
     Vector2D& getPosition() { return m_position; }
@@ -36,18 +35,19 @@ public:
 
     // is the object currently being updated?
     bool updating() { return m_bUpdating; }
+    bool invulnerable() { return m_bInvulnerable; }
+    bool isAttack() { return m_bAttack; }
 
     // set whether to update the object or not
     void setUpdating(bool updating) { m_bUpdating = updating; }
 
+    bool isDead() { return m_bDead; }
+
+    bool isDying() { return m_bDying; }
+
     void setCollisionLayers(std::vector<TileLayer*>* layers) { m_pCollisionLayers = layers; }
 
-    bool dead() { return m_bDead; }
-
-    bool dying() { return m_bDying; }
-
 protected:
-    // constructor with default initialisation list
     GameObject()
         : m_position(0, 0)
         , m_velocity(0, 0)
@@ -60,8 +60,12 @@ protected:
         , m_currentFrame(0)
         , m_bUpdating(false)
         , m_angle(0)
+        , m_bDead(false)
+        , m_bAttack(false)
         , m_alpha(255)
         , m_bFlipped(false)
+        , m_aniCounter(false)
+        , m_bInvulnerable(false)
     {
         m_numFrames = TextureManager::Instance()->getNFrames(m_textureID);
     }
@@ -82,6 +86,7 @@ protected:
     int m_currentFrame;
     int m_numFrames;
     std::string m_textureID;
+    int m_aniCounter;
 
     // common boolean
     bool m_bUpdating;
@@ -92,8 +97,10 @@ protected:
 
     bool m_bDead;
     bool m_bDying;
+    int m_bAttack;
 
-    // blending
+    bool m_bInvulnerable;
+
     int m_alpha;
     std::vector<TileLayer*>* m_pCollisionLayers;
 };

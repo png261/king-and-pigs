@@ -3,6 +3,16 @@
 
 #include "GameObject.h"
 
+enum object_state {
+    ON_GROUND,
+    ON_FLY,
+    ON_FALL,
+    ON_HIT,
+    ON_ATTACK,
+    ON_DIE,
+};
+
+
 class PlatformerObject : public GameObject
 {
 public:
@@ -14,13 +24,17 @@ public:
     virtual void update();
 
     virtual void clean() {}
-    virtual void collision() {}
 
-    virtual std::string type() { return "SDLGameObject"; }
+    virtual void onHit(){};
 
-    bool dead() { return m_bDead; }
+    virtual std::string type() { return "GameObject"; }
+    virtual bool isInvulnerable() { return m_bInvulnerable; }
 
-    bool dying() { return m_bDying; }
+    virtual void setLives(int lives) { m_lives = std::max(std::min(lives, m_maxLives), 0); }
+
+    virtual int getLives() { return m_lives; }
+
+    void setCurrentState(object_state state) { m_currentState = state; }
 
 protected:
     PlatformerObject();
@@ -29,34 +43,19 @@ protected:
 
     void handleMovement(Vector2D velocity);
 
-    void doDyingAnimation();
-
     int m_moveSpeed;
     int m_jumpSpeed;
 
-    // how long the death animation takes, along with a counter
-    int m_dyingTime;
-    int m_dyingCounter;
-
-    // has the explosion sound played?
-    bool m_bPlayedDeathSound;
+    bool m_bInvulnerable;
+    int m_aniCounter;
 
     bool m_bFlipped;
 
-    bool m_bDead;
-    bool m_bDying;
+    int m_damage;
+    int m_lives;
+    int m_maxLives;
 
-    bool m_bMoveLeft;
-    bool m_bMoveRight;
-    bool m_bRunning;
-
-    bool m_bFalling;
-    bool m_bJumping;
-    bool m_bCanJump;
-
-    Vector2D m_lastSafePos;
-
-    int m_jumpHeight;
+    object_state m_currentState;
 };
 
 #endif

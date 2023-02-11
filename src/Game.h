@@ -4,10 +4,12 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include <vector>
+#include "Player.h"
 
 class Game
 {
 public:
+    ~Game(){};
     static Game* Instance()
     {
         static Game* s_pInstance = new Game();
@@ -20,9 +22,6 @@ public:
     void clean();
 
     SDL_Renderer* getRenderer() { return m_pRenderer; }
-
-    void setPlayerLives(int lives) { m_playerLives = lives; }
-    int getPlayerLives() { return m_playerLives; }
 
     void setCurrentLevel(int currentLevel);
     int getCurrentLevel() const { return m_currentLevel; }
@@ -45,12 +44,16 @@ public:
     int getLevelWidth() { return m_levelWidth; }
     int getLevelHegith() { return m_levelHeight; }
 
+    Player* getPlayer() { return m_pPlayer; }
+    void setPlayer(Player* pPlayer) { m_pPlayer = pPlayer; }
+
     std::vector<std::string> getLevelFiles() { return m_levelFiles; }
 
 private:
     Game();
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
+
     int m_gameWidth;
     int m_gameHeight;
 
@@ -59,11 +62,11 @@ private:
 
     bool m_bRunning;
 
-    int m_playerLives;
-
     int m_currentLevel;
     int m_nextLevel;
     bool m_bLevelComplete;
+
+    Player* m_pPlayer;
 
     std::vector<std::string> m_levelFiles;
 };

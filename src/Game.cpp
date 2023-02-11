@@ -13,7 +13,6 @@ Game::Game()
     : m_pWindow(NULL)
     , m_pRenderer(NULL)
     , m_bRunning(false)
-    , m_playerLives(3)
     , m_bLevelComplete(false)
 {
     m_levelFiles.push_back("levels/level1.tmx");
@@ -51,7 +50,7 @@ bool Game::init(const char* title, int x, int y, int width, int height, Uint32 f
     m_levelHeight = height;
     m_bRunning = true;
 
-    GameStateMachine::Instance()->changeState(new MainMenuState());
+    GameStateMachine::Instance()->changeState(new PlayState());
 
     return true;
 }

@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include "CollisionManager.h"
 #include "Layer.h"
 
 class GameObject;
@@ -19,7 +18,6 @@ public:
     std::vector<GameObject*>* getGameObjects() { return &m_gameObjects; }
 
 private:
-    CollisionManager m_collisionManager;
     std::vector<GameObject*> m_gameObjects;
 };
 

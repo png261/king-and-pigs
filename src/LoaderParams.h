@@ -15,6 +15,7 @@ public:
         int textureHeight,
         std::string textureID,
         int numFrames,
+        int lives = 0,
         int callbackID = 0,
         int animSpeed = 0)
         : m_x(x)
@@ -25,6 +26,7 @@ public:
         , m_textureHeight(textureHeight)
         , m_textureID(textureID)
         , m_numFrames(numFrames)
+        , m_lives(lives)
         , m_callbackID(callbackID)
         , m_animSpeed(animSpeed)
     {}
@@ -37,6 +39,7 @@ public:
     int getTextureHeight() const { return m_textureHeight; }
     std::string getTextureID() const { return m_textureID; }
     int getNumFrames() const { return m_numFrames; }
+    int getLives() const { return m_lives; }
     int getCallbackID() const { return m_callbackID; }
     int getAnimSpeed() const { return m_animSpeed; }
 
@@ -56,6 +59,8 @@ private:
     std::string m_textureID;
 
     int m_numFrames;
+
+    int m_lives;
 };
 
 #endif

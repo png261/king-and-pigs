@@ -15,9 +15,7 @@ public:
     virtual void update();
     virtual void clean();
 
-    virtual void collision();
-
-    virtual std::string type() { return "Box"; }
+    virtual std::string type() { return "Heart"; }
 };
 
 #endif

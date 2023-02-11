@@ -10,14 +10,6 @@
 
 PlatformerObject::PlatformerObject()
     : GameObject()
-    , m_moveSpeed(0)
-    , m_dyingTime(0)
-    , m_dyingCounter(0)
-    , m_bPlayedDeathSound(false)
-    , m_bFlipped(false)
-    , m_bRunning(false)
-    , m_bDead(false)
-    , m_bDying(false)
 {
     m_acceleration.setY(GRAVITY);
 }
@@ -34,6 +26,9 @@ void PlatformerObject::load(const LoaderParams* pParams)
     m_textureWidth = pParams->getTextureWidth();
     m_textureHeight = pParams->getTextureHeight();
     m_numFrames = pParams->getNumFrames();
+
+    m_lives = pParams->getLives();
+    m_maxLives = m_lives;
 }
 
 void PlatformerObject::draw()
@@ -82,16 +77,6 @@ void PlatformerObject::update()
     m_currentFrame = int(((SDL_GetTicks() / 100) % m_numFrames));
 }
 
-void PlatformerObject::doDyingAnimation()
-{
-    m_currentFrame = int(((SDL_GetTicks() / (1000 / 10)) % m_numFrames));
-
-    if (m_dyingCounter == m_dyingTime) {
-        m_bDead = true;
-    }
-    m_dyingCounter++;
-}
-
 void PlatformerObject::handleMovement(Vector2D velocity)
 {
     // get the current position
@@ -134,7 +119,8 @@ bool PlatformerObject::checkCollideTile(Vector2D newPos)
                 tileColumn = i / pTileLayer->getTileSize();
                 tileRow = j / pTileLayer->getTileSize();
 
-                if (tiles[tileRow + y][tileColumn + x] != 0) {
+                const int EMPTY_TILE = 0;
+                if (tiles[tileRow + y][tileColumn + x] != EMPTY_TILE) {
                     return true;
                 }
             }

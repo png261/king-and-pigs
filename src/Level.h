@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include "CollisionManager.h"
 #include "Layer.h"
 #include "Player.h"
 
@@ -36,15 +35,11 @@ public:
 
     std::vector<TileLayer*>& getCollidableLayers() { return m_collisionLayers; }
 
-    Player* getPlayer() { return m_pPlayer; }
-    void setPlayer(Player* pPlayer) { m_pPlayer = pPlayer; }
 
 private:
     friend class LevelParser;
 
     Level();
-
-    Player* m_pPlayer;
 
     std::vector<Layer*> m_layers;
     std::vector<Tileset> m_tilesets;

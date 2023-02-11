@@ -123,7 +123,7 @@ void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<
 
 GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
 {
-    int x, y, width, height, numFrames, callbackID, animSpeed;
+    int x, y, width, height, numFrames, lives, callbackID, animSpeed;
     int textureWidth;
     int textureHeight;
     std::string textureID;
@@ -152,6 +152,8 @@ GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
                         textureWidth = stoi(propertyValue);
                     } else if (propertyName == "textureHeight") {
                         textureHeight = stoi(propertyValue);
+                    } else if (propertyName == "lives") {
+                        lives = stoi(propertyValue);
                     } else if (propertyName == "numFrames") {
                         numFrames = stoi(propertyValue);
                     } else if (propertyName == "callbackID") {
@@ -175,12 +177,13 @@ GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
         textureHeight,
         textureID,
         numFrames,
+        lives,
         callbackID,
         animSpeed));
     pGameObject->setCollisionLayers(pLevel->getCollisionLayers());
 
     if (type == "Player") {
-        pLevel->setPlayer(dynamic_cast<Player*>(pGameObject));
+        Game::Instance()->setPlayer(dynamic_cast<Player*>(pGameObject));
     }
 
     return pGameObject;

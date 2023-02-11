@@ -12,10 +12,9 @@ public:
     virtual void update() { PlatformerObject::update(); }
 
 protected:
-    Enemy(int health)
+    Enemy()
         : PlatformerObject()
-        , m_health(health){};
-    int m_health;
+    {}
 };
 
 #endif

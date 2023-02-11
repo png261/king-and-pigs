@@ -20,7 +20,6 @@ const std::string PlayState::s_stateID = "PLAY";
 bool PlayState::onEnter()
 {
     std::cout << "enter playstate" << std::endl;
-    TheGame::Instance()->setPlayerLives(3);
 
     GameObjectFactory::Instance()->registerType("Player", new Creator<Player>);
     GameObjectFactory::Instance()->registerType("Pig", new Creator<Pig>);
@@ -59,22 +58,16 @@ bool PlayState::onEnter()
     TextureManager::Instance()
         ->load("assets/01-King Human/Door Out (78x58).png", "player doorOut", pRenderer, 8);
 
+    TextureManager::Instance()->load("assets/03-Pig/Idle (34x28).png", "pig idle", pRenderer, 11);
+    TextureManager::Instance()->load("assets/03-Pig/Run (34x28).png", "pig run", pRenderer, 6);
+    TextureManager::Instance()->load("assets/03-Pig/Jump (34x28).png", "pig jump", pRenderer, 1);
     TextureManager::Instance()
-        ->load("assets/03-Pig/Idle (34x28).png", "enemy_pig idle", pRenderer, 11);
+        ->load("assets/03-Pig/Attack (34x28).png", "pig attack", pRenderer, 3);
+    TextureManager::Instance()->load("assets/03-Pig/Dead (34x28).png", "pig dead", pRenderer, 4);
+    TextureManager::Instance()->load("assets/03-Pig/Fall (34x28).png", "pig fall", pRenderer, 1);
     TextureManager::Instance()
-        ->load("assets/03-Pig/Run (34x28).png", "enemy_pig run", pRenderer, 6);
-    TextureManager::Instance()
-        ->load("assets/03-Pig/Jump (34x28).png", "enemy_pig jump", pRenderer, 1);
-    TextureManager::Instance()
-        ->load("assets/03-Pig/Attack (34x28).png", "enemy_pig attack", pRenderer, 3);
-    TextureManager::Instance()
-        ->load("assets/03-Pig/Dead (34x28).png", "enemy_pig dead", pRenderer, 4);
-    TextureManager::Instance()
-        ->load("assets/03-Pig/Fall (34x28).png", "enemy_pig fall", pRenderer, 1);
-    TextureManager::Instance()
-        ->load("assets/03-Pig/Ground (34x28).png", "enemy_pig ground", pRenderer, 1);
-    TextureManager::Instance()
-        ->load("assets/03-Pig/Hit (34x28).png", "enemy_pig hit", pRenderer, 2);
+        ->load("assets/03-Pig/Ground (34x28).png", "pig ground", pRenderer, 1);
+    TextureManager::Instance()->load("assets/03-Pig/Hit (34x28).png", "pig hit", pRenderer, 2);
 
     TextureManager::Instance()->load(
         "assets/7-Objects/11-Health Bar/Health Bar.png",
@@ -91,7 +84,7 @@ bool PlayState::onEnter()
     TextureManager::Instance()
         ->load("assets/12-Live and Coins/Big Heart Idle (18x14).png", "heart idle", pRenderer, 7);
     TextureManager::Instance()
-        ->load("assets/12-Live and Coins/Big Heart Hit (18x14).png", "heart dead", pRenderer, 2);
+        ->load("assets/12-Live and Coins/Big Heart Hit (18x14).png", "heart hit", pRenderer, 2);
 
     m_loadingComplete = true;
     return true;
@@ -141,7 +134,7 @@ void PlayState::render()
     TheTextureManager::Instance()
         ->draw("health bar", 10, 10, 154, 62, Game::Instance()->getRenderer());
 
-    for (int i = 0; i < Game::Instance()->getPlayerLives(); i++) {
+    for (int i = 0; i < Game::Instance()->getPlayer()->getLives(); i++) {
         TheTextureManager::Instance()
             ->draw("health heart", 50 + 25 * i, 33, 22, 19, Game::Instance()->getRenderer());
     }
