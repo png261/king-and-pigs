@@ -5,6 +5,15 @@
 #include <map>
 #include <string>
 
+struct Animation
+{
+    std::string textureID;
+    int nFrames;
+    int nColumns;
+    Uint32 duration;
+};
+
+
 class TextureManager
 {
 public:
@@ -16,6 +25,7 @@ public:
 
     bool
     load(std::string filename, std::string textureID, SDL_Renderer* pRenderer, int nFrames = 1);
+
     void draw(
         std::string textureID,
         int x,
@@ -24,12 +34,15 @@ public:
         int height,
         SDL_Renderer* pRenderer,
         SDL_RendererFlip flip = SDL_FLIP_NONE);
+
     void drawFrame(
         std::string id,
         int x,
         int y,
         int width,
         int height,
+        int destX,
+        int destY,
         int currentRow,
         int currentFrame,
         SDL_Renderer* pRenderer,

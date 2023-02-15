@@ -10,6 +10,9 @@
 
 PlatformerObject::PlatformerObject()
     : GameObject()
+    , m_bAttack(false)
+    , m_startState(0)
+    , m_bInvulnerable(false)
 {
     m_acceleration.setY(GRAVITY);
 }
@@ -25,6 +28,8 @@ void PlatformerObject::load(const LoaderParams* pParams)
 
     m_textureWidth = pParams->getTextureWidth();
     m_textureHeight = pParams->getTextureHeight();
+    m_textureX = pParams->getTextureX();
+    m_textureY = pParams->getTextureY();
     m_numFrames = pParams->getNumFrames();
 
     m_lives = pParams->getLives();
@@ -39,6 +44,8 @@ void PlatformerObject::draw()
         m_position.getY() - TheCamera::Instance()->getPosition().m_y,
         m_textureWidth,
         m_textureHeight,
+        m_textureX,
+        m_textureY,
         m_currentRow,
         m_currentFrame,
         Game::Instance()->getRenderer(),
@@ -65,6 +72,9 @@ void PlatformerObject::draw()
 
 void PlatformerObject::update()
 {
+    if (m_lives <= 0) {
+        m_currentAttackState = ON_DIE;
+    }
     m_velocity += m_acceleration;
     handleMovement(m_velocity);
 

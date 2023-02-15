@@ -123,9 +123,11 @@ void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<
 
 GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
 {
-    int x, y, width, height, numFrames, lives, callbackID, animSpeed;
+    int x, y, width, height, numFrames, lives, callbackID;
     int textureWidth;
     int textureHeight;
+    int textureX = 0;
+    int textureY = 0;
     std::string textureID;
     std::string type;
 
@@ -150,6 +152,12 @@ GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
 
                     if (propertyName == "textureWidth") {
                         textureWidth = stoi(propertyValue);
+                    }
+                    if (propertyName == "textureY") {
+                        textureY = stoi(propertyValue);
+                    }
+                    if (propertyName == "textureX") {
+                        textureX = stoi(propertyValue);
                     } else if (propertyName == "textureHeight") {
                         textureHeight = stoi(propertyValue);
                     } else if (propertyName == "lives") {
@@ -160,8 +168,6 @@ GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
                         callbackID = stoi(propertyValue);
                     } else if (propertyName == "textureID") {
                         textureID = propertyValue;
-                    } else if (propertyName == "animSpeed") {
-                        animSpeed = stoi(propertyValue);
                     }
                 }
             }
@@ -179,7 +185,8 @@ GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
         numFrames,
         lives,
         callbackID,
-        animSpeed));
+        textureX,
+        textureY));
     pGameObject->setCollisionLayers(pLevel->getCollisionLayers());
 
     if (type == "Player") {

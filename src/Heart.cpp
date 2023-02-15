@@ -15,16 +15,9 @@ void Heart::load(const LoaderParams* pParams)
 
 void Heart::update()
 {
-    switch (m_currentState) {
-    case ON_GROUND:
-        setAnimation("heart idle");
-        if (checkCollision(this, Game::Instance()->getPlayer())) {
-            m_currentState = ON_HIT;
-            Game::Instance()->getPlayer()->setLives(Game::Instance()->getPlayer()->getLives() + 1);
-            m_bDead = true;
-        }
-        break;
-    case ON_HIT: setAnimation("heart hit"); break;
+    if (checkCollision(this, Game::Instance()->getPlayer())) {
+        Game::Instance()->getPlayer()->setLives(Game::Instance()->getPlayer()->getLives() + 1);
+        m_bDead = true;
     }
     PlatformerObject::update();
 }

@@ -35,15 +35,11 @@ public:
 
     // is the object currently being updated?
     bool updating() { return m_bUpdating; }
-    bool invulnerable() { return m_bInvulnerable; }
-    bool isAttack() { return m_bAttack; }
 
     // set whether to update the object or not
     void setUpdating(bool updating) { m_bUpdating = updating; }
 
     bool isDead() { return m_bDead; }
-
-    bool isDying() { return m_bDying; }
 
     void setCollisionLayers(std::vector<TileLayer*>* layers) { m_pCollisionLayers = layers; }
 
@@ -61,11 +57,9 @@ protected:
         , m_bUpdating(false)
         , m_angle(0)
         , m_bDead(false)
-        , m_bAttack(false)
         , m_alpha(255)
         , m_bFlipped(false)
         , m_aniCounter(false)
-        , m_bInvulnerable(false)
     {
         m_numFrames = TextureManager::Instance()->getNFrames(m_textureID);
     }
@@ -78,15 +72,18 @@ protected:
     // size
     int m_width;
     int m_height;
-    int m_textureHeight;
-    int m_textureWidth;
 
     // animation
     int m_currentRow;
     int m_currentFrame;
     int m_numFrames;
-    std::string m_textureID;
     int m_aniCounter;
+    int m_textureHeight;
+    int m_textureWidth;
+    int m_textureX;
+    int m_textureY;
+    std::string m_textureID;
+    int m_aniClock;
 
     // common boolean
     bool m_bUpdating;
@@ -96,10 +93,6 @@ protected:
     bool m_bFlipped;
 
     bool m_bDead;
-    bool m_bDying;
-    int m_bAttack;
-
-    bool m_bInvulnerable;
 
     int m_alpha;
     std::vector<TileLayer*>* m_pCollisionLayers;

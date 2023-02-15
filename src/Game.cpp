@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <iostream>
 
 #include "GameObjectFactory.h"
 #include "GameStateMachine.h"
@@ -16,6 +17,7 @@ Game::Game()
     , m_bLevelComplete(false)
 {
     m_levelFiles.push_back("levels/level1.tmx");
+    m_levelFiles.push_back("levels/level2.tmx");
     m_currentLevel = 1;
 }
 

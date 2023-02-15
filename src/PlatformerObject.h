@@ -1,12 +1,17 @@
 #ifndef PLATFORMER_OBJECT_H
 #define PLATFORMER_OBJECT_H
 
+#include <iostream>
 #include "GameObject.h"
 
 enum object_state {
     ON_GROUND,
     ON_FLY,
     ON_FALL,
+};
+
+enum object_attack_state {
+    ON_NORMAL,
     ON_HIT,
     ON_ATTACK,
     ON_DIE,
@@ -25,16 +30,30 @@ public:
 
     virtual void clean() {}
 
-    virtual void onHit(){};
-
     virtual std::string type() { return "GameObject"; }
     virtual bool isInvulnerable() { return m_bInvulnerable; }
 
     virtual void setLives(int lives) { m_lives = std::max(std::min(lives, m_maxLives), 0); }
+    virtual void changeLives(int lives) { setLives(m_lives + lives); }
 
     virtual int getLives() { return m_lives; }
 
+    virtual void hit(int damage)
+    {
+        if (m_bInvulnerable == true) {
+            return;
+        }
+
+        m_currentAttackState = ON_HIT;
+        changeLives(-damage);
+    };
+    virtual void attack(PlatformerObject* pTarget) { pTarget->hit(1); };
+    virtual bool isAttack() { return m_bAttack; }
+    virtual int getDamageRange() { return m_damageRange; }
+    virtual bool getFlipped() { return m_bFlipped; }
+
     void setCurrentState(object_state state) { m_currentState = state; }
+    bool invulnerable() { return m_bInvulnerable; }
 
 protected:
     PlatformerObject();
@@ -52,10 +71,18 @@ protected:
     bool m_bFlipped;
 
     int m_damage;
+    int m_damageRange;
+    bool m_bAttack;
     int m_lives;
     int m_maxLives;
 
+    Uint32 m_startState;
+    int m_attackSpeed;
+
+    std::vector<std::string> m_animationMap;
+
     object_state m_currentState;
+    object_attack_state m_currentAttackState;
 };
 
 #endif

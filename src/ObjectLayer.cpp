@@ -33,12 +33,6 @@ void ObjectLayer::update(Level* pLevel)
             continue;
         }
 
-        if ((*it)->type() == "Enemy") {
-            if (Game::Instance()->getPlayer()->isAttack() &&
-                checkCollision(Game::Instance()->getPlayer(), *it)) {
-                dynamic_cast<Enemy*>(*it)->onHit();
-            }
-        }
 
         (*it)->setUpdating(true);
         (*it)->update();

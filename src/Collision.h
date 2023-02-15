@@ -2,39 +2,48 @@
 #define COLLISION_H
 
 #include <SDL2/SDL.h>
+#include <iostream>
 #include "GameObject.h"
-
-const static int s_buffer = 4;
+#include "PlatformerObject.h"
 
 static bool RectRect(SDL_Rect* A, SDL_Rect* B)
 {
-    int aHBuf = A->h / s_buffer;
-    int aWBuf = A->w / s_buffer;
+    // The sides of the rectangles
+    int leftA, leftB;
+    int rightA, rightB;
+    int topA, topB;
+    int bottomA, bottomB;
 
-    int bHBuf = B->h / s_buffer;
-    int bWBuf = B->w / s_buffer;
+    // Calculate the sides of rect A
+    leftA = A->x;
+    rightA = A->x + A->w;
+    topA = A->y;
+    bottomA = A->y + A->h;
 
-    // if the bottom of A is less than the top of B - no collision
-    if ((A->y + A->h) - aHBuf <= B->y + bHBuf) {
+    // Calculate the sides of rect B
+    leftB = B->x;
+    rightB = B->x + B->w;
+    topB = B->y;
+    bottomB = B->y + B->h;
+
+    // If any of the sides from A are outside of B
+    if (bottomA <= topB) {
         return false;
     }
 
-    // if the top of A is more than the bottom of B = no collision
-    if (A->y + aHBuf >= (B->y + B->h) - bHBuf) {
+    if (topA >= bottomB) {
         return false;
     }
 
-    // if the right of A is less than the left of B - no collision
-    if ((A->x + A->w) - aWBuf <= B->x + bWBuf) {
+    if (rightA <= leftB) {
         return false;
     }
 
-    // if the left of A is more than the right of B - no collision
-    if (A->x + aWBuf >= (B->x + B->w) - bWBuf) {
+    if (leftA >= rightB) {
         return false;
     }
 
-    // otherwise there has been a collision
+    // If none of the sides from A are outside B
     return true;
 }
 
@@ -44,6 +53,26 @@ static bool checkCollision(GameObject* A, GameObject* B)
     pRect1->x = A->getPosition().getX();
     pRect1->y = A->getPosition().getY();
     pRect1->w = A->getWidth();
+    pRect1->h = A->getHeight();
+
+    SDL_Rect* pRect2 = new SDL_Rect();
+    pRect2->x = B->getPosition().getX();
+    pRect2->y = B->getPosition().getY();
+    pRect2->w = B->getWidth();
+    pRect2->h = B->getHeight();
+
+    return RectRect(pRect1, pRect2);
+}
+
+static bool checkCollisionAttack(PlatformerObject* A, PlatformerObject* B, int range)
+{
+    SDL_Rect* pRect1 = new SDL_Rect();
+    pRect1->x = A->getPosition().getX();
+    if (A->getFlipped()) {
+        pRect1->x -= 2 * range;
+    }
+    pRect1->y = A->getPosition().getY();
+    pRect1->w = A->getWidth() + range;
     pRect1->h = A->getHeight();
 
     SDL_Rect* pRect2 = new SDL_Rect();
