@@ -41,8 +41,6 @@ public:
         int y,
         int width,
         int height,
-        int destX,
-        int destY,
         int currentRow,
         int currentFrame,
         SDL_Renderer* pRenderer,

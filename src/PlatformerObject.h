@@ -4,13 +4,13 @@
 #include <iostream>
 #include "GameObject.h"
 
-enum object_state {
+enum objectMotion {
     ON_GROUND,
     ON_FLY,
     ON_FALL,
 };
 
-enum object_attack_state {
+enum objectStatus {
     ON_NORMAL,
     ON_HIT,
     ON_ATTACK,
@@ -52,7 +52,7 @@ public:
     virtual int getDamageRange() { return m_damageRange; }
     virtual bool getFlipped() { return m_bFlipped; }
 
-    void setCurrentState(object_state state) { m_currentState = state; }
+    void setCurrentState(objectMotion state) { m_currentState = state; }
     bool invulnerable() { return m_bInvulnerable; }
 
 protected:
@@ -81,8 +81,8 @@ protected:
 
     std::vector<std::string> m_animationMap;
 
-    object_state m_currentState;
-    object_attack_state m_currentAttackState;
+    objectMotion m_currentState;
+    objectStatus m_currentAttackState;
 };
 
 #endif

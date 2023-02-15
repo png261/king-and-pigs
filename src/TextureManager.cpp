@@ -64,8 +64,6 @@ void TextureManager::drawFrame(
     int y,
     int width,
     int height,
-    int destX,
-    int destY,
     int currentRow,
     int currentFrame,
     SDL_Renderer* pRenderer,
@@ -79,8 +77,8 @@ void TextureManager::drawFrame(
     srcRect.y = height * currentRow;
     srcRect.w = destRect.w = width;
     srcRect.h = destRect.h = height;
-    destRect.x = destX + x;
-    destRect.y = destY + y;
+    destRect.x = x;
+    destRect.y = y;
 
     SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
     SDL_RenderDrawRect(pRenderer, &destRect);

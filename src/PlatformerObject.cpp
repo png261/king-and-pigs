@@ -40,12 +40,10 @@ void PlatformerObject::draw()
 {
     TextureManager::Instance()->drawFrame(
         m_textureID,
-        m_position.getX() - TheCamera::Instance()->getPosition().m_x,
-        m_position.getY() - TheCamera::Instance()->getPosition().m_y,
+        m_position.getX() + m_textureX - TheCamera::Instance()->getPosition().m_x,
+        m_position.getY() + m_textureY - TheCamera::Instance()->getPosition().m_y,
         m_textureWidth,
         m_textureHeight,
-        m_textureX,
-        m_textureY,
         m_currentRow,
         m_currentFrame,
         Game::Instance()->getRenderer(),
@@ -75,6 +73,7 @@ void PlatformerObject::update()
     if (m_lives <= 0) {
         m_currentAttackState = ON_DIE;
     }
+
     m_velocity += m_acceleration;
     handleMovement(m_velocity);
 
