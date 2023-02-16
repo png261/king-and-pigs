@@ -18,33 +18,20 @@ public:
         int lives = 0,
         int callbackID = 0,
         int textureX = 0,
-        int textureY = 0)
-        : m_x(x)
-        , m_y(y)
-        , m_width(width)
-        , m_height(height)
-        , m_textureWidth(textureWidth)
-        , m_textureHeight(textureHeight)
-        , m_textureX(textureX)
-        , m_textureY(textureY)
-        , m_textureID(textureID)
-        , m_numFrames(numFrames)
-        , m_lives(lives)
-        , m_callbackID(callbackID)
-    {}
+        int textureY = 0);
 
-    int getX() const { return m_x; }
-    int getY() const { return m_y; }
-    int getWidth() const { return m_width; }
-    int getHeight() const { return m_height; }
-    int getTextureWidth() const { return m_textureWidth; }
-    int getTextureHeight() const { return m_textureHeight; }
-    int getTextureX() const { return m_textureX; }
-    int getTextureY() const { return m_textureY; }
-    std::string getTextureID() const { return m_textureID; }
-    int getNumFrames() const { return m_numFrames; }
-    int getLives() const { return m_lives; }
-    int getCallbackID() const { return m_callbackID; }
+    int getX() const;
+    int getY() const;
+    int getWidth() const;
+    int getHeight() const;
+    int getTextureWidth() const;
+    int getTextureHeight() const;
+    int getTextureX() const;
+    int getTextureY() const;
+    std::string getTextureID() const;
+    int getNumFrames() const;
+    int getLives() const;
+    int getCallbackID() const;
 
 private:
     int m_x;
