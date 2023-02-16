@@ -22,7 +22,7 @@ void PlatformerObject::load(const LoaderParams* pParams)
     m_position = Vector2D(pParams->getX(), pParams->getY());
 
     m_width = pParams->getWidth();
-    m_HPPeight = pParams->getHeight();
+    m_height = pParams->getHeight();
 
     m_textureID = pParams->getTextureID();
 
@@ -58,7 +58,7 @@ void PlatformerObject::draw()
     srcRect.x = 0;
     srcRect.y = 0;
     srcRect.w = destRect.w = m_width;
-    srcRect.h = destRect.h = m_HPPeight;
+    srcRect.h = destRect.h = m_height;
     destRect.x = m_position.getX() - TheCamera::Instance()->getPosition().m_x;
     destRect.y = m_position.getY() - TheCamera::Instance()->getPosition().m_y;
 
@@ -70,7 +70,7 @@ void PlatformerObject::draw()
 
 void PlatformerObject::update()
 {
-    if (m_lives <= 0) {
+    if (getLives() <= 0) {
         m_currentAttackState = ON_DIE;
     }
 
@@ -121,7 +121,7 @@ bool PlatformerObject::checkCollideTile(Vector2D newPos)
         y = layerPos.getY() / pTileLayer->getTileSize();
 
         Vector2D startPos = newPos;
-        Vector2D endPos(newPos.m_x + (m_width), (newPos.m_y) + m_HPPeight);
+        Vector2D endPos(newPos.m_x + (m_width), (newPos.m_y) + m_height);
 
         for (int i = startPos.m_x; i < endPos.m_x; i++) {
             for (int j = startPos.m_y; j < endPos.m_y; j++) {
@@ -137,4 +137,68 @@ bool PlatformerObject::checkCollideTile(Vector2D newPos)
     }
 
     return false;
+}
+
+std::string PlatformerObject::type()
+{
+    return "GameObject";
+}
+
+bool PlatformerObject::isInvulnerable()
+{
+    return m_bInvulnerable;
+}
+
+void PlatformerObject::setLives(int lives)
+{
+    m_lives = std::max(std::min(lives, m_maxLives), 0);
+}
+
+void PlatformerObject::changeLives(int lives)
+{
+    setLives(m_lives + lives);
+}
+
+int PlatformerObject::getLives()
+{
+    return m_lives;
+}
+
+void PlatformerObject::hit(int damage)
+{
+    if (isInvulnerable()) {
+        return;
+    }
+
+    m_currentAttackState = ON_HIT;
+    changeLives(-damage);
+};
+
+void PlatformerObject::attack(PlatformerObject* pTarget)
+{
+    pTarget->hit(1);
+};
+bool PlatformerObject::isAttack()
+{
+    return m_bAttack;
+}
+
+int PlatformerObject::getDamageRange()
+{
+    return m_damageRange;
+}
+
+bool PlatformerObject::isFlipped()
+{
+    return m_bFlipped;
+}
+
+void PlatformerObject::setCurrentState(objectMotion state)
+{
+    m_currentState = state;
+}
+
+bool PlatformerObject::invulnerable()
+{
+    return m_bInvulnerable;
 }

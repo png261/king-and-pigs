@@ -1,5 +1,11 @@
 #include "GameStateMachine.hpp"
 
+GameStateMachine* GameStateMachine::Instance()
+{
+    static GameStateMachine* s_pInstance = new GameStateMachine;
+    return s_pInstance;
+}
+
 void GameStateMachine::clean()
 {
     if (!m_gameStates.empty()) {

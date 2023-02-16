@@ -6,18 +6,13 @@
 class Camera
 {
 public:
-    static Camera* Instance()
-    {
-        static Camera* s_pCamera = new Camera();
-        return s_pCamera;
-    }
-
+    static Camera* Instance();
     void update();
+
+    Vector2D getPosition() const;
 
     void setTarget(GameObject* target) { m_pTarget = target; }
     void setPosition(const Vector2D& position) { m_position = position; }
-
-    Vector2D getPosition() const;
 
 private:
     Camera();

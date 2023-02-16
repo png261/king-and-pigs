@@ -12,6 +12,12 @@ Camera::~Camera()
     delete m_pTarget;
 }
 
+Camera* Camera::Instance()
+{
+    static Camera* s_pCamera = new Camera();
+    return s_pCamera;
+}
+
 Vector2D Camera::getPosition() const
 {
     if (m_pTarget == NULL) {

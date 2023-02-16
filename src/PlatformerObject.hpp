@@ -12,7 +12,7 @@ enum objectMotion {
 
 enum objectStatus {
     ON_NORMAL,
-    ON_HPPIT,
+    ON_HIT,
     ON_ATTACK,
     ON_DIE,
 };
@@ -27,33 +27,25 @@ public:
 
     virtual void draw();
     virtual void update();
-
     virtual void clean() {}
+    virtual std::string type();
 
-    virtual std::string type() { return "GameObject"; }
-    virtual bool isInvulnerable() { return m_bInvulnerable; }
+    virtual int getLives();
+    virtual int getDamageRange();
+    virtual bool isFlipped();
 
-    virtual void setLives(int lives) { m_lives = std::max(std::min(lives, m_maxLives), 0); }
-    virtual void changeLives(int lives) { setLives(m_lives + lives); }
+    virtual void setLives(int lives);
+    virtual void setCurrentState(objectMotion state);
+    virtual void changeLives(int lives);
 
-    virtual int getLives() { return m_lives; }
+    virtual bool isAttack();
+    virtual bool isInvulnerable();
 
-    virtual void hit(int damage)
-    {
-        if (m_bInvulnerable == true) {
-            return;
-        }
+    virtual void attack(PlatformerObject* pTarget);
+    virtual void hit(int damage);
 
-        m_currentAttackState = ON_HPPIT;
-        changeLives(-damage);
-    };
-    virtual void attack(PlatformerObject* pTarget) { pTarget->hit(1); };
-    virtual bool isAttack() { return m_bAttack; }
-    virtual int getDamageRange() { return m_damageRange; }
-    virtual bool getFlipped() { return m_bFlipped; }
 
-    void setCurrentState(objectMotion state) { m_currentState = state; }
-    bool invulnerable() { return m_bInvulnerable; }
+    bool invulnerable();
 
 protected:
     PlatformerObject();

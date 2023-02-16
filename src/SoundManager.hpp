@@ -11,11 +11,7 @@
 class SoundManager
 {
 public:
-    static SoundManager* Instance()
-    {
-        static SoundManager* s_pInstance = new SoundManager;
-        return s_pInstance;
-    }
+    static SoundManager* Instance();
 
     bool loadSFX(std::string filename, std::string soundID);
     bool loadMusic(std::string filename, std::string soundID);

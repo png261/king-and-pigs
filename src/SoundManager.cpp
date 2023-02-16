@@ -1,6 +1,11 @@
 #include "SoundManager.hpp"
-#include <SDL2/SDL_mixer.h>
 #include <iostream>
+
+SoundManager* SoundManager::Instance()
+{
+    static SoundManager* s_pInstance = new SoundManager;
+    return s_pInstance;
+}
 
 SoundManager::SoundManager()
 {

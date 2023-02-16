@@ -28,3 +28,23 @@ void Level::update()
         layer->update(this);
     }
 }
+
+std::vector<Tileset>* Level::getTilesets()
+{
+    return &m_tilesets;
+}
+
+std::vector<Layer*>* Level::getLayers()
+{
+    return &m_layers;
+}
+
+std::vector<TileLayer*>* Level::getCollisionLayers()
+{
+    return &m_collisionLayers;
+}
+
+std::vector<TileLayer*>& Level::getCollidableLayers()
+{
+    return m_collisionLayers;
+}

@@ -8,11 +8,7 @@
 class TextureManager
 {
 public:
-    static TextureManager* Instance()
-    {
-        static TextureManager* s_pInstance = new TextureManager;
-        return s_pInstance;
-    }
+    static TextureManager* Instance();
 
     bool
     load(std::string filename, std::string textureID, SDL_Renderer* pRenderer, int nFrames = 1);

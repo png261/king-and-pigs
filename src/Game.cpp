@@ -21,10 +21,10 @@ Game::Game()
     m_currentLevel = 1;
 }
 
-void Game::setCurrentLevel(int currentLevel)
+Game* Game::Instance()
 {
-    m_currentLevel = currentLevel;
-    m_bLevelComplete = false;
+    static Game* s_pInstance = new Game();
+    return s_pInstance;
 }
 
 bool Game::init(const char* title, int x, int y, int width, int height, Uint32 flags)
@@ -75,3 +75,96 @@ void Game::render()
 }
 
 void Game::clean() {}
+
+void Game::quit()
+{
+    m_bRunning = false;
+}
+
+
+SDL_Renderer* Game::getRenderer()
+{
+    return m_pRenderer;
+}
+
+
+int Game::getCurrentLevel() const
+{
+    return m_currentLevel;
+}
+
+void Game::setNextLevel(int nextLevel)
+{
+    m_nextLevel = nextLevel;
+}
+
+int Game::getNextLevel() const
+{
+    return m_nextLevel;
+}
+
+void Game::setLevelComplete(bool levelComplete)
+{
+    m_bLevelComplete = levelComplete;
+}
+
+const bool Game::isLevelComplete()
+{
+    return m_bLevelComplete;
+}
+
+bool Game::isRunning()
+{
+    return m_bRunning;
+}
+
+int Game::getGameWidth() const
+{
+    return m_gameWidth;
+}
+
+int Game::getGameHeight() const
+{
+    return m_gameHeight;
+}
+
+void Game::setLevelWidth(int width)
+{
+    m_levelWidth = width;
+}
+
+void Game::setLevelHeight(int height)
+{
+    m_levelHeight = height;
+}
+
+int Game::getLevelWidth()
+{
+    return m_levelWidth;
+}
+
+int Game::getLevelHegith()
+{
+    return m_levelHeight;
+}
+
+Player* Game::getPlayer()
+{
+    return m_pPlayer;
+}
+
+void Game::setPlayer(Player* pPlayer)
+{
+    m_pPlayer = pPlayer;
+}
+
+std::vector<std::string> Game::getLevelFiles()
+{
+    return m_levelFiles;
+}
+
+void Game::setCurrentLevel(int currentLevel)
+{
+    m_currentLevel = currentLevel;
+    m_bLevelComplete = false;
+}

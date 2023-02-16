@@ -40,7 +40,7 @@ void Player::handleInput()
 {
     switch (m_currentState) {
     case ON_GROUND:
-        if (m_currentAttackState == ON_HPPIT) {
+        if (m_currentAttackState == ON_HIT) {
             break;
         }
 
@@ -93,7 +93,7 @@ void Player::handleInput()
         }
 
         break;
-    case ON_HPPIT:
+    case ON_HIT:
         if (!timer.isRunning()) {
             timer.restart();
         }

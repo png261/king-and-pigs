@@ -25,9 +25,9 @@ void MenuButton::update()
 
     if (pMousePos->getX() < (m_position.getX() + m_width) &&
         pMousePos->getX() > m_position.getX() &&
-        pMousePos->getY() < (m_position.getY() + m_HPPeight) &&
+        pMousePos->getY() < (m_position.getY() + m_height) &&
         pMousePos->getY() > m_position.getY()) {
-        if (TheInputHandler::Instance()->getMouseButtonState(LEFT) && m_bReleased) {
+        if (TheInputHandler::Instance()->isMouseButtonDown(LEFT) && m_bReleased) {
             m_currentFrame = CLICKED;
 
             if (m_callback != 0) {
@@ -35,7 +35,7 @@ void MenuButton::update()
             }
 
             m_bReleased = false;
-        } else if (!TheInputHandler::Instance()->getMouseButtonState(LEFT)) {
+        } else if (!TheInputHandler::Instance()->isMouseButtonDown(LEFT)) {
             m_bReleased = true;
             m_currentFrame = MOUSE_OVER;
         }

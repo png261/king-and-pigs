@@ -1,7 +1,6 @@
 #ifndef TILE_LAYER_HPP
 #define TILE_LAYER_HPP
 
-#include <iostream>
 #include <vector>
 #include "Layer.hpp"
 #include "Level.hpp"
@@ -11,26 +10,20 @@ class TileLayer : public Layer
 {
 public:
     TileLayer(int tileSize, int mapWidth, int mapHeight, const std::vector<Tileset>& tilesets);
-
-    virtual ~TileLayer() {}
-
+    ~TileLayer() {}
     virtual void update(Level* pLevel);
     virtual void render();
 
-    void setTileIDs(const std::vector<std::vector<int>>& data) { m_tileIDs = data; }
-    void setTileSize(int tileSize) { m_tileSize = tileSize; }
-    void setMapWidth(int mapWidth) { m_mapWidth = mapWidth; }
-    int getMapWidth() { return m_mapWidth; }
-
-    int getTileSize() { return m_tileSize; }
-
-    const std::vector<std::vector<int>>& getTileIDs() { return m_tileIDs; }
-
+    void setTileIDs(const std::vector<std::vector<int>>& data);
+    void setTileSize(int tileSize);
+    void setMapWidth(int mapWidth);
+    int getMapWidth();
+    int getTileSize();
     Tileset getTilesetByID(int tileID);
 
-    const Vector2D getPosition() { return m_position; }
-
-    void setPosition(Vector2D position) { m_position = position; }
+    const std::vector<std::vector<int>>& getTileIDs();
+    const Vector2D getPosition();
+    void setPosition(Vector2D position);
 
 private:
     int m_numColumns;

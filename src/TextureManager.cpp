@@ -2,6 +2,12 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
 
+TextureManager* TextureManager::Instance()
+{
+    static TextureManager* s_pInstance = new TextureManager;
+    return s_pInstance;
+}
+
 bool TextureManager::load(
     std::string filename,
     std::string textureID,

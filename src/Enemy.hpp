@@ -16,13 +16,13 @@ public:
     {
         PlatformerObject::update();
         if (Game::Instance()->getPlayer()->isAttack() &&
-            checkCollisionAttack(
+            Collision::checkAttack(
                 Game::Instance()->getPlayer(),
                 this,
                 Game::Instance()->getPlayer()->getDamageRange())) {
             hit(1);
         }
-        if (m_bAttack && checkCollision(Game::Instance()->getPlayer(), this)) {
+        if (m_bAttack && Collision::check(Game::Instance()->getPlayer(), this)) {
             Game::Instance()->getPlayer()->hit(1);
         }
     }

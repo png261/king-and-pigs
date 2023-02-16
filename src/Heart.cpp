@@ -15,7 +15,7 @@ void Heart::load(const LoaderParams* pParams)
 
 void Heart::update()
 {
-    if (checkCollision(this, Game::Instance()->getPlayer())) {
+    if (Collision::check(this, Game::Instance()->getPlayer())) {
         Game::Instance()->getPlayer()->setLives(Game::Instance()->getPlayer()->getLives() + 1);
         m_bDead = true;
     }

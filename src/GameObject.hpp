@@ -21,48 +21,21 @@ public:
     virtual void clean() = 0;
     virtual std::string type() = 0;
 
-    Vector2D& getPosition() { return m_position; }
-    Vector2D& getVelocity() { return m_velocity; }
+    Vector2D& getPosition();
+    Vector2D& getVelocity();
 
-    int getWidth() const { return m_width; }
-    int getHeight() const { return m_HPPeight; }
+    int getWidth() const;
+    int getHeight() const;
 
-    virtual void setAnimation(std::string textureID)
-    {
-        m_textureID = textureID;
-        m_numFrames = TextureManager::Instance()->getNFrames(textureID);
-    }
+    bool isUpdating();
+    bool isDead();
 
-    // is the object currently being updated?
-    bool updating() { return m_bUpdating; }
-
-    // set whether to update the object or not
-    void setUpdating(bool updating) { m_bUpdating = updating; }
-
-    bool isDead() { return m_bDead; }
-
-    void setCollisionLayers(std::vector<TileLayer*>* layers) { m_pCollisionLayers = layers; }
+    virtual void setAnimation(std::string textureID);
+    void setUpdating(bool updating);
+    void setCollisionLayers(std::vector<TileLayer*>* layers);
 
 protected:
-    GameObject()
-        : m_position(0, 0)
-        , m_velocity(0, 0)
-        , m_acceleration(0, 0)
-        , m_width(0)
-        , m_HPPeight(0)
-        , m_textureHeight(0)
-        , m_textureWidth(0)
-        , m_currentRow(0)
-        , m_currentFrame(0)
-        , m_bUpdating(false)
-        , m_angle(0)
-        , m_bDead(false)
-        , m_alpha(255)
-        , m_bFlipped(false)
-        , m_aniCounter(false)
-    {
-        m_numFrames = TextureManager::Instance()->getNFrames(m_textureID);
-    }
+    GameObject();
 
     // movement
     Vector2D m_position;
@@ -71,7 +44,7 @@ protected:
 
     // size
     int m_width;
-    int m_HPPeight;
+    int m_height;
 
     // animation
     int m_currentRow;
@@ -83,12 +56,9 @@ protected:
     int m_textureX;
     int m_textureY;
     std::string m_textureID;
-    int m_aniClock;
 
-    // common boolean
     bool m_bUpdating;
 
-    // rotation
     double m_angle;
     bool m_bFlipped;
 

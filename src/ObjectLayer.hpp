@@ -15,7 +15,7 @@ public:
     virtual void update(Level* pLevel);
     virtual void render();
 
-    std::vector<GameObject*>* getGameObjects() { return &m_gameObjects; }
+    std::vector<GameObject*>* getGameObjects();
 
 private:
     std::vector<GameObject*> m_gameObjects;

@@ -47,7 +47,7 @@ void Pig::update()
         }
 
         break;
-    case ON_HPPIT:
+    case ON_HIT:
         if (m_startState == 0) {
             m_startState = SDL_GetTicks();
         }

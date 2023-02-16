@@ -3,6 +3,12 @@
 #include <SDL2/SDL_events.h>
 #include "Game.hpp"
 
+InputHandler* InputHandler::Instance()
+{
+    static InputHandler* s_pInstance = new InputHandler;
+    return s_pInstance;
+}
+
 InputHandler::InputHandler()
     : m_keystates(NULL)
     , m_pMousePosition(new Vector2D(0, 0))
@@ -81,3 +87,13 @@ void InputHandler::reset()
         m_bMouseButtonState[i] = false;
     }
 }
+
+Vector2D* InputHandler::getMousePosition() const
+{
+    return m_pMousePosition;
+}
+
+bool InputHandler::isMouseButtonDown(mouse_buttons buttonID) const
+{
+    return m_bMouseButtonState[buttonID];
+};

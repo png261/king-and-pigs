@@ -7,11 +7,7 @@
 class GameStateMachine
 {
 public:
-    static GameStateMachine* Instance()
-    {
-        static GameStateMachine* s_pInstance = new GameStateMachine;
-        return s_pInstance;
-    }
+    static GameStateMachine* Instance();
 
     void update();
     void render();

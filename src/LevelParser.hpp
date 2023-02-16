@@ -21,9 +21,10 @@ private:
         std::vector<Layer*>* pLayers,
         const std::vector<Tileset>* pTilesets,
         std::vector<TileLayer*>* pCollisionLayers);
+
     int m_tileSize;
     int m_width;
-    int m_HPPeight;
+    int m_height;
 };
 
 #endif

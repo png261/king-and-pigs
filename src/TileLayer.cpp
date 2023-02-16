@@ -88,3 +88,43 @@ Tileset TileLayer::getTilesetByID(int tileID)
     Tileset t;
     return t;
 }
+
+void TileLayer::setTileIDs(const std::vector<std::vector<int>>& data)
+{
+    m_tileIDs = data;
+}
+
+void TileLayer::setTileSize(int tileSize)
+{
+    m_tileSize = tileSize;
+}
+
+void TileLayer::setMapWidth(int mapWidth)
+{
+    m_mapWidth = mapWidth;
+}
+
+int TileLayer::getMapWidth()
+{
+    return m_mapWidth;
+}
+
+int TileLayer::getTileSize()
+{
+    return m_tileSize;
+}
+
+const std::vector<std::vector<int>>& TileLayer::getTileIDs()
+{
+    return m_tileIDs;
+}
+
+const Vector2D TileLayer::getPosition()
+{
+    return m_position;
+}
+
+void TileLayer::setPosition(Vector2D position)
+{
+    m_position = position;
+}

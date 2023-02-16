@@ -16,16 +16,13 @@ enum mouse_buttons {
 class InputHandler
 {
 public:
-    static InputHandler* Instance()
-    {
-        static InputHandler* s_pInstance = new InputHandler;
-        return s_pInstance;
-    }
+    static InputHandler* Instance();
+
     void update();
-    Vector2D* getMousePosition() const { return m_pMousePosition; }
+    Vector2D* getMousePosition() const;
 
     bool isKeyDown(SDL_Scancode key) const;
-    bool getMouseButtonState(mouse_buttons buttonID) { return m_bMouseButtonState[buttonID]; };
+    bool isMouseButtonDown(mouse_buttons buttonID) const;
 
     void reset();
 

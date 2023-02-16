@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Game.hpp"
 #include "Timer.hpp"
 
@@ -13,7 +12,7 @@ int main(int argc, char* argv[])
 
     Timer timer;
 
-    while (Game::Instance()->running()) {
+    while (Game::Instance()->isRunning()) {
         timer.restart();
 
         Game::Instance()->handleEvents();
