@@ -1,7 +1,9 @@
+#include <iostream>
 #include "Game.h"
+#include "Timer.h"
 
-const int FPS = 60;
-const int DELAY_TIME = 1000.f / FPS;
+const unsigned int FPS = 60;
+const unsigned int DELAY_TIME = 1000.f / FPS;
 
 int main(int argc, char* argv[])
 {
@@ -9,20 +11,21 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    Uint32 frameStart, frameTime;
+    Timer timer;
 
     while (Game::Instance()->running()) {
-        frameStart = SDL_GetTicks();
+        timer.restart();
 
         Game::Instance()->handleEvents();
         Game::Instance()->update();
         Game::Instance()->render();
 
-        frameTime = SDL_GetTicks() - frameStart;
-        if (frameTime < DELAY_TIME) {
-            SDL_Delay(DELAY_TIME - frameTime);
+        timer.pause();
+        if (timer.delta() < DELAY_TIME) {
+            SDL_Delay(DELAY_TIME - timer.delta());
         }
     }
+
     Game::Instance()->clean();
     return 0;
 }
