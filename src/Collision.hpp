@@ -2,7 +2,6 @@
 #define COLLISION_HPP
 
 #include <SDL2/SDL.h>
-#include <iostream>
 #include "GameObject.hpp"
 #include "PlatformerObject.hpp"
 

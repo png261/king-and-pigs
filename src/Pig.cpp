@@ -1,5 +1,4 @@
 #include "Pig.hpp"
-#include <iostream>
 #include "Collision.hpp"
 #include "Game.hpp"
 #include "InputHandler.hpp"
@@ -72,7 +71,6 @@ void Pig::update()
             m_currentAttackState = ON_NORMAL;
             m_startState = 0;
             m_bAttack = false;
-            std::cout << "pig normal" << std::endl;
             break;
         }
         m_bAttack = true;

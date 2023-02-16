@@ -1,7 +1,6 @@
 #ifndef PAUSE_STATE_HPP
 #define PAUSE_STATE_HPP
 
-#include <iostream>
 #include <vector>
 #include "MenuState.hpp"
 

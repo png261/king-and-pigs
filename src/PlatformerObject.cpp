@@ -1,6 +1,5 @@
 #include "PlatformerObject.hpp"
 
-#include <iostream>
 #include "Camera.hpp"
 #include "Game.hpp"
 #include "TextureManager.hpp"

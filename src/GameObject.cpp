@@ -43,7 +43,7 @@ void GameObject::setAnimation(std::string textureID)
     m_numFrames = TextureManager::Instance()->getNFrames(textureID);
 }
 
-bool GameObject::isUpdating()
+bool GameObject::isUpdating() const
 {
     return m_bUpdating;
 }
@@ -53,7 +53,7 @@ void GameObject::setUpdating(bool updating)
     m_bUpdating = updating;
 }
 
-bool GameObject::isDead()
+bool GameObject::isDead() const
 {
     return m_bDead;
 }

@@ -1,8 +1,8 @@
 #include "TileLayer.hpp"
-#include <iostream>
 #include "Camera.hpp"
 #include "Game.hpp"
 #include "InputHandler.hpp"
+#include "Log.hpp"
 #include "TextureManager.hpp"
 
 TileLayer::TileLayer(
@@ -84,7 +84,7 @@ Tileset TileLayer::getTilesetByID(int tileID)
         }
     }
 
-    std::cout << "did not find tileset, returning empty tileset\n";
+    Log::warning("did not find tileset, returning empty tileset");
     Tileset t;
     return t;
 }

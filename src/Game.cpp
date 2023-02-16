@@ -1,9 +1,10 @@
 #include "Game.hpp"
-#include <iostream>
+#include <SDL2/SDL_render.h>
 
 #include "GameObjectFactory.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
+#include "Log.hpp"
 #include "MainMenuState.hpp"
 #include "MenuButton.hpp"
 #include "PlayState.hpp"
@@ -27,24 +28,16 @@ Game* Game::Instance()
     return s_pInstance;
 }
 
-bool Game::init(const char* title, int x, int y, int width, int height, Uint32 flags)
+bool Game::init(int width, int height, Uint32 flags)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        SDL_Log("fail to init SDL");
+        Log::error("fail to init SDL");
         return false;
     }
 
-    m_pWindow = SDL_CreateWindow(title, x, y, width, height, flags);
-    if (m_pWindow == NULL) {
-        SDL_Log("fail to create Window");
-        return false;
-    }
-
-    m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
-    if (m_pRenderer == NULL) {
-        SDL_Log("fail to create Renderer");
-        return false;
-    }
+    SDL_CreateWindowAndRenderer(width, height, flags, &m_pWindow, &m_pRenderer);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+    SDL_RenderSetLogicalSize(m_pRenderer, width, height);
 
     m_gameWidth = width;
     m_gameHeight = height;
@@ -108,12 +101,12 @@ void Game::setLevelComplete(bool levelComplete)
     m_bLevelComplete = levelComplete;
 }
 
-const bool Game::isLevelComplete()
+bool Game::isLevelComplete() const
 {
     return m_bLevelComplete;
 }
 
-bool Game::isRunning()
+bool Game::isRunning() const
 {
     return m_bRunning;
 }
@@ -138,12 +131,12 @@ void Game::setLevelHeight(int height)
     m_levelHeight = height;
 }
 
-int Game::getLevelWidth()
+int Game::getLevelWidth() const
 {
     return m_levelWidth;
 }
 
-int Game::getLevelHegith()
+int Game::getLevelHeight() const
 {
     return m_levelHeight;
 }

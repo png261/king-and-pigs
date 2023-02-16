@@ -1,5 +1,4 @@
 #include "ObjectLayer.hpp"
-#include <iostream>
 
 #include "Camera.hpp"
 #include "Collision.hpp"

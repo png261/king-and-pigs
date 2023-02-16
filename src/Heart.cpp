@@ -1,5 +1,4 @@
 #include "Heart.hpp"
-#include <iostream>
 #include "Collision.hpp"
 #include "Game.hpp"
 

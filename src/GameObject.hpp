@@ -27,8 +27,8 @@ public:
     int getWidth() const;
     int getHeight() const;
 
-    bool isUpdating();
-    bool isDead();
+    bool isUpdating() const;
+    bool isDead() const;
 
     virtual void setAnimation(std::string textureID);
     void setUpdating(bool updating);

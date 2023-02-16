@@ -1,6 +1,6 @@
 #include "TextureManager.hpp"
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_render.h>
+#include "Log.hpp"
 
 TextureManager* TextureManager::Instance()
 {
@@ -15,20 +15,13 @@ bool TextureManager::load(
     int nFrames)
 {
     if (m_textureMap.find(textureID) != m_textureMap.end()) {
-        SDL_Log("textureID already exists");
+        Log::warning("textureID already exists");
         return false;
     }
 
-    SDL_Surface* pTempSurface = IMG_Load(filename.c_str());
-    if (pTempSurface == NULL) {
-        SDL_Log("fail to load %s", filename.c_str());
-        return false;
-    }
-
-    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(pRenderer, pTempSurface);
-    SDL_FreeSurface(pTempSurface);
+    SDL_Texture* pTexture = IMG_LoadTexture(pRenderer, filename.c_str());
     if (pTexture == NULL) {
-        SDL_Log("fail to create Texture for %s", filename.c_str());
+        Log::error("fail to create Texture for: " + filename);
         return false;
     }
 
@@ -47,15 +40,8 @@ void TextureManager::draw(
     SDL_Renderer* pRenderer,
     SDL_RendererFlip flip)
 {
-    SDL_Rect srcRect;
-    SDL_Rect destRect;
-
-    srcRect.x = 0;
-    srcRect.y = 0;
-    srcRect.w = destRect.w = width;
-    srcRect.h = destRect.h = height;
-    destRect.x = x;
-    destRect.y = y;
+    SDL_Rect srcRect{0, 0, width, height};
+    SDL_Rect destRect{x, y, width, height};
 
     SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
     SDL_RenderDrawRect(pRenderer, &destRect);
@@ -77,14 +63,8 @@ void TextureManager::drawFrame(
     int alpha,
     SDL_RendererFlip flip)
 {
-    SDL_Rect srcRect;
-    SDL_Rect destRect;
-    srcRect.x = width * currentFrame;
-    srcRect.y = height * currentRow;
-    srcRect.w = destRect.w = width;
-    srcRect.h = destRect.h = height;
-    destRect.x = x;
-    destRect.y = y;
+    SDL_Rect srcRect{width * currentFrame, height * currentRow, width, height};
+    SDL_Rect destRect{x, y, width, height};
 
     SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
     SDL_RenderDrawRect(pRenderer, &destRect);
@@ -106,14 +86,12 @@ void TextureManager::drawTile(
     int currentFrame,
     SDL_Renderer* pRenderer)
 {
-    SDL_Rect srcRect;
-    SDL_Rect destRect;
-    srcRect.x = margin + (spacing + width) * currentFrame;
-    srcRect.y = margin + (spacing + height) * currentRow;
-    srcRect.w = destRect.w = width;
-    srcRect.h = destRect.h = height;
-    destRect.x = x;
-    destRect.y = y;
+    SDL_Rect srcRect{
+        margin + (spacing + width) * currentFrame,
+        margin + (spacing + height) * currentRow,
+        width,
+        height};
+    SDL_Rect destRect{x, y, width, height};
 
     SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
     SDL_RenderDrawRect(pRenderer, &destRect);

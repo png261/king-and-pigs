@@ -1,7 +1,6 @@
 #ifndef EMENY_HPP
 #define EMENY_HPP
 
-#include <iostream>
 #include "Collision.hpp"
 #include "Game.hpp"
 #include "PlatformerObject.hpp"

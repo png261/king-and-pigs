@@ -1,7 +1,6 @@
 #ifndef LEVEL_HPP
 #define LEVEL_HPP
 
-#include <iostream>
 #include <vector>
 #include "Layer.hpp"
 #include "Player.hpp"

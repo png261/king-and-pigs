@@ -1,5 +1,6 @@
 #include "SoundManager.hpp"
-#include <iostream>
+
+#include "Log.hpp"
 
 SoundManager* SoundManager::Instance()
 {
@@ -25,7 +26,7 @@ bool isValidFileType(std::string filename, std::string filetype)
 bool SoundManager::loadMusic(std::string filename, std::string soundID)
 {
     if (!isValidFileType(filename, "ogg")) {
-        std::cout << "Filetype must be .ogg" << std::endl;
+        Log::error("Filetype must be .ogg");
         return false;
     }
 
@@ -40,7 +41,7 @@ bool SoundManager::loadMusic(std::string filename, std::string soundID)
 bool SoundManager::loadSFX(std::string filename, std::string soundID)
 {
     if (!isValidFileType(filename, "wav")) {
-        std::cout << "Filetype must be .wav" << std::endl;
+        Log::error("Filetype must be .wav");
         return false;
     }
 

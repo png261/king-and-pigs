@@ -9,17 +9,17 @@
 #include "InputHandler.hpp"
 #include "LevelParser.hpp"
 #include "LoaderParams.hpp"
+#include "Log.hpp"
 #include "PauseState.hpp"
 #include "Pig.hpp"
 #include "Player.hpp"
 
-#include <iostream>
 
 const std::string PlayState::s_stateID = "PLAY";
 
 bool PlayState::onEnter()
 {
-    std::cout << "enter playstate" << std::endl;
+    Log::log("enter playstate");
 
     GameObjectFactory::Instance()->registerType("Player", new Creator<Player>);
     GameObjectFactory::Instance()->registerType("Pig", new Creator<Pig>);
@@ -95,7 +95,7 @@ bool PlayState::onExit()
     m_exiting = true;
     TheInputHandler::Instance()->reset();
 
-    std::cout << "exit playstate" << std::endl;
+    Log::log("exit playstate");
 
     return true;
 }

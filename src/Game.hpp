@@ -11,7 +11,7 @@ class Game
 public:
     ~Game(){};
     static Game* Instance();
-    bool init(const char* title, int x, int y, int w, int h, Uint32 flags);
+    bool init(int w, int h, Uint32 flags);
     void handleEvents();
     void update();
     void render();
@@ -21,15 +21,15 @@ public:
     SDL_Renderer* getRenderer();
     int getCurrentLevel() const;
     int getNextLevel() const;
-    const bool isLevelComplete();
     int getGameWidth() const;
     int getGameHeight() const;
-    int getLevelWidth();
-    int getLevelHegith();
+    int getLevelWidth() const;
+    int getLevelHeight() const;
     Player* getPlayer();
     std::vector<std::string> getLevelFiles();
 
-    bool isRunning();
+    bool isRunning() const;
+    bool isLevelComplete() const;
 
     void setCurrentLevel(int currentLevel);
     void setNextLevel(int nextLevel);
@@ -50,10 +50,10 @@ private:
     int m_levelWidth;
     int m_levelHeight;
 
-    bool m_bRunning;
-
     int m_currentLevel;
     int m_nextLevel;
+
+    bool m_bRunning;
     bool m_bLevelComplete;
 
     Player* m_pPlayer;

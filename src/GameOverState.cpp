@@ -7,6 +7,7 @@
 #include "PlayState.hpp"
 #include "StateParser.hpp"
 #include "TextureManager.hpp"
+#include "Log.hpp"
 
 const std::string GameOverState::s_gameOverID = "GAMEOVER";
 
@@ -52,7 +53,7 @@ bool GameOverState::onEnter()
 
     m_loadingComplete = true;
 
-    std::cout << "entering GameOverState\n";
+    Log::log("entering GameOverState");
     return true;
 }
 
@@ -63,7 +64,7 @@ bool GameOverState::onExit()
 
     TheInputHandler::Instance()->reset();
 
-    std::cout << "exiting GameOverState\n";
+    Log::log("exiting GameOverState");
     return true;
 }
 

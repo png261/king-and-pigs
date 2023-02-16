@@ -1,6 +1,5 @@
 #include "LevelParser.hpp"
 
-#include <iostream>
 #include <vector>
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"

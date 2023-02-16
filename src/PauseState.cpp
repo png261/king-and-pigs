@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
+#include "Log.hpp"
 #include "MainMenuState.hpp"
 #include "MenuButton.hpp"
 #include "PlayState.hpp"
@@ -52,7 +53,7 @@ bool PauseState::onEnter()
 
     m_loadingComplete = true;
 
-    std::cout << "entering PauseState\n";
+    Log::log("entering PauseState\n");
     return true;
 }
 
@@ -67,7 +68,7 @@ bool PauseState::onExit()
     }
     TheInputHandler::Instance()->reset();
 
-    std::cout << "exiting PauseState\n";
+    Log::log("exiting PauseState\n");
     return true;
 }
 

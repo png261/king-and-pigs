@@ -1,5 +1,4 @@
 #include "MainMenuState.hpp"
-#include <iostream>
 #include "Game.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
@@ -7,6 +6,7 @@
 #include "PlayState.hpp"
 #include "StateParser.hpp"
 #include "TextureManager.hpp"
+#include "Log.hpp"
 
 const std::string MainMenuState::s_stateID = "MENU";
 
@@ -59,7 +59,7 @@ bool MainMenuState::onEnter()
     setCallbacks(m_callbacks);
 
     m_loadingComplete = true;
-    std::cout << "entering MenuState\n";
+    Log::log("entering MenuState");
     return true;
 }
 
@@ -70,7 +70,7 @@ bool MainMenuState::onExit()
 
     TheInputHandler::Instance()->reset();
 
-    std::cout << "exiting MenuState\n";
+    Log::log("exiting MenuState");
     return true;
 }
 

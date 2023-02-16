@@ -1,7 +1,6 @@
 #ifndef OBJECT_LAYER_HPP
 #define OBJECT_LAYER_HPP
 
-#include <iostream>
 #include <vector>
 #include "Layer.hpp"
 

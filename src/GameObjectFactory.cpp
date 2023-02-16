@@ -1,5 +1,7 @@
 #include "GameObjectFactory.hpp"
 
+#include "Log.hpp"
+
 GameObjectFactory* GameObjectFactory::Instance()
 {
     static GameObjectFactory* s_pInstance = new GameObjectFactory();
@@ -22,7 +24,7 @@ GameObject* GameObjectFactory::create(std::string typeID)
     std::map<std::string, BaseCreator*>::iterator it = m_creators.find(typeID);
 
     if (it == m_creators.end()) {
-        std::cout << "could not find type: " << typeID << "\n";
+        Log::warning("could not find type: " + typeID);
         return NULL;
     }
 

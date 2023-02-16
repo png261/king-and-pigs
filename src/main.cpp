@@ -6,7 +6,7 @@ const unsigned int DELAY_TIME = 1000.f / FPS;
 
 int main(int argc, char* argv[])
 {
-    if (!Game::Instance()->init("kings and pigs", 200, 0, 700, 400, SDL_WINDOW_SHOWN)) {
+    if (!Game::Instance()->init(700, 400, SDL_WINDOW_SHOWN)) {
         return -1;
     }
 

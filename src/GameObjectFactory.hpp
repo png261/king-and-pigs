@@ -1,7 +1,6 @@
 #ifndef GAME_OBJECT_FACTORY_HPP
 #define GAME_OBJECT_FACTORY_HPP
 
-#include <iostream>
 #include <map>
 #include <string>
 #include "GameObject.hpp"

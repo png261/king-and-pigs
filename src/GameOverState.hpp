@@ -1,7 +1,6 @@
 #ifndef GAME_OVER_STATE_HPP
 #define GAME_OVER_STATE_HPP
 
-#include <iostream>
 #include <vector>
 #include "MenuState.hpp"
 

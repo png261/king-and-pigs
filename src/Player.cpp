@@ -1,6 +1,3 @@
-
-#include <iostream>
-
 #include "Camera.hpp"
 #include "Game.hpp"
 #include "InputHandler.hpp"
@@ -124,13 +121,7 @@ void Player::handleInput()
         m_bAttack = true;
         setAnimation("player attack");
         break;
-    case ON_DIE:
-        if (m_startState == 0) {
-            m_startState = SDL_GetTicks();
-        }
-
-        setAnimation("player die");
-        break;
+    case ON_DIE: setAnimation("player die"); break;
     }
 };
 

@@ -1,5 +1,4 @@
 #include "Box.hpp"
-#include <iostream>
 
 Box::Box()
     : PlatformerObject()
@@ -20,6 +19,5 @@ void Box::draw()
 }
 void Box::collision()
 {
-    std::cout << "box collision" << std::endl;
 }
 void Box::clean() {}
