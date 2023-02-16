@@ -1,5 +1,5 @@
-#include "MenuButton.h"
-#include "InputHandler.h"
+#include "MenuButton.hpp"
+#include "InputHandler.hpp"
 
 MenuButton::MenuButton()
     : PlatformerObject()
@@ -25,7 +25,7 @@ void MenuButton::update()
 
     if (pMousePos->getX() < (m_position.getX() + m_width) &&
         pMousePos->getX() > m_position.getX() &&
-        pMousePos->getY() < (m_position.getY() + m_height) &&
+        pMousePos->getY() < (m_position.getY() + m_HPPeight) &&
         pMousePos->getY() > m_position.getY()) {
         if (TheInputHandler::Instance()->getMouseButtonState(LEFT) && m_bReleased) {
             m_currentFrame = CLICKED;

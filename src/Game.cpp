@@ -1,14 +1,14 @@
-#include "Game.h"
+#include "Game.hpp"
 #include <iostream>
 
-#include "GameObjectFactory.h"
-#include "GameStateMachine.h"
-#include "InputHandler.h"
-#include "MainMenuState.h"
-#include "MenuButton.h"
-#include "PlayState.h"
-#include "SoundManager.h"
-#include "TextureManager.h"
+#include "GameObjectFactory.hpp"
+#include "GameStateMachine.hpp"
+#include "InputHandler.hpp"
+#include "MainMenuState.hpp"
+#include "MenuButton.hpp"
+#include "PlayState.hpp"
+#include "SoundManager.hpp"
+#include "TextureManager.hpp"
 
 Game::Game()
     : m_pWindow(NULL)

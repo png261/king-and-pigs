@@ -1,7 +1,7 @@
-#include "InputHandler.h"
+#include "InputHandler.hpp"
 
 #include <SDL2/SDL_events.h>
-#include "Game.h"
+#include "Game.hpp"
 
 InputHandler::InputHandler()
     : m_keystates(NULL)

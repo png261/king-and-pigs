@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Game.h"
-#include "Timer.h"
+#include "Game.hpp"
+#include "Timer.hpp"
 
 const unsigned int FPS = 60;
 const unsigned int DELAY_TIME = 1000.f / FPS;

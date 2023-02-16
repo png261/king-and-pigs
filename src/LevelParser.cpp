@@ -1,13 +1,13 @@
-#include "LevelParser.h"
+#include "LevelParser.hpp"
 
 #include <iostream>
 #include <vector>
-#include "Game.h"
-#include "GameObjectFactory.h"
-#include "Layer.h"
-#include "ObjectLayer.h"
-#include "TextureManager.h"
-#include "TileLayer.h"
+#include "Game.hpp"
+#include "GameObjectFactory.hpp"
+#include "Layer.hpp"
+#include "ObjectLayer.hpp"
+#include "TextureManager.hpp"
+#include "TileLayer.hpp"
 
 using namespace tinyxml2;
 
@@ -23,9 +23,9 @@ Level* LevelParser::parseLevel(const char* levelFile)
     m_width = atoi(pRoot->Attribute("width"));
 
     Game::Instance()->setLevelWidth(m_width * m_tileSize);
-    Game::Instance()->setLevelHeight(m_height * m_tileSize);
+    Game::Instance()->setLevelHeight(m_HPPeight * m_tileSize);
 
-    m_height = atoi(pRoot->Attribute("height"));
+    m_HPPeight = atoi(pRoot->Attribute("height"));
 
     for (XMLElement* e = pRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("properties")) {
@@ -218,14 +218,14 @@ void LevelParser::parseTileLayer(
     const std::vector<Tileset>* pTilesets,
     std::vector<TileLayer*>* pCollisionLayers)
 {
-    TileLayer* pTileLayer = new TileLayer(m_tileSize, m_width, m_height, *pTilesets);
+    TileLayer* pTileLayer = new TileLayer(m_tileSize, m_width, m_HPPeight, *pTilesets);
 
     bool collidable = false;
 
     std::vector<std::vector<int>> data;
 
     std::vector<int> layerRow(m_width);
-    for (int i = 0; i < m_height; i++) {
+    for (int i = 0; i < m_HPPeight; i++) {
         data.push_back(layerRow);
     }
 
@@ -253,7 +253,7 @@ void LevelParser::parseTileLayer(
 
     int start = 0;
 
-    for (int row = 0; row < m_height; row++) {
+    for (int row = 0; row < m_HPPeight; row++) {
         for (int col = 0; col < m_width; col++) {
             int end = dataText.find(',', start);
             data[row][col] = stoi(dataText.substr(start, end - start));

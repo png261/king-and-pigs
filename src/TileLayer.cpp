@@ -1,9 +1,9 @@
-#include "TileLayer.h"
+#include "TileLayer.hpp"
 #include <iostream>
-#include "Camera.h"
-#include "Game.h"
-#include "InputHandler.h"
-#include "TextureManager.h"
+#include "Camera.hpp"
+#include "Game.hpp"
+#include "InputHandler.hpp"
+#include "TextureManager.hpp"
 
 TileLayer::TileLayer(
     int tileSize,

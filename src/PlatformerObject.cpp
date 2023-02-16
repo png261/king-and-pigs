@@ -1,10 +1,10 @@
-#include "PlatformerObject.h"
+#include "PlatformerObject.hpp"
 
 #include <iostream>
-#include "Camera.h"
-#include "Game.h"
-#include "TextureManager.h"
-#include "TileLayer.h"
+#include "Camera.hpp"
+#include "Game.hpp"
+#include "TextureManager.hpp"
+#include "TileLayer.hpp"
 
 #define GRAVITY 0.3
 
@@ -22,7 +22,7 @@ void PlatformerObject::load(const LoaderParams* pParams)
     m_position = Vector2D(pParams->getX(), pParams->getY());
 
     m_width = pParams->getWidth();
-    m_height = pParams->getHeight();
+    m_HPPeight = pParams->getHeight();
 
     m_textureID = pParams->getTextureID();
 
@@ -58,7 +58,7 @@ void PlatformerObject::draw()
     srcRect.x = 0;
     srcRect.y = 0;
     srcRect.w = destRect.w = m_width;
-    srcRect.h = destRect.h = m_height;
+    srcRect.h = destRect.h = m_HPPeight;
     destRect.x = m_position.getX() - TheCamera::Instance()->getPosition().m_x;
     destRect.y = m_position.getY() - TheCamera::Instance()->getPosition().m_y;
 
@@ -121,7 +121,7 @@ bool PlatformerObject::checkCollideTile(Vector2D newPos)
         y = layerPos.getY() / pTileLayer->getTileSize();
 
         Vector2D startPos = newPos;
-        Vector2D endPos(newPos.m_x + (m_width), (newPos.m_y) + m_height);
+        Vector2D endPos(newPos.m_x + (m_width), (newPos.m_y) + m_HPPeight);
 
         for (int i = startPos.m_x; i < endPos.m_x; i++) {
             for (int j = startPos.m_y; j < endPos.m_y; j++) {

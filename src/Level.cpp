@@ -1,8 +1,8 @@
-#include "Level.h"
-#include "Game.h"
-#include "Layer.h"
-#include "TextureManager.h"
-#include "TileLayer.h"
+#include "Level.hpp"
+#include "Game.hpp"
+#include "Layer.hpp"
+#include "TextureManager.hpp"
+#include "TileLayer.hpp"
 
 Level::Level() {}
 

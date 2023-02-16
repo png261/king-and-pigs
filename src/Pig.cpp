@@ -1,8 +1,8 @@
-#include "Pig.h"
+#include "Pig.hpp"
 #include <iostream>
-#include "Collision.h"
-#include "Game.h"
-#include "InputHandler.h"
+#include "Collision.hpp"
+#include "Game.hpp"
+#include "InputHandler.hpp"
 
 Pig::Pig()
     : Enemy()
@@ -47,7 +47,7 @@ void Pig::update()
         }
 
         break;
-    case ON_HIT:
+    case ON_HPPIT:
         if (m_startState == 0) {
             m_startState = SDL_GetTicks();
         }

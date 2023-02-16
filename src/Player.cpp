@@ -1,11 +1,11 @@
 
 #include <iostream>
 
-#include "Camera.h"
-#include "Game.h"
-#include "InputHandler.h"
-#include "PlatformerObject.h"
-#include "SoundManager.h"
+#include "Camera.hpp"
+#include "Game.hpp"
+#include "InputHandler.hpp"
+#include "PlatformerObject.hpp"
+#include "SoundManager.hpp"
 
 Player::Player()
     : PlatformerObject()
@@ -40,7 +40,7 @@ void Player::handleInput()
 {
     switch (m_currentState) {
     case ON_GROUND:
-        if (m_currentAttackState == ON_HIT) {
+        if (m_currentAttackState == ON_HPPIT) {
             break;
         }
 
@@ -93,15 +93,16 @@ void Player::handleInput()
         }
 
         break;
-    case ON_HIT:
-        if (m_startState == 0) {
-            m_startState = SDL_GetTicks();
+    case ON_HPPIT:
+        if (!timer.isRunning()) {
+            timer.restart();
         }
-        if (m_startState && SDL_GetTicks() - m_startState >= 300) {
+        if (timer.delta() >= 300) {
             m_currentAttackState = ON_NORMAL;
             m_startState = 0;
             m_bInvulnerable = false;
             m_velocity.setX(0);
+            timer.stop();
             break;
         }
 
@@ -109,13 +110,14 @@ void Player::handleInput()
         setAnimation("player hit");
         break;
     case ON_ATTACK:
-        if (m_startState == 0) {
-            m_startState = SDL_GetTicks();
+        if (!timer.isRunning()) {
+            timer.restart();
         }
-        if (SDL_GetTicks() - m_startState >= 300) {
+        if (timer.delta() >= 300) {
             m_currentAttackState = ON_NORMAL;
             m_startState = 0;
             m_bAttack = false;
+            timer.stop();
             break;
         }
 

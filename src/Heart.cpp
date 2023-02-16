@@ -1,7 +1,7 @@
-#include "Heart.h"
+#include "Heart.hpp"
 #include <iostream>
-#include "Collision.h"
-#include "Game.h"
+#include "Collision.hpp"
+#include "Game.hpp"
 
 Heart::Heart()
     : PlatformerObject()

@@ -1,4 +1,4 @@
-#include "GameStateMachine.h"
+#include "GameStateMachine.hpp"
 
 void GameStateMachine::clean()
 {

@@ -1,11 +1,11 @@
-#include "ObjectLayer.h"
+#include "ObjectLayer.hpp"
 #include <iostream>
 
-#include "Camera.h"
-#include "Collision.h"
-#include "Enemy.h"
-#include "Game.h"
-#include "Level.h"
+#include "Camera.hpp"
+#include "Collision.hpp"
+#include "Enemy.hpp"
+#include "Game.hpp"
+#include "Level.hpp"
 
 ObjectLayer::~ObjectLayer()
 {

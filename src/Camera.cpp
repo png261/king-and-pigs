@@ -1,6 +1,6 @@
-#include "Camera.h"
+#include "Camera.hpp"
 #include <iostream>
-#include "Game.h"
+#include "Game.hpp"
 
 Camera::Camera()
     : m_pTarget(0)
