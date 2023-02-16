@@ -1,6 +1,7 @@
 #include "PlayState.hpp"
 #include "Box.hpp"
 #include "Camera.hpp"
+#include "Diamond.hpp"
 #include "Enemy.hpp"
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"
@@ -25,6 +26,7 @@ bool PlayState::onEnter()
     GameObjectFactory::Instance()->registerType("Pig", new Creator<Pig>);
     GameObjectFactory::Instance()->registerType("Box", new Creator<Box>);
     GameObjectFactory::Instance()->registerType("Heart", new Creator<Heart>);
+    GameObjectFactory::Instance()->registerType("Diamond", new Creator<Diamond>);
 
     LevelParser levelParser;
     pLevel = levelParser.parseLevel(
@@ -32,6 +34,8 @@ bool PlayState::onEnter()
     if (pLevel == NULL) {
         return false;
     }
+
+    TheCamera::Instance()->setTarget(Game::Instance()->getPlayer());
 
     SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
 
@@ -52,11 +56,9 @@ bool PlayState::onEnter()
     TextureManager::Instance()
         ->load("assets/01-King Human/Hit (78x58).png", "player hit", pRenderer, 2);
     TextureManager::Instance()
-        ->load("assets/01-King Human/Door In (78x58).png", "player doorIn", pRenderer, 8);
+        ->load("assets/01-King Human/Door In (78x58).png", "player door in", pRenderer, 8);
     TextureManager::Instance()
-        ->load("assets/01-King Human/Door In (78x58).png", "player doorIn", pRenderer, 8);
-    TextureManager::Instance()
-        ->load("assets/01-King Human/Door Out (78x58).png", "player doorOut", pRenderer, 8);
+        ->load("assets/01-King Human/Door Out (78x58).png", "player door out", pRenderer, 8);
 
     TextureManager::Instance()->load("assets/03-Pig/Idle (34x28).png", "pig idle", pRenderer, 11);
     TextureManager::Instance()->load("assets/03-Pig/Run (34x28).png", "pig run", pRenderer, 6);
@@ -85,6 +87,14 @@ bool PlayState::onEnter()
         ->load("assets/12-Live and Coins/Big Heart Idle (18x14).png", "heart idle", pRenderer, 7);
     TextureManager::Instance()
         ->load("assets/12-Live and Coins/Big Heart Hit (18x14).png", "heart hit", pRenderer, 2);
+
+    TextureManager::Instance()->load(
+        "assets/12-Live and Coins/Big Diamond Idle (18x14).png",
+        "diamond idle",
+        pRenderer,
+        7);
+    TextureManager::Instance()
+        ->load("assets/12-Live and Coins/Big Diamond Hit (18x14).png", "diamond hit", pRenderer, 2);
 
     m_loadingComplete = true;
     return true;

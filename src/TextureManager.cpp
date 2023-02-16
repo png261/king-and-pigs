@@ -38,16 +38,19 @@ void TextureManager::draw(
     int width,
     int height,
     SDL_Renderer* pRenderer,
-    SDL_RendererFlip flip)
+    bool bFlipped)
 {
     SDL_Rect srcRect{0, 0, width, height};
     SDL_Rect destRect{x, y, width, height};
 
-    SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
-    SDL_RenderDrawRect(pRenderer, &destRect);
-    SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
-
-    SDL_RenderCopyEx(pRenderer, m_textureMap[textureID], &srcRect, &destRect, 0, 0, flip);
+    SDL_RenderCopyEx(
+        pRenderer,
+        m_textureMap[textureID],
+        &srcRect,
+        &destRect,
+        0,
+        0,
+        bFlipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
 
 void TextureManager::drawFrame(
@@ -59,19 +62,19 @@ void TextureManager::drawFrame(
     int currentRow,
     int currentFrame,
     SDL_Renderer* pRenderer,
-    double angle,
-    int alpha,
-    SDL_RendererFlip flip)
+    bool bFlipped)
 {
     SDL_Rect srcRect{width * currentFrame, height * currentRow, width, height};
     SDL_Rect destRect{x, y, width, height};
 
-    SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
-    SDL_RenderDrawRect(pRenderer, &destRect);
-    SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
-
-    SDL_SetTextureAlphaMod(m_textureMap[id], alpha);
-    SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, angle, 0, flip);
+    SDL_RenderCopyEx(
+        pRenderer,
+        m_textureMap[id],
+        &srcRect,
+        &destRect,
+        0,
+        0,
+        bFlipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
 
 void TextureManager::drawTile(
@@ -92,10 +95,6 @@ void TextureManager::drawTile(
         width,
         height};
     SDL_Rect destRect{x, y, width, height};
-
-    SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
-    SDL_RenderDrawRect(pRenderer, &destRect);
-    SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
 
     SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, 0, 0, SDL_FLIP_NONE);
 }

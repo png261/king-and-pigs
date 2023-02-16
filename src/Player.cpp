@@ -1,12 +1,10 @@
+#include <iostream>
+#include "Animation.hpp"
 #include "Camera.hpp"
 #include "Game.hpp"
 #include "InputHandler.hpp"
 #include "PlatformerObject.hpp"
 #include "SoundManager.hpp"
-
-Player::Player()
-    : PlatformerObject()
-{}
 
 void Player::load(const LoaderParams* pParams)
 {
@@ -17,9 +15,20 @@ void Player::load(const LoaderParams* pParams)
     m_damage = 1;
     m_damageRange = 10;
 
+    m_animations[IDLE] = new Animation("player idle", 11);
+    m_animations[RUN] = new Animation("player run", 8);
+    m_animations[JUMP] = new Animation("player jump", 1);
+    m_animations[FALL] = new Animation("player fall", 1);
+    m_animations[GROUND] = new Animation("player ground", 1);
+    m_animations[ATTACK] = new Animation("player attack", 3);
+    m_animations[HIT] = new Animation("player hit", 2);
+    m_animations[DEAD] = new Animation("player dead", 4, false);
+    m_animations[DOOR_IN] = new Animation("player door in", 8, false);
+    m_animations[DOOR_OUT] = new Animation("player door out", 8, false);
+
     m_currentState = ON_FLY;
+    m_curAnimation = FALL;
     m_currentAttackState = ON_NORMAL;
-    TheCamera::Instance()->setTarget(this);
 }
 
 void Player::draw()
@@ -35,26 +44,26 @@ void Player::update()
 
 void Player::handleInput()
 {
+    ANIMATION_ID newAnimation;
     switch (m_currentState) {
     case ON_GROUND:
-        if (m_currentAttackState == ON_HIT) {
+        if (isDead() || m_currentAttackState == ON_HIT) {
             break;
         }
 
         if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) {
             m_velocity.setX(-m_moveSpeed);
-            setAnimation("player run");
+            newAnimation = RUN;
         } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) {
             m_velocity.setX(m_moveSpeed);
-            setAnimation("player run");
+            newAnimation = RUN;
         } else {
             m_velocity.setX(0);
-            setAnimation("player idle");
+            newAnimation = IDLE;
         }
 
         if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)) {
             m_velocity.setY(-m_jumpSpeed);
-            setAnimation("player jump");
             m_currentState = ON_FLY;
         }
         break;
@@ -65,12 +74,12 @@ void Player::handleInput()
         }
 
         if (m_velocity.getY() < 0) {
-            setAnimation("player jump");
+            newAnimation = JUMP;
             break;
         }
         break;
     case ON_FALL:
-        setAnimation("player fall");
+        newAnimation = FALL;
         if (m_velocity.getY() == 0) {
             m_currentState = ON_GROUND;
         }
@@ -91,12 +100,10 @@ void Player::handleInput()
 
         break;
     case ON_HIT:
-        if (!timer.isRunning()) {
-            timer.restart();
-        }
+        timer.start();
+
         if (timer.delta() >= 300) {
             m_currentAttackState = ON_NORMAL;
-            m_startState = 0;
             m_bInvulnerable = false;
             m_velocity.setX(0);
             timer.stop();
@@ -104,27 +111,29 @@ void Player::handleInput()
         }
 
         m_bInvulnerable = true;
-        setAnimation("player hit");
+        newAnimation = HIT;
         break;
     case ON_ATTACK:
-        if (!timer.isRunning()) {
-            timer.restart();
-        }
+        timer.start();
+
         if (timer.delta() >= 300) {
             m_currentAttackState = ON_NORMAL;
-            m_startState = 0;
             m_bAttack = false;
             timer.stop();
             break;
         }
 
         m_bAttack = true;
-        setAnimation("player attack");
+        newAnimation = ATTACK;
         break;
-    case ON_DIE: setAnimation("player die"); break;
+    case ON_DIE: newAnimation = DEAD; break;
+    }
+
+    if (newAnimation != m_curAnimation) {
+        m_animations[m_curAnimation]->stop();
+        m_curAnimation = newAnimation;
+        m_animations[m_curAnimation]->start();
     }
 };
-
-void Player::ressurect() {}
 
 void Player::clean() {}

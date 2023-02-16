@@ -1,9 +1,9 @@
-#ifndef HEART_HPP
-#define HEART_HPP
+#ifndef DIAMOND_HPP
+#define DIAMOND_HPP
 
 #include "ItemObject.hpp"
 
-class Heart : public ItemObject
+class Diamond : public ItemObject
 {
 public:
     void load(const LoaderParams* pParams);
@@ -12,7 +12,7 @@ public:
     void clean();
     void bonus();
 
-    std::string type() { return "Heart"; }
+    std::string type() { return "Diamond"; }
 };
 
 #endif

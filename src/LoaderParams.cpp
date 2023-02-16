@@ -7,7 +7,6 @@ LoaderParams::LoaderParams(
     int height,
     int textureWidth,
     int textureHeight,
-    std::string textureID,
     int numFrames,
     int lives,
     int callbackID,
@@ -21,7 +20,6 @@ LoaderParams::LoaderParams(
     , m_textureHeight(textureHeight)
     , m_textureX(textureX)
     , m_textureY(textureY)
-    , m_textureID(textureID)
     , m_numFrames(numFrames)
     , m_lives(lives)
     , m_callbackID(callbackID)
@@ -58,10 +56,6 @@ int LoaderParams::getTextureX() const
 int LoaderParams::getTextureY() const
 {
     return m_textureY;
-}
-std::string LoaderParams::getTextureID() const
-{
-    return m_textureID;
 }
 int LoaderParams::getNumFrames() const
 {

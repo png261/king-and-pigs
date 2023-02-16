@@ -24,6 +24,7 @@ private:
     enum button_state { MOUSE_OUT = 0, MOUSE_OVER = 1, CLICKED = 2 };
 
     bool m_bReleased;
+    int m_currentFrame;
 
     int m_callbackID;
 

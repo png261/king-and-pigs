@@ -71,7 +71,6 @@ void StateParser::parseObjects(XMLElement* pObjectRoot, std::vector<GameObject*>
 {
     for (XMLElement* e = pObjectRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
         int x, y, width, height, numFrames, callbackID;
-        std::string textureID;
 
         if (e->Attribute("x")) {
             x = atoi(e->Attribute("x"));
@@ -91,13 +90,10 @@ void StateParser::parseObjects(XMLElement* pObjectRoot, std::vector<GameObject*>
         if (e->Attribute("callbackID")) {
             callbackID = atoi(e->Attribute("callbackID"));
         }
-        if (e->Attribute("textureID")) {
-            textureID = e->Attribute("textureID");
-        }
 
         GameObject* pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
         pGameObject->load(
-            new LoaderParams(x, y, width, height, width, height, textureID, numFrames, callbackID));
+            new LoaderParams(x, y, width, height, width, height, numFrames, callbackID));
         pObjects->push_back(pGameObject);
     }
 }

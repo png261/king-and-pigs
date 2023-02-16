@@ -1,29 +1,31 @@
 #include "Timer.hpp"
+#include <iostream>
 
 Timer::Timer()
-    : m_startMark(0)
-    , m_stopMark(0)
-    , m_pauseMark(0)
-    , m_bRunning(false)
-    , m_bPaused(false)
-{}
+{
+    m_startMark = 0;
+    m_stopMark = 0;
+    m_pausedMark = 0;
+    m_bRunning = false;
+    m_bPaused = false;
+}
 
 void Timer::start()
 {
-    if (m_bRunning) {
+    if (isRunning()) {
         return;
     }
 
     m_startMark = SDL_GetTicks();
     m_stopMark = 0;
-    m_pauseMark = 0;
+    m_pausedMark = 0;
     m_bRunning = true;
     m_bPaused = false;
 }
 
 void Timer::stop()
 {
-    if (!m_bRunning) {
+    if (!isRunning()) {
         return;
     }
 
@@ -40,24 +42,24 @@ void Timer::restart()
 
 void Timer::pause()
 {
-    if (!m_bRunning || m_bPaused) {
+    if (!isRunning() || isPaused()) {
         return;
     }
     m_bRunning = false;
     m_bPaused = true;
-    m_pauseMark = (SDL_GetTicks() - this->m_startMark);
+    m_pausedMark = (SDL_GetTicks() - this->m_startMark);
 }
 
 void Timer::resume()
 {
-    if (m_bRunning || !m_bPaused) {
+    if (isRunning() || !isPaused()) {
         return;
     }
 
     m_bRunning = false;
     m_bPaused = true;
-    m_startMark = (SDL_GetTicks() - this->m_pauseMark);
-    m_pauseMark = 0;
+    m_startMark = (SDL_GetTicks() - this->m_pausedMark);
+    m_pausedMark = 0;
 }
 
 bool Timer::isRunning()
@@ -82,7 +84,7 @@ Uint32 Timer::delta()
     }
 
     if (isPaused()) {
-        return m_pauseMark;
+        return m_pausedMark;
     }
 
     if (m_startMark == 0) {

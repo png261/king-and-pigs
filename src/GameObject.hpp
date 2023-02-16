@@ -30,7 +30,6 @@ public:
     bool isUpdating() const;
     bool isDead() const;
 
-    virtual void setAnimation(std::string textureID);
     void setUpdating(bool updating);
     void setCollisionLayers(std::vector<TileLayer*>* layers);
 
@@ -46,16 +45,10 @@ protected:
     int m_width;
     int m_height;
 
-    // animation
-    int m_currentRow;
-    int m_currentFrame;
-    int m_numFrames;
-    int m_aniCounter;
     int m_textureHeight;
     int m_textureWidth;
     int m_textureX;
     int m_textureY;
-    std::string m_textureID;
 
     bool m_bUpdating;
 
@@ -64,7 +57,6 @@ protected:
 
     bool m_bDead;
 
-    int m_alpha;
     std::vector<TileLayer*>* m_pCollisionLayers;
 };
 

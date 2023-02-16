@@ -20,7 +20,7 @@ public:
 protected:
     Uint32 m_startMark;
     Uint32 m_stopMark;
-    Uint32 m_pauseMark;
+    Uint32 m_pausedMark;
     bool m_bRunning;
     bool m_bPaused;
 };

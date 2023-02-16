@@ -8,14 +8,11 @@
 class Animation
 {
 public:
-    Animation(
-        std::string textureID,
-        Vector2D position,
-        int nFrames = 1,
-        int framerate = 0,
-        int loop = -1);
-    virtual void update();
+    Animation(std::string textureID, int nFrames = 1, bool bLoop = true);
+
+    virtual void draw(int x, int y, int width, int height, bool flip);
     void start();
+    void restart();
     void stop();
     bool isRunning();
 
@@ -23,13 +20,17 @@ private:
     Timer timer;
     std::string m_textureID;
     unsigned int m_framerate;
+
     bool m_bRunning;
-    Vector2D m_position;
-    unsigned int m_textureWidth;
-    unsigned int m_textureHeight;
+    int m_x;
+    int m_y;
+
+    unsigned int m_width;
+    unsigned int m_height;
+
     int m_curFrame;
     int m_nFrames;
-    int m_loop;
+    bool m_bLoop;
     int m_timesLooped;
 };
 

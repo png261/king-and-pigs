@@ -20,7 +20,7 @@ public:
         int width,
         int height,
         SDL_Renderer* pRenderer,
-        SDL_RendererFlip flip = SDL_FLIP_NONE);
+        bool bFlipped = false);
 
     void drawFrame(
         std::string id,
@@ -31,9 +31,7 @@ public:
         int currentRow,
         int currentFrame,
         SDL_Renderer* pRenderer,
-        double angle,
-        int alpha = 255,
-        SDL_RendererFlip flip = SDL_FLIP_NONE);
+        bool bFlipped = false);
     void drawTile(
         std::string id,
         int margin,

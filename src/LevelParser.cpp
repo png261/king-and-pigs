@@ -127,7 +127,6 @@ GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
     int textureHeight;
     int textureX = 0;
     int textureY = 0;
-    std::string textureID;
     std::string type;
 
     x = atoi(pObjectElement->Attribute("x"));
@@ -165,8 +164,6 @@ GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
                         numFrames = stoi(propertyValue);
                     } else if (propertyName == "callbackID") {
                         callbackID = stoi(propertyValue);
-                    } else if (propertyName == "textureID") {
-                        textureID = propertyValue;
                     }
                 }
             }
@@ -180,7 +177,6 @@ GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
         height,
         textureWidth,
         textureHeight,
-        textureID,
         numFrames,
         lives,
         callbackID,

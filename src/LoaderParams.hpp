@@ -13,7 +13,6 @@ public:
         int height,
         int textureWidth,
         int textureHeight,
-        std::string textureID,
         int numFrames,
         int lives = 0,
         int callbackID = 0,
@@ -46,8 +45,6 @@ private:
     int m_textureY;
 
     int m_callbackID;
-
-    std::string m_textureID;
 
     int m_numFrames;
 

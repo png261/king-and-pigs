@@ -10,7 +10,6 @@
 PlatformerObject::PlatformerObject()
     : GameObject()
     , m_bAttack(false)
-    , m_startState(0)
     , m_bInvulnerable(false)
 {
     m_acceleration.setY(GRAVITY);
@@ -23,13 +22,10 @@ void PlatformerObject::load(const LoaderParams* pParams)
     m_width = pParams->getWidth();
     m_height = pParams->getHeight();
 
-    m_textureID = pParams->getTextureID();
-
     m_textureWidth = pParams->getTextureWidth();
     m_textureHeight = pParams->getTextureHeight();
     m_textureX = pParams->getTextureX();
     m_textureY = pParams->getTextureY();
-    m_numFrames = pParams->getNumFrames();
 
     m_lives = pParams->getLives();
     m_maxLives = m_lives;
@@ -37,34 +33,12 @@ void PlatformerObject::load(const LoaderParams* pParams)
 
 void PlatformerObject::draw()
 {
-    TextureManager::Instance()->drawFrame(
-        m_textureID,
+    m_animations[m_curAnimation]->draw(
         m_position.getX() + m_textureX - TheCamera::Instance()->getPosition().m_x,
         m_position.getY() + m_textureY - TheCamera::Instance()->getPosition().m_y,
         m_textureWidth,
         m_textureHeight,
-        m_currentRow,
-        m_currentFrame,
-        Game::Instance()->getRenderer(),
-        m_angle,
-        m_alpha,
-        m_bFlipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
-
-    // debug
-    SDL_Rect srcRect;
-    SDL_Rect destRect;
-
-    srcRect.x = 0;
-    srcRect.y = 0;
-    srcRect.w = destRect.w = m_width;
-    srcRect.h = destRect.h = m_height;
-    destRect.x = m_position.getX() - TheCamera::Instance()->getPosition().m_x;
-    destRect.y = m_position.getY() - TheCamera::Instance()->getPosition().m_y;
-
-    SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), 255, 0, 255, 255);
-    SDL_RenderDrawRect(Game::Instance()->getRenderer(), &destRect);
-    SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), 0, 0, 0, 255);
-    //
+        m_bFlipped);
 }
 
 void PlatformerObject::update()
@@ -81,8 +55,6 @@ void PlatformerObject::update()
     } else if (m_velocity.getX() > 0) {
         m_bFlipped = false;
     }
-
-    m_currentFrame = int(((SDL_GetTicks() / 100) % m_numFrames));
 }
 
 void PlatformerObject::handleMovement(Vector2D velocity)
@@ -195,9 +167,4 @@ bool PlatformerObject::isFlipped()
 void PlatformerObject::setCurrentState(objectMotion state)
 {
     m_currentState = state;
-}
-
-bool PlatformerObject::invulnerable()
-{
-    return m_bInvulnerable;
 }

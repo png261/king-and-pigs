@@ -10,25 +10,38 @@ Pig::Pig()
 void Pig::load(const LoaderParams* pParams)
 {
     Enemy::load(pParams);
-    m_currentState = ON_GROUND;
+
+    m_animations[IDLE] = new Animation("pig idle", 11);
+    m_animations[RUN] = new Animation("pig run", 6);
+    m_animations[JUMP] = new Animation("pig jump", 1);
+    m_animations[FALL] = new Animation("pig fall", 1);
+    m_animations[GROUND] = new Animation("pig ground", 1);
+    m_animations[ATTACK] = new Animation("pig attack", 3);
+    m_animations[HIT] = new Animation("pig hit", 2);
+    m_animations[DEAD] = new Animation("pig dead", 4, false);
+
+    m_currentState = ON_FLY;
+    m_curAnimation = FALL;
     m_currentAttackState = ON_NORMAL;
 }
 
 void Pig::update()
 {
+    ANIMATION_ID newAnimation;
     switch (m_currentState) {
-    case ON_GROUND: setAnimation("pig idle"); break;
+    case ON_GROUND: newAnimation = IDLE; break;
     case ON_FLY:
         if (m_velocity.getY() > 0) {
-            setAnimation("pig fall");
+            newAnimation = FALL;
             m_currentState = ON_FALL;
         } else if (m_velocity.getY() < 0) {
-            setAnimation("pig jump");
+            newAnimation = JUMP;
         }
         break;
     case ON_FALL:
         if (m_velocity.getY() == 0) {
-            setAnimation("pig ground");
+            newAnimation = GROUND;
+            m_currentState = ON_GROUND;
         }
         break;
     }
@@ -47,49 +60,48 @@ void Pig::update()
 
         break;
     case ON_HIT:
-        if (m_startState == 0) {
-            m_startState = SDL_GetTicks();
-        }
-
-        if (SDL_GetTicks() - m_startState >= 300) {
+        timer.start();
+        if (timer.delta() >= 300) {
             m_currentAttackState = ON_NORMAL;
             m_bInvulnerable = false;
             m_velocity.setX(0);
+            timer.stop();
             break;
         }
 
         m_bInvulnerable = true;
-        setAnimation("pig hit");
+        newAnimation = HIT;
 
         break;
     case ON_ATTACK:
-        if (m_startState == 0) {
-            m_startState = SDL_GetTicks();
-        }
+        timer.start();
 
-        if (SDL_GetTicks() - m_startState >= 300) {
+        if (timer.delta() >= 300) {
             m_currentAttackState = ON_NORMAL;
-            m_startState = 0;
+            timer.stop();
             m_bAttack = false;
             break;
         }
         m_bAttack = true;
-        setAnimation("pig attack");
+        newAnimation = ATTACK;
         break;
     case ON_DIE:
-        if (m_startState == 0) {
-            m_startState = SDL_GetTicks();
-        }
+        timer.start();
 
-        if (SDL_GetTicks() - m_startState >= 300) {
+        if (timer.delta() >= 1000) {
             m_bDead = true;
             break;
         };
 
-        setAnimation("pig die");
+        newAnimation = DEAD;
         break;
     }
-    m_aniCounter++;
+
+    if (newAnimation != m_curAnimation) {
+        m_animations[m_curAnimation]->stop();
+        m_curAnimation = newAnimation;
+        m_animations[m_curAnimation]->start();
+    }
 
     Enemy::update();
 }

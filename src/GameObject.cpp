@@ -7,17 +7,11 @@ GameObject::GameObject()
     , m_height(0)
     , m_textureHeight(0)
     , m_textureWidth(0)
-    , m_currentRow(0)
-    , m_currentFrame(0)
     , m_bUpdating(false)
     , m_angle(0)
     , m_bDead(false)
-    , m_alpha(255)
     , m_bFlipped(false)
-    , m_aniCounter(false)
-{
-    m_numFrames = TextureManager::Instance()->getNFrames(m_textureID);
-}
+{}
 
 Vector2D& GameObject::getPosition()
 {
@@ -35,12 +29,6 @@ int GameObject::getWidth() const
 int GameObject::getHeight() const
 {
     return m_height;
-}
-
-void GameObject::setAnimation(std::string textureID)
-{
-    m_textureID = textureID;
-    m_numFrames = TextureManager::Instance()->getNFrames(textureID);
 }
 
 bool GameObject::isUpdating() const

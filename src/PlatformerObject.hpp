@@ -1,7 +1,9 @@
 #ifndef PLATFORMER_OBJECT_HPP
 #define PLATFORMER_OBJECT_HPP
 
+#include "Animation.hpp"
 #include "GameObject.hpp"
+#include "Timer.hpp"
 
 class PlatformerObject : public GameObject
 {
@@ -18,6 +20,20 @@ public:
         ON_ATTACK,
         ON_DIE,
     };
+
+    enum ANIMATION_ID {
+        IDLE,
+        RUN,
+        JUMP,
+        FALL,
+        GROUND,
+        ATTACK,
+        DEAD,
+        HIT,
+        DOOR_IN,
+        DOOR_OUT,
+    };
+
 
     virtual ~PlatformerObject() {}
 
@@ -42,9 +58,6 @@ public:
     virtual void attack(PlatformerObject* pTarget);
     virtual void hit(int damage);
 
-
-    bool invulnerable();
-
 protected:
     PlatformerObject();
 
@@ -55,14 +68,11 @@ protected:
     int m_moveSpeed;
     int m_jumpSpeed;
 
-    int m_aniCounter;
-
     int m_damage;
     int m_damageRange;
     int m_lives;
     int m_maxLives;
 
-    Uint32 m_startState;
     int m_attackSpeed;
 
     bool m_bInvulnerable;
@@ -73,6 +83,9 @@ protected:
     objectStatus m_currentAttackState;
 
     std::vector<std::string> m_animationMap;
+    std::map<ANIMATION_ID, Animation*> m_animations;
+    ANIMATION_ID m_curAnimation;
+    Timer timer;
 };
 
 #endif
