@@ -30,18 +30,16 @@ public:
 
     std::vector<Tileset>* getTilesets();
     std::vector<Layer*>* getLayers();
-    std::vector<TileLayer*>* getCollisionLayers();
-    std::vector<TileLayer*>& getCollidableLayers();
 
 
 private:
     friend class LevelParser;
 
     Level();
+    void createTileObject();
 
     std::vector<Layer*> m_layers;
     std::vector<Tileset> m_tilesets;
-    std::vector<TileLayer*> m_collisionLayers;
 };
 
 #endif

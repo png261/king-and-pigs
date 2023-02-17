@@ -6,6 +6,8 @@
 #include "Player.hpp"
 #include "SDL.hpp"
 
+#include <box2d/box2d.h>
+
 class Game
 {
 public:
@@ -18,14 +20,15 @@ public:
     void clean();
     void quit();
 
-    SDL_Renderer* getRenderer();
+    SDL_Renderer* getRenderer() const;
     int getCurrentLevel() const;
     int getNextLevel() const;
     int getGameWidth() const;
     int getGameHeight() const;
     int getLevelWidth() const;
     int getLevelHeight() const;
-    Player* getPlayer();
+    Player* getPlayer() const;
+    b2World* getWorld() const;
     std::vector<std::string> getLevelFiles();
 
     bool isRunning() const;
@@ -43,6 +46,8 @@ private:
 
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
+
+    b2World* m_pWorld;
 
     int m_gameWidth;
     int m_gameHeight;

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Animation.hpp"
+#include "Box2d.hpp"
 #include "Camera.hpp"
 #include "Game.hpp"
 #include "InputHandler.hpp"
@@ -10,8 +11,8 @@ void Player::load(const LoaderParams* pParams)
 {
     PlatformerObject::load(pParams);
 
-    m_moveSpeed = 2;
-    m_jumpSpeed = 7;
+    m_moveSpeed = 6 * Box2d::PPM;
+    m_jumpSpeed = -6 * Box2d::PPM;
     m_damage = 1;
     m_damageRange = 10;
 
@@ -26,8 +27,9 @@ void Player::load(const LoaderParams* pParams)
     m_animations[DOOR_IN] = new Animation("player door in", 8, false);
     m_animations[DOOR_OUT] = new Animation("player door out", 8, false);
 
-    m_currentState = ON_FLY;
-    m_curAnimation = FALL;
+    m_currentState = ON_GROUND;
+    m_curAnimation = IDLE;
+    m_animations[m_curAnimation]->start();
     m_currentAttackState = ON_NORMAL;
 }
 
@@ -52,19 +54,21 @@ void Player::handleInput()
         }
 
         if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) {
-            m_velocity.setX(-m_moveSpeed);
+            float impulse = -m_pBody->GetMass() * 6;
+            m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), 1);
             newAnimation = RUN;
         } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) {
-            m_velocity.setX(m_moveSpeed);
+            float impulse = m_pBody->GetMass() * 6;
+            m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), 1);
             newAnimation = RUN;
         } else {
-            m_velocity.setX(0);
             newAnimation = IDLE;
         }
 
         if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)) {
-            m_velocity.setY(-m_jumpSpeed);
-            m_currentState = ON_FLY;
+            float impulse = -m_pBody->GetMass() * 20;
+            m_pBody->ApplyLinearImpulse(b2Vec2(0, impulse), m_pBody->GetWorldCenter(), 1);
+            /* m_currentState = ON_FLY; */
         }
         break;
     case ON_FLY:

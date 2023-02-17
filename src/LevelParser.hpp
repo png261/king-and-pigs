@@ -19,8 +19,7 @@ private:
     void parseTileLayer(
         tinyxml2::XMLElement* pTileElement,
         std::vector<Layer*>* pLayers,
-        const std::vector<Tileset>* pTilesets,
-        std::vector<TileLayer*>* pCollisionLayers);
+        const std::vector<Tileset>* pTilesets);
 
     int m_tileSize;
     int m_width;

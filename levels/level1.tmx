@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="77">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="79">
  <tileset firstgid="1" name="Decorations (32x32)" tilewidth="32" tileheight="32" tilecount="42" columns="7">
   <image source="../assets/TileSets/Decorations (32x32).png" width="224" height="192"/>
  </tileset>
@@ -281,6 +281,23 @@
     <property name="textureHeight" value="28"/>
     <property name="textureID" value="pig idle"/>
     <property name="textureWidth" value="34"/>
+   </properties>
+  </object>
+  <object id="77" name="Heart" class="Heart" x="174.333" y="260.333" width="18" height="14">
+   <properties>
+    <property name="numFrames" value="11"/>
+    <property name="textureHeight" value="14"/>
+    <property name="textureID" value="heart idle"/>
+    <property name="textureWidth" value="18"/>
+   </properties>
+  </object>
+  <object id="78" name="Box" class="Box" x="157" y="232" width="32" height="32">
+   <properties>
+    <property name="lives" value="3"/>
+    <property name="numFrames" value="11"/>
+    <property name="textureHeight" value="32"/>
+    <property name="textureID" value="box idle"/>
+    <property name="textureWidth" value="32"/>
    </properties>
   </object>
  </objectgroup>

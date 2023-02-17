@@ -22,6 +22,7 @@ public:
         int height,
         int currentRow,
         int currentFrame,
+        float angle = 0,
         bool bFlipped = false);
     void drawTile(
         std::string id,

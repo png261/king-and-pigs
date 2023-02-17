@@ -51,11 +51,7 @@ Level* LevelParser::parseLevel(const char* levelFile)
                 e->FirstChildElement()->Value() == std::string("data") ||
                 (e->FirstChildElement()->NextSiblingElement() != 0 &&
                  e->FirstChildElement()->NextSiblingElement()->Value() == std::string("data"))) {
-                parseTileLayer(
-                    e,
-                    pLevel->getLayers(),
-                    pLevel->getTilesets(),
-                    pLevel->getCollisionLayers());
+                parseTileLayer(e, pLevel->getLayers(), pLevel->getTilesets());
             }
         }
     }
@@ -180,7 +176,6 @@ GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
         callbackID,
         textureX,
         textureY));
-    pGameObject->setCollisionLayers(pLevel->getCollisionLayers());
 
     if (type == "Player") {
         Game::Instance()->setPlayer(dynamic_cast<Player*>(pGameObject));
@@ -208,8 +203,7 @@ void LevelParser::parseObjectLayer(
 void LevelParser::parseTileLayer(
     tinyxml2::XMLElement* pTileElement,
     std::vector<Layer*>* pLayers,
-    const std::vector<Tileset>* pTilesets,
-    std::vector<TileLayer*>* pCollisionLayers)
+    const std::vector<Tileset>* pTilesets)
 {
     TileLayer* pTileLayer = new TileLayer(m_tileSize, m_width, m_height, *pTilesets);
 
@@ -257,7 +251,21 @@ void LevelParser::parseTileLayer(
     pTileLayer->setTileIDs(data);
     pTileLayer->setMapWidth(m_width);
     if (collidable) {
-        pCollisionLayers->push_back(pTileLayer);
+        for (int row = 0; row < m_height; row++) {
+            for (int col = 0; col < m_width; col++) {
+                int id = data[row][col];
+                if (id == 0) {
+                    continue;
+                }
+
+                b2BodyDef groundBodyDef;
+                groundBodyDef.position.Set(col * m_tileSize, row * m_tileSize);
+                b2Body* groundBody = Game::Instance()->getWorld()->CreateBody(&groundBodyDef);
+                b2PolygonShape groundBox;
+                groundBox.SetAsBox(m_tileSize / 2.0f, m_tileSize / 2.0f);
+                groundBody->CreateFixture(&groundBox, 0.0f);
+            }
+        }
     }
     pLayers->push_back(pTileLayer);
 }

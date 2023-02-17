@@ -1,4 +1,8 @@
 #include "GameObject.hpp"
+
+#include "Game.hpp"
+
+
 GameObject::GameObject()
     : m_position(0, 0)
     , m_velocity(0, 0)
@@ -13,6 +17,20 @@ GameObject::GameObject()
     , m_bFlipped(false)
 {}
 
+void GameObject::load(const LoaderParams* pParams)
+{
+    m_position = Vector2D(pParams->getX(), pParams->getY());
+
+    m_width = pParams->getWidth();
+    m_height = pParams->getHeight();
+
+    m_textureWidth = pParams->getTextureWidth();
+    m_textureHeight = pParams->getTextureHeight();
+    m_textureX = pParams->getTextureX();
+    m_textureY = pParams->getTextureY();
+}
+
+
 Vector2D& GameObject::getPosition()
 {
     return m_position;
@@ -26,6 +44,7 @@ int GameObject::getWidth() const
 {
     return m_width;
 }
+
 int GameObject::getHeight() const
 {
     return m_height;
@@ -44,9 +63,4 @@ void GameObject::setUpdating(bool updating)
 bool GameObject::isDead() const
 {
     return m_bDead;
-}
-
-void GameObject::setCollisionLayers(std::vector<TileLayer*>* layers)
-{
-    m_pCollisionLayers = layers;
 }

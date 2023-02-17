@@ -86,6 +86,8 @@ protected:
     std::map<ANIMATION_ID, Animation*> m_animations;
     ANIMATION_ID m_curAnimation;
     Timer timer;
+    b2Body* m_pBody;
+    b2Fixture* m_pFixture;
 };
 
 #endif

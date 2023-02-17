@@ -1,5 +1,7 @@
 #include "Game.hpp"
+#include <box2d/b2_world.h>
 
+#include "Box2d.hpp"
 #include "GameObjectFactory.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
@@ -43,6 +45,9 @@ bool Game::init(int width, int height, Uint32 flags)
     m_levelHeight = height;
     m_bRunning = true;
 
+    b2Vec2 gravity = b2Vec2(0.0f, 9.8f * Box2d::PPM);
+    m_pWorld = new b2World(gravity);
+
     GameStateMachine::Instance()->changeState(new PlayState());
 
     return true;
@@ -55,6 +60,11 @@ void Game::handleEvents()
 
 void Game::update()
 {
+    float timeStep = 1.0f / 60.0f;
+    int32 velocityIterations = 6;
+    int32 positionIterations = 2;
+    getWorld()->Step(timeStep, velocityIterations, positionIterations);
+
     GameStateMachine::Instance()->update();
 }
 
@@ -76,7 +86,7 @@ void Game::quit()
 }
 
 
-SDL_Renderer* Game::getRenderer()
+SDL_Renderer* Game::getRenderer() const
 {
     return m_pRenderer;
 }
@@ -142,7 +152,7 @@ int Game::getLevelHeight() const
     return m_levelHeight;
 }
 
-Player* Game::getPlayer()
+Player* Game::getPlayer() const
 {
     return m_pPlayer;
 }
@@ -161,4 +171,9 @@ void Game::setCurrentLevel(int currentLevel)
 {
     m_currentLevel = currentLevel;
     m_bLevelComplete = false;
+}
+
+b2World* Game::getWorld() const
+{
+    return m_pWorld;
 }

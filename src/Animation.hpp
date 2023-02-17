@@ -10,7 +10,7 @@ class Animation
 public:
     Animation(std::string textureID, int nFrames = 1, bool bLoop = true);
 
-    virtual void draw(int x, int y, int width, int height, bool flip);
+    virtual void draw(int x, int y, int width, int height, float angle = 0, bool flip = false);
     void start();
     void restart();
     void stop();

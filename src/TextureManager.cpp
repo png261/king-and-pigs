@@ -52,6 +52,7 @@ void TextureManager::drawFrame(
     int height,
     int currentRow,
     int currentFrame,
+    float angle,
     bool bFlipped)
 {
     SDL_Rect srcRect{width * currentFrame, height * currentRow, width, height};
@@ -64,7 +65,7 @@ void TextureManager::drawFrame(
         m_textureMap[id],
         &srcRect,
         &destRect,
-        0,
+        angle,
         0,
         bFlipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
