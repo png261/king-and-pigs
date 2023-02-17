@@ -37,64 +37,36 @@ bool PlayState::onEnter()
 
     TheCamera::Instance()->setTarget(Game::Instance()->getPlayer());
 
-    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
+    TextureManager::Instance()->load("assets/Player/Idle.png", "player idle");
+    TextureManager::Instance()->load("assets/Player/Run.png", "player run");
+    TextureManager::Instance()->load("assets/Player/Jump.png", "player jump");
+    TextureManager::Instance()->load("assets/Player/Attack.png", "player attack");
+    TextureManager::Instance()->load("assets/Player/Dead.png", "player dead");
+    TextureManager::Instance()->load("assets/Player/Fall.png", "player fall");
+    TextureManager::Instance()->load("assets/Player/Ground.png", "player ground");
+    TextureManager::Instance()->load("assets/Player/Hit.png", "player hit");
+    TextureManager::Instance()->load("assets/Player/Door In.png", "player door in");
+    TextureManager::Instance()->load("assets/Player/Door Out.png", "player door out");
 
-    TextureManager::Instance()
-        ->load("assets/01-King Human/Idle (78x58).png", "player idle", pRenderer, 11);
-    TextureManager::Instance()
-        ->load("assets/01-King Human/Run (78x58).png", "player run", pRenderer, 8);
-    TextureManager::Instance()
-        ->load("assets/01-King Human/Jump (78x58).png", "player jump", pRenderer, 1);
-    TextureManager::Instance()
-        ->load("assets/01-King Human/Attack (78x58).png", "player attack", pRenderer, 3);
-    TextureManager::Instance()
-        ->load("assets/01-King Human/Dead (78x58).png", "player dead", pRenderer, 4);
-    TextureManager::Instance()
-        ->load("assets/01-King Human/Fall (78x58).png", "player fall", pRenderer, 1);
-    TextureManager::Instance()
-        ->load("assets/01-King Human/Ground (78x58).png", "player ground", pRenderer, 1);
-    TextureManager::Instance()
-        ->load("assets/01-King Human/Hit (78x58).png", "player hit", pRenderer, 2);
-    TextureManager::Instance()
-        ->load("assets/01-King Human/Door In (78x58).png", "player door in", pRenderer, 8);
-    TextureManager::Instance()
-        ->load("assets/01-King Human/Door Out (78x58).png", "player door out", pRenderer, 8);
+    TextureManager::Instance()->load("assets/Enemy/Pig/Idle.png", "pig idle");
+    TextureManager::Instance()->load("assets/Enemy/Pig/Run.png", "pig run");
+    TextureManager::Instance()->load("assets/Enemy/Pig/Jump.png", "pig jump");
+    TextureManager::Instance()->load("assets/Enemy/Pig/Attack.png", "pig attack");
+    TextureManager::Instance()->load("assets/Enemy/Pig/Dead.png", "pig dead");
+    TextureManager::Instance()->load("assets/Enemy/Pig/Fall.png", "pig fall");
+    TextureManager::Instance()->load("assets/Enemy/Pig/Ground.png", "pig ground");
+    TextureManager::Instance()->load("assets/Enemy/Pig/Hit.png", "pig hit");
 
-    TextureManager::Instance()->load("assets/03-Pig/Idle (34x28).png", "pig idle", pRenderer, 11);
-    TextureManager::Instance()->load("assets/03-Pig/Run (34x28).png", "pig run", pRenderer, 6);
-    TextureManager::Instance()->load("assets/03-Pig/Jump (34x28).png", "pig jump", pRenderer, 1);
-    TextureManager::Instance()
-        ->load("assets/03-Pig/Attack (34x28).png", "pig attack", pRenderer, 3);
-    TextureManager::Instance()->load("assets/03-Pig/Dead (34x28).png", "pig dead", pRenderer, 4);
-    TextureManager::Instance()->load("assets/03-Pig/Fall (34x28).png", "pig fall", pRenderer, 1);
-    TextureManager::Instance()
-        ->load("assets/03-Pig/Ground (34x28).png", "pig ground", pRenderer, 1);
-    TextureManager::Instance()->load("assets/03-Pig/Hit (34x28).png", "pig hit", pRenderer, 2);
+    TextureManager::Instance()->load("assets/Item/Big Heart Idle.png", "heart idle");
+    TextureManager::Instance()->load("assets/Item/Big Heart Hit.png", "heart hit");
+    TextureManager::Instance()->load("assets/Item/Big Diamond Idle.png", "diamond idle");
+    TextureManager::Instance()->load("assets/Item/Big Diamond Hit.png", "diamond hit");
 
-    TextureManager::Instance()->load(
-        "assets/7-Objects/11-Health Bar/Health Bar.png",
-        "health bar",
-        pRenderer);
+    TextureManager::Instance()->load("assets/UI/Health Bar/Health Bar.png", "health bar");
+    TextureManager::Instance()->load("assets/UI/Health Bar/Heart.png", "health heart");
 
-    TextureManager::Instance()->load(
-        "assets/7-Objects/11-Health Bar/Heart.png",
-        "health heart",
-        pRenderer);
-
-    TextureManager::Instance()->load("assets/08-Box/Idle.png", "box idle", pRenderer, 0);
-
-    TextureManager::Instance()
-        ->load("assets/12-Live and Coins/Big Heart Idle (18x14).png", "heart idle", pRenderer, 7);
-    TextureManager::Instance()
-        ->load("assets/12-Live and Coins/Big Heart Hit (18x14).png", "heart hit", pRenderer, 2);
-
-    TextureManager::Instance()->load(
-        "assets/12-Live and Coins/Big Diamond Idle (18x14).png",
-        "diamond idle",
-        pRenderer,
-        7);
-    TextureManager::Instance()
-        ->load("assets/12-Live and Coins/Big Diamond Hit (18x14).png", "diamond hit", pRenderer, 2);
+    TextureManager::Instance()->load("assets/Item/Box/Idle.png", "box idle");
+    TextureManager::Instance()->load("assets/Item/Box/Hit.png", "box hit");
 
     m_loadingComplete = true;
     return true;
@@ -141,11 +113,9 @@ void PlayState::render()
         pLevel->render();
     }
 
-    TheTextureManager::Instance()
-        ->draw("health bar", 10, 10, 154, 62, Game::Instance()->getRenderer());
+    TheTextureManager::Instance()->draw("health bar", 10, 10, 154, 62);
 
     for (int i = 0; i < Game::Instance()->getPlayer()->getLives(); i++) {
-        TheTextureManager::Instance()
-            ->draw("health heart", 50 + 25 * i, 33, 22, 19, Game::Instance()->getRenderer());
+        TheTextureManager::Instance()->draw("health heart", 50 + 25 * i, 33, 22, 19);
     }
 }

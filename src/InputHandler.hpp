@@ -1,11 +1,9 @@
 #ifndef INPUT_MANAGER_HPP
 #define INPUT_MANAGER_HPP
 
-#include <SDL2/SDL.h>
-
 #include <vector>
-
 #include "Vector2D.hpp"
+#include "SDL.hpp"
 
 enum mouse_buttons {
     LEFT = 0,

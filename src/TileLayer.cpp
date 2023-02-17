@@ -66,8 +66,7 @@ void TileLayer::render()
                 m_tileSize,
                 m_tileSize,
                 (id - (tileset.firstGridID - 1)) / tileset.numColumns,
-                (id - (tileset.firstGridID - 1)) % tileset.numColumns,
-                TheGame::Instance()->getRenderer());
+                (id - (tileset.firstGridID - 1)) % tileset.numColumns);
         }
     }
 }

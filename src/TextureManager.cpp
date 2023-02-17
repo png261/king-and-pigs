@@ -1,6 +1,7 @@
 #include "TextureManager.hpp"
-#include <SDL2/SDL_image.h>
+#include "Game.hpp"
 #include "Log.hpp"
+#include "SDL.hpp"
 
 TextureManager* TextureManager::Instance()
 {
@@ -8,17 +9,14 @@ TextureManager* TextureManager::Instance()
     return s_pInstance;
 }
 
-bool TextureManager::load(
-    std::string filename,
-    std::string textureID,
-    SDL_Renderer* pRenderer,
-    int nFrames)
+bool TextureManager::load(std::string filename, std::string textureID)
 {
     if (m_textureMap.find(textureID) != m_textureMap.end()) {
         Log::warning("textureID already exists");
         return false;
     }
 
+    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
     SDL_Texture* pTexture = IMG_LoadTexture(pRenderer, filename.c_str());
     if (pTexture == NULL) {
         Log::error("fail to create Texture for: " + filename);
@@ -26,23 +24,16 @@ bool TextureManager::load(
     }
 
     m_textureMap[textureID] = pTexture;
-    m_nFrameMap[textureID] = nFrames;
 
     return true;
 }
 
-void TextureManager::draw(
-    std::string textureID,
-    int x,
-    int y,
-    int width,
-    int height,
-    SDL_Renderer* pRenderer,
-    bool bFlipped)
+void TextureManager::draw(std::string textureID, int x, int y, int width, int height, bool bFlipped)
 {
     SDL_Rect srcRect{0, 0, width, height};
     SDL_Rect destRect{x, y, width, height};
 
+    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
     SDL_RenderCopyEx(
         pRenderer,
         m_textureMap[textureID],
@@ -61,11 +52,12 @@ void TextureManager::drawFrame(
     int height,
     int currentRow,
     int currentFrame,
-    SDL_Renderer* pRenderer,
     bool bFlipped)
 {
     SDL_Rect srcRect{width * currentFrame, height * currentRow, width, height};
     SDL_Rect destRect{x, y, width, height};
+
+    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
 
     SDL_RenderCopyEx(
         pRenderer,
@@ -86,9 +78,9 @@ void TextureManager::drawTile(
     int width,
     int height,
     int currentRow,
-    int currentFrame,
-    SDL_Renderer* pRenderer)
+    int currentFrame)
 {
+    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
     SDL_Rect srcRect{
         margin + (spacing + width) * currentFrame,
         margin + (spacing + height) * currentRow,

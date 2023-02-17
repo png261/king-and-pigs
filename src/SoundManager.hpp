@@ -1,9 +1,9 @@
 #ifndef SOUND_MANAGER_HPP
 #define SOUND_MANAGER_HPP
 
-#include <SDL2/SDL_mixer.h>
 #include <map>
 #include <string>
+#include "SDL.hpp"
 
 // music: .ogg
 // sfx: .wav

@@ -1,7 +1,7 @@
 #ifndef TIMER_HPP
 #define TIMER_HPP
 
-#include <SDL2/SDL.h>
+#include "SDL.hpp"
 
 class Timer
 {

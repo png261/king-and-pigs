@@ -1,6 +1,5 @@
 #include "InputHandler.hpp"
 
-#include <SDL2/SDL_events.h>
 #include "Game.hpp"
 
 InputHandler* InputHandler::Instance()

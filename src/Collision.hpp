@@ -1,8 +1,8 @@
 #ifndef COLLISION_HPP
 #define COLLISION_HPP
 
-#include <SDL2/SDL.h>
 #include "GameObject.hpp"
+#include "SDL.hpp"
 #include "PlatformerObject.hpp"
 
 class Collision

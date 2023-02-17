@@ -67,8 +67,7 @@ void LevelParser::parseTextures(XMLElement* pTextureRoot)
 {
     TextureManager::Instance()->load(
         pTextureRoot->Attribute("value"),
-        pTextureRoot->Attribute("name"),
-        Game::Instance()->getRenderer());
+        pTextureRoot->Attribute("name"));
 }
 
 void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<Tileset>* pTilesets)
@@ -114,8 +113,7 @@ void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<
 
     TextureManager::Instance()->load(
         std::string("assets/") + pImagieEl->Attribute("source"),
-        tileset.name,
-        Game::Instance()->getRenderer());
+        tileset.name);
 
     pTilesets->push_back(tileset);
 }

@@ -15,7 +15,7 @@ SRCEXT = cpp
 CC = g++
 
 # Dependency libraries
-LIBS = `sdl2-config --cflags --libs` -lSDL2 -lSDL2_image -lSDL2_mixer
+LIBS = `sdl2-config --cflags --libs` -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
  
 # Defines the language standards for GCC
 # STD = -std=c11 

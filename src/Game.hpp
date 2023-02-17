@@ -1,10 +1,10 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include <SDL2/SDL.h>
 #include <string>
 #include <vector>
 #include "Player.hpp"
+#include "SDL.hpp"
 
 class Game
 {

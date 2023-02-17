@@ -42,16 +42,8 @@ void Animation::draw(int x, int y, int width, int height, bool bFlipped)
         }
     }
 
-    TextureManager::Instance()->drawFrame(
-        m_textureID,
-        x,
-        y,
-        width,
-        height,
-        0,
-        m_curFrame,
-        Game::Instance()->getRenderer(),
-        bFlipped);
+    TextureManager::Instance()
+        ->drawFrame(m_textureID, x, y, width, height, 0, m_curFrame, bFlipped);
 }
 
 void Animation::start()

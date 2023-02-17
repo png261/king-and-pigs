@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include <SDL2/SDL_render.h>
 
 #include "GameObjectFactory.hpp"
 #include "GameStateMachine.hpp"
@@ -30,10 +29,9 @@ Game* Game::Instance()
 
 bool Game::init(int width, int height, Uint32 flags)
 {
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        Log::error("fail to init SDL");
+    if (SDL::init() == false) {
         return false;
-    }
+    };
 
     SDL_CreateWindowAndRenderer(width, height, flags, &m_pWindow, &m_pRenderer);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
@@ -67,7 +65,10 @@ void Game::render()
     SDL_RenderPresent(m_pRenderer);
 }
 
-void Game::clean() {}
+void Game::clean()
+{
+    SDL::exit();
+}
 
 void Game::quit()
 {

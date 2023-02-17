@@ -63,7 +63,7 @@ void StateParser::parseTextures(XMLElement* pTextureRoot)
         std::string fileName = e->Attribute("filename");
         std::string textureID = e->Attribute("ID");
 
-        TextureManager::Instance()->load(fileName, textureID, Game::Instance()->getRenderer());
+        TextureManager::Instance()->load(fileName, textureID);
     }
 }
 
