@@ -1,7 +1,9 @@
 #include "Game.hpp"
-#include <box2d/b2_world.h>
+#include <box2d/b2_common.h>
+#include <iostream>
 
-#include "Box2d.hpp"
+#include "Box2D.hpp"
+#include "Camera.hpp"
 #include "GameObjectFactory.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
@@ -45,11 +47,10 @@ bool Game::init(int width, int height, Uint32 flags)
     m_levelHeight = height;
     m_bRunning = true;
 
-    b2Vec2 gravity = b2Vec2(0.0f, 9.8f * Box2d::PPM);
-    m_pWorld = new b2World(gravity);
+    m_pWorld = new b2World(Box2D::gravity);
+    m_pWorld->SetContactListener(new Box2D::ContactListener);
 
     GameStateMachine::Instance()->changeState(new PlayState());
-
     return true;
 }
 
@@ -64,6 +65,7 @@ void Game::update()
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
     getWorld()->Step(timeStep, velocityIterations, positionIterations);
+
 
     GameStateMachine::Instance()->update();
 }

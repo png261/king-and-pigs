@@ -10,6 +10,8 @@ PlatformerObject::PlatformerObject()
     : GameObject()
     , m_bAttack(false)
     , m_bInvulnerable(false)
+    , m_bOnGround(false)
+    , m_footContact(0)
 {}
 
 void PlatformerObject::load(const LoaderParams* pParams)
@@ -22,7 +24,9 @@ void PlatformerObject::load(const LoaderParams* pParams)
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(m_position.getX(), m_position.getY());
     bodyDef.fixedRotation = true;
+    bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
     m_pBody = Game::Instance()->getWorld()->CreateBody(&bodyDef);
+
     b2PolygonShape dynamicBox;
     dynamicBox.SetAsBox(m_width / 2.0f, m_height / 2.0f);
 
@@ -30,7 +34,10 @@ void PlatformerObject::load(const LoaderParams* pParams)
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 10;
     fixtureDef.friction = 0.3f;
+    m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
+    dynamicBox.SetAsBox(m_width / 2.0f, 0.3, b2Vec2(0, m_height / 2.0f), 0);
+    fixtureDef.isSensor = true;
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 }
 

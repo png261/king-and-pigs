@@ -1,6 +1,7 @@
 #ifndef PLATFORMER_OBJECT_HPP
 #define PLATFORMER_OBJECT_HPP
 
+#include <iostream>
 #include "Animation.hpp"
 #include "GameObject.hpp"
 #include "Timer.hpp"
@@ -57,6 +58,8 @@ public:
 
     virtual void attack(PlatformerObject* pTarget);
     virtual void hit(int damage);
+    virtual void setOnGround(bool isOnGround) { m_bOnGround = isOnGround; }
+    virtual void changeFootContact(int n) { m_footContact += n; }
 
 protected:
     PlatformerObject();
@@ -88,6 +91,8 @@ protected:
     Timer timer;
     b2Body* m_pBody;
     b2Fixture* m_pFixture;
+    int m_footContact;
+    bool m_bOnGround;
 };
 
 #endif
