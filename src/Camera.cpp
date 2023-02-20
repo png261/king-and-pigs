@@ -43,11 +43,18 @@ void Camera::update()
     if (m_position.m_x < 0) {
         m_position.m_x = 0;
     }
-    if (m_position.m_y < 0) {
-        m_position.m_y = 0;
-    }
 
     if (m_position.m_y < 0) {
         m_position.m_y = 0;
     }
+}
+
+void Camera::setTarget(GameObject* target)
+{
+    m_pTarget = target;
+}
+
+void Camera::setPosition(const Vector2D& position)
+{
+    m_position = position;
 }

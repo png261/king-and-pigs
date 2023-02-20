@@ -1,57 +1,35 @@
 #ifndef BOX2D_HPP
 #define BOX2D_HPP
 
-#include <SDL2/SDL_gamecontroller.h>
 #include <box2d/box2d.h>
-#include <iostream>
-#include "PlatformerObject.hpp"
 
-
-namespace Box2D {
-class ContactListener : public b2ContactListener
+class DebugDraw;
+class Box2D
 {
 public:
-    void BeginContact(b2Contact* contact)
-    {
-        b2Fixture* fixtureA = contact->GetFixtureA();
-        if (fixtureA->IsSensor()) {
-            PlatformerObject* obj =
-                reinterpret_cast<PlatformerObject*>(fixtureA->GetBody()->GetUserData().pointer);
-            obj->changeFootContact(+1);
-        }
+    static Box2D* Instance();
+    b2World* init();
+    void update();
+    void debugDraw();
+    b2World* getWorld();
+    DebugDraw* getDebugDraw();
+    void toggleDebugDraw();
 
-        b2Fixture* fixtureB = contact->GetFixtureB();
-        if (fixtureB->IsSensor()) {
-            PlatformerObject* obj =
-                reinterpret_cast<PlatformerObject*>(fixtureB->GetBody()->GetUserData().pointer);
-            obj->changeFootContact(+1);
-        }
-    }
+    enum filterCategory {
+        PLAYER = 0x0001,
+        PLAYER_FOOT = 0x0002,
+        WALL = 0x0004,
+        ENEMY = 0x0008,
+        ITEM = 0x00010,
+    };
+    static const int PPM;
+    static const b2Vec2 GRAVITY;
 
-    void EndContact(b2Contact* contact)
-    {
-        b2Fixture* fixtureA = contact->GetFixtureA();
-        if (fixtureA->IsSensor()) {
-            PlatformerObject* obj =
-                reinterpret_cast<PlatformerObject*>(fixtureA->GetBody()->GetUserData().pointer);
-            obj->changeFootContact(-1);
-        }
-
-        b2Fixture* fixtureB = contact->GetFixtureB();
-        if (fixtureB->IsSensor()) {
-            PlatformerObject* obj =
-                reinterpret_cast<PlatformerObject*>(fixtureB->GetBody()->GetUserData().pointer);
-            obj->changeFootContact(-1);
-        }
-    }
-
-    void PreSolve(b2Contact* contact, const b2Manifold* oldManifold) {}
-
-    void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {}
+private:
+    Box2D(){};
+    b2World* m_pWorld;
+    bool m_bDebugEnable;
+    DebugDraw* m_pDebugDraw;
 };
-
-const int PPM = 100;
-const b2Vec2 gravity = b2Vec2(0.0f, 9.8f * PPM);
-}; // namespace Box2D
 
 #endif

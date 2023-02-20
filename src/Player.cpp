@@ -11,6 +11,22 @@ void Player::load(const LoaderParams* pParams)
 {
     PlatformerObject::load(pParams);
 
+
+    b2PolygonShape dynamicBox;
+    dynamicBox.SetAsBox(m_width / 2.0f, m_height / 2.0f);
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &dynamicBox;
+    fixtureDef.density = 1;
+    fixtureDef.filter.categoryBits = Box2D::PLAYER;
+    fixtureDef.filter.maskBits = Box2D::WALL | Box2D::ENEMY | Box2D::ITEM;
+    m_pFixture = m_pBody->CreateFixture(&fixtureDef);
+
+    dynamicBox.SetAsBox(m_width / 2.0f, 0.3, b2Vec2(0, m_height / 2.0f), 0);
+    fixtureDef.isSensor = true;
+    fixtureDef.filter.categoryBits = Box2D::PLAYER_FOOT;
+    fixtureDef.filter.maskBits = Box2D::WALL | Box2D::ENEMY;
+    b2Fixture* footSensorFixture = m_pBody->CreateFixture(&fixtureDef);
+
     m_moveSpeed = 6 * Box2D::PPM;
     m_jumpSpeed = -6 * Box2D::PPM;
     m_damage = 1;
@@ -47,11 +63,16 @@ void Player::handleInput()
 {
     ANIMATION_ID newAnimation;
 
-    if (m_footContact <= 0) {
-        m_currentState = ON_FLY;
-    } else {
+
+    std::cout << m_footContact << std::endl;
+    if (m_footContact > 0) {
+        std::cout << "on ground" << std::endl;
         m_currentState = ON_GROUND;
+    } else {
+        std::cout << "on fly" << std::endl;
+        m_currentState = ON_FLY;
     }
+
 
     switch (m_currentState) {
     case ON_GROUND:
@@ -72,7 +93,7 @@ void Player::handleInput()
         }
 
         if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)) {
-            float impulse = -m_pBody->GetMass() * 1000;
+            float impulse = -m_pBody->GetMass() * 100 * Box2D::PPM;
             m_pBody->ApplyLinearImpulse(b2Vec2(0, impulse), m_pBody->GetWorldCenter(), 1);
         }
         break;

@@ -1,6 +1,4 @@
 #include "Game.hpp"
-#include <box2d/b2_common.h>
-#include <iostream>
 
 #include "Box2D.hpp"
 #include "Camera.hpp"
@@ -47,9 +45,7 @@ bool Game::init(int width, int height, Uint32 flags)
     m_levelHeight = height;
     m_bRunning = true;
 
-    m_pWorld = new b2World(Box2D::gravity);
-    m_pWorld->SetContactListener(new Box2D::ContactListener);
-
+    Box2D::Instance()->init();
     GameStateMachine::Instance()->changeState(new PlayState());
     return true;
 }
@@ -57,24 +53,23 @@ bool Game::init(int width, int height, Uint32 flags)
 void Game::handleEvents()
 {
     InputHandler::Instance()->update();
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Q)) {
+        Box2D::Instance()->toggleDebugDraw();
+    };
 }
 
 void Game::update()
 {
-    float timeStep = 1.0f / 60.0f;
-    int32 velocityIterations = 6;
-    int32 positionIterations = 2;
-    getWorld()->Step(timeStep, velocityIterations, positionIterations);
-
-
     GameStateMachine::Instance()->update();
+    Box2D::Instance()->update();
 }
 
 void Game::render()
 {
-    SDL_RenderClear(m_pRenderer);
+    SDL_RenderClear(getRenderer());
     GameStateMachine::Instance()->render();
-    SDL_RenderPresent(m_pRenderer);
+    Box2D::Instance()->debugDraw();
+    SDL_RenderPresent(getRenderer());
 }
 
 void Game::clean()
@@ -173,9 +168,4 @@ void Game::setCurrentLevel(int currentLevel)
 {
     m_currentLevel = currentLevel;
     m_bLevelComplete = false;
-}
-
-b2World* Game::getWorld() const
-{
-    return m_pWorld;
 }

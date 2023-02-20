@@ -1,6 +1,7 @@
 #include "LevelParser.hpp"
 
 #include <vector>
+#include "Box2D.hpp"
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"
 #include "Layer.hpp"
@@ -259,11 +260,16 @@ void LevelParser::parseTileLayer(
                 }
 
                 b2BodyDef groundBodyDef;
-                groundBodyDef.position.Set(col * m_tileSize, row * m_tileSize);
-                b2Body* groundBody = Game::Instance()->getWorld()->CreateBody(&groundBodyDef);
+                groundBodyDef.position.Set(
+                    col * m_tileSize + m_tileSize / 2.0f,
+                    row * m_tileSize + m_tileSize / 2.0f);
+                b2Body* groundBody = Box2D::Instance()->getWorld()->CreateBody(&groundBodyDef);
                 b2PolygonShape groundBox;
                 groundBox.SetAsBox(m_tileSize / 2.0f, m_tileSize / 2.0f);
-                groundBody->CreateFixture(&groundBox, 0.0f);
+                b2FixtureDef fixtureDef;
+                fixtureDef.shape = &groundBox;
+                fixtureDef.filter.categoryBits = Box2D::WALL;
+                groundBody->CreateFixture(&fixtureDef);
             }
         }
     }

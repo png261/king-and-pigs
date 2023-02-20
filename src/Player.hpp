@@ -16,6 +16,7 @@ public:
 
 private:
     void handleInput();
+    b2Fixture* m_pAttackRange;
 };
 
 #endif

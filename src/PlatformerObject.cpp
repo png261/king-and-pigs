@@ -1,6 +1,7 @@
 #include "PlatformerObject.hpp"
 #include <iostream>
 
+#include "Box2D.hpp"
 #include "Camera.hpp"
 #include "Game.hpp"
 #include "TextureManager.hpp"
@@ -10,7 +11,6 @@ PlatformerObject::PlatformerObject()
     : GameObject()
     , m_bAttack(false)
     , m_bInvulnerable(false)
-    , m_bOnGround(false)
     , m_footContact(0)
 {}
 
@@ -25,20 +25,7 @@ void PlatformerObject::load(const LoaderParams* pParams)
     bodyDef.position.Set(m_position.getX(), m_position.getY());
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
-    m_pBody = Game::Instance()->getWorld()->CreateBody(&bodyDef);
-
-    b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(m_width / 2.0f, m_height / 2.0f);
-
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &dynamicBox;
-    fixtureDef.density = 10;
-    fixtureDef.friction = 0.3f;
-    m_pFixture = m_pBody->CreateFixture(&fixtureDef);
-
-    dynamicBox.SetAsBox(m_width / 2.0f, 0.3, b2Vec2(0, m_height / 2.0f), 0);
-    fixtureDef.isSensor = true;
-    m_pFixture = m_pBody->CreateFixture(&fixtureDef);
+    m_pBody = Box2D::Instance()->getWorld()->CreateBody(&bodyDef);
 }
 
 void PlatformerObject::draw()

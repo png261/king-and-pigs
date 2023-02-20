@@ -28,7 +28,6 @@ public:
     int getLevelWidth() const;
     int getLevelHeight() const;
     Player* getPlayer() const;
-    b2World* getWorld() const;
     std::vector<std::string> getLevelFiles();
 
     bool isRunning() const;
@@ -46,8 +45,6 @@ private:
 
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
-
-    b2World* m_pWorld;
 
     int m_gameWidth;
     int m_gameHeight;

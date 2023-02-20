@@ -1,7 +1,7 @@
 #include "Pig.hpp"
-#include "Collision.hpp"
 #include "Game.hpp"
 #include "InputHandler.hpp"
+#include "Box2D.hpp"
 
 Pig::Pig()
     : Enemy()
@@ -10,6 +10,15 @@ Pig::Pig()
 void Pig::load(const LoaderParams* pParams)
 {
     Enemy::load(pParams);
+
+    b2PolygonShape dynamicBox;
+    b2FixtureDef fixtureDef;
+    dynamicBox.SetAsBox(m_width / 2.0f, m_height / 2.0f);
+    fixtureDef.shape = &dynamicBox;
+    fixtureDef.density = 1;
+    fixtureDef.filter.categoryBits = Box2D::ENEMY;
+    fixtureDef.filter.maskBits = Box2D::WALL | Box2D::PLAYER | Box2D::ENEMY;
+    m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
     m_animations[IDLE] = new Animation("pig idle", 11);
     m_animations[RUN] = new Animation("pig run", 6);

@@ -1,7 +1,6 @@
 #include "PlayState.hpp"
 #include "Box.hpp"
 #include "Camera.hpp"
-#include "Diamond.hpp"
 #include "Enemy.hpp"
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"
@@ -26,7 +25,6 @@ bool PlayState::onEnter()
     GameObjectFactory::Instance()->registerType("Pig", new Creator<Pig>);
     GameObjectFactory::Instance()->registerType("Box", new Creator<Box>);
     GameObjectFactory::Instance()->registerType("Heart", new Creator<Heart>);
-    GameObjectFactory::Instance()->registerType("Diamond", new Creator<Diamond>);
 
     LevelParser levelParser;
     pLevel = levelParser.parseLevel(

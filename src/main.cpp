@@ -1,15 +1,14 @@
 #include "Game.hpp"
 #include "Timer.hpp"
 
-const unsigned int FPS = 60;
-const unsigned int DELAY_TIME = 1000.f / FPS;
-
 int main(int argc, char* argv[])
 {
     if (!Game::Instance()->init(700, 400, SDL_WINDOW_SHOWN)) {
         return -1;
     }
 
+    const unsigned int FPS = 60;
+    const unsigned int DELAY_TIME = 1000.f / FPS;
     Timer timer;
 
     while (Game::Instance()->isRunning()) {
