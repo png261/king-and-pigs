@@ -1,7 +1,7 @@
 #include "Pig.hpp"
+#include "Box2D.hpp"
 #include "Game.hpp"
 #include "InputHandler.hpp"
-#include "Box2D.hpp"
 
 Pig::Pig()
     : Enemy()
@@ -17,7 +17,7 @@ void Pig::load(const LoaderParams* pParams)
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1;
     fixtureDef.filter.categoryBits = Box2D::ENEMY;
-    fixtureDef.filter.maskBits = Box2D::WALL | Box2D::PLAYER | Box2D::ENEMY;
+    fixtureDef.filter.maskBits = Box2D::WALL | Box2D::PLAYER | Box2D::PLAYER_FOOT | Box2D::ENEMY;
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
     m_animations[IDLE] = new Animation("pig idle", 11);
@@ -40,15 +40,15 @@ void Pig::update()
     switch (m_currentState) {
     case ON_GROUND: newAnimation = IDLE; break;
     case ON_FLY:
-        if (m_velocity.getY() > 0) {
+        if (m_velocity.y > 0) {
             newAnimation = FALL;
             m_currentState = ON_FALL;
-        } else if (m_velocity.getY() < 0) {
+        } else if (m_velocity.y < 0) {
             newAnimation = JUMP;
         }
         break;
     case ON_FALL:
-        if (m_velocity.getY() == 0) {
+        if (m_velocity.y == 0) {
             newAnimation = GROUND;
             m_currentState = ON_GROUND;
         }
@@ -73,7 +73,7 @@ void Pig::update()
         if (timer.delta() >= 300) {
             m_currentAttackState = ON_NORMAL;
             m_bInvulnerable = false;
-            m_velocity.setX(0);
+            m_velocity.x = 0;
             timer.stop();
             break;
         }

@@ -4,7 +4,6 @@
 #include <vector>
 #include "Layer.hpp"
 #include "Level.hpp"
-#include "Vector2D.hpp"
 
 class TileLayer : public Layer
 {
@@ -22,8 +21,8 @@ public:
     Tileset getTilesetByID(int tileID);
 
     const std::vector<std::vector<int>>& getTileIDs();
-    const Vector2D getPosition();
-    void setPosition(Vector2D position);
+    const b2Vec2 getPosition();
+    void setPosition(b2Vec2 position);
 
 private:
     int m_numColumns;
@@ -32,9 +31,9 @@ private:
 
     int m_mapWidth;
 
-    Vector2D m_position;
-    Vector2D m_velocity;
-    Vector2D m_acceleration;
+    b2Vec2 m_position;
+    b2Vec2 m_velocity;
+    b2Vec2 m_acceleration;
 
     float diff;
 

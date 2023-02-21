@@ -7,7 +7,6 @@
 #include <vector>
 #include "LoaderParams.hpp"
 #include "TextureManager.hpp"
-#include "Vector2D.hpp"
 
 class TileLayer;
 
@@ -22,8 +21,8 @@ public:
     virtual void clean() = 0;
     virtual std::string type() = 0;
 
-    Vector2D& getPosition();
-    Vector2D& getVelocity();
+    b2Vec2& getPosition();
+    b2Vec2& getVelocity();
 
     int getWidth() const;
     int getHeight() const;
@@ -37,9 +36,9 @@ protected:
     GameObject();
 
     // movement
-    Vector2D m_position;
-    Vector2D m_velocity;
-    Vector2D m_acceleration;
+    b2Vec2 m_position;
+    b2Vec2 m_velocity;
+    b2Vec2 m_acceleration;
 
     // size
     int m_width;

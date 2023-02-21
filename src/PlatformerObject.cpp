@@ -22,7 +22,7 @@ void PlatformerObject::load(const LoaderParams* pParams)
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(m_position.getX(), m_position.getY());
+    bodyDef.position.Set(m_position.x, m_position.y);
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
     m_pBody = Box2D::Instance()->getWorld()->CreateBody(&bodyDef);
@@ -31,8 +31,8 @@ void PlatformerObject::load(const LoaderParams* pParams)
 void PlatformerObject::draw()
 {
     m_animations[m_curAnimation]->draw(
-        m_position.getX() + m_textureX - TheCamera::Instance()->getPosition().m_x,
-        m_position.getY() + m_textureY - TheCamera::Instance()->getPosition().m_y,
+        m_position.x + m_textureX - TheCamera::Instance()->getPosition().x,
+        m_position.y + m_textureY - TheCamera::Instance()->getPosition().y,
         m_textureWidth,
         m_textureHeight,
         m_pBody->GetAngle() / 3.14 * 180,
@@ -42,8 +42,8 @@ void PlatformerObject::draw()
 void PlatformerObject::update()
 {
     b2Vec2 newPosition = m_pBody->GetPosition();
-    m_position.setX(newPosition.x);
-    m_position.setY(newPosition.y);
+    m_position.x = newPosition.x;
+    m_position.y = newPosition.y;
 
     if (getLives() <= 0) {
         m_currentAttackState = ON_DIE;
@@ -51,9 +51,9 @@ void PlatformerObject::update()
 
     m_velocity += m_acceleration;
 
-    if (m_velocity.getX() < 0) {
+    if (m_velocity.x < 0) {
         m_bFlipped = true;
-    } else if (m_velocity.getX() > 0) {
+    } else if (m_velocity.x > 0) {
         m_bFlipped = false;
     }
 }

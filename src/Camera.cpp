@@ -17,20 +17,20 @@ Camera* Camera::Instance()
     return s_pCamera;
 }
 
-Vector2D Camera::getPosition() const
+b2Vec2 Camera::getPosition() const
 {
     if (m_pTarget == NULL) {
         return m_position;
     }
 
-    Vector2D pos(
-        m_pTarget->getPosition().m_x -
+    b2Vec2 pos(
+        m_pTarget->getPosition().x -
             ((Game::Instance()->getGameWidth() - m_pTarget->getWidth()) / 2.0),
-        m_pTarget->getPosition().m_y -
+        m_pTarget->getPosition().y -
             ((Game::Instance()->getGameHeight() - m_pTarget->getHeight()) / 2.0));
 
-    if (pos.m_x < 0) {
-        pos.m_x = 0;
+    if (pos.x < 0) {
+        pos.x = 0;
     }
 
     return pos;
@@ -40,12 +40,12 @@ void Camera::update()
 {
     m_position += m_pTarget->getVelocity();
 
-    if (m_position.m_x < 0) {
-        m_position.m_x = 0;
+    if (m_position.x < 0) {
+        m_position.x = 0;
     }
 
-    if (m_position.m_y < 0) {
-        m_position.m_y = 0;
+    if (m_position.y < 0) {
+        m_position.y = 0;
     }
 }
 
@@ -54,7 +54,7 @@ void Camera::setTarget(GameObject* target)
     m_pTarget = target;
 }
 
-void Camera::setPosition(const Vector2D& position)
+void Camera::setPosition(const b2Vec2& position)
 {
     m_position = position;
 }

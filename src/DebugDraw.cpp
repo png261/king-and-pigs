@@ -23,8 +23,8 @@ void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, cons
     SDL_Point sdlVertices[vertexCount];
     for (int i = 0; i < vertexCount; i++) {
         sdlVertices[i] = {
-            static_cast<int>(vertices[i].x - TheCamera::Instance()->getPosition().getX()),
-            static_cast<int>(vertices[i].y - TheCamera::Instance()->getPosition().getY())};
+            static_cast<int>(vertices[i].x - TheCamera::Instance()->getPosition().x),
+            static_cast<int>(vertices[i].y - TheCamera::Instance()->getPosition().y)};
     }
 
     // Draw the polygon by calling SDL_RenderDrawLines.

@@ -2,7 +2,7 @@
 #define INPUT_MANAGER_HPP
 
 #include <vector>
-#include "Vector2D.hpp"
+#include "Box2D.hpp"
 #include "SDL.hpp"
 
 enum mouse_buttons {
@@ -17,7 +17,7 @@ public:
     static InputHandler* Instance();
 
     void update();
-    Vector2D* getMousePosition() const;
+    b2Vec2* getMousePosition() const;
 
     bool isKeyDown(SDL_Scancode key) const;
     bool isMouseButtonDown(mouse_buttons buttonID) const;
@@ -34,7 +34,7 @@ private:
     void onMouseButtonDown(SDL_Event& event);
     void onMouseButtonUp(SDL_Event& event);
 
-    Vector2D* m_pMousePosition;
+    b2Vec2* m_pMousePosition;
     std::vector<bool> m_bMouseButtonState;
 
     const Uint8* m_keystates;

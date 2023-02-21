@@ -19,7 +19,7 @@ GameObject::GameObject()
 
 void GameObject::load(const LoaderParams* pParams)
 {
-    m_position = Vector2D(pParams->getX(), pParams->getY());
+    m_position = b2Vec2(pParams->getX(), pParams->getY());
 
     m_width = pParams->getWidth();
     m_height = pParams->getHeight();
@@ -31,11 +31,11 @@ void GameObject::load(const LoaderParams* pParams)
 }
 
 
-Vector2D& GameObject::getPosition()
+b2Vec2& GameObject::getPosition()
 {
     return m_position;
 }
-Vector2D& GameObject::getVelocity()
+b2Vec2& GameObject::getVelocity()
 {
     return m_velocity;
 }

@@ -120,7 +120,7 @@ void Player::handleInput()
         if (timer.delta() >= 300) {
             m_currentAttackState = ON_NORMAL;
             m_bInvulnerable = false;
-            m_velocity.setX(0);
+            m_velocity.x = 0;
             timer.stop();
             break;
         }

@@ -3,7 +3,6 @@
 
 #include <string>
 #include "Timer.hpp"
-#include "Vector2D.hpp"
 
 class Animation
 {

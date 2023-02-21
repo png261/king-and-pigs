@@ -29,6 +29,7 @@ int LoaderParams::getX() const
 {
     return m_x;
 }
+
 int LoaderParams::getY() const
 {
     return m_y;

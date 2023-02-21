@@ -27,11 +27,11 @@ void TileLayer::render()
 {
     int x, y, x2, y2 = 0;
 
-    x = m_position.getX() / m_tileSize;
-    y = m_position.getY() / m_tileSize;
+    x = m_position.x / m_tileSize;
+    y = m_position.y / m_tileSize;
 
-    x2 = int(m_position.getX()) % m_tileSize;
-    y2 = int(m_position.getY()) % m_tileSize;
+    x2 = int(m_position.x) % m_tileSize;
+    y2 = int(m_position.y) % m_tileSize;
 
     for (int i = 0; i < m_numRows; i++) {
         for (int j = 0; j < m_numColumns; j++) {
@@ -41,14 +41,14 @@ void TileLayer::render()
                 continue;
             }
 
-            if (((j * m_tileSize) - x2) - TheCamera::Instance()->getPosition().m_x < -m_tileSize ||
-                ((j * m_tileSize) - x2) - TheCamera::Instance()->getPosition().m_x >
+            if (((j * m_tileSize) - x2) - TheCamera::Instance()->getPosition().x < -m_tileSize ||
+                ((j * m_tileSize) - x2) - TheCamera::Instance()->getPosition().x >
                     TheGame::Instance()->getGameWidth()) {
                 continue;
             }
 
-            if (((i * m_tileSize) - y2) - TheCamera::Instance()->getPosition().m_y < -m_tileSize ||
-                ((i * m_tileSize) - y2) - TheCamera::Instance()->getPosition().m_y >
+            if (((i * m_tileSize) - y2) - TheCamera::Instance()->getPosition().y < -m_tileSize ||
+                ((i * m_tileSize) - y2) - TheCamera::Instance()->getPosition().y >
                     TheGame::Instance()->getGameHeight()) {
                 continue;
             }
@@ -61,8 +61,8 @@ void TileLayer::render()
                 tileset.name,
                 tileset.margin,
                 tileset.spacing,
-                ((j * m_tileSize) - x2) - TheCamera::Instance()->getPosition().m_x,
-                ((i * m_tileSize) - y2) - TheCamera::Instance()->getPosition().m_y,
+                ((j * m_tileSize) - x2) - TheCamera::Instance()->getPosition().x,
+                ((i * m_tileSize) - y2) - TheCamera::Instance()->getPosition().y,
                 m_tileSize,
                 m_tileSize,
                 (id - (tileset.firstGridID - 1)) / tileset.numColumns,
@@ -118,12 +118,12 @@ const std::vector<std::vector<int>>& TileLayer::getTileIDs()
     return m_tileIDs;
 }
 
-const Vector2D TileLayer::getPosition()
+const b2Vec2 TileLayer::getPosition()
 {
     return m_position;
 }
 
-void TileLayer::setPosition(Vector2D position)
+void TileLayer::setPosition(b2Vec2 position)
 {
     m_position = position;
 }

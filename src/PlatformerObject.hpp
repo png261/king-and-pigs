@@ -62,9 +62,9 @@ public:
 protected:
     PlatformerObject();
 
-    bool checkCollideTile(Vector2D newPos);
+    bool checkCollideTile(b2Vec2 newPos);
 
-    void handleMovement(Vector2D velocity);
+    void handleMovement(b2Vec2 velocity);
 
     int m_moveSpeed;
     int m_jumpSpeed;

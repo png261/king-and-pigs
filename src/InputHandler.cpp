@@ -10,7 +10,7 @@ InputHandler* InputHandler::Instance()
 
 InputHandler::InputHandler()
     : m_keystates(NULL)
-    , m_pMousePosition(new Vector2D(0, 0))
+    , m_pMousePosition(new b2Vec2(0, 0))
 {
     for (int i = 0; i < 3; i++) {
         m_bMouseButtonState.push_back(false);
@@ -62,8 +62,8 @@ void InputHandler::onKeyUp(SDL_Event& event)
 
 void InputHandler::onMouseMove(SDL_Event& event)
 {
-    m_pMousePosition->setX(event.motion.x);
-    m_pMousePosition->setY(event.motion.y);
+    m_pMousePosition->x = event.motion.x;
+    m_pMousePosition->y = event.motion.y;
 }
 
 bool InputHandler::isKeyDown(SDL_Scancode key) const
@@ -87,7 +87,7 @@ void InputHandler::reset()
     }
 }
 
-Vector2D* InputHandler::getMousePosition() const
+b2Vec2* InputHandler::getMousePosition() const
 {
     return m_pMousePosition;
 }
