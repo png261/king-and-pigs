@@ -18,7 +18,7 @@ bool TextureManager::load(std::string filename, std::string textureID)
 
     SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
     SDL_Texture* pTexture = IMG_LoadTexture(pRenderer, filename.c_str());
-    if (pTexture == NULL) {
+    if (pTexture == nullptr) {
         Log::error("fail to create Texture for: " + filename);
         return false;
     }

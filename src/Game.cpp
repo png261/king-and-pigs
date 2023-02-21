@@ -13,8 +13,8 @@
 #include "TextureManager.hpp"
 
 Game::Game()
-    : m_pWindow(NULL)
-    , m_pRenderer(NULL)
+    : m_pWindow(nullptr)
+    , m_pRenderer(nullptr)
     , m_bRunning(false)
     , m_bLevelComplete(false)
 {
@@ -35,6 +35,10 @@ bool Game::init(int width, int height, Uint32 flags)
         return false;
     };
 
+    if (Box2D::Instance()->init() == false) {
+        return false;
+    };
+
     SDL_CreateWindowAndRenderer(width, height, flags, &m_pWindow, &m_pRenderer);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_RenderSetLogicalSize(m_pRenderer, width, height);
@@ -45,7 +49,6 @@ bool Game::init(int width, int height, Uint32 flags)
     m_levelHeight = height;
     m_bRunning = true;
 
-    Box2D::Instance()->init();
     GameStateMachine::Instance()->changeState(new PlayState());
     return true;
 }
@@ -94,19 +97,9 @@ int Game::getCurrentLevel() const
     return m_currentLevel;
 }
 
-void Game::setNextLevel(int nextLevel)
-{
-    m_nextLevel = nextLevel;
-}
-
 int Game::getNextLevel() const
 {
     return m_nextLevel;
-}
-
-void Game::setLevelComplete(bool levelComplete)
-{
-    m_bLevelComplete = levelComplete;
 }
 
 bool Game::isLevelComplete() const
@@ -129,16 +122,6 @@ int Game::getGameHeight() const
     return m_gameHeight;
 }
 
-void Game::setLevelWidth(int width)
-{
-    m_levelWidth = width;
-}
-
-void Game::setLevelHeight(int height)
-{
-    m_levelHeight = height;
-}
-
 int Game::getLevelWidth() const
 {
     return m_levelWidth;
@@ -154,14 +137,36 @@ Player* Game::getPlayer() const
     return m_pPlayer;
 }
 
-void Game::setPlayer(Player* pPlayer)
-{
-    m_pPlayer = pPlayer;
-}
-
 std::vector<std::string> Game::getLevelFiles()
 {
     return m_levelFiles;
+}
+
+void Game::setLevelComplete(bool levelComplete)
+{
+    m_bLevelComplete = levelComplete;
+}
+
+void Game::setNextLevel(int nextLevel)
+{
+    m_nextLevel = nextLevel;
+}
+
+
+void Game::setLevelWidth(int width)
+{
+    m_levelWidth = width;
+}
+
+void Game::setLevelHeight(int height)
+{
+    m_levelHeight = height;
+}
+
+
+void Game::setPlayer(Player* pPlayer)
+{
+    m_pPlayer = pPlayer;
 }
 
 void Game::setCurrentLevel(int currentLevel)

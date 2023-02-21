@@ -19,7 +19,7 @@ Camera* Camera::Instance()
 
 b2Vec2 Camera::getPosition() const
 {
-    if (m_pTarget == NULL) {
+    if (m_pTarget == nullptr) {
         return m_position;
     }
 

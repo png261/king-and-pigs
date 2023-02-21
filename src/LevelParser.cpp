@@ -27,9 +27,9 @@ Level* LevelParser::parseLevel(const char* levelFile)
 
     m_height = atoi(pRoot->Attribute("height"));
 
-    for (XMLElement* e = pRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
+    for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("properties")) {
-            for (XMLElement* pProperty = e->FirstChildElement(); pProperty != NULL;
+            for (XMLElement* pProperty = e->FirstChildElement(); pProperty != nullptr;
                  pProperty = pProperty->NextSiblingElement()) {
                 if (pProperty->Value() == std::string("property")) {
                     parseTextures(pProperty);
@@ -38,13 +38,13 @@ Level* LevelParser::parseLevel(const char* levelFile)
         }
     }
 
-    for (XMLElement* e = pRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
+    for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("tileset")) {
             parseTilesets(e, pLevel->getTilesets());
         }
     }
 
-    for (XMLElement* e = pRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
+    for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("objectgroup") || e->Value() == std::string("layer")) {
             if (e->FirstChildElement()->Value() == std::string("object")) {
                 parseObjectLayer(e, pLevel->getLayers(), pLevel);
@@ -134,10 +134,10 @@ GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
 
     GameObject* pGameObject = GameObjectFactory::Instance()->create(type);
 
-    for (XMLElement* e = pObjectElement->FirstChildElement(); e != NULL;
+    for (XMLElement* e = pObjectElement->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
         if (e->Value() == std::string("properties")) {
-            for (XMLElement* property = e->FirstChildElement(); property != NULL;
+            for (XMLElement* property = e->FirstChildElement(); property != nullptr;
                  property = property->NextSiblingElement()) {
                 if (property->Value() == std::string("property")) {
                     std::string propertyName = property->Attribute("name");
@@ -192,7 +192,7 @@ void LevelParser::parseObjectLayer(
 {
     ObjectLayer* pObjectLayer = new ObjectLayer();
 
-    for (XMLElement* e = pObjectEl->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
+    for (XMLElement* e = pObjectEl->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("object")) {
             pObjectLayer->getGameObjects()->push_back(parseObject(e, pLevel));
         }
@@ -219,10 +219,10 @@ void LevelParser::parseTileLayer(
 
     XMLElement* pDataNode = nullptr;
 
-    for (XMLElement* e = pTileElement->FirstChildElement(); e != NULL;
+    for (XMLElement* e = pTileElement->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
         if (e->Value() == std::string("properties")) {
-            for (XMLElement* property = e->FirstChildElement(); property != NULL;
+            for (XMLElement* property = e->FirstChildElement(); property != nullptr;
                  property = property->NextSiblingElement()) {
                 if (property->Value() == std::string("property")) {
                     if (property->Attribute("name") == std::string("collidable")) {

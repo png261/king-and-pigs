@@ -31,7 +31,7 @@ bool SoundManager::loadMusic(std::string filename, std::string soundID)
     }
 
     Mix_Music* pMusic = Mix_LoadMUS(filename.c_str());
-    if (pMusic == NULL) {
+    if (pMusic == nullptr) {
         return false;
     }
     m_musicMap[soundID] = pMusic;
@@ -46,7 +46,7 @@ bool SoundManager::loadSFX(std::string filename, std::string soundID)
     }
 
     Mix_Chunk* pSFX = Mix_LoadWAV(filename.c_str());
-    if (pSFX == NULL) {
+    if (pSFX == nullptr) {
         return false;
     }
     m_sfxMap[soundID] = pSFX;

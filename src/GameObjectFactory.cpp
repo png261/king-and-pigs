@@ -25,7 +25,7 @@ GameObject* GameObjectFactory::create(std::string typeID)
 
     if (it == m_creators.end()) {
         Log::warning("could not find type: " + typeID);
-        return NULL;
+        return nullptr;
     }
 
     BaseCreator* pCreator = (*it).second;

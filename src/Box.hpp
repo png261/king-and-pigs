@@ -18,7 +18,7 @@ public:
 
     virtual void collision();
 
-    virtual std::string type() { return "Box"; }
+    virtual std::string type() const { return "Box"; }
 };
 
 #endif

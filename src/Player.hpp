@@ -12,7 +12,7 @@ public:
     void update();
     void clean();
 
-    std::string type() { return "Player"; }
+    std::string type() const { return "Player"; }
 
 private:
     void handleInput();

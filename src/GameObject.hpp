@@ -19,7 +19,7 @@ public:
     virtual void update() = 0;
     virtual void draw() = 0;
     virtual void clean() = 0;
-    virtual std::string type() = 0;
+    virtual std::string type() const = 0;
 
     b2Vec2& getPosition();
     b2Vec2& getVelocity();

@@ -42,18 +42,18 @@ public:
     virtual void draw();
     virtual void update();
     virtual void clean() {}
-    virtual std::string type();
+    virtual std::string type() const;
 
-    virtual int getLives();
-    virtual int getDamageRange();
+    virtual int getLives() const;
+    virtual int getDamageRange() const;
 
     virtual void setLives(int lives);
     virtual void setCurrentState(objectMotion state);
     virtual void changeLives(int lives);
 
-    virtual bool isAttack();
-    virtual bool isInvulnerable();
-    virtual bool isFlipped();
+    virtual bool isAttack() const;
+    virtual bool isInvulnerable() const;
+    virtual bool isFlipped() const;
 
     virtual void attack(PlatformerObject* pTarget);
     virtual void hit(int damage);

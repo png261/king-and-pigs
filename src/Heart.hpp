@@ -12,7 +12,7 @@ public:
     void clean();
     void bonus();
 
-    std::string type() { return "Heart"; }
+    std::string type() const { return "Heart"; }
 };
 
 #endif

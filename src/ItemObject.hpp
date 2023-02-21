@@ -7,6 +7,6 @@ class ItemObject : public PlatformerObject
 {
 public:
     virtual void bonus() = 0;
-    std::string type() { return "ItemObject"; }
+    std::string type() const { return "ItemObject"; }
 };
 #endif

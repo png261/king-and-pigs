@@ -58,12 +58,12 @@ void PlatformerObject::update()
     }
 }
 
-std::string PlatformerObject::type()
+std::string PlatformerObject::type() const
 {
     return "GameObject";
 }
 
-bool PlatformerObject::isInvulnerable()
+bool PlatformerObject::isInvulnerable() const
 {
     return m_bInvulnerable;
 }
@@ -78,7 +78,7 @@ void PlatformerObject::changeLives(int lives)
     setLives(m_lives + lives);
 }
 
-int PlatformerObject::getLives()
+int PlatformerObject::getLives() const
 {
     return m_lives;
 }
@@ -97,17 +97,18 @@ void PlatformerObject::attack(PlatformerObject* pTarget)
 {
     pTarget->hit(1);
 };
-bool PlatformerObject::isAttack()
+
+bool PlatformerObject::isAttack() const
 {
     return m_bAttack;
 }
 
-int PlatformerObject::getDamageRange()
+int PlatformerObject::getDamageRange() const
 {
     return m_damageRange;
 }
 
-bool PlatformerObject::isFlipped()
+bool PlatformerObject::isFlipped() const
 {
     return m_bFlipped;
 }

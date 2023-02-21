@@ -13,24 +13,24 @@ bool StateParser::parseState(
     doc.LoadFile(stateFile);
 
     XMLElement* pRoot = doc.RootElement();
-    if (pRoot == NULL) {
+    if (pRoot == nullptr) {
         return false;
     }
 
-    XMLElement* pStateRoot = NULL;
-    for (XMLElement* e = pRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
+    XMLElement* pStateRoot = nullptr;
+    for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (strcmp(e->Value(), stateID.c_str()) == 0) {
             pStateRoot = e;
             break;
         }
     }
 
-    if (pStateRoot == NULL) {
+    if (pStateRoot == nullptr) {
         return false;
     }
 
     XMLElement* pTextureRoot = 0;
-    for (XMLElement* e = pStateRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
+    for (XMLElement* e = pStateRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (strcmp(e->Value(), "TEXTURES") == 0) {
             pTextureRoot = e;
             break;
@@ -41,8 +41,8 @@ bool StateParser::parseState(
         parseTextures(pTextureRoot);
     }
 
-    XMLElement* pObjectRoot = NULL;
-    for (XMLElement* e = pStateRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
+    XMLElement* pObjectRoot = nullptr;
+    for (XMLElement* e = pStateRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (strcmp(e->Value(), "OBJECTS") == 0) {
             pObjectRoot = e;
             break;
@@ -58,7 +58,7 @@ bool StateParser::parseState(
 
 void StateParser::parseTextures(XMLElement* pTextureRoot)
 {
-    for (XMLElement* e = pTextureRoot->FirstChildElement(); e != NULL;
+    for (XMLElement* e = pTextureRoot->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
         std::string fileName = e->Attribute("filename");
         std::string textureID = e->Attribute("ID");
@@ -69,7 +69,7 @@ void StateParser::parseTextures(XMLElement* pTextureRoot)
 
 void StateParser::parseObjects(XMLElement* pObjectRoot, std::vector<GameObject*>* pObjects)
 {
-    for (XMLElement* e = pObjectRoot->FirstChildElement(); e != NULL; e = e->NextSiblingElement()) {
+    for (XMLElement* e = pObjectRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         int x, y, width, height, numFrames, callbackID;
 
         if (e->Attribute("x")) {

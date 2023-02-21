@@ -29,7 +29,7 @@ bool PlayState::onEnter()
     LevelParser levelParser;
     pLevel = levelParser.parseLevel(
         TheGame::Instance()->getLevelFiles()[TheGame::Instance()->getCurrentLevel() - 1].c_str());
-    if (pLevel == NULL) {
+    if (pLevel == nullptr) {
         return false;
     }
 
@@ -95,7 +95,7 @@ void PlayState::update()
         GameStateMachine::Instance()->pushState(new PauseState);
     }
 
-    if (pLevel != NULL) {
+    if (pLevel != nullptr) {
         pLevel->update();
     }
     TheCamera::Instance()->update();
@@ -107,7 +107,7 @@ void PlayState::render()
         return;
     }
 
-    if (pLevel != NULL) {
+    if (pLevel != nullptr) {
         pLevel->render();
     }
 

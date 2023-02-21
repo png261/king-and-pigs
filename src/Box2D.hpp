@@ -8,7 +8,7 @@ class Box2D
 {
 public:
     static Box2D* Instance();
-    b2World* init();
+    bool init();
     void update();
     void debugDraw();
     b2World* getWorld();

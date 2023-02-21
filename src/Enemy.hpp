@@ -7,7 +7,7 @@
 class Enemy : public PlatformerObject
 {
 public:
-    virtual std::string type() { return "Enemy"; }
+    virtual std::string type() const { return "Enemy"; }
     virtual void load(const LoaderParams* pParams) { PlatformerObject::load(pParams); };
     virtual void draw() { PlatformerObject::draw(); }
 

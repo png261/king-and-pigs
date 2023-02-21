@@ -9,7 +9,7 @@ InputHandler* InputHandler::Instance()
 }
 
 InputHandler::InputHandler()
-    : m_keystates(NULL)
+    : m_keystates(nullptr)
     , m_pMousePosition(new b2Vec2(0, 0))
 {
     for (int i = 0; i < 3; i++) {
@@ -81,7 +81,7 @@ bool InputHandler::isKeyDown(SDL_Scancode key) const
 
 void InputHandler::reset()
 {
-    m_keystates = NULL;
+    m_keystates = nullptr;
     for (int i = 0; i < 3; i++) {
         m_bMouseButtonState[i] = false;
     }

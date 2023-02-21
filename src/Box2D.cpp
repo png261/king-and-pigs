@@ -11,7 +11,7 @@ Box2D* Box2D::Instance()
     return pInstance;
 }
 
-b2World* Box2D::init()
+bool Box2D::init()
 {
     m_pWorld = new b2World(Box2D::GRAVITY);
     m_pWorld->SetContactListener(new ContactListener);
@@ -25,7 +25,8 @@ b2World* Box2D::init()
     /* flags += b2Draw::e_pairBit; */
     m_pDebugDraw->SetFlags(flags);
     m_bDebugEnable = true;
-    return m_pWorld;
+
+    return true;
 }
 
 void Box2D::update()
