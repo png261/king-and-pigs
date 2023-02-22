@@ -10,6 +10,8 @@
 PlatformerObject::PlatformerObject()
     : GameObject()
     , m_bAttack(false)
+    , m_attackRange(0)
+    , m_attackDamage(0)
     , m_bInvulnerable(false)
     , m_footContact(0)
 {}
@@ -28,6 +30,7 @@ void PlatformerObject::load(const LoaderParams* pParams)
     m_pBody = Box2D::Instance()->getWorld()->CreateBody(&bodyDef);
 
     b2PolygonShape dynamicBox;
+
     dynamicBox.SetAsBox(m_width / 2.0f, m_height / 2.0f);
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
@@ -35,10 +38,18 @@ void PlatformerObject::load(const LoaderParams* pParams)
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
     dynamicBox.SetAsBox(m_width / 2.0f, 0.3, b2Vec2(0, m_height / 2.0f), 0);
-    fixtureDef.isSensor = true;
-    fixtureDef.filter.categoryBits = Box2D::CAT_FOOT_SENSOR;
-    fixtureDef.filter.maskBits = Box2D::MASK_FOOT_SENSOR;
-    m_pBody->CreateFixture(&fixtureDef);
+    b2FixtureDef footSensorDef;
+    footSensorDef.shape = &dynamicBox;
+    footSensorDef.isSensor = true;
+    footSensorDef.filter.categoryBits = Box2D::CAT_FOOT_SENSOR;
+    footSensorDef.filter.maskBits = Box2D::MASK_FOOT_SENSOR;
+    m_pFootSensor = m_pBody->CreateFixture(&footSensorDef);
+
+    dynamicBox.SetAsBox(m_attackRange / 2.0f, m_attackRange / 2.0f, b2Vec2(m_width / 2.0f, 0), 0);
+    b2FixtureDef attackSensorDef;
+    attackSensorDef.shape = &dynamicBox;
+    attackSensorDef.isSensor = true;
+    m_pAttackSensor = m_pBody->CreateFixture(&attackSensorDef);
 }
 
 void PlatformerObject::draw()
@@ -100,7 +111,7 @@ void PlatformerObject::hit(int damage)
 
 void PlatformerObject::attack(PlatformerObject* pTarget)
 {
-    pTarget->hit(1);
+    pTarget->hit(getAttackDamage());
 };
 
 bool PlatformerObject::isAttack() const
@@ -108,9 +119,14 @@ bool PlatformerObject::isAttack() const
     return m_bAttack;
 }
 
-int PlatformerObject::getDamageRange() const
+int PlatformerObject::getAttackRange() const
 {
-    return m_damageRange;
+    return m_attackRange;
+}
+
+int PlatformerObject::getAttackDamage() const
+{
+    return m_attackDamage;
 }
 
 bool PlatformerObject::isFlipped() const

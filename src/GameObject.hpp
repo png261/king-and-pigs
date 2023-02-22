@@ -20,6 +20,7 @@ public:
 
     int getWidth() const;
     int getHeight() const;
+    b2Body* getBody() const;
 
     bool isUpdating() const;
     bool isDead() const;

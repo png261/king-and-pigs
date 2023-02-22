@@ -17,7 +17,7 @@ void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, cons
 {
     SDL_Renderer* renderer = Game::Instance()->getRenderer();
     // Set the renderer color to the fill color.
-    SDL_SetRenderDrawColor(renderer, color.r * 255, color.g * 255, color.b * 255, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, color.r * 255, color.g * 255, color.b * 255, color.a * 255);
 
     // Create an array of SDL points from the Box2D vertices.
     SDL_Point sdlVertices[vertexCount];
@@ -36,15 +36,6 @@ void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, cons
         sdlVertices[vertexCount - 1].y,
         sdlVertices[0].x,
         sdlVertices[0].y);
-
-    // Set the renderer color to the outline color.
-    b2Color outlineColor = {color.r * 0.5f, color.g * 0.5f, color.b * 0.5f};
-    SDL_SetRenderDrawColor(
-        renderer,
-        outlineColor.r * 255,
-        outlineColor.g * 255,
-        outlineColor.b * 255,
-        outlineColor.a * 255);
 
     // Draw the outline by calling SDL_RenderDrawLines again.
     SDL_RenderDrawLines(renderer, sdlVertices, vertexCount);

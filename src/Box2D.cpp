@@ -1,7 +1,9 @@
 #include "Box2D.hpp"
+#include <iostream>
 #include "ContactListener.hpp"
 #include "DebugDraw.hpp"
 #include "InputHandler.hpp"
+#include "PlatformerObject.hpp"
 
 const int Box2D::PPM = 32.0f;
 const b2Vec2 Box2D::GRAVITY = b2Vec2(0.0f, 9.8f * Box2D::PPM);
@@ -42,6 +44,28 @@ void Box2D::handleEvents()
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Q)) {
         Box2D::Instance()->toggleDebugDraw();
     };
+
+    for (b2Contact* contact = getWorld()->GetContactList(); contact; contact = contact->GetNext()) {
+        b2Fixture* fixtureA = contact->GetFixtureA();
+        b2Fixture* fixtureB = contact->GetFixtureB();
+        uint16 catA = fixtureA->GetFilterData().categoryBits;
+        uint16 catB = fixtureB->GetFilterData().categoryBits;
+
+        if (((catA | catB) == (Box2D::CAT_ATTACK_SENSOR | Box2D::CAT_ENEMY)) ||
+            ((catA | catB) == (Box2D::CAT_ATTACK_SENSOR | Box2D::CAT_PLAYER))) {
+            PlatformerObject* A = (PlatformerObject*)(fixtureA->GetBody()->GetUserData().pointer);
+            PlatformerObject* B = (PlatformerObject*)(fixtureB->GetBody()->GetUserData().pointer);
+            if (A == nullptr || B == nullptr) {
+                continue;
+            }
+
+            if (catA == Box2D::CAT_ATTACK_SENSOR && A->isAttack()) {
+                A->attack(B);
+            } else if (catB == Box2D::CAT_ATTACK_SENSOR && B->isAttack()) {
+                B->attack(A);
+            }
+        }
+    }
 }
 
 void Box2D::update()
@@ -51,9 +75,10 @@ void Box2D::update()
 
 void Box2D::debugDraw()
 {
-    if (m_bDebugEnable) {
-        getWorld()->DebugDraw();
+    if (!m_bDebugEnable) {
+        return;
     }
+    getWorld()->DebugDraw();
 }
 
 

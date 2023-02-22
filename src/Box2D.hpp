@@ -19,17 +19,17 @@ public:
     enum collisionFilterCategory : uint16 {
         CAT_ALL = 0xFFFF,
         CAT_WALL = 0x0001,
-        CAT_PLAYER,
-        CAT_ENEMY,
-        CAT_ITEM,
-        CAT_FOOT_SENSOR,
-        CAT_ATTACK_SENSOR,
+        CAT_PLAYER = 0x0002,
+        CAT_ENEMY = 0x0004,
+        CAT_ITEM = 0x0008,
+        CAT_FOOT_SENSOR = 0x0010,
+        CAT_ATTACK_SENSOR = 0x0020,
     };
 
     enum collisionFilterMask : uint16 {
         MASK_PLAYER = CAT_ALL,
         MASK_WALL = CAT_ALL,
-        MASK_ENEMY = CAT_ALL,
+        MASK_ENEMY = CAT_ALL & ~CAT_ITEM,
         MASK_ITEM = CAT_PLAYER | CAT_WALL,
         MASK_FOOT_SENSOR = CAT_ALL,
         MASK_PLAYER_ATTACK_SENSOR = CAT_ENEMY,

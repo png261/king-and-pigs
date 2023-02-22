@@ -44,6 +44,11 @@ int GameObject::getHeight() const
     return m_height;
 }
 
+b2Body* GameObject::getBody() const
+{
+    return m_pBody;
+}
+
 bool GameObject::isUpdating() const
 {
     return m_bUpdating;

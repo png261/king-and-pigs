@@ -11,9 +11,9 @@ void ContactListener::ItemContact(b2Contact* contact)
     uint16 catA = fixtureA->GetFilterData().categoryBits;
 
     if (catA == Box2D::CAT_ITEM) {
-        reinterpret_cast<ItemObject*>(fixtureA->GetBody()->GetUserData().pointer)->bonus();
+        ((ItemObject*)(fixtureA->GetBody()->GetUserData().pointer))->bonus();
     } else {
-        reinterpret_cast<ItemObject*>(fixtureB->GetBody()->GetUserData().pointer)->bonus();
+        ((ItemObject*)(fixtureB->GetBody()->GetUserData().pointer))->bonus();
     }
 }
 
@@ -23,10 +23,8 @@ void ContactListener::JumpBeginContact(b2Contact* contact)
     b2Fixture* fixtureB = contact->GetFixtureB();
     uint16 catA = fixtureA->GetFilterData().categoryBits;
     uint16 catB = fixtureB->GetFilterData().categoryBits;
-    PlatformerObject* objA =
-        reinterpret_cast<PlatformerObject*>(fixtureA->GetBody()->GetUserData().pointer);
-    PlatformerObject* objB =
-        reinterpret_cast<PlatformerObject*>(fixtureB->GetBody()->GetUserData().pointer);
+    PlatformerObject* objA = (PlatformerObject*)(fixtureA->GetBody()->GetUserData().pointer);
+    PlatformerObject* objB = (PlatformerObject*)(fixtureB->GetBody()->GetUserData().pointer);
 
     if (catA == Box2D::CAT_FOOT_SENSOR) {
         objA->changeFootContact(+1);
@@ -41,10 +39,8 @@ void ContactListener::JumpEndContact(b2Contact* contact)
     b2Fixture* fixtureB = contact->GetFixtureB();
     uint16 catA = fixtureA->GetFilterData().categoryBits;
     uint16 catB = fixtureB->GetFilterData().categoryBits;
-    PlatformerObject* objA =
-        reinterpret_cast<PlatformerObject*>(fixtureA->GetBody()->GetUserData().pointer);
-    PlatformerObject* objB =
-        reinterpret_cast<PlatformerObject*>(fixtureB->GetBody()->GetUserData().pointer);
+    PlatformerObject* objA = (PlatformerObject*)(fixtureA->GetBody()->GetUserData().pointer);
+    PlatformerObject* objB = (PlatformerObject*)(fixtureB->GetBody()->GetUserData().pointer);
 
     if (catA == Box2D::CAT_FOOT_SENSOR) {
         objA->changeFootContact(-1);

@@ -10,6 +10,11 @@
 
 void Player::load(const LoaderParams* pParams)
 {
+    m_moveSpeed = 6 * Box2D::PPM;
+    m_jumpSpeed = -6 * Box2D::PPM;
+    m_attackDamage = 1;
+    m_attackRange = 100;
+
     PlatformerObject::load(pParams);
 
     b2Filter filter;
@@ -17,10 +22,10 @@ void Player::load(const LoaderParams* pParams)
     filter.maskBits = Box2D::MASK_PLAYER;
     m_pFixture->SetFilterData(filter);
 
-    m_moveSpeed = 6 * Box2D::PPM;
-    m_jumpSpeed = -6 * Box2D::PPM;
-    m_damage = 1;
-    m_damageRange = 10;
+    b2Filter attackFilter;
+    attackFilter.categoryBits = Box2D::CAT_ATTACK_SENSOR;
+    attackFilter.maskBits = Box2D::MASK_PLAYER_ATTACK_SENSOR;
+    m_pAttackSensor->SetFilterData(attackFilter);
 
     m_animations[IDLE] = new Animation("player idle", 11);
     m_animations[RUN] = new Animation("player run", 8);

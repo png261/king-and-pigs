@@ -46,7 +46,8 @@ public:
     virtual std::string type() const;
 
     virtual int getLives() const;
-    virtual int getDamageRange() const;
+    virtual int getAttackRange() const;
+    virtual int getAttackDamage() const;
 
     virtual void setLives(int lives);
     virtual void setCurrentState(objectMotion state);
@@ -66,8 +67,8 @@ protected:
     int m_moveSpeed;
     int m_jumpSpeed;
 
-    int m_damage;
-    int m_damageRange;
+    int m_attackDamage;
+    int m_attackRange;
     int m_lives;
     int m_maxLives;
 
@@ -84,8 +85,8 @@ protected:
     std::map<ANIMATION_ID, Animation*> m_animations;
     ANIMATION_ID m_curAnimation;
     Timer timer;
-    b2Body* m_pBody;
-    b2Fixture* m_pFixture;
+    b2Fixture* m_pFootSensor;
+    b2Fixture* m_pAttackSensor;
     int m_footContact;
 };
 
