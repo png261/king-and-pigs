@@ -1,9 +1,12 @@
 #include "Box2D.hpp"
 #include "ContactListener.hpp"
 #include "DebugDraw.hpp"
+#include "InputHandler.hpp"
 
 const int Box2D::PPM = 32.0f;
 const b2Vec2 Box2D::GRAVITY = b2Vec2(0.0f, 9.8f * Box2D::PPM);
+
+Box2D::Box2D() {}
 
 Box2D* Box2D::Instance()
 {
@@ -14,9 +17,7 @@ Box2D* Box2D::Instance()
 bool Box2D::init()
 {
     m_pWorld = new b2World(Box2D::GRAVITY);
-    m_pWorld->SetContactListener(new ContactListener);
     m_pDebugDraw = new DebugDraw();
-    m_pWorld->SetDebugDraw(m_pDebugDraw);
     uint32 flags = 0;
     flags += b2Draw::e_shapeBit;
     /* flags += b2Draw::e_jointBit; */
@@ -24,17 +25,28 @@ bool Box2D::init()
     /* flags += b2Draw::e_aabbBit; */
     /* flags += b2Draw::e_pairBit; */
     m_pDebugDraw->SetFlags(flags);
+
+    m_pWorld->SetContactListener(new ContactListener);
+    m_pWorld->SetDebugDraw(m_pDebugDraw);
     m_bDebugEnable = true;
+
+    m_timeStep = 1.0f / 60.f;
+    m_velocityIterations = 10;
+    m_positionIterations = 8;
 
     return true;
 }
 
+void Box2D::handleEvents()
+{
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Q)) {
+        Box2D::Instance()->toggleDebugDraw();
+    };
+}
+
 void Box2D::update()
 {
-    float timeStep = 1.0f / 60.f;
-    int32 velocityIterations = 10;
-    int32 positionIterations = 8;
-    getWorld()->Step(timeStep, velocityIterations, positionIterations);
+    getWorld()->Step(m_timeStep, m_velocityIterations, m_positionIterations);
 }
 
 void Box2D::debugDraw()
