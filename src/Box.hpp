@@ -1,10 +1,10 @@
 #ifndef BOX_HPP
 #define BOX_HPP
 
-#include "PlatformerObject.hpp"
+#include "Enemy.hpp"
 
 
-class Box : public PlatformerObject
+class Box : public Enemy
 {
 public:
     Box();
@@ -15,8 +15,6 @@ public:
     virtual void draw();
     virtual void update();
     virtual void clean();
-
-    virtual void collision();
 
     virtual std::string type() const { return "Box"; }
 };

@@ -26,6 +26,19 @@ void PlatformerObject::load(const LoaderParams* pParams)
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
     m_pBody = Box2D::Instance()->getWorld()->CreateBody(&bodyDef);
+
+    b2PolygonShape dynamicBox;
+    dynamicBox.SetAsBox(m_width / 2.0f, m_height / 2.0f);
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &dynamicBox;
+    fixtureDef.density = 1;
+    m_pFixture = m_pBody->CreateFixture(&fixtureDef);
+
+    dynamicBox.SetAsBox(m_width / 2.0f, 0.3, b2Vec2(0, m_height / 2.0f), 0);
+    fixtureDef.isSensor = true;
+    fixtureDef.filter.categoryBits = Box2D::CAT_FOOT_SENSOR;
+    fixtureDef.filter.maskBits = Box2D::MASK_FOOT_SENSOR;
+    m_pBody->CreateFixture(&fixtureDef);
 }
 
 void PlatformerObject::draw()
@@ -35,27 +48,19 @@ void PlatformerObject::draw()
         m_position.y + m_textureY - TheCamera::Instance()->getPosition().y,
         m_textureWidth,
         m_textureHeight,
-        m_pBody->GetAngle() / 3.14 * 180,
+        m_pBody->GetAngle() / M_PI * 180,
         m_bFlipped);
 }
 
 void PlatformerObject::update()
 {
-    b2Vec2 newPosition = m_pBody->GetPosition();
-    m_position.x = newPosition.x;
-    m_position.y = newPosition.y;
-
-    if (getLives() <= 0) {
-        m_currentAttackState = ON_DIE;
+    if (m_footContact > 0) {
+        m_currentState = ON_GROUND;
+    } else {
+        m_currentState = ON_FLY;
     }
 
-    m_velocity += m_acceleration;
-
-    if (m_velocity.x < 0) {
-        m_bFlipped = true;
-    } else if (m_velocity.x > 0) {
-        m_bFlipped = false;
-    }
+    m_position = m_pBody->GetPosition();
 }
 
 std::string PlatformerObject::type() const

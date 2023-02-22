@@ -32,8 +32,6 @@ private:
     int m_mapWidth;
 
     b2Vec2 m_position;
-    b2Vec2 m_velocity;
-    b2Vec2 m_acceleration;
 
     float diff;
 

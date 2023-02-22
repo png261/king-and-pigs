@@ -38,7 +38,7 @@ b2Vec2 Camera::getPosition() const
 
 void Camera::update()
 {
-    m_position += m_pTarget->getVelocity();
+    m_position = m_pTarget->getPosition();
 
     if (m_position.x < 0) {
         m_position.x = 0;

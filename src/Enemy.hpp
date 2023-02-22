@@ -8,8 +8,8 @@ class Enemy : public PlatformerObject
 {
 public:
     virtual std::string type() const { return "Enemy"; }
-    virtual void load(const LoaderParams* pParams) { PlatformerObject::load(pParams); };
-    virtual void draw() { PlatformerObject::draw(); }
+    virtual void load(const LoaderParams* pParams);
+    virtual void draw();
 
 protected:
     Enemy()

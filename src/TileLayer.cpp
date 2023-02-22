@@ -13,7 +13,6 @@ TileLayer::TileLayer(
     : m_tileSize(tileSize)
     , m_tilesets(tilesets)
     , m_position(0, 0)
-    , m_velocity(0, 0)
 {
     m_numColumns = mapWidth;
     m_numRows = mapHeight;

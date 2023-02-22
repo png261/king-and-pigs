@@ -2,6 +2,7 @@
 #define PLATFORMER_OBJECT_HPP
 
 #include <iostream>
+#include <vector>
 #include "Animation.hpp"
 #include "GameObject.hpp"
 #include "Timer.hpp"
@@ -61,10 +62,6 @@ public:
 
 protected:
     PlatformerObject();
-
-    bool checkCollideTile(b2Vec2 newPos);
-
-    void handleMovement(b2Vec2 velocity);
 
     int m_moveSpeed;
     int m_jumpSpeed;

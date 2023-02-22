@@ -192,7 +192,8 @@ void LevelParser::parseObjectLayer(
 {
     ObjectLayer* pObjectLayer = new ObjectLayer();
 
-    for (XMLElement* e = pObjectEl->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+    for (XMLElement* e = pObjectEl->FirstChildElement(); e != nullptr;
+         e = e->NextSiblingElement()) {
         if (e->Value() == std::string("object")) {
             pObjectLayer->getGameObjects()->push_back(parseObject(e, pLevel));
         }
@@ -268,7 +269,7 @@ void LevelParser::parseTileLayer(
                 groundBox.SetAsBox(m_tileSize / 2.0f, m_tileSize / 2.0f);
                 b2FixtureDef fixtureDef;
                 fixtureDef.shape = &groundBox;
-                fixtureDef.filter.categoryBits = Box2D::WALL;
+                fixtureDef.filter.categoryBits = Box2D::CAT_WALL;
                 groundBody->CreateFixture(&fixtureDef);
             }
         }

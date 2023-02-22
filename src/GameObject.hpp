@@ -1,14 +1,9 @@
 #ifndef GAME_OBJECT_HPP
 #define GAME_OBJECT_HPP
 
-#include <box2d/box2d.h>
-#include <map>
-#include <string>
-#include <vector>
+#include "Box2D.hpp"
 #include "LoaderParams.hpp"
 #include "TextureManager.hpp"
-
-class TileLayer;
 
 class GameObject
 {
@@ -22,7 +17,6 @@ public:
     virtual std::string type() const = 0;
 
     b2Vec2& getPosition();
-    b2Vec2& getVelocity();
 
     int getWidth() const;
     int getHeight() const;
@@ -37,8 +31,6 @@ protected:
 
     // movement
     b2Vec2 m_position;
-    b2Vec2 m_velocity;
-    b2Vec2 m_acceleration;
 
     // size
     int m_width;

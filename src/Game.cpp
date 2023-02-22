@@ -56,9 +56,7 @@ bool Game::init(int width, int height, Uint32 flags)
 void Game::handleEvents()
 {
     InputHandler::Instance()->update();
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Q)) {
-        Box2D::Instance()->toggleDebugDraw();
-    };
+    Box2D::Instance()->handleEvents();
 }
 
 void Game::update()
@@ -85,12 +83,10 @@ void Game::quit()
     m_bRunning = false;
 }
 
-
 SDL_Renderer* Game::getRenderer() const
 {
     return m_pRenderer;
 }
-
 
 int Game::getCurrentLevel() const
 {

@@ -5,8 +5,6 @@
 
 GameObject::GameObject()
     : m_position(0, 0)
-    , m_velocity(0, 0)
-    , m_acceleration(0, 0)
     , m_width(0)
     , m_height(0)
     , m_textureHeight(0)
@@ -34,10 +32,6 @@ void GameObject::load(const LoaderParams* pParams)
 b2Vec2& GameObject::getPosition()
 {
     return m_position;
-}
-b2Vec2& GameObject::getVelocity()
-{
-    return m_velocity;
 }
 
 int GameObject::getWidth() const

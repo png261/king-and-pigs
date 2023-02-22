@@ -11,7 +11,6 @@ public:
 
 private:
     void ItemContact(b2Contact* contact);
-    void AttackContact(b2Contact* contact);
 
     void JumpBeginContact(b2Contact* contact);
     void JumpEndContact(b2Contact* contact);
