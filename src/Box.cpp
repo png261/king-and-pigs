@@ -21,8 +21,10 @@ void Box::update()
 {
     Enemy::update();
 }
+
 void Box::draw()
 {
     Enemy::draw();
 }
+
 void Box::clean() {}

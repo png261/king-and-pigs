@@ -36,7 +36,7 @@ public:
         DOOR_OUT,
     };
 
-    virtual ~PlatformerObject() {}
+    virtual ~PlatformerObject(){};
 
     virtual void load(const LoaderParams* pParams);
 

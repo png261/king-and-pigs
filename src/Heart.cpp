@@ -19,7 +19,7 @@ void Heart::bonus()
     Game::Instance()->getPlayer()->changeLives(+1);
     m_curAnimation = HIT;
     m_animations[m_curAnimation]->start();
-    /* m_bDead = true; */
+    m_bDead = true;
 }
 
 void Heart::update()

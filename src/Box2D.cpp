@@ -97,4 +97,10 @@ void Box2D::toggleDebugDraw()
     m_bDebugEnable = !m_bDebugEnable;
 }
 
+void Box2D::clean()
+{
+    delete m_pWorld;
+    m_pWorld = nullptr;
+}
+
 // Class Contact Listener

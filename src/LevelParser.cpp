@@ -117,12 +117,18 @@ void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<
 
 GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
 {
-    int x, y, width, height, numFrames, lives, callbackID;
-    int textureWidth;
-    int textureHeight;
+    int x = 0;
+    int y = 0;
+    int width = 0;
+    int height = 0;
+    int numFrames = 0;
+    int lives = 0;
+    int callbackID = 0;
+    int textureWidth = 0;
+    int textureHeight = 0;
     int textureX = 0;
     int textureY = 0;
-    std::string type;
+    std::string type = "";
 
     x = atoi(pObjectElement->Attribute("x"));
     y = atoi(pObjectElement->Attribute("y"));

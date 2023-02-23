@@ -9,6 +9,7 @@ class Box2D
 public:
     static Box2D* Instance();
     bool init();
+    void clean();
     void update();
     void handleEvents();
     void debugDraw();

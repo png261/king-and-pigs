@@ -1,6 +1,5 @@
 #include "ItemObject.hpp"
 #include "Box2D.hpp"
-#include "PlatformerObject.hpp"
 
 void ItemObject::load(const LoaderParams* pParams)
 {
@@ -10,4 +9,9 @@ void ItemObject::load(const LoaderParams* pParams)
     filter.categoryBits = Box2D::CAT_ITEM;
     filter.maskBits = Box2D::MASK_ITEM;
     m_pFixture->SetFilterData(filter);
+}
+
+std::string ItemObject::type() const
+{
+    return "ItemObject";
 }

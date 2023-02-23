@@ -1,7 +1,7 @@
 #include "GameObject.hpp"
+#include <iostream>
 
 #include "Game.hpp"
-
 
 GameObject::GameObject()
     : m_position(0, 0)
@@ -14,6 +14,11 @@ GameObject::GameObject()
     , m_bDead(false)
     , m_bFlipped(false)
 {}
+
+GameObject::~GameObject()
+{
+    m_pBody = nullptr;
+}
 
 void GameObject::load(const LoaderParams* pParams)
 {

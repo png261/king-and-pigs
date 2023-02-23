@@ -1,6 +1,7 @@
 #ifndef HEART_HPP
 #define HEART_HPP
 
+#include <iostream>
 #include "ItemObject.hpp"
 
 class Heart : public ItemObject

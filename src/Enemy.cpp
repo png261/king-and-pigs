@@ -18,6 +18,7 @@ void Enemy::load(const LoaderParams* pParams)
     attackFilter.categoryBits = Box2D::CAT_ATTACK_SENSOR;
     attackFilter.maskBits = Box2D::MASK_ENEMY_ATTACK_SENSOR;
     m_pAttackSensor->SetFilterData(attackFilter);
+
 };
 
 void Enemy::draw()

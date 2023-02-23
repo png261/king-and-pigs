@@ -16,6 +16,14 @@ ObjectLayer::~ObjectLayer()
 void ObjectLayer::update(Level* pLevel)
 {
     for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++) {
+        if ((*it)->isDead()) {
+            Box2D::Instance()->getWorld()->DestroyBody((*it)->getBody());
+            delete (*it);
+            m_gameObjects.erase(it);
+            it--;
+            continue;
+        }
+
         if ((*it)->getPosition().x >
                 TheCamera::Instance()->getPosition().x + Game::Instance()->getGameWidth() &&
             (*it)->getPosition().y >

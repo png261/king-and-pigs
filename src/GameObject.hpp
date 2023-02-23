@@ -8,7 +8,7 @@
 class GameObject
 {
 public:
-    virtual ~GameObject(){};
+    virtual ~GameObject();
 
     virtual void load(const LoaderParams* pParams);
     virtual void update() = 0;

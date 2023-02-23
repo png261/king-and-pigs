@@ -75,6 +75,7 @@ void Game::render()
 
 void Game::clean()
 {
+    Box2D::Instance()->clean();
     SDL::exit();
 }
 
