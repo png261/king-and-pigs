@@ -111,9 +111,9 @@ void PlayState::render()
         pLevel->render();
     }
 
-    TheTextureManager::Instance()->draw("health bar", 10, 10, 154, 62);
+    /* TheTextureManager::Instance()->draw("health bar", 10, 10, 154, 62); */
 
-    for (int i = 0; i < Game::Instance()->getPlayer()->getLives(); i++) {
-        TheTextureManager::Instance()->draw("health heart", 50 + 25 * i, 33, 22, 19);
-    }
+    /* for (int i = 0; i < Game::Instance()->getPlayer()->getLives(); i++) { */
+    /*     TheTextureManager::Instance()->draw("health heart", 50 + 25 * i, 33, 22, 19); */
+    /* } */
 }

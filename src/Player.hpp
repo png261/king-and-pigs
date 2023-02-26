@@ -1,16 +1,19 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+#include "AttackableObject.hpp"
+#include "DamageableObject.hpp"
 #include "PlatformerObject.hpp"
 
-class Player : public PlatformerObject
+class Player : public PlatformerObject, public DamageableObject, public AttackableObject
 {
 public:
+    Player();
     void load(const LoaderParams* pParams);
 
     void draw();
     void update();
-    void clean();
+    void updateAnimation();
 
     std::string type() const { return "Player"; }
 

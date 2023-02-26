@@ -16,7 +16,7 @@ ObjectLayer::~ObjectLayer()
 void ObjectLayer::update(Level* pLevel)
 {
     for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++) {
-        if ((*it)->isDead()) {
+        if ((*it)->isExist() == false) {
             Box2D::Instance()->getWorld()->DestroyBody((*it)->getBody());
             delete (*it);
             m_gameObjects.erase(it);

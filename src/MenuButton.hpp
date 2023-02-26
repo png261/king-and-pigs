@@ -15,7 +15,6 @@ public:
 
     virtual void draw();
     virtual void update();
-    virtual void clean();
 
     void setCallback(void (*callback)()) { m_callback = callback; }
     int getCallbackID() { return m_callbackID; }

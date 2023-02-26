@@ -13,7 +13,6 @@ public:
     virtual void load(const LoaderParams* pParams);
     virtual void update() = 0;
     virtual void draw() = 0;
-    virtual void clean() = 0;
     virtual std::string type() const = 0;
 
     b2Vec2& getPosition();
@@ -23,9 +22,10 @@ public:
     b2Body* getBody() const;
 
     bool isUpdating() const;
-    bool isDead() const;
+    bool isExist() const;
 
     void setUpdating(bool updating);
+    void setExist(bool bExist);
 
 protected:
     GameObject();
@@ -47,7 +47,8 @@ protected:
     double m_angle;
     bool m_bFlipped;
 
-    bool m_bDead;
+    bool m_bExist;
+
     b2Body* m_pBody;
     b2Fixture* m_pFixture;
 };

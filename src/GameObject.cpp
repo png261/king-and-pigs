@@ -11,7 +11,7 @@ GameObject::GameObject()
     , m_textureWidth(0)
     , m_bUpdating(false)
     , m_angle(0)
-    , m_bDead(false)
+    , m_bExist(true)
     , m_bFlipped(false)
 {}
 
@@ -64,7 +64,12 @@ void GameObject::setUpdating(bool updating)
     m_bUpdating = updating;
 }
 
-bool GameObject::isDead() const
+bool GameObject::isExist() const
 {
-    return m_bDead;
+    return m_bExist;
+}
+
+void GameObject::setExist(bool bExist)
+{
+    m_bExist = bExist;
 }

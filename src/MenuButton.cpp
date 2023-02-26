@@ -41,8 +41,3 @@ void MenuButton::update()
         m_currentFrame = MOUSE_OUT;
     }
 }
-
-void MenuButton::clean()
-{
-    PlatformerObject::clean();
-}

@@ -61,7 +61,6 @@ bool PauseState::onExit()
 {
     if (m_loadingComplete && !m_gameObjects.empty()) {
         for (auto& obj : m_gameObjects) {
-            obj->clean();
             delete obj;
         }
         m_gameObjects.clear();

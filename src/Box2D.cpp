@@ -1,6 +1,8 @@
 #include "Box2D.hpp"
 #include <iostream>
+#include "AttackableObject.hpp"
 #include "ContactListener.hpp"
+#include "DamageableObject.hpp"
 #include "DebugDraw.hpp"
 #include "InputHandler.hpp"
 #include "PlatformerObject.hpp"
@@ -53,16 +55,25 @@ void Box2D::handleEvents()
 
         if (((catA | catB) == (Box2D::CAT_ATTACK_SENSOR | Box2D::CAT_ENEMY)) ||
             ((catA | catB) == (Box2D::CAT_ATTACK_SENSOR | Box2D::CAT_PLAYER))) {
-            PlatformerObject* A = (PlatformerObject*)(fixtureA->GetBody()->GetUserData().pointer);
-            PlatformerObject* B = (PlatformerObject*)(fixtureB->GetBody()->GetUserData().pointer);
-            if (A == nullptr || B == nullptr) {
-                continue;
-            }
+            if (catA == Box2D::CAT_ATTACK_SENSOR) {
+                AttackableObject* A = dynamic_cast<AttackableObject*>(
+                    (PlatformerObject*)(fixtureA->GetBody()->GetUserData().pointer));
+                DamageableObject* B = dynamic_cast<DamageableObject*>(
+                    (PlatformerObject*)(fixtureB->GetBody()->GetUserData().pointer));
 
-            if (catA == Box2D::CAT_ATTACK_SENSOR && A->isAttack()) {
-                A->attack(B);
-            } else if (catB == Box2D::CAT_ATTACK_SENSOR && B->isAttack()) {
-                B->attack(A);
+                if (A != nullptr && B != nullptr && A->isAttack()) {
+                    B->damage(A->getDamage());
+                }
+
+            } else if (catB == Box2D::CAT_ATTACK_SENSOR) {
+                AttackableObject* B = dynamic_cast<AttackableObject*>(
+                    (PlatformerObject*)(fixtureB->GetBody()->GetUserData().pointer));
+                DamageableObject* A = dynamic_cast<DamageableObject*>(
+                    (PlatformerObject*)(fixtureA->GetBody()->GetUserData().pointer));
+
+                if (A != nullptr && B != nullptr && B->isAttack()) {
+                    A->damage(B->getDamage());
+                }
             }
         }
     }
