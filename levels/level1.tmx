@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="79">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="80">
  <tileset firstgid="1" name="Decorations (32x32)" tilewidth="32" tileheight="32" tilecount="42" columns="7">
   <image source="../assets/TileSets/Decorations (32x32).png" width="224" height="192"/>
  </tileset>
@@ -205,8 +205,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,64,64,64,64,64,64,64,64,64,64,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,64,64,64,64,64,64,64,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,64,64,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,140,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,140,140,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,140,140,0,0,0,0,0,0,0,0,0,
@@ -241,7 +241,7 @@
     <property name="textureWidth" value="34"/>
    </properties>
   </object>
-  <object id="73" name="Heart" class="Heart" x="752.5" y="486" width="18" height="14">
+  <object id="73" name="Heart" class="Heart" x="375" y="301" width="18" height="14">
    <properties>
     <property name="numFrames" value="11"/>
     <property name="textureHeight" value="14"/>
@@ -249,12 +249,20 @@
     <property name="textureWidth" value="18"/>
    </properties>
   </object>
-  <object id="74" name="Heart" class="Heart" x="816.333" y="549" width="18" height="14">
+  <object id="74" name="Heart" class="Heart" x="444" y="255" width="18" height="14">
    <properties>
     <property name="numFrames" value="11"/>
     <property name="textureHeight" value="14"/>
     <property name="textureID" value="heart idle"/>
     <property name="textureWidth" value="18"/>
+   </properties>
+  </object>
+  <object id="79" name="Box" class="Box" x="486" y="314" width="32" height="32">
+   <properties>
+    <property name="numFrames" value="2"/>
+    <property name="textureHeight" value="32"/>
+    <property name="textureID" value="box idle"/>
+    <property name="textureWidth" value="32"/>
    </properties>
   </object>
  </objectgroup>

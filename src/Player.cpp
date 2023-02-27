@@ -12,7 +12,7 @@
 Player::Player()
     : PlatformerObject()
     , DamageableObject(3, 300)
-    , AttackableObject(1, 100, 300)
+    , AttackableObject(1, 50, 300)
 {}
 
 void Player::load(const LoaderParams* pParams)
@@ -109,16 +109,18 @@ void Player::handleInput()
             float impulse = -m_pBody->GetMass() * 6;
             m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), 1);
             m_direction = DIRECTION_LEFT;
+            m_bTurnRight = false;
             m_bFlipped = true;
         } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) {
             float impulse = m_pBody->GetMass() * 6;
             m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), 1);
             m_direction = DIRECTION_RIGHT;
             m_bFlipped = false;
+            m_bTurnRight = true;
         }
 
         if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)) {
-            float impulse = -m_pBody->GetMass() * 100 * Box2D::PPM;
+            float impulse = -m_pBody->GetMass() * 300 * Box2D::PPM;
             m_pBody->ApplyLinearImpulse(b2Vec2(0, impulse), m_pBody->GetWorldCenter(), 1);
         }
     }

@@ -1,5 +1,6 @@
 #ifndef DAMAGEABLE_OBJECT_HPP
 #define DAMAGEABLE_OBJECT_HPP
+#include "GameObject.hpp"
 #include "LoaderParams.hpp"
 #include "Timer.hpp"
 
@@ -18,6 +19,7 @@ public:
 
 protected:
     Timer invulnerableTimer;
+    Timer deadTimer;
     virtual void startInvulnerable();
     virtual void stopInvulnerable();
 

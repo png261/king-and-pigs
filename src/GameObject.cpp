@@ -59,17 +59,12 @@ bool GameObject::isUpdating() const
     return m_bUpdating;
 }
 
-void GameObject::setUpdating(bool updating)
+void GameObject::setUpdating(bool bUpdating)
 {
-    m_bUpdating = updating;
+    m_bUpdating = bUpdating;
 }
 
 bool GameObject::isExist() const
 {
     return m_bExist;
-}
-
-void GameObject::setExist(bool bExist)
-{
-    m_bExist = bExist;
 }

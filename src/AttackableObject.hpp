@@ -20,6 +20,7 @@ public:
 
     virtual int getDamage();
     virtual bool isAttack();
+    virtual bool isTurnRight();
 
 protected:
     Timer attackTimer;
@@ -30,6 +31,7 @@ protected:
 
     bool m_bAttack;
     bool m_bCanAttack;
+    bool m_bTurnRight;
 
     b2Fixture* m_pAttackSensor;
 };

@@ -25,7 +25,6 @@ public:
     bool isExist() const;
 
     void setUpdating(bool updating);
-    void setExist(bool bExist);
 
 protected:
     GameObject();

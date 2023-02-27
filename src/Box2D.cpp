@@ -62,7 +62,10 @@ void Box2D::handleEvents()
                     (PlatformerObject*)(fixtureB->GetBody()->GetUserData().pointer));
 
                 if (A != nullptr && B != nullptr && A->isAttack()) {
-                    B->damage(A->getDamage());
+                    const char* direction = (const char*)fixtureA->GetUserData().pointer;
+                    if (A->isTurnRight() == (std::string(direction) == "right")) {
+                        B->damage(A->getDamage());
+                    }
                 }
 
             } else if (catB == Box2D::CAT_ATTACK_SENSOR) {
@@ -72,7 +75,10 @@ void Box2D::handleEvents()
                     (PlatformerObject*)(fixtureA->GetBody()->GetUserData().pointer));
 
                 if (A != nullptr && B != nullptr && B->isAttack()) {
-                    A->damage(B->getDamage());
+                    const char* direction = (const char*)fixtureB->GetUserData().pointer;
+                    if (B->isTurnRight() == (std::string(direction) == "right")) {
+                        A->damage(B->getDamage());
+                    }
                 }
             }
         }

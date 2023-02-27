@@ -1,22 +1,24 @@
 #ifndef BOX_HPP
 #define BOX_HPP
 
+#include "DamageableObject.hpp"
 #include "Enemy.hpp"
 
 
-class Box : public Enemy
+class Box : public Enemy, public DamageableObject
 {
 public:
     Box();
-    virtual ~Box() {}
+    ~Box() {}
 
-    virtual void load(const LoaderParams* pParams);
+    void load(const LoaderParams* pParams);
 
-    virtual void draw();
-    virtual void update();
-    virtual void clean();
+    void draw();
+    void update();
+    void clean();
+    void updateAnimation();
 
-    virtual std::string type() const { return "Box"; }
+    std::string type() const { return "Box"; }
 };
 
 #endif

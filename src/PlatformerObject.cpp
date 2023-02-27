@@ -32,7 +32,7 @@ void PlatformerObject::load(const LoaderParams* pParams)
     fixtureDef.density = 1;
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
-    dynamicBox.SetAsBox(m_width / 2.0f, 0.3, b2Vec2(0, m_height / 2.0f), 0);
+    dynamicBox.SetAsBox((m_width - 0.5) / 2.0f, 0.3, b2Vec2(0, m_height / 2.0f), 0);
     b2FixtureDef footSensorDef;
     footSensorDef.shape = &dynamicBox;
     footSensorDef.isSensor = true;

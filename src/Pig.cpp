@@ -8,7 +8,7 @@
 Pig::Pig()
     : Enemy()
     , DamageableObject(3, 300)
-    , AttackableObject(1, 100, 300)
+    , AttackableObject(1, 50, 300)
 {}
 
 void Pig::load(const LoaderParams* pParams)

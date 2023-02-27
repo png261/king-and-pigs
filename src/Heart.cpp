@@ -18,6 +18,7 @@ void Heart::bonus()
 {
     m_curAnimation = HIT;
     m_animations[m_curAnimation]->start();
+    m_bExist = false;
 }
 
 void Heart::update()

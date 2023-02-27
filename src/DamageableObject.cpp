@@ -49,6 +49,7 @@ void DamageableObject::damage(int d)
     if (m_hp <= 0) {
         m_hp = 0;
         m_bDead = true;
+        deadTimer.start();
         return;
     }
 
