@@ -15,7 +15,6 @@ public:
     enum objectMotion {
         ON_GROUND,
         ON_FLY,
-        ON_FALL,
     };
 
     enum objectStatus {

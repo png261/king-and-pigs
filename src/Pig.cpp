@@ -54,8 +54,18 @@ void Pig::updateAnimation()
 
     switch (m_currentState) {
     case ON_GROUND: newAnimation = IDLE; break;
-    case ON_FLY: newAnimation = JUMP; break;
-    case ON_FALL: newAnimation = FALL; break;
+    case ON_FLY:
+        if (this->getBody()->GetLinearVelocity().y == 0) {
+            m_currentState = ON_GROUND;
+            break;
+        }
+
+        if (this->getBody()->GetLinearVelocity().y < 0) {
+            newAnimation = JUMP;
+        } else {
+            newAnimation = FALL;
+        }
+        break;
     }
 
     switch (m_currentAttackState) {
