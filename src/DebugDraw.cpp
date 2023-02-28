@@ -22,9 +22,8 @@ void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, cons
     // Create an array of SDL points from the Box2D vertices.
     SDL_Point sdlVertices[vertexCount];
     for (int i = 0; i < vertexCount; i++) {
-        sdlVertices[i] = {
-            static_cast<int>(vertices[i].x - TheCamera::Instance()->getPosition().x),
-            static_cast<int>(vertices[i].y - TheCamera::Instance()->getPosition().y)};
+        b2Vec2 point = vertices[i] - TheCamera::Instance()->getPosition();
+        sdlVertices[i] = {static_cast<int>(point.x), static_cast<int>(point.y)};
     }
 
     // Draw the polygon by calling SDL_RenderDrawLines.

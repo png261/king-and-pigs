@@ -45,6 +45,7 @@ private:
 
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
+    SDL_Renderer* m_pRendererUI;
 
     int m_gameWidth;
     int m_gameHeight;

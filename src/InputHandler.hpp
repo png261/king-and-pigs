@@ -5,15 +5,15 @@
 #include "Box2D.hpp"
 #include "SDL.hpp"
 
-enum mouse_buttons {
-    LEFT = 0,
-    MIDDLE = 1,
-    RIGHT = 2,
-};
-
 class InputHandler
 {
 public:
+    enum mouse_buttons {
+        LEFT = 0,
+        MIDDLE = 1,
+        RIGHT = 2,
+    };
+
     static InputHandler* Instance();
 
     void update();

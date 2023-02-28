@@ -1,4 +1,5 @@
 #include "PlayState.hpp"
+#include <SDL2/SDL_scancode.h>
 #include "Box.hpp"
 #include "Camera.hpp"
 #include "Enemy.hpp"
@@ -34,6 +35,7 @@ bool PlayState::onEnter()
     }
 
     TheCamera::Instance()->setTarget(Game::Instance()->getPlayer());
+    TheCamera::Instance()->setZoom(1.5);
 
     TextureManager::Instance()->load("assets/Player/Idle.png", "player idle");
     TextureManager::Instance()->load("assets/Player/Run.png", "player run");
@@ -110,10 +112,4 @@ void PlayState::render()
     if (pLevel != nullptr) {
         pLevel->render();
     }
-
-    /* TheTextureManager::Instance()->draw("health bar", 10, 10, 154, 62); */
-
-    /* for (int i = 0; i < Game::Instance()->getPlayer()->getLives(); i++) { */
-    /*     TheTextureManager::Instance()->draw("health heart", 50 + 25 * i, 33, 22, 19); */
-    /* } */
 }

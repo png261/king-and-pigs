@@ -1,9 +1,11 @@
 #include "Camera.hpp"
+#include <iostream>
 #include "Game.hpp"
 
 Camera::Camera()
     : m_pTarget(0)
     , m_position(0, 0)
+    , m_zoom(1)
 {}
 
 Camera::~Camera()
@@ -17,16 +19,23 @@ Camera* Camera::Instance()
     return s_pCamera;
 }
 
+float Camera::getZoom() const
+{
+    return m_zoom;
+}
+
 b2Vec2 Camera::getPosition() const
 {
     if (m_pTarget == nullptr) {
         return m_position;
     }
 
-    b2Vec2 pos = m_pTarget->getPosition() -
-                 b2Vec2(
-                     ((Game::Instance()->getGameWidth() - m_pTarget->getWidth()) / 2.0f),
-                     ((Game::Instance()->getGameHeight() - m_pTarget->getHeight()) / 2.0f));
+
+    b2Vec2 pos =
+        m_pTarget->getPosition() -
+        b2Vec2(
+            ((Game::Instance()->getGameWidth() - m_pTarget->getWidth()) / m_zoom / 2.0f),
+            ((Game::Instance()->getGameHeight() - m_pTarget->getHeight()) / m_zoom / 2.0f));
 
     if (pos.x < 0) {
         pos.x = 0;
@@ -56,4 +65,10 @@ void Camera::setTarget(GameObject* target)
 void Camera::setPosition(const b2Vec2& position)
 {
     m_position = position;
+}
+
+void Camera::setZoom(float zoom)
+{
+    m_zoom = zoom;
+    SDL_RenderSetScale(TheGame::Instance()->getRenderer(), m_zoom, m_zoom);
 }
