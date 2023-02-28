@@ -76,9 +76,9 @@ void Player::updateAnimation()
 
     switch (m_currentState) {
     case ON_GROUND:
-        if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) {
+        if (InputHandler::Instance()->isKeyDown(KEY_LEFT)) {
             newAnimation = RUN;
-        } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) {
+        } else if (InputHandler::Instance()->isKeyDown(KEY_RIGHT)) {
             newAnimation = RUN;
         } else {
             newAnimation = IDLE;
@@ -115,13 +115,13 @@ void Player::updateAnimation()
 void Player::handleInput()
 {
     if (m_currentState == ON_GROUND) {
-        if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) {
+        if (InputHandler::Instance()->isKeyDown(KEY_LEFT)) {
             float impulse = -m_pBody->GetMass() * 6;
             m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), 1);
             m_direction = DIRECTION_LEFT;
             m_bTurnRight = false;
             m_bFlipped = true;
-        } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) {
+        } else if (InputHandler::Instance()->isKeyDown(KEY_RIGHT)) {
             float impulse = m_pBody->GetMass() * 6;
             m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), 1);
             m_direction = DIRECTION_RIGHT;
@@ -129,14 +129,14 @@ void Player::handleInput()
             m_bTurnRight = true;
         }
 
-        if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)) {
-            float impulse = -m_pBody->GetMass() * 300 * Box2D::PPM;
+        if (InputHandler::Instance()->isKeyDown(KEY_SPACE)) {
+            float impulse = -m_pBody->GetMass() * 100 * Box2D::PPM;
             m_pBody->ApplyLinearImpulse(b2Vec2(0, impulse), m_pBody->GetWorldCenter(), 1);
         }
     }
 
     if (m_currentAttackState == ON_NORMAL) {
-        if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_A)) {
+        if (InputHandler::Instance()->isKeyDown(KEY_A)) {
             this->attack();
         }
     }

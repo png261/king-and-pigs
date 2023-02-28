@@ -93,7 +93,7 @@ void PlayState::update()
         return;
     }
 
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE)) {
+    if (InputHandler::Instance()->isKeyDown(KEY_ESCAPE)) {
         GameStateMachine::Instance()->pushState(new PauseState);
     }
 

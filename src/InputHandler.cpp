@@ -35,18 +35,18 @@ void InputHandler::update()
 void InputHandler::onMouseButtonDown(SDL_Event& event)
 {
     switch (event.button.button) {
-    case SDL_BUTTON_LEFT: m_bMouseButtonState[LEFT] = true; break;
-    case SDL_BUTTON_MIDDLE: m_bMouseButtonState[MIDDLE] = true; break;
-    case SDL_BUTTON_RIGHT: m_bMouseButtonState[RIGHT] = true; break;
+    case SDL_BUTTON_LEFT: m_bMouseButtonState[MOUSE_LEFT] = true; break;
+    case SDL_BUTTON_MIDDLE: m_bMouseButtonState[MOUSE_MIDDLE] = true; break;
+    case SDL_BUTTON_RIGHT: m_bMouseButtonState[MOUSE_RIGHT] = true; break;
     }
 }
 
 void InputHandler::onMouseButtonUp(SDL_Event& event)
 {
     switch (event.button.button) {
-    case SDL_BUTTON_LEFT: m_bMouseButtonState[LEFT] = false; break;
-    case SDL_BUTTON_MIDDLE: m_bMouseButtonState[MIDDLE] = false; break;
-    case SDL_BUTTON_RIGHT: m_bMouseButtonState[RIGHT] = false; break;
+    case SDL_BUTTON_LEFT: m_bMouseButtonState[MOUSE_LEFT] = false; break;
+    case SDL_BUTTON_MIDDLE: m_bMouseButtonState[MOUSE_MIDDLE] = false; break;
+    case SDL_BUTTON_RIGHT: m_bMouseButtonState[MOUSE_RIGHT] = false; break;
     }
 }
 
@@ -66,7 +66,7 @@ void InputHandler::onMouseMove(SDL_Event& event)
     m_pMousePosition->y = event.motion.y;
 }
 
-bool InputHandler::isKeyDown(SDL_Scancode key) const
+bool InputHandler::isKeyDown(KeyboardKey key) const
 {
     if (m_keystates != 0) {
         if (m_keystates[key] == 1) {
@@ -92,7 +92,7 @@ b2Vec2* InputHandler::getMousePosition() const
     return m_pMousePosition;
 }
 
-bool InputHandler::isMouseButtonDown(mouse_buttons buttonID) const
+bool InputHandler::isMouseButtonDown(MouseButton buttonID) const
 {
     return m_bMouseButtonState[buttonID];
 };

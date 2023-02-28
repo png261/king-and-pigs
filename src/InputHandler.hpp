@@ -3,24 +3,19 @@
 
 #include <vector>
 #include "Box2D.hpp"
+#include "InputDefinitions.hpp"
 #include "SDL.hpp"
 
 class InputHandler
 {
 public:
-    enum mouse_buttons {
-        LEFT = 0,
-        MIDDLE = 1,
-        RIGHT = 2,
-    };
-
     static InputHandler* Instance();
 
     void update();
     b2Vec2* getMousePosition() const;
 
-    bool isKeyDown(SDL_Scancode key) const;
-    bool isMouseButtonDown(mouse_buttons buttonID) const;
+    bool isKeyDown(KeyboardKey key) const;
+    bool isMouseButtonDown(MouseButton buttonID) const;
 
     void reset();
 

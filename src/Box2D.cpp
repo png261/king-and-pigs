@@ -57,7 +57,7 @@ bool Box2D::init()
 
 void Box2D::handleEvents()
 {
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Q)) {
+    if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
         Box2D::Instance()->toggleDebugDraw();
     };
 
