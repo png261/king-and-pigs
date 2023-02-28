@@ -36,36 +36,34 @@ void TileLayer::render()
         for (int j = 0; j < m_numColumns; j++) {
             int id = m_tileIDs[i + y][j + x];
 
-            if (id == 0) {
+            const int EMPTY_TILE = 0;
+
+            if (id == EMPTY_TILE) {
                 continue;
             }
 
-            if (((j * m_tileSize) - x2) - TheCamera::Instance()->getPosition().x < -m_tileSize ||
-                ((j * m_tileSize) - x2) - TheCamera::Instance()->getPosition().x >
-                    TheGame::Instance()->getGameWidth()) {
-                continue;
-            }
+            b2Vec2 position = b2Vec2(((j * m_tileSize) - x2), ((i * m_tileSize) - y2)) -
+                              TheCamera::Instance()->getPosition();
 
-            if (((i * m_tileSize) - y2) - TheCamera::Instance()->getPosition().y < -m_tileSize ||
-                ((i * m_tileSize) - y2) - TheCamera::Instance()->getPosition().y >
-                    TheGame::Instance()->getGameHeight()) {
+            bool isInViewPort =
+                position.x > -m_tileSize && position.x < TheGame::Instance()->getGameWidth() &&
+                position.y > -m_tileSize && position.y < TheGame::Instance()->getGameHeight();
+
+            if (isInViewPort == false) {
                 continue;
             }
 
             Tileset tileset = getTilesetByID(id);
 
-            id--;
-
             TheTextureManager::Instance()->drawTile(
                 tileset.name,
                 tileset.margin,
                 tileset.spacing,
-                ((j * m_tileSize) - x2) - TheCamera::Instance()->getPosition().x,
-                ((i * m_tileSize) - y2) - TheCamera::Instance()->getPosition().y,
+                position,
                 m_tileSize,
                 m_tileSize,
-                (id - (tileset.firstGridID - 1)) / tileset.numColumns,
-                (id - (tileset.firstGridID - 1)) % tileset.numColumns);
+                (id - tileset.firstGridID) / tileset.numColumns,
+                (id - tileset.firstGridID) % tileset.numColumns);
         }
     }
 }
@@ -82,9 +80,8 @@ Tileset TileLayer::getTilesetByID(int tileID)
         }
     }
 
-    Log::warning("did not find tileset, returning empty tileset");
-    Tileset t;
-    return t;
+    Log::warning("did not find tileset, return empty tileset");
+    return Tileset{};
 }
 
 void TileLayer::setTileIDs(const std::vector<std::vector<int>>& data)

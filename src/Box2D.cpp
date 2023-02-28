@@ -18,6 +18,20 @@ Box2D* Box2D::Instance()
     return pInstance;
 }
 
+void Box2D::createWall(int size, b2Vec2 position)
+{
+    b2BodyDef groundBodyDef;
+    groundBodyDef.position = position;
+    b2Body* groundBody = Box2D::Instance()->getWorld()->CreateBody(&groundBodyDef);
+    b2PolygonShape groundBox;
+    groundBox.SetAsBox(size / 2.0f, size / 2.0f);
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &groundBox;
+    fixtureDef.friction = 1;
+    fixtureDef.filter.categoryBits = Box2D::CAT_WALL;
+    groundBody->CreateFixture(&fixtureDef);
+}
+
 bool Box2D::init()
 {
     m_pWorld = new b2World(Box2D::GRAVITY);

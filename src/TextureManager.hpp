@@ -3,6 +3,7 @@
 
 #include <map>
 #include <string>
+#include "Box2D.hpp"
 #include "SDL.hpp"
 
 class TextureManager
@@ -12,12 +13,11 @@ public:
 
     bool load(std::string filename, std::string textureID);
 
-    void draw(std::string textureID, int x, int y, int width, int height, bool bFlipped = false);
+    void draw(std::string textureID, b2Vec2 position, int width, int height, bool bFlipped = false);
 
     void drawFrame(
         std::string id,
-        int x,
-        int y,
+        b2Vec2 position,
         int width,
         int height,
         int currentRow,
@@ -28,8 +28,7 @@ public:
         std::string id,
         int margin,
         int spacing,
-        int x,
-        int y,
+        b2Vec2 position,
         int width,
         int height,
         int currentRow,

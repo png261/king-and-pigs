@@ -2,6 +2,7 @@
 #define ANIMATION_HPP
 
 #include <string>
+#include "Box2D.hpp"
 #include "Timer.hpp"
 
 class Animation
@@ -9,7 +10,7 @@ class Animation
 public:
     Animation(std::string textureID, int nFrames = 1, bool bLoop = true);
 
-    virtual void draw(int x, int y, int width, int height, float angle = 0, bool flip = false);
+    virtual void draw(b2Vec2 position, int width, int height, float angle = 0, bool flip = false);
     void start();
     void restart();
     void stop();

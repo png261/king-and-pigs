@@ -28,12 +28,22 @@ bool TextureManager::load(std::string filename, std::string textureID)
     return true;
 }
 
-void TextureManager::draw(std::string textureID, int x, int y, int width, int height, bool bFlipped)
+void TextureManager::draw(
+    std::string textureID,
+    b2Vec2 position,
+    int width,
+    int height,
+    bool bFlipped)
 {
-    SDL_Rect srcRect{0, 0, width, height};
-    SDL_Rect destRect{x, y, width, height};
-
     SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
+
+    SDL_Rect srcRect{0, 0, width, height};
+    SDL_Rect destRect{(int)position.x, (int)position.y, width, height};
+
+    SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
+    SDL_RenderDrawRect(pRenderer, &destRect);
+    SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
+
     SDL_RenderCopyEx(
         pRenderer,
         m_textureMap[textureID],
@@ -46,8 +56,7 @@ void TextureManager::draw(std::string textureID, int x, int y, int width, int he
 
 void TextureManager::drawFrame(
     std::string id,
-    int x,
-    int y,
+    b2Vec2 position,
     int width,
     int height,
     int currentRow,
@@ -55,10 +64,14 @@ void TextureManager::drawFrame(
     float angle,
     bool bFlipped)
 {
-    SDL_Rect srcRect{width * currentFrame, height * currentRow, width, height};
-    SDL_Rect destRect{x, y, width, height};
-
     SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
+
+    SDL_Rect srcRect{width * currentFrame, height * currentRow, width, height};
+    SDL_Rect destRect{(int)position.x, (int)position.y, width, height};
+
+    SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
+    SDL_RenderDrawRect(pRenderer, &destRect);
+    SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
 
     SDL_RenderCopyEx(
         pRenderer,
@@ -74,8 +87,7 @@ void TextureManager::drawTile(
     std::string id,
     int margin,
     int spacing,
-    int x,
-    int y,
+    b2Vec2 position,
     int width,
     int height,
     int currentRow,
@@ -87,7 +99,11 @@ void TextureManager::drawTile(
         margin + (spacing + height) * currentRow,
         width,
         height};
-    SDL_Rect destRect{x, y, width, height};
+    SDL_Rect destRect{(int)position.x, (int)position.y, width, height};
+
+    SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
+    SDL_RenderDrawRect(pRenderer, &destRect);
+    SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
 
     SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, 0, 0, SDL_FLIP_NONE);
 }

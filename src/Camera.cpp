@@ -23,11 +23,10 @@ b2Vec2 Camera::getPosition() const
         return m_position;
     }
 
-    b2Vec2 pos(
-        m_pTarget->getPosition().x -
-            ((Game::Instance()->getGameWidth() - m_pTarget->getWidth()) / 2.0),
-        m_pTarget->getPosition().y -
-            ((Game::Instance()->getGameHeight() - m_pTarget->getHeight()) / 2.0));
+    b2Vec2 pos = m_pTarget->getPosition() -
+                 b2Vec2(
+                     ((Game::Instance()->getGameWidth() - m_pTarget->getWidth()) / 2.0f),
+                     ((Game::Instance()->getGameHeight() - m_pTarget->getHeight()) / 2.0f));
 
     if (pos.x < 0) {
         pos.x = 0;

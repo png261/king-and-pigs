@@ -44,8 +44,7 @@ void PlatformerObject::load(const LoaderParams* pParams)
 void PlatformerObject::draw()
 {
     m_animations[m_curAnimation]->draw(
-        m_position.x + m_textureX - TheCamera::Instance()->getPosition().x,
-        m_position.y + m_textureY - TheCamera::Instance()->getPosition().y,
+        m_position - TheCamera::Instance()->getPosition(),
         m_textureWidth,
         m_textureHeight,
         m_pBody->GetAngle() / M_PI * 180,
@@ -54,7 +53,8 @@ void PlatformerObject::draw()
 
 void PlatformerObject::update()
 {
-    m_position = m_pBody->GetPosition();
+    m_position = m_pBody->GetPosition() - b2Vec2(m_textureWidth / 2.0f, m_textureHeight / 2.0f) +
+                 b2Vec2(m_textureX, m_textureY);
     m_currentState = m_footContact > 0 ? ON_GROUND : ON_FLY;
 }
 

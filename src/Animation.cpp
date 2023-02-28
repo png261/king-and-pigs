@@ -22,7 +22,7 @@ bool Animation::isRunning()
     return m_bRunning;
 }
 
-void Animation::draw(int x, int y, int width, int height, float angle, bool bFlipped)
+void Animation::draw(b2Vec2 position, int width, int height, float angle, bool bFlipped)
 {
     if (m_framerate == 0) {
         return;
@@ -43,7 +43,7 @@ void Animation::draw(int x, int y, int width, int height, float angle, bool bFli
     }
 
     TextureManager::Instance()
-        ->drawFrame(m_textureID, x, y, width, height, 0, m_curFrame, angle, bFlipped);
+        ->drawFrame(m_textureID, position, width, height, 0, m_curFrame, angle, bFlipped);
 }
 
 void Animation::start()

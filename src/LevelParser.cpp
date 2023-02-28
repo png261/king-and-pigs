@@ -90,6 +90,7 @@ void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<
     if (pTilesetRoot->Attribute("tileheight")) {
         tileset.tileHeight = atoi(pTilesetRoot->Attribute("tileheight"));
     }
+
     if (pTilesetRoot->Attribute("spacing")) {
         tileset.spacing = atoi(pTilesetRoot->Attribute("spacing"));
     } else {
@@ -109,7 +110,7 @@ void LevelParser::parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<
     tileset.numColumns = tileset.width / (tileset.tileWidth + tileset.spacing);
 
     TextureManager::Instance()->load(
-        std::string("assets/") + pImagieEl->Attribute("source"),
+        assetsTag.append(pImagieEl->Attribute("source")),
         tileset.name);
 
     pTilesets->push_back(tileset);
@@ -266,19 +267,14 @@ void LevelParser::parseTileLayer(
                     continue;
                 }
 
-                b2BodyDef groundBodyDef;
-                groundBodyDef.position.Set(
-                    col * m_tileSize + m_tileSize / 2.0f,
-                    row * m_tileSize + m_tileSize / 2.0f);
-                b2Body* groundBody = Box2D::Instance()->getWorld()->CreateBody(&groundBodyDef);
-                b2PolygonShape groundBox;
-                groundBox.SetAsBox(m_tileSize / 2.0f, m_tileSize / 2.0f);
-                b2FixtureDef fixtureDef;
-                fixtureDef.shape = &groundBox;
-                fixtureDef.filter.categoryBits = Box2D::CAT_WALL;
-                groundBody->CreateFixture(&fixtureDef);
+                Box2D::Instance()->createWall(
+                    m_tileSize,
+                    b2Vec2(
+                        col * m_tileSize + m_tileSize / 2.0f,
+                        row * m_tileSize + m_tileSize / 2.0f));
             }
         }
     }
+
     pLayers->push_back(pTileLayer);
 }

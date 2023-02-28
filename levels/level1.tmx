@@ -174,7 +174,7 @@
 0,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,82,0,0,0,
 0,88,64,64,64,64,65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,82,0,0,0,
 0,0,0,0,0,0,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,82,0,0,0,
-0,0,0,0,0,0,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,82,0,0,0,
+0,0,0,0,0,0,84,84,84,84,84,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,82,0,0,0,
 0,0,0,0,0,0,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,82,0,0,0,
 0,0,0,0,0,0,88,64,64,64,64,64,64,64,64,64,64,64,64,65,0,0,0,0,0,0,0,0,82,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,0,0,0,0,0,0,0,0,82,0,0,0,
@@ -221,15 +221,15 @@
 </data>
  </layer>
  <objectgroup id="4" name="Object Layer 1">
-  <object id="9" name="Player" class="Player" x="315" y="313" width="32" height="32">
+  <object id="9" name="Player" class="Player" x="247" y="233" width="32" height="32">
    <properties>
     <property name="lives" value="3"/>
     <property name="numFrames" value="11"/>
     <property name="textureHeight" value="58"/>
     <property name="textureID" value="player idle"/>
     <property name="textureWidth" value="78"/>
-    <property name="textureX" value="-15"/>
-    <property name="textureY" value="-12"/>
+    <property name="textureX" value="0"/>
+    <property name="textureY" value="0"/>
    </properties>
   </object>
   <object id="10" name="Pig" class="Pig" x="570" y="316" width="34" height="30">
