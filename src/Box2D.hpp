@@ -19,19 +19,22 @@ public:
     DebugDraw* getDebugDraw();
     void toggleDebugDraw();
 
-    enum collisionFilterCategory : uint16 {
-        CAT_ALL = 0xFFFF,
+    enum FilterCategory : uint16 {
         CAT_WALL = 0x0001,
         CAT_PLAYER = 0x0002,
-        CAT_ENEMY = 0x0004,
-        CAT_ITEM = 0x0008,
-        CAT_FOOT_SENSOR = 0x0010,
-        CAT_ATTACK_SENSOR = 0x0020,
+        CAT_DOOR = 0x0004,
+        CAT_ENEMY = 0x0008,
+        CAT_ITEM = 0x0010,
+        CAT_FOOT_SENSOR = 0x0020,
+        CAT_ATTACK_SENSOR = 0x0040,
+        CAT_ALL = 0xFFFF,
+        CAT_NONE = 0x0000,
     };
 
-    enum collisionFilterMask : uint16 {
+    enum FilterMask : uint16 {
         MASK_PLAYER = CAT_ALL,
         MASK_WALL = CAT_ALL,
+        MASK_DOOR = CAT_PLAYER,
         MASK_ENEMY = CAT_ALL & ~CAT_ITEM,
         MASK_ITEM = CAT_PLAYER | CAT_WALL,
         MASK_FOOT_SENSOR = CAT_ALL,
