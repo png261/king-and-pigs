@@ -34,8 +34,9 @@ b2Vec2 Camera::getPosition() const
     b2Vec2 pos =
         m_pTarget->getPosition() -
         b2Vec2(
-            ((Game::Instance()->getGameWidth() - m_pTarget->getWidth()) / m_zoom / 2.0f),
-            ((Game::Instance()->getGameHeight() - m_pTarget->getHeight()) / m_zoom / 2.0f));
+            ((Game::Instance()->getWindow()->getWidth() - m_pTarget->getWidth()) / m_zoom / 2.0f),
+            ((Game::Instance()->getWindow()->getHeight() - m_pTarget->getHeight()) / m_zoom /
+             2.0f));
 
     if (pos.x < 0) {
         pos.x = 0;
@@ -70,5 +71,5 @@ void Camera::setPosition(const b2Vec2& position)
 void Camera::setZoom(float zoom)
 {
     m_zoom = zoom;
-    SDL_RenderSetScale(TheGame::Instance()->getRenderer(), m_zoom, m_zoom);
+    SDL_RenderSetScale(TheGame::Instance()->getWindow()->getRenderer(), m_zoom, m_zoom);
 }

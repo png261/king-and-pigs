@@ -2,6 +2,7 @@
 #include <SDL2/SDL_scancode.h>
 #include "Box.hpp"
 #include "Camera.hpp"
+#include "DoorObject.hpp"
 #include "Enemy.hpp"
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"
@@ -26,6 +27,7 @@ bool PlayState::onEnter()
     GameObjectFactory::Instance()->registerType("Pig", new Creator<Pig>);
     GameObjectFactory::Instance()->registerType("Box", new Creator<Box>);
     GameObjectFactory::Instance()->registerType("Heart", new Creator<Heart>);
+    GameObjectFactory::Instance()->registerType("Door", new Creator<DoorObject>);
 
     LevelParser levelParser;
     pLevel = levelParser.parseLevel(
@@ -61,6 +63,10 @@ bool PlayState::onEnter()
     TextureManager::Instance()->load("assets/Item/Big Heart Hit.png", "heart hit");
     TextureManager::Instance()->load("assets/Item/Big Diamond Idle.png", "diamond idle");
     TextureManager::Instance()->load("assets/Item/Big Diamond Hit.png", "diamond hit");
+
+    TextureManager::Instance()->load("assets/Item/Door/idle.png", "door idle");
+    TextureManager::Instance()->load("assets/Item/Door/open.png", "door open");
+    TextureManager::Instance()->load("assets/Item/Door/close.png", "door close");
 
     TextureManager::Instance()->load("assets/UI/Health Bar/Health Bar.png", "health bar");
     TextureManager::Instance()->load("assets/UI/Health Bar/Heart.png", "health heart");

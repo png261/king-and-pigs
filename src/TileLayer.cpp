@@ -45,9 +45,10 @@ void TileLayer::render()
             b2Vec2 position = b2Vec2(((j * m_tileSize) - x2), ((i * m_tileSize) - y2)) -
                               TheCamera::Instance()->getPosition();
 
-            bool isInViewPort =
-                position.x > -m_tileSize && position.x < TheGame::Instance()->getGameWidth() &&
-                position.y > -m_tileSize && position.y < TheGame::Instance()->getGameHeight();
+            bool isInViewPort = position.x > -m_tileSize &&
+                                position.x < TheGame::Instance()->getWindow()->getWidth() &&
+                                position.y > -m_tileSize &&
+                                position.y < TheGame::Instance()->getWindow()->getHeight();
 
             if (isInViewPort == false) {
                 continue;

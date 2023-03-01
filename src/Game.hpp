@@ -5,6 +5,7 @@
 #include <vector>
 #include "Player.hpp"
 #include "SDL.hpp"
+#include "Window.hpp"
 
 #include <box2d/box2d.h>
 
@@ -13,18 +14,16 @@ class Game
 public:
     ~Game(){};
     static Game* Instance();
-    bool init(int w, int h, Uint32 flags);
+    bool init(unsigned int width, unsigned int height);
     void handleEvents();
     void update();
     void render();
     void clean();
     void quit();
 
-    SDL_Renderer* getRenderer() const;
+    Window* getWindow();
     int getCurrentLevel() const;
     int getNextLevel() const;
-    int getGameWidth() const;
-    int getGameHeight() const;
     int getLevelWidth() const;
     int getLevelHeight() const;
     Player* getPlayer() const;
@@ -42,14 +41,7 @@ public:
 
 private:
     Game();
-
-    SDL_Window* m_pWindow;
-    SDL_Renderer* m_pRenderer;
-    SDL_Renderer* m_pRendererUI;
-
-    int m_gameWidth;
-    int m_gameHeight;
-
+    Window* m_pWindow;
     int m_levelWidth;
     int m_levelHeight;
 

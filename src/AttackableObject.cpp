@@ -12,7 +12,7 @@ AttackableObject::AttackableObject(int damage, int range, int attackSpeed)
 void AttackableObject::createAttackSensor(
     b2Body* pBody,
     int objectWidth,
-    Box2D::collisionFilterMask filterMask)
+    Box2D::FilterMask filterMask)
 {
     b2PolygonShape attackShape;
     attackShape.SetAsBox(

@@ -35,6 +35,8 @@ public:
         HIT,
         DOOR_IN,
         DOOR_OUT,
+        DOOR_OPEN,
+        DOOR_CLOSE,
     };
 
     virtual ~PlatformerObject(){};

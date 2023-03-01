@@ -16,8 +16,7 @@ bool TextureManager::load(std::string filename, std::string textureID)
         return false;
     }
 
-    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
-    SDL_Texture* pTexture = IMG_LoadTexture(pRenderer, filename.c_str());
+    SDL_Texture* pTexture = TheGame::Instance()->getWindow()->loadImage(filename.c_str());
     if (pTexture == nullptr) {
         Log::error("fail to create Texture for: " + filename);
         return false;
@@ -35,17 +34,10 @@ void TextureManager::draw(
     int height,
     bool bFlipped)
 {
-    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
-
     SDL_Rect srcRect{0, 0, width, height};
     SDL_Rect destRect{static_cast<int>(position.x), static_cast<int>(position.y), width, height};
 
-    SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
-    SDL_RenderDrawRect(pRenderer, &destRect);
-    SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
-
-    SDL_RenderCopyEx(
-        pRenderer,
+    TheGame::Instance()->getWindow()->renderImage(
         m_textureMap[textureID],
         &srcRect,
         &destRect,
@@ -64,17 +56,10 @@ void TextureManager::drawFrame(
     float angle,
     bool bFlipped)
 {
-    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
-
     SDL_Rect srcRect{width * currentFrame, height * currentRow, width, height};
     SDL_Rect destRect{static_cast<int>(position.x), static_cast<int>(position.y), width, height};
 
-    SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
-    SDL_RenderDrawRect(pRenderer, &destRect);
-    SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
-
-    SDL_RenderCopyEx(
-        pRenderer,
+    TheGame::Instance()->getWindow()->renderImage(
         m_textureMap[id],
         &srcRect,
         &destRect,
@@ -93,7 +78,6 @@ void TextureManager::drawTile(
     int currentRow,
     int currentFrame)
 {
-    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
     SDL_Rect srcRect{
         margin + (spacing + width) * currentFrame,
         margin + (spacing + height) * currentRow,
@@ -101,5 +85,5 @@ void TextureManager::drawTile(
         height};
     SDL_Rect destRect{static_cast<int>(position.x), static_cast<int>(position.y), width, height};
 
-    SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, 0, 0, SDL_FLIP_NONE);
+    TheGame::Instance()->getWindow()->renderImage(m_textureMap[id], &srcRect, &destRect);
 }

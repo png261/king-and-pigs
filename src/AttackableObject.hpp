@@ -11,8 +11,7 @@ class AttackableObject
 public:
     AttackableObject(int damage, int range, int attackSpeed);
 
-    virtual void
-    createAttackSensor(b2Body* pBody, int objectWidth, Box2D::collisionFilterMask filterMask);
+    virtual void createAttackSensor(b2Body* pBody, int objectWidth, Box2D::FilterMask filterMask);
 
     virtual bool canAttack();
     virtual void update();

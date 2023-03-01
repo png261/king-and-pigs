@@ -15,7 +15,7 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
 
 void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
 {
-    SDL_Renderer* renderer = Game::Instance()->getRenderer();
+    SDL_Renderer* renderer = Game::Instance()->getWindow()->getRenderer();
     // Set the renderer color to the fill color.
     SDL_SetRenderDrawColor(renderer, color.r * 255, color.g * 255, color.b * 255, color.a * 255);
 

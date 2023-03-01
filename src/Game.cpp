@@ -14,7 +14,6 @@
 
 Game::Game()
     : m_pWindow(nullptr)
-    , m_pRenderer(nullptr)
     , m_bRunning(false)
     , m_bLevelComplete(false)
 {
@@ -29,7 +28,7 @@ Game* Game::Instance()
     return s_pInstance;
 }
 
-bool Game::init(int width, int height, Uint32 flags)
+bool Game::init(unsigned int width, unsigned int height)
 {
     if (SDL::init() == false) {
         return false;
@@ -39,12 +38,8 @@ bool Game::init(int width, int height, Uint32 flags)
         return false;
     };
 
-    SDL_CreateWindowAndRenderer(width, height, flags, &m_pWindow, &m_pRenderer);
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
-    SDL_RenderSetLogicalSize(m_pRenderer, width, height);
+    m_pWindow = new Window(width, height, "");
 
-    m_gameWidth = width;
-    m_gameHeight = height;
     m_levelWidth = width;
     m_levelHeight = height;
     m_bRunning = true;
@@ -67,26 +62,25 @@ void Game::update()
 
 void Game::render()
 {
-    SDL_RenderClear(getRenderer());
+    m_pWindow->clear();
+
     GameStateMachine::Instance()->render();
     Box2D::Instance()->debugDraw();
-    SDL_RenderPresent(getRenderer());
+
+    m_pWindow->refresh();
+    m_pWindow->delayFramerateIfNeeded();
 }
 
 void Game::clean()
 {
     Box2D::Instance()->clean();
+    delete m_pWindow;
     SDL::exit();
 }
 
 void Game::quit()
 {
     m_bRunning = false;
-}
-
-SDL_Renderer* Game::getRenderer() const
-{
-    return m_pRenderer;
 }
 
 int Game::getCurrentLevel() const
@@ -107,16 +101,6 @@ bool Game::isLevelComplete() const
 bool Game::isRunning() const
 {
     return m_bRunning;
-}
-
-int Game::getGameWidth() const
-{
-    return m_gameWidth;
-}
-
-int Game::getGameHeight() const
-{
-    return m_gameHeight;
 }
 
 int Game::getLevelWidth() const
@@ -170,4 +154,9 @@ void Game::setCurrentLevel(int currentLevel)
 {
     m_currentLevel = currentLevel;
     m_bLevelComplete = false;
+}
+
+Window* Game::getWindow()
+{
+    return m_pWindow;
 }
