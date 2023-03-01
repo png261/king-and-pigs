@@ -162,10 +162,6 @@ GameObject* parseObject(XMLElement* pObjectElement, Level* pLevel)
                         textureHeight = stoi(propertyValue);
                     } else if (propertyName == "lives") {
                         lives = stoi(propertyValue);
-                    } else if (propertyName == "numFrames") {
-                        numFrames = stoi(propertyValue);
-                    } else if (propertyName == "callbackID") {
-                        callbackID = stoi(propertyValue);
                     }
                 }
             }
