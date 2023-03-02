@@ -11,7 +11,7 @@ public:
     Box();
     ~Box() {}
 
-    void load(const LoaderParams* pParams);
+    void load(const LoaderParams* const pParams);
 
     void draw();
     void update();

@@ -10,7 +10,7 @@ class GameObject
 public:
     virtual ~GameObject();
 
-    virtual void load(const LoaderParams* pParams);
+    virtual void load(const LoaderParams* const pParams);
     virtual void update() = 0;
     virtual void draw() = 0;
     virtual std::string type() const = 0;
@@ -29,10 +29,8 @@ public:
 protected:
     GameObject();
 
-    // movement
     b2Vec2 m_position;
 
-    // size
     int m_width;
     int m_height;
 

@@ -28,7 +28,7 @@ Game* Game::Instance()
     return s_pInstance;
 }
 
-bool Game::init(unsigned int width, unsigned int height)
+bool Game::init(const unsigned int width, const unsigned int height)
 {
     if (SDL::init() == false) {
         return false;
@@ -123,34 +123,34 @@ std::vector<std::string> Game::getLevelFiles()
     return m_levelFiles;
 }
 
-void Game::setLevelComplete(bool levelComplete)
+void Game::setLevelComplete(bool const levelComplete)
 {
     m_bLevelComplete = levelComplete;
 }
 
-void Game::setNextLevel(int nextLevel)
+void Game::setNextLevel(int const nextLevel)
 {
     m_nextLevel = nextLevel;
 }
 
 
-void Game::setLevelWidth(int width)
+void Game::setLevelWidth(int const width)
 {
     m_levelWidth = width;
 }
 
-void Game::setLevelHeight(int height)
+void Game::setLevelHeight(int const height)
 {
     m_levelHeight = height;
 }
 
 
-void Game::setPlayer(Player* pPlayer)
+void Game::setPlayer(Player* const pPlayer)
 {
     m_pPlayer = pPlayer;
 }
 
-void Game::setCurrentLevel(int currentLevel)
+void Game::setCurrentLevel(int const currentLevel)
 {
     m_currentLevel = currentLevel;
     m_bLevelComplete = false;

@@ -10,16 +10,18 @@ public:
     Level* parseLevel(const char* levelFile);
 
 private:
-    void parseTextures(tinyxml2::XMLElement* pTextureRoot);
-    void parseTilesets(tinyxml2::XMLElement* pTilesetRoot, std::vector<Tileset>* pTilesets);
+    void parseTextures(tinyxml2::XMLElement* const pTextureRoot);
+    void parseTilesets(
+        tinyxml2::XMLElement* const pTilesetRoot,
+        std::vector<Tileset>* const pTilesets);
     void parseObjectLayer(
-        tinyxml2::XMLElement* pObjectElement,
-        std::vector<Layer*>* pLayers,
-        Level* pLevel);
+        tinyxml2::XMLElement* const pObjectElement,
+        std::vector<Layer*>* const pLayers,
+        Level* const pLevel);
     void parseTileLayer(
-        tinyxml2::XMLElement* pTileElement,
-        std::vector<Layer*>* pLayers,
-        const std::vector<Tileset>* pTilesets);
+        tinyxml2::XMLElement* const pTileElement,
+        std::vector<Layer*>* const pLayers,
+        std::vector<Tileset>* const pTilesets);
 
     int m_tileSize;
     int m_width;

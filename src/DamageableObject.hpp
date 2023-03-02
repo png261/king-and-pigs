@@ -7,19 +7,21 @@
 class DamageableObject
 {
 public:
-    DamageableObject(int initialHp, int invulnerableTime);
+    DamageableObject(const int initialHp, const int invulnerableTime);
 
     virtual void update();
 
-    virtual void heal(int d);
-    virtual void damage(int d);
-    virtual int getHp();
-    virtual bool isDead();
-    virtual bool isInvulnerable();
+    virtual void heal(const int d);
+    virtual void damage(const int d);
+
+    virtual int getHp() const;
+    virtual bool isDead() const;
+    virtual bool isInvulnerable() const;
 
 protected:
     Timer invulnerableTimer;
     Timer deadTimer;
+
     virtual void startInvulnerable();
     virtual void stopInvulnerable();
 

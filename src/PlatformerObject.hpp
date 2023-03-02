@@ -41,7 +41,7 @@ public:
 
     virtual ~PlatformerObject(){};
 
-    virtual void load(const LoaderParams* pParams);
+    virtual void load(const LoaderParams* const pParams);
 
     virtual void draw();
     virtual void update();
@@ -51,7 +51,7 @@ public:
 
     virtual bool isFlipped() const;
 
-    virtual void changeFootContact(int n) { m_footContact += n; }
+    virtual void changeFootContact(int n);
 
 protected:
     PlatformerObject();

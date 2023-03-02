@@ -13,11 +13,11 @@ class SoundManager
 public:
     static SoundManager* Instance();
 
-    bool loadSFX(std::string filename, std::string soundID);
-    bool loadMusic(std::string filename, std::string soundID);
+    bool loadSFX(const std::string filename, const std::string soundID);
+    bool loadMusic(const std::string filename, const std::string soundID);
 
-    void playSFX(std::string soundID, int loop = 0);
-    void playMusic(std::string soundID, int loop = 0);
+    void playSFX(const std::string soundID, const int loop = 0);
+    void playMusic(const std::string soundID, const int loop = 0);
 
 private:
     SoundManager();

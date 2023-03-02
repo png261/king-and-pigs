@@ -38,4 +38,3 @@ std::vector<Layer*>* Level::getLayers()
 {
     return &m_layers;
 }
-

@@ -7,7 +7,7 @@ MenuButton::MenuButton()
     , m_bReleased(true)
 {}
 
-void MenuButton::load(const LoaderParams* pParams)
+void MenuButton::load(const LoaderParams* const pParams)
 {
     PlatformerObject::load(pParams);
     m_callbackID = pParams->getCallbackID();

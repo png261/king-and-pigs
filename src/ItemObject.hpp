@@ -7,7 +7,7 @@ class ItemObject : public PlatformerObject
 {
 public:
     virtual void bonus() = 0;
-    virtual void load(const LoaderParams* pParams);
+    virtual void load(const LoaderParams* const pParams);
     virtual std::string type() const;
 
 protected:

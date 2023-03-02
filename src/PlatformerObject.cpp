@@ -13,7 +13,7 @@ PlatformerObject::PlatformerObject()
 
 {}
 
-void PlatformerObject::load(const LoaderParams* pParams)
+void PlatformerObject::load(const LoaderParams* const pParams)
 {
     GameObject::load(pParams);
 
@@ -71,4 +71,9 @@ PlatformerObject::direction PlatformerObject::getDirection() const
 bool PlatformerObject::isFlipped() const
 {
     return m_bFlipped;
+}
+
+void PlatformerObject::changeFootContact(int n)
+{
+    m_footContact += n;
 }

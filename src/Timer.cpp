@@ -62,22 +62,22 @@ void Timer::resume()
     m_pausedMark = 0;
 }
 
-bool Timer::isRunning()
+bool Timer::isRunning() const
 {
     return m_bRunning;
 }
 
-bool Timer::isPaused()
+bool Timer::isPaused() const
 {
     return m_bPaused;
 }
 
-Uint32 Timer::currentTime()
+Uint32 Timer::currentTime() const
 {
     return SDL_GetTicks() - m_startMark;
 }
 
-Uint32 Timer::delta()
+Uint32 Timer::delta() const
 {
     if (isRunning()) {
         return currentTime();

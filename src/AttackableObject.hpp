@@ -9,17 +9,20 @@
 class AttackableObject
 {
 public:
-    AttackableObject(int damage, int range, int attackSpeed);
+    AttackableObject(const int damage, const int range, const int attackSpeed);
 
-    virtual void createAttackSensor(b2Body* pBody, int objectWidth, Box2D::FilterMask filterMask);
+    virtual void createAttackSensor(
+        b2Body* const pBody,
+        const int objectWidth,
+        const Box2D::FilterMask filterMask);
 
-    virtual bool canAttack();
     virtual void update();
     virtual void attack();
 
-    virtual int getDamage();
-    virtual bool isAttack();
-    virtual bool isTurnRight();
+    virtual bool canAttack() const;
+    virtual int getDamage() const;
+    virtual bool isAttack() const;
+    virtual bool isTurnRight() const;
 
 protected:
     Timer attackTimer;

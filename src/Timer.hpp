@@ -12,10 +12,10 @@ public:
     void pause();
     void resume();
     void restart();
-    Uint32 delta();
-    Uint32 currentTime();
-    bool isRunning();
-    bool isPaused();
+    Uint32 delta() const;
+    Uint32 currentTime() const;
+    bool isRunning() const;
+    bool isPaused() const;
 
 protected:
     Uint32 m_startMark;

@@ -2,7 +2,7 @@
 #include <SDL2/SDL_render.h>
 #include "Log.hpp"
 
-Window::Window(uint32_t width, uint32_t height, std::string title)
+Window::Window(const unsigned int width, const unsigned int height, const std::string title)
     : m_pWindow(nullptr)
     , m_pRenderer(nullptr)
     , m_width(width)
@@ -86,16 +86,16 @@ void Window::refresh()
     SDL_RenderPresent(m_pRenderer);
 }
 
-SDL_Texture* Window::loadImage(std::string filename)
+SDL_Texture* Window::loadImage(const std::string filename)
 {
-    SDL_Texture* pTexture = IMG_LoadTexture(m_pRenderer, filename.c_str());
+    SDL_Texture* const pTexture = IMG_LoadTexture(m_pRenderer, filename.c_str());
     if (!pTexture) {
         Log::error("IMG_LoadTexture: Couldn't open image '" + filename + "': " + IMG_GetError());
     }
     return pTexture;
 }
 
-void Window::freeImage(SDL_Texture* pTexture)
+void Window::freeImage(SDL_Texture* const pTexture)
 {
     if (!pTexture) {
         return;
@@ -105,9 +105,9 @@ void Window::freeImage(SDL_Texture* pTexture)
 }
 
 void Window::renderImage(
-    SDL_Texture* texture,
-    const SDL_Rect* srcrect,
-    const SDL_Rect* dstrect,
+    SDL_Texture* const texture,
+    const SDL_Rect* const srcrect,
+    const SDL_Rect* const dstrect,
     const double angle,
     const SDL_Point* center,
     const SDL_RendererFlip flip)
@@ -120,7 +120,7 @@ void Window::renderImage(
     SDL_RenderCopyEx(m_pRenderer, texture, srcrect, dstrect, angle, center, flip);
 }
 
-void Window::fill(Color color)
+void Window::fill(const Color color)
 {
     SDL_SetRenderDrawColor(m_pRenderer, color.r(), color.g(), color.b(), color.a());
 
@@ -132,7 +132,7 @@ void Window::clear()
     this->fill(m_bgColor);
 }
 
-void Window::setTitle(std::string title)
+void Window::setTitle(const std::string title)
 {
     if (!m_pWindow) {
         return;
@@ -141,7 +141,7 @@ void Window::setTitle(std::string title)
     SDL_SetWindowTitle(m_pWindow, title.c_str());
 }
 
-void Window::setBackgroundColor(Color color)
+void Window::setBackgroundColor(const Color color)
 {
     m_bgColor = color;
 }
@@ -162,7 +162,7 @@ unsigned int Window::getDelta() const
     return m_currentFrameDelta;
 }
 
-SDL_Renderer* Window::getRenderer()
+SDL_Renderer* Window::getRenderer() const
 {
     return m_pRenderer;
 }

@@ -11,7 +11,7 @@ public:
 
     virtual ~MenuButton() {}
 
-    virtual void load(const LoaderParams* pParams);
+    virtual void load(const LoaderParams* const pParams);
 
     virtual void draw();
     virtual void update();

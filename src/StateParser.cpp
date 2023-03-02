@@ -6,13 +6,13 @@
 
 bool StateParser::parseState(
     const char* stateFile,
-    std::string stateID,
-    std::vector<GameObject*>* pObjects)
+    const std::string stateID,
+    std::vector<GameObject*>* const pObjects)
 {
     XMLDocument doc;
     doc.LoadFile(stateFile);
 
-    XMLElement* pRoot = doc.RootElement();
+    XMLElement* const pRoot = doc.RootElement();
     if (pRoot == nullptr) {
         return false;
     }
@@ -29,8 +29,9 @@ bool StateParser::parseState(
         return false;
     }
 
-    XMLElement* pTextureRoot = 0;
-    for (XMLElement* e = pStateRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+    XMLElement* pTextureRoot = nullptr;
+    for (XMLElement* e = pStateRoot->FirstChildElement(); e != nullptr;
+         e = e->NextSiblingElement()) {
         if (strcmp(e->Value(), "TEXTURES") == 0) {
             pTextureRoot = e;
             break;
@@ -42,7 +43,8 @@ bool StateParser::parseState(
     }
 
     XMLElement* pObjectRoot = nullptr;
-    for (XMLElement* e = pStateRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+    for (XMLElement* e = pStateRoot->FirstChildElement(); e != nullptr;
+         e = e->NextSiblingElement()) {
         if (strcmp(e->Value(), "OBJECTS") == 0) {
             pObjectRoot = e;
             break;
@@ -56,7 +58,7 @@ bool StateParser::parseState(
     return true;
 }
 
-void StateParser::parseTextures(XMLElement* pTextureRoot)
+void StateParser::parseTextures(XMLElement* const pTextureRoot)
 {
     for (XMLElement* e = pTextureRoot->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
@@ -67,9 +69,10 @@ void StateParser::parseTextures(XMLElement* pTextureRoot)
     }
 }
 
-void StateParser::parseObjects(XMLElement* pObjectRoot, std::vector<GameObject*>* pObjects)
+void StateParser::parseObjects(XMLElement* const pObjectRoot, std::vector<GameObject*>* pObjects)
 {
-    for (XMLElement* e = pObjectRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+    for (XMLElement* e = pObjectRoot->FirstChildElement(); e != nullptr;
+         e = e->NextSiblingElement()) {
         int x, y, width, height, numFrames, callbackID;
 
         if (e->Attribute("x")) {
@@ -91,7 +94,7 @@ void StateParser::parseObjects(XMLElement* pObjectRoot, std::vector<GameObject*>
             callbackID = atoi(e->Attribute("callbackID"));
         }
 
-        GameObject* pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
+        GameObject* const pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
         pGameObject->load(
             new LoaderParams(x, y, width, height, width, height, numFrames, callbackID));
         pObjects->push_back(pGameObject);

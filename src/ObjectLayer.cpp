@@ -13,7 +13,7 @@ ObjectLayer::~ObjectLayer()
     m_gameObjects.clear();
 }
 
-void ObjectLayer::update(Level* pLevel)
+void ObjectLayer::update(Level* const pLevel)
 {
     for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++) {
         if ((*it)->isExist() == false) {

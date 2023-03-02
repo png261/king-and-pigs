@@ -7,7 +7,7 @@
 class Heart : public ItemObject
 {
 public:
-    void load(const LoaderParams* pParams);
+    void load(const LoaderParams* const pParams);
 
     void update();
     void clean();

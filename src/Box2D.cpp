@@ -14,7 +14,7 @@ Box2D::Box2D() {}
 
 Box2D* Box2D::Instance()
 {
-    static Box2D* pInstance = new Box2D();
+    static Box2D* const pInstance = new Box2D();
     return pInstance;
 }
 
@@ -22,7 +22,7 @@ void Box2D::createWall(int size, b2Vec2 position)
 {
     b2BodyDef groundBodyDef;
     groundBodyDef.position = position;
-    b2Body* groundBody = Box2D::Instance()->getWorld()->CreateBody(&groundBodyDef);
+    b2Body* const groundBody = Box2D::Instance()->getWorld()->CreateBody(&groundBodyDef);
     b2PolygonShape groundBox;
     groundBox.SetAsBox(size / 2.0f, size / 2.0f);
     b2FixtureDef fixtureDef;
@@ -62,17 +62,17 @@ void Box2D::handleEvents()
     };
 
     for (b2Contact* contact = getWorld()->GetContactList(); contact; contact = contact->GetNext()) {
-        b2Fixture* fixtureA = contact->GetFixtureA();
-        b2Fixture* fixtureB = contact->GetFixtureB();
-        uint16 catA = fixtureA->GetFilterData().categoryBits;
-        uint16 catB = fixtureB->GetFilterData().categoryBits;
+        b2Fixture* const fixtureA = contact->GetFixtureA();
+        b2Fixture* const fixtureB = contact->GetFixtureB();
+        uint16 const catA = fixtureA->GetFilterData().categoryBits;
+        uint16 const catB = fixtureB->GetFilterData().categoryBits;
 
         if (((catA | catB) == (Box2D::CAT_ATTACK_SENSOR | Box2D::CAT_ENEMY)) ||
             ((catA | catB) == (Box2D::CAT_ATTACK_SENSOR | Box2D::CAT_PLAYER))) {
             if (catA == Box2D::CAT_ATTACK_SENSOR) {
-                AttackableObject* A = dynamic_cast<AttackableObject*>(
+                AttackableObject* const A = dynamic_cast<AttackableObject*>(
                     (PlatformerObject*)(fixtureA->GetBody()->GetUserData().pointer));
-                DamageableObject* B = dynamic_cast<DamageableObject*>(
+                DamageableObject* const B = dynamic_cast<DamageableObject*>(
                     (PlatformerObject*)(fixtureB->GetBody()->GetUserData().pointer));
 
                 if (A != nullptr && B != nullptr && A->isAttack()) {
@@ -83,9 +83,9 @@ void Box2D::handleEvents()
                 }
 
             } else if (catB == Box2D::CAT_ATTACK_SENSOR) {
-                AttackableObject* B = dynamic_cast<AttackableObject*>(
+                AttackableObject* const B = dynamic_cast<AttackableObject*>(
                     (PlatformerObject*)(fixtureB->GetBody()->GetUserData().pointer));
-                DamageableObject* A = dynamic_cast<DamageableObject*>(
+                DamageableObject* const A = dynamic_cast<DamageableObject*>(
                     (PlatformerObject*)(fixtureA->GetBody()->GetUserData().pointer));
 
                 if (A != nullptr && B != nullptr && B->isAttack()) {

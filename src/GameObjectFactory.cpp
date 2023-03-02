@@ -4,11 +4,11 @@
 
 GameObjectFactory* GameObjectFactory::Instance()
 {
-    static GameObjectFactory* s_pInstance = new GameObjectFactory();
+    static GameObjectFactory* const s_pInstance = new GameObjectFactory();
     return s_pInstance;
 }
 
-bool GameObjectFactory::registerType(std::string typeID, BaseCreator* pCreator)
+bool GameObjectFactory::registerType(const std::string typeID, BaseCreator* const pCreator)
 {
     if (m_creators.find(typeID) != m_creators.end()) {
         return false;
@@ -19,7 +19,7 @@ bool GameObjectFactory::registerType(std::string typeID, BaseCreator* pCreator)
     return true;
 }
 
-GameObject* GameObjectFactory::create(std::string typeID)
+GameObject* GameObjectFactory::create(const std::string typeID)
 {
     std::map<std::string, BaseCreator*>::iterator it = m_creators.find(typeID);
 
@@ -28,6 +28,6 @@ GameObject* GameObjectFactory::create(std::string typeID)
         return nullptr;
     }
 
-    BaseCreator* pCreator = (*it).second;
+    BaseCreator* const pCreator = (*it).second;
     return pCreator->createGameObject();
 }

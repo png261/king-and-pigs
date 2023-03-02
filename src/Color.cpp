@@ -7,7 +7,7 @@ Color::Color()
     , m_alpha(255)
 {}
 
-Color::Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+Color::Color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a)
     : m_red(r)
     , m_green(g)
     , m_blue(b)

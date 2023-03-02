@@ -8,13 +8,19 @@
 class Animation
 {
 public:
-    Animation(std::string textureID, int nFrames = 1, bool bLoop = true);
+    Animation(const std::string textureID, const int nFrames = 1, const bool bLoop = true);
 
-    virtual void draw(b2Vec2 position, int width, int height, float angle = 0, bool flip = false);
+    virtual void draw(
+        const b2Vec2 position,
+        const int width,
+        const int height,
+        const float angle = 0,
+        const bool flip = false);
+
     void start();
     void restart();
     void stop();
-    bool isRunning();
+    bool isRunning() const;
 
 private:
     Timer timer;

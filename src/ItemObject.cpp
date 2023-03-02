@@ -1,7 +1,7 @@
 #include "ItemObject.hpp"
 #include "Box2D.hpp"
 
-void ItemObject::load(const LoaderParams* pParams)
+void ItemObject::load(const LoaderParams* const pParams)
 {
     PlatformerObject::load(pParams);
 

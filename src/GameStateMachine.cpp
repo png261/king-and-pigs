@@ -2,7 +2,7 @@
 
 GameStateMachine* GameStateMachine::Instance()
 {
-    static GameStateMachine* s_pInstance = new GameStateMachine;
+    static GameStateMachine* const s_pInstance = new GameStateMachine;
     return s_pInstance;
 }
 
@@ -31,7 +31,7 @@ void GameStateMachine::render()
     }
 }
 
-void GameStateMachine::pushState(GameState* pState)
+void GameStateMachine::pushState(GameState* const pState)
 {
     m_gameStates.push_back(pState);
     m_gameStates.back()->onEnter();
@@ -47,7 +47,7 @@ void GameStateMachine::popState()
     m_gameStates.back()->resume();
 }
 
-void GameStateMachine::changeState(GameState* pState)
+void GameStateMachine::changeState(GameState* const pState)
 {
     if (!m_gameStates.empty()) {
         if (m_gameStates.back()->getStateID() == pState->getStateID()) {

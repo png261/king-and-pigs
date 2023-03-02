@@ -3,7 +3,7 @@
 #include "Box2D.hpp"
 #include "Game.hpp"
 
-void Heart::load(const LoaderParams* pParams)
+void Heart::load(const LoaderParams* const pParams)
 {
     ItemObject::load(pParams);
 

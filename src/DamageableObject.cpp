@@ -1,24 +1,24 @@
 #include "DamageableObject.hpp"
 #include <iostream>
 
-DamageableObject::DamageableObject(int initialHp, int invulnerableTime)
+DamageableObject::DamageableObject(const int initialHp, const int invulnerableTime)
     : m_hp(initialHp)
     , m_bDead(false)
     , m_bInvulnerable(false)
     , m_invulnerableTime(invulnerableTime)
 {}
 
-void DamageableObject::heal(int d)
+void DamageableObject::heal(const int d)
 {
     m_hp += d;
 }
 
-bool DamageableObject::isDead()
+bool DamageableObject::isDead() const
 {
     return m_bDead;
 }
 
-bool DamageableObject::isInvulnerable()
+bool DamageableObject::isInvulnerable() const
 {
     return m_bInvulnerable;
 }
@@ -39,7 +39,7 @@ void DamageableObject::stopInvulnerable()
     invulnerableTimer.stop();
 };
 
-void DamageableObject::damage(int d)
+void DamageableObject::damage(const int d)
 {
     if (this->isInvulnerable() || this->isDead()) {
         return;
@@ -61,9 +61,9 @@ void DamageableObject::update()
     if (invulnerableTimer.delta() >= m_invulnerableTime) {
         this->stopInvulnerable();
     }
-}
+};
 
-int DamageableObject::getHp()
+int DamageableObject::getHp() const
 {
     return m_hp;
 };

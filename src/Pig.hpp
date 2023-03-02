@@ -8,7 +8,7 @@ class Pig : public Enemy, public DamageableObject, public AttackableObject
 {
 public:
     Pig();
-    void load(const LoaderParams* pParams);
+    void load(const LoaderParams* const pParams);
     void draw();
     void update();
     void updateAnimation();

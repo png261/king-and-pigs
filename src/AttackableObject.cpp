@@ -1,5 +1,5 @@
 #include "AttackableObject.hpp"
-AttackableObject::AttackableObject(int damage, int range, int attackSpeed)
+AttackableObject::AttackableObject(const int damage, const int range, const int attackSpeed)
     : m_damage(damage)
     , m_range(range)
     , m_bAttack(false)
@@ -10,9 +10,9 @@ AttackableObject::AttackableObject(int damage, int range, int attackSpeed)
 {}
 
 void AttackableObject::createAttackSensor(
-    b2Body* pBody,
-    int objectWidth,
-    Box2D::FilterMask filterMask)
+    b2Body* const pBody,
+    const int objectWidth,
+    const Box2D::FilterMask filterMask)
 {
     b2PolygonShape attackShape;
     attackShape.SetAsBox(
@@ -39,22 +39,22 @@ void AttackableObject::createAttackSensor(
     m_pAttackSensor = pBody->CreateFixture(&attackSensorDef);
 }
 
-bool AttackableObject::isAttack()
+bool AttackableObject::isAttack() const
 {
     return m_bAttack;
 }
 
-bool AttackableObject::isTurnRight()
+bool AttackableObject::isTurnRight() const
 {
     return m_bTurnRight;
 }
 
-bool AttackableObject::canAttack()
+bool AttackableObject::canAttack() const
 {
     return m_bCanAttack;
 }
 
-int AttackableObject::getDamage()
+int AttackableObject::getDamage() const
 {
     return m_damage;
 }

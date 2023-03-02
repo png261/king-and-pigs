@@ -1,17 +1,17 @@
 #include "LoaderParams.hpp"
 
 LoaderParams::LoaderParams(
-    int x,
-    int y,
-    int width,
-    int height,
-    int textureWidth,
-    int textureHeight,
-    int numFrames,
-    int lives,
-    int callbackID,
-    int textureX,
-    int textureY)
+    const int x,
+    const int y,
+    const int width,
+    const int height,
+    const int textureWidth,
+    const int textureHeight,
+    const int numFrames,
+    const int lives,
+    const int callbackID,
+    const int textureX,
+    const int textureY)
     : m_x(x)
     , m_y(y)
     , m_width(width)

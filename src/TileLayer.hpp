@@ -8,21 +8,26 @@
 class TileLayer : public Layer
 {
 public:
-    TileLayer(int tileSize, int mapWidth, int mapHeight, const std::vector<Tileset>& tilesets);
+    TileLayer(
+        int const tileSize,
+        int const mapWidth,
+        int const mapHeight,
+        const std::vector<Tileset>& tilesets);
     ~TileLayer() {}
-    virtual void update(Level* pLevel);
+    virtual void update(Level* const pLevel);
     virtual void render();
 
     void setTileIDs(const std::vector<std::vector<int>>& data);
-    void setTileSize(int tileSize);
-    void setMapWidth(int mapWidth);
-    int getMapWidth();
-    int getTileSize();
-    Tileset getTilesetByID(int tileID);
+    void setTileSize(int const tileSize);
+    void setMapWidth(int const mapWidth);
+    void setPosition(b2Vec2 const position);
 
     const std::vector<std::vector<int>>& getTileIDs();
-    const b2Vec2 getPosition();
-    void setPosition(b2Vec2 position);
+    int getMapWidth() const;
+    int getTileSize() const;
+    Tileset getTilesetByID(int const tileID) const;
+    b2Vec2 getPosition() const;
+
 
 private:
     int m_numColumns;
@@ -32,8 +37,6 @@ private:
     int m_mapWidth;
 
     b2Vec2 m_position;
-
-    float diff;
 
     const std::vector<Tileset>& m_tilesets;
 

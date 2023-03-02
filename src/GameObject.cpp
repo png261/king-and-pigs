@@ -20,7 +20,7 @@ GameObject::~GameObject()
     m_pBody = nullptr;
 }
 
-void GameObject::load(const LoaderParams* pParams)
+void GameObject::load(const LoaderParams* const pParams)
 {
     m_position = b2Vec2(pParams->getX(), pParams->getY());
 

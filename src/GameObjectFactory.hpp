@@ -23,8 +23,8 @@ class GameObjectFactory
 {
 public:
     static GameObjectFactory* Instance();
-    bool registerType(std::string typeID, BaseCreator* pCreator);
-    GameObject* create(std::string typeID);
+    bool registerType(const std::string typeID, BaseCreator* const pCreator);
+    GameObject* create(const std::string typeID);
 
 private:
     GameObjectFactory() {}

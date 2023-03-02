@@ -1,5 +1,4 @@
 #include "Box.hpp"
-#include <iostream>
 #include "Box2D.hpp"
 #include "DamageableObject.hpp"
 
@@ -8,7 +7,7 @@ Box::Box()
     , DamageableObject(1, 200)
 {}
 
-void Box::load(const LoaderParams* pParams)
+void Box::load(const LoaderParams* const pParams)
 {
     Enemy::load(pParams);
 

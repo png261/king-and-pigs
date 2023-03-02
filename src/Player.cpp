@@ -15,7 +15,7 @@ Player::Player()
     , AttackableObject(1, 50, 300)
 {}
 
-void Player::load(const LoaderParams* pParams)
+void Player::load(const LoaderParams* const pParams)
 {
     m_moveSpeed = 6 * Box2D::PPM;
     m_jumpSpeed = -6 * Box2D::PPM;

@@ -15,7 +15,7 @@ Camera::~Camera()
 
 Camera* Camera::Instance()
 {
-    static Camera* s_pCamera = new Camera();
+    static Camera* const s_pCamera = new Camera();
     return s_pCamera;
 }
 
@@ -58,7 +58,7 @@ void Camera::update()
     }
 }
 
-void Camera::setTarget(GameObject* target)
+void Camera::setTarget(GameObject* const target)
 {
     m_pTarget = target;
 }
@@ -68,7 +68,7 @@ void Camera::setPosition(const b2Vec2& position)
     m_position = position;
 }
 
-void Camera::setZoom(float zoom)
+void Camera::setZoom(const float zoom)
 {
     m_zoom = zoom;
     SDL_RenderSetScale(TheGame::Instance()->getWindow()->getRenderer(), m_zoom, m_zoom);

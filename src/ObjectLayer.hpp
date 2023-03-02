@@ -11,7 +11,7 @@ class ObjectLayer : public Layer
 public:
     virtual ~ObjectLayer();
 
-    virtual void update(Level* pLevel);
+    virtual void update(Level* const pLevel);
     virtual void render();
 
     std::vector<GameObject*>* getGameObjects();

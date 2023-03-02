@@ -7,17 +7,17 @@ class LoaderParams
 {
 public:
     LoaderParams(
-        int x,
-        int y,
-        int width,
-        int height,
-        int textureWidth,
-        int textureHeight,
-        int numFrames,
-        int lives = 0,
-        int callbackID = 0,
-        int textureX = 0,
-        int textureY = 0);
+        const int x,
+        const int y,
+        const int width,
+        const int height,
+        const int textureWidth,
+        const int textureHeight,
+        const int numFrames,
+        const int lives = 0,
+        const int callbackID = 0,
+        const int textureX = 0,
+        const int textureY = 0);
 
     int getX() const;
     int getY() const;

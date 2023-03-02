@@ -6,9 +6,9 @@
 class Log
 {
 public:
-    static void error(std::string msg);
-    static void warning(std::string msg);
-    static void log(std::string msg);
+    static void error(const std::string msg);
+    static void warning(const std::string msg);
+    static void log(const std::string msg);
 };
 
 #endif

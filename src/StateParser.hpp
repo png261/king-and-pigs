@@ -12,11 +12,14 @@ using namespace tinyxml2;
 class StateParser
 {
 public:
-    bool parseState(const char* stateFile, std::string stateID, std::vector<GameObject*>* pObjects);
+    bool parseState(
+        const char* stateFile,
+        const std::string stateID,
+        std::vector<GameObject*>* const pObjects);
 
 private:
-    void parseObjects(XMLElement* pStateRoot, std::vector<GameObject*>* pObjects);
-    void parseTextures(XMLElement* pStateRoot);
+    void parseObjects(XMLElement* const pStateRoot, std::vector<GameObject*>* const pObjects);
+    void parseTextures(XMLElement* const pStateRoot);
 };
 
 #endif

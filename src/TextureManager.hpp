@@ -11,28 +11,35 @@ class TextureManager
 public:
     static TextureManager* Instance();
 
-    bool load(std::string filename, std::string textureID);
+    bool load(const std::string filename, const std::string textureID);
 
-    void draw(std::string textureID, b2Vec2 position, int width, int height, bool bFlipped = false);
+    void draw(
+        const std::string textureID,
+        const b2Vec2 position,
+        const int width,
+        const int height,
+        const bool bFlipped = false);
 
     void drawFrame(
-        std::string id,
-        b2Vec2 position,
-        int width,
-        int height,
-        int currentRow,
-        int currentFrame,
-        float angle = 0,
-        bool bFlipped = false);
+        const std::string id,
+        const b2Vec2 position,
+        const int width,
+        const int height,
+        const int currentRow,
+        const int currentFrame,
+        const float angle = 0,
+        const bool bFlipped = false);
+
     void drawTile(
-        std::string id,
-        int margin,
-        int spacing,
-        b2Vec2 position,
-        int width,
-        int height,
-        int currentRow,
-        int currentFrame);
+        const std::string id,
+        const int margin,
+        const int spacing,
+        const b2Vec2 position,
+        const int width,
+        const int height,
+        const int currentRow,
+        const int currentFrame);
+
     void clean();
 
 private:

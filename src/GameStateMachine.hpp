@@ -12,8 +12,8 @@ public:
     void update();
     void render();
 
-    void pushState(GameState* pState);
-    void changeState(GameState* pState);
+    void pushState(GameState* const pState);
+    void changeState(GameState* const pState);
     void popState();
 
     void clean();

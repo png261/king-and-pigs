@@ -9,7 +9,7 @@ public:
     virtual ~Layer() {}
 
     virtual void render() = 0;
-    virtual void update(Level* pLevel) = 0;
+    virtual void update(Level* const pLevel) = 0;
 };
 
 #endif

@@ -13,9 +13,9 @@ public:
     b2Vec2 getPosition() const;
     float getZoom() const;
 
-    void setTarget(GameObject* target);
+    void setTarget(GameObject* const target);
     void setPosition(const b2Vec2& position);
-    void setZoom(float zoom);
+    void setZoom(const float zoom);
 
 private:
     Camera();

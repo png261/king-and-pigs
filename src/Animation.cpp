@@ -4,7 +4,7 @@
 #include "Log.hpp"
 #include "TextureManager.hpp"
 
-Animation::Animation(std::string textureID, int nFrames, bool bLoop)
+Animation::Animation(const std::string textureID, const int nFrames, const bool bLoop)
     : m_textureID(textureID)
     , m_bRunning(false)
     , m_x(0)
@@ -17,12 +17,17 @@ Animation::Animation(std::string textureID, int nFrames, bool bLoop)
     m_framerate = 10;
 }
 
-bool Animation::isRunning()
+bool Animation::isRunning() const
 {
     return m_bRunning;
 }
 
-void Animation::draw(b2Vec2 position, int width, int height, float angle, bool bFlipped)
+void Animation::draw(
+    const b2Vec2 position,
+    const int width,
+    const int height,
+    const float angle,
+    const bool bFlipped)
 {
     if (m_framerate == 0) {
         return;
@@ -31,7 +36,7 @@ void Animation::draw(b2Vec2 position, int width, int height, float angle, bool b
         return;
     }
 
-    int time_between_frames = (1000.0f / m_framerate);
+    const Uint32 time_between_frames = (1000.0f / m_framerate);
     m_curFrame = (timer.delta() / time_between_frames);
 
     if (m_curFrame >= m_nFrames) {
@@ -51,6 +56,7 @@ void Animation::start()
     if (m_framerate == 0) {
         return;
     }
+
     if (isRunning()) {
         return;
     }

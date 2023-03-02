@@ -14,20 +14,20 @@ public:
     void update();
     b2Vec2* getMousePosition() const;
 
-    bool isKeyDown(KeyboardKey key) const;
-    bool isMouseButtonDown(MouseButton buttonID) const;
+    bool isKeyDown(const KeyboardKey key) const;
+    bool isMouseButtonDown(const MouseButton buttonID) const;
 
     void reset();
 
 private:
     InputHandler();
 
-    void onKeyDown(SDL_Event& event);
-    void onKeyUp(SDL_Event& event);
+    void onKeyDown(SDL_Event const& event);
+    void onKeyUp(SDL_Event const& event);
 
-    void onMouseMove(SDL_Event& event);
-    void onMouseButtonDown(SDL_Event& event);
-    void onMouseButtonUp(SDL_Event& event);
+    void onMouseMove(SDL_Event const& event);
+    void onMouseButtonDown(SDL_Event const& event);
+    void onMouseButtonUp(SDL_Event const& event);
 
     b2Vec2* m_pMousePosition;
     std::vector<bool> m_bMouseButtonState;

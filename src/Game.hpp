@@ -7,14 +7,12 @@
 #include "SDL.hpp"
 #include "Window.hpp"
 
-#include <box2d/box2d.h>
-
 class Game
 {
 public:
     ~Game(){};
     static Game* Instance();
-    bool init(unsigned int width, unsigned int height);
+    bool init(const unsigned int width, const unsigned int height);
     void handleEvents();
     void update();
     void render();
@@ -32,12 +30,12 @@ public:
     bool isRunning() const;
     bool isLevelComplete() const;
 
-    void setCurrentLevel(int currentLevel);
-    void setNextLevel(int nextLevel);
-    void setLevelComplete(bool levelComplete);
-    void setLevelWidth(int width);
-    void setLevelHeight(int height);
-    void setPlayer(Player* pPlayer);
+    void setCurrentLevel(int const currentLevel);
+    void setNextLevel(int const nextLevel);
+    void setLevelComplete(bool const levelComplete);
+    void setLevelWidth(int const width);
+    void setLevelHeight(int const height);
+    void setPlayer(Player* const pPlayer);
 
 private:
     Game();

@@ -5,18 +5,18 @@
 
 TextureManager* TextureManager::Instance()
 {
-    static TextureManager* s_pInstance = new TextureManager;
+    static TextureManager* const s_pInstance = new TextureManager;
     return s_pInstance;
 }
 
-bool TextureManager::load(std::string filename, std::string textureID)
+bool TextureManager::load(const std::string filename, const std::string textureID)
 {
     if (m_textureMap.find(textureID) != m_textureMap.end()) {
         Log::warning("textureID already exists");
         return false;
     }
 
-    SDL_Texture* pTexture = TheGame::Instance()->getWindow()->loadImage(filename.c_str());
+    SDL_Texture* const pTexture = TheGame::Instance()->getWindow()->loadImage(filename.c_str());
     if (pTexture == nullptr) {
         Log::error("fail to create Texture for: " + filename);
         return false;
@@ -28,14 +28,18 @@ bool TextureManager::load(std::string filename, std::string textureID)
 }
 
 void TextureManager::draw(
-    std::string textureID,
-    b2Vec2 position,
-    int width,
-    int height,
-    bool bFlipped)
+    const std::string textureID,
+    const b2Vec2 position,
+    const int width,
+    const int height,
+    const bool bFlipped)
 {
-    SDL_Rect srcRect{0, 0, width, height};
-    SDL_Rect destRect{static_cast<int>(position.x), static_cast<int>(position.y), width, height};
+    SDL_Rect const srcRect{0, 0, width, height};
+    SDL_Rect const destRect{
+        static_cast<int>(position.x),
+        static_cast<int>(position.y),
+        width,
+        height};
 
     TheGame::Instance()->getWindow()->renderImage(
         m_textureMap[textureID],
@@ -47,17 +51,21 @@ void TextureManager::draw(
 }
 
 void TextureManager::drawFrame(
-    std::string id,
-    b2Vec2 position,
-    int width,
-    int height,
-    int currentRow,
-    int currentFrame,
-    float angle,
-    bool bFlipped)
+    const std::string id,
+    const b2Vec2 position,
+    const int width,
+    const int height,
+    const int currentRow,
+    const int currentFrame,
+    const float angle,
+    const bool bFlipped)
 {
-    SDL_Rect srcRect{width * currentFrame, height * currentRow, width, height};
-    SDL_Rect destRect{static_cast<int>(position.x), static_cast<int>(position.y), width, height};
+    SDL_Rect const srcRect{width * currentFrame, height * currentRow, width, height};
+    SDL_Rect const destRect{
+        static_cast<int>(position.x),
+        static_cast<int>(position.y),
+        width,
+        height};
 
     TheGame::Instance()->getWindow()->renderImage(
         m_textureMap[id],
@@ -69,21 +77,25 @@ void TextureManager::drawFrame(
 }
 
 void TextureManager::drawTile(
-    std::string id,
-    int margin,
-    int spacing,
-    b2Vec2 position,
-    int width,
-    int height,
-    int currentRow,
-    int currentFrame)
+    const std::string id,
+    const int margin,
+    const int spacing,
+    const b2Vec2 position,
+    const int width,
+    const int height,
+    const int currentRow,
+    const int currentFrame)
 {
-    SDL_Rect srcRect{
+    SDL_Rect const srcRect{
         margin + (spacing + width) * currentFrame,
         margin + (spacing + height) * currentRow,
         width,
         height};
-    SDL_Rect destRect{static_cast<int>(position.x), static_cast<int>(position.y), width, height};
+    SDL_Rect const destRect{
+        static_cast<int>(position.x),
+        static_cast<int>(position.y),
+        width,
+        height};
 
     TheGame::Instance()->getWindow()->renderImage(m_textureMap[id], &srcRect, &destRect);
 }

@@ -5,7 +5,7 @@ DoorObject::DoorObject()
     : PlatformerObject()
 {}
 
-void DoorObject::load(const LoaderParams* pParams)
+void DoorObject::load(const LoaderParams* const pParams)
 {
     PlatformerObject::load(pParams);
     m_animations[IDLE] = new Animation("door idle", 1);

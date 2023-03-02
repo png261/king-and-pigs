@@ -7,7 +7,7 @@ class DoorObject : public PlatformerObject
 {
 public:
     DoorObject();
-    virtual void load(const LoaderParams* pParams);
+    virtual void load(const LoaderParams* const pParams);
     virtual void update();
     virtual std::string type() const;
 

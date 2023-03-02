@@ -2,7 +2,7 @@
 
 #include "Box2D.hpp"
 
-void Enemy::load(const LoaderParams* pParams)
+void Enemy::load(const LoaderParams* const pParams)
 {
     PlatformerObject::load(pParams);
 

@@ -11,7 +11,7 @@ Pig::Pig()
     , AttackableObject(1, 50, 300)
 {}
 
-void Pig::load(const LoaderParams* pParams)
+void Pig::load(const LoaderParams* const pParams)
 {
     Enemy::load(pParams);
     this->createAttackSensor(getBody(), m_width, Box2D::MASK_ENEMY_ATTACK_SENSOR);

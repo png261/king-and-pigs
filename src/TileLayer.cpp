@@ -6,9 +6,9 @@
 #include "TextureManager.hpp"
 
 TileLayer::TileLayer(
-    int tileSize,
-    int mapWidth,
-    int mapHeight,
+    int const tileSize,
+    int const mapWidth,
+    int const mapHeight,
     const std::vector<Tileset>& tilesets)
     : m_tileSize(tileSize)
     , m_tilesets(tilesets)
@@ -20,7 +20,7 @@ TileLayer::TileLayer(
     m_mapWidth = mapWidth;
 }
 
-void TileLayer::update(Level* pLevel) {}
+void TileLayer::update(Level* const pLevel) {}
 
 void TileLayer::render()
 {
@@ -69,7 +69,7 @@ void TileLayer::render()
     }
 }
 
-Tileset TileLayer::getTilesetByID(int tileID)
+Tileset TileLayer::getTilesetByID(int const tileID) const
 {
     for (int i = 0; i < m_tilesets.size(); i++) {
         if (i + 1 <= m_tilesets.size() - 1) {
@@ -90,22 +90,22 @@ void TileLayer::setTileIDs(const std::vector<std::vector<int>>& data)
     m_tileIDs = data;
 }
 
-void TileLayer::setTileSize(int tileSize)
+void TileLayer::setTileSize(int const tileSize)
 {
     m_tileSize = tileSize;
 }
 
-void TileLayer::setMapWidth(int mapWidth)
+void TileLayer::setMapWidth(int const mapWidth)
 {
     m_mapWidth = mapWidth;
 }
 
-int TileLayer::getMapWidth()
+int TileLayer::getMapWidth() const
 {
     return m_mapWidth;
 }
 
-int TileLayer::getTileSize()
+int TileLayer::getTileSize() const
 {
     return m_tileSize;
 }
@@ -115,12 +115,12 @@ const std::vector<std::vector<int>>& TileLayer::getTileIDs()
     return m_tileIDs;
 }
 
-const b2Vec2 TileLayer::getPosition()
+b2Vec2 TileLayer::getPosition() const
 {
     return m_position;
 }
 
-void TileLayer::setPosition(b2Vec2 position)
+void TileLayer::setPosition(b2Vec2 const position)
 {
     m_position = position;
 }

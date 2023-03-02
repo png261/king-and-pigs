@@ -9,7 +9,7 @@ class Player : public PlatformerObject, public DamageableObject, public Attackab
 {
 public:
     Player();
-    void load(const LoaderParams* pParams);
+    void load(const LoaderParams* const pParams);
 
     void draw();
     void update();
