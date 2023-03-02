@@ -16,7 +16,6 @@ public:
     virtual std::string type() const = 0;
 
     b2Vec2& getPosition();
-
     int getWidth() const;
     int getHeight() const;
     b2Body* getBody() const;

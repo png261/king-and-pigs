@@ -9,8 +9,6 @@
 PlatformerObject::PlatformerObject()
     : GameObject()
     , m_footContact(0)
-    , m_direction(DIRECTION_RIGHT)
-
 {}
 
 void PlatformerObject::load(const LoaderParams* const pParams)
@@ -56,21 +54,6 @@ void PlatformerObject::update()
     m_position = m_pBody->GetPosition() - b2Vec2(m_textureWidth / 2.0f, m_textureHeight / 2.0f) +
                  b2Vec2(m_textureX, m_textureY);
     m_currentState = m_footContact > 0 ? ON_GROUND : ON_FLY;
-}
-
-std::string PlatformerObject::type() const
-{
-    return "GameObject";
-}
-
-PlatformerObject::direction PlatformerObject::getDirection() const
-{
-    return m_direction;
-}
-
-bool PlatformerObject::isFlipped() const
-{
-    return m_bFlipped;
 }
 
 void PlatformerObject::changeFootContact(int n)

@@ -16,6 +16,8 @@ public:
     virtual void draw();
     virtual void update();
 
+    virtual std::string type() const;
+
     void setCallback(void (*callback)()) { m_callback = callback; }
     int getCallbackID() { return m_callbackID; }
 

@@ -8,6 +8,22 @@
 class Animation
 {
 public:
+    enum AnimationID {
+        IDLE,
+        RUN,
+        JUMP,
+        FALL,
+        GROUND,
+        ATTACK,
+        DEAD,
+        HIT,
+
+        DOOR_IN,
+        DOOR_OUT,
+        DOOR_OPEN,
+        DOOR_CLOSE,
+    };
+
     Animation(const std::string textureID, const int nFrames = 1, const bool bLoop = true);
 
     virtual void draw(

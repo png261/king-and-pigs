@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Animation.hpp"
 #include "AttackableObject.hpp"
 #include "Box2D.hpp"
@@ -29,18 +28,18 @@ void Player::load(const LoaderParams* const pParams)
 
     this->createAttackSensor(getBody(), m_width, Box2D::MASK_PLAYER_ATTACK_SENSOR);
 
-    m_animations[IDLE] = new Animation("player idle", 11);
-    m_animations[RUN] = new Animation("player run", 8);
-    m_animations[JUMP] = new Animation("player jump", 1);
-    m_animations[FALL] = new Animation("player fall", 1);
-    m_animations[GROUND] = new Animation("player ground", 1);
-    m_animations[ATTACK] = new Animation("player attack", 3, false);
-    m_animations[HIT] = new Animation("player hit", 2);
-    m_animations[DEAD] = new Animation("player dead", 4, false);
-    m_animations[DOOR_IN] = new Animation("player door in", 8, false);
-    m_animations[DOOR_OUT] = new Animation("player door out", 8, false);
+    m_animations[Animation::IDLE] = new Animation("player idle", 11);
+    m_animations[Animation::RUN] = new Animation("player run", 8);
+    m_animations[Animation::JUMP] = new Animation("player jump", 1);
+    m_animations[Animation::FALL] = new Animation("player fall", 1);
+    m_animations[Animation::GROUND] = new Animation("player ground", 1);
+    m_animations[Animation::ATTACK] = new Animation("player attack", 3, false);
+    m_animations[Animation::HIT] = new Animation("player hit", 2);
+    m_animations[Animation::DEAD] = new Animation("player dead", 4, false);
+    m_animations[Animation::DOOR_IN] = new Animation("player door in", 8, false);
+    m_animations[Animation::DOOR_OUT] = new Animation("player door out", 8, false);
 
-    m_curAnimation = IDLE;
+    m_curAnimation = Animation::IDLE;
     m_currentState = ON_GROUND;
     m_animations[m_curAnimation]->start();
     m_currentAttackState = ON_NORMAL;
@@ -62,7 +61,7 @@ void Player::update()
 
 void Player::updateAnimation()
 {
-    ANIMATION_ID newAnimation = m_curAnimation;
+    Animation::AnimationID newAnimation = m_curAnimation;
 
     if (this->isInvulnerable()) {
         m_currentAttackState = ON_HIT;
@@ -77,11 +76,11 @@ void Player::updateAnimation()
     switch (m_currentState) {
     case ON_GROUND:
         if (InputHandler::Instance()->isKeyDown(KEY_LEFT)) {
-            newAnimation = RUN;
+            newAnimation = Animation::RUN;
         } else if (InputHandler::Instance()->isKeyDown(KEY_RIGHT)) {
-            newAnimation = RUN;
+            newAnimation = Animation::RUN;
         } else {
-            newAnimation = IDLE;
+            newAnimation = Animation::IDLE;
         }
         break;
     case ON_FLY:
@@ -91,18 +90,18 @@ void Player::updateAnimation()
         }
 
         if (this->getBody()->GetLinearVelocity().y < 0) {
-            newAnimation = JUMP;
+            newAnimation = Animation::JUMP;
         } else {
-            newAnimation = FALL;
+            newAnimation = Animation::FALL;
         }
         break;
     }
 
     switch (m_currentAttackState) {
     case ON_NORMAL: break;
-    case ON_HIT: newAnimation = HIT; break;
-    case ON_ATTACK: newAnimation = ATTACK; break;
-    case ON_DIE: newAnimation = DEAD; break;
+    case ON_HIT: newAnimation = Animation::HIT; break;
+    case ON_ATTACK: newAnimation = Animation::ATTACK; break;
+    case ON_DIE: newAnimation = Animation::DEAD; break;
     }
 
     if (newAnimation != m_curAnimation) {
@@ -118,13 +117,11 @@ void Player::handleInput()
         if (InputHandler::Instance()->isKeyDown(KEY_LEFT)) {
             float impulse = -m_pBody->GetMass() * 6;
             m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), 1);
-            m_direction = DIRECTION_LEFT;
             m_bTurnRight = false;
             m_bFlipped = true;
         } else if (InputHandler::Instance()->isKeyDown(KEY_RIGHT)) {
             float impulse = m_pBody->GetMass() * 6;
             m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), 1);
-            m_direction = DIRECTION_RIGHT;
             m_bFlipped = false;
             m_bTurnRight = true;
         }

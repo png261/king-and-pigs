@@ -41,3 +41,8 @@ void MenuButton::update()
         m_currentFrame = MOUSE_OUT;
     }
 }
+
+std::string MenuButton::type() const
+{
+    return "MenuButton";
+}
