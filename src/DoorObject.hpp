@@ -1,15 +1,14 @@
 #ifndef DOOR_OBJECT_HPP
 #define DOOR_OBJECT_HPP
 
-#include "PlatformerObject.hpp"
+#include "GameObject.hpp"
 
-class DoorObject : public PlatformerObject
+class DoorObject : public GameObject
 {
 public:
     DoorObject();
     virtual void load(const LoaderParams* const pParams);
     virtual void update();
-    virtual std::string type() const;
 
 private:
 };

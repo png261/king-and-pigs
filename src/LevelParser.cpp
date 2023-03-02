@@ -244,7 +244,6 @@ void LevelParser::parseTileLayer(
     std::string const dataText = pDataNode->GetText();
 
     int start = 0;
-
     for (int row = 0; row < m_height; row++) {
         for (int col = 0; col < m_width; col++) {
             int end = dataText.find(',', start);

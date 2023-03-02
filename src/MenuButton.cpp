@@ -2,21 +2,21 @@
 #include "InputHandler.hpp"
 
 MenuButton::MenuButton()
-    : PlatformerObject()
+    : GameObject()
     , m_callback(0)
     , m_bReleased(true)
 {}
 
 void MenuButton::load(const LoaderParams* const pParams)
 {
-    PlatformerObject::load(pParams);
+    GameObject::load(pParams);
     m_callbackID = pParams->getCallbackID();
     m_currentFrame = MOUSE_OUT;
 }
 
 void MenuButton::draw()
 {
-    PlatformerObject::draw();
+    GameObject::draw();
 }
 
 void MenuButton::update()
@@ -40,9 +40,4 @@ void MenuButton::update()
     } else {
         m_currentFrame = MOUSE_OUT;
     }
-}
-
-std::string MenuButton::type() const
-{
-    return "MenuButton";
 }

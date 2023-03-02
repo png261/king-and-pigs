@@ -5,11 +5,11 @@
 #include "DamageableObject.hpp"
 #include "Game.hpp"
 #include "InputHandler.hpp"
-#include "PlatformerObject.hpp"
+#include "GameObject.hpp"
 #include "SoundManager.hpp"
 
 Player::Player()
-    : PlatformerObject()
+    : GameObject()
     , DamageableObject(3, 300)
     , AttackableObject(1, 50, 300)
 {}
@@ -19,7 +19,7 @@ void Player::load(const LoaderParams* const pParams)
     m_moveSpeed = 6 * Box2D::PPM;
     m_jumpSpeed = -6 * Box2D::PPM;
 
-    PlatformerObject::load(pParams);
+    GameObject::load(pParams);
 
     b2Filter filter;
     filter.categoryBits = Box2D::CAT_PLAYER;
@@ -47,13 +47,13 @@ void Player::load(const LoaderParams* const pParams)
 
 void Player::draw()
 {
-    PlatformerObject::draw();
+    GameObject::draw();
 }
 
 void Player::update()
 {
     this->handleInput();
-    PlatformerObject::update();
+    GameObject::update();
     DamageableObject::update();
     AttackableObject::update();
     this->updateAnimation();

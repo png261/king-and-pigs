@@ -11,6 +11,7 @@ public:
     bool init();
     void clean();
     void update();
+
     void createWall(int size, b2Vec2 position);
 
     void handleEvents();

@@ -3,9 +3,9 @@
 
 #include "AttackableObject.hpp"
 #include "DamageableObject.hpp"
-#include "PlatformerObject.hpp"
+#include "GameObject.hpp"
 
-class Player : public PlatformerObject, public DamageableObject, public AttackableObject
+class Player : public GameObject, public DamageableObject, public AttackableObject
 {
 public:
     Player();
@@ -14,8 +14,6 @@ public:
     void draw();
     void update();
     void updateAnimation();
-
-    std::string type() const { return "Player"; }
 
 private:
     void handleInput();

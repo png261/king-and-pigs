@@ -4,7 +4,7 @@
 
 void Enemy::load(const LoaderParams* const pParams)
 {
-    PlatformerObject::load(pParams);
+    GameObject::load(pParams);
 
     b2Filter filter;
     filter.categoryBits = Box2D::CAT_ENEMY;
@@ -14,5 +14,5 @@ void Enemy::load(const LoaderParams* const pParams)
 
 void Enemy::draw()
 {
-    PlatformerObject::draw();
+    GameObject::draw();
 }

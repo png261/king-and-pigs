@@ -5,7 +5,7 @@
 #include "DamageableObject.hpp"
 #include "DebugDraw.hpp"
 #include "InputHandler.hpp"
-#include "PlatformerObject.hpp"
+#include "GameObject.hpp"
 
 const int Box2D::PPM = 32.0f;
 const b2Vec2 Box2D::GRAVITY = b2Vec2(0.0f, 9.8f * Box2D::PPM);
@@ -71,9 +71,9 @@ void Box2D::handleEvents()
             ((catA | catB) == (Box2D::CAT_ATTACK_SENSOR | Box2D::CAT_PLAYER))) {
             if (catA == Box2D::CAT_ATTACK_SENSOR) {
                 AttackableObject* const A = dynamic_cast<AttackableObject*>(
-                    (PlatformerObject*)(fixtureA->GetBody()->GetUserData().pointer));
+                    (GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
                 DamageableObject* const B = dynamic_cast<DamageableObject*>(
-                    (PlatformerObject*)(fixtureB->GetBody()->GetUserData().pointer));
+                    (GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
 
                 if (A != nullptr && B != nullptr && A->isAttack()) {
                     const char* direction = (const char*)fixtureA->GetUserData().pointer;
@@ -84,9 +84,9 @@ void Box2D::handleEvents()
 
             } else if (catB == Box2D::CAT_ATTACK_SENSOR) {
                 AttackableObject* const B = dynamic_cast<AttackableObject*>(
-                    (PlatformerObject*)(fixtureB->GetBody()->GetUserData().pointer));
+                    (GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
                 DamageableObject* const A = dynamic_cast<DamageableObject*>(
-                    (PlatformerObject*)(fixtureA->GetBody()->GetUserData().pointer));
+                    (GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
 
                 if (A != nullptr && B != nullptr && B->isAttack()) {
                     const char* direction = (const char*)fixtureB->GetUserData().pointer;

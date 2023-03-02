@@ -12,8 +12,6 @@ public:
     void update();
     void clean();
     void bonus();
-
-    std::string type() const { return "Heart"; }
 };
 
 #endif

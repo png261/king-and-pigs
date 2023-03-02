@@ -1,10 +1,10 @@
 #ifndef MENU_BUTTON_HPP
 #define MENU_BUTTON_HPP
 
+#include "GameObject.hpp"
 #include "GameObjectFactory.hpp"
-#include "PlatformerObject.hpp"
 
-class MenuButton : public PlatformerObject
+class MenuButton : public GameObject
 {
 public:
     MenuButton();
@@ -15,8 +15,6 @@ public:
 
     virtual void draw();
     virtual void update();
-
-    virtual std::string type() const;
 
     void setCallback(void (*callback)()) { m_callback = callback; }
     int getCallbackID() { return m_callbackID; }

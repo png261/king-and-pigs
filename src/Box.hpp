@@ -17,8 +17,6 @@ public:
     void update();
     void clean();
     void updateAnimation();
-
-    std::string type() const { return "Box"; }
 };
 
 #endif

@@ -2,18 +2,17 @@
 #define EMENY_HPP
 
 #include "Game.hpp"
-#include "PlatformerObject.hpp"
+#include "GameObject.hpp"
 
-class Enemy : public PlatformerObject
+class Enemy : public GameObject
 {
 public:
-    virtual std::string type() const { return "Enemy"; }
     virtual void load(const LoaderParams* const pParams);
     virtual void draw();
 
 protected:
     Enemy()
-        : PlatformerObject()
+        : GameObject()
     {}
 };
 
