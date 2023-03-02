@@ -17,7 +17,7 @@ InputHandler::InputHandler()
     }
 }
 
-void InputHandler::update()
+void InputHandler::handleEvents()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {

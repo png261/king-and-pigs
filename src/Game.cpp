@@ -24,7 +24,7 @@ Game::Game()
 
 Game* Game::Instance()
 {
-    static Game* s_pInstance = new Game();
+    static Game* const s_pInstance = new Game();
     return s_pInstance;
 }
 
@@ -50,7 +50,7 @@ bool Game::init(const unsigned int width, const unsigned int height)
 
 void Game::handleEvents()
 {
-    InputHandler::Instance()->update();
+    InputHandler::Instance()->handleEvents();
     Box2D::Instance()->handleEvents();
 }
 

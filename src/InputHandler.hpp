@@ -11,9 +11,9 @@ class InputHandler
 public:
     static InputHandler* Instance();
 
-    void update();
-    b2Vec2* getMousePosition() const;
+    void handleEvents();
 
+    b2Vec2* getMousePosition() const;
     bool isKeyDown(const KeyboardKey key) const;
     bool isMouseButtonDown(const MouseButton buttonID) const;
 
