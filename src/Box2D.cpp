@@ -1,5 +1,4 @@
 #include "Box2D.hpp"
-#include <iostream>
 #include "AttackableObject.hpp"
 #include "ContactListener.hpp"
 #include "DamageableObject.hpp"
@@ -27,7 +26,7 @@ void Box2D::createWall(int size, b2Vec2 position)
     groundBox.SetAsBox(size / 2.0f, size / 2.0f);
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &groundBox;
-    fixtureDef.friction = 1;
+    fixtureDef.friction = 5;
     fixtureDef.filter.categoryBits = Box2D::CAT_WALL;
     groundBody->CreateFixture(&fixtureDef);
 }
@@ -38,10 +37,6 @@ bool Box2D::init()
     m_pDebugDraw = new DebugDraw();
     uint32 flags = 0;
     flags += b2Draw::e_shapeBit;
-    /* flags += b2Draw::e_jointBit; */
-    /* flags += b2Draw::e_centerOfMassBit; */
-    /* flags += b2Draw::e_aabbBit; */
-    /* flags += b2Draw::e_pairBit; */
     m_pDebugDraw->SetFlags(flags);
 
     m_pWorld->SetContactListener(new ContactListener);
@@ -58,44 +53,57 @@ bool Box2D::init()
 void Box2D::handleEvents()
 {
     if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
-        Box2D::Instance()->toggleDebugDraw();
+        this->toggleDebugDraw();
     };
 
+    this->contactListener();
+}
+
+void Box2D::contactListener()
+{
     for (b2Contact* contact = getWorld()->GetContactList(); contact; contact = contact->GetNext()) {
-        b2Fixture* const fixtureA = contact->GetFixtureA();
-        b2Fixture* const fixtureB = contact->GetFixtureB();
-        uint16 const catA = fixtureA->GetFilterData().categoryBits;
-        uint16 const catB = fixtureB->GetFilterData().categoryBits;
+        attackListener(contact);
+    }
+}
 
-        if (((catA | catB) == (Box2D::CAT_ATTACK_SENSOR | Box2D::CAT_ENEMY)) ||
-            ((catA | catB) == (Box2D::CAT_ATTACK_SENSOR | Box2D::CAT_PLAYER))) {
-            if (catA == Box2D::CAT_ATTACK_SENSOR) {
-                AttackableObject* const A = dynamic_cast<AttackableObject*>(
-                    (GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
-                DamageableObject* const B = dynamic_cast<DamageableObject*>(
-                    (GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
+void Box2D::attackListener(b2Contact* contact)
+{
+    b2Fixture* const A = contact->GetFixtureA();
+    b2Fixture* const B = contact->GetFixtureB();
+    uint16 const catA = A->GetFilterData().categoryBits;
+    uint16 const catB = B->GetFilterData().categoryBits;
+    bool isAttack = ((catA | catB) == (Box2D::CAT_ATTACK_SENSOR | Box2D::CAT_ENEMY)) ||
+                    ((catA | catB) == (Box2D::CAT_ATTACK_SENSOR | Box2D::CAT_PLAYER));
 
-                if (A != nullptr && B != nullptr && A->isAttack()) {
-                    const char* direction = (const char*)fixtureA->GetUserData().pointer;
-                    if (A->isTurnRight() == (std::string(direction) == "right")) {
-                        B->damage(A->getDamage());
-                    }
-                }
+    if (!isAttack) {
+        return;
+    }
 
-            } else if (catB == Box2D::CAT_ATTACK_SENSOR) {
-                AttackableObject* const B = dynamic_cast<AttackableObject*>(
-                    (GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
-                DamageableObject* const A = dynamic_cast<DamageableObject*>(
-                    (GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
+    if (catA == Box2D::CAT_ATTACK_SENSOR) {
+        handleAttack(A, B);
+        return;
+    }
 
-                if (A != nullptr && B != nullptr && B->isAttack()) {
-                    const char* direction = (const char*)fixtureB->GetUserData().pointer;
-                    if (B->isTurnRight() == (std::string(direction) == "right")) {
-                        A->damage(B->getDamage());
-                    }
-                }
-            }
-        }
+    if (catB == Box2D::CAT_ATTACK_SENSOR) {
+        handleAttack(B, A);
+        return;
+    }
+}
+
+void Box2D::handleAttack(b2Fixture* Attacker, b2Fixture* Defender)
+{
+    AttackableObject* const A =
+        dynamic_cast<AttackableObject*>((GameObject*)(Attacker->GetBody()->GetUserData().pointer));
+    DamageableObject* const B =
+        dynamic_cast<DamageableObject*>((GameObject*)(Defender->GetBody()->GetUserData().pointer));
+
+    if (A == nullptr || B == nullptr || A->isAttack() == false) {
+        return;
+    }
+
+    const char* direction = (const char*)Attacker->GetUserData().pointer;
+    if (A->isTurnRight() == (std::string(direction) == "right")) {
+        B->damage(A->getDamage());
     }
 }
 
@@ -133,5 +141,3 @@ void Box2D::clean()
     delete m_pWorld;
     m_pWorld = nullptr;
 }
-
-// Class Contact Listener

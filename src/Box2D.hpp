@@ -15,10 +15,12 @@ public:
     void createWall(int size, b2Vec2 position);
 
     void handleEvents();
+    void contactListener();
     void debugDraw();
+    void toggleDebugDraw();
+
     b2World* getWorld();
     DebugDraw* getDebugDraw();
-    void toggleDebugDraw();
 
     enum FilterCategory : uint16 {
         CAT_WALL = 0x0001,
@@ -48,6 +50,8 @@ public:
 
 private:
     Box2D();
+    void attackListener(b2Contact* contact);
+    void handleAttack(b2Fixture* Attacker, b2Fixture* Defender);
 
     b2World* m_pWorld;
     bool m_bDebugEnable;
