@@ -1,5 +1,4 @@
 #include "PlayState.hpp"
-#include <SDL2/SDL_scancode.h>
 #include "Box.hpp"
 #include "Camera.hpp"
 #include "DoorObject.hpp"
@@ -11,8 +10,6 @@
 #include "InputHandler.hpp"
 #include "LevelParser.hpp"
 #include "LoaderParams.hpp"
-#include "Log.hpp"
-#include "PauseState.hpp"
 #include "Pig.hpp"
 #include "Player.hpp"
 
@@ -21,23 +18,25 @@ const std::string PlayState::s_stateID = "PLAY";
 
 bool PlayState::onEnter()
 {
-    Log::log("enter playstate");
+    if (this->load() == false) {
+        return false;
+    };
 
+
+    TheCamera::Instance()->setTarget(Game::Instance()->getPlayer());
+    TheCamera::Instance()->setZoom(1.5);
+
+    m_loadingComplete = true;
+    return true;
+}
+
+bool PlayState::load()
+{
     GameObjectFactory::Instance()->registerType("Player", new Creator<Player>);
     GameObjectFactory::Instance()->registerType("Pig", new Creator<Pig>);
     GameObjectFactory::Instance()->registerType("Box", new Creator<Box>);
     GameObjectFactory::Instance()->registerType("Heart", new Creator<Heart>);
     GameObjectFactory::Instance()->registerType("Door", new Creator<DoorObject>);
-
-    LevelParser levelParser;
-    pLevel = levelParser.parseLevel(
-        TheGame::Instance()->getLevelFiles()[TheGame::Instance()->getCurrentLevel() - 1].c_str());
-    if (pLevel == nullptr) {
-        return false;
-    }
-
-    TheCamera::Instance()->setTarget(Game::Instance()->getPlayer());
-    TheCamera::Instance()->setZoom(1.5);
 
     TextureManager::Instance()->load("assets/Player/Idle.png", "player idle");
     TextureManager::Instance()->load("assets/Player/Run.png", "player run");
@@ -68,13 +67,19 @@ bool PlayState::onEnter()
     TextureManager::Instance()->load("assets/Item/Door/open.png", "door open");
     TextureManager::Instance()->load("assets/Item/Door/close.png", "door close");
 
-    TextureManager::Instance()->load("assets/UI/Health Bar/Health Bar.png", "health bar");
-    TextureManager::Instance()->load("assets/UI/Health Bar/Heart.png", "health heart");
-
     TextureManager::Instance()->load("assets/Item/Box/Idle.png", "box idle");
     TextureManager::Instance()->load("assets/Item/Box/Hit.png", "box hit");
 
-    m_loadingComplete = true;
+    TextureManager::Instance()->load("assets/UI/Health Bar/Health Bar.png", "health bar");
+    TextureManager::Instance()->load("assets/UI/Health Bar/Heart.png", "health heart");
+
+    LevelParser levelParser;
+    pLevel = levelParser.parseLevel(
+        TheGame::Instance()->getLevelFiles()[TheGame::Instance()->getCurrentLevel() - 1].c_str());
+    if (pLevel == nullptr) {
+        return false;
+    }
+
     return true;
 }
 
@@ -82,8 +87,6 @@ bool PlayState::onExit()
 {
     m_exiting = true;
     TheInputHandler::Instance()->reset();
-
-    Log::log("exit playstate");
 
     return true;
 }
@@ -97,10 +100,6 @@ void PlayState::update()
 {
     if (!m_loadingComplete || m_exiting) {
         return;
-    }
-
-    if (InputHandler::Instance()->isKeyDown(KEY_ESCAPE)) {
-        GameStateMachine::Instance()->pushState(new PauseState);
     }
 
     if (pLevel != nullptr) {

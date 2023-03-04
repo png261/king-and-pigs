@@ -12,9 +12,10 @@ public:
     virtual void update();
     virtual void render();
 
-    virtual bool onExit();
-    virtual void resume();
     virtual bool onEnter();
+    virtual bool load();
+    virtual void resume();
+    virtual bool onExit();
     virtual std::string getStateID() const { return s_stateID; }
 
 private:
