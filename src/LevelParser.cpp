@@ -122,9 +122,6 @@ GameObject* parseObject(XMLElement* const pObjectElement, Level* const pLevel)
     int y = 0;
     int width = 0;
     int height = 0;
-    int numFrames = 0;
-    int lives = 0;
-    int callbackID = 0;
     int textureWidth = 0;
     int textureHeight = 0;
     int textureX = 0;
@@ -160,26 +157,14 @@ GameObject* parseObject(XMLElement* const pObjectElement, Level* const pLevel)
                         textureX = stoi(propertyValue);
                     } else if (propertyName == "textureHeight") {
                         textureHeight = stoi(propertyValue);
-                    } else if (propertyName == "lives") {
-                        lives = stoi(propertyValue);
                     }
                 }
             }
         }
     }
 
-    pGameObject->load(new LoaderParams(
-        x,
-        y,
-        width,
-        height,
-        textureWidth,
-        textureHeight,
-        numFrames,
-        lives,
-        callbackID,
-        textureX,
-        textureY));
+    pGameObject->load(
+        new LoaderParams(x, y, width, height, textureWidth, textureHeight, textureX, textureY));
 
     if (type == "Player") {
         Game::Instance()->setPlayer(dynamic_cast<Player*>(pGameObject));

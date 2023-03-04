@@ -6,8 +6,6 @@
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
 #include "Log.hpp"
-#include "MainMenuState.hpp"
-#include "MenuButton.hpp"
 #include "PlayState.hpp"
 #include "SoundManager.hpp"
 #include "TextureManager.hpp"

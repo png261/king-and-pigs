@@ -7,9 +7,6 @@ LoaderParams::LoaderParams(
     const int height,
     const int textureWidth,
     const int textureHeight,
-    const int numFrames,
-    const int lives,
-    const int callbackID,
     const int textureX,
     const int textureY)
     : m_x(x)
@@ -20,53 +17,44 @@ LoaderParams::LoaderParams(
     , m_textureHeight(textureHeight)
     , m_textureX(textureX)
     , m_textureY(textureY)
-    , m_numFrames(numFrames)
-    , m_lives(lives)
-    , m_callbackID(callbackID)
 {}
 
-int LoaderParams::getX() const
+int LoaderParams::x() const
 {
     return m_x;
 }
 
-int LoaderParams::getY() const
+int LoaderParams::y() const
 {
     return m_y;
 }
-int LoaderParams::getWidth() const
+
+int LoaderParams::width() const
 {
     return m_width;
 }
-int LoaderParams::getHeight() const
+
+int LoaderParams::height() const
 {
     return m_height;
 }
-int LoaderParams::getTextureWidth() const
+
+int LoaderParams::textureWidth() const
 {
     return m_textureWidth;
 }
-int LoaderParams::getTextureHeight() const
+
+int LoaderParams::textureHeight() const
 {
     return m_textureHeight;
 }
-int LoaderParams::getTextureX() const
+
+int LoaderParams::textureX() const
 {
     return m_textureX;
 }
-int LoaderParams::getTextureY() const
+
+int LoaderParams::textureY() const
 {
     return m_textureY;
-}
-int LoaderParams::getNumFrames() const
-{
-    return m_numFrames;
-}
-int LoaderParams::getLives() const
-{
-    return m_lives;
-}
-int LoaderParams::getCallbackID() const
-{
-    return m_callbackID;
 }

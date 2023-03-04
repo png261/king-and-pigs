@@ -23,15 +23,15 @@ GameObject::~GameObject()
 
 void GameObject::load(const LoaderParams* const pParams)
 {
-    m_position = b2Vec2(pParams->getX(), pParams->getY());
+    m_position = b2Vec2(pParams->x(), pParams->y());
 
-    m_width = pParams->getWidth();
-    m_height = pParams->getHeight();
+    m_width = pParams->width();
+    m_height = pParams->height();
 
-    m_textureWidth = pParams->getTextureWidth();
-    m_textureHeight = pParams->getTextureHeight();
-    m_textureX = pParams->getTextureX();
-    m_textureY = pParams->getTextureY();
+    m_textureWidth = pParams->textureWidth();
+    m_textureHeight = pParams->textureHeight();
+    m_textureX = pParams->textureX();
+    m_textureY = pParams->textureY();
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
