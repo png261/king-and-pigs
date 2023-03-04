@@ -48,7 +48,7 @@ bool Game::init(const unsigned int width, const unsigned int height)
 
 void Game::handleEvents()
 {
-    InputHandler::Instance()->handleEvents();
+    InputHandler::Instance()->update();
     Box2D::Instance()->handleEvents();
 }
 

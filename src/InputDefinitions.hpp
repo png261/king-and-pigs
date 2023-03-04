@@ -253,6 +253,6 @@ enum KeyboardKey {
     KEY_SLEEP = SDL_SCANCODE_SLEEP
 };
 
-enum MouseButton { MOUSE_LEFT, MOUSE_MIDDLE, MOUSE_RIGHT, MOUSE_MAX };
+enum MouseButton { MOUSE_LEFT = 0, MOUSE_RIGHT, MOUSE_MAX };
 
 #endif

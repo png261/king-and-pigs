@@ -4,8 +4,8 @@
 #include "ContactListener.hpp"
 #include "DamageableObject.hpp"
 #include "DebugDraw.hpp"
-#include "InputHandler.hpp"
 #include "GameObject.hpp"
+#include "InputHandler.hpp"
 
 const int Box2D::PPM = 32.0f;
 const b2Vec2 Box2D::GRAVITY = b2Vec2(0.0f, 9.8f * Box2D::PPM);

@@ -80,9 +80,9 @@ void Player::updateAnimation()
 
     switch (m_currentState) {
     case ON_GROUND:
-        if (InputHandler::Instance()->isKeyDown(KEY_LEFT)) {
+        if (InputHandler::Instance()->isKeyPressed(KEY_LEFT)) {
             newAnimation = Animation::RUN;
-        } else if (InputHandler::Instance()->isKeyDown(KEY_RIGHT)) {
+        } else if (InputHandler::Instance()->isKeyPressed(KEY_RIGHT)) {
             newAnimation = Animation::RUN;
         } else {
             newAnimation = Animation::IDLE;
@@ -121,12 +121,12 @@ void Player::handleInput()
     InputHandler* const pInputHandler = InputHandler::Instance();
 
     if (m_currentState == ON_GROUND) {
-        if (pInputHandler->isKeyDown(KEY_LEFT)) {
+        if (pInputHandler->isKeyPressed(KEY_LEFT)) {
             float impulse = -m_pBody->GetMass() * 6;
             m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), true);
             m_bTurnRight = false;
             m_bFlipped = true;
-        } else if (pInputHandler->isKeyDown(KEY_RIGHT)) {
+        } else if (pInputHandler->isKeyPressed((KEY_RIGHT))) {
             float impulse = m_pBody->GetMass() * 6;
             m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), true);
             m_bFlipped = false;
@@ -134,13 +134,13 @@ void Player::handleInput()
         }
 
         if (pInputHandler->isKeyDown(KEY_SPACE)) {
-            float impulse = -m_pBody->GetMass() * 1000 / (1 / 60.0) * Box2D::PPM;
+            float impulse = -m_pBody->GetMass() * 1000 / (1 / 10000.0) * Box2D::PPM;
             m_pBody->ApplyLinearImpulse(b2Vec2(0, impulse), m_pBody->GetWorldCenter(), true);
         }
     }
 
     if (m_currentAttackState == ON_NORMAL) {
-        if (pInputHandler->isKeyDown(KEY_A)) {
+        if (pInputHandler->isKeyPressed(KEY_A)) {
             this->attack();
         }
     }

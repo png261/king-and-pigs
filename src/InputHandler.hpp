@@ -11,13 +11,15 @@ class InputHandler
 public:
     static InputHandler* Instance();
 
-    void handleEvents();
+    void update();
 
     b2Vec2 getMousePosition() const;
 
     bool isKeyDown(const KeyboardKey key) const;
+    bool isKeyUp(const KeyboardKey key) const;
+    bool isKeyPressed(const KeyboardKey key) const;
 
-    bool isMouseDown(const MouseButton buttonID) const;
+    bool isMouseDown(const MouseButton button) const;
 
     void reset();
 
@@ -31,10 +33,15 @@ private:
     void onMouseDown(SDL_Event const& event);
     void onMouseUp(SDL_Event const& event);
 
-    b2Vec2 m_pMousePosition;
-    bool m_bMouseDown[MOUSE_MAX];
+    bool m_bKeyDown[KEYBOARD_SIZE];
+    bool m_bKeyUp[KEYBOARD_SIZE];
 
-    const Uint8* m_keystates;
+    const Uint8* m_keyboard;
+    uint32_t m_mouse;
+
+    b2Vec2 m_mousePosition;
+    bool m_bMouseDown[MOUSE_MAX];
+    bool m_bMouseUp[MOUSE_MAX];
 };
 
 #endif

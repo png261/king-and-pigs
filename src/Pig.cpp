@@ -75,7 +75,7 @@ void Pig::updateAnimation()
 
     switch (m_currentAttackState) {
     case ON_NORMAL:
-        if (InputHandler::Instance()->isKeyDown(KEY_S)) {
+        if (InputHandler::Instance()->isKeyPressed(KEY_S)) {
             this->attack();
             break;
         }
