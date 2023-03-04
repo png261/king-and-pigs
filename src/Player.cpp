@@ -4,8 +4,8 @@
 #include "Camera.hpp"
 #include "DamageableObject.hpp"
 #include "Game.hpp"
-#include "InputHandler.hpp"
 #include "GameObject.hpp"
+#include "InputHandler.hpp"
 #include "SoundManager.hpp"
 
 Player::Player()
@@ -27,7 +27,14 @@ void Player::load(const LoaderParams* const pParams)
     m_pFixture->SetFilterData(filter);
 
     this->createAttackSensor(getBody(), m_width, Box2D::MASK_PLAYER_ATTACK_SENSOR);
+    this->loadAnimation();
 
+    m_currentState = ON_GROUND;
+    m_currentAttackState = ON_NORMAL;
+}
+
+void Player::loadAnimation()
+{
     m_animations[Animation::IDLE] = new Animation("player idle", 11);
     m_animations[Animation::RUN] = new Animation("player run", 8);
     m_animations[Animation::JUMP] = new Animation("player jump", 1);
@@ -40,9 +47,7 @@ void Player::load(const LoaderParams* const pParams)
     m_animations[Animation::DOOR_OUT] = new Animation("player door out", 8, false);
 
     m_curAnimation = Animation::IDLE;
-    m_currentState = ON_GROUND;
     m_animations[m_curAnimation]->start();
-    m_currentAttackState = ON_NORMAL;
 }
 
 void Player::draw()

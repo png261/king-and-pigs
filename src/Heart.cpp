@@ -1,12 +1,15 @@
 #include "Heart.hpp"
-#include <iostream>
 #include "Box2D.hpp"
 #include "Game.hpp"
 
 void Heart::load(const LoaderParams* const pParams)
 {
     ItemObject::load(pParams);
+    this->loadAnimation();
+}
 
+void Heart::loadAnimation()
+{
     m_animations[Animation::IDLE] = new Animation("heart idle", 7);
     m_animations[Animation::HIT] = new Animation("heart hit", 2);
 
@@ -25,5 +28,3 @@ void Heart::update()
 {
     ItemObject::update();
 }
-
-void Heart::clean() {}

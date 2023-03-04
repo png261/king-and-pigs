@@ -14,6 +14,7 @@ public:
     virtual void load(const LoaderParams* const pParams);
     virtual void update();
     virtual void draw();
+    virtual void loadAnimation(){};
 
     b2Vec2& getPosition();
     int getWidth() const;

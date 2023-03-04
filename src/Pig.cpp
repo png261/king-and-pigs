@@ -15,7 +15,13 @@ void Pig::load(const LoaderParams* const pParams)
 {
     Enemy::load(pParams);
     this->createAttackSensor(getBody(), m_width, Box2D::MASK_ENEMY_ATTACK_SENSOR);
+    this->loadAnimation();
 
+    m_currentAttackState = ON_NORMAL;
+}
+
+void Pig::loadAnimation()
+{
     m_animations[Animation::IDLE] = new Animation("pig idle", 11);
     m_animations[Animation::RUN] = new Animation("pig run", 6);
     m_animations[Animation::JUMP] = new Animation("pig jump", 1);
@@ -27,7 +33,6 @@ void Pig::load(const LoaderParams* const pParams)
 
     m_curAnimation = Animation::IDLE;
     m_animations[m_curAnimation]->start();
-    m_currentAttackState = ON_NORMAL;
 }
 
 void Pig::update()
@@ -35,7 +40,7 @@ void Pig::update()
     Enemy::update();
     DamageableObject::update();
     AttackableObject::update();
-    updateAnimation();
+    this->updateAnimation();
 }
 
 void Pig::updateAnimation()

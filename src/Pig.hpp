@@ -12,6 +12,7 @@ public:
     void draw();
     void update();
     void updateAnimation();
+    void loadAnimation();
 };
 
 #endif

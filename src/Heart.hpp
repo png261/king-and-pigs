@@ -10,8 +10,8 @@ public:
     void load(const LoaderParams* const pParams);
 
     void update();
-    void clean();
     void bonus();
+    void loadAnimation();
 };
 
 #endif
