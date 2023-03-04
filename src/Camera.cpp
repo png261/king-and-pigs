@@ -70,5 +70,5 @@ void Camera::setPosition(const b2Vec2& position)
 void Camera::setZoom(const float zoom)
 {
     m_zoom = zoom;
-    SDL_RenderSetScale(TheGame::Instance()->getWindow()->getRenderer(), m_zoom, m_zoom);
+    SDL_RenderSetScale(Game::Instance()->getWindow()->getRenderer(), m_zoom, m_zoom);
 }

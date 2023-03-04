@@ -16,7 +16,7 @@ bool TextureManager::load(const std::string filename, const std::string textureI
         return false;
     }
 
-    SDL_Texture* const pTexture = TheGame::Instance()->getWindow()->loadImage(filename.c_str());
+    SDL_Texture* const pTexture = Game::Instance()->getWindow()->loadImage(filename.c_str());
     if (pTexture == nullptr) {
         Log::error("fail to create Texture for: " + filename);
         return false;
@@ -41,7 +41,7 @@ void TextureManager::draw(
         width,
         height};
 
-    TheGame::Instance()->getWindow()->renderImage(
+    Game::Instance()->getWindow()->renderImage(
         m_textureMap[textureID],
         &srcRect,
         &destRect,
@@ -67,7 +67,7 @@ void TextureManager::drawFrame(
         width,
         height};
 
-    TheGame::Instance()->getWindow()->renderImage(
+    Game::Instance()->getWindow()->renderImage(
         m_textureMap[id],
         &srcRect,
         &destRect,
@@ -97,5 +97,5 @@ void TextureManager::drawTile(
         width,
         height};
 
-    TheGame::Instance()->getWindow()->renderImage(m_textureMap[id], &srcRect, &destRect);
+    Game::Instance()->getWindow()->renderImage(m_textureMap[id], &srcRect, &destRect);
 }

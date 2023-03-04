@@ -23,8 +23,8 @@ bool PlayState::onEnter()
     };
 
 
-    TheCamera::Instance()->setTarget(Game::Instance()->getPlayer());
-    TheCamera::Instance()->setZoom(1.5);
+    Camera::Instance()->setTarget(Game::Instance()->getPlayer());
+    Camera::Instance()->setZoom(1.5);
 
     m_loadingComplete = true;
     return true;
@@ -78,7 +78,7 @@ bool PlayState::load()
 
     LevelParser levelParser;
     pLevel = levelParser.parseLevel(
-        TheGame::Instance()->getLevelFiles()[TheGame::Instance()->getCurrentLevel() - 1].c_str());
+        Game::Instance()->getLevelFiles()[Game::Instance()->getCurrentLevel() - 1].c_str());
     if (pLevel == nullptr) {
         return false;
     }
@@ -89,7 +89,7 @@ bool PlayState::load()
 bool PlayState::onExit()
 {
     m_exiting = true;
-    TheInputHandler::Instance()->reset();
+    InputHandler::Instance()->reset();
 
     return true;
 }
@@ -108,7 +108,7 @@ void PlayState::update()
     if (pLevel != nullptr) {
         pLevel->update();
     }
-    TheCamera::Instance()->update();
+    Camera::Instance()->update();
 }
 
 void PlayState::render()

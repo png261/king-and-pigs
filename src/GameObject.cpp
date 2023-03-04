@@ -60,7 +60,7 @@ void GameObject::load(const LoaderParams* const pParams)
 void GameObject::draw()
 {
     m_animations[m_curAnimation]->draw(
-        m_position - TheCamera::Instance()->getPosition(),
+        m_position - Camera::Instance()->getPosition(),
         m_textureWidth,
         m_textureHeight,
         m_pBody->GetAngle() / M_PI * 180,

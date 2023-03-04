@@ -24,9 +24,9 @@ void ObjectLayer::update(Level* const pLevel)
             continue;
         }
 
-        if ((*it)->getPosition().x > TheCamera::Instance()->getPosition().x +
+        if ((*it)->getPosition().x > Camera::Instance()->getPosition().x +
                                          Game::Instance()->getWindow()->getWidth() &&
-            (*it)->getPosition().y > TheCamera::Instance()->getPosition().y +
+            (*it)->getPosition().y > Camera::Instance()->getPosition().y +
                                          Game::Instance()->getWindow()->getHeight()) {
             (*it)->setUpdating(false);
             continue;

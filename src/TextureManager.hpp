@@ -47,6 +47,4 @@ private:
     std::map<std::string, SDL_Texture*> m_textureMap;
 };
 
-typedef TextureManager TheTextureManager;
-
 #endif

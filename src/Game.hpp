@@ -11,6 +11,7 @@ class Game
 {
 public:
     ~Game(){};
+
     static Game* Instance();
     bool init(const unsigned int width, const unsigned int height);
     void handleEvents();
@@ -53,7 +54,5 @@ private:
 
     std::vector<std::string> m_levelFiles;
 };
-
-typedef Game TheGame;
 
 #endif

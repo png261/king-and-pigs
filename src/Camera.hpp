@@ -26,6 +26,6 @@ private:
     float m_zoom;
 };
 
-typedef Camera TheCamera;
+typedef Camera Camera;
 
 #endif
