@@ -29,7 +29,6 @@ b2Vec2 Camera::getPosition() const
         return m_position;
     }
 
-
     b2Vec2 pos =
         m_pTarget->getPosition() -
         b2Vec2(

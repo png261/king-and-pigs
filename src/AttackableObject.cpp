@@ -1,4 +1,5 @@
 #include "AttackableObject.hpp"
+#include "Box2D.hpp"
 AttackableObject::AttackableObject(const int damage, const int range, const int attackSpeed)
     : m_damage(damage)
     , m_range(range)
@@ -16,9 +17,9 @@ void AttackableObject::createAttackSensor(
 {
     b2PolygonShape attackShape;
     attackShape.SetAsBox(
-        m_range / 2.0f,
-        m_range / 2.0f,
-        b2Vec2(-(objectWidth / 4.0f + m_range / 2.0f), 0),
+        Box2D::pixelToMeter(m_range) / 2.0f,
+        Box2D::pixelToMeter(m_range) / 2.0f,
+        b2Vec2(-(Box2D::pixelToMeter(objectWidth) / 4.0f + Box2D::pixelToMeter(m_range) / 2.0f), 0),
         0);
 
     b2FixtureDef attackSensorDef;
@@ -31,9 +32,9 @@ void AttackableObject::createAttackSensor(
     m_pAttackSensor = pBody->CreateFixture(&attackSensorDef);
 
     attackShape.SetAsBox(
-        m_range / 2.0f,
-        m_range / 2.0f,
-        b2Vec2((objectWidth / 4.0f + m_range / 2.0f), 0),
+        Box2D::pixelToMeter(m_range) / 2.0f,
+        Box2D::pixelToMeter(m_range) / 2.0f,
+        b2Vec2((Box2D::pixelToMeter(objectWidth) / 4.0f + Box2D::pixelToMeter(m_range) / 2.0f), 0),
         0);
     attackSensorDef.userData.pointer = reinterpret_cast<uintptr_t>((void*)"right");
     m_pAttackSensor = pBody->CreateFixture(&attackSensorDef);

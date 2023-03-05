@@ -18,8 +18,13 @@ public:
 
 private:
     void handleInput();
-    b2Vec2 m_velocity;
-    b2Fixture* m_pAttackRange;
+
+    void moveRight();
+    void moveLeft();
+
+    void jump();
+    void jumpRight();
+    void jumpLeft();
 };
 
 #endif

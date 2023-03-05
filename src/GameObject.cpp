@@ -1,5 +1,6 @@
 #include "GameObject.hpp"
 
+#include "Box2D.hpp"
 #include "Camera.hpp"
 #include "Game.hpp"
 
@@ -35,20 +36,24 @@ void GameObject::load(const LoaderParams* const pParams)
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position = m_position;
+    bodyDef.position = Box2D::pixelToMeter(m_position);
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
     m_pBody = Box2D::Instance()->getWorld()->CreateBody(&bodyDef);
 
     b2PolygonShape dynamicBox;
 
-    dynamicBox.SetAsBox(m_width / 2.0f, m_height / 2.0f);
+    dynamicBox.SetAsBox(Box2D::pixelToMeter(m_width) / 2.0f, Box2D::pixelToMeter(m_height) / 2.0f);
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1;
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
-    dynamicBox.SetAsBox((m_width - 0.5) / 2.0f, 0.3, b2Vec2(0, m_height / 2.0f), 0);
+    dynamicBox.SetAsBox(
+        (Box2D::pixelToMeter(m_width - 0.5)) / 2.0f,
+        Box2D::pixelToMeter(0.5),
+        b2Vec2(0, Box2D::pixelToMeter(m_height) / 2.0f),
+        0);
     b2FixtureDef footSensorDef;
     footSensorDef.shape = &dynamicBox;
     footSensorDef.isSensor = true;
@@ -69,8 +74,10 @@ void GameObject::draw()
 
 void GameObject::update()
 {
-    m_position = m_pBody->GetPosition() - b2Vec2(m_textureWidth / 2.0f, m_textureHeight / 2.0f) +
+    m_position = Box2D::meterToPixel(m_pBody->GetPosition()) -
+                 b2Vec2(m_textureWidth / 2.0f, m_textureHeight / 2.0f) +
                  b2Vec2(m_textureX, m_textureY);
+
     m_currentState = m_footContact > 0 ? ON_GROUND : ON_FLY;
     m_animations[m_curAnimation]->update();
 }

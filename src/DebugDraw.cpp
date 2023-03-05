@@ -6,12 +6,7 @@
 #include "Game.hpp"
 #include "SDL.hpp"
 
-void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
-{
-    std::cout << "draw polygon" << std::endl;
-    std::cout << vertices->x << std::endl;
-    std::cout << vertices->y << std::endl;
-}
+void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {}
 
 void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
 {
@@ -22,7 +17,7 @@ void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, cons
     // Create an array of SDL points from the Box2D vertices.
     SDL_Point sdlVertices[vertexCount];
     for (int i = 0; i < vertexCount; i++) {
-        b2Vec2 point = vertices[i] - Camera::Instance()->getPosition();
+        b2Vec2 point = Box2D::meterToPixel(vertices[i]) - Camera::Instance()->getPosition();
         sdlVertices[i] = {static_cast<int>(point.x), static_cast<int>(point.y)};
     }
 
@@ -41,10 +36,7 @@ void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, cons
 }
 
 /// Draw a circle.
-void DebugDraw::DrawCircle(const b2Vec2& center, float radius, const b2Color& color)
-{
-    std::cout << "draw circle" << std::endl;
-}
+void DebugDraw::DrawCircle(const b2Vec2& center, float radius, const b2Color& color) {}
 
 
 /// Draw a solid circle.
@@ -53,25 +45,14 @@ void DebugDraw::DrawSolidCircle(
     float radius,
     const b2Vec2& axis,
     const b2Color& color)
-{
-    std::cout << "draw solid circle" << std::endl;
-}
+{}
 
 /// Draw a line segment.
-void DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color)
-{
-    std::cout << "draw segment" << std::endl;
-}
+void DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color) {}
 
 /// Draw a transform. Choose your own length scale.
 /// @param xf a transform.
-void DebugDraw::DrawTransform(const b2Transform& xf)
-{
-    std::cout << "draw transform" << std::endl;
-};
+void DebugDraw::DrawTransform(const b2Transform& xf){};
 
 /// Draw a point.
-void DebugDraw::DrawPoint(const b2Vec2& p, float size, const b2Color& color)
-{
-    std::cout << "draw point " << std::endl;
-}
+void DebugDraw::DrawPoint(const b2Vec2& p, float size, const b2Color& color) {}

@@ -3,12 +3,12 @@
 
 #include <box2d/box2d.h>
 
+
 class DebugDraw;
 class Box2D
 {
 public:
     static Box2D* Instance();
-    static int metterToPixel(int metter);
     bool init();
     void clean();
     void update();
@@ -21,7 +21,6 @@ public:
     void toggleDebugDraw();
 
     b2World* getWorld();
-    DebugDraw* getDebugDraw();
 
     enum FilterCategory : uint16 {
         CAT_WALL = 0x0001,
@@ -46,8 +45,15 @@ public:
         MASK_ENEMY_ATTACK_SENSOR = CAT_PLAYER,
     };
 
-    static const int PPM;
+    static const float PIXEL_PER_METER;
+    static const float METER_PER_PIXEL;
     static const b2Vec2 GRAVITY;
+
+    static int meterToPixel(float meter);
+    static float pixelToMeter(float pixel);
+
+    static b2Vec2 meterToPixel(b2Vec2 meter);
+    static b2Vec2 pixelToMeter(b2Vec2 pixel);
 
 private:
     Box2D();

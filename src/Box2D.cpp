@@ -6,8 +6,9 @@
 #include "GameObject.hpp"
 #include "InputHandler.hpp"
 
-const int Box2D::PPM = 32.0f;
-const b2Vec2 Box2D::GRAVITY = b2Vec2(0.0f, 9.8f * Box2D::PPM);
+const b2Vec2 Box2D::GRAVITY = b2Vec2(0.0f, 9.8f);
+const float Box2D::PIXEL_PER_METER = 32.0f;
+const float Box2D::METER_PER_PIXEL = 1 / Box2D::PIXEL_PER_METER;
 
 Box2D::Box2D() {}
 
@@ -17,21 +18,36 @@ Box2D* Box2D::Instance()
     return pInstance;
 }
 
-int Box2D::metterToPixel(int metter)
+int Box2D::meterToPixel(float meter)
 {
-    return metter * Box2D::PPM;
+    return floor(meter * Box2D::PIXEL_PER_METER);
 }
+
+float Box2D::pixelToMeter(float pixel)
+{
+    return pixel * Box2D::METER_PER_PIXEL;
+}
+
+b2Vec2 Box2D::meterToPixel(b2Vec2 meter)
+{
+    return b2Vec2(meter.x * Box2D::PIXEL_PER_METER, meter.y * Box2D::PIXEL_PER_METER);
+};
+
+b2Vec2 Box2D::pixelToMeter(b2Vec2 pixel)
+{
+    return b2Vec2(pixel.x * Box2D::METER_PER_PIXEL, pixel.y * Box2D::METER_PER_PIXEL);
+};
 
 void Box2D::createWall(int size, b2Vec2 position)
 {
     b2BodyDef groundBodyDef;
-    groundBodyDef.position = position;
-    b2Body* const groundBody = Box2D::Instance()->getWorld()->CreateBody(&groundBodyDef);
+    groundBodyDef.position = Box2D::pixelToMeter(position);
+    b2Body* const groundBody = this->getWorld()->CreateBody(&groundBodyDef);
     b2PolygonShape groundBox;
-    groundBox.SetAsBox(size / 2.0f, size / 2.0f);
+    groundBox.SetAsBox(Box2D::pixelToMeter(size) / 2.0f, Box2D::pixelToMeter(size) / 2.0f);
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &groundBox;
-    fixtureDef.friction = 5;
+    fixtureDef.friction = 1;
     fixtureDef.filter.categoryBits = Box2D::CAT_WALL;
     groundBody->CreateFixture(&fixtureDef);
 }
@@ -129,11 +145,6 @@ void Box2D::debugDraw()
 b2World* Box2D::getWorld()
 {
     return m_pWorld;
-}
-
-DebugDraw* Box2D::getDebugDraw()
-{
-    return m_pDebugDraw;
 }
 
 void Box2D::toggleDebugDraw()
