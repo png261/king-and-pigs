@@ -22,20 +22,8 @@ bool Animation::isRunning() const
     return m_bRunning;
 }
 
-void Animation::draw(
-    const b2Vec2 position,
-    const int width,
-    const int height,
-    const float angle,
-    const bool bFlipped)
+void Animation::update()
 {
-    if (m_framerate == 0) {
-        return;
-    }
-    if (!isRunning()) {
-        return;
-    }
-
     const Uint32 time_between_frames = (1000.0f / m_framerate);
     m_curFrame = (timer.delta() / time_between_frames);
 
@@ -45,6 +33,18 @@ void Animation::draw(
         } else {
             m_curFrame = m_nFrames - 1;
         }
+    }
+}
+
+void Animation::draw(
+    const b2Vec2 position,
+    const int width,
+    const int height,
+    const float angle,
+    const bool bFlipped)
+{
+    if (!isRunning() || m_framerate == 0) {
+        return;
     }
 
     TextureManager::Instance()

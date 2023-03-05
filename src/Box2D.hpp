@@ -8,6 +8,7 @@ class Box2D
 {
 public:
     static Box2D* Instance();
+    static int metterToPixel(int metter);
     bool init();
     void clean();
     void update();

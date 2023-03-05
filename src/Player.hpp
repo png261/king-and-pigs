@@ -18,6 +18,7 @@ public:
 
 private:
     void handleInput();
+    b2Vec2 m_velocity;
     b2Fixture* m_pAttackRange;
 };
 

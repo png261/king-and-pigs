@@ -33,6 +33,8 @@ public:
         const float angle = 0,
         const bool flip = false);
 
+    virtual void update();
+
     void start();
     void restart();
     void stop();

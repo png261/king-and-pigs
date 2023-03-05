@@ -17,6 +17,11 @@ Box2D* Box2D::Instance()
     return pInstance;
 }
 
+int Box2D::metterToPixel(int metter)
+{
+    return metter * Box2D::PPM;
+}
+
 void Box2D::createWall(int size, b2Vec2 position)
 {
     b2BodyDef groundBodyDef;

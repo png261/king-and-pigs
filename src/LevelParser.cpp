@@ -22,9 +22,6 @@ Level* LevelParser::parseLevel(const char* levelFile)
     m_tileSize = atoi(pRoot->Attribute("tilewidth"));
     m_width = atoi(pRoot->Attribute("width"));
 
-    Game::Instance()->setLevelWidth(m_width * m_tileSize);
-    Game::Instance()->setLevelHeight(m_height * m_tileSize);
-
     m_height = atoi(pRoot->Attribute("height"));
 
     for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {

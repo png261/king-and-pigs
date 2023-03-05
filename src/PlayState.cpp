@@ -78,7 +78,7 @@ bool PlayState::load()
 
     LevelParser levelParser;
     pLevel = levelParser.parseLevel(
-        Game::Instance()->getLevelFiles()[Game::Instance()->getCurrentLevel() - 1].c_str());
+        Game::Instance()->getLevel(Game::Instance()->getCurrentLevel()).c_str());
     if (pLevel == nullptr) {
         return false;
     }

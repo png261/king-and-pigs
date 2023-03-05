@@ -16,8 +16,8 @@ Player::Player()
 
 void Player::load(const LoaderParams* const pParams)
 {
-    m_moveSpeed = 6 * Box2D::PPM;
-    m_jumpSpeed = -6 * Box2D::PPM;
+    m_moveSpeed = Box2D::metterToPixel(6);
+    m_jumpSpeed = -Box2D::metterToPixel(6);
 
     GameObject::load(pParams);
 
@@ -25,6 +25,7 @@ void Player::load(const LoaderParams* const pParams)
     filter.categoryBits = Box2D::CAT_PLAYER;
     filter.maskBits = Box2D::MASK_PLAYER;
     m_pFixture->SetFilterData(filter);
+    m_pFixture->SetDensity(10);
 
     this->createAttackSensor(getBody(), m_width, Box2D::MASK_PLAYER_ATTACK_SENSOR);
     this->loadAnimation();
@@ -120,28 +121,28 @@ void Player::handleInput()
 {
     InputHandler* const pInputHandler = InputHandler::Instance();
 
-    if (m_currentState == ON_GROUND) {
-        if (pInputHandler->isKeyPressed(KEY_LEFT)) {
-            float impulse = -m_pBody->GetMass() * 6;
-            m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), true);
-            m_bTurnRight = false;
-            m_bFlipped = true;
-        } else if (pInputHandler->isKeyPressed((KEY_RIGHT))) {
-            float impulse = m_pBody->GetMass() * 6;
-            m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), true);
-            m_bFlipped = false;
-            m_bTurnRight = true;
-        }
-
-        if (pInputHandler->isKeyDown(KEY_SPACE)) {
-            float impulse = -m_pBody->GetMass() * 1000 / (1 / 10000.0) * Box2D::PPM;
-            m_pBody->ApplyLinearImpulse(b2Vec2(0, impulse), m_pBody->GetWorldCenter(), true);
-        }
+    /* if (m_currentState == ON_GROUND) { */
+    if (pInputHandler->isKeyPressed(KEY_LEFT)) {
+        float impulse = -m_pBody->GetMass() * m_moveSpeed / (1 / 60.0f);
+        m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), true);
+        m_bTurnRight = false;
+        m_bFlipped = true;
+    } else if (pInputHandler->isKeyPressed((KEY_RIGHT))) {
+        float impulse = m_pBody->GetMass() * m_moveSpeed / (1 / 60.0f);
+        m_pBody->ApplyLinearImpulse(b2Vec2(impulse, 0), m_pBody->GetWorldCenter(), true);
+        m_bFlipped = false;
+        m_bTurnRight = true;
     }
 
-    if (m_currentAttackState == ON_NORMAL) {
-        if (pInputHandler->isKeyPressed(KEY_A)) {
-            this->attack();
-        }
+    if (pInputHandler->isKeyPressed(KEY_SPACE)) {
+        float impulse = -m_pBody->GetMass() * 1000 / (1 / 10000.0) * Box2D::PPM;
+        m_pBody->ApplyLinearImpulse(b2Vec2(0, impulse), m_pBody->GetWorldCenter(), true);
     }
+    /* } */
+
+    /* if (m_currentAttackState == ON_NORMAL) { */
+    if (pInputHandler->isKeyPressed(KEY_A)) {
+        this->attack();
+    }
+    /* } */
 };

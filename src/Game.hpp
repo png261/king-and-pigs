@@ -23,32 +23,20 @@ public:
     Window* getWindow();
     int getCurrentLevel() const;
     int getNextLevel() const;
-    int getLevelWidth() const;
-    int getLevelHeight() const;
     Player* getPlayer() const;
-    std::vector<std::string> getLevelFiles();
-
+    std::string getLevel(int index);
     bool isRunning() const;
-    bool isLevelComplete() const;
 
     void setCurrentLevel(int const currentLevel);
-    void setNextLevel(int const nextLevel);
-    void setLevelComplete(bool const levelComplete);
-    void setLevelWidth(int const width);
-    void setLevelHeight(int const height);
     void setPlayer(Player* const pPlayer);
 
 private:
     Game();
     Window* m_pWindow;
-    int m_levelWidth;
-    int m_levelHeight;
 
     int m_currentLevel;
-    int m_nextLevel;
 
     bool m_bRunning;
-    bool m_bLevelComplete;
 
     Player* m_pPlayer;
 

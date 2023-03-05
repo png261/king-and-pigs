@@ -9,6 +9,7 @@ void Enemy::load(const LoaderParams* const pParams)
     b2Filter filter;
     filter.categoryBits = Box2D::CAT_ENEMY;
     filter.maskBits = Box2D::MASK_ENEMY;
+    m_pFixture->SetDensity(50);
     m_pFixture->SetFilterData(filter);
 };
 

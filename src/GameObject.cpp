@@ -72,6 +72,7 @@ void GameObject::update()
     m_position = m_pBody->GetPosition() - b2Vec2(m_textureWidth / 2.0f, m_textureHeight / 2.0f) +
                  b2Vec2(m_textureX, m_textureY);
     m_currentState = m_footContact > 0 ? ON_GROUND : ON_FLY;
+    m_animations[m_curAnimation]->update();
 }
 
 b2Vec2& GameObject::getPosition()

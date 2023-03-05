@@ -1,23 +1,17 @@
 #include "Game.hpp"
 
 #include "Box2D.hpp"
-#include "Camera.hpp"
-#include "GameObjectFactory.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
-#include "Log.hpp"
 #include "PlayState.hpp"
-#include "SoundManager.hpp"
-#include "TextureManager.hpp"
 
 Game::Game()
     : m_pWindow(nullptr)
     , m_bRunning(false)
-    , m_bLevelComplete(false)
 {
     m_levelFiles.push_back("levels/level1.tmx");
     m_levelFiles.push_back("levels/level2.tmx");
-    m_currentLevel = 1;
+    m_currentLevel = 0;
 }
 
 Game* Game::Instance()
@@ -37,12 +31,10 @@ bool Game::init(const unsigned int width, const unsigned int height)
     };
 
     m_pWindow = new Window(width, height, "");
-
-    m_levelWidth = width;
-    m_levelHeight = height;
     m_bRunning = true;
 
     GameStateMachine::Instance()->changeState(new PlayState());
+
     return true;
 }
 
@@ -86,29 +78,9 @@ int Game::getCurrentLevel() const
     return m_currentLevel;
 }
 
-int Game::getNextLevel() const
-{
-    return m_nextLevel;
-}
-
-bool Game::isLevelComplete() const
-{
-    return m_bLevelComplete;
-}
-
 bool Game::isRunning() const
 {
     return m_bRunning;
-}
-
-int Game::getLevelWidth() const
-{
-    return m_levelWidth;
-}
-
-int Game::getLevelHeight() const
-{
-    return m_levelHeight;
 }
 
 Player* Game::getPlayer() const
@@ -116,42 +88,14 @@ Player* Game::getPlayer() const
     return m_pPlayer;
 }
 
-std::vector<std::string> Game::getLevelFiles()
+std::string Game::getLevel(int index)
 {
-    return m_levelFiles;
+    return m_levelFiles[index];
 }
-
-void Game::setLevelComplete(bool const levelComplete)
-{
-    m_bLevelComplete = levelComplete;
-}
-
-void Game::setNextLevel(int const nextLevel)
-{
-    m_nextLevel = nextLevel;
-}
-
-
-void Game::setLevelWidth(int const width)
-{
-    m_levelWidth = width;
-}
-
-void Game::setLevelHeight(int const height)
-{
-    m_levelHeight = height;
-}
-
 
 void Game::setPlayer(Player* const pPlayer)
 {
     m_pPlayer = pPlayer;
-}
-
-void Game::setCurrentLevel(int const currentLevel)
-{
-    m_currentLevel = currentLevel;
-    m_bLevelComplete = false;
 }
 
 Window* Game::getWindow()
