@@ -2,16 +2,18 @@
 
 int main(int argc, char* argv[])
 {
-    if (!Game::Instance()->init(700, 400)) {
+    Game* game = Game::Instance();
+
+    if (!game->init(700, 400)) {
         return -1;
     }
 
-    while (Game::Instance()->isRunning()) {
-        Game::Instance()->handleEvents();
-        Game::Instance()->update();
-        Game::Instance()->render();
+    while (game->isRunning()) {
+        game->handleEvents();
+        game->update();
+        game->render();
     }
 
-    Game::Instance()->clean();
+    game->clean();
     return 0;
 }
