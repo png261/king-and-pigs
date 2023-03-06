@@ -21,10 +21,7 @@ private:
 
     void moveRight();
     void moveLeft();
-
     void jump();
-    void jumpRight();
-    void jumpLeft();
 };
 
 #endif

@@ -137,25 +137,68 @@ void Player::handleInput()
     }
 };
 
-
 void Player::moveRight()
 {
-    b2Vec2 impulse = b2Vec2(m_pBody->GetMass() * Box2D::pixelToMeter(20), 0);
-    m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
+    float maxSpeed = Box2D::pixelToMeter(100); // Maximum speed in meters per second
+    b2Body* playerBody = m_pBody;
+    // Assume we have a b2Body* playerBody that represents the player's body
+    float mass = playerBody->GetMass();
+    float groundFriction = 2; // Ground friction coefficient
+    bool isGrounded = true; // Flag indicating if player is grounded
+
+    b2Vec2 currentVelocity = playerBody->GetLinearVelocity();
+    float currentSpeed = currentVelocity.x;
+
+    // Calculate the impulse required to reach the maximum speed
+    float speedDifference = maxSpeed - currentSpeed;
+    float impulse = mass * speedDifference;
+
+    // Apply the impulse to the player's body to move it to the right
+    b2Vec2 impulseDirection(1.0f, 0.0f); // Move player to the right
+    impulseDirection.Normalize();
+    playerBody->ApplyLinearImpulse(impulse * impulseDirection, playerBody->GetWorldCenter(), true);
+
+    /* // Set the player's linear velocity to the maximum speed if it exceeds it */
+    /* b2Vec2 newVelocity = playerBody->GetLinearVelocity(); */
+    /* newVelocity.x = std::min(newVelocity.x, maxSpeed); */
+    /* playerBody->SetLinearVelocity(newVelocity); */
+
     m_bTurnRight = true;
     m_bFlipped = false;
 }
 
 void Player::moveLeft()
 {
-    b2Vec2 impulse = b2Vec2(-m_pBody->GetMass() * Box2D::pixelToMeter(20), 0);
-    m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
+    float maxSpeed = -Box2D::pixelToMeter(100); // Maximum speed in meters per second
+    b2Body* playerBody = m_pBody;
+    // Assume we have a b2Body* playerBody that represents the player's body
+    float mass = playerBody->GetMass();
+    float groundFriction = 2; // Ground friction coefficient
+    bool isGrounded = true; // Flag indicating if player is grounded
+
+    b2Vec2 currentVelocity = playerBody->GetLinearVelocity();
+    float currentSpeed = currentVelocity.x;
+
+    // Calculate the impulse required to reach the maximum speed
+    float speedDifference = maxSpeed - currentSpeed;
+    float impulse = mass * speedDifference;
+
+    // Apply the impulse to the player's body to move it to the right
+    b2Vec2 impulseDirection(1.0f, 0.0f); // Move player to the right
+    impulseDirection.Normalize();
+    playerBody->ApplyLinearImpulse(impulse * impulseDirection, playerBody->GetWorldCenter(), true);
+
     m_bTurnRight = false;
     m_bFlipped = true;
 }
 
 void Player::jump()
 {
-    b2Vec2 impulse = b2Vec2(0, -Box2D::pixelToMeter(60) * m_pBody->GetMass());
+    float mass = m_pBody->GetMass();
+    float gravity = 9.8f;
+    float jumpHeight = 0.5; // Jump height in meters
+
+    float timeToJumpPeak = sqrt(2 * jumpHeight / gravity);
+    b2Vec2 impulse = -b2Vec2(0, mass * jumpHeight / timeToJumpPeak);
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 }
