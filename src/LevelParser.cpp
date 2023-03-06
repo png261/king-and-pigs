@@ -183,8 +183,9 @@ void LevelParser::parseObjectLayer(
             pObjectLayer->getGameObjects()->push_back(parseObject(e, pLevel));
         }
     }
-
-    pLayers->push_back(pObjectLayer);
+    if (pObjectLayer->getGameObjects()->size() > 0) {
+        pLayers->push_back(pObjectLayer);
+    }
 }
 
 void LevelParser::parseTileLayer(
