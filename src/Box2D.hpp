@@ -47,6 +47,7 @@ public:
 
     static const float PIXEL_PER_METER;
     static const float METER_PER_PIXEL;
+    static const float GROUND_FRICTION;
     static const b2Vec2 GRAVITY;
 
     static int meterToPixel(float meter);

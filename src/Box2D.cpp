@@ -8,6 +8,7 @@
 
 const b2Vec2 Box2D::GRAVITY = b2Vec2(0.0f, 9.8f);
 const float Box2D::PIXEL_PER_METER = 32.0f;
+const float Box2D::GROUND_FRICTION = 32.0f;
 const float Box2D::METER_PER_PIXEL = 1 / Box2D::PIXEL_PER_METER;
 
 Box2D::Box2D() {}
@@ -47,7 +48,7 @@ void Box2D::createWall(int size, b2Vec2 position)
     groundBox.SetAsBox(Box2D::pixelToMeter(size) / 2.0f, Box2D::pixelToMeter(size) / 2.0f);
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &groundBox;
-    fixtureDef.friction = 1;
+    fixtureDef.friction = GROUND_FRICTION;
     fixtureDef.filter.categoryBits = Box2D::CAT_WALL;
     groundBody->CreateFixture(&fixtureDef);
 }
@@ -55,18 +56,16 @@ void Box2D::createWall(int size, b2Vec2 position)
 bool Box2D::init()
 {
     m_pWorld = new b2World(Box2D::GRAVITY);
-    m_pDebugDraw = new DebugDraw();
-    uint32 flags = 0;
-    flags += b2Draw::e_shapeBit;
-    m_pDebugDraw->SetFlags(flags);
-
     m_pWorld->SetContactListener(new ContactListener);
-    m_pWorld->SetDebugDraw(m_pDebugDraw);
-    m_bDebugEnable = true;
 
     m_timeStep = 1.0f / 60.f;
     m_velocityIterations = 10;
     m_positionIterations = 8;
+
+    m_pDebugDraw = new DebugDraw();
+    m_pDebugDraw->SetFlags(b2Draw::e_shapeBit);
+    m_pWorld->SetDebugDraw(m_pDebugDraw);
+    m_bDebugEnable = true;
 
     return true;
 }
