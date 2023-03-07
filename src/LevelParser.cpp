@@ -183,7 +183,8 @@ void LevelParser::parseObjectLayer(
             pObjectLayer->getGameObjects()->push_back(parseObject(e, pLevel));
         }
     }
-    if (pObjectLayer->getGameObjects()->size() > 0) {
+
+    if (!pObjectLayer->getGameObjects()->empty()) {
         pLayers->push_back(pObjectLayer);
     }
 }
@@ -247,9 +248,7 @@ void LevelParser::parseTileLayer(
 
                 Box2D::Instance()->createWall(
                     m_tileSize,
-                    b2Vec2(
-                        col * m_tileSize + m_tileSize / 2.0f,
-                        row * m_tileSize + m_tileSize / 2.0f));
+                    m_tileSize * b2Vec2(col + 0.5, row + 0.5));
             }
         }
     }

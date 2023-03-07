@@ -9,7 +9,7 @@
 
 using namespace tinyxml2;
 
-class StateParser
+class StateParser final
 {
 public:
     bool parseState(

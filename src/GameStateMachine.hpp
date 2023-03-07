@@ -4,7 +4,7 @@
 #include <vector>
 #include "GameState.hpp"
 
-class GameStateMachine
+class GameStateMachine final
 {
 public:
     static GameStateMachine* Instance();

@@ -40,6 +40,10 @@ b2Vec2 Camera::getPosition() const
         pos.x = 0;
     }
 
+    if (pos.y < 0) {
+        pos.y = 0;
+    }
+
     return pos;
 }
 

@@ -4,7 +4,6 @@
 #include "DamageableObject.hpp"
 #include "Enemy.hpp"
 
-
 class Box : public Enemy, public DamageableObject
 {
 public:

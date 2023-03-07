@@ -3,7 +3,7 @@
 
 #include "SDL.hpp"
 
-class Timer
+class Timer final
 {
 public:
     Timer();

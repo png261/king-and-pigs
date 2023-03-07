@@ -3,6 +3,7 @@
 #include "Box2D.hpp"
 #include "Camera.hpp"
 #include "Game.hpp"
+#include "Log.hpp"
 
 GameObject::GameObject()
     : m_position(0, 0)
@@ -15,6 +16,8 @@ GameObject::GameObject()
     , m_bExist(true)
     , m_bFlipped(false)
     , m_footContact(0)
+    , m_moveSpeed(0)
+    , m_jumpHeight(0)
 {}
 
 GameObject::~GameObject()
@@ -68,7 +71,7 @@ void GameObject::draw()
         m_position - Camera::Instance()->getPosition(),
         m_textureWidth,
         m_textureHeight,
-        m_pBody->GetAngle() / M_PI * 180,
+        Box2D::radToDeg(m_pBody->GetAngle()),
         m_bFlipped);
 }
 
@@ -120,4 +123,38 @@ bool GameObject::isExist() const
 void GameObject::changeFootContact(int n)
 {
     m_footContact += n;
+}
+
+
+void GameObject::moveRight()
+{
+    Log::log("mr");
+    float maxSpeed = Box2D::pixelToMeter(m_moveSpeed);
+    float mass = m_pBody->GetMass();
+    float speedDifference = maxSpeed - m_pBody->GetLinearVelocity().x;
+    b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
+    m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
+
+    m_bFlipped = false;
+}
+
+void GameObject::moveLeft()
+{
+    Log::log("ml");
+    float maxSpeed = -Box2D::pixelToMeter(m_moveSpeed);
+    float mass = m_pBody->GetMass();
+    float speedDifference = maxSpeed - m_pBody->GetLinearVelocity().x;
+    b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
+    m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
+
+    m_bFlipped = true;
+}
+
+void GameObject::jump()
+{
+    Log::log("jump");
+    float timeToJumpPeak = sqrt(2 * Box2D::pixelToMeter(m_jumpHeight) / Box2D::GRAVITY.y);
+    b2Vec2 impulse =
+        -b2Vec2(0, m_pBody->GetMass() * Box2D::pixelToMeter(m_jumpHeight) / timeToJumpPeak);
+    m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 }

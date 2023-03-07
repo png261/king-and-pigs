@@ -6,7 +6,7 @@
 #include "InputDefinitions.hpp"
 #include "SDL.hpp"
 
-class InputHandler
+class InputHandler final
 {
 public:
     static InputHandler* Instance();

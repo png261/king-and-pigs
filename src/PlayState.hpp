@@ -6,7 +6,7 @@
 #include "GameState.hpp"
 #include "Level.hpp"
 
-class PlayState : public GameState
+class PlayState final : public GameState
 {
 public:
     virtual void update();

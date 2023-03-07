@@ -6,7 +6,7 @@
 #include "SDL.hpp"
 #include "Timer.hpp"
 
-class Window
+class Window final
 {
 public:
     Window(const unsigned int width, const unsigned int height, const std::string title = "");

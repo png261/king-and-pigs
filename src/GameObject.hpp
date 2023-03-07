@@ -28,6 +28,10 @@ public:
     void setUpdating(const bool updating);
     virtual void changeFootContact(int n);
 
+    void moveLeft();
+    void moveRight();
+    void jump();
+
     enum ObjectPosition {
         ON_GROUND,
         ON_FLY,
@@ -71,7 +75,7 @@ protected:
     ObjectState m_currentAttackState;
 
     int m_moveSpeed;
-    int m_jumpSpeed;
+    int m_jumpHeight;
 
     int m_footContact;
 };

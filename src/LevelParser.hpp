@@ -4,7 +4,7 @@
 #include "Level.hpp"
 #include "tinyxml2.h"
 
-class LevelParser
+class LevelParser final
 {
 public:
     Level* parseLevel(const char* levelFile);

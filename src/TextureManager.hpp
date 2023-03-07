@@ -6,7 +6,7 @@
 #include "Box2D.hpp"
 #include "SDL.hpp"
 
-class TextureManager
+class TextureManager  final
 {
 public:
     static TextureManager* Instance();

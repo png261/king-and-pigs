@@ -3,7 +3,7 @@
 
 #include "Box2D.hpp"
 
-class DebugDraw : public b2Draw
+class DebugDraw final : public b2Draw
 {
 public:
     /// Draw a closed polygon provided in CCW order.

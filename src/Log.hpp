@@ -3,7 +3,7 @@
 
 #include <string>
 
-class Log
+class Log final
 {
 public:
     static void error(const std::string msg);

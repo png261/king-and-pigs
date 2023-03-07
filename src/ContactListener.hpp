@@ -3,7 +3,7 @@
 
 #include "Box2D.hpp"
 
-class ContactListener : public b2ContactListener
+class ContactListener final : public b2ContactListener
 {
 public:
     void BeginContact(b2Contact* contact);

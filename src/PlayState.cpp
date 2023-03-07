@@ -1,7 +1,7 @@
 #include "PlayState.hpp"
 #include "Box.hpp"
 #include "Camera.hpp"
-#include "DoorObject.hpp"
+#include "Door.hpp"
 #include "Enemy.hpp"
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"
@@ -24,7 +24,7 @@ bool PlayState::onEnter()
 
 
     Camera::Instance()->setTarget(Game::Instance()->getPlayer());
-    Camera::Instance()->setZoom(1.5);
+    Camera::Instance()->setZoom(3);
 
     m_loadingComplete = true;
     return true;
@@ -39,7 +39,7 @@ bool PlayState::load()
     pGameObjectFactory->registerType("Pig", new Creator<Pig>);
     pGameObjectFactory->registerType("Box", new Creator<Box>);
     pGameObjectFactory->registerType("Heart", new Creator<Heart>);
-    pGameObjectFactory->registerType("Door", new Creator<DoorObject>);
+    pGameObjectFactory->registerType("Door", new Creator<Door>);
 
     pTextureManager->load("assets/Player/Idle.png", "player idle");
     pTextureManager->load("assets/Player/Run.png", "player run");

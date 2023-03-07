@@ -3,9 +3,8 @@
 
 #include <box2d/box2d.h>
 
-
 class DebugDraw;
-class Box2D
+class Box2D final
 {
 public:
     static Box2D* Instance();
@@ -55,11 +54,11 @@ public:
     static int meterToPixel(float meter);
     static float pixelToMeter(float pixel);
 
-    static float radToDeg(float rad);
-    static float degToRad(float deg);
-
     static b2Vec2 meterToPixel(b2Vec2 meter);
     static b2Vec2 pixelToMeter(b2Vec2 pixel);
+
+    static float radToDeg(float rad);
+    static float degToRad(float deg);
 
 private:
     Box2D();

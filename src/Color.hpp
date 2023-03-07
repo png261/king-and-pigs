@@ -3,7 +3,7 @@
 
 #include <stdint.h> // uint8_t
 
-class Color
+class Color final
 {
 public:
     Color();

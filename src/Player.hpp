@@ -5,7 +5,7 @@
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
 
-class Player : public GameObject, public DamageableObject, public AttackableObject
+class Player final : public GameObject, public DamageableObject, public AttackableObject
 {
 public:
     Player();
@@ -18,10 +18,6 @@ public:
 
 private:
     void handleInput();
-
-    void moveRight();
-    void moveLeft();
-    void jump();
 };
 
 #endif

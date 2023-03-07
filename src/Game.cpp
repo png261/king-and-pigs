@@ -9,6 +9,7 @@ Game::Game()
     : m_pWindow(nullptr)
     , m_bRunning(false)
 {
+    m_levelFiles.push_back("levels/test.tmx");
     m_levelFiles.push_back("levels/level1.tmx");
     m_levelFiles.push_back("levels/level2.tmx");
     m_currentLevel = 0;

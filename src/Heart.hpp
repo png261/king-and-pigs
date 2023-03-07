@@ -1,10 +1,9 @@
 #ifndef HEART_HPP
 #define HEART_HPP
 
-#include <iostream>
 #include "ItemObject.hpp"
 
-class Heart : public ItemObject
+class Heart final : public ItemObject
 {
 public:
     void load(const LoaderParams* const pParams);

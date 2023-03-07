@@ -7,7 +7,7 @@
 #include "SDL.hpp"
 #include "Window.hpp"
 
-class Game
+class Game final
 {
 public:
     ~Game(){};

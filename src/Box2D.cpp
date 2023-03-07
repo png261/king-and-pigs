@@ -1,5 +1,4 @@
 #include "Box2D.hpp"
-#include <iostream>
 #include "AttackableObject.hpp"
 #include "ContactListener.hpp"
 #include "DamageableObject.hpp"
@@ -24,12 +23,12 @@ Box2D* Box2D::Instance()
 
 int Box2D::meterToPixel(float meter)
 {
-    return floor(meter * Box2D::PIXEL_PER_METER);
+    return static_cast<int>(meter * Box2D::PIXEL_PER_METER);
 }
 
 float Box2D::pixelToMeter(float pixel)
 {
-    return pixel * Box2D::METER_PER_PIXEL;
+    return static_cast<float>(pixel * Box2D::METER_PER_PIXEL);
 }
 
 b2Vec2 Box2D::meterToPixel(b2Vec2 meter)

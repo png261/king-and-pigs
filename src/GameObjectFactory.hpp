@@ -19,7 +19,7 @@ public:
     virtual GameObject* createGameObject() const { return new T(); };
 };
 
-class GameObjectFactory
+class GameObjectFactory final
 {
 public:
     static GameObjectFactory* Instance();
