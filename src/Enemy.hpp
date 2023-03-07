@@ -1,5 +1,4 @@
-#ifndef EMENY_HPP
-#define EMENY_HPP
+#pragma once
 
 #include "Game.hpp"
 #include "GameObject.hpp"
@@ -16,4 +15,3 @@ protected:
     {}
 };
 
-#endif

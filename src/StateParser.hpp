@@ -1,5 +1,4 @@
-#ifndef STATE_PARSER_HPP
-#define STATE_PARSER_HPP
+#pragma once
 
 #include <string>
 #include <vector>
@@ -22,4 +21,3 @@ private:
     void parseTextures(XMLElement* const pStateRoot);
 };
 
-#endif

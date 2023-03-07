@@ -1,5 +1,4 @@
-#ifndef DEBUG_DRAW_HPP
-#define DEBUG_DRAW_HPP
+#pragma once
 
 #include "Box2D.hpp"
 
@@ -29,4 +28,3 @@ public:
     /// Draw a point.
     void DrawPoint(const b2Vec2& p, float size, const b2Color& color);
 };
-#endif

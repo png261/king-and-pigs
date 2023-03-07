@@ -1,5 +1,4 @@
-#ifndef WINDOW_HPP
-#define WINDOW_HPP
+#pragma once
 
 #include <string>
 #include "Color.hpp"
@@ -62,5 +61,3 @@ private:
     unsigned int m_frameDelay;
     unsigned int m_currentFrameDelta;
 };
-
-#endif

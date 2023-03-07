@@ -1,5 +1,4 @@
-#ifndef PLAY_STATE_HPP
-#define PLAY_STATE_HPP
+#pragma once
 
 #include <vector>
 #include "GameObject.hpp"
@@ -24,4 +23,3 @@ private:
     Level* pLevel;
 };
 
-#endif

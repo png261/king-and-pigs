@@ -1,5 +1,4 @@
-#ifndef PIG_ENEMY_HPP
-#define PIG_ENEMY_HPP
+#pragma once
 
 #include "AttackableObject.hpp"
 #include "Enemy.hpp"
@@ -15,4 +14,3 @@ public:
     void loadAnimation();
 };
 
-#endif

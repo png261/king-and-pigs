@@ -1,5 +1,4 @@
-#ifndef TILE_LAYER_HPP
-#define TILE_LAYER_HPP
+#pragma once
 
 #include <vector>
 #include "Layer.hpp"
@@ -43,4 +42,3 @@ private:
     std::vector<std::vector<int>> m_tileIDs;
 };
 
-#endif

@@ -1,5 +1,4 @@
-#ifndef GAME_OBJECT_FACTORY_HPP
-#define GAME_OBJECT_FACTORY_HPP
+#pragma once
 
 #include <map>
 #include <string>
@@ -33,4 +32,3 @@ private:
     std::map<std::string, BaseCreator*> m_creators;
 };
 
-#endif

@@ -1,5 +1,4 @@
-#ifndef LOG_HPP
-#define LOG_HPP
+#pragma once
 
 #include <string>
 
@@ -11,4 +10,3 @@ public:
     static void log(const std::string msg);
 };
 
-#endif

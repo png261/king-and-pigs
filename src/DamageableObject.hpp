@@ -1,5 +1,4 @@
-#ifndef DAMAGEABLE_OBJECT_HPP
-#define DAMAGEABLE_OBJECT_HPP
+#pragma once
 #include "GameObject.hpp"
 #include "LoaderParams.hpp"
 #include "Timer.hpp"
@@ -31,4 +30,3 @@ protected:
     int m_hp;
 };
 
-#endif

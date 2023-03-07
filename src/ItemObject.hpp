@@ -1,5 +1,4 @@
-#ifndef ITEM_OBJECT_H
-#define ITEM_OBJECT_H
+#pragma once
 
 #include "GameObject.hpp"
 
@@ -12,4 +11,3 @@ public:
 protected:
     virtual ~ItemObject(){};
 };
-#endif

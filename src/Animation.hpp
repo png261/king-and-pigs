@@ -1,5 +1,4 @@
-#ifndef ANIMATION_HPP
-#define ANIMATION_HPP
+#pragma once
 
 #include <string>
 #include "Box2D.hpp"
@@ -58,4 +57,3 @@ private:
     int m_timesLooped;
 };
 
-#endif

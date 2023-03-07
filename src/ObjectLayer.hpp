@@ -1,5 +1,4 @@
-#ifndef OBJECT_LAYER_HPP
-#define OBJECT_LAYER_HPP
+#pragma once
 
 #include <vector>
 #include "Layer.hpp"
@@ -20,4 +19,3 @@ private:
     std::vector<GameObject*> m_gameObjects;
 };
 
-#endif

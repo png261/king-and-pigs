@@ -1,5 +1,4 @@
-#ifndef CALL_BACK_HPP
-#define CALL_BACK_HPP
+#pragma once
 
 class Callback
 {
@@ -20,4 +19,3 @@ private:
     void (*m_func)();
 };
 
-#endif

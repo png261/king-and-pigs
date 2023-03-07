@@ -1,5 +1,4 @@
-#ifndef TEXTURE_MANAGER_HPP
-#define TEXTURE_MANAGER_HPP
+#pragma once
 
 #include <map>
 #include <string>
@@ -47,4 +46,3 @@ private:
     std::map<std::string, SDL_Texture*> m_textureMap;
 };
 
-#endif

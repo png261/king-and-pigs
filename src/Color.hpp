@@ -1,5 +1,4 @@
-#ifndef COLOR_HPP
-#define COLOR_HPP
+#pragma once
 
 #include <stdint.h> // uint8_t
 
@@ -20,4 +19,3 @@ private:
     uint8_t m_alpha;
 };
 
-#endif

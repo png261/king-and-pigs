@@ -1,5 +1,4 @@
-#ifndef LAYER_HPP
-#define LAYER_HPP
+#pragma once
 
 class Level;
 
@@ -12,4 +11,3 @@ public:
     virtual void update(Level* const pLevel) = 0;
 };
 
-#endif

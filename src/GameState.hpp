@@ -1,5 +1,4 @@
-#ifndef GAME_STATE_HPP
-#define GAME_STATE_HPP
+#pragma once
 
 #include <string>
 #include <vector>
@@ -26,4 +25,3 @@ protected:
     bool m_exiting;
 };
 
-#endif

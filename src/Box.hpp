@@ -1,5 +1,4 @@
-#ifndef BOX_HPP
-#define BOX_HPP
+#pragma once
 
 #include "DamageableObject.hpp"
 #include "Enemy.hpp"
@@ -18,4 +17,3 @@ public:
     void updateAnimation();
 };
 
-#endif

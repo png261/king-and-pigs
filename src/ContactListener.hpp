@@ -1,5 +1,4 @@
-#ifndef CONTACT_LISTENER_HPP
-#define CONTACT_LISTENER_HPP
+#pragma once
 
 #include "Box2D.hpp"
 
@@ -16,4 +15,3 @@ private:
     void JumpEndContact(b2Contact* contact);
 };
 
-#endif

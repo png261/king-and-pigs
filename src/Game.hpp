@@ -1,5 +1,4 @@
-#ifndef GAME_HPP
-#define GAME_HPP
+#pragma once
 
 #include <string>
 #include <vector>
@@ -24,7 +23,7 @@ public:
     int getCurrentLevel() const;
     int getNextLevel() const;
     Player* getPlayer() const;
-    std::string getLevel(int index);
+    std::string getLevel(const int index);
     bool isRunning() const;
 
     void setCurrentLevel(int const currentLevel);
@@ -42,5 +41,3 @@ private:
 
     std::vector<std::string> m_levelFiles;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef SDL_HPP
-#define SDL_HPP
+#pragma once
 
 #include <SDL2/SDL.h> // SDL2
 #include <SDL2/SDL_image.h> // SDL2_Image
@@ -11,4 +10,3 @@ bool init();
 void exit();
 } // namespace SDL
 
-#endif

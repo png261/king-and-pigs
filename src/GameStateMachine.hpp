@@ -1,5 +1,4 @@
-#ifndef GAME_STATE_MACHINE_HPP
-#define GAME_STATE_MACHINE_HPP
+#pragma once
 
 #include <vector>
 #include "GameState.hpp"
@@ -23,4 +22,3 @@ private:
     std::vector<GameState*> m_gameStates;
 };
 
-#endif

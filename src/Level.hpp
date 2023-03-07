@@ -1,5 +1,4 @@
-#ifndef LEVEL_HPP
-#define LEVEL_HPP
+#pragma once
 
 #include <vector>
 #include "Layer.hpp"
@@ -42,4 +41,3 @@ private:
     std::vector<Tileset> m_tilesets;
 };
 
-#endif

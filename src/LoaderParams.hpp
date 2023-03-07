@@ -1,5 +1,4 @@
-#ifndef LOADER_PARAMS
-#define LOADER_PARAMS
+#pragma once
 
 #include <string>
 
@@ -38,4 +37,3 @@ private:
     int m_textureY;
 };
 
-#endif

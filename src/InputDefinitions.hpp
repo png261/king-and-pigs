@@ -1,5 +1,4 @@
-#ifndef INPUT_DEFINITIONS_HPP
-#define INPUT_DEFINITIONS_HPP
+#pragma once
 
 #include "SDL.hpp"
 
@@ -255,4 +254,3 @@ enum KeyboardKey {
 
 enum MouseButton { MOUSE_LEFT = 0, MOUSE_RIGHT, MOUSE_MAX };
 
-#endif

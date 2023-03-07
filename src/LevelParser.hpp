@@ -1,5 +1,4 @@
-#ifndef LEVEL_PARSER_HPP
-#define LEVEL_PARSER_HPP
+#pragma once
 
 #include "Level.hpp"
 #include "tinyxml2.h"
@@ -28,4 +27,3 @@ private:
     int m_height;
 };
 
-#endif

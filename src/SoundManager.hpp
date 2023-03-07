@@ -1,5 +1,4 @@
-#ifndef SOUND_MANAGER_HPP
-#define SOUND_MANAGER_HPP
+#pragma once
 
 #include <map>
 #include <string>
@@ -27,4 +26,3 @@ private:
     std::map<std::string, Mix_Chunk*> m_sfxMap;
 };
 
-#endif

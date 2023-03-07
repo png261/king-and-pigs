@@ -1,5 +1,4 @@
-#ifndef INPUT_MANAGER_HPP
-#define INPUT_MANAGER_HPP
+#pragma once
 
 #include <vector>
 #include "Box2D.hpp"
@@ -44,4 +43,3 @@ private:
     bool m_bMouseUp[MOUSE_MAX];
 };
 
-#endif

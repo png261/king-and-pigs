@@ -1,5 +1,4 @@
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#pragma once
 
 #include "AttackableObject.hpp"
 #include "DamageableObject.hpp"
@@ -20,4 +19,3 @@ private:
     void handleInput();
 };
 
-#endif

@@ -1,5 +1,4 @@
-#ifndef BOX2D_HPP
-#define BOX2D_HPP
+#pragma once
 
 #include <box2d/box2d.h>
 
@@ -73,5 +72,3 @@ private:
     int32 m_velocityIterations;
     int32 m_positionIterations;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef ATTACK_ABLE_OBJECT_HPP
-#define ATTACK_ABLE_OBJECT_HPP
+#pragma once
 
 #include "Box2D.hpp"
 #include "DamageableObject.hpp"
@@ -39,4 +38,3 @@ protected:
 };
 
 
-#endif

@@ -1,5 +1,4 @@
-#ifndef CAMERA_HPP
-#define CAMERA_HPP
+#pragma once
 
 #include "Box2D.hpp"
 #include "GameObject.hpp"
@@ -28,4 +27,3 @@ private:
 
 typedef Camera Camera;
 
-#endif

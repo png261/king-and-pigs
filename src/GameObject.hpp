@@ -1,5 +1,4 @@
-#ifndef GAME_OBJECT_HPP
-#define GAME_OBJECT_HPP
+#pragma once
 
 #include "Animation.hpp"
 #include "Box2D.hpp"
@@ -80,4 +79,3 @@ protected:
     int m_footContact;
 };
 
-#endif

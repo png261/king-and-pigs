@@ -1,5 +1,4 @@
-#ifndef DOOR_OBJECT_HPP
-#define DOOR_OBJECT_HPP
+#pragma once
 
 #include "GameObject.hpp"
 
@@ -12,4 +11,3 @@ public:
     void loadAnimation();
 };
 
-#endif

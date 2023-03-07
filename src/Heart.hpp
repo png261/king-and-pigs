@@ -1,5 +1,4 @@
-#ifndef HEART_HPP
-#define HEART_HPP
+#pragma once
 
 #include "ItemObject.hpp"
 
@@ -13,4 +12,3 @@ public:
     void loadAnimation();
 };
 
-#endif

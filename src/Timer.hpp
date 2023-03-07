@@ -1,5 +1,4 @@
-#ifndef TIMER_HPP
-#define TIMER_HPP
+#pragma once
 
 #include "SDL.hpp"
 
@@ -25,4 +24,3 @@ protected:
     bool m_bPaused;
 };
 
-#endif
