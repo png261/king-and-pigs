@@ -35,7 +35,7 @@ AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortBlocksOnASingleLine: false
 
 # If true, short case labels will be contracted to a single line.
-AllowShortCaseLabelsOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: false
 
 # Dependent on the value, int f() { return 0; } can be put on a single line.
 # SFS_None (in configuration: None) Never merge functions into a single line.
