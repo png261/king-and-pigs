@@ -1,4 +1,5 @@
 #include "Box2D.hpp"
+#include <iostream>
 #include "AttackableObject.hpp"
 #include "ContactListener.hpp"
 #include "DamageableObject.hpp"
@@ -6,10 +7,12 @@
 #include "GameObject.hpp"
 #include "InputHandler.hpp"
 
-const b2Vec2 Box2D::GRAVITY = b2Vec2(0.0f, 9.8f);
 const float Box2D::PIXEL_PER_METER = 32.0f;
-const float Box2D::GROUND_FRICTION = 32.0f;
-const float Box2D::METER_PER_PIXEL = 1 / Box2D::PIXEL_PER_METER;
+const float Box2D::METER_PER_PIXEL = 1 / PIXEL_PER_METER;
+const float Box2D::RAD_PER_DEG = 180 / b2_pi;
+const float Box2D::DEG_PER_RAD = b2_pi / 180;
+const float Box2D::GROUND_FRICTION = 1;
+const b2Vec2 Box2D::GRAVITY = {0.0f, 9.8f};
 
 Box2D::Box2D() {}
 
@@ -39,18 +42,31 @@ b2Vec2 Box2D::pixelToMeter(b2Vec2 pixel)
     return b2Vec2(pixel.x * Box2D::METER_PER_PIXEL, pixel.y * Box2D::METER_PER_PIXEL);
 };
 
+float Box2D::radToDeg(float rad)
+{
+    return rad * Box2D::DEG_PER_RAD;
+};
+
+float Box2D::degToRad(float deg)
+{
+    return deg * Box2D::RAD_PER_DEG;
+};
+
 void Box2D::createWall(int size, b2Vec2 position)
 {
-    b2BodyDef groundBodyDef;
-    groundBodyDef.position = Box2D::pixelToMeter(position);
-    b2Body* const groundBody = this->getWorld()->CreateBody(&groundBodyDef);
-    b2PolygonShape groundBox;
-    groundBox.SetAsBox(Box2D::pixelToMeter(size) / 2.0f, Box2D::pixelToMeter(size) / 2.0f);
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &groundBox;
-    fixtureDef.friction = GROUND_FRICTION;
-    fixtureDef.filter.categoryBits = Box2D::CAT_WALL;
-    groundBody->CreateFixture(&fixtureDef);
+    b2BodyDef body;
+    body.position = Box2D::pixelToMeter(position);
+    body.type = b2_staticBody;
+    b2Body* const groundBody = this->getWorld()->CreateBody(&body);
+
+    b2PolygonShape box;
+    box.SetAsBox(Box2D::pixelToMeter(size) / 2.0f, Box2D::pixelToMeter(size) / 2.0f);
+
+    b2FixtureDef fixture;
+    fixture.shape = &box;
+    fixture.friction = Box2D::GROUND_FRICTION;
+    fixture.filter.categoryBits = Box2D::CAT_WALL;
+    groundBody->CreateFixture(&fixture);
 }
 
 bool Box2D::init()

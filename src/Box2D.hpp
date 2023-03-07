@@ -47,11 +47,16 @@ public:
 
     static const float PIXEL_PER_METER;
     static const float METER_PER_PIXEL;
+    static const float RAD_PER_DEG;
+    static const float DEG_PER_RAD;
     static const float GROUND_FRICTION;
     static const b2Vec2 GRAVITY;
 
     static int meterToPixel(float meter);
     static float pixelToMeter(float pixel);
+
+    static float radToDeg(float rad);
+    static float degToRad(float deg);
 
     static b2Vec2 meterToPixel(b2Vec2 meter);
     static b2Vec2 pixelToMeter(b2Vec2 pixel);
