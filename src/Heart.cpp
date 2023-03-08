@@ -10,8 +10,8 @@ void Heart::load(const LoaderParams* const pParams)
 
 void Heart::loadAnimation()
 {
-    m_animations[Animation::IDLE] = new Animation("heart idle", 7);
-    m_animations[Animation::HIT] = new Animation("heart hit", 2);
+    m_animations[Animation::IDLE] = new Animation("heart idle", 18, 14, 7);
+    m_animations[Animation::HIT] = new Animation("heart hit", 18, 14, 2);
 
     m_curAnimation = Animation::IDLE;
     m_animations[m_curAnimation]->start();

@@ -24,12 +24,24 @@ void InputHandler::update()
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
-        case SDL_QUIT: Game::Instance()->quit(); break;
-        case SDL_KEYDOWN: onKeyDown(event); break;
-        case SDL_KEYUP: onKeyUp(event); break;
-        case SDL_MOUSEMOTION: onMouseMove(event); break;
-        case SDL_MOUSEBUTTONDOWN: onMouseDown(event); break;
-        case SDL_MOUSEBUTTONUP: onMouseUp(event); break;
+        case SDL_QUIT:
+            Game::Instance()->quit();
+            break;
+        case SDL_KEYDOWN:
+            onKeyDown(event);
+            break;
+        case SDL_KEYUP:
+            onKeyUp(event);
+            break;
+        case SDL_MOUSEMOTION:
+            onMouseMove(event);
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            onMouseDown(event);
+            break;
+        case SDL_MOUSEBUTTONUP:
+            onMouseUp(event);
+            break;
         }
     }
 }
@@ -37,16 +49,24 @@ void InputHandler::update()
 void InputHandler::onMouseDown(SDL_Event const& event)
 {
     switch (event.button.button) {
-    case SDL_BUTTON_LEFT: m_bMouseDown[MOUSE_LEFT] = true; break;
-    case SDL_BUTTON_RIGHT: m_bMouseDown[MOUSE_RIGHT] = true; break;
+    case SDL_BUTTON_LEFT:
+        m_bMouseDown[MOUSE_LEFT] = true;
+        break;
+    case SDL_BUTTON_RIGHT:
+        m_bMouseDown[MOUSE_RIGHT] = true;
+        break;
     }
 }
 
 void InputHandler::onMouseUp(SDL_Event const& event)
 {
     switch (event.button.button) {
-    case SDL_BUTTON_LEFT: m_bMouseUp[MOUSE_LEFT] = false; break;
-    case SDL_BUTTON_RIGHT: m_bMouseUp[MOUSE_RIGHT] = false; break;
+    case SDL_BUTTON_LEFT:
+        m_bMouseUp[MOUSE_LEFT] = false;
+        break;
+    case SDL_BUTTON_RIGHT:
+        m_bMouseUp[MOUSE_RIGHT] = false;
+        break;
     }
 }
 

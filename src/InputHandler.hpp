@@ -42,4 +42,3 @@ private:
     bool m_bMouseDown[MOUSE_MAX];
     bool m_bMouseUp[MOUSE_MAX];
 };
-

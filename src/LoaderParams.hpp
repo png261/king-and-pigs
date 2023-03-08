@@ -5,24 +5,12 @@
 class LoaderParams
 {
 public:
-    LoaderParams(
-        const int x,
-        const int y,
-        const int width,
-        const int height,
-        const int textureWidth,
-        const int textureHeight,
-        const int textureX = 0,
-        const int textureY = 0);
+    LoaderParams(const int x, const int y, const int width, const int height);
 
     int x() const;
     int y() const;
     int width() const;
     int height() const;
-    int textureWidth() const;
-    int textureHeight() const;
-    int textureX() const;
-    int textureY() const;
 
 private:
     int m_x;
@@ -36,4 +24,3 @@ private:
     int m_textureX;
     int m_textureY;
 };
-

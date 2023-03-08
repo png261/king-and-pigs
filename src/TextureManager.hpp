@@ -5,7 +5,7 @@
 #include "Box2D.hpp"
 #include "SDL.hpp"
 
-class TextureManager  final
+class TextureManager final
 {
 public:
     static TextureManager* Instance();
@@ -45,4 +45,3 @@ private:
     TextureManager(){};
     std::map<std::string, SDL_Texture*> m_textureMap;
 };
-

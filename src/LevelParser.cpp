@@ -19,10 +19,9 @@ Level* LevelParser::parseLevel(const char* levelFile)
     Level* const pLevel = new Level();
     XMLElement* const pRoot = levelDocument.RootElement();
 
-    m_tileSize = atoi(pRoot->Attribute("tilewidth"));
-    m_width = atoi(pRoot->Attribute("width"));
-
-    m_height = atoi(pRoot->Attribute("height"));
+    m_tileSize = std::stoi(pRoot->Attribute("tilewidth"));
+    m_width = std::stoi(pRoot->Attribute("width"));
+    m_height = std::stoi(pRoot->Attribute("height"));
 
     for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("properties")) {
@@ -74,34 +73,32 @@ void LevelParser::parseTilesets(
 
     Tileset tileset;
 
-    if (pTilesetRoot->Attribute("firstgid")) {
-        tileset.firstGridID = atoi(pTilesetRoot->Attribute("firstgid"));
-    }
     if (pImagieEl->Attribute("width")) {
-        tileset.width = atoi(pImagieEl->Attribute("width"));
+        tileset.width = std::stoi(pImagieEl->Attribute("width"));
     }
     if (pImagieEl->Attribute("height")) {
-        tileset.height = atoi(pImagieEl->Attribute("height"));
-    }
-    if (pTilesetRoot->Attribute("tilewidth")) {
-        tileset.tileWidth = atoi(pTilesetRoot->Attribute("tilewidth"));
-    }
-    if (pTilesetRoot->Attribute("tileheight")) {
-        tileset.tileHeight = atoi(pTilesetRoot->Attribute("tileheight"));
+        tileset.height = std::stoi(pImagieEl->Attribute("height"));
     }
 
+    if (pTilesetRoot->Attribute("firstgid")) {
+        tileset.firstGridID = std::stoi(pTilesetRoot->Attribute("firstgid"));
+    }
+    if (pTilesetRoot->Attribute("tilewidth")) {
+        tileset.tileWidth = std::stoi(pTilesetRoot->Attribute("tilewidth"));
+    }
+    if (pTilesetRoot->Attribute("tileheight")) {
+        tileset.tileHeight = std::stoi(pTilesetRoot->Attribute("tileheight"));
+    }
     if (pTilesetRoot->Attribute("spacing")) {
-        tileset.spacing = atoi(pTilesetRoot->Attribute("spacing"));
+        tileset.spacing = std::stoi(pTilesetRoot->Attribute("spacing"));
     } else {
         tileset.spacing = 0;
     }
-
     if (pTilesetRoot->Attribute("margin")) {
-        tileset.margin = atoi(pTilesetRoot->Attribute("margin"));
+        tileset.margin = std::stoi(pTilesetRoot->Attribute("margin"));
     } else {
         tileset.margin = 0;
     }
-
     if (pTilesetRoot->Attribute("name")) {
         tileset.name = pTilesetRoot->Attribute("name");
     }
@@ -119,17 +116,13 @@ GameObject* parseObject(XMLElement* const pObjectElement, Level* const pLevel)
     int y = 0;
     int width = 0;
     int height = 0;
-    int textureWidth = 0;
-    int textureHeight = 0;
-    int textureX = 0;
-    int textureY = 0;
     std::string type = "";
 
-    x = atoi(pObjectElement->Attribute("x"));
-    y = atoi(pObjectElement->Attribute("y"));
+    x = std::stoi(pObjectElement->Attribute("x"));
+    y = std::stoi(pObjectElement->Attribute("y"));
 
-    width = atoi(pObjectElement->Attribute("width"));
-    height = atoi(pObjectElement->Attribute("height"));
+    width = std::stoi(pObjectElement->Attribute("width"));
+    height = std::stoi(pObjectElement->Attribute("height"));
 
     type = pObjectElement->Attribute("class");
 
@@ -143,25 +136,12 @@ GameObject* parseObject(XMLElement* const pObjectElement, Level* const pLevel)
                 if (property->Value() == std::string("property")) {
                     std::string propertyName = property->Attribute("name");
                     std::string propertyValue = property->Attribute("value");
-
-                    if (propertyName == "textureWidth") {
-                        textureWidth = stoi(propertyValue);
-                    }
-                    if (propertyName == "textureY") {
-                        textureY = stoi(propertyValue);
-                    }
-                    if (propertyName == "textureX") {
-                        textureX = stoi(propertyValue);
-                    } else if (propertyName == "textureHeight") {
-                        textureHeight = stoi(propertyValue);
-                    }
                 }
             }
         }
     }
 
-    pGameObject->load(
-        new LoaderParams(x, y, width, height, textureWidth, textureHeight, textureX, textureY));
+    pGameObject->load(new LoaderParams(x, y, width, height));
 
     if (type == "Player") {
         Game::Instance()->setPlayer(dynamic_cast<Player*>(pGameObject));
@@ -231,18 +211,18 @@ void LevelParser::parseTileLayer(
     for (int row = 0; row < m_height; row++) {
         for (int col = 0; col < m_width; col++) {
             int end = dataText.find(',', start);
-            data[row][col] = stoi(dataText.substr(start, end - start));
+            data[row][col] = std::stoi(dataText.substr(start, end - start));
             start = end + 1;
         }
     }
 
     pTileLayer->setTileIDs(data);
     pTileLayer->setMapWidth(m_width);
+
     if (collidable) {
         for (int row = 0; row < m_height; row++) {
             for (int col = 0; col < m_width; col++) {
-                int id = data[row][col];
-                if (id == 0) {
+                if (data[row][col] == 0) {
                     continue;
                 }
 

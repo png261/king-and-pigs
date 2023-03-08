@@ -1,5 +1,4 @@
 #include "Pig.hpp"
-#include <iostream>
 #include "Box2D.hpp"
 #include "DamageableObject.hpp"
 #include "Game.hpp"
@@ -22,14 +21,14 @@ void Pig::load(const LoaderParams* const pParams)
 
 void Pig::loadAnimation()
 {
-    m_animations[Animation::IDLE] = new Animation("pig idle", 11);
-    m_animations[Animation::RUN] = new Animation("pig run", 6);
-    m_animations[Animation::JUMP] = new Animation("pig jump", 1);
-    m_animations[Animation::FALL] = new Animation("pig fall", 1);
-    m_animations[Animation::GROUND] = new Animation("pig ground", 1);
-    m_animations[Animation::ATTACK] = new Animation("pig attack", 3, false);
-    m_animations[Animation::HIT] = new Animation("pig hit", 2);
-    m_animations[Animation::DEAD] = new Animation("pig dead", 4, false);
+    m_animations[Animation::IDLE] = new Animation("pig idle", 34, 28, 11);
+    m_animations[Animation::RUN] = new Animation("pig run", 34, 28, 6);
+    m_animations[Animation::JUMP] = new Animation("pig jump", 34, 28, 1);
+    m_animations[Animation::FALL] = new Animation("pig fall", 34, 28, 1);
+    m_animations[Animation::GROUND] = new Animation("pig ground", 34, 28, 1);
+    m_animations[Animation::ATTACK] = new Animation("pig attack", 34, 28, 3, false);
+    m_animations[Animation::HIT] = new Animation("pig hit", 34, 28, 2);
+    m_animations[Animation::DEAD] = new Animation("pig dead", 34, 28, 4, false);
 
     m_curAnimation = Animation::IDLE;
     m_animations[m_curAnimation]->start();
@@ -58,7 +57,9 @@ void Pig::updateAnimation()
     }
 
     switch (m_currentState) {
-    case ON_GROUND: newAnimation = Animation::IDLE; break;
+    case ON_GROUND:
+        newAnimation = Animation::IDLE;
+        break;
     case ON_FLY:
         if (this->getBody()->GetLinearVelocity().y == 0) {
             m_currentState = ON_GROUND;
@@ -81,9 +82,15 @@ void Pig::updateAnimation()
         }
 
         break;
-    case ON_HIT: newAnimation = Animation::HIT; break;
-    case ON_ATTACK: newAnimation = Animation::ATTACK; break;
-    case ON_DIE: newAnimation = Animation::DEAD; break;
+    case ON_HIT:
+        newAnimation = Animation::HIT;
+        break;
+    case ON_ATTACK:
+        newAnimation = Animation::ATTACK;
+        break;
+    case ON_DIE:
+        newAnimation = Animation::DEAD;
+        break;
     }
 
     if (newAnimation != m_curAnimation) {

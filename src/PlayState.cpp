@@ -24,7 +24,7 @@ bool PlayState::onEnter()
 
 
     Camera::Instance()->setTarget(Game::Instance()->getPlayer());
-    Camera::Instance()->setZoom(3);
+    Camera::Instance()->setZoom(2);
 
     m_loadingComplete = true;
     return true;

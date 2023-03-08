@@ -15,7 +15,8 @@ public:
     virtual void draw();
     virtual void loadAnimation(){};
 
-    b2Vec2& getPosition();
+    b2Vec2 getPosition();
+    float getAngle();
     int getWidth() const;
     int getHeight() const;
 
@@ -27,9 +28,9 @@ public:
     void setUpdating(const bool updating);
     virtual void changeFootContact(int n);
 
-    void moveLeft();
-    void moveRight();
-    void jump();
+    virtual void moveLeft();
+    virtual void moveRight();
+    virtual void jump();
 
     enum ObjectPosition {
         ON_GROUND,
@@ -46,15 +47,8 @@ public:
 protected:
     GameObject();
 
-    b2Vec2 m_position;
-
     int m_width;
     int m_height;
-
-    int m_textureHeight;
-    int m_textureWidth;
-    int m_textureX;
-    int m_textureY;
 
     bool m_bUpdating;
 
@@ -73,9 +67,8 @@ protected:
     ObjectPosition m_currentState;
     ObjectState m_currentAttackState;
 
-    int m_moveSpeed;
-    int m_jumpHeight;
+    float m_moveSpeed;
+    float m_jumpHeight;
 
     int m_footContact;
 };
-

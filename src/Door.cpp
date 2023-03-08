@@ -19,9 +19,9 @@ void Door::load(const LoaderParams* const pParams)
 
 void Door::loadAnimation()
 {
-    m_animations[Animation::IDLE] = new Animation("door idle", 1);
-    m_animations[Animation::DOOR_OPEN] = new Animation("door open", 5);
-    m_animations[Animation::DOOR_CLOSE] = new Animation("door close", 5);
+    m_animations[Animation::IDLE] = new Animation("door idle", 78, 96, 1);
+    m_animations[Animation::DOOR_OPEN] = new Animation("door open", 78, 96, 5);
+    m_animations[Animation::DOOR_CLOSE] = new Animation("door close", 78, 96, 5);
 
     m_curAnimation = Animation::DOOR_OPEN;
     m_animations[m_curAnimation]->start();

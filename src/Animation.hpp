@@ -23,14 +23,14 @@ public:
         DOOR_CLOSE,
     };
 
-    Animation(const std::string textureID, const int nFrames = 1, const bool bLoop = true);
+    Animation(
+        const std::string textureID,
+        int width,
+        int height,
+        const int nFrames = 1,
+        const bool bLoop = true);
 
-    virtual void draw(
-        const b2Vec2 position,
-        const int width,
-        const int height,
-        const float angle = 0,
-        const bool flip = false);
+    virtual void draw(const b2Vec2 position, const float angle = 0, const bool flip = false);
 
     virtual void update();
 
@@ -56,4 +56,3 @@ private:
     bool m_bLoop;
     int m_timesLooped;
 };
-

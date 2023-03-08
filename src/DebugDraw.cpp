@@ -6,7 +6,32 @@
 #include "Game.hpp"
 #include "SDL.hpp"
 
-void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {}
+void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
+{
+    SDL_Renderer* const renderer = Game::Instance()->getWindow()->getRenderer();
+    // Set the renderer color to the fill color.
+    SDL_SetRenderDrawColor(renderer, color.r * 255, color.g * 255, color.b * 255, color.a * 255);
+
+    // Create an array of SDL points from the Box2D vertices.
+    SDL_Point sdlVertices[vertexCount];
+    for (int i = 0; i < vertexCount; i++) {
+        b2Vec2 point = Box2D::meterToPixel(vertices[i]) - Camera::Instance()->getPosition();
+        sdlVertices[i] = {static_cast<int>(point.x), static_cast<int>(point.y)};
+    }
+
+    // Draw the polygon by calling SDL_RenderDrawLines.
+    // The last point should connect to the first point to close the polygon.
+    SDL_RenderDrawLines(renderer, sdlVertices, vertexCount);
+    SDL_RenderDrawLine(
+        renderer,
+        sdlVertices[vertexCount - 1].x,
+        sdlVertices[vertexCount - 1].y,
+        sdlVertices[0].x,
+        sdlVertices[0].y);
+
+    // Draw the outline by calling SDL_RenderDrawLines again.
+    SDL_RenderDrawLines(renderer, sdlVertices, vertexCount);
+}
 
 void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
 {

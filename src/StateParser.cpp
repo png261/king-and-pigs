@@ -87,16 +87,9 @@ void StateParser::parseObjects(XMLElement* const pObjectRoot, std::vector<GameOb
         if (e->Attribute("height")) {
             height = atoi(e->Attribute("height"));
         }
-        if (e->Attribute("numFrames")) {
-            numFrames = atoi(e->Attribute("numFrames"));
-        }
-        if (e->Attribute("callbackID")) {
-            callbackID = atoi(e->Attribute("callbackID"));
-        }
 
         GameObject* const pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
-        pGameObject->load(
-            new LoaderParams(x, y, width, height, width, height, numFrames, callbackID));
+        pGameObject->load(new LoaderParams(x, y, width, height));
         pObjects->push_back(pGameObject);
     }
 }

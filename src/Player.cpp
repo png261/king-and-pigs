@@ -34,16 +34,16 @@ void Player::load(const LoaderParams* const pParams)
 
 void Player::loadAnimation()
 {
-    m_animations[Animation::IDLE] = new Animation("player idle", 11);
-    m_animations[Animation::RUN] = new Animation("player run", 8);
-    m_animations[Animation::JUMP] = new Animation("player jump", 1);
-    m_animations[Animation::FALL] = new Animation("player fall", 1);
-    m_animations[Animation::GROUND] = new Animation("player ground", 1);
-    m_animations[Animation::ATTACK] = new Animation("player attack", 3, false);
-    m_animations[Animation::HIT] = new Animation("player hit", 2);
-    m_animations[Animation::DEAD] = new Animation("player dead", 4, false);
-    m_animations[Animation::DOOR_IN] = new Animation("player door in", 8, false);
-    m_animations[Animation::DOOR_OUT] = new Animation("player door out", 8, false);
+    m_animations[Animation::IDLE] = new Animation("player idle", 78, 58, 11);
+    m_animations[Animation::RUN] = new Animation("player run", 78, 58, 8);
+    m_animations[Animation::JUMP] = new Animation("player jump", 78, 58, 1);
+    m_animations[Animation::FALL] = new Animation("player fall", 78, 58, 1);
+    m_animations[Animation::GROUND] = new Animation("player ground", 78, 58, 1);
+    m_animations[Animation::ATTACK] = new Animation("player attack", 78, 58, 3, false);
+    m_animations[Animation::HIT] = new Animation("player hit", 78, 58, 2);
+    m_animations[Animation::DEAD] = new Animation("player dead", 78, 58, 4, false);
+    m_animations[Animation::DOOR_IN] = new Animation("player door in", 78, 58, 8, false);
+    m_animations[Animation::DOOR_OUT] = new Animation("player door out", 78, 58, 8, false);
 
     m_curAnimation = Animation::IDLE;
     m_animations[m_curAnimation]->start();
@@ -56,7 +56,6 @@ void Player::draw()
 
 void Player::update()
 {
-    std::cout << "footContact: " << m_footContact << std::endl;
     this->handleInput();
     GameObject::update();
     DamageableObject::update();
@@ -104,10 +103,17 @@ void Player::updateAnimation()
     }
 
     switch (m_currentAttackState) {
-    case ON_NORMAL: break;
-    case ON_HIT: newAnimation = Animation::HIT; break;
-    case ON_ATTACK: newAnimation = Animation::ATTACK; break;
-    case ON_DIE: newAnimation = Animation::DEAD; break;
+    case ON_NORMAL:
+        break;
+    case ON_HIT:
+        newAnimation = Animation::HIT;
+        break;
+    case ON_ATTACK:
+        newAnimation = Animation::ATTACK;
+        break;
+    case ON_DIE:
+        newAnimation = Animation::DEAD;
+        break;
     }
 
     if (newAnimation != m_curAnimation) {
