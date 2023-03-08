@@ -1,4 +1,5 @@
 #include "Box2D.hpp"
+#include <iostream>
 #include "AttackableObject.hpp"
 #include "ContactListener.hpp"
 #include "DamageableObject.hpp"
@@ -23,7 +24,7 @@ Box2D* Box2D::Instance()
 
 int Box2D::meterToPixel(float meter)
 {
-    return static_cast<int>(meter * Box2D::PIXEL_PER_METER);
+    return static_cast<int>(floor(meter * Box2D::PIXEL_PER_METER));
 }
 
 float Box2D::pixelToMeter(float pixel)
@@ -33,12 +34,12 @@ float Box2D::pixelToMeter(float pixel)
 
 b2Vec2 Box2D::meterToPixel(b2Vec2 meter)
 {
-    return b2Vec2(meter.x * Box2D::PIXEL_PER_METER, meter.y * Box2D::PIXEL_PER_METER);
+    return {meter.x * Box2D::PIXEL_PER_METER, meter.y * Box2D::PIXEL_PER_METER};
 };
 
 b2Vec2 Box2D::pixelToMeter(b2Vec2 pixel)
 {
-    return b2Vec2(pixel.x * Box2D::METER_PER_PIXEL, pixel.y * Box2D::METER_PER_PIXEL);
+    return {pixel.x * Box2D::METER_PER_PIXEL, pixel.y * Box2D::METER_PER_PIXEL};
 };
 
 float Box2D::radToDeg(float rad)
@@ -58,10 +59,19 @@ void Box2D::createWall(int size, b2Vec2 position)
     body.type = b2_staticBody;
     b2Body* const groundBody = this->getWorld()->CreateBody(&body);
 
-    b2PolygonShape box;
-    box.SetAsBox(Box2D::pixelToMeter(size) / 2.0f, Box2D::pixelToMeter(size) / 2.0f);
+    float width = Box2D::pixelToMeter(size);
+    float height = Box2D::pixelToMeter(size);
 
     b2FixtureDef fixture;
+
+    b2ChainShape box;
+    b2Vec2 vertices[4];
+    vertices[0].Set(-width / 2, -height / 2);
+    vertices[1].Set(width / 2, -height / 2);
+    vertices[2].Set(width / 2, height / 2);
+    vertices[3].Set(-width / 2, height / 2);
+    box.CreateLoop(vertices, 4);
+
     fixture.shape = &box;
     fixture.friction = Box2D::GROUND_FRICTION;
     fixture.filter.categoryBits = Box2D::CAT_WALL;
@@ -78,7 +88,13 @@ bool Box2D::init()
     m_positionIterations = 8;
 
     m_pDebugDraw = new DebugDraw();
-    m_pDebugDraw->SetFlags(b2Draw::e_shapeBit);
+    uint32 flags = 0;
+    flags += b2Draw::e_shapeBit;
+    flags += b2Draw::e_jointBit;
+    flags += b2Draw::e_centerOfMassBit;
+    flags += b2Draw::e_aabbBit;
+    flags += b2Draw::e_pairBit;
+    m_pDebugDraw->SetFlags(flags);
     m_pWorld->SetDebugDraw(m_pDebugDraw);
     m_bDebugEnable = true;
 
@@ -96,7 +112,8 @@ void Box2D::handleEvents()
 
 void Box2D::contactListener()
 {
-    for (b2Contact* contact = getWorld()->GetContactList(); contact; contact = contact->GetNext()) {
+    for (b2Contact* contact = getWorld()->GetContactList(); contact != nullptr;
+         contact = contact->GetNext()) {
         attackListener(contact);
     }
 }
