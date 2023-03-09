@@ -49,11 +49,6 @@ void Player::loadAnimation()
     m_animations[m_curAnimation]->start();
 }
 
-void Player::draw()
-{
-    GameObject::draw();
-}
-
 void Player::update()
 {
     this->handleInput();
@@ -62,6 +57,31 @@ void Player::update()
     AttackableObject::update();
     this->updateAnimation();
 }
+
+void Player::handleInput()
+{
+    InputHandler* const input = InputHandler::Instance();
+
+    if (m_currentState == ON_GROUND) {
+        if (input->isKeyPressed(KEY_SPACE)) {
+            this->jump();
+        }
+        if (input->isKeyPressed(KEY_RIGHT)) {
+            this->moveRight();
+            m_bTurnRight = true;
+        }
+        if (input->isKeyPressed(KEY_LEFT)) {
+            this->moveLeft();
+            m_bTurnRight = false;
+        }
+    }
+
+    if (m_currentAttackState == ON_NORMAL) {
+        if (input->isKeyPressed(KEY_A)) {
+            this->attack();
+        }
+    }
+};
 
 void Player::updateAnimation()
 {
@@ -122,28 +142,3 @@ void Player::updateAnimation()
         m_animations[m_curAnimation]->start();
     }
 }
-
-void Player::handleInput()
-{
-    InputHandler* const input = InputHandler::Instance();
-
-    if (m_currentState == ON_GROUND) {
-        if (input->isKeyPressed(KEY_SPACE)) {
-            this->jump();
-        }
-        if (input->isKeyPressed(KEY_RIGHT)) {
-            this->moveRight();
-            m_bTurnRight = true;
-        }
-        if (input->isKeyPressed(KEY_LEFT)) {
-            this->moveLeft();
-            m_bTurnRight = false;
-        }
-    }
-
-    if (m_currentAttackState == ON_NORMAL) {
-        if (input->isKeyPressed(KEY_A)) {
-            this->attack();
-        }
-    }
-};

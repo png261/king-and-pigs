@@ -31,13 +31,12 @@ public:
 
 private:
     Game();
+    Player* m_pPlayer;
     Window* m_pWindow;
 
     int m_currentLevel;
 
     bool m_bRunning;
-
-    Player* m_pPlayer;
 
     std::vector<std::string> m_levelFiles;
 };

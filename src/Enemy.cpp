@@ -12,8 +12,3 @@ void Enemy::load(const LoaderParams* const pParams)
     m_pFixture->SetDensity(50);
     m_pFixture->SetFilterData(filter);
 };
-
-void Enemy::draw()
-{
-    GameObject::draw();
-}

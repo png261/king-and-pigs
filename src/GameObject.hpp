@@ -14,19 +14,19 @@ public:
     virtual void update();
     virtual void draw();
     virtual void loadAnimation(){};
+    virtual void createBody(const int x, const int y, const int width, const int height);
 
-    b2Vec2 getPosition();
-    float getAngle();
-    int getWidth() const;
-    int getHeight() const;
+    virtual b2Body* getBody() const;
+    virtual int getWidth() const;
+    virtual int getHeight() const;
+    virtual b2Vec2 getPosition() const;
+    virtual float getAngle() const;
 
-    b2Body* getBody() const;
+    virtual bool isUpdating() const;
+    virtual bool isExist() const;
 
-    bool isUpdating() const;
-    bool isExist() const;
-
-    void setUpdating(const bool updating);
-    virtual void changeFootContact(int n);
+    virtual void setUpdating(const bool updating);
+    virtual void changeFootContact(const int n);
 
     virtual void moveLeft();
     virtual void moveRight();
@@ -51,24 +51,18 @@ protected:
     int m_height;
 
     bool m_bUpdating;
-
-    double m_angle;
     bool m_bFlipped;
-
-    std::map<Animation::AnimationID, Animation*> m_animations;
-    Animation::AnimationID m_curAnimation;
-
     bool m_bExist;
 
     b2Body* m_pBody;
-    b2Fixture* m_pFootSensor;
     b2Fixture* m_pFixture;
-
-    ObjectPosition m_currentState;
-    ObjectState m_currentAttackState;
-
     float m_moveSpeed;
     float m_jumpHeight;
 
     int m_footContact;
+
+    ObjectPosition m_currentState;
+    ObjectState m_currentAttackState;
+    std::map<Animation::AnimationID, Animation*> m_animations;
+    Animation::AnimationID m_curAnimation;
 };

@@ -10,7 +10,6 @@ public:
     Player();
     void load(const LoaderParams* const pParams);
 
-    void draw();
     void update();
     void updateAnimation();
     void loadAnimation();

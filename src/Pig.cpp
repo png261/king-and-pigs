@@ -99,8 +99,3 @@ void Pig::updateAnimation()
         m_animations[m_curAnimation]->start();
     }
 }
-
-void Pig::draw()
-{
-    Enemy::draw();
-}

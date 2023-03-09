@@ -40,4 +40,3 @@ private:
     std::vector<Layer*> m_layers;
     std::vector<Tileset> m_tilesets;
 };
-
