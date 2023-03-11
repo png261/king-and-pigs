@@ -2,9 +2,11 @@
 
 #include <vector>
 #include "Box2D.hpp"
+#include "CONSTANT.hpp"
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"
 #include "Layer.hpp"
+#include "Log.hpp"
 #include "ObjectLayer.hpp"
 #include "TextureManager.hpp"
 #include "TileLayer.hpp"
@@ -14,10 +16,15 @@ using namespace tinyxml2;
 Level* LevelParser::parseLevel(const char* levelFile)
 {
     XMLDocument levelDocument;
-    levelDocument.LoadFile(levelFile);
+    if (levelDocument.LoadFile(levelFile) != XML_SUCCESS) {
+        Log::error(std::string("fail to load level file: ") + levelFile);
+    }
 
     Level* const pLevel = new Level();
     XMLElement* const pRoot = levelDocument.RootElement();
+    if (pRoot == nullptr) {
+        Log::error(std::string(levelFile) + ": missing  root element");
+    }
 
     m_tileSize = std::stoi(pRoot->Attribute("tilewidth"));
     m_width = std::stoi(pRoot->Attribute("width"));
@@ -42,12 +49,15 @@ Level* LevelParser::parseLevel(const char* levelFile)
 
     for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("objectgroup") || e->Value() == std::string("layer")) {
-            if (e->FirstChildElement()->Value() == std::string("object")) {
-                parseObjectLayer(e, pLevel->getLayers(), pLevel);
-            } else if (
+            bool isTileLayer =
                 e->FirstChildElement()->Value() == std::string("data") ||
                 (e->FirstChildElement()->NextSiblingElement() != 0 &&
-                 e->FirstChildElement()->NextSiblingElement()->Value() == std::string("data"))) {
+                 e->FirstChildElement()->NextSiblingElement()->Value() == std::string("data"));
+            bool isObjectLayer = e->FirstChildElement()->Value() == std::string("object");
+
+            if (isObjectLayer) {
+                parseObjectLayer(e, pLevel->getLayers(), pLevel);
+            } else if (isTileLayer) {
                 parseTileLayer(e, pLevel->getLayers(), pLevel->getTilesets());
             }
         }
@@ -67,8 +77,6 @@ void LevelParser::parseTilesets(
     XMLElement* const pTilesetRoot,
     std::vector<Tileset>* const pTilesets)
 {
-    const std::string assetsTag = "assets/";
-
     XMLElement* const pImagieEl = pTilesetRoot->FirstChildElement();
 
     Tileset tileset;
@@ -79,7 +87,6 @@ void LevelParser::parseTilesets(
     if (pImagieEl->Attribute("height")) {
         tileset.height = std::stoi(pImagieEl->Attribute("height"));
     }
-
     if (pTilesetRoot->Attribute("firstgid")) {
         tileset.firstGridID = std::stoi(pTilesetRoot->Attribute("firstgid"));
     }
@@ -105,7 +112,7 @@ void LevelParser::parseTilesets(
 
     tileset.numColumns = tileset.width / (tileset.tileWidth + tileset.spacing);
 
-    TextureManager::Instance()->load(assetsTag + pImagieEl->Attribute("source"), tileset.name);
+    TextureManager::Instance()->load(ASSETS_DIR + pImagieEl->Attribute("source"), tileset.name);
 
     pTilesets->push_back(tileset);
 }
@@ -169,6 +176,27 @@ void LevelParser::parseObjectLayer(
     }
 }
 
+std::vector<std::vector<int>> LevelParser::parseData(std::string dataText)
+{
+    std::vector<std::vector<int>> data;
+
+    std::vector<int> layerRow(m_width);
+    for (int i = 0; i < m_height; i++) {
+        data.push_back(layerRow);
+    }
+
+    int start = 0;
+    for (int row = 0; row < m_height; row++) {
+        for (int col = 0; col < m_width; col++) {
+            int end = dataText.find(',', start);
+            data[row][col] = std::stoi(dataText.substr(start, end - start));
+            start = end + 1;
+        }
+    }
+
+    return data;
+}
+
 void LevelParser::parseTileLayer(
     XMLElement* const pTileElement,
     std::vector<Layer*>* const pLayers,
@@ -177,13 +205,6 @@ void LevelParser::parseTileLayer(
     TileLayer* const pTileLayer = new TileLayer(m_tileSize, m_width, m_height, *pTilesets);
 
     bool collidable = false;
-
-    std::vector<std::vector<int>> data;
-
-    std::vector<int> layerRow(m_width);
-    for (int i = 0; i < m_height; i++) {
-        data.push_back(layerRow);
-    }
 
     XMLElement* pDataNode = nullptr;
 
@@ -205,24 +226,14 @@ void LevelParser::parseTileLayer(
         }
     }
 
-    std::string const dataText = pDataNode->GetText();
-
-    int start = 0;
-    for (int row = 0; row < m_height; row++) {
-        for (int col = 0; col < m_width; col++) {
-            int end = dataText.find(',', start);
-            data[row][col] = std::stoi(dataText.substr(start, end - start));
-            start = end + 1;
-        }
-    }
-
-    pTileLayer->setTileIDs(data);
+    std::vector<std::vector<int>> IDs = parseData(pDataNode->GetText());
+    pTileLayer->setTileIDs(IDs);
     pTileLayer->setMapWidth(m_width);
 
     if (collidable) {
         for (int row = 0; row < m_height; row++) {
             for (int col = 0; col < m_width; col++) {
-                if (data[row][col] == 0) {
+                if (IDs[row][col] == 0) {
                     continue;
                 }
 

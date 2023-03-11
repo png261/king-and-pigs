@@ -1,5 +1,6 @@
 #pragma once
 
+#include <box2d/b2_types.h>
 #include <box2d/box2d.h>
 
 class DebugDraw;
@@ -28,6 +29,7 @@ public:
         CAT_ITEM = 0x0010,
         CAT_FOOT_SENSOR = 0x0020,
         CAT_ATTACK_SENSOR = 0x0040,
+        CAT_ENEMY_VISION_SENSOR = 0x0080,
         CAT_ALL = 0xFFFF,
         CAT_NONE = 0x0000,
     };
@@ -41,6 +43,7 @@ public:
         MASK_FOOT_SENSOR = CAT_ALL,
         MASK_PLAYER_ATTACK_SENSOR = CAT_ENEMY,
         MASK_ENEMY_ATTACK_SENSOR = CAT_PLAYER,
+        MASK_ENEMY_VISION_SENSOR = CAT_ALL,
     };
 
     static const float PIXEL_PER_METER;
@@ -62,6 +65,7 @@ public:
 private:
     Box2D();
     void attackListener(b2Contact* contact);
+    void enemyVisionListener(b2Contact* contact);
     void handleAttack(b2Fixture* Attacker, b2Fixture* Defender);
 
     b2World* m_pWorld;

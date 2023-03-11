@@ -21,6 +21,7 @@ private:
         tinyxml2::XMLElement* const pTileElement,
         std::vector<Layer*>* const pLayers,
         std::vector<Tileset>* const pTilesets);
+    std::vector<std::vector<int>> parseData(const std::string dataText);
 
     int m_tileSize;
     int m_width;

@@ -9,4 +9,3 @@ namespace SDL {
 bool init();
 void exit();
 } // namespace SDL
-

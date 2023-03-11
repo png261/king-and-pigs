@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
 #include "Box2D.hpp"
+#include "CONSTANT.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
 #include "PlayState.hpp"
@@ -9,9 +10,9 @@ Game::Game()
     : m_pWindow(nullptr)
     , m_bRunning(false)
 {
-    m_levelFiles.push_back("levels/test.tmx");
-    m_levelFiles.push_back("levels/level1.tmx");
-    m_levelFiles.push_back("levels/level2.tmx");
+    m_levelFiles.push_back(LEVELS_DIR + "test.tmx");
+    m_levelFiles.push_back(LEVELS_DIR + "level1.tmx");
+    m_levelFiles.push_back(LEVELS_DIR + "level2.tmx");
     m_currentLevel = 0;
 }
 
@@ -27,14 +28,14 @@ bool Game::init(const unsigned int width, const unsigned int height)
         return false;
     };
 
+    m_pWindow = new Window(width, height);
+
     if (Box2D::Instance()->init() == false) {
         return false;
     };
 
-    m_pWindow = new Window(width, height, "");
-    m_bRunning = true;
-
     GameStateMachine::Instance()->changeState(new PlayState());
+    m_bRunning = true;
 
     return true;
 }

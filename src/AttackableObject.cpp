@@ -68,7 +68,7 @@ void AttackableObject::attack()
 
     m_bAttack = true;
     m_bCanAttack = false;
-    attackTimer.start();
+    attackTimer.restart();
 }
 
 void AttackableObject::update()

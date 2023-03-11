@@ -4,8 +4,11 @@
 #include "ContactListener.hpp"
 #include "DamageableObject.hpp"
 #include "DebugDraw.hpp"
+#include "Game.hpp"
 #include "GameObject.hpp"
 #include "InputHandler.hpp"
+#include "Log.hpp"
+#include "Pig.hpp"
 
 const float Box2D::PIXEL_PER_METER = 32.0f;
 const float Box2D::METER_PER_PIXEL = 1 / PIXEL_PER_METER;
@@ -87,14 +90,7 @@ bool Box2D::init()
     m_velocityIterations = 10;
     m_positionIterations = 8;
 
-    m_pDebugDraw = new DebugDraw();
-    uint32 flags = 0;
-    flags += b2Draw::e_shapeBit;
-    /* flags += b2Draw::e_jointBit; */
-    /* flags += b2Draw::e_centerOfMassBit; */
-    /* flags += b2Draw::e_aabbBit; */
-    /* flags += b2Draw::e_pairBit; */
-    m_pDebugDraw->SetFlags(flags);
+    m_pDebugDraw = new DebugDraw(Game::Instance()->getWindow());
     m_pWorld->SetDebugDraw(m_pDebugDraw);
     m_bDebugEnable = true;
 
@@ -115,6 +111,30 @@ void Box2D::contactListener()
     for (b2Contact* contact = getWorld()->GetContactList(); contact != nullptr;
          contact = contact->GetNext()) {
         attackListener(contact);
+        enemyVisionListener(contact);
+    }
+}
+
+void Box2D::enemyVisionListener(b2Contact* contact)
+{
+    b2Fixture* const A = contact->GetFixtureA();
+    b2Fixture* const B = contact->GetFixtureB();
+    uint16 const catA = A->GetFilterData().categoryBits;
+    uint16 const catB = B->GetFilterData().categoryBits;
+    bool isSeeing = (catA | catB) == (Box2D::CAT_PLAYER | Box2D::CAT_ENEMY_VISION_SENSOR);
+    if (!isSeeing) {
+        return;
+    }
+    if (catA == Box2D::CAT_ENEMY_VISION_SENSOR) {
+        GameObject* const enemy = (GameObject*)(A->GetBody()->GetUserData().pointer);
+        GameObject* const player = (GameObject*)(B->GetBody()->GetUserData().pointer);
+        std::cout << player->getPosition().x << std::endl;
+    }
+
+    if (catB == Box2D::CAT_ENEMY_VISION_SENSOR) {
+        GameObject* const player = (GameObject*)(A->GetBody()->GetUserData().pointer);
+        Pig* const enemy = dynamic_cast<Pig*>((GameObject*)(B->GetBody()->GetUserData().pointer));
+        enemy->setFollowPosition(player->getPosition());
     }
 }
 

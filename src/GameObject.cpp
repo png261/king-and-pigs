@@ -123,6 +123,11 @@ void GameObject::moveRight()
     b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 
+    if (m_curAnimation != Animation::RUN) {
+        m_animations[m_curAnimation]->stop();
+        m_curAnimation = Animation::RUN;
+        m_animations[m_curAnimation]->start();
+    }
     m_bFlipped = false;
 }
 
@@ -132,6 +137,11 @@ void GameObject::moveLeft()
     b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 
+    if (m_curAnimation != Animation::RUN) {
+        m_animations[m_curAnimation]->stop();
+        m_curAnimation = Animation::RUN;
+        m_animations[m_curAnimation]->start();
+    }
     m_bFlipped = true;
 }
 

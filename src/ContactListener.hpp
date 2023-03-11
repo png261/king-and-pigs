@@ -13,5 +13,9 @@ private:
 
     void JumpBeginContact(b2Contact* contact);
     void JumpEndContact(b2Contact* contact);
-};
 
+    void EnemyVisionBeginContact(b2Contact* contact);
+    void EnemyVisionEndContact(b2Contact* contact);
+    void EnemyAttackRangePlayerBeginContact(b2Contact* contact);
+    void EnemyAttackRangePlayerEndContact(b2Contact* contact);
+};

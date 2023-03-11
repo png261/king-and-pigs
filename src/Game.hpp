@@ -20,9 +20,9 @@ public:
     void quit();
 
     Window* getWindow();
+    Player* getPlayer() const;
     int getCurrentLevel() const;
     int getNextLevel() const;
-    Player* getPlayer() const;
     std::string getLevel(const int index);
     bool isRunning() const;
 

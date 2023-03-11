@@ -1,5 +1,6 @@
 #include "PlayState.hpp"
 #include "Box.hpp"
+#include "CONSTANT.hpp"
 #include "Camera.hpp"
 #include "Door.hpp"
 #include "Enemy.hpp"
@@ -41,40 +42,40 @@ bool PlayState::load()
     pGameObjectFactory->registerType("Heart", new Creator<Heart>);
     pGameObjectFactory->registerType("Door", new Creator<Door>);
 
-    pTextureManager->load("assets/Player/Idle.png", "player idle");
-    pTextureManager->load("assets/Player/Run.png", "player run");
-    pTextureManager->load("assets/Player/Jump.png", "player jump");
-    pTextureManager->load("assets/Player/Attack.png", "player attack");
-    pTextureManager->load("assets/Player/Dead.png", "player dead");
-    pTextureManager->load("assets/Player/Fall.png", "player fall");
-    pTextureManager->load("assets/Player/Ground.png", "player ground");
-    pTextureManager->load("assets/Player/Hit.png", "player hit");
-    pTextureManager->load("assets/Player/Door In.png", "player door in");
-    pTextureManager->load("assets/Player/Door Out.png", "player door out");
+    pTextureManager->load(ASSETS_DIR + "Player/Idle.png", "player idle");
+    pTextureManager->load(ASSETS_DIR + "Player/Run.png", "player run");
+    pTextureManager->load(ASSETS_DIR + "Player/Jump.png", "player jump");
+    pTextureManager->load(ASSETS_DIR + "Player/Attack.png", "player attack");
+    pTextureManager->load(ASSETS_DIR + "Player/Dead.png", "player dead");
+    pTextureManager->load(ASSETS_DIR + "Player/Fall.png", "player fall");
+    pTextureManager->load(ASSETS_DIR + "Player/Ground.png", "player ground");
+    pTextureManager->load(ASSETS_DIR + "Player/Hit.png", "player hit");
+    pTextureManager->load(ASSETS_DIR + "Player/Door In.png", "player door in");
+    pTextureManager->load(ASSETS_DIR + "Player/Door Out.png", "player door out");
 
-    pTextureManager->load("assets/Enemy/Pig/Idle.png", "pig idle");
-    pTextureManager->load("assets/Enemy/Pig/Run.png", "pig run");
-    pTextureManager->load("assets/Enemy/Pig/Jump.png", "pig jump");
-    pTextureManager->load("assets/Enemy/Pig/Attack.png", "pig attack");
-    pTextureManager->load("assets/Enemy/Pig/Dead.png", "pig dead");
-    pTextureManager->load("assets/Enemy/Pig/Fall.png", "pig fall");
-    pTextureManager->load("assets/Enemy/Pig/Ground.png", "pig ground");
-    pTextureManager->load("assets/Enemy/Pig/Hit.png", "pig hit");
+    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Idle.png", "pig idle");
+    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Run.png", "pig run");
+    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Jump.png", "pig jump");
+    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Attack.png", "pig attack");
+    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Dead.png", "pig dead");
+    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Fall.png", "pig fall");
+    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Ground.png", "pig ground");
+    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Hit.png", "pig hit");
 
-    pTextureManager->load("assets/Item/Big Heart Idle.png", "heart idle");
-    pTextureManager->load("assets/Item/Big Heart Hit.png", "heart hit");
-    pTextureManager->load("assets/Item/Big Diamond Idle.png", "diamond idle");
-    pTextureManager->load("assets/Item/Big Diamond Hit.png", "diamond hit");
+    pTextureManager->load(ASSETS_DIR + "Item/Big Heart Idle.png", "heart idle");
+    pTextureManager->load(ASSETS_DIR + "Item/Big Heart Hit.png", "heart hit");
+    pTextureManager->load(ASSETS_DIR + "Item/Big Diamond Idle.png", "diamond idle");
+    pTextureManager->load(ASSETS_DIR + "Item/Big Diamond Hit.png", "diamond hit");
 
-    pTextureManager->load("assets/Item/Door/idle.png", "door idle");
-    pTextureManager->load("assets/Item/Door/open.png", "door open");
-    pTextureManager->load("assets/Item/Door/close.png", "door close");
+    pTextureManager->load(ASSETS_DIR + "Item/Door/idle.png", "door idle");
+    pTextureManager->load(ASSETS_DIR + "Item/Door/open.png", "door open");
+    pTextureManager->load(ASSETS_DIR + "Item/Door/close.png", "door close");
 
-    pTextureManager->load("assets/Item/Box/Idle.png", "box idle");
-    pTextureManager->load("assets/Item/Box/Hit.png", "box hit");
+    pTextureManager->load(ASSETS_DIR + "Item/Box/Idle.png", "box idle");
+    pTextureManager->load(ASSETS_DIR + "Item/Box/Hit.png", "box hit");
 
-    pTextureManager->load("assets/UI/Health Bar/Health Bar.png", "health bar");
-    pTextureManager->load("assets/UI/Health Bar/Heart.png", "health heart");
+    pTextureManager->load(ASSETS_DIR + "UI/Health Bar/Health Bar.png", "health bar");
+    pTextureManager->load(ASSETS_DIR + "UI/Health Bar/Heart.png", "health heart");
 
     LevelParser levelParser;
     pLevel = levelParser.parseLevel(

@@ -35,11 +35,12 @@ public:
     void setBackgroundColor(const Color color = Color(0, 0, 0));
     void setTitle(const std::string title);
 
-    void delayFramerateIfNeeded();
     unsigned int getDelta() const;
     unsigned int getWidth() const;
     unsigned int getHeight() const;
     SDL_Renderer* getRenderer() const;
+
+    void delayFramerateIfNeeded();
 
 private:
     SDL_Window* m_pWindow;

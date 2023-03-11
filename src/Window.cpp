@@ -123,7 +123,6 @@ void Window::renderImage(
 void Window::fill(const Color color)
 {
     SDL_SetRenderDrawColor(m_pRenderer, color.r(), color.g(), color.b(), color.a());
-
     SDL_RenderClear(m_pRenderer);
 }
 
