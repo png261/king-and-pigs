@@ -1,125 +1,140 @@
 #include "ContactListener.hpp"
-#include <iostream>
 #include "ItemObject.hpp"
 #include "Pig.hpp"
 
-void ContactListener::BeginContact(b2Contact* contact)
+void ContactListener::BeginContact(b2Contact* const contact)
 {
-    ItemContact(contact);
+    b2Fixture* const fixtureA = contact->GetFixtureA();
+    b2Fixture* const fixtureB = contact->GetFixtureB();
+    Box2D::FilterCategory const catA =
+        static_cast<Box2D::FilterCategory>(fixtureA->GetFilterData().categoryBits);
+    Box2D::FilterCategory const catB =
+        static_cast<Box2D::FilterCategory>(fixtureB->GetFilterData().categoryBits);
 
-    JumpBeginContact(contact);
-    EnemyVisionBeginContact(contact);
-    EnemyAttackRangePlayerBeginContact(contact);
+    ItemContact(fixtureA, fixtureB, catA, catB);
+    JumpBeginContact(fixtureA, fixtureB, catA, catB);
+    EnemyVisionBeginContact(fixtureA, fixtureB, catA, catB);
+    EnemyAttackRangePlayerBeginContact(fixtureA, fixtureB, catA, catB);
 }
 
-void ContactListener::EndContact(b2Contact* contact)
+void ContactListener::EndContact(b2Contact* const contact)
 {
-    JumpEndContact(contact);
-    EnemyVisionEndContact(contact);
-    EnemyAttackRangePlayerEndContact(contact);
+    b2Fixture* const fixtureA = contact->GetFixtureA();
+    b2Fixture* const fixtureB = contact->GetFixtureB();
+    Box2D::FilterCategory const catA =
+        static_cast<Box2D::FilterCategory>(fixtureA->GetFilterData().categoryBits);
+    Box2D::FilterCategory const catB =
+        static_cast<Box2D::FilterCategory>(fixtureB->GetFilterData().categoryBits);
+
+    JumpEndContact(fixtureA, fixtureB, catA, catB);
+    EnemyVisionEndContact(fixtureA, fixtureB, catA, catB);
+    EnemyAttackRangePlayerEndContact(fixtureA, fixtureB, catA, catB);
 }
 
-void ContactListener::EnemyAttackRangePlayerBeginContact(b2Contact* contact)
+void ContactListener::PreSolve(b2Contact* const contact, const b2Manifold* oldManifold) {}
+
+void ContactListener::PostSolve(b2Contact* const contact, const b2ContactImpulse* impulse){};
+
+void ContactListener::EnemyAttackRangePlayerBeginContact(
+    b2Fixture* const fixtureA,
+    b2Fixture* const fixtureB,
+    Box2D::FilterCategory const catA,
+    Box2D::FilterCategory const catB)
 {
-    b2Fixture* const A = contact->GetFixtureA();
-    b2Fixture* const B = contact->GetFixtureB();
-    uint16 const catA = A->GetFilterData().categoryBits;
-    uint16 const catB = B->GetFilterData().categoryBits;
-    bool isTrue = (catA | catB) == (Box2D::CAT_PLAYER | Box2D::CAT_ATTACK_SENSOR);
     return;
 
-    if (!isTrue) {
+    if ((catA | catB) != (Box2D::CAT_PLAYER | Box2D::CAT_ATTACK_SENSOR)) {
         return;
     }
 
     if (catA == Box2D::CAT_ATTACK_SENSOR) {
-        Pig* enemy = dynamic_cast<Pig*>((GameObject*)(A->GetBody()->GetUserData().pointer));
+        Pig* enemy = dynamic_cast<Pig*>((GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
         if (enemy != nullptr) {
             enemy->setCanAttackPlayer(true);
         }
     }
 
     if (catB == Box2D::CAT_ATTACK_SENSOR) {
-        Pig* enemy = dynamic_cast<Pig*>((GameObject*)(B->GetBody()->GetUserData().pointer));
+        Pig* enemy = dynamic_cast<Pig*>((GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
         if (enemy != nullptr) {
             enemy->setCanAttackPlayer(true);
         }
     }
 };
 
-void ContactListener::EnemyAttackRangePlayerEndContact(b2Contact* contact)
+void ContactListener::EnemyAttackRangePlayerEndContact(
+    b2Fixture* const fixtureA,
+    b2Fixture* const fixtureB,
+    Box2D::FilterCategory const catA,
+    Box2D::FilterCategory const catB)
 {
-    b2Fixture* const A = contact->GetFixtureA();
-    b2Fixture* const B = contact->GetFixtureB();
-    uint16 const catA = A->GetFilterData().categoryBits;
-    uint16 const catB = B->GetFilterData().categoryBits;
-    bool isTrue = (catA | catB) == (Box2D::CAT_PLAYER | Box2D::CAT_ATTACK_SENSOR);
-    if (!isTrue) {
+    if ((catA | catB) != (Box2D::CAT_PLAYER | Box2D::CAT_ATTACK_SENSOR)) {
         return;
     }
+
     if (catA == Box2D::CAT_ATTACK_SENSOR) {
-        Pig* enemy = dynamic_cast<Pig*>((GameObject*)(A->GetBody()->GetUserData().pointer));
+        Pig* enemy = dynamic_cast<Pig*>((GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
         if (enemy != nullptr) {
             enemy->setCanAttackPlayer(false);
         }
     }
 
     if (catA == Box2D::CAT_ATTACK_SENSOR) {
-        Pig* enemy = dynamic_cast<Pig*>((GameObject*)(B->GetBody()->GetUserData().pointer));
+        Pig* enemy = dynamic_cast<Pig*>((GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
         if (enemy != nullptr) {
             enemy->setCanAttackPlayer(false);
         }
     }
 };
 
-void ContactListener::EnemyVisionBeginContact(b2Contact* contact)
+void ContactListener::EnemyVisionBeginContact(
+    b2Fixture* const fixtureA,
+    b2Fixture* const fixtureB,
+    Box2D::FilterCategory const catA,
+    Box2D::FilterCategory const catB)
 {
-    b2Fixture* const A = contact->GetFixtureA();
-    b2Fixture* const B = contact->GetFixtureB();
-    uint16 const catA = A->GetFilterData().categoryBits;
-    uint16 const catB = B->GetFilterData().categoryBits;
-    bool isSeeing = (catA | catB) == (Box2D::CAT_PLAYER | Box2D::CAT_ENEMY_VISION_SENSOR);
-    if (!isSeeing) {
+    if ((catA | catB) != (Box2D::CAT_PLAYER | Box2D::CAT_ENEMY_VISION_SENSOR)) {
         return;
     }
+
     Pig* enemy = nullptr;
     if (catA == Box2D::CAT_ENEMY_VISION_SENSOR) {
-        enemy = dynamic_cast<Pig*>((GameObject*)(A->GetBody()->GetUserData().pointer));
+        enemy = dynamic_cast<Pig*>((GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
     }
 
     if (catB == Box2D::CAT_ENEMY_VISION_SENSOR) {
-        enemy = dynamic_cast<Pig*>((GameObject*)(B->GetBody()->GetUserData().pointer));
+        enemy = dynamic_cast<Pig*>((GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
     }
     enemy->setSeeingPlayer(true);
 }
 
-void ContactListener::EnemyVisionEndContact(b2Contact* contact)
+void ContactListener::EnemyVisionEndContact(
+    b2Fixture* const fixtureA,
+    b2Fixture* const fixtureB,
+    Box2D::FilterCategory const catA,
+    Box2D::FilterCategory const catB)
 {
-    b2Fixture* const A = contact->GetFixtureA();
-    b2Fixture* const B = contact->GetFixtureB();
-    uint16 const catA = A->GetFilterData().categoryBits;
-    uint16 const catB = B->GetFilterData().categoryBits;
-    bool isSeeing = (catA | catB) == (Box2D::CAT_PLAYER | Box2D::CAT_ENEMY_VISION_SENSOR);
-    if (!isSeeing) {
+    if ((catA | catB) != (Box2D::CAT_PLAYER | Box2D::CAT_ENEMY_VISION_SENSOR)) {
         return;
     }
+
     Pig* enemy = nullptr;
     if (catA == Box2D::CAT_ENEMY_VISION_SENSOR) {
-        enemy = dynamic_cast<Pig*>((GameObject*)(A->GetBody()->GetUserData().pointer));
+        enemy = dynamic_cast<Pig*>((GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
     }
 
     if (catB == Box2D::CAT_ENEMY_VISION_SENSOR) {
-        enemy = dynamic_cast<Pig*>((GameObject*)(B->GetBody()->GetUserData().pointer));
+        enemy = dynamic_cast<Pig*>((GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
     }
     enemy->setSeeingPlayer(false);
 }
 
-void ContactListener::ItemContact(b2Contact* contact)
+void ContactListener::ItemContact(
+    b2Fixture* const fixtureA,
+    b2Fixture* const fixtureB,
+    Box2D::FilterCategory const catA,
+    Box2D::FilterCategory const catB)
 {
-    b2Fixture* const fixtureA = contact->GetFixtureA();
-    b2Fixture* const fixtureB = contact->GetFixtureB();
-    uint16 const catB = fixtureB->GetFilterData().categoryBits;
-    uint16 const catA = fixtureA->GetFilterData().categoryBits;
     if ((catA | catB) != (Box2D::CAT_ITEM | Box2D::CAT_PLAYER)) {
         return;
     }
@@ -131,42 +146,42 @@ void ContactListener::ItemContact(b2Contact* contact)
     }
 }
 
-void ContactListener::JumpBeginContact(b2Contact* contact)
+void ContactListener::JumpBeginContact(
+    b2Fixture* const fixtureA,
+    b2Fixture* const fixtureB,
+    Box2D::FilterCategory const catA,
+    Box2D::FilterCategory const catB)
 {
-    b2Fixture* const fixtureA = contact->GetFixtureA();
-    b2Fixture* const fixtureB = contact->GetFixtureB();
-    uint16 const catA = fixtureA->GetFilterData().categoryBits;
-    uint16 const catB = fixtureB->GetFilterData().categoryBits;
     if (!((catA | catB) & Box2D::CAT_FOOT_SENSOR)) {
         return;
     }
 
-    GameObject* const objA = (GameObject*)(fixtureA->GetBody()->GetUserData().pointer);
-    GameObject* const objB = (GameObject*)(fixtureB->GetBody()->GetUserData().pointer);
+    GameObject* const A = (GameObject*)(fixtureA->GetBody()->GetUserData().pointer);
+    GameObject* const B = (GameObject*)(fixtureB->GetBody()->GetUserData().pointer);
 
     if (catA == Box2D::CAT_FOOT_SENSOR) {
-        objA->changeFootContact(+1);
+        A->changeFootContact(+1);
     } else if (catB == Box2D::CAT_FOOT_SENSOR) {
-        objB->changeFootContact(+1);
+        B->changeFootContact(+1);
     }
 }
 
-void ContactListener::JumpEndContact(b2Contact* contact)
+void ContactListener::JumpEndContact(
+    b2Fixture* const fixtureA,
+    b2Fixture* const fixtureB,
+    Box2D::FilterCategory const catA,
+    Box2D::FilterCategory const catB)
 {
-    b2Fixture* fixtureA = contact->GetFixtureA();
-    b2Fixture* fixtureB = contact->GetFixtureB();
-    uint16 catA = fixtureA->GetFilterData().categoryBits;
-    uint16 catB = fixtureB->GetFilterData().categoryBits;
     if (!((catA | catB) & Box2D::CAT_FOOT_SENSOR)) {
         return;
     }
 
-    GameObject* objA = (GameObject*)(fixtureA->GetBody()->GetUserData().pointer);
-    GameObject* objB = (GameObject*)(fixtureB->GetBody()->GetUserData().pointer);
+    GameObject* A = (GameObject*)(fixtureA->GetBody()->GetUserData().pointer);
+    GameObject* B = (GameObject*)(fixtureB->GetBody()->GetUserData().pointer);
 
     if (catA == Box2D::CAT_FOOT_SENSOR) {
-        objA->changeFootContact(-1);
+        A->changeFootContact(-1);
     } else if (catB == Box2D::CAT_FOOT_SENSOR) {
-        objB->changeFootContact(-1);
+        B->changeFootContact(-1);
     }
 }
