@@ -95,16 +95,6 @@ void TileLayer::setTileSize(int const tileSize)
     m_tileSize = tileSize;
 }
 
-void TileLayer::setMapWidth(int const mapWidth)
-{
-    m_mapWidth = mapWidth;
-}
-
-int TileLayer::getMapWidth() const
-{
-    return m_mapWidth;
-}
-
 int TileLayer::getTileSize() const
 {
     return m_tileSize;

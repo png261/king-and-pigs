@@ -18,11 +18,9 @@ public:
 
     void setTileIDs(const std::vector<std::vector<int>>& data);
     void setTileSize(int const tileSize);
-    void setMapWidth(int const mapWidth);
     void setPosition(b2Vec2 const position);
 
     const std::vector<std::vector<int>>& getTileIDs();
-    int getMapWidth() const;
     int getTileSize() const;
     Tileset getTilesetByID(int const tileID) const;
     b2Vec2 getPosition() const;
@@ -41,4 +39,3 @@ private:
 
     std::vector<std::vector<int>> m_tileIDs;
 };
-

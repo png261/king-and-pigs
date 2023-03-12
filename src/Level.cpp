@@ -34,6 +34,11 @@ std::vector<Tileset>* Level::getTilesets()
     return &m_tilesets;
 }
 
+std::map<int, CollisionShape>* Level::getCollisionShapes()
+{
+    return &m_collisionShapes;
+}
+
 std::vector<Layer*>* Level::getLayers()
 {
     return &m_layers;

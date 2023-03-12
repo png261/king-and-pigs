@@ -1,11 +1,13 @@
 #include "LevelParser.hpp"
 
+#include <iostream>
 #include <vector>
 #include "Box2D.hpp"
 #include "CONSTANT.hpp"
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"
 #include "Layer.hpp"
+#include "Level.hpp"
 #include "Log.hpp"
 #include "ObjectLayer.hpp"
 #include "TextureManager.hpp"
@@ -43,7 +45,7 @@ Level* LevelParser::parseLevel(const char* levelFile)
 
     for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("tileset")) {
-            parseTilesets(e, pLevel->getTilesets());
+            parseTilesets(e, pLevel->getTilesets(), pLevel->getCollisionShapes());
         }
     }
 
@@ -58,7 +60,11 @@ Level* LevelParser::parseLevel(const char* levelFile)
             if (isObjectLayer) {
                 parseObjectLayer(e, pLevel->getLayers(), pLevel);
             } else if (isTileLayer) {
-                parseTileLayer(e, pLevel->getLayers(), pLevel->getTilesets());
+                parseTileLayer(
+                    e,
+                    pLevel->getLayers(),
+                    pLevel->getTilesets(),
+                    pLevel->getCollisionShapes());
             }
         }
     }
@@ -75,7 +81,8 @@ void LevelParser::parseTextures(XMLElement* const pTextureRoot)
 
 void LevelParser::parseTilesets(
     XMLElement* const pTilesetRoot,
-    std::vector<Tileset>* const pTilesets)
+    std::vector<Tileset>* const pTilesets,
+    std::map<int, CollisionShape>* const pCollisionShapes)
 {
     XMLElement* const pImagieEl = pTilesetRoot->FirstChildElement();
 
@@ -113,8 +120,25 @@ void LevelParser::parseTilesets(
     tileset.numColumns = tileset.width / (tileset.tileWidth + tileset.spacing);
 
     TextureManager::Instance()->load(ASSETS_DIR + pImagieEl->Attribute("source"), tileset.name);
-
     pTilesets->push_back(tileset);
+    parseCollisionObject(pTilesetRoot, tileset.firstGridID, pCollisionShapes);
+}
+
+void LevelParser::parseCollisionObject(
+    XMLElement* pTilesetRoot,
+    int firstGridID,
+    std::map<int, CollisionShape>* pCollisionShapes)
+{
+    for (XMLElement* e = pTilesetRoot->FirstChildElement(); e != nullptr;
+         e = e->NextSiblingElement()) {
+        if (e->Value() == std::string("tile")) {
+            XMLElement* obj = e->FirstChildElement()->FirstChildElement();
+            int id = std::stoi(e->Attribute("id")) + firstGridID;
+            int width = std::stoi(obj->Attribute("width"));
+            int height = std::stoi(obj->Attribute("height"));
+            pCollisionShapes->insert(std::pair<int, CollisionShape>(id, {width, height}));
+        }
+    }
 }
 
 GameObject* parseObject(XMLElement* const pObjectElement, Level* const pLevel)
@@ -200,49 +224,44 @@ std::vector<std::vector<int>> LevelParser::parseData(std::string dataText)
 void LevelParser::parseTileLayer(
     XMLElement* const pTileElement,
     std::vector<Layer*>* const pLayers,
-    std::vector<Tileset>* const pTilesets)
+    std::vector<Tileset>* const pTilesets,
+    std::map<int, CollisionShape>* const pCollisionShape)
 {
     TileLayer* const pTileLayer = new TileLayer(m_tileSize, m_width, m_height, *pTilesets);
 
-    bool collidable = false;
-
-    XMLElement* pDataNode = nullptr;
-
+    std::vector<std::vector<int>> IDs;
     for (XMLElement* e = pTileElement->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
-        if (e->Value() == std::string("properties")) {
-            for (XMLElement* property = e->FirstChildElement(); property != nullptr;
-                 property = property->NextSiblingElement()) {
-                if (property->Value() == std::string("property")) {
-                    if (property->Attribute("name") == std::string("collidable")) {
-                        collidable = true;
-                    }
-                }
-            }
-        }
-
         if (e->Value() == std::string("data")) {
-            pDataNode = e;
+            IDs = parseData(e->GetText());
         }
     }
 
-    std::vector<std::vector<int>> IDs = parseData(pDataNode->GetText());
     pTileLayer->setTileIDs(IDs);
-    pTileLayer->setMapWidth(m_width);
+    pLayers->push_back(pTileLayer);
 
-    if (collidable) {
+    if (!pCollisionShape->empty()) {
         for (int row = 0; row < m_height; row++) {
             for (int col = 0; col < m_width; col++) {
-                if (IDs[row][col] == 0) {
+                int id = IDs[row][col];
+                if (id == 0) {
                     continue;
                 }
+                if (pCollisionShape->find(id) == pCollisionShape->end()) {
+                    continue;
+                }
+                auto const shape = pCollisionShape->find(id);
 
-                Box2D::Instance()->createWall(
-                    m_tileSize,
-                    m_tileSize * b2Vec2(col + 0.5, row + 0.5));
+                b2Vec2 position = m_tileSize * b2Vec2(col, row);
+                if (id == 59) {
+                    std::cout << position.x << " " << position.y << std::endl;
+                }
+
+                Box2D::Instance()->createCollisionObject(
+                    shape->second.width,
+                    shape->second.height,
+                    position);
             }
         }
     }
-
-    pLayers->push_back(pTileLayer);
 }

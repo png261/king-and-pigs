@@ -12,7 +12,7 @@ public:
     void clean();
     void update();
 
-    void createWall(int size, b2Vec2 position);
+    void createCollisionObject(const int width, const int height, b2Vec2 position);
 
     void handleEvents();
     void contactListener();

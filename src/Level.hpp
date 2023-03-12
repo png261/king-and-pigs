@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <vector>
 #include "Layer.hpp"
 #include "Player.hpp"
@@ -19,6 +20,12 @@ struct Tileset
     std::string name;
 };
 
+struct CollisionShape
+{
+    int width;
+    int height;
+};
+
 class Level
 {
 public:
@@ -28,6 +35,7 @@ public:
     void render();
 
     std::vector<Tileset>* getTilesets();
+    std::map<int, CollisionShape>* getCollisionShapes();
     std::vector<Layer*>* getLayers();
 
 
@@ -38,5 +46,6 @@ private:
     void createTileObject();
 
     std::vector<Layer*> m_layers;
+    std::map<int, CollisionShape> m_collisionShapes;
     std::vector<Tileset> m_tilesets;
 };

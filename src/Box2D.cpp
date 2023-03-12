@@ -25,54 +25,54 @@ Box2D* Box2D::Instance()
     return pInstance;
 }
 
-int Box2D::meterToPixel(float meter)
+int Box2D::meterToPixel(const float meter)
 {
     return static_cast<int>(floor(meter * Box2D::PIXEL_PER_METER));
 }
 
-float Box2D::pixelToMeter(float pixel)
+float Box2D::pixelToMeter(const float pixel)
 {
     return static_cast<float>(pixel * Box2D::METER_PER_PIXEL);
 }
 
-b2Vec2 Box2D::meterToPixel(b2Vec2 meter)
+b2Vec2 Box2D::meterToPixel(const b2Vec2 meter)
 {
     return {meter.x * Box2D::PIXEL_PER_METER, meter.y * Box2D::PIXEL_PER_METER};
 };
 
-b2Vec2 Box2D::pixelToMeter(b2Vec2 pixel)
+b2Vec2 Box2D::pixelToMeter(const b2Vec2 pixel)
 {
     return {pixel.x * Box2D::METER_PER_PIXEL, pixel.y * Box2D::METER_PER_PIXEL};
 };
 
-float Box2D::radToDeg(float rad)
+float Box2D::radToDeg(const float rad)
 {
     return rad * Box2D::DEG_PER_RAD;
 };
 
-float Box2D::degToRad(float deg)
+float Box2D::degToRad(const float deg)
 {
     return deg * Box2D::RAD_PER_DEG;
 };
 
-void Box2D::createWall(int size, b2Vec2 position)
+void Box2D::createCollisionObject(const int width, const int height, const b2Vec2 position)
 {
     b2BodyDef body;
-    body.position = Box2D::pixelToMeter(position);
+    body.position = Box2D::pixelToMeter(position + b2Vec2(width * 0.5, height * 0.5));
     body.type = b2_staticBody;
     b2Body* const groundBody = this->getWorld()->CreateBody(&body);
 
-    float width = Box2D::pixelToMeter(size);
-    float height = Box2D::pixelToMeter(size);
+    float w = Box2D::pixelToMeter(width);
+    float h = Box2D::pixelToMeter(height);
 
     b2FixtureDef fixture;
 
     b2ChainShape box;
     b2Vec2 vertices[4];
-    vertices[0].Set(-width / 2, -height / 2);
-    vertices[1].Set(width / 2, -height / 2);
-    vertices[2].Set(width / 2, height / 2);
-    vertices[3].Set(-width / 2, height / 2);
+    vertices[0].Set(-w / 2, -h / 2);
+    vertices[1].Set(w / 2, -h / 2);
+    vertices[2].Set(w / 2, h / 2);
+    vertices[3].Set(-w / 2, h / 2);
     box.CreateLoop(vertices, 4);
 
     fixture.shape = &box;
