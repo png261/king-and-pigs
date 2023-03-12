@@ -96,19 +96,10 @@ bool Game::isRunning() const
     return m_bRunning;
 }
 
-Player* Game::getPlayer() const
-{
-    return m_pPlayer;
-}
 
 std::string Game::getLevel(int index)
 {
     return m_levelFiles[index];
-}
-
-void Game::setPlayer(Player* const pPlayer)
-{
-    m_pPlayer = pPlayer;
 }
 
 Window* Game::getWindow()

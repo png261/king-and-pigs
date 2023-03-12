@@ -43,3 +43,13 @@ std::vector<Layer*>* Level::getLayers()
 {
     return &m_layers;
 }
+
+Player* Level::getPlayer()
+{
+    return m_pPlayer;
+}
+
+void Level::setPlayer(Player* player)
+{
+    m_pPlayer = player;
+}

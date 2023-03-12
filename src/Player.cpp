@@ -70,20 +70,23 @@ void Player::handleInput()
     InputHandler* const input = InputHandler::Instance();
 
     if (m_currentState == ON_GROUND) {
-        if (input->isKeyPressed(KEY_W)) {
+        if (input->isKeyDown(KEY_W)) {
             m_bWantDoorIn = true;
+        } else {
+            m_bWantDoorIn = false;
         }
+
         if (input->isKeyPressed(KEY_SPACE)) {
             this->jump();
         }
-        if (input->isKeyPressed(KEY_RIGHT)) {
-            this->moveRight();
-            m_bTurnRight = true;
-        }
-        if (input->isKeyPressed(KEY_LEFT)) {
-            this->moveLeft();
-            m_bTurnRight = false;
-        }
+    }
+    if (input->isKeyPressed(KEY_RIGHT)) {
+        this->moveRight();
+        m_bTurnRight = true;
+    }
+    if (input->isKeyPressed(KEY_LEFT)) {
+        this->moveLeft();
+        m_bTurnRight = false;
     }
 
     if (m_currentAttackState == ON_NORMAL) {

@@ -11,10 +11,8 @@
 #include "Heart.hpp"
 #include "InputHandler.hpp"
 #include "LevelParser.hpp"
-#include "LoaderParams.hpp"
 #include "Pig.hpp"
 #include "Player.hpp"
-
 
 const std::string PlayState::s_stateID = "PLAY";
 
@@ -24,61 +22,63 @@ bool PlayState::onEnter()
         return false;
     };
 
-
-    Camera::Instance()->setTarget(Game::Instance()->getPlayer());
-    Camera::Instance()->setZoom(2);
-
     m_loadingComplete = true;
     return true;
 }
 
 bool PlayState::load()
 {
-    TextureManager* const pTextureManager = TextureManager::Instance();
-    GameObjectFactory* const pGameObjectFactory = GameObjectFactory::Instance();
+    TextureManager* const texture = TextureManager::Instance();
+    GameObjectFactory* const factory = GameObjectFactory::Instance();
 
-    pGameObjectFactory->registerType("Player", new Creator<Player>);
-    pGameObjectFactory->registerType("Pig", new Creator<Pig>);
-    pGameObjectFactory->registerType("Box", new Creator<Box>);
-    pGameObjectFactory->registerType("Heart", new Creator<Heart>);
-    pGameObjectFactory->registerType("DoorOut", new Creator<DoorOut>);
-    pGameObjectFactory->registerType("DoorIn", new Creator<DoorIn>);
+    factory->registerType("Player", new Creator<Player>);
+    factory->registerType("Pig", new Creator<Pig>);
+    factory->registerType("Box", new Creator<Box>);
+    factory->registerType("Heart", new Creator<Heart>);
+    factory->registerType("DoorOut", new Creator<DoorOut>);
+    factory->registerType("DoorIn", new Creator<DoorIn>);
 
-    pTextureManager->load(ASSETS_DIR + "Player/Idle.png", "player idle");
-    pTextureManager->load(ASSETS_DIR + "Player/Run.png", "player run");
-    pTextureManager->load(ASSETS_DIR + "Player/Jump.png", "player jump");
-    pTextureManager->load(ASSETS_DIR + "Player/Attack.png", "player attack");
-    pTextureManager->load(ASSETS_DIR + "Player/Dead.png", "player dead");
-    pTextureManager->load(ASSETS_DIR + "Player/Fall.png", "player fall");
-    pTextureManager->load(ASSETS_DIR + "Player/Ground.png", "player ground");
-    pTextureManager->load(ASSETS_DIR + "Player/Hit.png", "player hit");
-    pTextureManager->load(ASSETS_DIR + "Player/Door In.png", "player door in");
-    pTextureManager->load(ASSETS_DIR + "Player/Door Out.png", "player door out");
+    texture->load(ASSETS_DIR + "Player/Idle.png", "player idle");
+    texture->load(ASSETS_DIR + "Player/Run.png", "player run");
+    texture->load(ASSETS_DIR + "Player/Jump.png", "player jump");
+    texture->load(ASSETS_DIR + "Player/Attack.png", "player attack");
+    texture->load(ASSETS_DIR + "Player/Dead.png", "player dead");
+    texture->load(ASSETS_DIR + "Player/Fall.png", "player fall");
+    texture->load(ASSETS_DIR + "Player/Ground.png", "player ground");
+    texture->load(ASSETS_DIR + "Player/Hit.png", "player hit");
+    texture->load(ASSETS_DIR + "Player/Door In.png", "player door in");
+    texture->load(ASSETS_DIR + "Player/Door Out.png", "player door out");
 
-    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Idle.png", "pig idle");
-    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Run.png", "pig run");
-    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Jump.png", "pig jump");
-    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Attack.png", "pig attack");
-    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Dead.png", "pig dead");
-    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Fall.png", "pig fall");
-    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Ground.png", "pig ground");
-    pTextureManager->load(ASSETS_DIR + "Enemy/Pig/Hit.png", "pig hit");
+    texture->load(ASSETS_DIR + "Enemy/Pig/Idle.png", "pig idle");
+    texture->load(ASSETS_DIR + "Enemy/Pig/Run.png", "pig run");
+    texture->load(ASSETS_DIR + "Enemy/Pig/Jump.png", "pig jump");
+    texture->load(ASSETS_DIR + "Enemy/Pig/Attack.png", "pig attack");
+    texture->load(ASSETS_DIR + "Enemy/Pig/Dead.png", "pig dead");
+    texture->load(ASSETS_DIR + "Enemy/Pig/Fall.png", "pig fall");
+    texture->load(ASSETS_DIR + "Enemy/Pig/Ground.png", "pig ground");
+    texture->load(ASSETS_DIR + "Enemy/Pig/Hit.png", "pig hit");
 
-    pTextureManager->load(ASSETS_DIR + "Item/Big Heart Idle.png", "heart idle");
-    pTextureManager->load(ASSETS_DIR + "Item/Big Heart Hit.png", "heart hit");
-    pTextureManager->load(ASSETS_DIR + "Item/Big Diamond Idle.png", "diamond idle");
-    pTextureManager->load(ASSETS_DIR + "Item/Big Diamond Hit.png", "diamond hit");
+    texture->load(ASSETS_DIR + "Item/Big Heart Idle.png", "heart idle");
+    texture->load(ASSETS_DIR + "Item/Big Heart Hit.png", "heart hit");
+    texture->load(ASSETS_DIR + "Item/Big Diamond Idle.png", "diamond idle");
+    texture->load(ASSETS_DIR + "Item/Big Diamond Hit.png", "diamond hit");
 
-    pTextureManager->load(ASSETS_DIR + "Item/Door/idle.png", "door idle");
-    pTextureManager->load(ASSETS_DIR + "Item/Door/open.png", "door open");
-    pTextureManager->load(ASSETS_DIR + "Item/Door/close.png", "door close");
+    texture->load(ASSETS_DIR + "Item/Door/idle.png", "door idle");
+    texture->load(ASSETS_DIR + "Item/Door/open.png", "door open");
+    texture->load(ASSETS_DIR + "Item/Door/close.png", "door close");
 
-    pTextureManager->load(ASSETS_DIR + "Item/Box/Idle.png", "box idle");
-    pTextureManager->load(ASSETS_DIR + "Item/Box/Hit.png", "box hit");
+    texture->load(ASSETS_DIR + "Item/Box/Idle.png", "box idle");
+    texture->load(ASSETS_DIR + "Item/Box/Hit.png", "box hit");
 
-    pTextureManager->load(ASSETS_DIR + "UI/Health Bar/Health Bar.png", "health bar");
-    pTextureManager->load(ASSETS_DIR + "UI/Health Bar/Heart.png", "health heart");
-    this->loadLevel();
+    texture->load(ASSETS_DIR + "UI/Health Bar/Health Bar.png", "health bar");
+    texture->load(ASSETS_DIR + "UI/Health Bar/Heart.png", "health heart");
+
+    if (this->loadLevel() == false) {
+        return false;
+    }
+
+    Camera::Instance()->setTarget(m_pLevel->getPlayer());
+    Camera::Instance()->setZoom(2);
 
     return true;
 }
@@ -86,9 +86,10 @@ bool PlayState::load()
 bool PlayState::loadLevel()
 {
     LevelParser levelParser;
-    pLevel = levelParser.parseLevel(
+    m_pLevel = levelParser.parseLevel(
         Game::Instance()->getLevel(Game::Instance()->getCurrentLevel()).c_str());
-    if (pLevel == nullptr) {
+
+    if (m_pLevel == nullptr) {
         return false;
     }
     return true;
@@ -110,23 +111,19 @@ void PlayState::resume()
 
 void PlayState::update()
 {
-    if (!m_loadingComplete || m_exiting) {
+    if (!m_loadingComplete || m_exiting || m_pLevel == nullptr) {
         return;
     }
 
-    if (pLevel != nullptr) {
-        pLevel->update();
-    }
+    m_pLevel->update();
     Camera::Instance()->update();
 }
 
 void PlayState::render()
 {
-    if (!m_loadingComplete || m_exiting) {
+    if (!m_loadingComplete || m_exiting || m_pLevel == nullptr) {
         return;
     }
 
-    if (pLevel != nullptr) {
-        pLevel->render();
-    }
+    m_pLevel->render();
 }

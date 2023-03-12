@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include "Player.hpp"
 #include "SDL.hpp"
 #include "Window.hpp"
 
@@ -20,7 +19,6 @@ public:
     void quit();
 
     Window* getWindow();
-    Player* getPlayer() const;
     int getCurrentLevel() const;
     int getNextLevel() const;
     void nextLevel();
@@ -28,11 +26,10 @@ public:
     bool isRunning() const;
 
     void setCurrentLevel(int const currentLevel);
-    void setPlayer(Player* const pPlayer);
 
 private:
     Game();
-    Player* m_pPlayer;
+
     Window* m_pWindow;
 
     int m_currentLevel;

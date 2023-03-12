@@ -37,13 +37,15 @@ public:
     std::vector<Tileset>* getTilesets();
     std::map<int, CollisionShape>* getCollisionShapes();
     std::vector<Layer*>* getLayers();
-
+    Player* getPlayer();
+    void setPlayer(Player* player);
 
 private:
     friend class LevelParser;
 
     Level();
     void createTileObject();
+    Player* m_pPlayer;
 
     std::vector<Layer*> m_layers;
     std::map<int, CollisionShape> m_collisionShapes;

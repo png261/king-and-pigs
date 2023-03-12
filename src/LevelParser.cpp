@@ -175,7 +175,7 @@ GameObject* parseObject(XMLElement* const pObjectElement, Level* const pLevel)
     pGameObject->load(new LoaderParams(x, y, width, height));
 
     if (type == "Player") {
-        Game::Instance()->setPlayer(dynamic_cast<Player*>(pGameObject));
+        pLevel->setPlayer(dynamic_cast<Player*>(pGameObject));
     }
 
     return pGameObject;

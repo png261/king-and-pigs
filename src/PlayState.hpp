@@ -21,5 +21,5 @@ public:
 private:
     static const std::string s_stateID;
     std::vector<GameObject*> m_gameObjects;
-    Level* pLevel;
+    Level* m_pLevel;
 };
