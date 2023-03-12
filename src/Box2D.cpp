@@ -10,6 +10,7 @@
 #include "InputHandler.hpp"
 #include "Log.hpp"
 #include "Pig.hpp"
+#include "Player.hpp"
 
 const float Box2D::PIXEL_PER_METER = 32.0f;
 const float Box2D::METER_PER_PIXEL = 1 / PIXEL_PER_METER;

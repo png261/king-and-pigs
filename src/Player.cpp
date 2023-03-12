@@ -1,3 +1,5 @@
+#include "Player.hpp"
+
 #include <iostream>
 #include "Animation.hpp"
 #include "AttackableObject.hpp"
@@ -12,7 +14,7 @@
 Player::Player()
     : GameObject()
     , DamageableObject(3, 300)
-    , AttackableObject(1, 50, 300)
+    , AttackableObject(1, 30, 300)
     , m_bDoorIn(false)
 {}
 

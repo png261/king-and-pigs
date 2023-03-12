@@ -46,7 +46,7 @@ void Pig::loadAnimation()
 
 void Pig::update()
 {
-    this->handleMovement();
+    /* this->handleMovement(); */
     Enemy::update();
     DamageableObject::update();
     AttackableObject::update();
