@@ -12,7 +12,6 @@ TextureManager* TextureManager::Instance()
 bool TextureManager::load(const std::string filename, const std::string textureID)
 {
     if (m_textureMap.find(textureID) != m_textureMap.end()) {
-        Log::warning("textureID already exists");
         return false;
     }
 

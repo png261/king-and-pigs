@@ -7,18 +7,20 @@
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "InputHandler.hpp"
+#include "Log.hpp"
 
 Player::Player()
     : GameObject()
     , DamageableObject(3, 300)
     , AttackableObject(1, 50, 300)
+    , m_bDoorIn(false)
 {}
 
 void Player::load(const LoaderParams* const pParams)
 {
     GameObject::load(pParams);
     m_moveSpeed = 100;
-    m_jumpHeight = 32.0f;
+    m_jumpHeight = 20.0f;
 
     b2Filter filter;
     filter.categoryBits = Box2D::CAT_PLAYER;
@@ -45,8 +47,9 @@ void Player::loadAnimation()
     m_animations[Animation::DOOR_IN] = new Animation("player door in", 78, 58, 8, false);
     m_animations[Animation::DOOR_OUT] = new Animation("player door out", 78, 58, 8, false);
 
-    m_curAnimation = Animation::IDLE;
+    m_curAnimation = Animation::DOOR_OUT;
     m_animations[m_curAnimation]->start();
+    doorOutTimer.start();
 }
 
 void Player::update()
@@ -60,9 +63,16 @@ void Player::update()
 
 void Player::handleInput()
 {
+    if (m_bDoorIn) {
+        return;
+    }
+
     InputHandler* const input = InputHandler::Instance();
 
     if (m_currentState == ON_GROUND) {
+        if (input->isKeyPressed(KEY_W)) {
+            m_bWantDoorIn = true;
+        }
         if (input->isKeyPressed(KEY_SPACE)) {
             this->jump();
         }
@@ -85,6 +95,10 @@ void Player::handleInput()
 
 void Player::updateAnimation()
 {
+    if (m_bDoorIn) {
+        return;
+    }
+
     Animation::AnimationID newAnimation = m_curAnimation;
 
     if (this->isInvulnerable()) {
@@ -136,9 +150,31 @@ void Player::updateAnimation()
         break;
     }
 
-    if (newAnimation != m_curAnimation) {
-        m_animations[m_curAnimation]->stop();
-        m_curAnimation = newAnimation;
-        m_animations[m_curAnimation]->start();
+    if (doorOutTimer.delta() > 1000) {
+        doorOutTimer.stop();
+        if (newAnimation != m_curAnimation) {
+            m_animations[m_curAnimation]->stop();
+            m_curAnimation = newAnimation;
+            m_animations[m_curAnimation]->start();
+        }
     }
+}
+
+void Player::doorIn()
+{
+    m_bDoorIn = true;
+    m_curAnimation = Animation::DOOR_IN;
+    m_animations[m_curAnimation]->start();
+}
+
+void Player::doorOut()
+{
+    m_bDoorIn = true;
+    m_curAnimation = Animation::DOOR_OUT;
+    m_animations[m_curAnimation]->start();
+}
+
+bool Player::isWantDoorIn()
+{
+    return m_bWantDoorIn;
 }

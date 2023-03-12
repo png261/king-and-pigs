@@ -38,6 +38,7 @@ public:
     void restart();
     void stop();
     bool isRunning() const;
+    bool isFinished() const;
 
 private:
     Timer timer;
@@ -45,6 +46,7 @@ private:
     unsigned int m_framerate;
 
     bool m_bRunning;
+    bool m_bFinished;
     int m_x;
     int m_y;
 

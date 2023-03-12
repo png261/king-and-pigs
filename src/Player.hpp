@@ -14,6 +14,14 @@ public:
     void updateAnimation();
     void loadAnimation();
 
+    void doorIn();
+    void doorOut();
+
+    bool isWantDoorIn();
+
 private:
     void handleInput();
+    Timer doorOutTimer;
+    bool m_bDoorIn;
+    bool m_bWantDoorIn;
 };

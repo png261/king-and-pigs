@@ -2,7 +2,8 @@
 #include "Box.hpp"
 #include "CONSTANT.hpp"
 #include "Camera.hpp"
-#include "Door.hpp"
+#include "DoorIn.hpp"
+#include "DoorOut.hpp"
 #include "Enemy.hpp"
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"
@@ -40,7 +41,8 @@ bool PlayState::load()
     pGameObjectFactory->registerType("Pig", new Creator<Pig>);
     pGameObjectFactory->registerType("Box", new Creator<Box>);
     pGameObjectFactory->registerType("Heart", new Creator<Heart>);
-    pGameObjectFactory->registerType("Door", new Creator<Door>);
+    pGameObjectFactory->registerType("DoorOut", new Creator<DoorOut>);
+    pGameObjectFactory->registerType("DoorIn", new Creator<DoorIn>);
 
     pTextureManager->load(ASSETS_DIR + "Player/Idle.png", "player idle");
     pTextureManager->load(ASSETS_DIR + "Player/Run.png", "player run");
@@ -76,14 +78,19 @@ bool PlayState::load()
 
     pTextureManager->load(ASSETS_DIR + "UI/Health Bar/Health Bar.png", "health bar");
     pTextureManager->load(ASSETS_DIR + "UI/Health Bar/Heart.png", "health heart");
+    this->loadLevel();
 
+    return true;
+}
+
+bool PlayState::loadLevel()
+{
     LevelParser levelParser;
     pLevel = levelParser.parseLevel(
         Game::Instance()->getLevel(Game::Instance()->getCurrentLevel()).c_str());
     if (pLevel == nullptr) {
         return false;
     }
-
     return true;
 }
 
@@ -91,6 +98,7 @@ bool PlayState::onExit()
 {
     m_exiting = true;
     InputHandler::Instance()->reset();
+    Box2D::Instance()->clean();
 
     return true;
 }

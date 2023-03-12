@@ -23,6 +23,7 @@ public:
     Player* getPlayer() const;
     int getCurrentLevel() const;
     int getNextLevel() const;
+    void nextLevel();
     std::string getLevel(const int index);
     bool isRunning() const;
 

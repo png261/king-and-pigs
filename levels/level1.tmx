@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="85">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="94">
  <tileset firstgid="1" name="Decorations (32x32)" tilewidth="32" tileheight="32" tilecount="42" columns="7">
   <image source="../assets/TileSets/Decorations (32x32).png" width="224" height="192"/>
   <tile id="9">
@@ -498,7 +498,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,17,19,0,20,0,13,0,0,0,0,0,0,0,0,17,19,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,0,0,0,17,19,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -519,8 +519,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="18" name="Object Layer">
+  <object id="90" name="DoorOut" class="DoorOut" x="128" y="136" width="46" height="56"/>
+  <object id="93" name="DoorIn" class="DoorIn" x="312" y="168" width="46" height="56"/>
+ </objectgroup>
  <objectgroup id="12" name="Object Layer 1">
-  <object id="82" name="Player" class="Player" x="80" y="141" width="32" height="32"/>
-  <object id="83" name="Box" class="Box" x="168" y="169" width="19" height="16"/>
+  <object id="82" name="Player" class="Player" x="135" y="160" width="32" height="32"/>
  </objectgroup>
 </map>

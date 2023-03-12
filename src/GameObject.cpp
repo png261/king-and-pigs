@@ -31,7 +31,7 @@ void GameObject::createBody(const int x, const int y, const int width, const int
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position = Box2D::pixelToMeter(b2Vec2(x, y));
+    bodyDef.position = Box2D::pixelToMeter(b2Vec2(x + width * 0.5f, y + height * 0.5f));
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
     m_pBody = Box2D::Instance()->getWorld()->CreateBody(&bodyDef);

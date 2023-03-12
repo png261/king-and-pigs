@@ -247,10 +247,10 @@ void LevelParser::parseTileLayer(
                 if (id == 0) {
                     continue;
                 }
-                if (pCollisionShape->find(id) == pCollisionShape->end()) {
+                std::map<int, CollisionShape>::iterator shape = pCollisionShape->find(id);
+                if (shape == pCollisionShape->end()) {
                     continue;
                 }
-                auto const shape = pCollisionShape->find(id);
 
                 b2Vec2 position = m_tileSize * b2Vec2(col, row);
                 if (id == 59) {

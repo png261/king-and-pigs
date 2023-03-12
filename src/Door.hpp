@@ -6,8 +6,9 @@ class Door : public GameObject
 {
 public:
     Door();
-    void load(const LoaderParams* const pParams);
-    void update();
-    void loadAnimation();
+    virtual void load(const LoaderParams* const pParams);
+    virtual void update();
+    virtual void loadAnimation();
+    virtual void open();
+    virtual void close();
 };
-

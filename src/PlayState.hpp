@@ -8,18 +8,18 @@
 class PlayState final : public GameState
 {
 public:
-    virtual void update();
-    virtual void render();
+    void update();
+    void render();
 
-    virtual bool onEnter();
-    virtual bool load();
-    virtual void resume();
-    virtual bool onExit();
-    virtual std::string getStateID() const { return s_stateID; }
+    bool onEnter();
+    bool load();
+    bool loadLevel();
+    void resume();
+    bool onExit();
+    std::string getStateID() const { return s_stateID; }
 
 private:
     static const std::string s_stateID;
     std::vector<GameObject*> m_gameObjects;
     Level* pLevel;
 };
-

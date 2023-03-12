@@ -11,8 +11,8 @@ Game::Game()
     , m_bRunning(false)
 {
     m_levelFiles.push_back(LEVELS_DIR + "level1.tmx");
-    m_levelFiles.push_back(LEVELS_DIR + "test.tmx");
     m_levelFiles.push_back(LEVELS_DIR + "level2.tmx");
+    m_levelFiles.push_back(LEVELS_DIR + "test.tmx");
     m_currentLevel = 0;
 }
 
@@ -73,6 +73,17 @@ void Game::clean()
 void Game::quit()
 {
     m_bRunning = false;
+}
+
+void Game::nextLevel()
+{
+    m_currentLevel += 1;
+    if (m_currentLevel >= m_levelFiles.size()) {
+        /* TODO: win screen */
+        return;
+    }
+
+    GameStateMachine::Instance()->changeState(new PlayState());
 }
 
 int Game::getCurrentLevel() const

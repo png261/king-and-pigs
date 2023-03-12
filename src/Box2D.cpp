@@ -4,6 +4,7 @@
 #include "ContactListener.hpp"
 #include "DamageableObject.hpp"
 #include "DebugDraw.hpp"
+#include "DoorIn.hpp"
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "InputHandler.hpp"
@@ -24,6 +25,23 @@ Box2D* Box2D::Instance()
     static Box2D* const pInstance = new Box2D();
     return pInstance;
 }
+
+bool Box2D::init()
+{
+    m_pWorld = new b2World(Box2D::GRAVITY);
+    m_pWorld->SetContactListener(new ContactListener);
+
+    m_timeStep = 1.0f / 60.f;
+    m_velocityIterations = 10;
+    m_positionIterations = 8;
+
+    m_pDebugDraw = new DebugDraw(Game::Instance()->getWindow());
+    m_pWorld->SetDebugDraw(m_pDebugDraw);
+    m_bDebugEnable = false;
+
+    return true;
+}
+
 
 int Box2D::meterToPixel(const float meter)
 {
@@ -81,22 +99,6 @@ void Box2D::createCollisionObject(const int width, const int height, const b2Vec
     groundBody->CreateFixture(&fixture);
 }
 
-bool Box2D::init()
-{
-    m_pWorld = new b2World(Box2D::GRAVITY);
-    m_pWorld->SetContactListener(new ContactListener);
-
-    m_timeStep = 1.0f / 60.f;
-    m_velocityIterations = 10;
-    m_positionIterations = 8;
-
-    m_pDebugDraw = new DebugDraw(Game::Instance()->getWindow());
-    m_pWorld->SetDebugDraw(m_pDebugDraw);
-    m_bDebugEnable = true;
-
-    return true;
-}
-
 void Box2D::handleEvents()
 {
     if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
@@ -112,6 +114,7 @@ void Box2D::contactListener()
          contact = contact->GetNext()) {
         attackListener(contact);
         enemyVisionListener(contact);
+        DoorInBeginContact(contact);
     }
 }
 
@@ -138,6 +141,37 @@ void Box2D::enemyVisionListener(b2Contact* contact)
     }
 }
 
+void Box2D::DoorInBeginContact(b2Contact* contact)
+{
+    b2Fixture* fixtureA = contact->GetFixtureA();
+    b2Fixture* fixtureB = contact->GetFixtureB();
+    uint16 catA = fixtureA->GetFilterData().categoryBits;
+    uint16 catB = fixtureB->GetFilterData().categoryBits;
+    bool isPlayerDoor = (catA | catB) == (Box2D::CAT_DOOR_IN | Box2D::CAT_PLAYER);
+    if (!isPlayerDoor) {
+        return;
+    }
+    DoorIn* door = nullptr;
+    Player* player = nullptr;
+
+    if (catA == Box2D::CAT_DOOR_IN) {
+        door = dynamic_cast<DoorIn*>((GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
+        player = dynamic_cast<Player*>((GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
+    } else {
+        door = dynamic_cast<DoorIn*>((GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
+        player = dynamic_cast<Player*>((GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
+    }
+
+    if (player == nullptr || door == nullptr) {
+        return;
+    }
+
+    if (player->isWantDoorIn()) {
+        door->open();
+        player->doorIn();
+    }
+}
+
 void Box2D::attackListener(b2Contact* contact)
 {
     b2Fixture* const A = contact->GetFixtureA();
@@ -153,12 +187,8 @@ void Box2D::attackListener(b2Contact* contact)
 
     if (catA == Box2D::CAT_ATTACK_SENSOR) {
         handleAttack(A, B);
-        return;
-    }
-
-    if (catB == Box2D::CAT_ATTACK_SENSOR) {
+    } else {
         handleAttack(B, A);
-        return;
     }
 }
 
@@ -205,6 +235,9 @@ void Box2D::toggleDebugDraw()
 
 void Box2D::clean()
 {
-    delete m_pWorld;
-    m_pWorld = nullptr;
+    for (b2Body* body = m_pWorld->GetBodyList(); body; body = body->GetNext()) {
+        m_pWorld->DestroyBody(body);
+    }
+    /* delete m_pWorld; */
+    /* m_pWorld = nullptr; */
 }

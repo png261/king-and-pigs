@@ -12,6 +12,7 @@ Animation::Animation(
     const bool bLoop)
     : m_textureID(textureID)
     , m_bRunning(false)
+    , m_bFinished(false)
     , m_x(0)
     , m_y(0)
     , m_width(width)
@@ -39,6 +40,7 @@ void Animation::update()
             m_curFrame %= m_nFrames;
         } else {
             m_curFrame = m_nFrames - 1;
+            m_bFinished = true;
         }
     }
 }
@@ -94,4 +96,9 @@ void Animation::stop()
 
     m_bRunning = false;
     timer.stop();
+}
+
+bool Animation::isFinished() const
+{
+    return m_bFinished;
 }

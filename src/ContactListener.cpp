@@ -1,6 +1,5 @@
 #include "ContactListener.hpp"
 #include <iostream>
-#include "GameObject.hpp"
 #include "ItemObject.hpp"
 #include "Pig.hpp"
 
