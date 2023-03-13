@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include "SDL.hpp"
 #include "Window.hpp"
 
 class Game final
@@ -11,6 +10,7 @@ public:
     ~Game(){};
 
     static Game* Instance();
+
     bool init(const unsigned int width, const unsigned int height);
     void handleEvents();
     void update();
@@ -29,12 +29,8 @@ public:
 
 private:
     Game();
-
     Window* m_pWindow;
-
-    int m_currentLevel;
-
     bool m_bRunning;
-
+    int m_currentLevel;
     std::vector<std::string> m_levelFiles;
 };

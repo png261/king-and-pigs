@@ -10,9 +10,9 @@ class Pig : public Enemy, public DamageableObject, public AttackableObject
 public:
     Pig();
     void load(const LoaderParams* const pParams);
+    void loadAnimation();
     void update();
     void updateAnimation();
-    void loadAnimation();
     void handleMovement();
 
     void setSeeingPlayer(bool isSeeing);

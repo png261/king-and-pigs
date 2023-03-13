@@ -3,7 +3,7 @@
 #include <string>
 #include "Color.hpp"
 #include "SDL.hpp"
-#include "Timer.hpp"
+#include "Stopwatch.hpp"
 
 class Window final
 {
@@ -56,7 +56,7 @@ private:
 
     std::string m_title;
     Color m_bgColor;
-    Timer m_framerateTimer;
+    Stopwatch m_framerateStopwatch;
 
     unsigned int m_framerate;
     unsigned int m_frameDelay;

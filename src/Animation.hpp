@@ -2,7 +2,7 @@
 
 #include <string>
 #include "Box2D.hpp"
-#include "Timer.hpp"
+#include "Stopwatch.hpp"
 
 class Animation
 {
@@ -41,7 +41,7 @@ public:
     bool isFinished() const;
 
 private:
-    Timer timer;
+    Stopwatch m_stopwatch;
     std::string m_textureID;
     unsigned int m_framerate;
 

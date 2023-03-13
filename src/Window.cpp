@@ -26,7 +26,7 @@ Window::Window(const unsigned int width, const unsigned int height, const std::s
         throw "Window() Fail";
     }
 
-    this->m_framerateTimer.start();
+    this->m_framerateStopwatch.start();
 
     this->clear();
     this->refresh();
@@ -147,13 +147,13 @@ void Window::setBackgroundColor(const Color color)
 
 void Window::delayFramerateIfNeeded()
 {
-    m_currentFrameDelta = m_framerateTimer.delta();
+    m_currentFrameDelta = m_framerateStopwatch.delta();
 
     if ((m_currentFrameDelta) < (m_frameDelay)) {
         SDL_Delay((m_frameDelay)-m_currentFrameDelta);
     };
 
-    m_framerateTimer.restart();
+    m_framerateStopwatch.restart();
 }
 
 unsigned int Window::getDelta() const

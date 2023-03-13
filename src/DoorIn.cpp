@@ -1,6 +1,5 @@
 #include "DoorIn.hpp"
 #include "Game.hpp"
-#include "Log.hpp"
 
 void DoorIn::load(const LoaderParams* const pParams)
 {

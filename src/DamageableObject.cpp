@@ -1,11 +1,18 @@
 #include "DamageableObject.hpp"
 #include <iostream>
 
-DamageableObject::DamageableObject(const int initialHp, const int invulnerableTime)
+DamageableObject::DamageableObject(
+    const int initialHp,
+    const int invulnerableTime,
+    const int dyingTime)
     : m_hp(initialHp)
     , m_bDead(false)
+    , m_bDying(false)
     , m_bInvulnerable(false)
     , m_invulnerableTime(invulnerableTime)
+    , m_dyingTime(dyingTime)
+    , invulnerableTimer(invulnerableTime)
+    , dyingTimer(dyingTime)
 {}
 
 void DamageableObject::heal(const int d)
@@ -36,7 +43,6 @@ void DamageableObject::startInvulnerable()
 void DamageableObject::stopInvulnerable()
 {
     m_bInvulnerable = false;
-    invulnerableTimer.stop();
 };
 
 void DamageableObject::damage(const int d)
@@ -48,8 +54,8 @@ void DamageableObject::damage(const int d)
     m_hp -= d;
     if (m_hp <= 0) {
         m_hp = 0;
-        m_bDead = true;
-        deadTimer.start();
+        m_bDying = true;
+        dyingTimer.start();
         return;
     }
 
@@ -58,12 +64,25 @@ void DamageableObject::damage(const int d)
 
 void DamageableObject::update()
 {
-    if (invulnerableTimer.delta() >= m_invulnerableTime) {
+    if (m_bDead) {
+        return;
+    }
+
+    if (invulnerableTimer.isDone()) {
         this->stopInvulnerable();
     }
-};
+
+    if (m_bDying && dyingTimer.isDone()) {
+        m_bDead = true;
+    };
+}
 
 int DamageableObject::getHp() const
 {
     return m_hp;
 };
+
+bool DamageableObject::isDying() const
+{
+    return m_bDying;
+}

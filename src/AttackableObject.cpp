@@ -8,6 +8,7 @@ AttackableObject::AttackableObject(const int damage, const int range, const int 
     , m_bTurnRight(true)
     , m_attackSpeed(attackSpeed)
     , m_pAttackSensor(nullptr)
+    , attackTimer(attackSpeed)
 {}
 
 void AttackableObject::createAttackSensor(
@@ -73,9 +74,8 @@ void AttackableObject::attack()
 
 void AttackableObject::update()
 {
-    if (attackTimer.delta() >= m_attackSpeed) {
+    if (attackTimer.isDone()) {
         m_bAttack = false;
         m_bCanAttack = true;
-        attackTimer.stop();
     }
 }

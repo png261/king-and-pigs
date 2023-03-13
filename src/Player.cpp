@@ -13,7 +13,7 @@
 
 Player::Player()
     : GameObject()
-    , DamageableObject(3, 300)
+    , DamageableObject(3, 300, 500)
     , AttackableObject(1, 30, 300)
     , m_bDoorIn(false)
 {}
@@ -49,7 +49,9 @@ void Player::loadAnimation()
     m_animations[Animation::DOOR_IN] = new Animation("player door in", 78, 58, 8, false);
     m_animations[Animation::DOOR_OUT] = new Animation("player door out", 78, 58, 8, false);
 
+    doorOutTimer.setTime(300);
     m_curAnimation = Animation::DOOR_OUT;
+
     m_animations[m_curAnimation]->start();
     doorOutTimer.start();
 }
@@ -111,7 +113,7 @@ void Player::updateAnimation()
     } else if (this->isAttack()) {
         m_currentAttackState = ON_ATTACK;
     } else if (this->isDead()) {
-        m_currentAttackState = ON_DIE;
+        m_currentAttackState = ON_DYING;
     } else {
         m_currentAttackState = ON_NORMAL;
     }
@@ -150,13 +152,12 @@ void Player::updateAnimation()
     case ON_ATTACK:
         newAnimation = Animation::ATTACK;
         break;
-    case ON_DIE:
+    case ON_DYING:
         newAnimation = Animation::DEAD;
         break;
     }
 
-    if (doorOutTimer.delta() > 1000) {
-        doorOutTimer.stop();
+    if (doorOutTimer.isDone()) {
         if (newAnimation != m_curAnimation) {
             m_animations[m_curAnimation]->stop();
             m_curAnimation = newAnimation;

@@ -4,7 +4,7 @@
 
 Box::Box()
     : Enemy()
-    , DamageableObject(1, 200)
+    , DamageableObject(1, 200, 300)
 {}
 
 void Box::load(const LoaderParams* const pParams)

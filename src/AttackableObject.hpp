@@ -3,7 +3,7 @@
 #include "Box2D.hpp"
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
-#include "Timer.hpp"
+#include "Stopwatch.hpp"
 
 class AttackableObject
 {
@@ -36,5 +36,3 @@ protected:
 
     b2Fixture* m_pAttackSensor;
 };
-
-

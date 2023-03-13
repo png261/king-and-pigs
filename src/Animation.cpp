@@ -1,5 +1,4 @@
 #include "Animation.hpp"
-#include <iostream>
 #include "Game.hpp"
 #include "Log.hpp"
 #include "TextureManager.hpp"
@@ -33,7 +32,7 @@ bool Animation::isRunning() const
 void Animation::update()
 {
     const Uint32 time_between_frames = (1000.0f / m_framerate);
-    m_curFrame = (timer.delta() / time_between_frames);
+    m_curFrame = (m_stopwatch.delta() / time_between_frames);
 
     if (m_curFrame >= m_nFrames) {
         if (m_bLoop) {
@@ -75,7 +74,7 @@ void Animation::start()
     m_curFrame = 0;
     m_timesLooped = 0;
     m_bRunning = true;
-    timer.start();
+    m_stopwatch.start();
 }
 
 void Animation::restart()
@@ -95,7 +94,7 @@ void Animation::stop()
     }
 
     m_bRunning = false;
-    timer.stop();
+    m_stopwatch.stop();
 }
 
 bool Animation::isFinished() const

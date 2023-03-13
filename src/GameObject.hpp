@@ -41,7 +41,7 @@ public:
         ON_NORMAL,
         ON_HIT,
         ON_ATTACK,
-        ON_DIE,
+        ON_DYING,
     };
 
 protected:

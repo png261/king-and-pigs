@@ -8,7 +8,7 @@
 
 Pig::Pig()
     : Enemy()
-    , DamageableObject(3, 300)
+    , DamageableObject(3, 300, 1000)
     , AttackableObject(1, 50, 300)
     , m_followPosition(0, 0)
     , m_originPosition(0, 0)
@@ -66,13 +66,14 @@ void Pig::update()
 void Pig::updateAnimation()
 {
     Animation::AnimationID newAnimation = m_curAnimation;
-
-    if (this->isInvulnerable()) {
+    if (this->isDead()) {
+        m_bExist = false;
+    } else if (this->isInvulnerable()) {
         m_currentAttackState = ON_HIT;
     } else if (this->isAttack()) {
         m_currentAttackState = ON_ATTACK;
-    } else if (this->isDead()) {
-        m_currentAttackState = ON_DIE;
+    } else if (this->isDying()) {
+        m_currentAttackState = ON_DYING;
     } else {
         m_currentAttackState = ON_NORMAL;
     }
@@ -104,7 +105,7 @@ void Pig::updateAnimation()
     case ON_ATTACK:
         newAnimation = Animation::ATTACK;
         break;
-    case ON_DIE:
+    case ON_DYING:
         newAnimation = Animation::DEAD;
         break;
     }
