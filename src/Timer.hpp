@@ -1,26 +1,20 @@
 #pragma once
-
 #include "SDL.hpp"
+#include "Stopwatch.hpp"
 
 class Timer final
 {
 public:
+    Timer(Uint32 time);
     Timer();
+    void setTime(Uint32 time);
     void start();
-    void stop();
-    void pause();
-    void resume();
     void restart();
-    Uint32 delta() const;
-    Uint32 currentTime() const;
-    bool isRunning() const;
-    bool isPaused() const;
+    bool isDone();
+    bool isRunning();
 
-protected:
-    Uint32 m_startMark;
-    Uint32 m_stopMark;
-    Uint32 m_pausedMark;
-    bool m_bRunning;
-    bool m_bPaused;
+private:
+    Uint32 m_time;
+    bool m_bDone;
+    Stopwatch m_stopwatch;
 };
-
