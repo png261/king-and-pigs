@@ -5,6 +5,10 @@ void DoorIn::load(const LoaderParams* const pParams)
 {
     Door::load(pParams);
     this->createSensor();
+    b2Filter filter;
+    filter.categoryBits = Box2D::CAT_DOOR_IN;
+    filter.maskBits = Box2D::MASK_DOOR_IN;
+    m_pFixture->SetFilterData(filter);
 }
 
 void DoorIn::createSensor()
@@ -19,12 +23,12 @@ void DoorIn::createSensor()
             Box2D::pixelToMeter(m_height / 4.0f - sensorSize)),
         0);
 
-    b2FixtureDef footSensorDef;
-    footSensorDef.shape = &dynamicBox;
-    footSensorDef.isSensor = true;
-    footSensorDef.filter.categoryBits = Box2D::CAT_DOOR_IN;
-    footSensorDef.filter.maskBits = Box2D::MASK_DOOR;
-    m_pBody->CreateFixture(&footSensorDef);
+    b2FixtureDef sensorDef;
+    sensorDef.shape = &dynamicBox;
+    sensorDef.isSensor = true;
+    sensorDef.filter.categoryBits = Box2D::CAT_DOOR_IN;
+    sensorDef.filter.maskBits = Box2D::MASK_DOOR_IN;
+    m_pBody->CreateFixture(&sensorDef);
 }
 
 void DoorIn::open()

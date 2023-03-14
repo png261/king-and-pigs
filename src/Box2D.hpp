@@ -38,7 +38,8 @@ public:
     enum FilterMask : uint16 {
         MASK_PLAYER = CAT_ALL,
         MASK_WALL = CAT_ALL,
-        MASK_DOOR = CAT_PLAYER,
+        MASK_DOOR_OUT = CAT_PLAYER,
+        MASK_DOOR_IN = CAT_PLAYER,
         MASK_ENEMY = CAT_ALL & ~CAT_ITEM,
         MASK_ITEM = CAT_PLAYER | CAT_WALL,
         MASK_FOOT_SENSOR = CAT_ALL,

@@ -6,7 +6,7 @@ void DoorOut::load(const LoaderParams* const pParams)
 
     b2Filter filter;
     filter.categoryBits = Box2D::CAT_DOOR_OUT;
-    filter.maskBits = Box2D::MASK_DOOR;
+    filter.maskBits = Box2D::MASK_DOOR_OUT;
     m_pFixture->SetFilterData(filter);
 }
 
