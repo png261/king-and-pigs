@@ -56,12 +56,12 @@ float Box2D::pixelToMeter(const float pixel)
 
 b2Vec2 Box2D::meterToPixel(const b2Vec2 meter)
 {
-    return {meter.x * Box2D::PIXEL_PER_METER, meter.y * Box2D::PIXEL_PER_METER};
+    return Box2D::PIXEL_PER_METER * meter;
 };
 
 b2Vec2 Box2D::pixelToMeter(const b2Vec2 pixel)
 {
-    return {pixel.x * Box2D::METER_PER_PIXEL, pixel.y * Box2D::METER_PER_PIXEL};
+    return Box2D::METER_PER_PIXEL * pixel;
 };
 
 float Box2D::radToDeg(const float rad)
