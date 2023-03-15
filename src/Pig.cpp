@@ -1,10 +1,9 @@
 #include "Pig.hpp"
-#include <iostream>
-#include "PhysicWorld.hpp"
 #include "DamageableObject.hpp"
 #include "DebugDraw.hpp"
 #include "Game.hpp"
 #include "InputHandler.hpp"
+#include "PhysicWorld.hpp"
 
 Pig::Pig()
     : Enemy()

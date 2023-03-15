@@ -1,6 +1,10 @@
 #include "DoorIn.hpp"
 #include "Game.hpp"
+#include "Log.hpp"
 
+DoorIn::DoorIn()
+    : m_bOpened(false)
+{}
 void DoorIn::load(const LoaderParams* const pParams)
 {
     Door::load(pParams);
@@ -35,6 +39,11 @@ void DoorIn::open()
 {
     Door::open();
     if (m_animations[Animation::DOOR_OPEN]->isFinished()) {
-        Game::Instance()->nextLevel();
+        m_bOpened = true;
     }
 }
+
+bool DoorIn::isOpened()
+{
+    return m_bOpened;
+};

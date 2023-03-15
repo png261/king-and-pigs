@@ -1,21 +1,20 @@
 #include "Player.hpp"
 
-#include <iostream>
 #include "Animation.hpp"
 #include "AttackableObject.hpp"
-#include "PhysicWorld.hpp"
 #include "Camera.hpp"
 #include "DamageableObject.hpp"
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "InputHandler.hpp"
-#include "Log.hpp"
+#include "PhysicWorld.hpp"
 
 Player::Player()
     : GameObject()
     , DamageableObject(3, 300, 500)
     , AttackableObject(1, 30, 300)
     , m_bDoorIn(false)
+    , m_bWantDoorIn(false)
 {}
 
 void Player::load(const LoaderParams* const pParams)
@@ -68,6 +67,7 @@ void Player::update()
 void Player::handleInput()
 {
     if (m_bDoorIn) {
+        m_bWantDoorIn = true;
         return;
     }
 
@@ -175,7 +175,6 @@ void Player::doorIn()
 
 void Player::doorOut()
 {
-    m_bDoorIn = true;
     m_curAnimation = Animation::DOOR_OUT;
     m_animations[m_curAnimation]->start();
 }
@@ -183,4 +182,9 @@ void Player::doorOut()
 bool Player::isWantDoorIn()
 {
     return m_bWantDoorIn;
+}
+
+bool Player::isDoorIn()
+{
+    return m_bDoorIn;
 }

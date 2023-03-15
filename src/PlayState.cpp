@@ -100,8 +100,8 @@ bool PlayState::onExit()
     m_exiting = true;
     InputHandler::Instance()->reset();
     PhysicWorld::Instance()->clean();
-    /* delete m_pLevel; */
-    /* m_pLevel = nullptr; */
+    delete m_pLevel;
+    m_pLevel = nullptr;
 
     return true;
 }

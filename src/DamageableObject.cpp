@@ -1,5 +1,4 @@
 #include "DamageableObject.hpp"
-#include <iostream>
 
 DamageableObject::DamageableObject(
     const int initialHp,

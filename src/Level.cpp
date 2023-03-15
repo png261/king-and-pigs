@@ -1,6 +1,7 @@
 #include "Level.hpp"
 #include "Game.hpp"
 #include "Layer.hpp"
+#include "Log.hpp"
 #include "TextureManager.hpp"
 #include "TileLayer.hpp"
 
@@ -11,7 +12,6 @@ Level::~Level()
     for (auto& layer : m_layers) {
         delete layer;
     }
-
     m_layers.clear();
 }
 

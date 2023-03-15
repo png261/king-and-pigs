@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include "AttackableObject.hpp"
 #include "Enemy.hpp"
 #include "Log.hpp"

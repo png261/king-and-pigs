@@ -1,5 +1,4 @@
 #include "PhysicWorld.hpp"
-#include <iostream>
 #include "AttackableObject.hpp"
 #include "ContactListener.hpp"
 #include "DamageableObject.hpp"
@@ -8,7 +7,6 @@
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "InputHandler.hpp"
-#include "Log.hpp"
 #include "Pig.hpp"
 #include "Player.hpp"
 
@@ -120,7 +118,7 @@ void PhysicWorld::contactListener()
          contact = contact->GetNext()) {
         /* attackListener(contact); */
         /* enemyVisionListener(contact); */
-        /* DoorInBeginContact(contact); */
+        DoorInBeginContact(contact);
     }
 }
 
@@ -138,7 +136,6 @@ void PhysicWorld::enemyVisionListener(b2Contact* contact)
     if (catA == PhysicWorld::CAT_ENEMY_VISION_SENSOR) {
         GameObject* const enemy = (GameObject*)(A->GetBody()->GetUserData().pointer);
         GameObject* const player = (GameObject*)(B->GetBody()->GetUserData().pointer);
-        std::cout << player->getPosition().x << std::endl;
     }
 
     if (catB == PhysicWorld::CAT_ENEMY_VISION_SENSOR) {
@@ -154,28 +151,27 @@ void PhysicWorld::DoorInBeginContact(b2Contact* contact)
     b2Fixture* fixtureB = contact->GetFixtureB();
     uint16 catA = fixtureA->GetFilterData().categoryBits;
     uint16 catB = fixtureB->GetFilterData().categoryBits;
-    bool isPlayerDoor = (catA | catB) == (PhysicWorld::CAT_DOOR_IN | PhysicWorld::CAT_PLAYER);
+
+    bool isPlayerDoor = catA == PhysicWorld::CAT_DOOR_IN && catB == PhysicWorld::CAT_PLAYER;
     if (!isPlayerDoor) {
         return;
     }
-    DoorIn* door = nullptr;
-    Player* player = nullptr;
 
-    if (catA == PhysicWorld::CAT_DOOR_IN) {
-        door = dynamic_cast<DoorIn*>((GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
-        player = dynamic_cast<Player*>((GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
-    } else {
-        door = dynamic_cast<DoorIn*>((GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
-        player = dynamic_cast<Player*>((GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
-    }
+    DoorIn* door = dynamic_cast<DoorIn*>((GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
+    Player* player =
+        dynamic_cast<Player*>((GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
 
     if (player == nullptr || door == nullptr) {
         return;
     }
 
     if (player->isWantDoorIn()) {
-        door->open();
-        player->doorIn();
+        if (door->isOpened()) {
+            Game::Instance()->nextLevel();
+        } else {
+            door->open();
+            player->doorIn();
+        }
     }
 }
 
@@ -185,6 +181,7 @@ void PhysicWorld::attackListener(b2Contact* contact)
     b2Fixture* const B = contact->GetFixtureB();
     uint16 const catA = A->GetFilterData().categoryBits;
     uint16 const catB = B->GetFilterData().categoryBits;
+
     bool isAttack = ((catA | catB) == (PhysicWorld::CAT_ATTACK_SENSOR | PhysicWorld::CAT_ENEMY)) ||
                     ((catA | catB) == (PhysicWorld::CAT_ATTACK_SENSOR | PhysicWorld::CAT_PLAYER));
 
@@ -246,6 +243,7 @@ void PhysicWorld::clean()
     for (b2Body* body = m_pWorld->GetBodyList(); body; body = body->GetNext()) {
         m_pWorld->DestroyBody(body);
     }
+
     m_contactListener = new ContactListener();
     m_pWorld->SetContactListener(m_contactListener);
     /* delete m_pWorld; */

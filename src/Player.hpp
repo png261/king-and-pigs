@@ -18,6 +18,7 @@ public:
     void doorOut();
 
     bool isWantDoorIn();
+    bool isDoorIn();
 
 private:
     void handleInput();

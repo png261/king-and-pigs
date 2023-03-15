@@ -37,15 +37,11 @@ void ContactListener::ItemContact(
     PhysicWorld::FilterCategory const catA,
     PhysicWorld::FilterCategory const catB)
 {
-    if ((catA | catB) != (PhysicWorld::CAT_ITEM | PhysicWorld::CAT_PLAYER)) {
+    if (catA != PhysicWorld::CAT_ITEM || catB != PhysicWorld::CAT_PLAYER) {
         return;
     }
 
-    if (catA == PhysicWorld::CAT_ITEM) {
-        ((ItemObject*)(fixtureA->GetBody()->GetUserData().pointer))->bonus();
-    } else {
-        ((ItemObject*)(fixtureB->GetBody()->GetUserData().pointer))->bonus();
-    }
+    ((ItemObject*)(fixtureA->GetBody()->GetUserData().pointer))->bonus();
 }
 
 void ContactListener::JumpBeginContact(

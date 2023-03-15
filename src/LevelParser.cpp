@@ -1,8 +1,6 @@
 #include "LevelParser.hpp"
 
-#include <iostream>
 #include <vector>
-#include "PhysicWorld.hpp"
 #include "CONSTANT.hpp"
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"
@@ -10,6 +8,7 @@
 #include "Level.hpp"
 #include "Log.hpp"
 #include "ObjectLayer.hpp"
+#include "PhysicWorld.hpp"
 #include "TextureManager.hpp"
 #include "TileLayer.hpp"
 
@@ -253,9 +252,6 @@ void LevelParser::parseTileLayer(
                 }
 
                 b2Vec2 position = m_tileSize * b2Vec2(col, row);
-                if (id == 59) {
-                    std::cout << position.x << " " << position.y << std::endl;
-                }
 
                 PhysicWorld::Instance()->createCollisionObject(
                     shape->second.width,

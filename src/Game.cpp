@@ -1,9 +1,9 @@
 #include "Game.hpp"
 
-#include "PhysicWorld.hpp"
 #include "CONSTANT.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
+#include "PhysicWorld.hpp"
 #include "PlayState.hpp"
 
 Game::Game()
