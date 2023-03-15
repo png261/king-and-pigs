@@ -4,10 +4,11 @@
 #include <box2d/box2d.h>
 
 class DebugDraw;
-class Box2D final
+class ContactListener;
+class PhysicWorld final
 {
 public:
-    static Box2D* Instance();
+    static PhysicWorld* Instance();
     bool init();
     void clean();
     void update();
@@ -65,7 +66,7 @@ public:
     static float degToRad(float deg);
 
 private:
-    Box2D();
+    PhysicWorld();
     void attackListener(b2Contact* contact);
     void enemyVisionListener(b2Contact* contact);
     void handleAttack(b2Fixture* Attacker, b2Fixture* Defender);
@@ -74,6 +75,7 @@ private:
     b2World* m_pWorld;
     bool m_bDebugEnable;
     DebugDraw* m_pDebugDraw;
+    ContactListener* m_contactListener;
 
     float m_timeStep;
     int32 m_velocityIterations;

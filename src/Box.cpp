@@ -1,5 +1,5 @@
 #include "Box.hpp"
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "DamageableObject.hpp"
 
 Box::Box()

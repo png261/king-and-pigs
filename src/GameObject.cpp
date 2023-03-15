@@ -1,6 +1,6 @@
 #include "GameObject.hpp"
 
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "Camera.hpp"
 #include "Game.hpp"
 
@@ -31,13 +31,13 @@ void GameObject::createBody(const int x, const int y, const int width, const int
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position = Box2D::pixelToMeter(b2Vec2(x + width * 0.5f, y + height * 0.5f));
+    bodyDef.position = PhysicWorld::pixelToMeter(b2Vec2(x + width * 0.5f, y + height * 0.5f));
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
-    m_pBody = Box2D::Instance()->getWorld()->CreateBody(&bodyDef);
+    m_pBody = PhysicWorld::Instance()->getWorld()->CreateBody(&bodyDef);
 
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(Box2D::pixelToMeter(width) / 2.0f, Box2D::pixelToMeter(height) / 2.0f);
+    dynamicBox.SetAsBox(PhysicWorld::pixelToMeter(width) / 2.0f, PhysicWorld::pixelToMeter(height) / 2.0f);
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
@@ -46,15 +46,15 @@ void GameObject::createBody(const int x, const int y, const int width, const int
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
     dynamicBox.SetAsBox(
-        (Box2D::pixelToMeter(width - 0.5)) / 2.0f,
-        Box2D::pixelToMeter(0.5),
-        b2Vec2(0, Box2D::pixelToMeter(height) / 2.0f),
+        (PhysicWorld::pixelToMeter(width - 0.5)) / 2.0f,
+        PhysicWorld::pixelToMeter(0.5),
+        b2Vec2(0, PhysicWorld::pixelToMeter(height) / 2.0f),
         0);
     b2FixtureDef footSensorDef;
     footSensorDef.shape = &dynamicBox;
     footSensorDef.isSensor = true;
-    footSensorDef.filter.categoryBits = Box2D::CAT_FOOT_SENSOR;
-    footSensorDef.filter.maskBits = Box2D::MASK_FOOT_SENSOR;
+    footSensorDef.filter.categoryBits = PhysicWorld::CAT_FOOT_SENSOR;
+    footSensorDef.filter.maskBits = PhysicWorld::MASK_FOOT_SENSOR;
     m_pBody->CreateFixture(&footSensorDef);
 }
 
@@ -74,12 +74,12 @@ void GameObject::update()
 
 b2Vec2 GameObject::getPosition() const
 {
-    return Box2D::meterToPixel(m_pBody->GetPosition());
+    return PhysicWorld::meterToPixel(m_pBody->GetPosition());
 }
 
 float GameObject::getAngle() const
 {
-    return Box2D::meterToPixel(m_pBody->GetAngle());
+    return PhysicWorld::meterToPixel(m_pBody->GetAngle());
 }
 
 int GameObject::getWidth() const
@@ -119,7 +119,7 @@ void GameObject::changeFootContact(int n)
 
 void GameObject::moveRight()
 {
-    float speedDifference = Box2D::pixelToMeter(m_moveSpeed) - m_pBody->GetLinearVelocity().x;
+    float speedDifference = PhysicWorld::pixelToMeter(m_moveSpeed) - m_pBody->GetLinearVelocity().x;
     b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 
@@ -133,7 +133,7 @@ void GameObject::moveRight()
 
 void GameObject::moveLeft()
 {
-    float speedDifference = -Box2D::pixelToMeter(m_moveSpeed) - m_pBody->GetLinearVelocity().x;
+    float speedDifference = -PhysicWorld::pixelToMeter(m_moveSpeed) - m_pBody->GetLinearVelocity().x;
     b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 
@@ -147,8 +147,8 @@ void GameObject::moveLeft()
 
 void GameObject::jump()
 {
-    float timeToJumpPeak = sqrt(2 * Box2D::pixelToMeter(m_jumpHeight) / Box2D::GRAVITY.y);
+    float timeToJumpPeak = sqrt(2 * PhysicWorld::pixelToMeter(m_jumpHeight) / PhysicWorld::GRAVITY.y);
     b2Vec2 impulse =
-        -b2Vec2(0, m_pBody->GetMass() * Box2D::pixelToMeter(m_jumpHeight) / timeToJumpPeak);
+        -b2Vec2(0, m_pBody->GetMass() * PhysicWorld::pixelToMeter(m_jumpHeight) / timeToJumpPeak);
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 }

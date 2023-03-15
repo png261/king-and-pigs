@@ -99,7 +99,9 @@ bool PlayState::onExit()
 {
     m_exiting = true;
     InputHandler::Instance()->reset();
-    Box2D::Instance()->clean();
+    PhysicWorld::Instance()->clean();
+    /* delete m_pLevel; */
+    /* m_pLevel = nullptr; */
 
     return true;
 }
@@ -113,6 +115,9 @@ void PlayState::update()
 {
     if (!m_loadingComplete || m_exiting || m_pLevel == nullptr) {
         return;
+    }
+    if (InputHandler::Instance()->isKeyDown(KEY_Z)) {
+        Game::Instance()->nextLevel();
     }
 
     m_pLevel->update();

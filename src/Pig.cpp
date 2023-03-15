@@ -1,6 +1,6 @@
 #include "Pig.hpp"
 #include <iostream>
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "DamageableObject.hpp"
 #include "DebugDraw.hpp"
 #include "Game.hpp"
@@ -23,7 +23,7 @@ void Pig::load(const LoaderParams* const pParams)
     m_moveSpeed = 50;
     m_jumpHeight = 32.0f;
     m_originPosition = this->getPosition();
-    this->createAttackSensor(getBody(), m_width, Box2D::MASK_ENEMY_ATTACK_SENSOR);
+    this->createAttackSensor(getBody(), m_width, PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
     this->loadAnimation();
 
     m_currentAttackState = ON_NORMAL;
@@ -60,7 +60,7 @@ void Pig::update()
 
     EnemyRayCastCallback callback;
     callback.setListener(this);
-    Box2D::Instance()->getWorld()->RayCast(&callback, start, end);
+    PhysicWorld::Instance()->getWorld()->RayCast(&callback, start, end);
 }
 
 void Pig::updateAnimation()

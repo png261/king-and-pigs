@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Animation.hpp"
 #include "AttackableObject.hpp"
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "Camera.hpp"
 #include "DamageableObject.hpp"
 #include "Game.hpp"
@@ -25,11 +25,11 @@ void Player::load(const LoaderParams* const pParams)
     m_jumpHeight = 20.0f;
 
     b2Filter filter;
-    filter.categoryBits = Box2D::CAT_PLAYER;
-    filter.maskBits = Box2D::MASK_PLAYER;
+    filter.categoryBits = PhysicWorld::CAT_PLAYER;
+    filter.maskBits = PhysicWorld::MASK_PLAYER;
     m_pFixture->SetFilterData(filter);
 
-    this->createAttackSensor(getBody(), m_width, Box2D::MASK_PLAYER_ATTACK_SENSOR);
+    this->createAttackSensor(getBody(), m_width, PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
     this->loadAnimation();
 
     m_currentState = ON_GROUND;

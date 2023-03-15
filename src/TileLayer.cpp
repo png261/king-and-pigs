@@ -20,7 +20,9 @@ TileLayer::TileLayer(
     m_mapWidth = mapWidth;
 }
 
-void TileLayer::update(Level* const pLevel) {}
+TileLayer::~TileLayer() {}
+
+void TileLayer::update() {}
 
 void TileLayer::render()
 {

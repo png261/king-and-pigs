@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Animation.hpp"
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "LoaderParams.hpp"
 #include "TextureManager.hpp"
 

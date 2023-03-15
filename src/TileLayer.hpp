@@ -4,7 +4,7 @@
 #include "Layer.hpp"
 #include "Level.hpp"
 
-class TileLayer : public Layer
+class TileLayer final : public Layer
 {
 public:
     TileLayer(
@@ -12,8 +12,8 @@ public:
         int const mapWidth,
         int const mapHeight,
         const std::vector<Tileset>& tilesets);
-    ~TileLayer() {}
-    virtual void update(Level* const pLevel);
+    ~TileLayer();
+    virtual void update();
     virtual void render();
 
     void setTileIDs(const std::vector<std::vector<int>>& data);

@@ -44,11 +44,11 @@ public:
         const b2Vec2& normal,
         float fraction) override
     {
-        if (fixture->GetFilterData().categoryBits == Box2D::CAT_PLAYER) {
+        if (fixture->GetFilterData().categoryBits == PhysicWorld::CAT_PLAYER) {
             Log::log("seeing player");
             m_listener->setSeeingPlayer(true);
         }
-        if (fixture->GetFilterData().categoryBits == Box2D::CAT_ENEMY) {
+        if (fixture->GetFilterData().categoryBits == PhysicWorld::CAT_ENEMY) {
             m_listener->setSeeingPlayer(false);
         }
         return -1;

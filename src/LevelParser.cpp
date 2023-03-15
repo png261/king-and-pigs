@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <vector>
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "CONSTANT.hpp"
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"
@@ -257,7 +257,7 @@ void LevelParser::parseTileLayer(
                     std::cout << position.x << " " << position.y << std::endl;
                 }
 
-                Box2D::Instance()->createCollisionObject(
+                PhysicWorld::Instance()->createCollisionObject(
                     shape->second.width,
                     shape->second.height,
                     position);

@@ -1,5 +1,5 @@
 #include "AttackableObject.hpp"
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 AttackableObject::AttackableObject(const int damage, const int range, const int attackSpeed)
     : m_damage(damage)
     , m_range(range)
@@ -14,18 +14,18 @@ AttackableObject::AttackableObject(const int damage, const int range, const int 
 void AttackableObject::createAttackSensor(
     b2Body* const pBody,
     const int objectWidth,
-    const Box2D::FilterMask filterMask)
+    const PhysicWorld::FilterMask filterMask)
 {
     b2PolygonShape attackShape;
     attackShape.SetAsBox(
-        Box2D::pixelToMeter(m_range) / 2.0f,
-        Box2D::pixelToMeter(m_range) / 2.0f,
-        b2Vec2(-(Box2D::pixelToMeter(objectWidth) / 4.0f + Box2D::pixelToMeter(m_range) / 2.0f), 0),
+        PhysicWorld::pixelToMeter(m_range) / 2.0f,
+        PhysicWorld::pixelToMeter(m_range) / 2.0f,
+        b2Vec2(-(PhysicWorld::pixelToMeter(objectWidth) / 4.0f + PhysicWorld::pixelToMeter(m_range) / 2.0f), 0),
         0);
 
     b2FixtureDef attackSensorDef;
     attackSensorDef.shape = &attackShape;
-    attackSensorDef.filter.categoryBits = Box2D::CAT_ATTACK_SENSOR;
+    attackSensorDef.filter.categoryBits = PhysicWorld::CAT_ATTACK_SENSOR;
     attackSensorDef.filter.maskBits = filterMask;
     attackSensorDef.isSensor = true;
     attackSensorDef.userData.pointer = reinterpret_cast<uintptr_t>((void*)"left");
@@ -33,9 +33,9 @@ void AttackableObject::createAttackSensor(
     m_pAttackSensor = pBody->CreateFixture(&attackSensorDef);
 
     attackShape.SetAsBox(
-        Box2D::pixelToMeter(m_range) / 2.0f,
-        Box2D::pixelToMeter(m_range) / 2.0f,
-        b2Vec2((Box2D::pixelToMeter(objectWidth) / 4.0f + Box2D::pixelToMeter(m_range) / 2.0f), 0),
+        PhysicWorld::pixelToMeter(m_range) / 2.0f,
+        PhysicWorld::pixelToMeter(m_range) / 2.0f,
+        b2Vec2((PhysicWorld::pixelToMeter(objectWidth) / 4.0f + PhysicWorld::pixelToMeter(m_range) / 2.0f), 0),
         0);
     attackSensorDef.userData.pointer = reinterpret_cast<uintptr_t>((void*)"right");
     m_pAttackSensor = pBody->CreateFixture(&attackSensorDef);

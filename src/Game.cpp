@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "CONSTANT.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
@@ -30,7 +30,7 @@ bool Game::init(const unsigned int width, const unsigned int height)
 
     m_pWindow = new Window(width, height);
 
-    if (Box2D::Instance()->init() == false) {
+    if (PhysicWorld::Instance()->init() == false) {
         return false;
     };
 
@@ -43,13 +43,13 @@ bool Game::init(const unsigned int width, const unsigned int height)
 void Game::handleEvents()
 {
     InputHandler::Instance()->update();
-    Box2D::Instance()->handleEvents();
+    PhysicWorld::Instance()->handleEvents();
 }
 
 void Game::update()
 {
     GameStateMachine::Instance()->update();
-    Box2D::Instance()->update();
+    PhysicWorld::Instance()->update();
 }
 
 void Game::render()
@@ -57,7 +57,7 @@ void Game::render()
     m_pWindow->clear();
 
     GameStateMachine::Instance()->render();
-    Box2D::Instance()->debugDraw();
+    PhysicWorld::Instance()->debugDraw();
 
     m_pWindow->refresh();
     m_pWindow->delayFramerateIfNeeded();
@@ -65,7 +65,7 @@ void Game::render()
 
 void Game::clean()
 {
-    Box2D::Instance()->clean();
+    PhysicWorld::Instance()->clean();
     delete m_pWindow;
     SDL::exit();
 }

@@ -1,5 +1,5 @@
 #include "Heart.hpp"
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "Game.hpp"
 
 void Heart::load(const LoaderParams* const pParams)

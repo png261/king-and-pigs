@@ -24,7 +24,7 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
     SDL_Point sdlVertices[vertexCount];
     for (int i = 0; i < vertexCount; i++) {
         sdlVertices[i] = Utils::b2Vec2ToSDLPoint(
-            Box2D::meterToPixel(vertices[i]) - Camera::Instance()->getPosition());
+            PhysicWorld::meterToPixel(vertices[i]) - Camera::Instance()->getPosition());
     }
 
     SDL_RenderDrawLines(m_pRenderer, sdlVertices, vertexCount);
@@ -62,7 +62,7 @@ void DebugDraw::DrawCircle(const b2Vec2& center, float radius, const b2Color& co
     SDL_Point sdlVertices[vertexCount];
     for (int32 i = 0; i < vertexCount; ++i) {
         sdlVertices[i] = Utils::b2Vec2ToSDLPoint(
-            Box2D::meterToPixel(vertices[i]) - Camera::Instance()->getPosition());
+            PhysicWorld::meterToPixel(vertices[i]) - Camera::Instance()->getPosition());
     }
 
     SDL_RenderDrawLines(m_pRenderer, sdlVertices, vertexCount);
@@ -83,9 +83,9 @@ void DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& c
     int vertexCount = 2;
     SDL_Point sdlVertices[vertexCount];
     sdlVertices[0] =
-        Utils::b2Vec2ToSDLPoint(Box2D::meterToPixel(p1) - Camera::Instance()->getPosition());
+        Utils::b2Vec2ToSDLPoint(PhysicWorld::meterToPixel(p1) - Camera::Instance()->getPosition());
     sdlVertices[1] =
-        Utils::b2Vec2ToSDLPoint(Box2D::meterToPixel(p2) - Camera::Instance()->getPosition());
+        Utils::b2Vec2ToSDLPoint(PhysicWorld::meterToPixel(p2) - Camera::Instance()->getPosition());
 
     SDL_RenderDrawLines(m_pRenderer, sdlVertices, vertexCount);
 }
@@ -93,9 +93,9 @@ void DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& c
 void DebugDraw::DrawTransform(const b2Transform& xf)
 {
     SDL_Point p1 =
-        Utils::b2Vec2ToSDLPoint(Box2D::meterToPixel(xf.p) - Camera::Instance()->getPosition());
+        Utils::b2Vec2ToSDLPoint(PhysicWorld::meterToPixel(xf.p) - Camera::Instance()->getPosition());
     SDL_Point p2 = Utils::b2Vec2ToSDLPoint(
-        Box2D::meterToPixel({xf.p.x + xf.q.c * 20.0f, xf.p.y + xf.q.s * 20.0f}) -
+        PhysicWorld::meterToPixel({xf.p.x + xf.q.c * 20.0f, xf.p.y + xf.q.s * 20.0f}) -
         Camera::Instance()->getPosition());
     SDL_RenderDrawLine(m_pRenderer, p1.x, p1.y, p2.x, p2.y);
 };
@@ -103,8 +103,8 @@ void DebugDraw::DrawTransform(const b2Transform& xf)
 void DebugDraw::DrawPoint(const b2Vec2& p, float size, const b2Color& color)
 {
     SDL_SetRenderDrawColor(m_pRenderer, color.r * 255, color.g * 255, color.b * 255, color.a * 255);
-    b2Vec2 point = Box2D::meterToPixel(p) - Camera::Instance()->getPosition();
-    size = Box2D::meterToPixel(size);
+    b2Vec2 point = PhysicWorld::meterToPixel(p) - Camera::Instance()->getPosition();
+    size = PhysicWorld::meterToPixel(size);
     SDL_Rect rect{
         static_cast<int>(point.x - size / 2.0f),
         static_cast<int>(point.y - size / 2.0f),

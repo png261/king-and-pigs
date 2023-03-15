@@ -5,12 +5,12 @@
 
 class GameObject;
 
-class ObjectLayer : public Layer
+class ObjectLayer final : public Layer
 {
 public:
     virtual ~ObjectLayer();
 
-    virtual void update(Level* const pLevel);
+    virtual void update();
     virtual void render();
 
     std::vector<GameObject*>* getGameObjects();
@@ -18,4 +18,3 @@ public:
 private:
     std::vector<GameObject*> m_gameObjects;
 };
-

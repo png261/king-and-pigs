@@ -13,21 +13,21 @@ ObjectLayer::~ObjectLayer()
     m_gameObjects.clear();
 }
 
-void ObjectLayer::update(Level* const pLevel)
+void ObjectLayer::update()
 {
     for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++) {
         if ((*it)->isExist() == false) {
-            Box2D::Instance()->getWorld()->DestroyBody((*it)->getBody());
+            PhysicWorld::Instance()->getWorld()->DestroyBody((*it)->getBody());
             delete (*it);
             m_gameObjects.erase(it);
             it--;
             continue;
         }
 
-        if ((*it)->getPosition().x > Camera::Instance()->getPosition().x +
-                                         Game::Instance()->getWindow()->getWidth() &&
-            (*it)->getPosition().y > Camera::Instance()->getPosition().y +
-                                         Game::Instance()->getWindow()->getHeight()) {
+        if ((*it)->getPosition().x >
+                Camera::Instance()->getPosition().x + Game::Instance()->getWindow()->getWidth() &&
+            (*it)->getPosition().y >
+                Camera::Instance()->getPosition().y + Game::Instance()->getWindow()->getHeight()) {
             (*it)->setUpdating(false);
             continue;
         }

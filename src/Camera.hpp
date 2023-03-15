@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "GameObject.hpp"
 
 class Camera

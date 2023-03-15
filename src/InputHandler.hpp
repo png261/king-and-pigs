@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "InputDefinitions.hpp"
 #include "SDL.hpp"
 

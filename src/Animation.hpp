@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "Stopwatch.hpp"
 
 class Animation

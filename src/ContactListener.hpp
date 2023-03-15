@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 
 class ContactListener final : public b2ContactListener
 {
@@ -14,36 +14,16 @@ private:
     void ItemContact(
         b2Fixture* const fixtureA,
         b2Fixture* const fixtureB,
-        Box2D::FilterCategory const catA,
-        Box2D::FilterCategory const catB);
+        PhysicWorld::FilterCategory const catA,
+        PhysicWorld::FilterCategory const catB);
     void JumpBeginContact(
         b2Fixture* const fixtureA,
         b2Fixture* const fixtureB,
-        Box2D::FilterCategory const catA,
-        Box2D::FilterCategory const catB);
+        PhysicWorld::FilterCategory const catA,
+        PhysicWorld::FilterCategory const catB);
     void JumpEndContact(
         b2Fixture* const fixtureA,
         b2Fixture* const fixtureB,
-        Box2D::FilterCategory const catA,
-        Box2D::FilterCategory const catB);
-    void EnemyVisionBeginContact(
-        b2Fixture* const fixtureA,
-        b2Fixture* const fixtureB,
-        Box2D::FilterCategory const catA,
-        Box2D::FilterCategory const catB);
-    void EnemyVisionEndContact(
-        b2Fixture* const fixtureA,
-        b2Fixture* const fixtureB,
-        Box2D::FilterCategory const catA,
-        Box2D::FilterCategory const catB);
-    void EnemyAttackRangePlayerBeginContact(
-        b2Fixture* const fixtureA,
-        b2Fixture* const fixtureB,
-        Box2D::FilterCategory const catA,
-        Box2D::FilterCategory const catB);
-    void EnemyAttackRangePlayerEndContact(
-        b2Fixture* const fixtureA,
-        b2Fixture* const fixtureB,
-        Box2D::FilterCategory const catA,
-        Box2D::FilterCategory const catB);
+        PhysicWorld::FilterCategory const catA,
+        PhysicWorld::FilterCategory const catB);
 };

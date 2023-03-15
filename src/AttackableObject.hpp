@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
 #include "Stopwatch.hpp"
@@ -13,7 +13,7 @@ public:
     virtual void createAttackSensor(
         b2Body* const pBody,
         const int objectWidth,
-        const Box2D::FilterMask filterMask);
+        const PhysicWorld::FilterMask filterMask);
 
     virtual void update();
     virtual void attack();

@@ -25,7 +25,7 @@ void Level::render()
 void Level::update()
 {
     for (auto& layer : m_layers) {
-        layer->update(this);
+        layer->update();
     }
 }
 

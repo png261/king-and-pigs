@@ -2,7 +2,7 @@
 
 #include <map>
 #include <string>
-#include "Box2D.hpp"
+#include "PhysicWorld.hpp"
 #include "SDL.hpp"
 
 class TextureManager final
