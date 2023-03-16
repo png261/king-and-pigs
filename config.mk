@@ -1,12 +1,12 @@
 PROJECT_NAME = king and pigs
 
-# Directories
-BINDIR = bin
+# directories
+BIN_DIR = bin
 BINARY = binary
-SRCDIR = src
-LOGDIR = log
-LIBDIR = lib
-TESTDIR = test
+SRC_DIR = src
+LOG_DIR = log
+LIB_DIR = lib
+TEST_DIR = test
 
 # Source code file extension
 SRCEXT = cpp
@@ -31,7 +31,3 @@ CFLAGS = -O3 $(STD) $(STACK) $(WARNS)
 
 # Debug options
 DEBUG = -g3 -DDEBUG=1
-
-# paths
-PROJECT_PATH = $(PWD)
-PREFIX = /usr/local
