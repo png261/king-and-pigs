@@ -162,6 +162,9 @@ GameObject* parseObject(XMLElement* const pObjectElement, Level* const pLevel)
     type = pObjectElement->Attribute("class");
 
     GameObject* const pGameObject = GameObjectFactory::Instance()->create(type);
+    if (pGameObject == nullptr) {
+        return nullptr;
+    }
 
     for (XMLElement* e = pObjectElement->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
@@ -195,7 +198,10 @@ void LevelParser::parseObjectLayer(
     for (XMLElement* e = pObjectEl->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
         if (e->Value() == std::string("object")) {
-            pObjectLayer->getGameObjects()->push_back(parseObject(e, pLevel));
+            GameObject* obj = parseObject(e, pLevel);
+            if (obj != nullptr) {
+                pObjectLayer->getGameObjects()->push_back(obj);
+            }
         }
     }
 
