@@ -13,8 +13,6 @@ public:
     void clean();
     void update();
 
-    void createCollisionObject(const int width, const int height, b2Vec2 position);
-
     void handleEvents();
     void contactListener();
     void debugDraw();
@@ -24,14 +22,15 @@ public:
 
     enum FilterCategory : uint16 {
         CAT_WALL = 0x0001,
-        CAT_PLAYER = 0x0002,
-        CAT_DOOR_IN = 0x0004,
-        CAT_DOOR_OUT = 0x0008,
-        CAT_ENEMY = 0x0010,
-        CAT_ITEM = 0x0020,
-        CAT_FOOT_SENSOR = 0x0040,
-        CAT_ATTACK_SENSOR = 0x0080,
-        CAT_ENEMY_VISION_SENSOR = 0x0100,
+        CAT_ONE_WAY_WALL = 0x0002,
+        CAT_PLAYER = 0x0004,
+        CAT_DOOR_IN = 0x0008,
+        CAT_DOOR_OUT = 0x0010,
+        CAT_ENEMY = 0x0020,
+        CAT_ITEM = 0x0040,
+        CAT_FOOT_SENSOR = 0x0080,
+        CAT_ATTACK_SENSOR = 0x0100,
+        CAT_ENEMY_VISION_SENSOR = 0x0200,
         CAT_ALL = 0xFFFF,
         CAT_NONE = 0x0000,
     };
@@ -48,6 +47,12 @@ public:
         MASK_ENEMY_ATTACK_SENSOR = CAT_PLAYER,
         MASK_ENEMY_VISION_SENSOR = CAT_ALL,
     };
+
+    void createCollisionObject(
+        PhysicWorld::FilterCategory categoyr,
+        const int width,
+        const int height,
+        b2Vec2 position);
 
     static const float PIXEL_PER_METER;
     static const float METER_PER_PIXEL;
@@ -67,10 +72,10 @@ public:
 
 private:
     PhysicWorld();
-    void attackListener(b2Contact* contact);
+    void AttackListener(b2Contact* contact);
     void enemyVisionListener(b2Contact* contact);
     void handleAttack(b2Fixture* Attacker, b2Fixture* Defender);
-    void DoorInBeginContact(b2Contact* contact);
+    void DoorInListener(b2Contact* contact);
 
     b2World* m_pWorld;
     bool m_bDebugEnable;

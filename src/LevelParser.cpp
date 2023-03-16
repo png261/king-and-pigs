@@ -133,9 +133,14 @@ void LevelParser::parseCollisionObject(
         if (e->Value() == std::string("tile")) {
             XMLElement* obj = e->FirstChildElement()->FirstChildElement();
             int id = std::stoi(e->Attribute("id")) + firstGridID;
+            bool isOneWay = false;
+            if (e->Attribute("class")) {
+                isOneWay = e->Attribute("class") == std::string("oneway");
+            }
+
             int width = std::stoi(obj->Attribute("width"));
             int height = std::stoi(obj->Attribute("height"));
-            pCollisionShapes->insert(std::pair<int, CollisionShape>(id, {width, height}));
+            pCollisionShapes->insert(std::pair<int, CollisionShape>(id, {isOneWay, width, height}));
         }
     }
 }
@@ -252,8 +257,11 @@ void LevelParser::parseTileLayer(
                 }
 
                 b2Vec2 position = m_tileSize * b2Vec2(col, row);
+                PhysicWorld::FilterCategory category =
+                    shape->second.isOneWay ? PhysicWorld::CAT_ONE_WAY_WALL : PhysicWorld::CAT_WALL;
 
                 PhysicWorld::Instance()->createCollisionObject(
+                    category,
                     shape->second.width,
                     shape->second.height,
                     position);

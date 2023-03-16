@@ -22,6 +22,7 @@ struct Tileset
 
 struct CollisionShape
 {
+    bool isOneWay;
     int width;
     int height;
 };

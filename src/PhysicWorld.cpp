@@ -77,7 +77,11 @@ float PhysicWorld::degToRad(const float deg)
     return deg * PhysicWorld::RAD_PER_DEG;
 };
 
-void PhysicWorld::createCollisionObject(const int width, const int height, const b2Vec2 position)
+void PhysicWorld::createCollisionObject(
+    const PhysicWorld::FilterCategory category,
+    const int width,
+    const int height,
+    const b2Vec2 position)
 {
     b2BodyDef body;
     body.position = PhysicWorld::pixelToMeter(position + b2Vec2(width * 0.5, height * 0.5));
@@ -99,7 +103,7 @@ void PhysicWorld::createCollisionObject(const int width, const int height, const
 
     fixture.shape = &box;
     fixture.friction = PhysicWorld::GROUND_FRICTION;
-    fixture.filter.categoryBits = PhysicWorld::CAT_WALL;
+    fixture.filter.categoryBits = category;
     groundBody->CreateFixture(&fixture);
 }
 
@@ -116,9 +120,9 @@ void PhysicWorld::contactListener()
 {
     for (b2Contact* contact = getWorld()->GetContactList(); contact != nullptr;
          contact = contact->GetNext()) {
-        /* attackListener(contact); */
+        AttackListener(contact);
+        DoorInListener(contact);
         /* enemyVisionListener(contact); */
-        DoorInBeginContact(contact);
     }
 }
 
@@ -145,7 +149,7 @@ void PhysicWorld::enemyVisionListener(b2Contact* contact)
     }
 }
 
-void PhysicWorld::DoorInBeginContact(b2Contact* contact)
+void PhysicWorld::DoorInListener(b2Contact* contact)
 {
     b2Fixture* fixtureA = contact->GetFixtureA();
     b2Fixture* fixtureB = contact->GetFixtureB();
@@ -175,7 +179,7 @@ void PhysicWorld::DoorInBeginContact(b2Contact* contact)
     }
 }
 
-void PhysicWorld::attackListener(b2Contact* contact)
+void PhysicWorld::AttackListener(b2Contact* contact)
 {
     b2Fixture* const A = contact->GetFixtureA();
     b2Fixture* const B = contact->GetFixtureB();
