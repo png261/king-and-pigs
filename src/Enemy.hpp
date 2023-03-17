@@ -6,7 +6,7 @@
 class Enemy : public GameObject
 {
 public:
-    virtual void load(const LoaderParams* const pParams);
+    virtual void load(std::unique_ptr<LoaderParams> const& pParams);
 
 protected:
     Enemy()

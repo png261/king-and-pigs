@@ -5,6 +5,6 @@
 class DoorOut : public Door
 {
 public:
-    void load(const LoaderParams* const pParams);
+    void load(std::unique_ptr<LoaderParams> const& pParams);
     void loadAnimation();
 };

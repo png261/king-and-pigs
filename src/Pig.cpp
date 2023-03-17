@@ -16,9 +16,9 @@ Pig::Pig()
     , m_bCanAttackPlayer(false)
 {}
 
-void Pig::load(const LoaderParams* const pParams)
+void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    Enemy::load(pParams);
+    Enemy::load(std::move(pParams));
     m_moveSpeed = 50;
     m_jumpHeight = 32.0f;
     m_originPosition = this->getPosition();

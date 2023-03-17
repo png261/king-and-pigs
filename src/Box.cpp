@@ -7,9 +7,9 @@ Box::Box()
     , DamageableObject(1, 200, 300)
 {}
 
-void Box::load(const LoaderParams* const pParams)
+void Box::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    Enemy::load(pParams);
+    Enemy::load(std::move(pParams));
 
     m_pBody->SetFixedRotation(false);
     m_pFixture->SetDensity(0.5);

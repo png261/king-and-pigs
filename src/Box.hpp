@@ -9,7 +9,7 @@ public:
     Box();
     ~Box() {}
 
-    void load(const LoaderParams* const pParams);
+    void load(std::unique_ptr<LoaderParams> const& pParams);
 
     void draw();
     void update();

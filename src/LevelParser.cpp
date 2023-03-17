@@ -1,5 +1,6 @@
 #include "LevelParser.hpp"
 
+#include <memory>
 #include <vector>
 #include "CONSTANT.hpp"
 #include "Game.hpp"
@@ -179,7 +180,7 @@ GameObject* parseObject(XMLElement* const pObjectElement, Level* const pLevel)
         }
     }
 
-    pGameObject->load(new LoaderParams(x, y, width, height));
+    pGameObject->load(std::make_unique<LoaderParams>(LoaderParams(x, y, width, height)));
 
     if (type == "Player") {
         pLevel->setPlayer(dynamic_cast<Player*>(pGameObject));

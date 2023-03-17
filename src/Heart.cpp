@@ -2,9 +2,9 @@
 #include "PhysicWorld.hpp"
 #include "Game.hpp"
 
-void Heart::load(const LoaderParams* const pParams)
+void Heart::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    ItemObject::load(pParams);
+    ItemObject::load(std::move(pParams));
     this->loadAnimation();
 }
 

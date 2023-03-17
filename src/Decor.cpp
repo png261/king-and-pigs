@@ -1,8 +1,8 @@
 #include "Decor.hpp"
 
-void Decor::load(const LoaderParams* const pParams)
+void Decor::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    GameObject::load(pParams);
+    GameObject::load(std::move(pParams));
     m_animations[Animation::IDLE] = new Animation("candle idle", 14, 32, 8);
     m_curAnimation = Animation::IDLE;
     m_animations[m_curAnimation]->start();

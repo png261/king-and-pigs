@@ -6,9 +6,9 @@ Door::Door()
     : GameObject()
 {}
 
-void Door::load(const LoaderParams* const pParams)
+void Door::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    GameObject::load(pParams);
+    GameObject::load(std::move(pParams));
     m_pBody->SetGravityScale(0);
     m_pFixture->SetSensor(true);
 

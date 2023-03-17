@@ -6,7 +6,7 @@ class DoorIn : public Door
 {
 public:
     DoorIn();
-    void load(const LoaderParams* const pParams);
+    void load(std::unique_ptr<LoaderParams> const& pParams);
     void createSensor();
     void open();
     bool isOpened();

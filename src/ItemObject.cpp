@@ -1,9 +1,9 @@
 #include "ItemObject.hpp"
 #include "PhysicWorld.hpp"
 
-void ItemObject::load(const LoaderParams* const pParams)
+void ItemObject::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    GameObject::load(pParams);
+    GameObject::load(std::move(pParams));
 
     b2Filter filter;
     filter.categoryBits = PhysicWorld::CAT_ITEM;

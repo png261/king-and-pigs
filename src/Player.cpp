@@ -1,5 +1,6 @@
 #include "Player.hpp"
 
+#include <memory>
 #include "Animation.hpp"
 #include "AttackableObject.hpp"
 #include "Camera.hpp"
@@ -17,9 +18,9 @@ Player::Player()
     , m_bWantDoorIn(false)
 {}
 
-void Player::load(const LoaderParams* const pParams)
+void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    GameObject::load(pParams);
+    GameObject::load(std::move(pParams));
     m_moveSpeed = 100;
     m_jumpHeight = 20.0f;
 

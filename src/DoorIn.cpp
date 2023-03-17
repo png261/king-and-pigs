@@ -5,9 +5,10 @@
 DoorIn::DoorIn()
     : m_bOpened(false)
 {}
-void DoorIn::load(const LoaderParams* const pParams)
+
+void DoorIn::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    Door::load(pParams);
+    Door::load(std::move(pParams));
     this->createSensor();
     b2Filter filter;
     filter.categoryBits = PhysicWorld::CAT_DOOR_IN;

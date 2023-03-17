@@ -1,8 +1,8 @@
 #include "DoorOut.hpp"
 
-void DoorOut::load(const LoaderParams* const pParams)
+void DoorOut::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    Door::load(pParams);
+    Door::load(std::move(pParams));
 
     b2Filter filter;
     filter.categoryBits = PhysicWorld::CAT_DOOR_OUT;

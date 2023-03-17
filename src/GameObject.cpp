@@ -1,8 +1,8 @@
 #include "GameObject.hpp"
 
-#include "PhysicWorld.hpp"
 #include "Camera.hpp"
 #include "Game.hpp"
+#include "PhysicWorld.hpp"
 
 GameObject::GameObject()
     : m_width(0)
@@ -20,12 +20,14 @@ GameObject::~GameObject()
     m_pBody = nullptr;
 }
 
-void GameObject::load(const LoaderParams* const pParams)
+void GameObject::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     m_width = pParams->width();
     m_height = pParams->height();
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
 }
+
+void GameObject::loadAnimation(){};
 
 void GameObject::createBody(const int x, const int y, const int width, const int height)
 {
@@ -37,7 +39,9 @@ void GameObject::createBody(const int x, const int y, const int width, const int
     m_pBody = PhysicWorld::Instance()->getWorld()->CreateBody(&bodyDef);
 
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(PhysicWorld::pixelToMeter(width) / 2.0f, PhysicWorld::pixelToMeter(height) / 2.0f);
+    dynamicBox.SetAsBox(
+        PhysicWorld::pixelToMeter(width) / 2.0f,
+        PhysicWorld::pixelToMeter(height) / 2.0f);
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
@@ -133,7 +137,8 @@ void GameObject::moveRight()
 
 void GameObject::moveLeft()
 {
-    float speedDifference = -PhysicWorld::pixelToMeter(m_moveSpeed) - m_pBody->GetLinearVelocity().x;
+    float speedDifference =
+        -PhysicWorld::pixelToMeter(m_moveSpeed) - m_pBody->GetLinearVelocity().x;
     b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 
@@ -147,7 +152,8 @@ void GameObject::moveLeft()
 
 void GameObject::jump()
 {
-    float timeToJumpPeak = sqrt(2 * PhysicWorld::pixelToMeter(m_jumpHeight) / PhysicWorld::GRAVITY.y);
+    float timeToJumpPeak =
+        sqrt(2 * PhysicWorld::pixelToMeter(m_jumpHeight) / PhysicWorld::GRAVITY.y);
     b2Vec2 impulse =
         -b2Vec2(0, m_pBody->GetMass() * PhysicWorld::pixelToMeter(m_jumpHeight) / timeToJumpPeak);
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);

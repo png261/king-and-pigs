@@ -1,8 +1,9 @@
 #pragma once
 
+#include <memory>
 #include "Animation.hpp"
-#include "PhysicWorld.hpp"
 #include "LoaderParams.hpp"
+#include "PhysicWorld.hpp"
 #include "TextureManager.hpp"
 
 class GameObject
@@ -10,10 +11,10 @@ class GameObject
 public:
     virtual ~GameObject();
 
-    virtual void load(const LoaderParams* const pParams);
+    virtual void load(std::unique_ptr<LoaderParams> const& pParams);
     virtual void update();
     virtual void draw();
-    virtual void loadAnimation(){};
+    virtual void loadAnimation();
     virtual void createBody(const int x, const int y, const int width, const int height);
 
     virtual b2Body* getBody() const;
