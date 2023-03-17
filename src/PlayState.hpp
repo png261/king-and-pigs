@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 #include "GameObject.hpp"
 #include "GameState.hpp"
@@ -8,6 +9,7 @@
 class PlayState final : public GameState
 {
 public:
+    ~PlayState();
     void update();
     void render();
 
@@ -16,10 +18,9 @@ public:
     bool loadLevel();
     void resume();
     bool onExit();
-    std::string getStateID() const { return s_stateID; }
+    std::string getStateID() const;
 
 private:
     static const std::string s_stateID;
-    std::vector<GameObject*> m_gameObjects;
-    Level* m_pLevel;
+    std::unique_ptr<Level> m_pLevel;
 };

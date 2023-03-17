@@ -13,6 +13,7 @@ Level::~Level()
         delete layer;
     }
     m_layers.clear();
+    Log::log("deleted level");
 }
 
 void Level::render()

@@ -16,6 +16,8 @@
 
 const std::string PlayState::s_stateID = "PLAY";
 
+PlayState::~PlayState() {}
+
 bool PlayState::onEnter()
 {
     if (this->load() == false) {
@@ -25,6 +27,7 @@ bool PlayState::onEnter()
     m_loadingComplete = true;
     return true;
 }
+
 
 bool PlayState::load()
 {
@@ -86,8 +89,8 @@ bool PlayState::load()
 bool PlayState::loadLevel()
 {
     LevelParser levelParser;
-    m_pLevel = levelParser.parseLevel(
-        Game::Instance()->getLevel(Game::Instance()->getCurrentLevel()).c_str());
+    m_pLevel = std::unique_ptr<Level>(levelParser.parseLevel(
+        Game::Instance()->getLevel(Game::Instance()->getCurrentLevel()).c_str()));
 
     if (m_pLevel == nullptr) {
         return false;
@@ -100,8 +103,6 @@ bool PlayState::onExit()
     m_exiting = true;
     InputHandler::Instance()->reset();
     PhysicWorld::Instance()->clean();
-    delete m_pLevel;
-    m_pLevel = nullptr;
 
     return true;
 }
@@ -131,4 +132,9 @@ void PlayState::render()
     }
 
     m_pLevel->render();
+}
+
+std::string PlayState::getStateID() const
+{
+    return s_stateID;
 }
