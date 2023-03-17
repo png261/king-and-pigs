@@ -5,8 +5,8 @@
 
 Animation::Animation(
     const std::string textureID,
-    int width,
-    int height,
+    const int width,
+    const int height,
     const int nFrames,
     const bool bLoop)
     : m_textureID(textureID)
@@ -23,6 +23,8 @@ Animation::Animation(
 {
     m_framerate = 10;
 }
+
+Animation::~Animation() {}
 
 bool Animation::isRunning() const
 {
@@ -52,7 +54,7 @@ void Animation::draw(const b2Vec2 position, const float angle, const bool bFlipp
 
     TextureManager::Instance()->drawFrame(
         m_textureID,
-        position - b2Vec2(m_width * 0.5f, m_height * 0.5f),
+        position - 0.5 * b2Vec2(m_width, m_height),
         m_width,
         m_height,
         0,

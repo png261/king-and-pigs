@@ -18,6 +18,9 @@ Player::Player()
     , m_bWantDoorIn(false)
 {}
 
+Player::~Player() {}
+
+
 void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
@@ -38,16 +41,24 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Player::loadAnimation()
 {
-    m_animations[Animation::IDLE] = new Animation("player idle", 78, 58, 11);
-    m_animations[Animation::RUN] = new Animation("player run", 78, 58, 8);
-    m_animations[Animation::JUMP] = new Animation("player jump", 78, 58, 1);
-    m_animations[Animation::FALL] = new Animation("player fall", 78, 58, 1);
-    m_animations[Animation::GROUND] = new Animation("player ground", 78, 58, 1);
-    m_animations[Animation::ATTACK] = new Animation("player attack", 78, 58, 3, false);
-    m_animations[Animation::HIT] = new Animation("player hit", 78, 58, 2);
-    m_animations[Animation::DEAD] = new Animation("player dead", 78, 58, 4, false);
-    m_animations[Animation::DOOR_IN] = new Animation("player door in", 78, 58, 8, false);
-    m_animations[Animation::DOOR_OUT] = new Animation("player door out", 78, 58, 8, false);
+    m_animations[Animation::IDLE] =
+        std::make_unique<Animation>(Animation("player idle", 78, 58, 11));
+    m_animations[Animation::RUN] = std::make_unique<Animation>(Animation("player run", 78, 58, 8));
+    m_animations[Animation::JUMP] =
+        std::make_unique<Animation>(Animation("player jump", 78, 58, 1));
+    m_animations[Animation::FALL] =
+        std::make_unique<Animation>(Animation("player fall", 78, 58, 1));
+    m_animations[Animation::GROUND] =
+        std::make_unique<Animation>(Animation("player ground", 78, 58, 1));
+    m_animations[Animation::ATTACK] =
+        std::make_unique<Animation>(Animation("player attack", 78, 58, 3, false));
+    m_animations[Animation::HIT] = std::make_unique<Animation>(Animation("player hit", 78, 58, 2));
+    m_animations[Animation::DEAD] =
+        std::make_unique<Animation>(Animation("player dead", 78, 58, 4, false));
+    m_animations[Animation::DOOR_IN] =
+        std::make_unique<Animation>(Animation("player door in", 78, 58, 8, false));
+    m_animations[Animation::DOOR_OUT] =
+        std::make_unique<Animation>(Animation("player door out", 78, 58, 8, false));
 
     doorOutTimer.setTime(300);
     m_curAnimation = Animation::DOOR_OUT;

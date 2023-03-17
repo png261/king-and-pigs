@@ -8,6 +8,7 @@ class Player final : public GameObject, public DamageableObject, public Attackab
 {
 public:
     Player();
+    ~Player();
     void load(std::unique_ptr<LoaderParams> const& pParams);
 
     void update();

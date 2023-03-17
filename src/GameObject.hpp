@@ -64,6 +64,6 @@ protected:
 
     ObjectPosition m_currentState;
     ObjectState m_currentAttackState;
-    std::map<Animation::AnimationID, Animation*> m_animations;
+    std::map<Animation::AnimationID, std::unique_ptr<Animation>> m_animations;
     Animation::AnimationID m_curAnimation;
 };

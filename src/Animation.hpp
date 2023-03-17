@@ -29,6 +29,7 @@ public:
         int height,
         const int nFrames = 1,
         const bool bLoop = true);
+    virtual ~Animation();
 
     virtual void draw(const b2Vec2 position, const float angle = 0, const bool flip = false);
 

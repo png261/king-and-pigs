@@ -7,10 +7,7 @@ Camera::Camera()
     , m_zoom(1)
 {}
 
-Camera::~Camera()
-{
-    delete m_pTarget;
-}
+Camera::~Camera() {}
 
 Camera* Camera::Instance()
 {

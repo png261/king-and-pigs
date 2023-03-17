@@ -17,7 +17,7 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-    m_pBody = nullptr;
+    m_animations.clear();
 }
 
 void GameObject::load(std::unique_ptr<LoaderParams> const& pParams)

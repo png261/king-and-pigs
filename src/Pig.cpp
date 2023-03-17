@@ -30,14 +30,14 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Pig::loadAnimation()
 {
-    m_animations[Animation::IDLE] = new Animation("pig idle", 34, 28, 11);
-    m_animations[Animation::RUN] = new Animation("pig run", 34, 28, 6);
-    m_animations[Animation::JUMP] = new Animation("pig jump", 34, 28, 1);
-    m_animations[Animation::FALL] = new Animation("pig fall", 34, 28, 1);
-    m_animations[Animation::GROUND] = new Animation("pig ground", 34, 28, 1);
-    m_animations[Animation::ATTACK] = new Animation("pig attack", 34, 28, 3, false);
-    m_animations[Animation::HIT] = new Animation("pig hit", 34, 28, 2);
-    m_animations[Animation::DEAD] = new Animation("pig dead", 34, 28, 4, false);
+    m_animations[Animation::IDLE] = std::make_unique<Animation>(Animation("pig idle", 34, 28, 11));
+    m_animations[Animation::RUN] = std::make_unique<Animation>(Animation("pig run", 34, 28, 6));
+    m_animations[Animation::JUMP] = std::make_unique<Animation>(Animation("pig jump", 34, 28, 1));
+    m_animations[Animation::FALL] = std::make_unique<Animation>(Animation("pig fall", 34, 28, 1));
+    m_animations[Animation::GROUND] = std::make_unique<Animation>(Animation("pig ground", 34, 28, 1));
+    m_animations[Animation::ATTACK] = std::make_unique<Animation>(Animation("pig attack", 34, 28, 3, false));
+    m_animations[Animation::HIT] = std::make_unique<Animation>(Animation("pig hit", 34, 28, 2));
+    m_animations[Animation::DEAD] = std::make_unique<Animation>(Animation("pig dead", 34, 28, 4, false));
 
     m_curAnimation = Animation::IDLE;
     m_animations[m_curAnimation]->start();
