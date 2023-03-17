@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 #include <vector>
 #include "Window.hpp"
@@ -7,7 +8,7 @@
 class Game final
 {
 public:
-    ~Game(){};
+    ~Game();
 
     static Game* Instance();
 

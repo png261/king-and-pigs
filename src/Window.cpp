@@ -133,7 +133,7 @@ void Window::clear()
 
 void Window::setTitle(const std::string title)
 {
-    if (!m_pWindow) {
+    if (m_pWindow == nullptr) {
         return;
     }
 

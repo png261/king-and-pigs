@@ -2,6 +2,8 @@
 
 #include <box2d/b2_types.h>
 #include <box2d/box2d.h>
+#include <memory>
+#include "Window.hpp"
 
 class DebugDraw;
 class ContactListener;
@@ -9,7 +11,8 @@ class PhysicWorld final
 {
 public:
     static PhysicWorld* Instance();
-    bool init();
+
+    bool init(Window* window);
     void clean();
     void update();
 
@@ -79,8 +82,8 @@ private:
 
     b2World* m_pWorld;
     bool m_bDebugEnable;
-    DebugDraw* m_pDebugDraw;
-    ContactListener* m_contactListener;
+    std::unique_ptr<DebugDraw> m_pDebugDraw;
+    std::unique_ptr<ContactListener> m_contactListener;
 
     float m_timeStep;
     int32 m_velocityIterations;

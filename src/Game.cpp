@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <memory>
 
 #include "CONSTANT.hpp"
 #include "GameStateMachine.hpp"
@@ -16,6 +17,8 @@ Game::Game()
     m_currentLevel = 0;
 }
 
+Game::~Game() {}
+
 Game* Game::Instance()
 {
     static Game* const s_pInstance = new Game();
@@ -30,7 +33,7 @@ bool Game::init(const unsigned int width, const unsigned int height)
 
     m_pWindow = new Window(width, height);
 
-    if (PhysicWorld::Instance()->init() == false) {
+    if (PhysicWorld::Instance()->init(m_pWindow) == false) {
         return false;
     };
 
@@ -66,7 +69,6 @@ void Game::render()
 void Game::clean()
 {
     PhysicWorld::Instance()->clean();
-    delete m_pWindow;
     SDL::exit();
 }
 

@@ -19,8 +19,6 @@ const b2Vec2 PhysicWorld::GRAVITY = {0.0f, 9.8f};
 
 PhysicWorld::PhysicWorld()
     : m_pWorld(nullptr)
-    , m_contactListener(nullptr)
-    , m_pDebugDraw(nullptr)
 {}
 
 PhysicWorld* PhysicWorld::Instance()
@@ -29,18 +27,18 @@ PhysicWorld* PhysicWorld::Instance()
     return pInstance;
 }
 
-bool PhysicWorld::init()
+bool PhysicWorld::init(Window* window)
 {
     m_pWorld = new b2World(PhysicWorld::GRAVITY);
+    m_contactListener = std::make_unique<ContactListener>(ContactListener());
+    m_pDebugDraw = std::make_unique<DebugDraw>(DebugDraw(window));
+    m_pWorld->SetContactListener(new ContactListener);
+    m_pWorld->SetDebugDraw(m_pDebugDraw.get());
 
     m_timeStep = 1.0f / 60.f;
     m_velocityIterations = 10;
     m_positionIterations = 8;
 
-    m_contactListener = new ContactListener();
-    m_pWorld->SetContactListener(new ContactListener);
-    m_pDebugDraw = new DebugDraw(Game::Instance()->getWindow());
-    m_pWorld->SetDebugDraw(m_pDebugDraw);
     m_bDebugEnable = false;
 
     return true;
@@ -244,12 +242,14 @@ void PhysicWorld::toggleDebugDraw()
 void PhysicWorld::clean()
 {
     m_pWorld->SetContactListener(nullptr);
+    m_contactListener.reset();
+
     for (b2Body* body = m_pWorld->GetBodyList(); body; body = body->GetNext()) {
         m_pWorld->DestroyBody(body);
     }
 
-    m_contactListener = new ContactListener();
-    m_pWorld->SetContactListener(m_contactListener);
+    m_contactListener = std::make_unique<ContactListener>(ContactListener());
+    m_pWorld->SetContactListener(m_contactListener.get());
     /* delete m_pWorld; */
     /* m_pWorld = nullptr; */
 }
