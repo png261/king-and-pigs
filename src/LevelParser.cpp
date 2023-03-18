@@ -134,10 +134,7 @@ void LevelParser::parseCollisionObject(
         if (e->Value() == std::string("tile")) {
             XMLElement* obj = e->FirstChildElement()->FirstChildElement();
             int id = std::stoi(e->Attribute("id")) + firstGridID;
-            bool isOneWay = false;
-            if (e->Attribute("class")) {
-                isOneWay = e->Attribute("class") == std::string("oneway");
-            }
+            bool isOneWay = getType(e) == std::string("oneway");
 
             int width = std::stoi(obj->Attribute("width"));
             int height = std::stoi(obj->Attribute("height"));
@@ -146,7 +143,7 @@ void LevelParser::parseCollisionObject(
     }
 }
 
-GameObject* parseObject(XMLElement* const pObjectElement, Level* const pLevel)
+GameObject* LevelParser::parseObject(XMLElement* const pObjectElement, Level* const pLevel)
 {
     int x = 0;
     int y = 0;
@@ -160,7 +157,7 @@ GameObject* parseObject(XMLElement* const pObjectElement, Level* const pLevel)
     width = std::stoi(pObjectElement->Attribute("width"));
     height = std::stoi(pObjectElement->Attribute("height"));
 
-    type = pObjectElement->Attribute("class");
+    type = getType(pObjectElement);
 
     GameObject* const pGameObject = GameObjectFactory::Instance()->create(type);
     if (pGameObject == nullptr) {
@@ -275,4 +272,17 @@ void LevelParser::parseTileLayer(
             }
         }
     }
+}
+
+std::string LevelParser::getType(XMLElement* const el)
+{
+    if (el->Attribute("class")) {
+        return el->Attribute("class");
+    }
+
+    if (el->Attribute("type")) {
+        return el->Attribute("type");
+    }
+
+    return "";
 }

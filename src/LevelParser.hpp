@@ -28,6 +28,9 @@ private:
         tinyxml2::XMLElement* pTilesetRoot,
         int firstGridID,
         std::map<int, CollisionShape>* pCollisionShapes);
+    std::string getType(tinyxml2::XMLElement* const element);
+    GameObject* parseObject(tinyxml2::XMLElement* const pObjectElement, Level* const pLevel);
+
 
     int m_tileSize;
     int m_width;
