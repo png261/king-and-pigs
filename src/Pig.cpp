@@ -24,8 +24,6 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
     m_originPosition = this->getPosition();
     this->createAttackSensor(getBody(), m_width, PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
     this->loadAnimation();
-
-    m_currentAttackState = ON_NORMAL;
 }
 
 void Pig::loadAnimation()
@@ -34,10 +32,13 @@ void Pig::loadAnimation()
     m_animations[Animation::RUN] = std::make_unique<Animation>(Animation("pig run", 34, 28, 6));
     m_animations[Animation::JUMP] = std::make_unique<Animation>(Animation("pig jump", 34, 28, 1));
     m_animations[Animation::FALL] = std::make_unique<Animation>(Animation("pig fall", 34, 28, 1));
-    m_animations[Animation::GROUND] = std::make_unique<Animation>(Animation("pig ground", 34, 28, 1));
-    m_animations[Animation::ATTACK] = std::make_unique<Animation>(Animation("pig attack", 34, 28, 3, false));
+    m_animations[Animation::GROUND] =
+        std::make_unique<Animation>(Animation("pig ground", 34, 28, 1));
+    m_animations[Animation::ATTACK] =
+        std::make_unique<Animation>(Animation("pig attack", 34, 28, 3, false));
     m_animations[Animation::HIT] = std::make_unique<Animation>(Animation("pig hit", 34, 28, 2));
-    m_animations[Animation::DEAD] = std::make_unique<Animation>(Animation("pig dead", 34, 28, 4, false));
+    m_animations[Animation::DEAD] =
+        std::make_unique<Animation>(Animation("pig dead", 34, 28, 4, false));
 
     m_curAnimation = Animation::IDLE;
     m_animations[m_curAnimation]->start();
@@ -65,48 +66,29 @@ void Pig::update()
 void Pig::updateAnimation()
 {
     Animation::AnimationID newAnimation = m_curAnimation;
-    if (this->isDead()) {
-        m_bExist = false;
-    } else if (this->isInvulnerable()) {
-        m_currentAttackState = ON_HIT;
-    } else if (this->isAttack()) {
-        m_currentAttackState = ON_ATTACK;
-    } else if (this->isDying()) {
-        m_currentAttackState = ON_DYING;
-    } else {
-        m_currentAttackState = ON_NORMAL;
-    }
 
-    switch (m_currentState) {
-    case ON_GROUND:
-        newAnimation = Animation::IDLE;
-        break;
-    case ON_FLY:
-        if (this->getBody()->GetLinearVelocity().y == 0) {
-            m_currentState = ON_GROUND;
-            break;
+    if (this->isOnGround()) {
+        if (InputHandler::Instance()->isKeyPressed(KEY_LEFT)) {
+            newAnimation = Animation::RUN;
+        } else if (InputHandler::Instance()->isKeyPressed(KEY_RIGHT)) {
+            newAnimation = Animation::RUN;
+        } else {
+            newAnimation = Animation::IDLE;
         }
-
+    } else {
         if (this->getBody()->GetLinearVelocity().y < 0) {
             newAnimation = Animation::JUMP;
         } else {
             newAnimation = Animation::FALL;
         }
-        break;
     }
 
-    switch (m_currentAttackState) {
-    case ON_NORMAL:
-        break;
-    case ON_HIT:
+    if (this->isInvulnerable()) {
         newAnimation = Animation::HIT;
-        break;
-    case ON_ATTACK:
+    } else if (this->isAttack()) {
         newAnimation = Animation::ATTACK;
-        break;
-    case ON_DYING:
+    } else if (this->isDead()) {
         newAnimation = Animation::DEAD;
-        break;
     }
 
     if (newAnimation != m_curAnimation) {

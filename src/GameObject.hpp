@@ -25,25 +25,14 @@ public:
 
     virtual bool isUpdating() const;
     virtual bool isExist() const;
+    virtual bool isOnGround() const;
 
-    virtual void setUpdating(const bool updating);
+    virtual void setUpdating(const bool bUpdating);
     virtual void changeFootContact(const int n);
 
     virtual void moveLeft();
     virtual void moveRight();
     virtual void jump();
-
-    enum ObjectPosition {
-        ON_GROUND,
-        ON_FLY,
-    };
-
-    enum ObjectState {
-        ON_NORMAL,
-        ON_HIT,
-        ON_ATTACK,
-        ON_DYING,
-    };
 
 protected:
     GameObject();
@@ -62,8 +51,8 @@ protected:
 
     int m_footContact;
 
-    ObjectPosition m_currentState;
-    ObjectState m_currentAttackState;
+    bool m_bOnGround;
+
     std::map<Animation::AnimationID, std::unique_ptr<Animation>> m_animations;
     Animation::AnimationID m_curAnimation;
 };

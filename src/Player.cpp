@@ -34,9 +34,6 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 
     this->createAttackSensor(getBody(), m_width, PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
     this->loadAnimation();
-
-    m_currentState = ON_GROUND;
-    m_currentAttackState = ON_NORMAL;
 }
 
 void Player::loadAnimation()
@@ -85,7 +82,7 @@ void Player::handleInput()
 
     InputHandler* const input = InputHandler::Instance();
 
-    if (m_currentState == ON_GROUND) {
+    if (this->isOnGround()) {
         if (input->isKeyDown(KEY_W)) {
             m_bWantDoorIn = true;
         } else {
@@ -105,10 +102,8 @@ void Player::handleInput()
         m_bTurnRight = false;
     }
 
-    if (m_currentAttackState == ON_NORMAL) {
-        if (input->isKeyPressed(KEY_A)) {
-            this->attack();
-        }
+    if (input->isKeyPressed(KEY_A)) {
+        this->attack();
     }
 };
 
@@ -120,18 +115,7 @@ void Player::updateAnimation()
 
     Animation::AnimationID newAnimation = m_curAnimation;
 
-    if (this->isInvulnerable()) {
-        m_currentAttackState = ON_HIT;
-    } else if (this->isAttack()) {
-        m_currentAttackState = ON_ATTACK;
-    } else if (this->isDead()) {
-        m_currentAttackState = ON_DYING;
-    } else {
-        m_currentAttackState = ON_NORMAL;
-    }
-
-    switch (m_currentState) {
-    case ON_GROUND:
+    if (this->isOnGround()) {
         if (InputHandler::Instance()->isKeyPressed(KEY_LEFT)) {
             newAnimation = Animation::RUN;
         } else if (InputHandler::Instance()->isKeyPressed(KEY_RIGHT)) {
@@ -139,34 +123,20 @@ void Player::updateAnimation()
         } else {
             newAnimation = Animation::IDLE;
         }
-        break;
-    case ON_FLY:
-        if (this->getBody()->GetLinearVelocity().y == 0) {
-            m_currentState = ON_GROUND;
-            break;
-        }
-
+    } else {
         if (this->getBody()->GetLinearVelocity().y < 0) {
             newAnimation = Animation::JUMP;
         } else {
             newAnimation = Animation::FALL;
         }
-
-        break;
     }
 
-    switch (m_currentAttackState) {
-    case ON_NORMAL:
-        break;
-    case ON_HIT:
+    if (this->isInvulnerable()) {
         newAnimation = Animation::HIT;
-        break;
-    case ON_ATTACK:
+    } else if (this->isAttack()) {
         newAnimation = Animation::ATTACK;
-        break;
-    case ON_DYING:
+    } else if (this->isDead()) {
         newAnimation = Animation::DEAD;
-        break;
     }
 
     if (doorOutTimer.isDone()) {

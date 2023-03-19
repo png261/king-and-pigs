@@ -13,6 +13,7 @@ GameObject::GameObject()
     , m_footContact(0)
     , m_moveSpeed(0)
     , m_jumpHeight(0)
+    , m_bOnGround(false)
 {}
 
 GameObject::~GameObject()
@@ -72,7 +73,7 @@ void GameObject::draw()
 
 void GameObject::update()
 {
-    m_currentState = m_footContact > 0 ? ON_GROUND : ON_FLY;
+    m_bOnGround = m_footContact > 0;
     m_animations[m_curAnimation]->update();
 }
 
@@ -157,4 +158,9 @@ void GameObject::jump()
     b2Vec2 impulse =
         -b2Vec2(0, m_pBody->GetMass() * PhysicWorld::pixelToMeter(m_jumpHeight) / timeToJumpPeak);
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
+}
+
+bool GameObject::isOnGround() const
+{
+    return m_bOnGround;
 }
