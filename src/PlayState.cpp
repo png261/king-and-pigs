@@ -3,6 +3,7 @@
 #include "Box.hpp"
 #include "CONSTANT.hpp"
 #include "Camera.hpp"
+#include "Decor.hpp"
 #include "DoorIn.hpp"
 #include "DoorOut.hpp"
 #include "Enemy.hpp"
@@ -44,6 +45,7 @@ bool PlayState::load()
     factory->registerType("DoorIn", new Creator<DoorIn>);
     factory->registerType("Bomb", new Creator<Bomb>);
     factory->registerType("PigWithBomb", new Creator<PigWithBomb>);
+    factory->registerType("Decor", new Creator<Decor>);
 
     texture->load(ASSETS_DIR + "Player/Idle.png", "player idle");
     texture->load(ASSETS_DIR + "Player/Run.png", "player run");
@@ -73,6 +75,8 @@ bool PlayState::load()
     texture->load(ASSETS_DIR + "Item/Door/idle.png", "door idle");
     texture->load(ASSETS_DIR + "Item/Door/open.png", "door open");
     texture->load(ASSETS_DIR + "Item/Door/close.png", "door close");
+
+    texture->load(ASSETS_DIR + "Item/Candle/Idle.png", "candle idle");
 
     texture->load(ASSETS_DIR + "Item/Box/Idle.png", "box idle");
     texture->load(ASSETS_DIR + "Item/Box/Hit.png", "box hit");

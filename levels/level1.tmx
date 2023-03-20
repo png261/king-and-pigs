@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="94">
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="110">
  <tileset firstgid="1" name="Decorations (32x32)" tilewidth="32" tileheight="32" tilecount="42" columns="7">
   <image source="../assets/TileSets/Decorations (32x32).png" width="224" height="192"/>
-  <tile id="9">
+  <tile id="9" type="oneway">
    <objectgroup draworder="index" id="5">
     <object id="4" x="0" y="0" width="32" height="5"/>
    </objectgroup>
   </tile>
-  <tile id="10">
+  <tile id="10" type="oneway">
    <objectgroup draworder="index" id="2">
     <object id="1" x="0" y="0" width="32" height="5"/>
    </objectgroup>
   </tile>
-  <tile id="11">
+  <tile id="11" type="oneway">
    <objectgroup draworder="index" id="2">
     <object id="1" x="0" y="0" width="32" height="5"/>
    </objectgroup>
   </tile>
-  <tile id="12">
+  <tile id="12" type="oneway">
    <objectgroup draworder="index" id="2">
     <object id="1" x="0" y="0" width="32" height="5"/>
    </objectgroup>
@@ -519,11 +519,20 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="18" name="Object Layer">
-  <object id="90" name="DoorOut" class="DoorOut" x="128" y="136" width="46" height="56"/>
-  <object id="93" name="DoorIn" class="DoorIn" x="312" y="168" width="46" height="56"/>
+ <objectgroup id="18" name="Door">
+  <object id="90" name="DoorOut" type="DoorOut" x="95" y="136" width="46" height="56"/>
+  <object id="102" name="Decor" type="Decor" x="147" y="136" width="14" height="32"/>
+  <object id="103" name="Decor" type="Decor" x="75" y="137" width="14" height="32"/>
+  <object id="107" name="DoorIn" type="DoorIn" x="854" y="136" width="46" height="56"/>
+  <object id="108" name="Decor" type="Decor" x="906" y="136" width="14" height="32"/>
+  <object id="109" name="Decor" type="Decor" x="834" y="137" width="14" height="32"/>
  </objectgroup>
- <objectgroup id="12" name="Object Layer 1">
-  <object id="82" name="Player" class="Player" x="135" y="160" width="32" height="32"/>
+ <objectgroup id="12" name="Enemy">
+  <object id="95" name="Bomb" type="Bomb" x="291" y="119" width="20" height="20"/>
+  <object id="98" name="PigWithBomb" type="PigWithBomb" x="216" y="135" width="26" height="26"/>
+  <object id="99" name="Pig" type="Pig" x="255" y="161" width="26" height="26"/>
+ </objectgroup>
+ <objectgroup id="19" name="Player">
+  <object id="100" name="Player" type="Player" x="102" y="160" width="32" height="32"/>
  </objectgroup>
 </map>
