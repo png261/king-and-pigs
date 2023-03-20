@@ -1,8 +1,8 @@
 #pragma once
 
-#include "PhysicWorld.hpp"
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
+#include "PhysicWorld.hpp"
 #include "Stopwatch.hpp"
 
 class AttackableObject
@@ -12,7 +12,7 @@ public:
 
     virtual void createAttackSensor(
         b2Body* const pBody,
-        const int objectWidth,
+        const int width,
         const PhysicWorld::FilterMask filterMask);
 
     virtual void update();
@@ -21,7 +21,6 @@ public:
     virtual bool canAttack() const;
     virtual int getDamage() const;
     virtual bool isAttack() const;
-    virtual bool isTurnRight() const;
 
 protected:
     Timer attackTimer;
@@ -32,7 +31,6 @@ protected:
 
     bool m_bAttack;
     bool m_bCanAttack;
-    bool m_bTurnRight;
 
     b2Fixture* m_pAttackSensor;
 };

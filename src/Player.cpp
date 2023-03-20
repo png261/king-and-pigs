@@ -12,7 +12,7 @@
 
 Player::Player()
     : GameObject()
-    , DamageableObject(3, 300, 500)
+    , DamageableObject(3, 1000, 500)
     , AttackableObject(1, 30, 300)
     , m_bDoorIn(false)
     , m_bWantDoorIn(false)
@@ -50,7 +50,7 @@ void Player::loadAnimation()
     m_animations[Animation::ATTACK] =
         std::make_unique<Animation>(Animation("player attack", 78, 58, 3, false));
     m_animations[Animation::HIT] = std::make_unique<Animation>(Animation("player hit", 78, 58, 2));
-    m_animations[Animation::DEAD] =
+    m_animations[Animation::DYING] =
         std::make_unique<Animation>(Animation("player dead", 78, 58, 4, false));
     m_animations[Animation::DOOR_IN] =
         std::make_unique<Animation>(Animation("player door in", 78, 58, 8, false));
@@ -59,13 +59,16 @@ void Player::loadAnimation()
 
     doorOutTimer.setTime(300);
     m_curAnimation = Animation::DOOR_OUT;
-
     m_animations[m_curAnimation]->start();
     doorOutTimer.start();
 }
 
 void Player::update()
 {
+    if (this->isDead()) {
+        return;
+    }
+
     this->handleInput();
     GameObject::update();
     DamageableObject::update();
@@ -95,11 +98,11 @@ void Player::handleInput()
     }
     if (input->isKeyPressed(KEY_RIGHT)) {
         this->moveRight();
-        m_bTurnRight = true;
+        m_bFlipped = false;
     }
     if (input->isKeyPressed(KEY_LEFT)) {
         this->moveLeft();
-        m_bTurnRight = false;
+        m_bFlipped = true;
     }
 
     if (input->isKeyPressed(KEY_A)) {
@@ -135,8 +138,8 @@ void Player::updateAnimation()
         newAnimation = Animation::HIT;
     } else if (this->isAttack()) {
         newAnimation = Animation::ATTACK;
-    } else if (this->isDead()) {
-        newAnimation = Animation::DEAD;
+    } else if (this->isDying()) {
+        newAnimation = Animation::DYING;
     }
 
     if (doorOutTimer.isDone()) {

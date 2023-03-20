@@ -24,6 +24,7 @@ public:
     b2World* getWorld();
 
     enum FilterCategory : uint16 {
+        CAT_NONE = 0x0000,
         CAT_WALL = 0x0001,
         CAT_ONE_WAY_WALL = 0x0002,
         CAT_PLAYER = 0x0004,
@@ -31,11 +32,10 @@ public:
         CAT_DOOR_OUT = 0x0010,
         CAT_ENEMY = 0x0020,
         CAT_ITEM = 0x0040,
-        CAT_FOOT_SENSOR = 0x0080,
-        CAT_ATTACK_SENSOR = 0x0100,
-        CAT_ENEMY_VISION_SENSOR = 0x0200,
+        CAT_BOMB = 0x0080,
+        CAT_FOOT_SENSOR = 0x0100,
+        CAT_ATTACK_SENSOR = 0x0200,
         CAT_ALL = 0xFFFF,
-        CAT_NONE = 0x0000,
     };
 
     enum FilterMask : uint16 {
@@ -45,6 +45,7 @@ public:
         MASK_DOOR_IN = CAT_PLAYER,
         MASK_ENEMY = CAT_ALL & ~CAT_ITEM,
         MASK_ITEM = CAT_PLAYER | CAT_WALL,
+        MASK_BOMB = CAT_PLAYER | CAT_WALL,
         MASK_FOOT_SENSOR = CAT_ALL,
         MASK_PLAYER_ATTACK_SENSOR = CAT_ENEMY,
         MASK_ENEMY_ATTACK_SENSOR = CAT_PLAYER,
@@ -76,9 +77,9 @@ public:
 private:
     PhysicWorld();
     void AttackListener(b2Contact* contact);
-    void enemyVisionListener(b2Contact* contact);
     void handleAttack(b2Fixture* Attacker, b2Fixture* Defender);
     void DoorInListener(b2Contact* contact);
+    void BombListener(b2Contact* contact);
 
     b2World* m_pWorld;
     bool m_bDebugEnable;

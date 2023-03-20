@@ -1,6 +1,6 @@
 #include "Heart.hpp"
-#include "PhysicWorld.hpp"
 #include "Game.hpp"
+#include "PhysicWorld.hpp"
 
 void Heart::load(std::unique_ptr<LoaderParams> const& pParams)
 {
@@ -21,7 +21,7 @@ void Heart::bonus()
 {
     m_curAnimation = Animation::HIT;
     m_animations[m_curAnimation]->start();
-    m_bExist = false;
+    this->disappear();
 }
 
 void Heart::update()

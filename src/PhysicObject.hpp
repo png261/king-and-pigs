@@ -11,6 +11,7 @@ public:
 
     virtual void createBody(const int x, const int y, const int width, const int height);
     virtual void changeFootContact(const int n);
+
     virtual void moveLeft();
     virtual void moveRight();
     virtual void jump();

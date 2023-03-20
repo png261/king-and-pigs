@@ -1,4 +1,5 @@
 #include "PlayState.hpp"
+#include "Bomb.hpp"
 #include "Box.hpp"
 #include "CONSTANT.hpp"
 #include "Camera.hpp"
@@ -12,6 +13,7 @@
 #include "InputHandler.hpp"
 #include "LevelParser.hpp"
 #include "Pig.hpp"
+#include "PigWithBomb.hpp"
 #include "Player.hpp"
 
 const std::string PlayState::s_stateID = "PLAY";
@@ -40,6 +42,8 @@ bool PlayState::load()
     factory->registerType("Heart", new Creator<Heart>);
     factory->registerType("DoorOut", new Creator<DoorOut>);
     factory->registerType("DoorIn", new Creator<DoorIn>);
+    factory->registerType("Bomb", new Creator<Bomb>);
+    factory->registerType("PigWithBomb", new Creator<PigWithBomb>);
 
     texture->load(ASSETS_DIR + "Player/Idle.png", "player idle");
     texture->load(ASSETS_DIR + "Player/Run.png", "player run");
@@ -72,6 +76,14 @@ bool PlayState::load()
 
     texture->load(ASSETS_DIR + "Item/Box/Idle.png", "box idle");
     texture->load(ASSETS_DIR + "Item/Box/Hit.png", "box hit");
+
+    texture->load(ASSETS_DIR + "Item/Bomb/On.png", "bomb on");
+    texture->load(ASSETS_DIR + "Item/Bomb/Off.png", "bomb off");
+    texture->load(ASSETS_DIR + "Item/Bomb/Explode.png", "bomb explode");
+
+    texture->load(ASSETS_DIR + "Enemy/PigWithBomb/Idle.png", "pigWithBomb idle");
+    texture->load(ASSETS_DIR + "Enemy/PigWithBomb/Run.png", "pigWithBomb run");
+    texture->load(ASSETS_DIR + "Enemy/PigWithBomb/Throwing.png", "pigWithBomb throwing");
 
     texture->load(ASSETS_DIR + "UI/Health Bar/Health Bar.png", "health bar");
     texture->load(ASSETS_DIR + "UI/Health Bar/Heart.png", "health heart");

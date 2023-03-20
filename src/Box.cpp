@@ -1,6 +1,6 @@
 #include "Box.hpp"
-#include "PhysicWorld.hpp"
 #include "DamageableObject.hpp"
+#include "PhysicWorld.hpp"
 
 Box::Box()
     : Enemy()
@@ -35,7 +35,7 @@ void Box::updateAnimation()
     if (this->isInvulnerable()) {
         newAnimation = Animation::HIT;
     } else if (this->isDead()) {
-        m_bExist = false;
+        this->disappear();
     } else {
         newAnimation = Animation::IDLE;
     }

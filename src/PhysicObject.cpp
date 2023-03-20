@@ -5,7 +5,6 @@ PhysicObject::PhysicObject()
     , m_moveSpeed(0)
     , m_footContact(0)
     , m_bOnGround(false)
-
 {}
 
 PhysicObject::~PhysicObject() {}

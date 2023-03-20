@@ -120,30 +120,6 @@ void PhysicWorld::contactListener()
          contact = contact->GetNext()) {
         AttackListener(contact);
         DoorInListener(contact);
-        /* enemyVisionListener(contact); */
-    }
-}
-
-void PhysicWorld::enemyVisionListener(b2Contact* contact)
-{
-    b2Fixture* const A = contact->GetFixtureA();
-    b2Fixture* const B = contact->GetFixtureB();
-    uint16 const catA = A->GetFilterData().categoryBits;
-    uint16 const catB = B->GetFilterData().categoryBits;
-    bool isSeeing =
-        (catA | catB) == (PhysicWorld::CAT_PLAYER | PhysicWorld::CAT_ENEMY_VISION_SENSOR);
-    if (!isSeeing) {
-        return;
-    }
-    if (catA == PhysicWorld::CAT_ENEMY_VISION_SENSOR) {
-        GameObject* const enemy = (GameObject*)(A->GetBody()->GetUserData().pointer);
-        GameObject* const player = (GameObject*)(B->GetBody()->GetUserData().pointer);
-    }
-
-    if (catB == PhysicWorld::CAT_ENEMY_VISION_SENSOR) {
-        GameObject* const player = (GameObject*)(A->GetBody()->GetUserData().pointer);
-        Pig* const enemy = dynamic_cast<Pig*>((GameObject*)(B->GetBody()->GetUserData().pointer));
-        enemy->setFollowPosition(player->getPosition());
     }
 }
 
@@ -210,9 +186,7 @@ void PhysicWorld::handleAttack(b2Fixture* Attacker, b2Fixture* Defender)
     }
 
     const char* direction = (const char*)Attacker->GetUserData().pointer;
-    if (A->isTurnRight() == (std::string(direction) == "right")) {
-        B->damage(A->getDamage());
-    }
+    B->damage(A->getDamage());
 }
 
 void PhysicWorld::update()

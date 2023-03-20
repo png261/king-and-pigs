@@ -9,11 +9,6 @@ Pig::Pig()
     : Enemy()
     , DamageableObject(3, 300, 1000)
     , AttackableObject(1, 50, 300)
-    , m_followPosition(0, 0)
-    , m_originPosition(0, 0)
-    , m_bSeeingPlayer(false)
-    , m_bReachRight(false)
-    , m_bCanAttackPlayer(false)
 {}
 
 void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
@@ -21,7 +16,6 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
     Enemy::load(std::move(pParams));
     m_moveSpeed = 50;
     m_jumpHeight = 32.0f;
-    m_originPosition = this->getPosition();
     this->createAttackSensor(getBody(), m_width, PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
     this->loadAnimation();
 }
@@ -37,7 +31,7 @@ void Pig::loadAnimation()
     m_animations[Animation::ATTACK] =
         std::make_unique<Animation>(Animation("pig attack", 34, 28, 3, false));
     m_animations[Animation::HIT] = std::make_unique<Animation>(Animation("pig hit", 34, 28, 2));
-    m_animations[Animation::DEAD] =
+    m_animations[Animation::DYING] =
         std::make_unique<Animation>(Animation("pig dead", 34, 28, 4, false));
 
     m_curAnimation = Animation::IDLE;
@@ -46,21 +40,15 @@ void Pig::loadAnimation()
 
 void Pig::update()
 {
-    /* this->handleMovement(); */
+    if (this->isDead()) {
+        this->disappear();
+        return;
+    }
+
     Enemy::update();
     DamageableObject::update();
     AttackableObject::update();
     this->updateAnimation();
-
-
-    DebugDraw* draw = new DebugDraw(Game::Instance()->getWindow());
-    b2Vec2 start = m_pBody->GetPosition();
-    b2Vec2 end = b2Vec2(start.x + 10, start.y);
-    draw->DrawSegment(start, end, b2Color(1, 1, 1, 1));
-
-    EnemyRayCastCallback callback;
-    callback.setListener(this);
-    PhysicWorld::Instance()->getWorld()->RayCast(&callback, start, end);
 }
 
 void Pig::updateAnimation()
@@ -68,13 +56,7 @@ void Pig::updateAnimation()
     Animation::AnimationID newAnimation = m_curAnimation;
 
     if (this->isOnGround()) {
-        if (InputHandler::Instance()->isKeyPressed(KEY_LEFT)) {
-            newAnimation = Animation::RUN;
-        } else if (InputHandler::Instance()->isKeyPressed(KEY_RIGHT)) {
-            newAnimation = Animation::RUN;
-        } else {
-            newAnimation = Animation::IDLE;
-        }
+        newAnimation = Animation::IDLE;
     } else {
         if (this->getBody()->GetLinearVelocity().y < 0) {
             newAnimation = Animation::JUMP;
@@ -87,8 +69,8 @@ void Pig::updateAnimation()
         newAnimation = Animation::HIT;
     } else if (this->isAttack()) {
         newAnimation = Animation::ATTACK;
-    } else if (this->isDead()) {
-        newAnimation = Animation::DEAD;
+    } else if (this->isDying()) {
+        newAnimation = Animation::DYING;
     }
 
     if (newAnimation != m_curAnimation) {
@@ -96,63 +78,4 @@ void Pig::updateAnimation()
         m_curAnimation = newAnimation;
         m_animations[m_curAnimation]->start();
     }
-}
-
-void Pig::setFollowPosition(b2Vec2 position)
-{
-    m_followPosition = position;
-    m_originPosition = position;
-}
-
-void Pig::scanMode()
-{
-    m_moveSpeed = 50;
-    b2Vec2 curPosition = this->getPosition();
-    if (curPosition.x > m_originPosition.x + 200) {
-        m_bReachRight = true;
-    }
-
-    if (curPosition.x < m_originPosition.x - 200) {
-        m_bReachRight = false;
-    }
-
-    if (m_bReachRight == false) {
-        this->moveRight();
-    } else {
-        this->moveLeft();
-    }
-};
-
-void Pig::handleMovement()
-{
-    if (m_bSeeingPlayer == false) {
-        this->scanMode();
-    } else {
-        this->followMode();
-    }
-
-    if (m_bCanAttackPlayer) {
-        this->attack();
-    }
-}
-
-void Pig::followMode()
-{
-    m_moveSpeed = 75;
-    b2Vec2 curPosition = this->getPosition();
-    if (m_followPosition.x > curPosition.x) {
-        this->moveRight();
-    } else if (m_followPosition.x < curPosition.x) {
-        this->moveLeft();
-    }
-}
-
-void Pig::setSeeingPlayer(bool isSeeing)
-{
-    m_bSeeingPlayer = isSeeing;
-}
-
-void Pig::setCanAttackPlayer(bool canAttackPlayer)
-{
-    m_bCanAttackPlayer = canAttackPlayer;
 }

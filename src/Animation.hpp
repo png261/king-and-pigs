@@ -14,13 +14,19 @@ public:
         FALL,
         GROUND,
         ATTACK,
-        DEAD,
+        DYING,
         HIT,
 
         DOOR_IN,
         DOOR_OUT,
         DOOR_OPEN,
         DOOR_CLOSE,
+
+        BOMB_ON,
+        BOMB_OFF,
+        BOMB_EXPLODE,
+
+        THROWING,
     };
 
     Animation(

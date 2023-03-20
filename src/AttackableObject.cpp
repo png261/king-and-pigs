@@ -5,7 +5,6 @@ AttackableObject::AttackableObject(const int damage, const int range, const int 
     , m_range(range)
     , m_bAttack(false)
     , m_bCanAttack(true)
-    , m_bTurnRight(true)
     , m_attackSpeed(attackSpeed)
     , m_pAttackSensor(nullptr)
     , attackTimer(attackSpeed)
@@ -20,7 +19,10 @@ void AttackableObject::createAttackSensor(
     attackShape.SetAsBox(
         PhysicWorld::pixelToMeter(m_range) / 2.0f,
         PhysicWorld::pixelToMeter(m_range) / 2.0f,
-        b2Vec2(-(PhysicWorld::pixelToMeter(objectWidth) / 4.0f + PhysicWorld::pixelToMeter(m_range) / 2.0f), 0),
+        b2Vec2(
+            -(PhysicWorld::pixelToMeter(objectWidth) / 4.0f +
+              PhysicWorld::pixelToMeter(m_range) / 2.0f),
+            0),
         0);
 
     b2FixtureDef attackSensorDef;
@@ -35,7 +37,10 @@ void AttackableObject::createAttackSensor(
     attackShape.SetAsBox(
         PhysicWorld::pixelToMeter(m_range) / 2.0f,
         PhysicWorld::pixelToMeter(m_range) / 2.0f,
-        b2Vec2((PhysicWorld::pixelToMeter(objectWidth) / 4.0f + PhysicWorld::pixelToMeter(m_range) / 2.0f), 0),
+        b2Vec2(
+            (PhysicWorld::pixelToMeter(objectWidth) / 4.0f +
+             PhysicWorld::pixelToMeter(m_range) / 2.0f),
+            0),
         0);
     attackSensorDef.userData.pointer = reinterpret_cast<uintptr_t>((void*)"right");
     m_pAttackSensor = pBody->CreateFixture(&attackSensorDef);
@@ -44,11 +49,6 @@ void AttackableObject::createAttackSensor(
 bool AttackableObject::isAttack() const
 {
     return m_bAttack;
-}
-
-bool AttackableObject::isTurnRight() const
-{
-    return m_bTurnRight;
 }
 
 bool AttackableObject::canAttack() const
@@ -63,13 +63,13 @@ int AttackableObject::getDamage() const
 
 void AttackableObject::attack()
 {
-    if (isAttack() || canAttack() == false) {
+    if (this->isAttack() || this->canAttack() == false) {
         return;
     }
 
     m_bAttack = true;
     m_bCanAttack = false;
-    attackTimer.restart();
+    attackTimer.start();
 }
 
 void AttackableObject::update()
