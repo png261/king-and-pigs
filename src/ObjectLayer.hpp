@@ -14,6 +14,7 @@ public:
     virtual void render();
 
     std::vector<GameObject*>* getGameObjects();
+    void addGameObject(GameObject*);
 
 private:
     std::vector<GameObject*> m_gameObjects;

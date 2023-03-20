@@ -198,7 +198,7 @@ void LevelParser::parseObjectLayer(
         if (e->Value() == std::string("object")) {
             GameObject* obj = parseObject(e, pLevel);
             if (obj != nullptr) {
-                pObjectLayer->getGameObjects()->push_back(obj);
+                pObjectLayer->addGameObject(obj);
             }
         }
     }

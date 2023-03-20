@@ -50,3 +50,8 @@ std::vector<GameObject*>* ObjectLayer::getGameObjects()
 {
     return &m_gameObjects;
 }
+
+void ObjectLayer::addGameObject(GameObject* obj)
+{
+    m_gameObjects.push_back(obj);
+}
