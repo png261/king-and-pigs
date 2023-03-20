@@ -1,16 +1,12 @@
 #include "LevelParser.hpp"
 
-#include <memory>
-#include <vector>
 #include "CONSTANT.hpp"
-#include "Game.hpp"
 #include "GameObjectFactory.hpp"
 #include "Layer.hpp"
 #include "Level.hpp"
 #include "Log.hpp"
 #include "ObjectLayer.hpp"
 #include "PhysicWorld.hpp"
-#include "TextureManager.hpp"
 #include "TileLayer.hpp"
 
 using namespace tinyxml2;
@@ -33,23 +29,10 @@ Level* LevelParser::parseLevel(const char* levelFile)
     m_height = std::stoi(pRoot->Attribute("height"));
 
     for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
-        if (e->Value() == std::string("properties")) {
-            for (XMLElement* pProperty = e->FirstChildElement(); pProperty != nullptr;
-                 pProperty = pProperty->NextSiblingElement()) {
-                if (pProperty->Value() == std::string("property")) {
-                    parseTextures(pProperty);
-                }
-            }
-        }
-    }
-
-    for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("tileset")) {
-            parseTilesets(e, pLevel->getTilesets(), pLevel->getCollisionShapes());
+            parseTilesets(e, pLevel);
         }
-    }
 
-    for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("objectgroup") || e->Value() == std::string("layer")) {
             bool isTileLayer =
                 e->FirstChildElement()->Value() == std::string("data") ||
@@ -58,13 +41,9 @@ Level* LevelParser::parseLevel(const char* levelFile)
             bool isObjectLayer = e->FirstChildElement()->Value() == std::string("object");
 
             if (isObjectLayer) {
-                parseObjectLayer(e, pLevel->getLayers(), pLevel);
+                parseObjectLayer(e, pLevel);
             } else if (isTileLayer) {
-                parseTileLayer(
-                    e,
-                    pLevel->getLayers(),
-                    pLevel->getTilesets(),
-                    pLevel->getCollisionShapes());
+                parseTileLayer(e, pLevel);
             }
         }
     }
@@ -72,17 +51,7 @@ Level* LevelParser::parseLevel(const char* levelFile)
     return pLevel;
 }
 
-void LevelParser::parseTextures(XMLElement* const pTextureRoot)
-{
-    TextureManager::Instance()->load(
-        pTextureRoot->Attribute("value"),
-        pTextureRoot->Attribute("name"));
-}
-
-void LevelParser::parseTilesets(
-    XMLElement* const pTilesetRoot,
-    std::vector<Tileset>* const pTilesets,
-    std::map<int, CollisionShape>* const pCollisionShapes)
+void LevelParser::parseTilesets(XMLElement* const pTilesetRoot, Level* pLevel)
 {
     XMLElement* const pImagieEl = pTilesetRoot->FirstChildElement();
 
@@ -120,14 +89,11 @@ void LevelParser::parseTilesets(
     tileset.numColumns = tileset.width / (tileset.tileWidth + tileset.spacing);
 
     TextureManager::Instance()->load(ASSETS_DIR + pImagieEl->Attribute("source"), tileset.name);
-    pTilesets->push_back(tileset);
-    parseCollisionObject(pTilesetRoot, tileset.firstGridID, pCollisionShapes);
+    pLevel->addTileSet(tileset);
+    parseCollisionObject(pTilesetRoot, pLevel, tileset.firstGridID);
 }
 
-void LevelParser::parseCollisionObject(
-    XMLElement* pTilesetRoot,
-    int firstGridID,
-    std::map<int, CollisionShape>* pCollisionShapes)
+void LevelParser::parseCollisionObject(XMLElement* pTilesetRoot, Level* pLevel, int firstGridID)
 {
     for (XMLElement* e = pTilesetRoot->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
@@ -138,7 +104,8 @@ void LevelParser::parseCollisionObject(
 
             int width = std::stoi(obj->Attribute("width"));
             int height = std::stoi(obj->Attribute("height"));
-            pCollisionShapes->insert(std::pair<int, CollisionShape>(id, {isOneWay, width, height}));
+            pLevel->addCollisionShape(
+                std::pair<int, CollisionShape>(id, {isOneWay, width, height}));
         }
     }
 }
@@ -186,10 +153,7 @@ GameObject* LevelParser::parseObject(XMLElement* const pObjectElement, Level* co
     return pGameObject;
 }
 
-void LevelParser::parseObjectLayer(
-    XMLElement* const pObjectEl,
-    std::vector<Layer*>* const pLayers,
-    Level* const pLevel)
+void LevelParser::parseObjectLayer(XMLElement* const pObjectEl, Level* const pLevel)
 {
     ObjectLayer* const pObjectLayer = new ObjectLayer();
 
@@ -204,7 +168,7 @@ void LevelParser::parseObjectLayer(
     }
 
     if (!pObjectLayer->getGameObjects()->empty()) {
-        pLayers->push_back(pObjectLayer);
+        pLevel->addLayer(pObjectLayer);
     }
 }
 
@@ -229,13 +193,10 @@ std::vector<std::vector<int>> LevelParser::parseData(std::string dataText)
     return data;
 }
 
-void LevelParser::parseTileLayer(
-    XMLElement* const pTileElement,
-    std::vector<Layer*>* const pLayers,
-    std::vector<Tileset>* const pTilesets,
-    std::map<int, CollisionShape>* const pCollisionShape)
+void LevelParser::parseTileLayer(XMLElement* const pTileElement, Level* pLevel)
 {
-    TileLayer* const pTileLayer = new TileLayer(m_tileSize, m_width, m_height, *pTilesets);
+    TileLayer* const pTileLayer =
+        new TileLayer(m_tileSize, m_width, m_height, *pLevel->getTilesets());
 
     std::vector<std::vector<int>> IDs;
     for (XMLElement* e = pTileElement->FirstChildElement(); e != nullptr;
@@ -246,8 +207,9 @@ void LevelParser::parseTileLayer(
     }
 
     pTileLayer->setTileIDs(IDs);
-    pLayers->push_back(pTileLayer);
+    pLevel->addLayer(pTileLayer);
 
+    std::map<int, CollisionShape>* pCollisionShape = pLevel->getCollisionShapes();
     if (!pCollisionShape->empty()) {
         for (int row = 0; row < m_height; row++) {
             for (int col = 0; col < m_width; col++) {
