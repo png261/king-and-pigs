@@ -12,6 +12,7 @@ public:
     void update();
     void loadAnimation();
     void updateAnimaton();
+    void throwBomb();
 
 private:
 };

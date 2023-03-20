@@ -4,6 +4,7 @@
 #include "Enemy.hpp"
 #include "Game.hpp"
 #include "Level.hpp"
+#include "Log.hpp"
 
 ObjectLayer::~ObjectLayer()
 {
@@ -15,35 +16,32 @@ ObjectLayer::~ObjectLayer()
 
 void ObjectLayer::update()
 {
-    for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++) {
+    for (auto& obj : m_gameObjects) {
+        if (obj->getPosition().x >
+                Camera::Instance()->getPosition().x + Game::Instance()->getWindow()->getWidth() &&
+            obj->getPosition().y >
+                Camera::Instance()->getPosition().y + Game::Instance()->getWindow()->getHeight()) {
+            obj->setUpdating(false);
+            continue;
+        }
+
+        obj->setUpdating(true);
+        obj->update();
+    }
+
+    for (auto it = m_gameObjects.begin(); it != m_gameObjects.end();) {
         if ((*it)->isExist() == false) {
             PhysicWorld::Instance()->getWorld()->DestroyBody((*it)->getBody());
             delete (*it);
             m_gameObjects.erase(it);
-            it--;
             continue;
         }
-
-        if ((*it)->getPosition().x >
-                Camera::Instance()->getPosition().x + Game::Instance()->getWindow()->getWidth() &&
-            (*it)->getPosition().y >
-                Camera::Instance()->getPosition().y + Game::Instance()->getWindow()->getHeight()) {
-            (*it)->setUpdating(false);
-            continue;
-        }
-
-
-        (*it)->setUpdating(true);
-        (*it)->update();
+        it++;
     }
 }
 
 void ObjectLayer::render()
 {
-    if (m_gameObjects.empty()) {
-        return;
-    }
-
     for (auto& obj : m_gameObjects) {
         obj->draw();
     }

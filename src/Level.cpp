@@ -8,7 +8,7 @@
 
 Level::Level()
 {
-    m_eventLayer = new ObjectLayer();
+    m_spawnLayer = new ObjectLayer();
 }
 
 Level::~Level()
@@ -17,6 +17,8 @@ Level::~Level()
         delete layer;
     }
     m_layers.clear();
+    delete m_spawnLayer;
+
     Log::log("deleted level");
 }
 
@@ -25,7 +27,7 @@ void Level::render()
     for (auto& layer : m_layers) {
         layer->render();
     }
-    m_eventLayer->render();
+    m_spawnLayer->render();
 }
 
 void Level::update()
@@ -33,7 +35,7 @@ void Level::update()
     for (auto& layer : m_layers) {
         layer->update();
     }
-    m_eventLayer->update();
+    m_spawnLayer->update();
 }
 
 std::vector<Tileset>* Level::getTilesets()
@@ -76,9 +78,10 @@ void Level::setPlayer(Player* player)
     m_pPlayer = player;
 }
 
-void Level::spawnGameObject(std::string type, std::unique_ptr<LoaderParams> const& pParams)
+GameObject* Level::spawnGameObject(std::string type, std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject* const pGameObject = GameObjectFactory::Instance()->create(type);
     pGameObject->load(std::move(pParams));
-    m_eventLayer->addGameObject(pGameObject);
+    m_spawnLayer->addGameObject(pGameObject);
+    return pGameObject;
 }

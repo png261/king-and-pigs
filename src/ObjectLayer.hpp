@@ -18,4 +18,5 @@ public:
 
 private:
     std::vector<GameObject*> m_gameObjects;
+    std::vector<GameObject*> m_willDelete;
 };

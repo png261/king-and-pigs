@@ -1,5 +1,6 @@
 #include "PigWithBomb.hpp"
 #include "DamageableObject.hpp"
+#include "InputHandler.hpp"
 
 PigWithBomb::PigWithBomb()
     : Pig()
@@ -30,7 +31,24 @@ void PigWithBomb::loadAnimation()
 void PigWithBomb::update()
 {
     Pig::update();
+    if (InputHandler::Instance()->isKeyDown(KEY_V)) {
+        this->throwBomb();
+    }
     this->updateAnimaton();
+}
+
+void PigWithBomb::throwBomb()
+{
+    m_bExist = false;
+    std::unique_ptr<LoaderParams> pParams = std::make_unique<LoaderParams>(
+        LoaderParams(this->getPosition().x, this->getPosition().y - 50, 20, 20));
+
+    GameObject* bomb = Game::Instance()->getLevel()->spawnGameObject("Bomb", std::move(pParams));
+    bomb->getBody()->ApplyForce(b2Vec2(0, -200), bomb->getBody()->GetWorldCenter(), true);
+
+    std::unique_ptr<LoaderParams> pParams2 = std::make_unique<LoaderParams>(
+        LoaderParams(this->getPosition().x, this->getPosition().y, 20, 20));
+    GameObject* obj = Game::Instance()->getLevel()->spawnGameObject("Pig", std::move(pParams2));
 }
 
 void PigWithBomb::updateAnimaton()

@@ -45,7 +45,7 @@ public:
 
     Player* getPlayer();
     void setPlayer(Player* player);
-    void spawnGameObject(std::string type, std::unique_ptr<LoaderParams> const& pParams);
+    GameObject* spawnGameObject(std::string type, std::unique_ptr<LoaderParams> const& pParams);
 
 private:
     friend class LevelParser;
@@ -54,7 +54,7 @@ private:
     void createTileObject();
     Player* m_pPlayer;
 
-    ObjectLayer* m_eventLayer;
+    ObjectLayer* m_spawnLayer;
     std::vector<Layer*> m_layers;
     std::map<int, CollisionShape> m_collisionShapes;
     std::vector<Tileset> m_tilesets;

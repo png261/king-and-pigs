@@ -134,15 +134,6 @@ void PlayState::update()
     if (!m_loadingComplete || m_exiting || m_pLevel == nullptr) {
         return;
     }
-    if (InputHandler::Instance()->isKeyDown(KEY_Z)) {
-        Game::Instance()->nextLevel();
-    }
-
-    if (InputHandler::Instance()->isKeyDown(KEY_X)) {
-        std::unique_ptr<LoaderParams> pParams =
-            std::make_unique<LoaderParams>(LoaderParams(100, 100, 20, 20));
-        m_pLevel->spawnGameObject("Box", std::move(pParams));
-    }
 
     m_pLevel->update();
     Camera::Instance()->update();
