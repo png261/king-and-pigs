@@ -17,7 +17,6 @@ private:
     GameObject* parseObject(tinyxml2::XMLElement* const pObjectElement, Level* const pLevel);
     std::string getType(tinyxml2::XMLElement* const element);
 
-
     int m_tileSize;
     int m_width;
     int m_height;

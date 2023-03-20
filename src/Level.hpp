@@ -3,6 +3,7 @@
 #include <map>
 #include <vector>
 #include "Layer.hpp"
+#include "ObjectLayer.hpp"
 #include "Player.hpp"
 
 class TileLayer;
@@ -38,8 +39,13 @@ public:
     std::vector<Tileset>* getTilesets();
     std::map<int, CollisionShape>* getCollisionShapes();
     std::vector<Layer*>* getLayers();
+    void addLayer(Layer*);
+    void addTileSet(Tileset tileset);
+    void addCollisionShape(std::pair<int, CollisionShape> shape);
+
     Player* getPlayer();
     void setPlayer(Player* player);
+    void spawnGameObject(std::string type, std::unique_ptr<LoaderParams> const& pParams);
 
 private:
     friend class LevelParser;
@@ -48,6 +54,7 @@ private:
     void createTileObject();
     Player* m_pPlayer;
 
+    ObjectLayer* m_eventLayer;
     std::vector<Layer*> m_layers;
     std::map<int, CollisionShape> m_collisionShapes;
     std::vector<Tileset> m_tilesets;

@@ -9,6 +9,7 @@
 
 Game::Game()
     : m_pWindow(nullptr)
+    , m_pLevel(nullptr)
     , m_bRunning(false)
 {
     m_levelFiles.push_back(LEVELS_DIR + "level1.tmx");
@@ -77,6 +78,11 @@ void Game::quit()
     m_bRunning = false;
 }
 
+void Game::setLevel(Level* pLevel)
+{
+    m_pLevel = pLevel;
+}
+
 void Game::nextLevel()
 {
     m_currentLevel += 1;
@@ -99,7 +105,7 @@ bool Game::isRunning() const
 }
 
 
-std::string Game::getLevel(int index)
+std::string Game::loadLevel(int index)
 {
     return m_levelFiles[index];
 }
@@ -107,4 +113,9 @@ std::string Game::getLevel(int index)
 Window* Game::getWindow()
 {
     return m_pWindow;
+}
+
+Level* Game::getLevel()
+{
+    return m_pLevel;
 }

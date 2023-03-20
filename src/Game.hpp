@@ -3,6 +3,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "Level.hpp"
 #include "Window.hpp"
 
 class Game final
@@ -20,17 +21,21 @@ public:
     void quit();
 
     Window* getWindow();
+    bool isRunning() const;
     int getCurrentLevel() const;
     int getNextLevel() const;
     void nextLevel();
-    std::string getLevel(const int index);
-    bool isRunning() const;
+    std::string loadLevel(const int index);
 
     void setCurrentLevel(int const currentLevel);
+
+    void setLevel(Level* pLevel);
+    Level* getLevel();
 
 private:
     Game();
     Window* m_pWindow;
+    Level* m_pLevel;
     bool m_bRunning;
     int m_currentLevel;
     std::vector<std::string> m_levelFiles;

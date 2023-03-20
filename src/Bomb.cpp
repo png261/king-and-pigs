@@ -50,10 +50,6 @@ void Bomb::update()
         this->explode();
     }
 
-    if (InputHandler::Instance()->isKeyDown(KEY_B)) {
-        this->turnOn();
-    }
-
     this->updateAnimaton();
 }
 

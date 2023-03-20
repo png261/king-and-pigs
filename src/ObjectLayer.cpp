@@ -40,6 +40,10 @@ void ObjectLayer::update()
 
 void ObjectLayer::render()
 {
+    if (m_gameObjects.empty()) {
+        return;
+    }
+
     for (auto& obj : m_gameObjects) {
         obj->draw();
     }
