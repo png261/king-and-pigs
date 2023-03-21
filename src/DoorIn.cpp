@@ -2,9 +2,7 @@
 #include "Game.hpp"
 #include "Log.hpp"
 
-DoorIn::DoorIn()
-    : m_bOpened(false)
-{}
+DoorIn::DoorIn() {}
 
 void DoorIn::load(std::unique_ptr<LoaderParams> const& pParams)
 {
@@ -35,16 +33,3 @@ void DoorIn::createSensor()
     sensorDef.filter.maskBits = PhysicWorld::MASK_DOOR_IN;
     m_pBody->CreateFixture(&sensorDef);
 }
-
-void DoorIn::open()
-{
-    Door::open();
-    if (m_animations[Animation::DOOR_OPEN]->isFinished()) {
-        m_bOpened = true;
-    }
-}
-
-bool DoorIn::isOpened()
-{
-    return m_bOpened;
-};

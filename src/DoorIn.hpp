@@ -8,9 +8,4 @@ public:
     DoorIn();
     void load(std::unique_ptr<LoaderParams> const& pParams) override;
     void createSensor();
-    void open() override;
-    bool isOpened();
-
-private:
-    bool m_bOpened;
 };

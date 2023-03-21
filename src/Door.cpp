@@ -4,6 +4,7 @@
 
 Door::Door()
     : GameObject()
+    , m_bOpened(false)
 {}
 
 void Door::load(std::unique_ptr<LoaderParams> const& pParams)
@@ -34,12 +35,31 @@ void Door::update()
 
 void Door::open()
 {
+    if (this->isOpened()) {
+        return;
+    }
+
     m_curAnimation = Animation::DOOR_OPEN;
     m_animations[m_curAnimation]->start();
+    if (m_animations[Animation::DOOR_OPEN]->isFinished()) {
+        m_bOpened = true;
+    }
 }
 
 void Door::close()
 {
+    if (this->isOpened() == false) {
+        return;
+    }
+
     m_curAnimation = Animation::DOOR_CLOSE;
     m_animations[m_curAnimation]->start();
+    if (m_animations[Animation::DOOR_CLOSE]->isFinished()) {
+        m_bOpened = false;
+    }
+}
+
+bool Door::isOpened()
+{
+    return m_bOpened;
 }

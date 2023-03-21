@@ -12,4 +12,8 @@ public:
 
     virtual void open();
     virtual void close();
+    virtual bool isOpened();
+
+protected:
+    bool m_bOpened;
 };
