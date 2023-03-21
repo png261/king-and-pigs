@@ -22,7 +22,6 @@ void GameObject::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     m_width = pParams->width();
     m_height = pParams->height();
-    this->createBody(pParams->x(), pParams->y(), m_width, m_height);
 }
 
 void GameObject::loadAnimation(){};

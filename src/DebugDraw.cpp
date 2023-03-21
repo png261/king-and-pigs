@@ -92,8 +92,8 @@ void DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& c
 
 void DebugDraw::DrawTransform(const b2Transform& xf)
 {
-    SDL_Point p1 =
-        Utils::b2Vec2ToSDLPoint(PhysicWorld::meterToPixel(xf.p) - Camera::Instance()->getPosition());
+    SDL_Point p1 = Utils::b2Vec2ToSDLPoint(
+        PhysicWorld::meterToPixel(xf.p) - Camera::Instance()->getPosition());
     SDL_Point p2 = Utils::b2Vec2ToSDLPoint(
         PhysicWorld::meterToPixel({xf.p.x + xf.q.c * 20.0f, xf.p.y + xf.q.s * 20.0f}) -
         Camera::Instance()->getPosition());

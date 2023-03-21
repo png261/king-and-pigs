@@ -4,7 +4,7 @@
 
 Bomb::Bomb()
     : GameObject()
-    , AttackableObject(1, 40, 9999)
+    , AttackableObject(1, 20, 9999)
     , m_bOn(false)
 {}
 
@@ -13,17 +13,28 @@ Bomb::~Bomb() {}
 void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position = PhysicWorld::pixelToMeter(
+        b2Vec2(pParams->x(), pParams->y()) + 0.5 * b2Vec2(m_width, m_height));
+    bodyDef.fixedRotation = true;
+    bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
+    m_pBody = PhysicWorld::Instance()->getWorld()->CreateBody(&bodyDef);
 
-    b2Filter filter;
-    filter.categoryBits = PhysicWorld::CAT_BOMB;
-    filter.maskBits = PhysicWorld::MASK_BOMB;
-    m_pFixture->SetFilterData(filter);
+    b2CircleShape circle;
+    circle.m_radius = PhysicWorld::pixelToMeter(m_width);
 
-    PhysicWorld::Instance()->createPolygonSensor(
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &circle;
+    fixtureDef.density = 1;
+    fixtureDef.friction = 0.3;
+    fixtureDef.filter.categoryBits = PhysicWorld::CAT_BOMB;
+    fixtureDef.filter.maskBits = PhysicWorld::MASK_BOMB;
+    m_pFixture = m_pBody->CreateFixture(&fixtureDef);
+
+    PhysicWorld::Instance()->createCircleSensor(
         m_pBody,
-        0,
-        0,
-        m_range,
+        {0, 0},
         m_range,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);

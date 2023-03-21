@@ -47,25 +47,40 @@ public:
 
     void handleEvents();
     void contactListener();
+
+    b2Fixture* createCircleBody(
+        b2Body*& body,
+        const b2Vec2 position,
+        const int radius,
+        const FilterCategory category,
+        const FilterMask mask);
+
+    b2Body* createStaticBody(
+        const b2Vec2 position,
+        const int width,
+        const int height,
+        const FilterCategory category,
+        const FilterMask mask);
+
     b2Fixture* createPolygonSensor(
-        b2Body* body,
-        float x,
-        float y,
-        int width,
-        int height,
-        FilterCategory category,
-        FilterMask mask);
+        b2Body* const body,
+        const b2Vec2 position,
+        const int width,
+        const int height,
+        const FilterCategory category,
+        const FilterMask mask);
+
+    b2Fixture* createCircleSensor(
+        b2Body* const body,
+        const b2Vec2 position,
+        const int radius,
+        const FilterCategory category,
+        const FilterMask mask);
+
     void debugDraw();
     void toggleDebugDraw();
 
     b2World* getWorld();
-
-
-    void createCollisionObject(
-        PhysicWorld::FilterCategory categoyr,
-        const int width,
-        const int height,
-        b2Vec2 position);
 
     static const float PIXEL_PER_METER;
     static const float METER_PER_PIXEL;

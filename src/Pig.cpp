@@ -8,12 +8,13 @@
 Pig::Pig()
     : GameObject()
     , DamageableObject(3, 300, 1000)
-    , AttackableObject(1, 50, 300)
+    , AttackableObject(1, 25, 300)
 {}
 
 void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
+    this->createBody(pParams->x(), pParams->y(), m_width, m_height);
 
     b2Filter filter;
     filter.categoryBits = PhysicWorld::CAT_ENEMY;
@@ -23,23 +24,21 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
 
     m_moveSpeed = 50;
     m_jumpHeight = 32.0f;
-    PhysicWorld::Instance()->createPolygonSensor(
+
+    PhysicWorld::Instance()->createCircleSensor(
         m_pBody,
-        -(m_width * 0.5 + m_range) * 0.5,
-        0,
-        m_range,
+        -b2Vec2((m_width * 0.5 + m_range) * 0.5, 0),
         m_range,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
 
-    PhysicWorld::Instance()->createPolygonSensor(
+    PhysicWorld::Instance()->createCircleSensor(
         m_pBody,
-        (m_width * 0.5 + m_range) * 0.5,
-        0,
-        m_range,
+        b2Vec2((m_width * 0.5 + m_range) * 0.5, 0),
         m_range,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
+
     this->loadAnimation();
 }
 

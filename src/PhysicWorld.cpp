@@ -75,16 +75,43 @@ float PhysicWorld::degToRad(const float deg)
     return deg * RAD_PER_DEG;
 };
 
-void PhysicWorld::createCollisionObject(
+b2Fixture* PhysicWorld::createCircleBody(
+    b2Body*& body,
+    const b2Vec2 position,
+    const int radius,
     const FilterCategory category,
+    const FilterMask mask)
+{
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position = PhysicWorld::pixelToMeter(b2Vec2(position) + 0.5 * b2Vec2(radius, radius));
+    bodyDef.fixedRotation = true;
+    body = PhysicWorld::Instance()->getWorld()->CreateBody(&bodyDef);
+
+    b2CircleShape circle;
+    circle.m_radius = PhysicWorld::pixelToMeter(radius);
+
+    b2FixtureDef fixture;
+    fixture.shape = &circle;
+    fixture.density = 1;
+    fixture.friction = 0.3;
+    fixture.filter.categoryBits = category;
+    fixture.filter.maskBits = mask;
+
+    return body->CreateFixture(&fixture);
+}
+
+b2Body* PhysicWorld::createStaticBody(
+    const b2Vec2 position,
     const int width,
     const int height,
-    const b2Vec2 position)
+    const FilterCategory category,
+    const FilterMask mask)
 {
-    b2BodyDef body;
-    body.position = pixelToMeter(position + b2Vec2(width * 0.5, height * 0.5));
-    body.type = b2_staticBody;
-    b2Body* const groundBody = this->getWorld()->CreateBody(&body);
+    b2BodyDef bodyDef;
+    bodyDef.position = pixelToMeter(position + b2Vec2(width * 0.5, height * 0.5));
+    bodyDef.type = b2_staticBody;
+    b2Body* const body = this->getWorld()->CreateBody(&bodyDef);
 
     float w = pixelToMeter(width);
     float h = pixelToMeter(height);
@@ -102,7 +129,9 @@ void PhysicWorld::createCollisionObject(
     fixture.shape = &box;
     fixture.friction = GROUND_FRICTION;
     fixture.filter.categoryBits = category;
-    groundBody->CreateFixture(&fixture);
+    fixture.filter.maskBits = mask;
+    body->CreateFixture(&fixture);
+    return body;
 }
 
 void PhysicWorld::handleEvents()
@@ -230,8 +259,7 @@ void PhysicWorld::clean()
 
 b2Fixture* PhysicWorld::createPolygonSensor(
     b2Body* body,
-    float x,
-    float y,
+    b2Vec2 position,
     int width,
     int height,
     FilterCategory category,
@@ -241,7 +269,7 @@ b2Fixture* PhysicWorld::createPolygonSensor(
     polygon.SetAsBox(
         PhysicWorld::pixelToMeter(width * 0.5),
         PhysicWorld::pixelToMeter(height * 0.5),
-        PhysicWorld::pixelToMeter(b2Vec2(x, y)),
+        PhysicWorld::pixelToMeter(position),
         0);
 
     b2FixtureDef fixtureDef;
@@ -249,8 +277,25 @@ b2Fixture* PhysicWorld::createPolygonSensor(
     fixtureDef.isSensor = true;
     fixtureDef.filter.categoryBits = category;
     fixtureDef.filter.maskBits = mask;
+    return body->CreateFixture(&fixtureDef);
+}
 
-    b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(pixelToMeter(width) / 2.0f, pixelToMeter(height) / 2.0f);
+b2Fixture* PhysicWorld::createCircleSensor(
+    b2Body* const body,
+    const b2Vec2 position,
+    const int radius,
+    const FilterCategory category,
+    const FilterMask mask)
+{
+    b2CircleShape circle;
+    circle.m_p = PhysicWorld::pixelToMeter(position);
+    circle.m_radius = PhysicWorld::pixelToMeter(radius);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &circle;
+    fixtureDef.isSensor = true;
+    fixtureDef.filter.categoryBits = category;
+    fixtureDef.filter.maskBits = mask;
+
     return body->CreateFixture(&fixtureDef);
 }

@@ -226,11 +226,12 @@ void LevelParser::parseTileLayer(XMLElement* const pTileElement, Level* pLevel)
                 PhysicWorld::FilterCategory category =
                     shape->second.isOneWay ? PhysicWorld::CAT_ONE_WAY_WALL : PhysicWorld::CAT_WALL;
 
-                PhysicWorld::Instance()->createCollisionObject(
-                    category,
+                PhysicWorld::Instance()->createStaticBody(
+                    position,
                     shape->second.width,
                     shape->second.height,
-                    position);
+                    category,
+                    PhysicWorld::MASK_WALL);
             }
         }
     }

@@ -23,12 +23,12 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
     m_pBody = PhysicWorld::Instance()->getWorld()->CreateBody(&bodyDef);
 
+    b2FixtureDef fixtureDef;
     b2PolygonShape dynamicBox;
     dynamicBox.SetAsBox(
         PhysicWorld::pixelToMeter(width) / 2.0f,
         PhysicWorld::pixelToMeter(height) / 2.0f);
 
-    b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1;
     fixtureDef.friction = 0.3;
@@ -36,8 +36,7 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
 
     PhysicWorld::Instance()->createPolygonSensor(
         m_pBody,
-        0,
-        height * 0.5,
+        b2Vec2(0, height * 0.5),
         width - 0.5,
         1,
         PhysicWorld::CAT_FOOT_SENSOR,
