@@ -8,8 +8,8 @@ class Pig : public Enemy, public DamageableObject, public AttackableObject
 {
 public:
     Pig();
-    void load(std::unique_ptr<LoaderParams> const& pParams);
-    void loadAnimation();
-    void update();
-    void updateAnimation();
+    void load(std::unique_ptr<LoaderParams> const& pParams) override;
+    void loadAnimation() override;
+    void update() override;
+    void updateAnimation() override;
 };

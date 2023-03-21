@@ -10,15 +10,15 @@ class PlayState final : public GameState
 {
 public:
     ~PlayState();
-    void update();
-    void render();
+    void update() override;
+    void render() override;
+    bool onEnter() override;
+    bool load() override;
+    void resume() override;
+    bool onExit() override;
+    std::string getStateID() const override;
 
-    bool onEnter();
-    bool load();
     bool loadLevel();
-    void resume();
-    bool onExit();
-    std::string getStateID() const;
 
 private:
     static const std::string s_stateID;

@@ -15,4 +15,5 @@ public:
     void throwBomb();
 
 private:
+    bool m_bThrowing;
 };

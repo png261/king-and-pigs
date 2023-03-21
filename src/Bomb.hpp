@@ -9,9 +9,10 @@ public:
     Bomb();
     ~Bomb();
 
-    void load(std::unique_ptr<LoaderParams> const& pParams);
-    void update();
-    void loadAnimation();
+    void load(std::unique_ptr<LoaderParams> const& pParams) override;
+    void update() override;
+    void loadAnimation() override;
+
     void updateAnimaton();
 
     void turnOn();

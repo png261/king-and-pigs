@@ -51,5 +51,3 @@ void Box::draw()
 {
     Enemy::draw();
 }
-
-void Box::clean() {}

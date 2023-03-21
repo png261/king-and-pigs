@@ -9,11 +9,9 @@ public:
     Box();
     ~Box() {}
 
-    void load(std::unique_ptr<LoaderParams> const& pParams);
+    void load(std::unique_ptr<LoaderParams> const& pParams) override;
 
-    void draw();
-    void update();
-    void clean();
-    void updateAnimation();
+    void draw() override;
+    void update() override;
+    void updateAnimation() override;
 };
-

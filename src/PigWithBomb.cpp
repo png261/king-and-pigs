@@ -4,6 +4,7 @@
 
 PigWithBomb::PigWithBomb()
     : Pig()
+    , m_bThrowing(false)
 {}
 
 PigWithBomb::~PigWithBomb() {}
@@ -30,16 +31,22 @@ void PigWithBomb::loadAnimation()
 
 void PigWithBomb::update()
 {
-    Pig::update();
     if (InputHandler::Instance()->isKeyDown(KEY_V)) {
+        m_bThrowing = true;
+    }
+
+    if (m_curAnimation == Animation::THROWING && m_animations[m_curAnimation]->isFinished()) {
         this->throwBomb();
     }
+
+    Pig::update();
+
     this->updateAnimaton();
 }
 
 void PigWithBomb::throwBomb()
 {
-    m_bExist = false;
+    this->disappear();
     std::unique_ptr<LoaderParams> pParams = std::make_unique<LoaderParams>(
         LoaderParams(this->getPosition().x, this->getPosition().y - 50, 20, 20));
 
@@ -53,5 +60,9 @@ void PigWithBomb::throwBomb()
 
 void PigWithBomb::updateAnimaton()
 {
-    Pig::updateAnimation();
+    /* Pig::updateAnimation(); */
+    if (m_bThrowing) {
+        m_curAnimation = Animation::THROWING;
+        m_animations[m_curAnimation]->start();
+    }
 }
