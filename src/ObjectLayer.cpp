@@ -1,7 +1,6 @@
 #include "ObjectLayer.hpp"
 
 #include "Camera.hpp"
-#include "Enemy.hpp"
 #include "Game.hpp"
 #include "Level.hpp"
 #include "Log.hpp"

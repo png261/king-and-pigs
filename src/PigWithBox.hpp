@@ -2,18 +2,17 @@
 
 #include "Pig.hpp"
 
-class PigWithBomb : public Pig
+class PigWithBox : public Pig
 {
 public:
-    PigWithBomb();
-    ~PigWithBomb();
+    PigWithBox();
+    ~PigWithBox();
 
-    void load(std::unique_ptr<LoaderParams> const& pParams) override;
     void update() override;
     void loadAnimation() override;
 
     void becomeNormal();
-    void throwBomb();
+    void throwBox();
 
 private:
     bool m_bThrowing;

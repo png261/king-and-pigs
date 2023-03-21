@@ -1,6 +1,4 @@
 #include "Door.hpp"
-#include "Log.hpp"
-
 
 Door::Door()
     : GameObject()

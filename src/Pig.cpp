@@ -6,17 +6,24 @@
 #include "PhysicWorld.hpp"
 
 Pig::Pig()
-    : Enemy()
+    : GameObject()
     , DamageableObject(3, 300, 1000)
     , AttackableObject(1, 50, 300)
 {}
 
 void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    Enemy::load(std::move(pParams));
+    GameObject::load(std::move(pParams));
+
+    b2Filter filter;
+    filter.categoryBits = PhysicWorld::CAT_ENEMY;
+    filter.maskBits = PhysicWorld::MASK_ENEMY;
+    m_pFixture->SetDensity(50);
+    m_pFixture->SetFilterData(filter);
+
     m_moveSpeed = 50;
     m_jumpHeight = 32.0f;
-    this->createAttackSensor(getBody(), m_width, PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
+    this->createAttackSensor(this->getBody(), m_width, PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
     this->loadAnimation();
 }
 
@@ -45,7 +52,7 @@ void Pig::update()
         return;
     }
 
-    Enemy::update();
+    GameObject::update();
     DamageableObject::update();
     AttackableObject::update();
     this->updateAnimation();
@@ -74,7 +81,6 @@ void Pig::updateAnimation()
     }
 
     if (newAnimation != m_curAnimation) {
-        m_animations[m_curAnimation]->stop();
         m_curAnimation = newAnimation;
         m_animations[m_curAnimation]->start();
     }

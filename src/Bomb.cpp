@@ -4,7 +4,7 @@
 
 Bomb::Bomb()
     : GameObject()
-    , AttackableObject(1, 50, 9999)
+    , AttackableObject(1, 20, 9999)
     , m_bOn(false)
 {}
 

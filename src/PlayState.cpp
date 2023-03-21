@@ -6,15 +6,16 @@
 #include "Decor.hpp"
 #include "DoorIn.hpp"
 #include "DoorOut.hpp"
-#include "Enemy.hpp"
 #include "Game.hpp"
 #include "GameObjectFactory.hpp"
 #include "GameStateMachine.hpp"
 #include "Heart.hpp"
 #include "InputHandler.hpp"
+#include "KingPig.hpp"
 #include "LevelParser.hpp"
 #include "Pig.hpp"
 #include "PigWithBomb.hpp"
+#include "PigWithBox.hpp"
 #include "Player.hpp"
 
 const std::string PlayState::s_stateID = "PLAY";
@@ -39,12 +40,14 @@ bool PlayState::load()
 
     factory->registerType("Player", new Creator<Player>);
     factory->registerType("Pig", new Creator<Pig>);
+    /* factory->registerType("KingPig", new Creator<KingPig>); */
+    factory->registerType("PigWithBomb", new Creator<PigWithBomb>);
+    factory->registerType("PigWithBox", new Creator<PigWithBox>);
+    factory->registerType("Bomb", new Creator<Bomb>);
     factory->registerType("Box", new Creator<Box>);
     factory->registerType("Heart", new Creator<Heart>);
     factory->registerType("DoorOut", new Creator<DoorOut>);
     factory->registerType("DoorIn", new Creator<DoorIn>);
-    factory->registerType("Bomb", new Creator<Bomb>);
-    factory->registerType("PigWithBomb", new Creator<PigWithBomb>);
     factory->registerType("Decor", new Creator<Decor>);
 
     texture->load(ASSETS_DIR + "Player/Idle.png", "player idle");
@@ -67,6 +70,24 @@ bool PlayState::load()
     texture->load(ASSETS_DIR + "Enemy/Pig/Ground.png", "pig ground");
     texture->load(ASSETS_DIR + "Enemy/Pig/Hit.png", "pig hit");
 
+    texture->load(ASSETS_DIR + "Enemy/KingPig/Idle.png", "kingPig idle");
+    texture->load(ASSETS_DIR + "Enemy/KingPig/Run.png", "kingPig run");
+    texture->load(ASSETS_DIR + "Enemy/KingPig/Jump.png", "kingPig jump");
+    texture->load(ASSETS_DIR + "Enemy/KingPig/Attack.png", "kingPig attack");
+    texture->load(ASSETS_DIR + "Enemy/KingPig/Dead.png", "kingPig dead");
+    texture->load(ASSETS_DIR + "Enemy/KingPig/Fall.png", "kingPig fall");
+    texture->load(ASSETS_DIR + "Enemy/KingPig/Ground.png", "kingPig ground");
+    texture->load(ASSETS_DIR + "Enemy/KingPig/Hit.png", "kingPig hit");
+
+    texture->load(ASSETS_DIR + "Enemy/PigWithBomb/Idle.png", "pigWithBomb idle");
+    texture->load(ASSETS_DIR + "Enemy/PigWithBomb/Run.png", "pigWithBomb run");
+    texture->load(ASSETS_DIR + "Enemy/PigWithBomb/Throwing.png", "pigWithBomb throwing");
+
+    texture->load(ASSETS_DIR + "Enemy/PigWithBox/Idle.png", "pigWithBox idle");
+    texture->load(ASSETS_DIR + "Enemy/PigWithBox/Run.png", "pigWithBox run");
+    texture->load(ASSETS_DIR + "Enemy/PigWithBox/Throwing.png", "pigWithBox throwing");
+
+
     texture->load(ASSETS_DIR + "Item/Big Heart Idle.png", "heart idle");
     texture->load(ASSETS_DIR + "Item/Big Heart Hit.png", "heart hit");
     texture->load(ASSETS_DIR + "Item/Big Diamond Idle.png", "diamond idle");
@@ -84,10 +105,6 @@ bool PlayState::load()
     texture->load(ASSETS_DIR + "Item/Bomb/On.png", "bomb on");
     texture->load(ASSETS_DIR + "Item/Bomb/Off.png", "bomb off");
     texture->load(ASSETS_DIR + "Item/Bomb/Explode.png", "bomb explode");
-
-    texture->load(ASSETS_DIR + "Enemy/PigWithBomb/Idle.png", "pigWithBomb idle");
-    texture->load(ASSETS_DIR + "Enemy/PigWithBomb/Run.png", "pigWithBomb run");
-    texture->load(ASSETS_DIR + "Enemy/PigWithBomb/Throwing.png", "pigWithBomb throwing");
 
     texture->load(ASSETS_DIR + "UI/Health Bar/Health Bar.png", "health bar");
     texture->load(ASSETS_DIR + "UI/Health Bar/Heart.png", "health heart");

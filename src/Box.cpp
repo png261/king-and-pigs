@@ -1,19 +1,29 @@
 #include "Box.hpp"
-#include "DamageableObject.hpp"
+#include "Game.hpp"
 #include "PhysicWorld.hpp"
 
 Box::Box()
-    : Enemy()
-    , DamageableObject(1, 200, 300)
+    : GameObject()
+    , DamageableObject(2, 200, 300)
 {}
 
 void Box::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    Enemy::load(std::move(pParams));
+    GameObject::load(std::move(pParams));
+
+    b2Filter filter;
+    filter.categoryBits = PhysicWorld::CAT_ENEMY;
+    m_pFixture->SetFilterData(filter);
 
     m_pBody->SetFixedRotation(false);
     m_pFixture->SetDensity(0.5);
     m_pFixture->SetFriction(0.3);
+
+    this->loadAnimation();
+}
+
+void Box::loadAnimation()
+{
     m_animations[Animation::IDLE] = std::make_unique<Animation>(Animation("box idle", 22, 16, 1));
     m_animations[Animation::HIT] = std::make_unique<Animation>(Animation("box hit", 22, 16, 2));
 
@@ -23,7 +33,13 @@ void Box::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Box::update()
 {
-    Enemy::update();
+    if (this->isDead()) {
+        this->breakIntoPieces();
+        this->disappear();
+        return;
+    }
+
+    GameObject::update();
     DamageableObject::update();
     this->updateAnimation();
 }
@@ -34,8 +50,6 @@ void Box::updateAnimation()
 
     if (this->isInvulnerable()) {
         newAnimation = Animation::HIT;
-    } else if (this->isDead()) {
-        this->disappear();
     } else {
         newAnimation = Animation::IDLE;
     }
@@ -47,7 +61,16 @@ void Box::updateAnimation()
     }
 }
 
-void Box::draw()
+void Box::breakIntoPieces()
 {
-    Enemy::draw();
+    std::unique_ptr<LoaderParams> pParams = std::make_unique<LoaderParams>(LoaderParams(
+        this->getPosition().x - 10 / 2.0f,
+        this->getPosition().y - 10 / 2.0f - 20,
+        10,
+        10));
+
+    Game::Instance()->getLevel()->spawnGameObject("Box", std::move(pParams));
+    Game::Instance()->getLevel()->spawnGameObject("Box", std::move(pParams));
+    Game::Instance()->getLevel()->spawnGameObject("Box", std::move(pParams));
+    Game::Instance()->getLevel()->spawnGameObject("Box", std::move(pParams));
 }

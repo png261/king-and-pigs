@@ -1,15 +1,16 @@
 #pragma once
 
 #include "AttackableObject.hpp"
-#include "Enemy.hpp"
+#include "DamageableObject.hpp"
+#include "GameObject.hpp"
 #include "Log.hpp"
 
-class Pig : public Enemy, public DamageableObject, public AttackableObject
+class Pig : public GameObject, public DamageableObject, public AttackableObject
 {
 public:
     Pig();
-    void load(std::unique_ptr<LoaderParams> const& pParams) override;
-    void loadAnimation() override;
-    void update() override;
-    void updateAnimation() override;
+    virtual void load(std::unique_ptr<LoaderParams> const& pParams) override;
+    virtual void loadAnimation() override;
+    virtual void update() override;
+    virtual void updateAnimation() override;
 };
