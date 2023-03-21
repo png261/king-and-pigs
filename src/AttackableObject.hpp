@@ -10,11 +10,6 @@ class AttackableObject
 public:
     AttackableObject(const int damage, const int range, const int attackSpeed);
 
-    virtual void createAttackSensor(
-        b2Body* const pBody,
-        const int width,
-        const PhysicWorld::FilterMask filterMask);
-
     virtual void update();
     virtual void attack();
 
@@ -31,6 +26,4 @@ protected:
 
     bool m_bAttack;
     bool m_bCanAttack;
-
-    b2Fixture* m_pAttackSensor;
 };

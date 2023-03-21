@@ -23,7 +23,23 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
 
     m_moveSpeed = 50;
     m_jumpHeight = 32.0f;
-    this->createAttackSensor(this->getBody(), m_width, PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
+    PhysicWorld::Instance()->createPolygonSensor(
+        m_pBody,
+        -(m_width * 0.5 + m_range) * 0.5,
+        0,
+        m_range,
+        m_range,
+        PhysicWorld::CAT_ATTACK_SENSOR,
+        PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
+
+    PhysicWorld::Instance()->createPolygonSensor(
+        m_pBody,
+        (m_width * 0.5 + m_range) * 0.5,
+        0,
+        m_range,
+        m_range,
+        PhysicWorld::CAT_ATTACK_SENSOR,
+        PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
     this->loadAnimation();
 }
 

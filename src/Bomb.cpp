@@ -4,7 +4,7 @@
 
 Bomb::Bomb()
     : GameObject()
-    , AttackableObject(1, 20, 9999)
+    , AttackableObject(1, 40, 9999)
     , m_bOn(false)
 {}
 
@@ -19,7 +19,15 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
     filter.maskBits = PhysicWorld::MASK_BOMB;
     m_pFixture->SetFilterData(filter);
 
-    this->createAttackSensor(getBody(), m_width, PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
+    PhysicWorld::Instance()->createPolygonSensor(
+        m_pBody,
+        0,
+        0,
+        m_range,
+        m_range,
+        PhysicWorld::CAT_ATTACK_SENSOR,
+        PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
+
     this->loadAnimation();
     onTimer.setTime(1000);
 }

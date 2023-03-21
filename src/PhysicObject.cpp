@@ -34,17 +34,14 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
     fixtureDef.friction = 0.3;
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
-    dynamicBox.SetAsBox(
-        (PhysicWorld::pixelToMeter(width - 0.5)) / 2.0f,
-        PhysicWorld::pixelToMeter(0.5),
-        b2Vec2(0, PhysicWorld::pixelToMeter(height) / 2.0f),
-        0);
-    b2FixtureDef footSensorDef;
-    footSensorDef.shape = &dynamicBox;
-    footSensorDef.isSensor = true;
-    footSensorDef.filter.categoryBits = PhysicWorld::CAT_FOOT_SENSOR;
-    footSensorDef.filter.maskBits = PhysicWorld::MASK_FOOT_SENSOR;
-    m_pBody->CreateFixture(&footSensorDef);
+    PhysicWorld::Instance()->createPolygonSensor(
+        m_pBody,
+        0,
+        height * 0.5,
+        width - 0.5,
+        1,
+        PhysicWorld::CAT_FOOT_SENSOR,
+        PhysicWorld::MASK_FOOT_SENSOR);
 }
 
 void PhysicObject::changeFootContact(int n)

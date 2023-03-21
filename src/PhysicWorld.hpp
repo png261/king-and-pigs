@@ -10,19 +10,6 @@ class ContactListener;
 class PhysicWorld final
 {
 public:
-    static PhysicWorld* Instance();
-
-    bool init(Window* window);
-    void clean();
-    void update();
-
-    void handleEvents();
-    void contactListener();
-    void debugDraw();
-    void toggleDebugDraw();
-
-    b2World* getWorld();
-
     enum FilterCategory : uint16 {
         CAT_NONE = 0x0000,
         CAT_WALL = 0x0001,
@@ -51,6 +38,28 @@ public:
         MASK_ENEMY_ATTACK_SENSOR = CAT_PLAYER,
         MASK_ENEMY_VISION_SENSOR = CAT_ALL,
     };
+
+    static PhysicWorld* Instance();
+
+    bool init(Window* window);
+    void clean();
+    void update();
+
+    void handleEvents();
+    void contactListener();
+    b2Fixture* createPolygonSensor(
+        b2Body* body,
+        float x,
+        float y,
+        int width,
+        int height,
+        FilterCategory category,
+        FilterMask mask);
+    void debugDraw();
+    void toggleDebugDraw();
+
+    b2World* getWorld();
+
 
     void createCollisionObject(
         PhysicWorld::FilterCategory categoyr,

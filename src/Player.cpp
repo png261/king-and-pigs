@@ -13,13 +13,12 @@
 Player::Player()
     : GameObject()
     , DamageableObject(3, 1000, 500)
-    , AttackableObject(1, 30, 300)
+    , AttackableObject(1, 40, 300)
     , m_bDoorIn(false)
     , m_bWantDoorIn(false)
 {}
 
 Player::~Player() {}
-
 
 void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 {
@@ -32,7 +31,24 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
     filter.maskBits = PhysicWorld::MASK_PLAYER;
     m_pFixture->SetFilterData(filter);
 
-    this->createAttackSensor(getBody(), m_width, PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
+    PhysicWorld::Instance()->createPolygonSensor(
+        m_pBody,
+        -(m_width * 0.5 + m_range) * 0.5,
+        0,
+        m_range,
+        m_range,
+        PhysicWorld::CAT_ATTACK_SENSOR,
+        PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
+
+    PhysicWorld::Instance()->createPolygonSensor(
+        m_pBody,
+        (m_width * 0.5 + m_range) * 0.5,
+        0,
+        m_range,
+        m_range,
+        PhysicWorld::CAT_ATTACK_SENSOR,
+        PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
+
     this->loadAnimation();
 }
 

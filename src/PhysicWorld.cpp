@@ -29,7 +29,7 @@ PhysicWorld* PhysicWorld::Instance()
 
 bool PhysicWorld::init(Window* window)
 {
-    m_pWorld = new b2World(PhysicWorld::GRAVITY);
+    m_pWorld = new b2World(GRAVITY);
     m_contactListener = std::make_unique<ContactListener>(ContactListener());
     m_pDebugDraw = std::make_unique<DebugDraw>(DebugDraw(window));
     m_pWorld->SetContactListener(new ContactListener);
@@ -47,47 +47,47 @@ bool PhysicWorld::init(Window* window)
 
 int PhysicWorld::meterToPixel(const float meter)
 {
-    return static_cast<int>(floor(meter * PhysicWorld::PIXEL_PER_METER));
+    return static_cast<int>(floor(meter * PIXEL_PER_METER));
 }
 
 float PhysicWorld::pixelToMeter(const float pixel)
 {
-    return static_cast<float>(pixel * PhysicWorld::METER_PER_PIXEL);
+    return static_cast<float>(pixel * METER_PER_PIXEL);
 }
 
 b2Vec2 PhysicWorld::meterToPixel(const b2Vec2 meter)
 {
-    return PhysicWorld::PIXEL_PER_METER * meter;
+    return PIXEL_PER_METER * meter;
 };
 
 b2Vec2 PhysicWorld::pixelToMeter(const b2Vec2 pixel)
 {
-    return PhysicWorld::METER_PER_PIXEL * pixel;
+    return METER_PER_PIXEL * pixel;
 };
 
 float PhysicWorld::radToDeg(const float rad)
 {
-    return rad * PhysicWorld::DEG_PER_RAD;
+    return rad * DEG_PER_RAD;
 };
 
 float PhysicWorld::degToRad(const float deg)
 {
-    return deg * PhysicWorld::RAD_PER_DEG;
+    return deg * RAD_PER_DEG;
 };
 
 void PhysicWorld::createCollisionObject(
-    const PhysicWorld::FilterCategory category,
+    const FilterCategory category,
     const int width,
     const int height,
     const b2Vec2 position)
 {
     b2BodyDef body;
-    body.position = PhysicWorld::pixelToMeter(position + b2Vec2(width * 0.5, height * 0.5));
+    body.position = pixelToMeter(position + b2Vec2(width * 0.5, height * 0.5));
     body.type = b2_staticBody;
     b2Body* const groundBody = this->getWorld()->CreateBody(&body);
 
-    float w = PhysicWorld::pixelToMeter(width);
-    float h = PhysicWorld::pixelToMeter(height);
+    float w = pixelToMeter(width);
+    float h = pixelToMeter(height);
 
     b2FixtureDef fixture;
 
@@ -100,7 +100,7 @@ void PhysicWorld::createCollisionObject(
     box.CreateLoop(vertices, 4);
 
     fixture.shape = &box;
-    fixture.friction = PhysicWorld::GROUND_FRICTION;
+    fixture.friction = GROUND_FRICTION;
     fixture.filter.categoryBits = category;
     groundBody->CreateFixture(&fixture);
 }
@@ -130,7 +130,7 @@ void PhysicWorld::DoorInListener(b2Contact* contact)
     uint16 catA = fixtureA->GetFilterData().categoryBits;
     uint16 catB = fixtureB->GetFilterData().categoryBits;
 
-    bool isPlayerDoor = catA == PhysicWorld::CAT_DOOR_IN && catB == PhysicWorld::CAT_PLAYER;
+    bool isPlayerDoor = catA == CAT_DOOR_IN && catB == CAT_PLAYER;
     if (!isPlayerDoor) {
         return;
     }
@@ -160,14 +160,14 @@ void PhysicWorld::AttackListener(b2Contact* contact)
     uint16 const catA = A->GetFilterData().categoryBits;
     uint16 const catB = B->GetFilterData().categoryBits;
 
-    bool isAttack = ((catA | catB) == (PhysicWorld::CAT_ATTACK_SENSOR | PhysicWorld::CAT_ENEMY)) ||
-                    ((catA | catB) == (PhysicWorld::CAT_ATTACK_SENSOR | PhysicWorld::CAT_PLAYER));
+    bool isAttack = ((catA | catB) == (CAT_ATTACK_SENSOR | CAT_ENEMY)) ||
+                    ((catA | catB) == (CAT_ATTACK_SENSOR | CAT_PLAYER));
 
     if (!isAttack) {
         return;
     }
 
-    if (catA == PhysicWorld::CAT_ATTACK_SENSOR) {
+    if (catA == CAT_ATTACK_SENSOR) {
         handleAttack(A, B);
     } else {
         handleAttack(B, A);
@@ -226,4 +226,31 @@ void PhysicWorld::clean()
     m_pWorld->SetContactListener(m_contactListener.get());
     /* delete m_pWorld; */
     /* m_pWorld = nullptr; */
+}
+
+b2Fixture* PhysicWorld::createPolygonSensor(
+    b2Body* body,
+    float x,
+    float y,
+    int width,
+    int height,
+    FilterCategory category,
+    FilterMask mask)
+{
+    b2PolygonShape polygon;
+    polygon.SetAsBox(
+        PhysicWorld::pixelToMeter(width * 0.5),
+        PhysicWorld::pixelToMeter(height * 0.5),
+        PhysicWorld::pixelToMeter(b2Vec2(x, y)),
+        0);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &polygon;
+    fixtureDef.isSensor = true;
+    fixtureDef.filter.categoryBits = category;
+    fixtureDef.filter.maskBits = mask;
+
+    b2PolygonShape dynamicBox;
+    dynamicBox.SetAsBox(pixelToMeter(width) / 2.0f, pixelToMeter(height) / 2.0f);
+    return body->CreateFixture(&fixtureDef);
 }

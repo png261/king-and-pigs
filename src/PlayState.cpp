@@ -40,7 +40,7 @@ bool PlayState::load()
 
     factory->registerType("Player", new Creator<Player>);
     factory->registerType("Pig", new Creator<Pig>);
-    /* factory->registerType("KingPig", new Creator<KingPig>); */
+    factory->registerType("KingPig", new Creator<KingPig>);
     factory->registerType("PigWithBomb", new Creator<PigWithBomb>);
     factory->registerType("PigWithBox", new Creator<PigWithBox>);
     factory->registerType("Bomb", new Creator<Bomb>);
