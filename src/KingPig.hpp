@@ -2,11 +2,10 @@
 
 #include "Pig.hpp"
 
-class KingPig
+class KingPig : public Pig
 {
-    /* public: */
-    /*     KingPig(); */
-    /*     ~KingPig(); */
-    /*     void load(std::unique_ptr<LoaderParams> const& pParams) override; */
-    /*     void loadAnimation() override; */
+public:
+    KingPig();
+
+    virtual void loadAnimation() override;
 };
