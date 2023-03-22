@@ -58,17 +58,27 @@ void PhysicObject::moveRight()
 void PhysicObject::moveLeft()
 {
     float speedDifference =
-        -PhysicWorld::pixelToMeter(m_moveSpeed) - m_pBody->GetLinearVelocity().x;
+        PhysicWorld::pixelToMeter(-m_moveSpeed) - m_pBody->GetLinearVelocity().x;
     b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 }
 
 void PhysicObject::jump()
 {
+    if (m_pBody->GetLinearVelocity().y != 0) {
+        return;
+    }
+
+    /* T = (2h/g)^(1/2) */
     float timeToJumpPeak =
         sqrt(2 * PhysicWorld::pixelToMeter(m_jumpHeight) / PhysicWorld::GRAVITY.y);
-    b2Vec2 impulse =
-        -b2Vec2(0, m_pBody->GetMass() * PhysicWorld::pixelToMeter(m_jumpHeight) / timeToJumpPeak);
+
+    /* F = 1/2.m.v^2 */
+
+    b2Vec2 impulse = 0.5 * m_pBody->GetMass() *
+                     std::pow((PhysicWorld::pixelToMeter(m_jumpHeight) / timeToJumpPeak), 2) *
+                     b2Vec2(0, -1);
+
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 }
 
