@@ -26,7 +26,7 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
 
     m_moveSpeed = 100;
-    m_jumpHeight = 20.0f;
+    m_jumpHeight = 32.0f + m_height;
 
     b2Filter filter;
     filter.categoryBits = PhysicWorld::CAT_PLAYER;
