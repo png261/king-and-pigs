@@ -31,7 +31,7 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
 
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1;
-    fixtureDef.friction = 0.3;
+    fixtureDef.friction = 1;
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
     PhysicWorld::Instance()->createPolygonSensor(
@@ -94,7 +94,7 @@ b2Vec2 PhysicObject::getPosition() const
 
 float PhysicObject::getAngle() const
 {
-    return PhysicWorld::meterToPixel(m_pBody->GetAngle());
+    return PhysicWorld::degToRad(m_pBody->GetAngle());
 }
 
 int PhysicObject::getFootContact() const
