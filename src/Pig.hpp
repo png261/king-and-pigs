@@ -3,7 +3,6 @@
 #include "AttackableObject.hpp"
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
-#include "Log.hpp"
 
 class Pig : public GameObject, public DamageableObject, public AttackableObject
 {

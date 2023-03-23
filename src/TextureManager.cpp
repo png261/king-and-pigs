@@ -3,6 +3,10 @@
 #include "Log.hpp"
 #include "SDL.hpp"
 
+TextureManager::TextureManager() {}
+
+TextureManager::~TextureManager() {}
+
 TextureManager* TextureManager::Instance()
 {
     static TextureManager* const s_pInstance = new TextureManager;
@@ -97,4 +101,9 @@ void TextureManager::drawTile(
         height};
 
     Game::Instance()->getWindow()->renderImage(m_textureMap[id], &srcRect, &destRect);
+}
+
+void TextureManager::clean()
+{
+    m_textureMap.clear();
 }

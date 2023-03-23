@@ -62,3 +62,5 @@ void SoundManager::playSFX(const std::string soundID, const int loop)
 {
     Mix_PlayChannel(-1, m_sfxMap[soundID], loop);
 }
+
+void SoundManager::clean() {}

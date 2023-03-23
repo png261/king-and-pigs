@@ -42,6 +42,7 @@ public:
     void clean();
 
 private:
-    TextureManager(){};
+    TextureManager();
+    ~TextureManager();
     std::map<std::string, SDL_Texture*> m_textureMap;
 };

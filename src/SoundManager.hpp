@@ -18,6 +18,8 @@ public:
     void playSFX(const std::string soundID, const int loop = 0);
     void playMusic(const std::string soundID, const int loop = 0);
 
+    void clean();
+
 private:
     SoundManager();
     ~SoundManager();
@@ -25,4 +27,3 @@ private:
     std::map<std::string, Mix_Music*> m_musicMap;
     std::map<std::string, Mix_Chunk*> m_sfxMap;
 };
-

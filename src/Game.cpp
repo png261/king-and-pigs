@@ -6,6 +6,7 @@
 #include "InputHandler.hpp"
 #include "PhysicWorld.hpp"
 #include "PlayState.hpp"
+#include "SoundManager.hpp"
 
 Game::Game()
     : m_pWindow(nullptr)
@@ -26,13 +27,13 @@ Game* Game::Instance()
     return s_pInstance;
 }
 
-bool Game::init(const unsigned int width, const unsigned int height)
+bool Game::init()
 {
     if (SDL::init() == false) {
         return false;
     };
 
-    m_pWindow = new Window(width, height);
+    m_pWindow = new Window(700, 400);
 
     if (PhysicWorld::Instance()->init(m_pWindow) == false) {
         return false;
@@ -52,8 +53,8 @@ void Game::handleEvents()
 
 void Game::update()
 {
-    GameStateMachine::Instance()->update();
     PhysicWorld::Instance()->update();
+    GameStateMachine::Instance()->update();
 }
 
 void Game::render()
@@ -70,6 +71,9 @@ void Game::render()
 void Game::clean()
 {
     PhysicWorld::Instance()->clean();
+    GameStateMachine::Instance()->clean();
+    TextureManager::Instance()->clean();
+    SoundManager::Instance()->clean();
     SDL::exit();
 }
 

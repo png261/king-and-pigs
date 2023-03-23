@@ -1,8 +1,6 @@
 #include "Pig.hpp"
 #include "DamageableObject.hpp"
-#include "DebugDraw.hpp"
 #include "Game.hpp"
-#include "InputHandler.hpp"
 #include "PhysicWorld.hpp"
 
 Pig::Pig()
@@ -15,15 +13,14 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
+    m_moveSpeed = 50;
+    m_jumpHeight = 32.0f;
 
     b2Filter filter;
     filter.categoryBits = PhysicWorld::CAT_ENEMY;
     filter.maskBits = PhysicWorld::MASK_ENEMY;
     m_pFixture->SetDensity(50);
     m_pFixture->SetFilterData(filter);
-
-    m_moveSpeed = 50;
-    m_jumpHeight = 32.0f;
 
     PhysicWorld::Instance()->createCircleSensor(
         m_pBody,

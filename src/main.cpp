@@ -4,7 +4,7 @@ int main(int argc, char* argv[])
 {
     Game* game = Game::Instance();
 
-    if (!game->init(700, 400)) {
+    if (game->init() == false) {
         return -1;
     }
 

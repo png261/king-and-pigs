@@ -13,7 +13,7 @@ public:
 
     static Game* Instance();
 
-    bool init(const unsigned int width, const unsigned int height);
+    bool init();
     void handleEvents();
     void update();
     void render();
