@@ -5,5 +5,6 @@
 class Decor : public GameObject
 {
 public:
-    virtual void load(std::unique_ptr<LoaderParams> const& pParams);
+    void load(std::unique_ptr<LoaderParams> const& pParams) override;
+    void loadAnimation() override;
 };
