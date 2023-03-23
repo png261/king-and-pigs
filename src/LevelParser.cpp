@@ -7,6 +7,7 @@
 #include "Log.hpp"
 #include "ObjectLayer.hpp"
 #include "PhysicWorld.hpp"
+#include "TextureManager.hpp"
 #include "TileLayer.hpp"
 
 using namespace tinyxml2;
@@ -112,19 +113,11 @@ void LevelParser::parseCollisionObject(XMLElement* pTilesetRoot, Level* pLevel, 
 
 GameObject* LevelParser::parseObject(XMLElement* const pObjectElement, Level* const pLevel)
 {
-    int x = 0;
-    int y = 0;
-    int width = 0;
-    int height = 0;
-    std::string type = "";
-
-    x = std::stoi(pObjectElement->Attribute("x"));
-    y = std::stoi(pObjectElement->Attribute("y"));
-
-    width = std::stoi(pObjectElement->Attribute("width"));
-    height = std::stoi(pObjectElement->Attribute("height"));
-
-    type = getType(pObjectElement);
+    int x = std::stoi(pObjectElement->Attribute("x"));
+    int y = std::stoi(pObjectElement->Attribute("y"));
+    int width = std::stoi(pObjectElement->Attribute("width"));
+    int height = std::stoi(pObjectElement->Attribute("height"));
+    std::string type = getType(pObjectElement);
 
     GameObject* const pGameObject = GameObjectFactory::Instance()->create(type);
     if (pGameObject == nullptr) {
