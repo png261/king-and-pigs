@@ -14,8 +14,8 @@ const float PhysicWorld::PIXEL_PER_METER = 32.0f;
 const float PhysicWorld::METER_PER_PIXEL = 1 / PIXEL_PER_METER;
 const float PhysicWorld::RAD_PER_DEG = 180 / b2_pi;
 const float PhysicWorld::DEG_PER_RAD = b2_pi / 180;
-const float PhysicWorld::GROUND_FRICTION = 1;
-const b2Vec2 PhysicWorld::GRAVITY = {0.0f, 9.8f};
+const float PhysicWorld::GROUND_FRICTION = 5;
+const b2Vec2 PhysicWorld::GRAVITY = {0.0f, 10.0f};
 
 PhysicWorld::PhysicWorld()
     : m_pWorld(nullptr)

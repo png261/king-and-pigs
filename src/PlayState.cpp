@@ -17,6 +17,7 @@
 #include "PigWithBomb.hpp"
 #include "PigWithBox.hpp"
 #include "Player.hpp"
+#include "TextureManager.hpp"
 
 const std::string PlayState::s_stateID = "PLAY";
 

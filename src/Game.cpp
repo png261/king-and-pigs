@@ -1,12 +1,13 @@
 #include "Game.hpp"
-#include <memory>
 
+#include <memory>
 #include "CONSTANT.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
 #include "PhysicWorld.hpp"
 #include "PlayState.hpp"
 #include "SoundManager.hpp"
+#include "TextureManager.hpp"
 
 Game::Game()
     : m_pWindow(nullptr)

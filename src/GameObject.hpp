@@ -1,11 +1,11 @@
 #pragma once
 
+#include <map>
 #include <memory>
 #include "Animation.hpp"
 #include "LoaderParams.hpp"
 #include "PhysicObject.hpp"
 #include "PhysicWorld.hpp"
-#include "TextureManager.hpp"
 
 class GameObject : public PhysicObject
 {
