@@ -2,6 +2,12 @@
 #include "Game.hpp"
 #include "PhysicWorld.hpp"
 
+void Heart::load(std::unique_ptr<LoaderParams> const& pParams)
+{
+    ItemObject::load(pParams);
+    this->loadAnimation();
+}
+
 void Heart::loadAnimation()
 {
     m_animations[Animation::IDLE] = std::make_unique<Animation>(Animation("heart idle", 18, 14, 7));
