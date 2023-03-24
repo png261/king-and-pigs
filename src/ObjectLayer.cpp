@@ -3,7 +3,6 @@
 #include "Camera.hpp"
 #include "Game.hpp"
 #include "Level.hpp"
-#include "Log.hpp"
 
 ObjectLayer::~ObjectLayer()
 {
@@ -20,11 +19,9 @@ void ObjectLayer::update()
                 Camera::Instance()->getPosition().x + Game::Instance()->getWindow()->getWidth() &&
             obj->getPosition().y >
                 Camera::Instance()->getPosition().y + Game::Instance()->getWindow()->getHeight()) {
-            obj->setUpdating(false);
             continue;
         }
 
-        obj->setUpdating(true);
         obj->update();
     }
 

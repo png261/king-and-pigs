@@ -8,7 +8,6 @@ GameObject::GameObject()
     : PhysicObject()
     , m_width(0)
     , m_height(0)
-    , m_bUpdating(false)
     , m_bExist(true)
     , m_bFlipped(false)
 {}
@@ -41,16 +40,6 @@ void GameObject::update()
 }
 
 void GameObject::updateAnimation() {}
-
-bool GameObject::isUpdating() const
-{
-    return m_bUpdating;
-}
-
-void GameObject::setUpdating(const bool bUpdating)
-{
-    m_bUpdating = bUpdating;
-}
 
 bool GameObject::isExist() const
 {

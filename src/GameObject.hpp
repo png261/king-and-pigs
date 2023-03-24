@@ -21,10 +21,8 @@ public:
     virtual int getWidth() const;
     virtual int getHeight() const;
 
-    virtual bool isUpdating() const;
     virtual bool isExist() const;
 
-    virtual void setUpdating(const bool bUpdating);
     virtual void disappear();
 
 protected:
@@ -33,7 +31,6 @@ protected:
     int m_width;
     int m_height;
 
-    bool m_bUpdating;
     bool m_bFlipped;
     bool m_bExist;
 
