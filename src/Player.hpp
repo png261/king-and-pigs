@@ -1,10 +1,16 @@
 #pragma once
 
+#include <iostream>
 #include "AttackableObject.hpp"
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
+#include "Log.hpp"
+#include "VisionObject.hpp"
 
-class Player final : public GameObject, public DamageableObject, public AttackableObject
+class Player final : public GameObject,
+                     public VisionObject,
+                     public DamageableObject,
+                     public AttackableObject
 {
 public:
     Player();
@@ -13,6 +19,7 @@ public:
     void update() override;
     void updateAnimation() override;
     void loadAnimation() override;
+    void draw() override;
 
     void doorIn();
     void doorOut();

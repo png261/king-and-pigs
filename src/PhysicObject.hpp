@@ -21,11 +21,15 @@ public:
     virtual float getAngle() const;
     virtual int getFootContact() const;
     virtual bool isOnGround() const;
+    virtual void setMoveRight(bool bMoveRight);
+    virtual void setMoveLeft(bool bMoveLeft);
 
 protected:
     b2Body* m_pBody;
     b2Fixture* m_pFixture;
 
+    bool m_bCanMoveRight;
+    bool m_bCanMoveLeft;
     bool m_bOnGround;
 
     float m_moveSpeed;

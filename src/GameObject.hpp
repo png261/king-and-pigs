@@ -6,6 +6,7 @@
 #include "LoaderParams.hpp"
 #include "PhysicObject.hpp"
 #include "PhysicWorld.hpp"
+#include "VisionObject.hpp"
 
 class GameObject : public PhysicObject
 {
@@ -24,9 +25,15 @@ public:
     virtual bool isExist() const;
 
     virtual void disappear();
+    enum direction {
+        RIGHT = 1,
+        LEFT = -1,
+    };
 
 protected:
     GameObject();
+
+    direction m_direction;
 
     int m_width;
     int m_height;

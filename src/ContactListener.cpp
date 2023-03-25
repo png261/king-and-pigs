@@ -1,6 +1,8 @@
 #include "ContactListener.hpp"
+#include <iostream>
 #include "ItemObject.hpp"
 #include "Log.hpp"
+#include "PhysicObject.hpp"
 #include "Pig.hpp"
 
 void ContactListener::BeginContact(b2Contact* const contact)
@@ -22,7 +24,6 @@ void ContactListener::PreSolve(b2Contact* const contact, const b2Manifold* oldMa
 void ContactListener::PostSolve(b2Contact* const contact, const b2ContactImpulse* impulse){
 
 };
-
 
 void ContactListener::OneWayPreSolve(b2Contact* const contact, const b2Manifold* oldManifold)
 {

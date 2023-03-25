@@ -12,9 +12,8 @@ public:
 
 private:
     void ItemBeginContact(b2Contact* const contact);
+
     void FootBeginContact(b2Contact* const contact);
-
     void FootEndContact(b2Contact* const contact);
-
     void OneWayPreSolve(b2Contact* const contact, const b2Manifold* oldManifold);
 };

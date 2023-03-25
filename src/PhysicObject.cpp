@@ -1,10 +1,13 @@
 #include "PhysicObject.hpp"
+#include <iostream>
 
 PhysicObject::PhysicObject()
     : m_jumpHeight(0)
     , m_moveSpeed(0)
     , m_footContact(0)
     , m_bOnGround(false)
+    , m_bCanMoveRight(true)
+    , m_bCanMoveLeft(true)
 {}
 
 PhysicObject::~PhysicObject() {}
@@ -50,6 +53,10 @@ void PhysicObject::changeFootContact(int n)
 
 void PhysicObject::moveRight()
 {
+    if (m_bCanMoveRight == false) {
+        return;
+    }
+
     float speedDifference = PhysicWorld::pixelToMeter(m_moveSpeed) - m_pBody->GetLinearVelocity().x;
     b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
@@ -57,6 +64,10 @@ void PhysicObject::moveRight()
 
 void PhysicObject::moveLeft()
 {
+    if (m_bCanMoveLeft == false) {
+        return;
+    }
+
     float speedDifference =
         PhysicWorld::pixelToMeter(-m_moveSpeed) - m_pBody->GetLinearVelocity().x;
     b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
@@ -105,4 +116,14 @@ int PhysicObject::getFootContact() const
 bool PhysicObject::isOnGround() const
 {
     return m_bOnGround;
+}
+
+void PhysicObject::setMoveRight(bool bMoveRight)
+{
+    m_bCanMoveRight = bMoveRight;
+}
+
+void PhysicObject::setMoveLeft(bool bMoveLeft)
+{
+    m_bCanMoveLeft = bMoveLeft;
 }

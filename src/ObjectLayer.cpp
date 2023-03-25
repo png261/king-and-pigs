@@ -26,13 +26,14 @@ void ObjectLayer::update()
     }
 
     for (auto it = m_gameObjects.begin(); it != m_gameObjects.end();) {
-        if ((*it)->isExist() == false) {
-            PhysicWorld::Instance()->getWorld()->DestroyBody((*it)->getBody());
-            delete (*it);
-            m_gameObjects.erase(it);
+        if ((*it)->isExist()) {
+            it++;
             continue;
         }
-        it++;
+
+        PhysicWorld::Instance()->getWorld()->DestroyBody((*it)->getBody());
+        delete (*it);
+        m_gameObjects.erase(it);
     }
 }
 

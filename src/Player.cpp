@@ -1,17 +1,22 @@
 #include "Player.hpp"
 
+#include <iostream>
 #include <memory>
 #include "Animation.hpp"
 #include "AttackableObject.hpp"
 #include "Camera.hpp"
 #include "DamageableObject.hpp"
+#include "DebugDraw.hpp"
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "InputHandler.hpp"
+#include "Log.hpp"
 #include "PhysicWorld.hpp"
+#include "VisionObject.hpp"
 
 Player::Player()
     : GameObject()
+    , VisionObject()
     , DamageableObject(3, 1000, 500)
     , AttackableObject(1, 25, 300)
     , m_bDoorIn(false)
@@ -84,11 +89,36 @@ void Player::update()
     }
 
     this->handleInput();
+
     GameObject::update();
+
+    b2Vec2 start = this->getPosition() + m_direction * b2Vec2(m_width / 2.0f, 0);
+    b2Vec2 end = start + m_direction * b2Vec2(100, 0);
+    VisionObject::update(start, end);
+
+    if (this->m_hitCategory == PhysicWorld::CAT_WALL &&
+        this->m_fraction <= PhysicWorld::pixelToMeter(1)) {
+        if (m_direction == RIGHT) {
+            m_bCanMoveRight = false;
+        } else {
+            m_bCanMoveLeft = false;
+        }
+    } else {
+        m_bCanMoveRight = true;
+        m_bCanMoveLeft = true;
+    }
+
     DamageableObject::update();
     AttackableObject::update();
     this->updateAnimation();
 }
+
+void Player::draw()
+{
+    GameObject::draw();
+    VisionObject::debugDraw();
+}
+
 
 void Player::handleInput()
 {
@@ -112,10 +142,12 @@ void Player::handleInput()
     }
     if (input->isKeyPressed(KEY_RIGHT)) {
         this->moveRight();
+        m_direction = RIGHT;
         m_bFlipped = false;
     }
     if (input->isKeyPressed(KEY_LEFT)) {
         this->moveLeft();
+        m_direction = LEFT;
         m_bFlipped = true;
     }
 
@@ -133,9 +165,9 @@ void Player::updateAnimation()
     Animation::AnimationID newAnimation = m_curAnimation;
 
     if (this->isOnGround()) {
-        if (InputHandler::Instance()->isKeyPressed(KEY_LEFT)) {
+        if (m_bCanMoveLeft && InputHandler::Instance()->isKeyPressed(KEY_LEFT)) {
             newAnimation = Animation::RUN;
-        } else if (InputHandler::Instance()->isKeyPressed(KEY_RIGHT)) {
+        } else if (m_bCanMoveRight && InputHandler::Instance()->isKeyPressed(KEY_RIGHT)) {
             newAnimation = Animation::RUN;
         } else {
             newAnimation = Animation::IDLE;

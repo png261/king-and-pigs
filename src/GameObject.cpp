@@ -10,6 +10,7 @@ GameObject::GameObject()
     , m_height(0)
     , m_bExist(true)
     , m_bFlipped(false)
+    , m_direction(RIGHT)
 {}
 
 GameObject::~GameObject()
