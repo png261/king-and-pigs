@@ -15,7 +15,6 @@ public:
         m_hitCategory =
             static_cast<PhysicWorld::FilterCategory>(fixture->GetFilterData().categoryBits);
         m_fraction = fraction;
-        std::cout << m_fraction << std::endl;
 
         return fraction;
     }
@@ -27,7 +26,7 @@ public:
 class VisionObject
 {
 public:
-    VisionObject();
+    VisionObject(int range);
     virtual void update(b2Vec2 start, b2Vec2 end);
     virtual void debugDraw();
 
@@ -36,4 +35,6 @@ protected:
     float m_fraction;
     b2Vec2 m_start;
     b2Vec2 m_end;
+    int m_orignRange;
+    int m_distance;
 };

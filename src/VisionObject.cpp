@@ -4,10 +4,12 @@
 #include "DebugDraw.hpp"
 #include "Game.hpp"
 
-VisionObject::VisionObject()
+VisionObject::VisionObject(int range)
     : m_start(0, 0)
     , m_end(0, 0)
     , m_fraction(1)
+    , m_orignRange(range)
+    , m_distance(range)
 {}
 
 void VisionObject::update(b2Vec2 start, b2Vec2 end)
@@ -18,11 +20,14 @@ void VisionObject::update(b2Vec2 start, b2Vec2 end)
     PhysicWorld::Instance()->getWorld()->RayCast(&callback, m_start, m_end);
     m_hitCategory = callback.m_hitCategory;
     m_fraction = callback.m_fraction;
-    std::cout << m_fraction << std::endl;
+    m_distance = m_orignRange * m_fraction;
 }
 
 void VisionObject::debugDraw()
 {
+    if (Game::Instance()->isDebug() == false) {
+        return;
+    }
     DebugDraw* debug = new DebugDraw(Game::Instance()->getWindow());
     debug->DrawSegment(m_start, m_end, {1, 1, 1, 1});
 }

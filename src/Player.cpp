@@ -16,7 +16,7 @@
 
 Player::Player()
     : GameObject()
-    , VisionObject()
+    , VisionObject(32)
     , DamageableObject(3, 1000, 500)
     , AttackableObject(1, 25, 300)
     , m_bDoorIn(false)
@@ -93,11 +93,11 @@ void Player::update()
     GameObject::update();
 
     b2Vec2 start = this->getPosition() + m_direction * b2Vec2(m_width / 2.0f, 0);
-    b2Vec2 end = start + m_direction * b2Vec2(100, 0);
+    b2Vec2 end = start + m_direction * b2Vec2(m_orignRange, 0);
     VisionObject::update(start, end);
 
     if (this->m_hitCategory == PhysicWorld::CAT_WALL &&
-        this->m_fraction <= PhysicWorld::pixelToMeter(1)) {
+        this->m_distance <= PhysicWorld::pixelToMeter(1)) {
         if (m_direction == RIGHT) {
             m_bCanMoveRight = false;
         } else {
