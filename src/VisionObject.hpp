@@ -12,6 +12,10 @@ public:
     float
     ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
     {
+        if (fixture->IsSensor()) {
+            return 1;
+        }
+
         m_hitCategory =
             static_cast<PhysicWorld::FilterCategory>(fixture->GetFilterData().categoryBits);
         m_fraction = fraction;

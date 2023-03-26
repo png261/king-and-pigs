@@ -8,6 +8,7 @@ PhysicObject::PhysicObject()
     , m_bOnGround(false)
     , m_bCanMoveRight(true)
     , m_bCanMoveLeft(true)
+    , m_bRunning(false)
 {}
 
 PhysicObject::~PhysicObject() {}
@@ -15,6 +16,7 @@ PhysicObject::~PhysicObject() {}
 void PhysicObject::update()
 {
     m_bOnGround = this->getFootContact() > 0;
+    m_bRunning = false;
 }
 
 void PhysicObject::createBody(const int x, const int y, const int width, const int height)
@@ -53,8 +55,12 @@ void PhysicObject::changeFootContact(int n)
 
 void PhysicObject::moveRight()
 {
-    if (m_bCanMoveRight == false) {
+    if (this->canMoveRight() == false) {
         return;
+    }
+
+    if (this->isOnGround()) {
+        m_bRunning = true;
     }
 
     float speedDifference = PhysicWorld::pixelToMeter(m_moveSpeed) - m_pBody->GetLinearVelocity().x;
@@ -64,8 +70,12 @@ void PhysicObject::moveRight()
 
 void PhysicObject::moveLeft()
 {
-    if (m_bCanMoveLeft == false) {
+    if (this->canMoveRight() == false) {
         return;
+    }
+
+    if (this->isOnGround()) {
+        m_bRunning = true;
     }
 
     float speedDifference =
@@ -126,4 +136,19 @@ void PhysicObject::setMoveRight(bool bMoveRight)
 void PhysicObject::setMoveLeft(bool bMoveLeft)
 {
     m_bCanMoveLeft = bMoveLeft;
+}
+
+bool PhysicObject::isRunning() const
+{
+    return m_bRunning;
+}
+
+bool PhysicObject::canMoveRight() const
+{
+    return m_bCanMoveRight;
+}
+
+bool PhysicObject::canMoveLeft() const
+{
+    return m_bCanMoveLeft;
 }

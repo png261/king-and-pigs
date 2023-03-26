@@ -88,9 +88,9 @@ void Player::update()
         return;
     }
 
-    this->handleInput();
 
     GameObject::update();
+    this->handleInput();
 
     b2Vec2 start = this->getPosition() + m_direction * b2Vec2(m_width / 2.0f, 0);
     b2Vec2 end = start + m_direction * b2Vec2(m_orignRange, 0);
@@ -99,13 +99,13 @@ void Player::update()
     if (this->m_hitCategory == PhysicWorld::CAT_WALL &&
         this->m_distance <= PhysicWorld::pixelToMeter(1)) {
         if (m_direction == RIGHT) {
-            m_bCanMoveRight = false;
+            this->setMoveRight(false);
         } else {
-            m_bCanMoveLeft = false;
+            this->setMoveLeft(false);
         }
     } else {
-        m_bCanMoveRight = true;
-        m_bCanMoveLeft = true;
+        this->setMoveRight(true);
+        this->setMoveLeft(true);
     }
 
     DamageableObject::update();
@@ -130,30 +130,27 @@ void Player::handleInput()
     InputHandler* const input = InputHandler::Instance();
 
     if (this->isOnGround()) {
-        if (input->isKeyDown(KEY_W)) {
-            m_bWantDoorIn = true;
-        } else {
-            m_bWantDoorIn = false;
-        }
+        m_bWantDoorIn = input->isKeyDown(KEY_W);
 
         if (input->isKeyPressed(KEY_SPACE)) {
             this->jump();
         }
     }
+
     if (input->isKeyPressed(KEY_RIGHT)) {
         this->moveRight();
         m_direction = RIGHT;
-        m_bFlipped = false;
     }
     if (input->isKeyPressed(KEY_LEFT)) {
         this->moveLeft();
         m_direction = LEFT;
-        m_bFlipped = true;
     }
 
     if (input->isKeyPressed(KEY_A)) {
         this->attack();
     }
+
+    m_bFlipped = m_direction == LEFT;
 };
 
 void Player::updateAnimation()
@@ -165,19 +162,17 @@ void Player::updateAnimation()
     Animation::AnimationID newAnimation = m_curAnimation;
 
     if (this->isOnGround()) {
-        if (m_bCanMoveLeft && InputHandler::Instance()->isKeyPressed(KEY_LEFT)) {
-            newAnimation = Animation::RUN;
-        } else if (m_bCanMoveRight && InputHandler::Instance()->isKeyPressed(KEY_RIGHT)) {
-            newAnimation = Animation::RUN;
-        } else {
-            newAnimation = Animation::IDLE;
-        }
+        newAnimation = Animation::IDLE;
     } else {
         if (this->getBody()->GetLinearVelocity().y < 0) {
             newAnimation = Animation::JUMP;
         } else {
             newAnimation = Animation::FALL;
         }
+    }
+
+    if (this->isRunning()) {
+        newAnimation = Animation::RUN;
     }
 
     if (this->isInvulnerable()) {

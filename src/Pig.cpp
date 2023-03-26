@@ -1,10 +1,12 @@
 #include "Pig.hpp"
+#include <iostream>
 #include "DamageableObject.hpp"
 #include "Game.hpp"
 #include "PhysicWorld.hpp"
 
 Pig::Pig()
     : GameObject()
+    , VisionObject(100)
     , DamageableObject(3, 300, 1000)
     , AttackableObject(1, 25, 300)
 {}
@@ -15,6 +17,7 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
     m_moveSpeed = 50;
     m_jumpHeight = 32.0f;
+    m_direction = LEFT;
 
     b2Filter filter;
     filter.categoryBits = PhysicWorld::CAT_ENEMY;
@@ -65,9 +68,37 @@ void Pig::update()
     }
 
     GameObject::update();
+    b2Vec2 start = this->getPosition() + m_direction * b2Vec2(m_width / 2.0f, 0);
+    b2Vec2 end = start + m_direction * b2Vec2(m_orignRange, 0);
+    VisionObject::update(start, end);
+    this->handleMovement();
+    m_bFlipped = m_direction == RIGHT;
+
     DamageableObject::update();
     AttackableObject::update();
     this->updateAnimation();
+}
+
+void Pig::handleMovement()
+{
+    if (this->m_distance <= PhysicWorld::pixelToMeter(1)) {
+        if (m_direction == RIGHT) {
+            this->setMoveRight(false);
+            m_direction = LEFT;
+        } else {
+            this->setMoveLeft(false);
+            m_direction = RIGHT;
+        }
+    } else {
+        this->setMoveRight(true);
+        this->setMoveLeft(true);
+    }
+
+    if (m_direction == RIGHT) {
+        this->moveRight();
+    } else {
+        this->moveLeft();
+    }
 }
 
 void Pig::updateAnimation()
@@ -84,6 +115,10 @@ void Pig::updateAnimation()
         }
     }
 
+    if (this->isRunning()) {
+        newAnimation = Animation::RUN;
+    }
+
     if (this->isInvulnerable()) {
         newAnimation = Animation::HIT;
     } else if (this->isAttack()) {
@@ -96,4 +131,10 @@ void Pig::updateAnimation()
         m_curAnimation = newAnimation;
         m_animations[m_curAnimation]->start();
     }
+}
+
+void Pig::draw()
+{
+    GameObject::draw();
+    VisionObject::debugDraw();
 }
