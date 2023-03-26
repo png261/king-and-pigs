@@ -70,7 +70,7 @@ void PhysicObject::moveRight()
 
 void PhysicObject::moveLeft()
 {
-    if (this->canMoveRight() == false) {
+    if (this->canMoveLeft() == false) {
         return;
     }
 
