@@ -38,9 +38,6 @@ bool PhysicWorld::init(Window* window)
     m_timeStep = 1.0f / 60.f;
     m_velocityIterations = 10;
     m_positionIterations = 8;
-
-    m_bDebugEnable = false;
-
     return true;
 }
 
@@ -136,15 +133,6 @@ b2Body* PhysicWorld::createStaticBody(
 
 void PhysicWorld::handleEvents()
 {
-    if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
-        this->toggleDebugDraw();
-    };
-
-    this->contactListener();
-}
-
-void PhysicWorld::contactListener()
-{
     for (b2Contact* contact = getWorld()->GetContactList(); contact != nullptr;
          contact = contact->GetNext()) {
         AttackListener(contact);
@@ -225,9 +213,6 @@ void PhysicWorld::update()
 
 void PhysicWorld::debugDraw()
 {
-    if (!m_bDebugEnable) {
-        return;
-    }
     getWorld()->DebugDraw();
 }
 
@@ -235,11 +220,6 @@ void PhysicWorld::debugDraw()
 b2World* PhysicWorld::getWorld()
 {
     return m_pWorld;
-}
-
-void PhysicWorld::toggleDebugDraw()
-{
-    m_bDebugEnable = !m_bDebugEnable;
 }
 
 void PhysicWorld::clean()

@@ -13,6 +13,7 @@ Game::Game()
     : m_pWindow(nullptr)
     , m_pLevel(nullptr)
     , m_bRunning(false)
+    , m_bDebug(false)
 {
     m_levelFiles.push_back(LEVELS_DIR + "level1.tmx");
     m_levelFiles.push_back(LEVELS_DIR + "level2.tmx");
@@ -49,6 +50,10 @@ bool Game::init()
 void Game::handleEvents()
 {
     InputHandler::Instance()->update();
+    if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
+        m_bDebug = !m_bDebug;
+    };
+
     PhysicWorld::Instance()->handleEvents();
 }
 
@@ -63,7 +68,9 @@ void Game::render()
     m_pWindow->clear();
 
     GameStateMachine::Instance()->render();
-    PhysicWorld::Instance()->debugDraw();
+    if (m_bDebug) {
+        PhysicWorld::Instance()->debugDraw();
+    }
 
     m_pWindow->refresh();
     m_pWindow->delayFramerateIfNeeded();
@@ -73,6 +80,7 @@ void Game::clean()
 {
     PhysicWorld::Instance()->clean();
     GameStateMachine::Instance()->clean();
+    InputHandler::Instance()->clean();
     TextureManager::Instance()->clean();
     SoundManager::Instance()->clean();
     SDL::exit();
@@ -123,4 +131,9 @@ Window* Game::getWindow()
 Level* Game::getLevel()
 {
     return m_pLevel;
+}
+
+bool Game::isDebug() const
+{
+    return m_bDebug;
 }

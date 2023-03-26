@@ -22,6 +22,7 @@ public:
 
     Window* getWindow();
     bool isRunning() const;
+    bool isDebug() const;
     int getCurrentLevel() const;
     int getNextLevel() const;
     void nextLevel();
@@ -37,6 +38,7 @@ private:
     Window* m_pWindow;
     Level* m_pLevel;
     bool m_bRunning;
+    bool m_bDebug;
     int m_currentLevel;
     std::vector<std::string> m_levelFiles;
 };

@@ -42,11 +42,9 @@ public:
     static PhysicWorld* Instance();
 
     bool init(Window* window);
-    void clean();
     void update();
-
     void handleEvents();
-    void contactListener();
+    void clean();
 
     b2Fixture* createCircleBody(
         b2Body*& body,
@@ -78,16 +76,8 @@ public:
         const FilterMask mask);
 
     void debugDraw();
-    void toggleDebugDraw();
 
     b2World* getWorld();
-
-    static const float PIXEL_PER_METER;
-    static const float METER_PER_PIXEL;
-    static const float RAD_PER_DEG;
-    static const float DEG_PER_RAD;
-    static const float GROUND_FRICTION;
-    static const b2Vec2 GRAVITY;
 
     static int meterToPixel(float meter);
     static float pixelToMeter(float pixel);
@@ -98,6 +88,13 @@ public:
     static float radToDeg(float rad);
     static float degToRad(float deg);
 
+    static const float PIXEL_PER_METER;
+    static const float METER_PER_PIXEL;
+    static const float RAD_PER_DEG;
+    static const float DEG_PER_RAD;
+    static const float GROUND_FRICTION;
+    static const b2Vec2 GRAVITY;
+
 private:
     PhysicWorld();
     void AttackListener(b2Contact* contact);
@@ -106,7 +103,6 @@ private:
     void BombListener(b2Contact* contact);
 
     b2World* m_pWorld;
-    bool m_bDebugEnable;
     std::unique_ptr<DebugDraw> m_pDebugDraw;
     std::unique_ptr<ContactListener> m_contactListener;
 
