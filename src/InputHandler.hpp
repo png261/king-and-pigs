@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include "PhysicWorld.hpp"
 #include "InputDefinitions.hpp"
+#include "PhysicWorld.hpp"
 #include "SDL.hpp"
 
 class InputHandler final
@@ -21,6 +21,7 @@ public:
     bool isMouseDown(const MouseButton button) const;
 
     void reset();
+    void clean();
 
 private:
     InputHandler();

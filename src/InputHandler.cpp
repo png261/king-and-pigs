@@ -129,3 +129,5 @@ bool InputHandler::isMouseDown(const MouseButton button) const
 {
     return m_bMouseDown[button];
 };
+
+void InputHandler::clean() {}
