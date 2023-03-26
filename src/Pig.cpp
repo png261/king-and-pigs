@@ -81,6 +81,9 @@ void Pig::update()
 
 void Pig::handleMovement()
 {
+    if (this->isDying()) {
+        return;
+    }
     if (this->m_distance <= PhysicWorld::pixelToMeter(1)) {
         if (m_direction == RIGHT) {
             this->setMoveRight(false);
