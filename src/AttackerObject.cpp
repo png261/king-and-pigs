@@ -5,14 +5,16 @@ AttackerObject::AttackerObject(const int damage, const int range, const int atta
     : m_attackDamage(damage)
     , m_attackRange(range)
     , m_attackSpeed(attackSpeed)
-    , attackTimer(attackSpeed)
-    , m_bAttack(false)
+    , attackTimer(100)
+    , delayTimer(attackSpeed)
+    , m_bAttacking(false)
+    , m_bDaming(false)
     , m_bCanAttack(true)
 {}
 
 bool AttackerObject::isAttack() const
 {
-    return m_bAttack;
+    return m_bAttacking;
 }
 
 bool AttackerObject::canAttack() const
@@ -31,15 +33,26 @@ void AttackerObject::attack()
         return;
     }
 
-    m_bAttack = true;
+    m_bAttacking = true;
+    m_bDaming = true;
     m_bCanAttack = false;
     attackTimer.start();
+    delayTimer.start();
 }
 
 void AttackerObject::update()
 {
     if (attackTimer.isDone()) {
-        m_bAttack = false;
-        m_bCanAttack = true;
+        m_bDaming = false;
     }
+
+    if (delayTimer.isDone()) {
+        m_bCanAttack = true;
+        m_bAttacking = false;
+    }
+}
+
+bool AttackerObject::isDaming() const
+{
+    return m_bDaming;
 }

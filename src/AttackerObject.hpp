@@ -16,14 +16,17 @@ public:
     virtual bool canAttack() const;
     virtual int getDamage() const;
     virtual bool isAttack() const;
+    virtual bool isDaming() const;
 
 protected:
     Timer attackTimer;
+    Timer delayTimer;
 
     int m_attackDamage;
     int m_attackRange;
     int m_attackSpeed;
 
-    bool m_bAttack;
+    bool m_bAttacking;
+    bool m_bDaming;
     bool m_bCanAttack;
 };

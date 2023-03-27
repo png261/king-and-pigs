@@ -193,7 +193,7 @@ void PhysicWorld::handleAttack(b2Fixture* Attacker, b2Fixture* Defender)
     DamageableObject* const B =
         dynamic_cast<DamageableObject*>((GameObject*)(Defender->GetBody()->GetUserData().pointer));
 
-    if (A == nullptr || B == nullptr || A->isAttack() == false) {
+    if (A == nullptr || B == nullptr || A->isDaming() == false) {
         return;
     }
 
