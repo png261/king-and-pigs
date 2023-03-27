@@ -16,7 +16,7 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
     GameObject::load(std::move(pParams));
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
     m_moveSpeed = 40;
-    m_jumpHeight = 32.0f + m_height;
+    m_jumpHeight = 32.0f;
     m_direction = LEFT;
 
     b2Filter filter;
@@ -108,6 +108,11 @@ void Pig::handleMovement()
     default:
         break;
     }
+
+    if (m_nearestDistance == 0) {
+        this->changeDirection();
+        return;
+    }
 }
 
 void Pig::seeingPlayer()
@@ -118,14 +123,8 @@ void Pig::seeingPlayer()
     this->attack();
 }
 
-void Pig::seeingWall()
+void Pig::changeDirection()
 {
-    if (m_nearestDistance >= 10) {
-        this->setMoveRight(true);
-        this->setMoveLeft(true);
-        return;
-    }
-
     if (m_direction == RIGHT) {
         this->setMoveRight(false);
         m_direction = LEFT;
@@ -133,6 +132,15 @@ void Pig::seeingWall()
         this->setMoveLeft(false);
         m_direction = RIGHT;
     }
+}
+void Pig::seeingWall()
+{
+    if (m_nearestDistance >= 10) {
+        this->setMoveRight(true);
+        this->setMoveLeft(true);
+        return;
+    }
+    this->changeDirection();
 }
 
 void Pig::seeingBox()

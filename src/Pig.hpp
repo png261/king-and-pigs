@@ -17,6 +17,7 @@ public:
 
 private:
     virtual void handleMovement();
+    virtual void changeDirection();
 
     virtual void seeingBox();
     virtual void seeingPig();

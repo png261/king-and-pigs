@@ -7,7 +7,9 @@
 PigWithBomb::PigWithBomb()
     : Pig()
     , m_bThrowing(false)
-{}
+{
+    m_bCanJump = false;
+}
 
 PigWithBomb::~PigWithBomb() {}
 
