@@ -17,7 +17,7 @@
 Player::Player()
     : GameObject()
     , VisionObject(32)
-    , DamageableObject(3, 1000, 500)
+    , DamageableObject(3, 300, 500)
     , AttackerObject(1, 20, 300)
     , m_bDoorIn(false)
     , m_bWantDoorIn(false)
@@ -30,7 +30,7 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
     GameObject::load(std::move(pParams));
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
 
-    m_moveSpeed = 100;
+    m_moveSpeed = 90;
     m_jumpHeight = 32.0f + m_height;
 
     b2Filter filter;
@@ -121,6 +121,14 @@ void Player::draw()
 
 void Player::handleInput()
 {
+    if (this->isDying()) {
+        return;
+    }
+
+    if (this->isInvulnerable()) {
+        return;
+    }
+
     if (m_bDoorIn) {
         m_bWantDoorIn = true;
         return;
@@ -162,6 +170,9 @@ void Player::updateAnimation()
 
     if (this->isOnGround()) {
         newAnimation = Animation::IDLE;
+        if (this->isRunning()) {
+            newAnimation = Animation::RUN;
+        }
     } else {
         if (this->getBody()->GetLinearVelocity().y < 0) {
             newAnimation = Animation::JUMP;
@@ -170,16 +181,13 @@ void Player::updateAnimation()
         }
     }
 
-    if (this->isRunning()) {
-        newAnimation = Animation::RUN;
-    }
 
-    if (this->isInvulnerable()) {
+    if (this->isDying()) {
+        newAnimation = Animation::DYING;
+    } else if (this->isInvulnerable()) {
         newAnimation = Animation::HIT;
     } else if (this->isAttack()) {
         newAnimation = Animation::ATTACK;
-    } else if (this->isDying()) {
-        newAnimation = Animation::DYING;
     }
 
     if (doorOutTimer.isDone()) {

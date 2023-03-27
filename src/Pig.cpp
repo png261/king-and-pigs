@@ -15,7 +15,7 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
-    m_moveSpeed = 50;
+    m_moveSpeed = 40;
     m_jumpHeight = 32.0f + m_height;
     m_direction = LEFT;
 
@@ -71,7 +71,7 @@ void Pig::update()
     b2Vec2 start = this->getPosition() + m_direction * b2Vec2(m_width / 2.0f, 0);
     b2Vec2 end = start + m_direction * b2Vec2(m_orignRange, 0);
     VisionObject::update(start, end);
-    /* this->handleMovement(); */
+    this->handleMovement();
     m_bFlipped = m_direction == RIGHT;
 
     DamageableObject::update();
@@ -99,7 +99,8 @@ void Pig::handleMovement()
         this->seeingBox();
         break;
     case PhysicWorld::CAT_PLAYER:
-        this->seeingPlayer();
+        /* TODO */
+        /* this->seeingPlayer(); */
         break;
     case PhysicWorld::CAT_PIG:
         this->seeingPig();
@@ -166,16 +167,15 @@ void Pig::updateAnimation()
 
     if (this->isOnGround()) {
         newAnimation = Animation::IDLE;
+        if (this->isRunning()) {
+            newAnimation = Animation::RUN;
+        }
     } else {
         if (this->getBody()->GetLinearVelocity().y < 0) {
             newAnimation = Animation::JUMP;
         } else {
             newAnimation = Animation::FALL;
         }
-    }
-
-    if (this->isRunning()) {
-        newAnimation = Animation::RUN;
     }
 
     if (this->isDying()) {

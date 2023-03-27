@@ -33,12 +33,11 @@ void PigWithBomb::loadAnimation()
 
 void PigWithBomb::update()
 {
-    if (InputHandler::Instance()->isKeyDown(KEY_V)) {
+    Pig::update();
+    if (m_seeingCategory == PhysicWorld::CAT_PLAYER && m_nearestDistance <= 100) {
         this->throwBomb();
         this->becomeNormal();
     }
-
-    Pig::update();
 }
 
 void PigWithBomb::throwBomb()
@@ -46,11 +45,14 @@ void PigWithBomb::throwBomb()
     std::unique_ptr<LoaderParams> pParams = std::make_unique<LoaderParams>(LoaderParams(
         this->getPosition().x - m_width / 2.0f,
         this->getPosition().y - m_height / 2.0f - 10,
-        20,
-        20));
+        7,
+        7));
 
     GameObject* bomb = Game::Instance()->getLevel()->spawnGameObject("Bomb", std::move(pParams));
-    bomb->getBody()->ApplyForce(b2Vec2(-100, -50), bomb->getBody()->GetWorldCenter(), true);
+    bomb->getBody()->ApplyForce(
+        b2Vec2(m_direction * 50, -32),
+        bomb->getBody()->GetWorldCenter(),
+        true);
     dynamic_cast<Bomb*>(bomb)->turnOn();
 }
 

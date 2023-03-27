@@ -1,8 +1,8 @@
 #include "PigWithBox.hpp"
 #include "Box.hpp"
 #include "DamageableObject.hpp"
-#include "InputHandler.hpp"
 #include "Game.hpp"
+#include "InputHandler.hpp"
 
 PigWithBox::PigWithBox()
     : Pig()
@@ -28,12 +28,11 @@ void PigWithBox::loadAnimation()
 
 void PigWithBox::update()
 {
-    if (InputHandler::Instance()->isKeyDown(KEY_V)) {
+    Pig::update();
+    if (m_seeingCategory == PhysicWorld::CAT_PLAYER && m_nearestDistance <= 100) {
         this->throwBox();
         this->becomeNormal();
     }
-
-    Pig::update();
 }
 
 void PigWithBox::throwBox()
@@ -45,7 +44,10 @@ void PigWithBox::throwBox()
         20));
 
     GameObject* box = Game::Instance()->getLevel()->spawnGameObject("Box", std::move(pParams));
-    box->getBody()->ApplyForce(b2Vec2(-500, -800), box->getBody()->GetWorldCenter(), true);
+    box->getBody()->ApplyForce(
+        b2Vec2(m_direction * 100, -32),
+        box->getBody()->GetWorldCenter(),
+        true);
 }
 
 void PigWithBox::becomeNormal()
