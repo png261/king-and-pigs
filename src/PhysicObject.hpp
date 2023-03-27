@@ -16,6 +16,7 @@ public:
     virtual bool isRunning() const;
     virtual bool canMoveRight() const;
     virtual bool canMoveLeft() const;
+    virtual bool canJump() const;
 
     virtual void createBody(const int x, const int y, const int width, const int height);
     virtual void changeFootContact(const int n);
@@ -33,6 +34,7 @@ protected:
 
     bool m_bCanMoveRight;
     bool m_bCanMoveLeft;
+    bool m_bCanJump;
     bool m_bOnGround;
     bool m_bRunning;
 

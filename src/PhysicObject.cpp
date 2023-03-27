@@ -9,6 +9,7 @@ PhysicObject::PhysicObject()
     , m_bCanMoveRight(true)
     , m_bCanMoveLeft(true)
     , m_bRunning(false)
+    , m_bCanJump(true)
 {}
 
 PhysicObject::~PhysicObject() {}
@@ -86,7 +87,11 @@ void PhysicObject::moveLeft()
 
 void PhysicObject::jump()
 {
-    if (m_pBody->GetLinearVelocity().y != 0) {
+    if (this->canJump() == false) {
+        return;
+    }
+
+    if (this->isOnGround() == false) {
         return;
     }
 
@@ -151,4 +156,9 @@ bool PhysicObject::canMoveRight() const
 bool PhysicObject::canMoveLeft() const
 {
     return m_bCanMoveLeft;
+}
+
+bool PhysicObject::canJump() const
+{
+    return m_bCanJump;
 }
