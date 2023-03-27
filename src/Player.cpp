@@ -43,14 +43,14 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
         -b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
         m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_PIG_ATTACK_SENSOR);
+        PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
 
     PhysicWorld::Instance()->createCircleSensor(
         m_pBody,
         b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
         m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_PIG_ATTACK_SENSOR);
+        PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
 
     this->loadAnimation();
 }

@@ -76,8 +76,8 @@ b2Fixture* PhysicWorld::createCircleBody(
     b2Body*& body,
     const b2Vec2 position,
     const int radius,
-    const FilterCategory category,
-    const FilterMask mask)
+    const Category category,
+    const Mask mask)
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
@@ -102,8 +102,8 @@ b2Body* PhysicWorld::createStaticBody(
     const b2Vec2 position,
     const int width,
     const int height,
-    const FilterCategory category,
-    const FilterMask mask)
+    const Category category,
+    const Mask mask)
 {
     b2BodyDef bodyDef;
     bodyDef.position = pixelToMeter(position + b2Vec2(width * 0.5, height * 0.5));
@@ -177,18 +177,13 @@ void PhysicWorld::AttackListener(b2Contact* contact)
     uint16 const catA = A->GetFilterData().categoryBits;
     uint16 const catB = B->GetFilterData().categoryBits;
 
-    bool isAttack = ((catA | catB) == (CAT_ATTACK_SENSOR | CAT_PIG)) ||
-                    ((catA | catB) == (CAT_ATTACK_SENSOR | CAT_PLAYER));
+    bool isAttack = catB == CAT_ATTACK_SENSOR && catA & (CAT_PIG | CAT_PLAYER | CAT_BOX);
 
     if (!isAttack) {
         return;
     }
 
-    if (catA == CAT_ATTACK_SENSOR) {
-        handleAttack(A, B);
-    } else {
-        handleAttack(B, A);
-    }
+    handleAttack(B, A);
 }
 
 void PhysicWorld::handleAttack(b2Fixture* Attacker, b2Fixture* Defender)
@@ -242,8 +237,8 @@ b2Fixture* PhysicWorld::createPolygonSensor(
     b2Vec2 position,
     int width,
     int height,
-    FilterCategory category,
-    FilterMask mask)
+    Category category,
+    Mask mask)
 {
     b2PolygonShape polygon;
     polygon.SetAsBox(
@@ -264,8 +259,8 @@ b2Fixture* PhysicWorld::createCircleSensor(
     b2Body* const body,
     const b2Vec2 position,
     const int radius,
-    const FilterCategory category,
-    const FilterMask mask)
+    const Category category,
+    const Mask mask)
 {
     b2CircleShape circle;
     circle.m_p = PhysicWorld::pixelToMeter(position);

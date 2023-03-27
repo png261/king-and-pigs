@@ -71,7 +71,7 @@ void Pig::update()
     b2Vec2 start = this->getPosition() + m_direction * b2Vec2(m_width / 2.0f, 0);
     b2Vec2 end = start + m_direction * b2Vec2(m_orignRange, 0);
     VisionObject::update(start, end);
-    this->handleMovement();
+    /* this->handleMovement(); */
     m_bFlipped = m_direction == RIGHT;
 
     DamageableObject::update();

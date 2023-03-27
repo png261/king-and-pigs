@@ -216,7 +216,7 @@ void LevelParser::parseTileLayer(XMLElement* const pTileElement, Level* pLevel)
                 }
 
                 b2Vec2 position = m_tileSize * b2Vec2(col, row);
-                PhysicWorld::FilterCategory category =
+                PhysicWorld::Category category =
                     shape->second.isOneWay ? PhysicWorld::CAT_ONE_WAY_WALL : PhysicWorld::CAT_WALL;
 
                 PhysicWorld::Instance()->createStaticBody(

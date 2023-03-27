@@ -17,13 +17,13 @@ public:
         }
 
         m_seeingCategory =
-            static_cast<PhysicWorld::FilterCategory>(fixture->GetFilterData().categoryBits);
+            static_cast<PhysicWorld::Category>(fixture->GetFilterData().categoryBits);
         m_fraction = fraction;
 
         return fraction;
     }
 
-    PhysicWorld::FilterCategory m_seeingCategory;
+    PhysicWorld::Category m_seeingCategory;
     float m_fraction;
 };
 
@@ -35,7 +35,7 @@ public:
     virtual void debugDraw();
 
 protected:
-    PhysicWorld::FilterCategory m_seeingCategory;
+    PhysicWorld::Category m_seeingCategory;
     float m_fraction;
     int m_orignRange;
     int m_nearestDistance;

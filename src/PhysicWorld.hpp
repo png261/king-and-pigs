@@ -10,7 +10,7 @@ class ContactListener;
 class PhysicWorld final
 {
 public:
-    enum FilterCategory : uint16 {
+    enum Category : uint16 {
         CAT_NONE = 0x0000,
         CAT_WALL = 0x0001,
         CAT_ONE_WAY_WALL = 0x0002,
@@ -26,7 +26,7 @@ public:
         CAT_ALL = 0xFFFF,
     };
 
-    enum FilterMask : uint16 {
+    enum Mask : uint16 {
         MASK_PLAYER = CAT_ALL,
         MASK_WALL = CAT_ALL,
         MASK_DOOR_OUT = CAT_PLAYER,
@@ -36,7 +36,7 @@ public:
         MASK_ITEM = CAT_PLAYER | CAT_WALL,
         MASK_BOMB = CAT_ALL,
         MASK_FOOT_SENSOR = CAT_ALL,
-        MASK_PLAYER_ATTACK_SENSOR = CAT_PIG,
+        MASK_PLAYER_ATTACK_SENSOR = CAT_PIG | CAT_BOX,
         MASK_PIG_ATTACK_SENSOR = CAT_PLAYER,
         MASK_PIG_VISION_SENSOR = CAT_ALL,
     };
@@ -52,30 +52,30 @@ public:
         b2Body*& body,
         const b2Vec2 position,
         const int radius,
-        const FilterCategory category,
-        const FilterMask mask);
+        const Category category,
+        const Mask mask);
 
     b2Body* createStaticBody(
         const b2Vec2 position,
         const int width,
         const int height,
-        const FilterCategory category,
-        const FilterMask mask);
+        const Category category,
+        const Mask mask);
 
     b2Fixture* createPolygonSensor(
         b2Body* const body,
         const b2Vec2 position,
         const int width,
         const int height,
-        const FilterCategory category,
-        const FilterMask mask);
+        const Category category,
+        const Mask mask);
 
     b2Fixture* createCircleSensor(
         b2Body* const body,
         const b2Vec2 position,
         const int radius,
-        const FilterCategory category,
-        const FilterMask mask);
+        const Category category,
+        const Mask mask);
 
     void debugDraw();
 
