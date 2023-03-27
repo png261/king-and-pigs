@@ -5,10 +5,10 @@
 #include "PhysicWorld.hpp"
 #include "Stopwatch.hpp"
 
-class AttackableObject
+class AttackerObject
 {
 public:
-    AttackableObject(const int damage, const int range, const int attackSpeed);
+    AttackerObject(const int damage, const int range, const int attackSpeed);
 
     virtual void update();
     virtual void attack();
@@ -20,8 +20,8 @@ public:
 protected:
     Timer attackTimer;
 
-    int m_damage;
-    int m_range;
+    int m_attackDamage;
+    int m_attackRange;
     int m_attackSpeed;
 
     bool m_bAttack;

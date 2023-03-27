@@ -30,7 +30,7 @@ public:
 
     void setCurrentLevel(int const currentLevel);
 
-    void setLevel(Level* pLevel);
+    void setLevel(Level* const pLevel);
     Level* getLevel();
 
 private:

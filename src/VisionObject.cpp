@@ -1,6 +1,4 @@
 #include "VisionObject.hpp"
-#include <box2d/b2_world_callbacks.h>
-#include <iostream>
 #include "DebugDraw.hpp"
 #include "Game.hpp"
 
@@ -9,18 +7,18 @@ VisionObject::VisionObject(int range)
     , m_end(0, 0)
     , m_fraction(1)
     , m_orignRange(range)
-    , m_distance(range)
+    , m_nearestDistance(range)
 {}
 
 void VisionObject::update(b2Vec2 start, b2Vec2 end)
 {
     m_start = PhysicWorld::pixelToMeter(start);
     m_end = PhysicWorld::pixelToMeter(end);
-    rayCastCallback callback;
+    VisionRayCastCallback callback;
     PhysicWorld::Instance()->getWorld()->RayCast(&callback, m_start, m_end);
-    m_hitCategory = callback.m_hitCategory;
+    m_seeingCategory = callback.m_seeingCategory;
     m_fraction = callback.m_fraction;
-    m_distance = m_orignRange * m_fraction;
+    m_nearestDistance = m_orignRange * m_fraction;
 }
 
 void VisionObject::debugDraw()

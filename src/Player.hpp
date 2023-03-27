@@ -1,16 +1,14 @@
 #pragma once
 
-#include <iostream>
-#include "AttackableObject.hpp"
+#include "AttackerObject.hpp"
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
-#include "Log.hpp"
 #include "VisionObject.hpp"
 
 class Player final : public GameObject,
                      public VisionObject,
                      public DamageableObject,
-                     public AttackableObject
+                     public AttackerObject
 {
 public:
     Player();
@@ -21,13 +19,14 @@ public:
     void loadAnimation() override;
     void draw() override;
 
-    void doorIn();
-    void doorOut();
     bool isWantDoorIn();
     bool isDoorIn();
+    void doorIn();
 
 private:
     void handleInput();
+    void doorOut();
+
     Timer doorOutTimer;
     bool m_bDoorIn;
     bool m_bWantDoorIn;

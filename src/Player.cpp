@@ -3,7 +3,7 @@
 #include <iostream>
 #include <memory>
 #include "Animation.hpp"
-#include "AttackableObject.hpp"
+#include "AttackerObject.hpp"
 #include "Camera.hpp"
 #include "DamageableObject.hpp"
 #include "DebugDraw.hpp"
@@ -18,7 +18,7 @@ Player::Player()
     : GameObject()
     , VisionObject(32)
     , DamageableObject(3, 1000, 500)
-    , AttackableObject(1, 25, 300)
+    , AttackerObject(1, 20, 300)
     , m_bDoorIn(false)
     , m_bWantDoorIn(false)
 {}
@@ -40,17 +40,17 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 
     PhysicWorld::Instance()->createCircleSensor(
         m_pBody,
-        -b2Vec2((m_width * 0.5 + m_range) * 0.5, 0),
-        m_range,
+        -b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
+        m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
+        PhysicWorld::MASK_PIG_ATTACK_SENSOR);
 
     PhysicWorld::Instance()->createCircleSensor(
         m_pBody,
-        b2Vec2((m_width * 0.5 + m_range) * 0.5, 0),
-        m_range,
+        b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
+        m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
+        PhysicWorld::MASK_PIG_ATTACK_SENSOR);
 
     this->loadAnimation();
 }
@@ -96,8 +96,7 @@ void Player::update()
     b2Vec2 end = start + m_direction * b2Vec2(m_orignRange, 0);
     VisionObject::update(start, end);
 
-    if (this->m_hitCategory == PhysicWorld::CAT_WALL &&
-        this->m_distance <= PhysicWorld::pixelToMeter(1)) {
+    if (this->m_seeingCategory == PhysicWorld::CAT_WALL && this->m_nearestDistance == 0) {
         if (m_direction == RIGHT) {
             this->setMoveRight(false);
         } else {
@@ -109,7 +108,7 @@ void Player::update()
     }
 
     DamageableObject::update();
-    AttackableObject::update();
+    AttackerObject::update();
     this->updateAnimation();
 }
 

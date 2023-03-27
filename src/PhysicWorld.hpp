@@ -17,11 +17,12 @@ public:
         CAT_PLAYER = 0x0004,
         CAT_DOOR_IN = 0x0008,
         CAT_DOOR_OUT = 0x0010,
-        CAT_ENEMY = 0x0020,
-        CAT_ITEM = 0x0040,
-        CAT_BOMB = 0x0080,
-        CAT_FOOT_SENSOR = 0x0100,
-        CAT_ATTACK_SENSOR = 0x0200,
+        CAT_PIG = 0x0020,
+        CAT_BOX = 0x0040,
+        CAT_ITEM = 0x0080,
+        CAT_BOMB = 0x0100,
+        CAT_FOOT_SENSOR = 0x0200,
+        CAT_ATTACK_SENSOR = 0x0400,
         CAT_ALL = 0xFFFF,
     };
 
@@ -30,13 +31,14 @@ public:
         MASK_WALL = CAT_ALL,
         MASK_DOOR_OUT = CAT_PLAYER,
         MASK_DOOR_IN = CAT_PLAYER,
-        MASK_ENEMY = CAT_ALL & ~CAT_ITEM,
+        MASK_PIG = CAT_ALL & ~CAT_ITEM,
+        MASK_BOX = CAT_ALL & ~CAT_ITEM,
         MASK_ITEM = CAT_PLAYER | CAT_WALL,
         MASK_BOMB = CAT_ALL,
         MASK_FOOT_SENSOR = CAT_ALL,
-        MASK_PLAYER_ATTACK_SENSOR = CAT_ENEMY,
-        MASK_ENEMY_ATTACK_SENSOR = CAT_PLAYER,
-        MASK_ENEMY_VISION_SENSOR = CAT_ALL,
+        MASK_PLAYER_ATTACK_SENSOR = CAT_PIG,
+        MASK_PIG_ATTACK_SENSOR = CAT_PLAYER,
+        MASK_PIG_VISION_SENSOR = CAT_ALL,
     };
 
     static PhysicWorld* Instance();

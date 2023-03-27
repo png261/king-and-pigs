@@ -2,10 +2,10 @@
 #include <iostream>
 #include "PhysicWorld.hpp"
 
-class rayCastCallback : public b2RayCastCallback
+class VisionRayCastCallback : public b2RayCastCallback
 {
 public:
-    rayCastCallback()
+    VisionRayCastCallback()
         : m_fraction(1)
     {}
 
@@ -16,14 +16,14 @@ public:
             return 1;
         }
 
-        m_hitCategory =
+        m_seeingCategory =
             static_cast<PhysicWorld::FilterCategory>(fixture->GetFilterData().categoryBits);
         m_fraction = fraction;
 
         return fraction;
     }
 
-    PhysicWorld::FilterCategory m_hitCategory;
+    PhysicWorld::FilterCategory m_seeingCategory;
     float m_fraction;
 };
 
@@ -35,10 +35,12 @@ public:
     virtual void debugDraw();
 
 protected:
-    PhysicWorld::FilterCategory m_hitCategory;
+    PhysicWorld::FilterCategory m_seeingCategory;
     float m_fraction;
+    int m_orignRange;
+    int m_nearestDistance;
+
+private:
     b2Vec2 m_start;
     b2Vec2 m_end;
-    int m_orignRange;
-    int m_distance;
 };

@@ -50,6 +50,7 @@ bool Game::init()
 void Game::handleEvents()
 {
     InputHandler::Instance()->update();
+
     if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
         m_bDebug = !m_bDebug;
     };
@@ -91,7 +92,7 @@ void Game::quit()
     m_bRunning = false;
 }
 
-void Game::setLevel(Level* pLevel)
+void Game::setLevel(Level* const pLevel)
 {
     m_pLevel = pLevel;
 }

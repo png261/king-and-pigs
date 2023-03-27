@@ -1,9 +1,9 @@
 #pragma once
 
-#include "AttackableObject.hpp"
+#include "AttackerObject.hpp"
 #include "GameObject.hpp"
 
-class Bomb final : public GameObject, public AttackableObject
+class Bomb final : public GameObject, public AttackerObject
 {
 public:
     Bomb();

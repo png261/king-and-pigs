@@ -4,7 +4,7 @@
 
 Bomb::Bomb()
     : GameObject()
-    , AttackableObject(1, 20, 9999)
+    , AttackerObject(1, 20, 9999)
     , m_bOn(false)
 {}
 
@@ -35,9 +35,9 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
     PhysicWorld::Instance()->createCircleSensor(
         m_pBody,
         {0, 0},
-        m_range,
+        m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
+        PhysicWorld::MASK_PIG_ATTACK_SENSOR);
 
     this->loadAnimation();
     onTimer.setTime(1000);
@@ -63,7 +63,7 @@ void Bomb::update()
     }
 
     GameObject::update();
-    AttackableObject::update();
+    AttackerObject::update();
 
     if (this->isOn() && onTimer.isDone()) {
         this->explode();

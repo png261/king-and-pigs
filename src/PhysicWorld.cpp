@@ -1,5 +1,5 @@
 #include "PhysicWorld.hpp"
-#include "AttackableObject.hpp"
+#include "AttackerObject.hpp"
 #include "ContactListener.hpp"
 #include "DamageableObject.hpp"
 #include "DebugDraw.hpp"
@@ -177,7 +177,7 @@ void PhysicWorld::AttackListener(b2Contact* contact)
     uint16 const catA = A->GetFilterData().categoryBits;
     uint16 const catB = B->GetFilterData().categoryBits;
 
-    bool isAttack = ((catA | catB) == (CAT_ATTACK_SENSOR | CAT_ENEMY)) ||
+    bool isAttack = ((catA | catB) == (CAT_ATTACK_SENSOR | CAT_PIG)) ||
                     ((catA | catB) == (CAT_ATTACK_SENSOR | CAT_PLAYER));
 
     if (!isAttack) {
@@ -193,8 +193,8 @@ void PhysicWorld::AttackListener(b2Contact* contact)
 
 void PhysicWorld::handleAttack(b2Fixture* Attacker, b2Fixture* Defender)
 {
-    AttackableObject* const A =
-        dynamic_cast<AttackableObject*>((GameObject*)(Attacker->GetBody()->GetUserData().pointer));
+    AttackerObject* const A =
+        dynamic_cast<AttackerObject*>((GameObject*)(Attacker->GetBody()->GetUserData().pointer));
     DamageableObject* const B =
         dynamic_cast<DamageableObject*>((GameObject*)(Defender->GetBody()->GetUserData().pointer));
 
