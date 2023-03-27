@@ -1,11 +1,11 @@
 #pragma once
 
-#include "AttackableObject.hpp"
+#include "AttackerObject.hpp"
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
 #include "VisionObject.hpp"
 
-class Pig : public GameObject, public VisionObject, public DamageableObject, public AttackableObject
+class Pig : public GameObject, public VisionObject, public DamageableObject, public AttackerObject
 {
 public:
     Pig();
@@ -17,4 +17,9 @@ public:
 
 private:
     virtual void handleMovement();
+
+    virtual void seeingBox();
+    virtual void seeingPig();
+    virtual void seeingPlayer();
+    virtual void seeingWall();
 };

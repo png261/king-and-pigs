@@ -8,7 +8,7 @@ Pig::Pig()
     : GameObject()
     , VisionObject(100)
     , DamageableObject(3, 300, 1000)
-    , AttackableObject(1, 25, 300)
+    , AttackerObject(1, 20, 300)
 {}
 
 void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
@@ -16,28 +16,28 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
     GameObject::load(std::move(pParams));
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
     m_moveSpeed = 50;
-    m_jumpHeight = 32.0f;
+    m_jumpHeight = 32.0f + m_height;
     m_direction = LEFT;
 
     b2Filter filter;
-    filter.categoryBits = PhysicWorld::CAT_ENEMY;
-    filter.maskBits = PhysicWorld::MASK_ENEMY;
+    filter.categoryBits = PhysicWorld::CAT_PIG;
+    filter.maskBits = PhysicWorld::MASK_PIG;
     m_pFixture->SetDensity(50);
     m_pFixture->SetFilterData(filter);
 
     PhysicWorld::Instance()->createCircleSensor(
         m_pBody,
-        -b2Vec2((m_width * 0.5 + m_range) * 0.5, 0),
-        m_range,
+        -b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
+        m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
+        PhysicWorld::MASK_PIG_ATTACK_SENSOR);
 
     PhysicWorld::Instance()->createCircleSensor(
         m_pBody,
-        b2Vec2((m_width * 0.5 + m_range) * 0.5, 0),
-        m_range,
+        b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
+        m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_ENEMY_ATTACK_SENSOR);
+        PhysicWorld::MASK_PIG_ATTACK_SENSOR);
 
     this->loadAnimation();
 }
@@ -75,7 +75,7 @@ void Pig::update()
     m_bFlipped = m_direction == RIGHT;
 
     DamageableObject::update();
-    AttackableObject::update();
+    AttackerObject::update();
     this->updateAnimation();
 }
 
@@ -84,19 +84,75 @@ void Pig::handleMovement()
     if (this->isDying()) {
         return;
     }
-    if (this->m_distance <= PhysicWorld::pixelToMeter(1)) {
-        if (m_direction == RIGHT) {
-            this->setMoveRight(false);
-            m_direction = LEFT;
-        } else {
-            this->setMoveLeft(false);
-            m_direction = RIGHT;
-        }
+
+    if (m_direction == RIGHT) {
+        this->moveRight();
     } else {
-        this->setMoveRight(true);
-        this->setMoveLeft(true);
+        this->moveLeft();
     }
 
+    switch (m_seeingCategory) {
+    case PhysicWorld::CAT_WALL:
+        this->seeingWall();
+        break;
+    case PhysicWorld::CAT_BOX:
+        this->seeingBox();
+        break;
+    case PhysicWorld::CAT_PLAYER:
+        this->seeingPlayer();
+        break;
+    case PhysicWorld::CAT_PIG:
+        this->seeingPig();
+        break;
+    default:
+        break;
+    }
+}
+
+void Pig::seeingPlayer()
+{
+    if (m_nearestDistance >= 10) {
+        return;
+    }
+    this->attack();
+}
+
+void Pig::seeingWall()
+{
+    if (m_nearestDistance >= 10) {
+        this->setMoveRight(true);
+        this->setMoveLeft(true);
+        return;
+    }
+
+    if (m_direction == RIGHT) {
+        this->setMoveRight(false);
+        m_direction = LEFT;
+    } else {
+        this->setMoveLeft(false);
+        m_direction = RIGHT;
+    }
+}
+
+void Pig::seeingBox()
+{
+    if (m_nearestDistance >= 10) {
+        return;
+    }
+    this->jump();
+    if (m_direction == RIGHT) {
+        this->moveRight();
+    } else {
+        this->moveLeft();
+    }
+}
+
+void Pig::seeingPig()
+{
+    if (m_nearestDistance >= 10) {
+        return;
+    }
+    this->jump();
     if (m_direction == RIGHT) {
         this->moveRight();
     } else {
@@ -122,12 +178,12 @@ void Pig::updateAnimation()
         newAnimation = Animation::RUN;
     }
 
-    if (this->isInvulnerable()) {
+    if (this->isDying()) {
+        newAnimation = Animation::DYING;
+    } else if (this->isInvulnerable()) {
         newAnimation = Animation::HIT;
     } else if (this->isAttack()) {
         newAnimation = Animation::ATTACK;
-    } else if (this->isDying()) {
-        newAnimation = Animation::DYING;
     }
 
     if (newAnimation != m_curAnimation) {
