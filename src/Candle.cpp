@@ -1,6 +1,6 @@
-#include "Decor.hpp"
+#include "Candle.hpp"
 
-void Decor::load(std::unique_ptr<LoaderParams> const& pParams)
+void Candle::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
@@ -14,7 +14,7 @@ void Decor::load(std::unique_ptr<LoaderParams> const& pParams)
     this->loadAnimation();
 };
 
-void Decor::loadAnimation()
+void Candle::loadAnimation()
 {
     m_animations[NORMAL] = new Animation("candle idle", 14, 32, 8);
     m_curAnimation = NORMAL;

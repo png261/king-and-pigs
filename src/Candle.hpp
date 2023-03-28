@@ -2,7 +2,7 @@
 
 #include "GameObject.hpp"
 
-class Decor : public GameObject
+class Candle : public GameObject
 {
 public:
     void load(std::unique_ptr<LoaderParams> const& pParams) override;
