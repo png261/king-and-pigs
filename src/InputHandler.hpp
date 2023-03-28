@@ -4,6 +4,7 @@
 #include "InputDefinitions.hpp"
 #include "PhysicWorld.hpp"
 #include "SDL.hpp"
+#include "Shapes.hpp"
 
 class InputHandler final
 {
@@ -19,6 +20,7 @@ public:
     bool isKeyPressed(const KeyboardKey key) const;
 
     bool isMouseDown(const MouseButton button) const;
+    bool isMouseInside(const Rectangle rectangle);
 
     void reset();
     void clean();

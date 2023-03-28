@@ -131,3 +131,12 @@ bool InputHandler::isMouseDown(const MouseButton button) const
 };
 
 void InputHandler::clean() {}
+
+bool InputHandler::isMouseInside(Rectangle rectangle)
+{
+    if ((m_mousePosition.x >= rectangle.x) && (m_mousePosition.x <= rectangle.x + rectangle.w) &&
+        (m_mousePosition.y >= rectangle.y) && (m_mousePosition.y <= rectangle.y + rectangle.h))
+        return true;
+
+    return false;
+}
