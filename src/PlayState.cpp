@@ -1,9 +1,10 @@
 #include "PlayState.hpp"
 #include "Bomb.hpp"
 #include "Box.hpp"
+#include "Button.hpp"
 #include "CONSTANT.hpp"
 #include "Camera.hpp"
-#include "Decor.hpp"
+#include "Candle.hpp"
 #include "DoorIn.hpp"
 #include "DoorOut.hpp"
 #include "Game.hpp"
@@ -17,6 +18,7 @@
 #include "PigWithBomb.hpp"
 #include "PigWithBox.hpp"
 #include "Player.hpp"
+#include "SoundManager.hpp"
 #include "TextureManager.hpp"
 
 const std::string PlayState::s_stateID = "PLAY";
@@ -25,6 +27,7 @@ PlayState::~PlayState() {}
 
 bool PlayState::onEnter()
 {
+    m_loadingComplete = false;
     if (this->load() == false) {
         return false;
     };
@@ -33,11 +36,20 @@ bool PlayState::onEnter()
     return true;
 }
 
+void PlayState::s_mute()
+{
+    SoundManager::Instance()->muteMusic();
+}
 
 bool PlayState::load()
 {
-    TextureManager* const texture = TextureManager::Instance();
     GameObjectFactory* const factory = GameObjectFactory::Instance();
+    TextureManager* const texture = TextureManager::Instance();
+    SoundManager* const sound = SoundManager::Instance();
+    Button* mute = new Button(500, 0, 20, 20);
+
+    mute->setCallback(s_mute);
+    m_uiObjects.push_back(mute);
 
     factory->registerType("Player", new Creator<Player>);
     factory->registerType("Pig", new Creator<Pig>);
@@ -49,7 +61,7 @@ bool PlayState::load()
     factory->registerType("Heart", new Creator<Heart>);
     factory->registerType("DoorOut", new Creator<DoorOut>);
     factory->registerType("DoorIn", new Creator<DoorIn>);
-    factory->registerType("Decor", new Creator<Decor>);
+    factory->registerType("Candle", new Creator<Candle>);
 
     texture->load(ASSETS_DIR + "Player/Idle.png", "player idle");
     texture->load(ASSETS_DIR + "Player/Run.png", "player run");
@@ -88,15 +100,15 @@ bool PlayState::load()
     texture->load(ASSETS_DIR + "Enemy/PigWithBox/Run.png", "pigWithBox run");
     texture->load(ASSETS_DIR + "Enemy/PigWithBox/Throwing.png", "pigWithBox throwing");
 
+    texture->load(ASSETS_DIR + "Item/Heart/Idle.png", "heart idle");
+    texture->load(ASSETS_DIR + "Item/Heart/Hit.png", "heart hit");
 
-    texture->load(ASSETS_DIR + "Item/Big Heart Idle.png", "heart idle");
-    texture->load(ASSETS_DIR + "Item/Big Heart Hit.png", "heart hit");
-    texture->load(ASSETS_DIR + "Item/Big Diamond Idle.png", "diamond idle");
-    texture->load(ASSETS_DIR + "Item/Big Diamond Hit.png", "diamond hit");
+    texture->load(ASSETS_DIR + "Item/Diamond/Idle.png", "diamond idle");
+    texture->load(ASSETS_DIR + "Item/Diamond/Hit.png", "diamond hit");
 
-    texture->load(ASSETS_DIR + "Item/Door/idle.png", "door idle");
-    texture->load(ASSETS_DIR + "Item/Door/open.png", "door open");
-    texture->load(ASSETS_DIR + "Item/Door/close.png", "door close");
+    texture->load(ASSETS_DIR + "Item/Door/Idle.png", "door idle");
+    texture->load(ASSETS_DIR + "Item/Door/Open.png", "door open");
+    texture->load(ASSETS_DIR + "Item/Door/Close.png", "door close");
 
     texture->load(ASSETS_DIR + "Item/Candle/Idle.png", "candle idle");
 
@@ -110,12 +122,17 @@ bool PlayState::load()
     texture->load(ASSETS_DIR + "UI/Health Bar/Health Bar.png", "health bar");
     texture->load(ASSETS_DIR + "UI/Health Bar/Heart.png", "health heart");
 
+    sound->loadMusic(ASSETS_DIR + "sounds/background.ogg", "background");
+    sound->playMusic("background");
+    sound->loadSFX(ASSETS_DIR + "sounds/jump.wav", "jump");
+
+
     if (this->loadLevel() == false) {
         return false;
     }
 
     Camera::Instance()->setTarget(m_pLevel->getPlayer());
-    Camera::Instance()->setZoom(2);
+    /* Camera::Instance()->setZoom(2); */
 
     return true;
 }
@@ -155,6 +172,13 @@ void PlayState::update()
 
     m_pLevel->update();
     Camera::Instance()->update();
+
+    for (auto& obj : m_uiObjects) {
+        if (obj == nullptr) {
+            continue;
+        }
+        obj->update();
+    }
 }
 
 void PlayState::render()
@@ -164,6 +188,9 @@ void PlayState::render()
     }
 
     m_pLevel->render();
+    for (auto& obj : m_uiObjects) {
+        obj->draw();
+    }
 }
 
 std::string PlayState::getStateID() const
