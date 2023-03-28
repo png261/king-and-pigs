@@ -18,13 +18,11 @@ void Door::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Door::loadAnimation()
 {
-    m_animations[DOOR_CLOSING] = new Animation("door idle", 46, 56, 1);
-    m_animations[DOOR_OPENING] =
-        new Animation("door open", 46, 56, 5, false);
-    m_animations[DOOR_CLOSING] =
-        new Animation("door close", 46, 56, 5, false);
+    m_animations[DOOR_CLOSED] = new Animation("door idle", 46, 56, 1);
+    m_animations[DOOR_OPENING] = new Animation("door open", 46, 56, 5, false);
+    m_animations[DOOR_CLOSING] = new Animation("door close", 46, 56, 5, false);
 
-    m_curAnimation = DOOR_CLOSING;
+    m_curAnimation = DOOR_CLOSED;
     m_animations[m_curAnimation]->start();
 }
 
