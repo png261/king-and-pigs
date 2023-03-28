@@ -4,31 +4,9 @@
 #include "PhysicWorld.hpp"
 #include "Stopwatch.hpp"
 
-class Animation
+class Animation final
 {
 public:
-    enum AnimationID {
-        IDLE,
-        RUN,
-        JUMP,
-        FALL,
-        GROUND,
-        ATTACK,
-        DYING,
-        HIT,
-
-        DOOR_IN,
-        DOOR_OUT,
-        DOOR_OPEN,
-        DOOR_CLOSE,
-
-        BOMB_ON,
-        BOMB_OFF,
-        BOMB_EXPLODE,
-
-        THROWING,
-    };
-
     Animation(
         const std::string textureID,
         int width,
@@ -38,7 +16,6 @@ public:
     virtual ~Animation();
 
     virtual void draw(const b2Vec2 position, const float angle = 0, const bool flip = false);
-
     virtual void update();
 
     void start();

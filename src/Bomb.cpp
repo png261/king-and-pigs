@@ -45,19 +45,18 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Bomb::loadAnimation()
 {
-    m_animations[Animation::BOMB_OFF] = std::make_unique<Animation>(Animation("bomb off", 52, 56));
-    m_animations[Animation::BOMB_ON] = std::make_unique<Animation>(Animation("bomb on", 52, 56, 4));
-    m_animations[Animation::BOMB_EXPLODE] =
-        std::make_unique<Animation>(Animation("bomb explode", 52, 56, 6, false));
+    m_animations[OFF] = new Animation("bomb off", 52, 56);
+    m_animations[ON] = new Animation("bomb on", 52, 56, 4);
+    m_animations[EXPLODE] =
+        new Animation("bomb explode", 52, 56, 6, false);
 
-    m_curAnimation = Animation::BOMB_OFF;
+    m_curAnimation = OFF;
     m_animations[m_curAnimation]->start();
 }
 
 void Bomb::update()
 {
-    if (this->isOn() && m_curAnimation == Animation::BOMB_EXPLODE &&
-        m_animations[m_curAnimation]->isFinished()) {
+    if (this->isOn() && m_curAnimation == EXPLODE && m_animations[m_curAnimation]->isFinished()) {
         this->disappear();
         return;
     }
@@ -76,7 +75,7 @@ void Bomb::turnOn()
 {
     m_bOn = true;
     onTimer.start();
-    m_curAnimation = Animation::BOMB_ON;
+    m_curAnimation = ON;
     m_animations[m_curAnimation]->start();
 }
 
@@ -89,7 +88,7 @@ void Bomb::explode()
 void Bomb::updateAnimaton()
 {
     if (this->isAttack()) {
-        m_curAnimation = Animation::BOMB_EXPLODE;
+        m_curAnimation = EXPLODE;
         m_animations[m_curAnimation]->start();
     }
 }

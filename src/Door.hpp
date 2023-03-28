@@ -12,8 +12,15 @@ public:
 
     virtual void open();
     virtual void close();
-    virtual bool isOpened();
+    virtual bool isOpened() const;
+    virtual bool isClosed() const;
 
 protected:
+    enum animations {
+        DOOR_CLOSED,
+        DOOR_OPENING,
+        DOOR_CLOSING,
+    };
+
     bool m_bOpened;
 };

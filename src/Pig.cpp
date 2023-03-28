@@ -44,19 +44,16 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Pig::loadAnimation()
 {
-    m_animations[Animation::IDLE] = std::make_unique<Animation>(Animation("pig idle", 34, 28, 11));
-    m_animations[Animation::RUN] = std::make_unique<Animation>(Animation("pig run", 34, 28, 6));
-    m_animations[Animation::JUMP] = std::make_unique<Animation>(Animation("pig jump", 34, 28, 1));
-    m_animations[Animation::FALL] = std::make_unique<Animation>(Animation("pig fall", 34, 28, 1));
-    m_animations[Animation::GROUND] =
-        std::make_unique<Animation>(Animation("pig ground", 34, 28, 1));
-    m_animations[Animation::ATTACK] =
-        std::make_unique<Animation>(Animation("pig attack", 34, 28, 3, false));
-    m_animations[Animation::HIT] = std::make_unique<Animation>(Animation("pig hit", 34, 28, 2));
-    m_animations[Animation::DYING] =
-        std::make_unique<Animation>(Animation("pig dead", 34, 28, 4, false));
+    m_animations[IDLE] = new Animation("pig idle", 34, 28, 11);
+    m_animations[RUN] = new Animation("pig run", 34, 28, 6);
+    m_animations[JUMP] = new Animation("pig jump", 34, 28, 1);
+    m_animations[FALL] = new Animation("pig fall", 34, 28, 1);
+    m_animations[GROUND] = new Animation("pig ground", 34, 28, 1);
+    m_animations[ATTACK] = new Animation("pig attack", 34, 28, 3, false);
+    m_animations[HIT] = new Animation("pig hit", 34, 28, 2);
+    m_animations[DYING] = new Animation("pig dead", 34, 28, 4, false);
 
-    m_curAnimation = Animation::IDLE;
+    m_curAnimation = IDLE;
     m_animations[m_curAnimation]->start();
 }
 
@@ -171,27 +168,27 @@ void Pig::seeingPig()
 
 void Pig::updateAnimation()
 {
-    Animation::AnimationID newAnimation = m_curAnimation;
+    int newAnimation = m_curAnimation;
 
     if (this->isOnGround()) {
-        newAnimation = Animation::IDLE;
+        newAnimation = IDLE;
         if (this->isRunning()) {
-            newAnimation = Animation::RUN;
+            newAnimation = RUN;
         }
     } else {
         if (this->getBody()->GetLinearVelocity().y < 0) {
-            newAnimation = Animation::JUMP;
+            newAnimation = JUMP;
         } else {
-            newAnimation = Animation::FALL;
+            newAnimation = FALL;
         }
     }
 
     if (this->isDying()) {
-        newAnimation = Animation::DYING;
+        newAnimation = DYING;
     } else if (this->isInvulnerable()) {
-        newAnimation = Animation::HIT;
+        newAnimation = HIT;
     } else if (this->isAttack()) {
-        newAnimation = Animation::ATTACK;
+        newAnimation = ATTACK;
     }
 
     if (newAnimation != m_curAnimation) {

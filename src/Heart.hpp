@@ -9,4 +9,7 @@ public:
     void update() override;
     void bonus() override;
     void loadAnimation() override;
+
+private:
+    enum animations { NORMAL, HIT };
 };

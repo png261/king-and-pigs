@@ -16,9 +16,7 @@ void Decor::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Decor::loadAnimation()
 {
-    m_animations[Animation::IDLE] =
-        std::make_unique<Animation>(Animation("candle idle", 14, 32, 8));
-    m_curAnimation = Animation::IDLE;
-
+    m_animations[NORMAL] = new Animation("candle idle", 14, 32, 8);
+    m_curAnimation = NORMAL;
     m_animations[m_curAnimation]->start();
 }

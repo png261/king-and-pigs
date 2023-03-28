@@ -25,13 +25,13 @@ public:
     virtual bool isExist() const;
 
     virtual void disappear();
+
+protected:
+    GameObject();
     enum direction {
         RIGHT = 1,
         LEFT = -1,
     };
-
-protected:
-    GameObject();
 
     direction m_direction;
 
@@ -41,6 +41,6 @@ protected:
     bool m_bFlipped;
     bool m_bExist;
 
-    std::map<Animation::AnimationID, std::unique_ptr<Animation>> m_animations;
-    Animation::AnimationID m_curAnimation;
+    std::map<int, Animation*> m_animations;
+    int m_curAnimation;
 };

@@ -2,7 +2,7 @@
 
 #include "Door.hpp"
 
-class DoorIn : public Door
+class DoorIn final : public Door
 {
 public:
     DoorIn();

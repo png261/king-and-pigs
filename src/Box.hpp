@@ -3,7 +3,7 @@
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
 
-class Box : public GameObject, public DamageableObject
+class Box final : public GameObject, public DamageableObject
 {
 public:
     Box();
@@ -15,4 +15,7 @@ public:
     void updateAnimation() override;
 
     void breakIntoPieces();
+
+private:
+    enum animation { NORMAL, HIT };
 };

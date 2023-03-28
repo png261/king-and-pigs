@@ -22,14 +22,12 @@ void PigWithBomb::loadAnimation()
 {
     Pig::loadAnimation();
 
-    m_animations[Animation::IDLE] =
-        std::make_unique<Animation>(Animation("pigWithBomb idle", 26, 26, 10));
-    m_animations[Animation::RUN] =
-        std::make_unique<Animation>(Animation("pigWithBomb run", 26, 26, 6));
-    m_animations[Animation::THROWING] =
-        std::make_unique<Animation>(Animation("pigWithBomb throwing", 26, 26, 5));
+    m_animations[IDLE] = new Animation("pigWithBomb idle", 26, 26, 10);
+    m_animations[RUN] = new Animation("pigWithBomb run", 26, 26, 6);
+    m_animations[THROWING] =
+        new Animation("pigWithBomb throwing", 26, 26, 5);
 
-    m_curAnimation = Animation::IDLE;
+    m_curAnimation = IDLE;
     m_animations[m_curAnimation]->start();
 }
 

@@ -25,4 +25,3 @@ protected:
     bool m_loadingComplete;
     bool m_exiting;
 };
-

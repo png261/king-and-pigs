@@ -24,6 +24,19 @@ public:
     void doorIn();
 
 private:
+    enum animations {
+        IDLE,
+        RUN,
+        JUMP,
+        FALL,
+        GROUND,
+        ATTACK,
+        DYING,
+        HIT,
+        DOOR_IN,
+        DOOR_OUT,
+    };
+
     void handleInput();
     void doorOut();
 

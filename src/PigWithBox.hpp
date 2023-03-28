@@ -15,5 +15,6 @@ public:
     void throwBox();
 
 private:
+    enum animations { IDLE, RUN, THROWING };
     bool m_bThrowing;
 };

@@ -12,6 +12,7 @@
 #include "InputHandler.hpp"
 #include "Log.hpp"
 #include "PhysicWorld.hpp"
+#include "SoundManager.hpp"
 #include "VisionObject.hpp"
 
 Player::Player()
@@ -58,27 +59,19 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Player::loadAnimation()
 {
-    m_animations[Animation::IDLE] =
-        std::make_unique<Animation>(Animation("player idle", 78, 58, 11));
-    m_animations[Animation::RUN] = std::make_unique<Animation>(Animation("player run", 78, 58, 8));
-    m_animations[Animation::JUMP] =
-        std::make_unique<Animation>(Animation("player jump", 78, 58, 1));
-    m_animations[Animation::FALL] =
-        std::make_unique<Animation>(Animation("player fall", 78, 58, 1));
-    m_animations[Animation::GROUND] =
-        std::make_unique<Animation>(Animation("player ground", 78, 58, 1));
-    m_animations[Animation::ATTACK] =
-        std::make_unique<Animation>(Animation("player attack", 78, 58, 3, false));
-    m_animations[Animation::HIT] = std::make_unique<Animation>(Animation("player hit", 78, 58, 2));
-    m_animations[Animation::DYING] =
-        std::make_unique<Animation>(Animation("player dead", 78, 58, 4, false));
-    m_animations[Animation::DOOR_IN] =
-        std::make_unique<Animation>(Animation("player door in", 78, 58, 8, false));
-    m_animations[Animation::DOOR_OUT] =
-        std::make_unique<Animation>(Animation("player door out", 78, 58, 8, false));
+    m_animations[IDLE] = new Animation("player idle", 78, 58, 11);
+    m_animations[RUN] = new Animation("player run", 78, 58, 8);
+    m_animations[JUMP] = new Animation("player jump", 78, 58, 1);
+    m_animations[FALL] = new Animation("player fall", 78, 58, 1);
+    m_animations[GROUND] = new Animation("player ground", 78, 58, 1);
+    m_animations[ATTACK] = new Animation("player attack", 78, 58, 3, false);
+    m_animations[HIT] = new Animation("player hit", 78, 58, 2);
+    m_animations[DYING] = new Animation("player dead", 78, 58, 4, false);
+    m_animations[DOOR_IN] = new Animation("player door in", 78, 58, 8, false);
+    m_animations[DOOR_OUT] = new Animation("player door out", 78, 58, 8, false);
 
     doorOutTimer.setTime(300);
-    m_curAnimation = Animation::DOOR_OUT;
+    m_curAnimation = DOOR_OUT;
     m_animations[m_curAnimation]->start();
     doorOutTimer.start();
 }
@@ -167,28 +160,28 @@ void Player::updateAnimation()
         return;
     }
 
-    Animation::AnimationID newAnimation = m_curAnimation;
+    int newAnimation = m_curAnimation;
 
     if (this->isOnGround()) {
-        newAnimation = Animation::IDLE;
+        newAnimation = IDLE;
         if (this->isRunning()) {
-            newAnimation = Animation::RUN;
+            newAnimation = RUN;
         }
     } else {
         if (this->getBody()->GetLinearVelocity().y < 0) {
-            newAnimation = Animation::JUMP;
+            newAnimation = JUMP;
         } else {
-            newAnimation = Animation::FALL;
+            newAnimation = FALL;
         }
     }
 
 
     if (this->isDying()) {
-        newAnimation = Animation::DYING;
+        newAnimation = DYING;
     } else if (this->isInvulnerable()) {
-        newAnimation = Animation::HIT;
+        newAnimation = HIT;
     } else if (this->isAttack()) {
-        newAnimation = Animation::ATTACK;
+        newAnimation = ATTACK;
     }
 
     if (doorOutTimer.isDone()) {
@@ -203,13 +196,13 @@ void Player::updateAnimation()
 void Player::doorIn()
 {
     m_bDoorIn = true;
-    m_curAnimation = Animation::DOOR_IN;
+    m_curAnimation = DOOR_IN;
     m_animations[m_curAnimation]->start();
 }
 
 void Player::doorOut()
 {
-    m_curAnimation = Animation::DOOR_OUT;
+    m_curAnimation = DOOR_OUT;
     m_animations[m_curAnimation]->start();
 }
 

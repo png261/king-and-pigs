@@ -18,13 +18,13 @@ void Door::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Door::loadAnimation()
 {
-    m_animations[Animation::IDLE] = std::make_unique<Animation>(Animation("door idle", 46, 56, 1));
-    m_animations[Animation::DOOR_OPEN] =
-        std::make_unique<Animation>(Animation("door open", 46, 56, 5, false));
-    m_animations[Animation::DOOR_CLOSE] =
-        std::make_unique<Animation>(Animation("door close", 46, 56, 5, false));
+    m_animations[DOOR_CLOSING] = new Animation("door idle", 46, 56, 1);
+    m_animations[DOOR_OPENING] =
+        new Animation("door open", 46, 56, 5, false);
+    m_animations[DOOR_CLOSING] =
+        new Animation("door close", 46, 56, 5, false);
 
-    m_curAnimation = Animation::IDLE;
+    m_curAnimation = DOOR_CLOSING;
     m_animations[m_curAnimation]->start();
 }
 
@@ -39,27 +39,32 @@ void Door::open()
         return;
     }
 
-    m_curAnimation = Animation::DOOR_OPEN;
+    m_curAnimation = DOOR_OPENING;
     m_animations[m_curAnimation]->start();
-    if (m_animations[Animation::DOOR_OPEN]->isFinished()) {
+    if (m_animations[DOOR_OPENING]->isFinished()) {
         m_bOpened = true;
     }
 }
 
 void Door::close()
 {
-    if (this->isOpened() == false) {
+    if (this->isClosed()) {
         return;
     }
 
-    m_curAnimation = Animation::DOOR_CLOSE;
+    m_curAnimation = DOOR_CLOSING;
     m_animations[m_curAnimation]->start();
-    if (m_animations[Animation::DOOR_CLOSE]->isFinished()) {
+    if (m_animations[DOOR_CLOSING]->isFinished()) {
         m_bOpened = false;
     }
 }
 
-bool Door::isOpened()
+bool Door::isOpened() const
 {
     return m_bOpened;
+}
+
+bool Door::isClosed() const
+{
+    return !m_bOpened;
 }

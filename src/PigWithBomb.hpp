@@ -16,5 +16,6 @@ public:
     void throwBomb();
 
 private:
+    enum animations { IDLE, RUN, THROWING };
     bool m_bThrowing;
 };

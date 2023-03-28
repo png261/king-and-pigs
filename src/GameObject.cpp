@@ -15,6 +15,9 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
+    for (auto& animation : m_animations) {
+        delete animation.second;
+    }
     m_animations.clear();
 }
 

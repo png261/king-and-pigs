@@ -21,6 +21,7 @@ public:
     bool isOn() const;
 
 private:
+    enum animations { OFF, ON, EXPLODE };
     bool m_bOn;
     Timer onTimer;
 };

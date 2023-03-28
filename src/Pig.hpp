@@ -16,6 +16,17 @@ public:
     virtual void draw() override;
 
 private:
+    enum animations {
+        IDLE,
+        RUN,
+        JUMP,
+        FALL,
+        GROUND,
+        ATTACK,
+        DYING,
+        HIT,
+    };
+
     virtual void handleMovement();
     virtual void changeDirection();
 

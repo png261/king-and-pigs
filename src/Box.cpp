@@ -23,10 +23,10 @@ void Box::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Box::loadAnimation()
 {
-    m_animations[Animation::IDLE] = std::make_unique<Animation>(Animation("box idle", 22, 16, 1));
-    m_animations[Animation::DYING] = std::make_unique<Animation>(Animation("box hit", 22, 16, 2));
+    m_animations[NORMAL] = new Animation("box idle", 22, 16, 1);
+    m_animations[HIT] = new Animation("box hit", 22, 16, 2);
 
-    m_curAnimation = Animation::IDLE;
+    m_curAnimation = NORMAL;
     m_animations[m_curAnimation]->start();
 }
 
@@ -45,12 +45,12 @@ void Box::update()
 
 void Box::updateAnimation()
 {
-    Animation::AnimationID newAnimation = m_curAnimation;
+    int newAnimation = m_curAnimation;
 
     if (this->isDying()) {
-        newAnimation = Animation::DYING;
+        newAnimation = HIT;
     } else {
-        newAnimation = Animation::IDLE;
+        newAnimation = NORMAL;
     }
 
     if (newAnimation != m_curAnimation) {

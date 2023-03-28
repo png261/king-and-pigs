@@ -100,10 +100,9 @@ void PhysicObject::jump()
         sqrt(2 * PhysicWorld::pixelToMeter(m_jumpHeight) / PhysicWorld::GRAVITY.y);
 
     /* F = 1/2.m.v^2 */
+    float velocity = PhysicWorld::pixelToMeter(m_jumpHeight) / timeToJumpPeak;
 
-    b2Vec2 impulse = 0.5 * m_pBody->GetMass() *
-                     std::pow((PhysicWorld::pixelToMeter(m_jumpHeight) / timeToJumpPeak), 2) *
-                     b2Vec2(0, -1);
+    b2Vec2 impulse = m_pBody->GetMass() * 0.5 * std::pow(velocity, 2) * b2Vec2(0, -1);
 
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 }
