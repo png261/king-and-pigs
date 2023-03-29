@@ -9,8 +9,8 @@ class Animation final
 public:
     Animation(
         const std::string textureID,
-        int width,
-        int height,
+        const int width,
+        const int height,
         const int nFrames = 1,
         const bool bLoop = true);
     virtual ~Animation();
@@ -23,6 +23,8 @@ public:
     void stop();
     bool isRunning() const;
     bool isFinished() const;
+    int getWidth() const;
+    int getHeight() const;
 
 private:
     Stopwatch m_stopwatch;
@@ -31,8 +33,6 @@ private:
 
     bool m_bRunning;
     bool m_bFinished;
-    int m_x;
-    int m_y;
 
     unsigned int m_width;
     unsigned int m_height;

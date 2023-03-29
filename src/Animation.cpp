@@ -12,8 +12,6 @@ Animation::Animation(
     : m_textureID(textureID)
     , m_bRunning(false)
     , m_bFinished(false)
-    , m_x(0)
-    , m_y(0)
     , m_width(width)
     , m_height(height)
     , m_curFrame(0)
@@ -52,15 +50,8 @@ void Animation::draw(const b2Vec2 position, const float angle, const bool bFlipp
         return;
     }
 
-    TextureManager::Instance()->drawFrame(
-        m_textureID,
-        position - 0.5 * b2Vec2(m_width, m_height),
-        m_width,
-        m_height,
-        0,
-        m_curFrame,
-        angle,
-        bFlipped);
+    TextureManager::Instance()
+        ->drawFrame(m_textureID, position, m_width, m_height, 0, m_curFrame, angle, bFlipped);
 }
 
 void Animation::start()
@@ -102,4 +93,14 @@ void Animation::stop()
 bool Animation::isFinished() const
 {
     return m_bFinished;
+}
+
+int Animation::getWidth() const
+{
+    return m_width;
+}
+
+int Animation::getHeight() const
+{
+    return m_height;
 }
