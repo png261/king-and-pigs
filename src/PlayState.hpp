@@ -5,6 +5,7 @@
 #include "GameObject.hpp"
 #include "GameState.hpp"
 #include "Level.hpp"
+#include "UiObject.hpp"
 
 class PlayState final : public GameState
 {
@@ -21,6 +22,9 @@ public:
     bool loadLevel();
 
 private:
+    static void s_mute();
+
     static const std::string s_stateID;
+    std::vector<UiObject*> m_uiObjects;
     std::unique_ptr<Level> m_pLevel;
 };

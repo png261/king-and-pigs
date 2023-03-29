@@ -6,9 +6,8 @@
 class UiObject
 {
 public:
-    virtual ~UiObject();
-
-    virtual void load(std::unique_ptr<LoaderParams> const& pParams);
+    virtual ~UiObject(){};
+    virtual void load() = 0;
     virtual void draw() = 0;
     virtual void update() = 0;
 };

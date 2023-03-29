@@ -122,6 +122,10 @@ bool PlayState::load()
     texture->load(ASSETS_DIR + "UI/Health Bar/Health Bar.png", "health bar");
     texture->load(ASSETS_DIR + "UI/Health Bar/Heart.png", "health heart");
 
+    texture->load(ASSETS_DIR + "UI/Button/normal.png", "button normal");
+    texture->load(ASSETS_DIR + "UI/Button/hovered.png", "button hovered");
+    texture->load(ASSETS_DIR + "UI/Button/pressed.png", "button pressed");
+
     sound->loadMusic(ASSETS_DIR + "sounds/background.ogg", "background");
     sound->playMusic("background");
     sound->loadSFX(ASSETS_DIR + "sounds/jump.wav", "jump");

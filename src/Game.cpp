@@ -4,6 +4,7 @@
 #include "CONSTANT.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
+#include "MainMenuState.hpp"
 #include "PhysicWorld.hpp"
 #include "PlayState.hpp"
 #include "SoundManager.hpp"
@@ -41,7 +42,7 @@ bool Game::init()
         return false;
     };
 
-    GameStateMachine::Instance()->changeState(new PlayState());
+    GameStateMachine::Instance()->changeState(new MainMenuState());
     m_bRunning = true;
 
     return true;

@@ -10,14 +10,14 @@ Animation::Animation(
     const int nFrames,
     const bool bLoop)
     : m_textureID(textureID)
-    , m_bRunning(false)
-    , m_bFinished(false)
     , m_width(width)
     , m_height(height)
-    , m_curFrame(0)
     , m_nFrames(nFrames)
     , m_bLoop(bLoop)
     , m_timesLooped(0)
+    , m_curFrame(0)
+    , m_bRunning(false)
+    , m_bFinished(false)
 {
     m_framerate = 10;
 }

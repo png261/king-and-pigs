@@ -31,8 +31,12 @@ void GameObject::loadAnimation(){};
 
 void GameObject::draw()
 {
+    b2Vec2 halfSize =
+        0.5 *
+        b2Vec2(m_animations[m_curAnimation]->getWidth(), m_animations[m_curAnimation]->getHeight());
+
     m_animations[m_curAnimation]->draw(
-        this->getPosition() - Camera::Instance()->getPosition(),
+        this->getPosition() - halfSize - Camera::Instance()->getPosition(),
         this->getAngle(),
         m_bFlipped);
 }
