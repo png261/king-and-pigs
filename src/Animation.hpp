@@ -9,9 +9,9 @@ class Animation final
 public:
     Animation(
         const std::string textureID,
-        const int width,
-        const int height,
-        const int nFrames = 1,
+        const uint width,
+        const uint height,
+        const uint nFrames = 1,
         const bool bLoop = true);
     virtual ~Animation();
 
@@ -21,6 +21,7 @@ public:
     void start();
     void restart();
     void stop();
+
     bool isRunning() const;
     bool isFinished() const;
     int getWidth() const;
@@ -29,16 +30,16 @@ public:
 private:
     Stopwatch m_stopwatch;
     std::string m_textureID;
-    unsigned int m_framerate;
+
+    uint m_framerate;
+    uint m_width;
+    uint m_height;
+
+    uint m_curFrame;
+    uint m_nFrames;
+    uint m_timesLooped;
 
     bool m_bRunning;
     bool m_bFinished;
-
-    unsigned int m_width;
-    unsigned int m_height;
-
-    int m_curFrame;
-    int m_nFrames;
     bool m_bLoop;
-    int m_timesLooped;
 };

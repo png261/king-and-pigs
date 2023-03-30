@@ -5,9 +5,9 @@
 
 Animation::Animation(
     const std::string textureID,
-    const int width,
-    const int height,
-    const int nFrames,
+    const uint width,
+    const uint height,
+    const uint nFrames,
     const bool bLoop)
     : m_textureID(textureID)
     , m_width(width)
@@ -46,7 +46,7 @@ void Animation::update()
 
 void Animation::draw(const b2Vec2 position, const float angle, const bool bFlipped)
 {
-    if (!isRunning() || m_framerate == 0) {
+    if (!this->isRunning() || m_framerate == 0) {
         return;
     }
 
@@ -60,7 +60,7 @@ void Animation::start()
         return;
     }
 
-    if (isRunning()) {
+    if (this->isRunning()) {
         return;
     }
 
@@ -72,8 +72,8 @@ void Animation::start()
 
 void Animation::restart()
 {
-    stop();
-    start();
+    this->stop();
+    this->start();
 }
 
 void Animation::stop()
@@ -82,7 +82,7 @@ void Animation::stop()
         return;
     }
 
-    if (!isRunning()) {
+    if (!this->isRunning()) {
         return;
     }
 
