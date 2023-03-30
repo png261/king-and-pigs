@@ -68,10 +68,10 @@ bool MainMenuState::load()
     texture->load(ASSETS_DIR + "UI/Button/hovered.png", "button hovered");
     texture->load(ASSETS_DIR + "UI/Button/pressed.png", "button pressed");
 
-    Button* btn = new Button(100, 100, 176, 64);
+    Button* btn = new Button("Play", 250, 100, 176, 64);
     btn->setCallback(s_enterPlay);
 
-    Button* btn2 = new Button(100, 100, 176, 64);
+    Button* btn2 = new Button("Exit", 250, 200, 176, 64);
     btn2->setCallback(s_exit);
 
     m_uiObjects.push_back(btn);

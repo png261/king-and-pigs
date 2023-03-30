@@ -42,9 +42,12 @@ public:
 
     void delayFramerateIfNeeded();
 
+    void print(std::string text, int fontSize, int x, int y, Color color);
+
 private:
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
+    TTF_Font* m_font;
 
     uint m_width;
     uint m_height;

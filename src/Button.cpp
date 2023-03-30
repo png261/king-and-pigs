@@ -1,8 +1,10 @@
 #include "Button.hpp"
+#include "Game.hpp"
 #include "InputHandler.hpp"
 
-Button::Button(int x, int y, int width, int height)
+Button::Button(std::string text, int x, int y, int width, int height)
     : UiObject()
+    , m_text(text)
     , m_rectangle(x, y, width, height)
     , m_callback(nullptr)
     , m_bHovered(false)
@@ -22,6 +24,12 @@ void Button::load(){};
 void Button::draw()
 {
     m_animations[m_curAnimation]->draw(b2Vec2(m_rectangle.x, m_rectangle.y));
+    Game::Instance()->getWindow()->print(
+        m_text,
+        40,
+        m_rectangle.x + m_rectangle.w / 2,
+        m_rectangle.y + m_rectangle.h / 2,
+        {});
 };
 
 void Button::update()

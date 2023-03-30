@@ -7,7 +7,7 @@
 class Button final : public UiObject
 {
 public:
-    Button(int x, int y, int width, int height);
+    Button(std::string text, int x, int y, int width, int height);
     ~Button();
     void load();
     void draw();
@@ -18,6 +18,7 @@ private:
     enum { NORMAL, HOVERED, PRESSED };
 
     Rectangle m_rectangle;
+    std::string m_text;
 
     int m_curAnimation;
     std::map<int, Animation*> m_animations;

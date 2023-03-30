@@ -46,7 +46,7 @@ bool PlayState::load()
     GameObjectFactory* const factory = GameObjectFactory::Instance();
     TextureManager* const texture = TextureManager::Instance();
     SoundManager* const sound = SoundManager::Instance();
-    Button* mute = new Button(500, 0, 20, 20);
+    Button* mute = new Button("mute", 500, 0, 176, 64);
 
     mute->setCallback(s_mute);
     m_uiObjects.push_back(mute);

@@ -1,5 +1,4 @@
 #include "Window.hpp"
-#include <SDL2/SDL_render.h>
 #include "Log.hpp"
 
 Window::Window(const uint width, const uint height, const std::string title)
@@ -24,6 +23,10 @@ Window::Window(const uint width, const uint height, const std::string title)
     if (!m_pWindow || !m_pRenderer) {
         Log::error("Window(): Couldn't create Window");
         throw "Window() Fail";
+    }
+    m_font = TTF_OpenFont("fonts/UbuntuMono.ttf", 28);
+    if (m_font == nullptr) {
+        Log::error("Window(): Couldn't load font");
     }
 
     this->m_framerateStopwatch.start();
@@ -155,6 +158,33 @@ void Window::delayFramerateIfNeeded()
 
     m_framerateStopwatch.restart();
 }
+
+void Window::print(std::string text, int fontSize, int x, int y, Color color)
+{
+    TTF_SetFontSize(m_font, fontSize);
+    if (!m_font) {
+        Log::error("Window::print: fail to load font");
+        return;
+    }
+    SDL_Surface* surface = TTF_RenderText_Blended(m_font, text.c_str(), {255, 255, 255, 255});
+    if (!surface) {
+        Log::error("Window::print: fail to create surface");
+        return;
+    }
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(m_pRenderer, surface);
+    SDL_FreeSurface(surface);
+
+    if (!texture) {
+        Log::error("Window::print: fail to create texture");
+        return;
+    }
+
+    SDL_Rect dest_rect = {x - surface->w / 2, y - surface->h / 2, surface->w, surface->h};
+
+    SDL_RenderCopy(m_pRenderer, texture, NULL, &dest_rect);
+
+    SDL_DestroyTexture(texture);
+};
 
 uint Window::getDelta() const
 {
