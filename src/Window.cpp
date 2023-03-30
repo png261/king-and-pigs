@@ -2,7 +2,7 @@
 #include <SDL2/SDL_render.h>
 #include "Log.hpp"
 
-Window::Window(const unsigned int width, const unsigned int height, const std::string title)
+Window::Window(const uint width, const uint height, const std::string title)
     : m_pWindow(nullptr)
     , m_pRenderer(nullptr)
     , m_width(width)
@@ -37,7 +37,7 @@ Window::~Window()
     this->destroy();
 }
 
-void Window::resize(std::string title, unsigned int width, unsigned int height)
+void Window::resize(std::string title, uint width, uint height)
 {
     // Just in case we already have a window
     this->destroy();
@@ -156,7 +156,7 @@ void Window::delayFramerateIfNeeded()
     m_framerateStopwatch.restart();
 }
 
-unsigned int Window::getDelta() const
+uint Window::getDelta() const
 {
     return m_currentFrameDelta;
 }
@@ -166,12 +166,12 @@ SDL_Renderer* Window::getRenderer() const
     return m_pRenderer;
 }
 
-unsigned int Window::getWidth() const
+uint Window::getWidth() const
 {
     return m_width;
 }
 
-unsigned int Window::getHeight() const
+uint Window::getHeight() const
 {
     return m_height;
 }

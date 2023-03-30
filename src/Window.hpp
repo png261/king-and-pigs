@@ -8,7 +8,7 @@
 class Window final
 {
 public:
-    Window(const unsigned int width, const unsigned int height, const std::string title = "");
+    Window(const uint width, const uint height, const std::string title = "");
     virtual ~Window();
 
     void destroy();
@@ -27,7 +27,7 @@ public:
 
     void refresh();
 
-    void resize(const std::string title, const unsigned int width, const unsigned int height);
+    void resize(const std::string title, const uint width, const uint height);
 
     void fill(const Color color);
 
@@ -35,9 +35,9 @@ public:
     void setBackgroundColor(const Color color = Color(0, 0, 0));
     void setTitle(const std::string title);
 
-    unsigned int getDelta() const;
-    unsigned int getWidth() const;
-    unsigned int getHeight() const;
+    uint getDelta() const;
+    uint getWidth() const;
+    uint getHeight() const;
     SDL_Renderer* getRenderer() const;
 
     void delayFramerateIfNeeded();
@@ -46,19 +46,19 @@ private:
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
 
-    unsigned int m_width;
-    unsigned int m_height;
+    uint m_width;
+    uint m_height;
 
-    unsigned int m_originalWidth;
-    unsigned int m_originalHeight;
+    uint m_originalWidth;
+    uint m_originalHeight;
+
+    uint m_framerate;
+    uint m_frameDelay;
+    uint m_currentFrameDelta;
 
     bool m_bFullscreen;
 
     std::string m_title;
     Color m_bgColor;
     Stopwatch m_framerateStopwatch;
-
-    unsigned int m_framerate;
-    unsigned int m_frameDelay;
-    unsigned int m_currentFrameDelta;
 };
