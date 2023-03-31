@@ -109,9 +109,7 @@ void Player::update()
 void Player::draw()
 {
     GameObject::draw();
-    VisionObject::debugDraw();
 }
-
 
 void Player::handleInput()
 {

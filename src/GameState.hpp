@@ -19,9 +19,9 @@ public:
 
 protected:
     GameState()
-        : m_loadingComplete(false)
-        , m_exiting(false)
+        : m_bLoaded(false)
+        , m_bPaused(false)
     {}
-    bool m_loadingComplete;
-    bool m_exiting;
+    bool m_bLoaded;
+    bool m_bPaused;
 };

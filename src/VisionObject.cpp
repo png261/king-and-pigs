@@ -1,6 +1,8 @@
 #include "VisionObject.hpp"
 #include "DebugDraw.hpp"
 #include "Game.hpp"
+#include "GameState.hpp"
+#include "GameStateMachine.hpp"
 
 VisionObject::VisionObject(int range)
     : m_start(0, 0)
@@ -23,9 +25,6 @@ void VisionObject::update(b2Vec2 start, b2Vec2 end)
 
 void VisionObject::debugDraw()
 {
-    if (Game::Instance()->isDebug() == false) {
-        return;
-    }
     DebugDraw* debug = new DebugDraw(Game::Instance()->getWindow());
     debug->DrawSegment(m_start, m_end, {1, 1, 1, 1});
 }

@@ -200,5 +200,4 @@ void Pig::updateAnimation()
 void Pig::draw()
 {
     GameObject::draw();
-    VisionObject::debugDraw();
 }

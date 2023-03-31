@@ -1,5 +1,4 @@
 #include "InputHandler.hpp"
-#include <SDL2/SDL_mouse.h>
 
 #include "Game.hpp"
 #include "InputDefinitions.hpp"

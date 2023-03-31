@@ -11,6 +11,7 @@ class PlayState final : public GameState
 {
 public:
     ~PlayState();
+    PlayState();
     void update() override;
     void render() override;
     bool onEnter() override;
@@ -24,6 +25,7 @@ public:
 private:
     static void s_mute();
 
+    bool m_bDebug;
     static const std::string s_stateID;
     std::vector<UiObject*> m_uiObjects;
     std::unique_ptr<Level> m_pLevel;

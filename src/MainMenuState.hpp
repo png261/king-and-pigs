@@ -7,13 +7,12 @@ class MainMenuState final : public GameState
 public:
     ~MainMenuState();
     MainMenuState();
-    void update();
-    void render();
-    bool onEnter();
-    bool load();
-    void resume();
-    bool onExit();
-    std::string getStateID() const;
+    void update() override;
+    void render() override;
+    bool onEnter() override;
+    bool load() override;
+    bool onExit() override;
+    std::string getStateID() const override;
 
 private:
     static void s_enterPlay();

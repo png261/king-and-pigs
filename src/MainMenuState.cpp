@@ -14,19 +14,15 @@ MainMenuState::~MainMenuState(){};
 
 bool MainMenuState::onEnter()
 {
-    m_loadingComplete = false;
-
     if (this->load() == false) {
         return false;
     }
-
-    m_loadingComplete = true;
     return true;
 };
 
 void MainMenuState::update()
 {
-    if (!m_loadingComplete || m_exiting) {
+    if (!m_bLoaded || m_bPaused) {
         return;
     }
 
@@ -40,7 +36,7 @@ void MainMenuState::update()
 
 void MainMenuState::render()
 {
-    if (!m_loadingComplete || m_exiting) {
+    if (!m_bLoaded || m_bPaused) {
         return;
     }
     for (auto& obj : m_uiObjects) {
@@ -63,6 +59,7 @@ void MainMenuState::s_exit()
 
 bool MainMenuState::load()
 {
+    m_bLoaded = false;
     TextureManager* const texture = TextureManager::Instance();
     texture->load(ASSETS_DIR + "UI/Button/normal.png", "button normal");
     texture->load(ASSETS_DIR + "UI/Button/hovered.png", "button hovered");
@@ -77,17 +74,14 @@ bool MainMenuState::load()
     m_uiObjects.push_back(btn);
     m_uiObjects.push_back(btn2);
 
-    return true;
-};
+    m_bLoaded = true;
 
-void MainMenuState::resume()
-{
-    m_exiting = false;
+    return true;
 };
 
 bool MainMenuState::onExit()
 {
-    m_exiting = true;
+    m_bPaused = true;
     return true;
 };
 

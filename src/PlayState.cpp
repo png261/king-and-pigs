@@ -14,6 +14,8 @@
 #include "InputHandler.hpp"
 #include "KingPig.hpp"
 #include "LevelParser.hpp"
+#include "Log.hpp"
+#include "PauseState.hpp"
 #include "Pig.hpp"
 #include "PigWithBomb.hpp"
 #include "PigWithBox.hpp"
@@ -25,14 +27,16 @@ const std::string PlayState::s_stateID = "PLAY";
 
 PlayState::~PlayState() {}
 
+PlayState::PlayState()
+    : GameState()
+    , m_bDebug(false)
+{}
+
 bool PlayState::onEnter()
 {
-    m_loadingComplete = false;
     if (this->load() == false) {
         return false;
     };
-
-    m_loadingComplete = true;
     return true;
 }
 
@@ -43,6 +47,7 @@ void PlayState::s_mute()
 
 bool PlayState::load()
 {
+    m_bLoaded = false;
     GameObjectFactory* const factory = GameObjectFactory::Instance();
     TextureManager* const texture = TextureManager::Instance();
     SoundManager* const sound = SoundManager::Instance();
@@ -138,6 +143,8 @@ bool PlayState::load()
     Camera::Instance()->setTarget(m_pLevel->getPlayer());
     /* Camera::Instance()->setZoom(2); */
 
+    m_bLoaded = true;
+
     return true;
 }
 
@@ -156,7 +163,7 @@ bool PlayState::loadLevel()
 
 bool PlayState::onExit()
 {
-    m_exiting = true;
+    m_bPaused = true;
     InputHandler::Instance()->reset();
     PhysicWorld::Instance()->clean();
 
@@ -165,15 +172,19 @@ bool PlayState::onExit()
 
 void PlayState::resume()
 {
-    m_exiting = false;
+    m_bPaused = false;
 }
 
 void PlayState::update()
 {
-    if (!m_loadingComplete || m_exiting || m_pLevel == nullptr) {
+    if (!m_bLoaded || m_bPaused || m_pLevel == nullptr) {
         return;
     }
+    if (InputHandler::Instance()->isKeyDown(KEY_ESCAPE)) {
+        GameStateMachine::Instance()->pushState(new PauseState());
+    }
 
+    PhysicWorld::Instance()->update();
     m_pLevel->update();
     Camera::Instance()->update();
 
@@ -187,13 +198,21 @@ void PlayState::update()
 
 void PlayState::render()
 {
-    if (!m_loadingComplete || m_exiting || m_pLevel == nullptr) {
+    if (!m_bLoaded || m_bPaused || m_pLevel == nullptr) {
         return;
     }
 
     m_pLevel->render();
     for (auto& obj : m_uiObjects) {
         obj->draw();
+    }
+
+    if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
+        m_bDebug = !m_bDebug;
+    };
+
+    if (m_bDebug) {
+        PhysicWorld::Instance()->debugDraw();
     }
 }
 
