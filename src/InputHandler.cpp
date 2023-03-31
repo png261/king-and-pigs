@@ -1,6 +1,8 @@
 #include "InputHandler.hpp"
+#include <SDL2/SDL_mouse.h>
 
 #include "Game.hpp"
+#include "InputDefinitions.hpp"
 
 InputHandler* InputHandler::Instance()
 {
@@ -10,8 +12,22 @@ InputHandler* InputHandler::Instance()
 
 InputHandler::InputHandler()
     : m_keyboard(nullptr)
+    , m_mouse(0)
     , m_mousePosition(0, 0)
-{}
+{
+    int i;
+    for (i = 0; i < KEYBOARD_SIZE; i++) {
+        m_bKeyDown[i] = false;
+        m_bKeyUp[i] = false;
+    }
+
+    for (i = 0; i < MOUSE_MAX; i++) {
+        m_bMouseDown[i] = false;
+        m_bMouseUp[i] = false;
+    }
+}
+
+InputHandler::~InputHandler() {}
 
 void InputHandler::update()
 {
@@ -19,6 +35,11 @@ void InputHandler::update()
     for (i = 0; i < KEYBOARD_SIZE; i++) {
         m_bKeyDown[i] = false;
         m_bKeyUp[i] = false;
+    }
+
+    for (i = 0; i < MOUSE_MAX; i++) {
+        m_bMouseDown[i] = false;
+        m_bMouseUp[i] = false;
     }
 
     SDL_Event event;
@@ -48,6 +69,8 @@ void InputHandler::update()
 
 void InputHandler::onMouseDown(SDL_Event const& event)
 {
+    m_mouse = SDL_GetMouseState(nullptr, nullptr);
+
     switch (event.button.button) {
     case SDL_BUTTON_LEFT:
         m_bMouseDown[MOUSE_LEFT] = true;
@@ -111,12 +134,15 @@ void InputHandler::reset()
 {
     m_keyboard = nullptr;
     int i;
-    for (i = 0; i < MOUSE_MAX; i++) {
-        m_bMouseDown[i] = false;
-    }
     for (i = 0; i < KEYBOARD_SIZE; i++) {
         m_bKeyDown[i] = false;
         m_bKeyUp[i] = false;
+    }
+
+    m_mouse = 0;
+    for (i = 0; i < MOUSE_MAX; i++) {
+        m_bMouseDown[i] = false;
+        m_bMouseUp[i] = false;
     }
 }
 
@@ -130,13 +156,39 @@ bool InputHandler::isMouseDown(const MouseButton button) const
     return m_bMouseDown[button];
 };
 
-void InputHandler::clean() {}
+bool InputHandler::isMouseUp(const MouseButton button) const
+{
+    return m_bMouseUp[button];
+};
 
-bool InputHandler::isMouseInside(Rectangle rectangle)
+bool InputHandler::isMousePressed(const MouseButton button) const
+{
+    switch (button) {
+    case MOUSE_LEFT:
+        if (m_mouse & SDL_BUTTON(1)) return true;
+        break;
+
+    case MOUSE_RIGHT:
+        if (m_mouse & SDL_BUTTON(3)) return true;
+        break;
+
+    default:
+        break;
+    }
+
+    return false;
+}
+
+bool InputHandler::isMouseInside(Rectangle rectangle) const
 {
     if ((m_mousePosition.x >= rectangle.x) && (m_mousePosition.x <= rectangle.x + rectangle.w) &&
         (m_mousePosition.y >= rectangle.y) && (m_mousePosition.y <= rectangle.y + rectangle.h))
         return true;
 
     return false;
+}
+
+void InputHandler::clean()
+{
+    this->reset();
 }
