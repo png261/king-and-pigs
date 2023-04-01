@@ -66,7 +66,8 @@ void TileLayer::render()
                 m_tileSize,
                 m_tileSize,
                 (id - tileset.firstGridID) / tileset.numColumns,
-                (id - tileset.firstGridID) % tileset.numColumns);
+                (id - tileset.firstGridID) % tileset.numColumns,
+                Camera::Instance()->getZoom());
         }
     }
 }

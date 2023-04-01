@@ -27,7 +27,8 @@ public:
         const int currentRow,
         const int currentFrame,
         const float angle = 0,
-        const bool bFlipped = false);
+        const bool bFlipped = false,
+        const int zoom = 1);
 
     void drawTile(
         const std::string id,
@@ -37,7 +38,8 @@ public:
         const int width,
         const int height,
         const int currentRow,
-        const int currentFrame);
+        const int currentFrame,
+        const int zoom = 1);
 
     void clean();
 

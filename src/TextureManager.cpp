@@ -1,4 +1,5 @@
 #include "TextureManager.hpp"
+#include "Camera.hpp"
 #include "Game.hpp"
 #include "Log.hpp"
 #include "SDL.hpp"
@@ -61,14 +62,15 @@ void TextureManager::drawFrame(
     const int currentRow,
     const int currentFrame,
     const float angle,
-    const bool bFlipped)
+    const bool bFlipped,
+    const int zoom)
 {
     SDL_Rect const srcRect{width * currentFrame, height * currentRow, width, height};
     SDL_Rect const destRect{
-        static_cast<int>(position.x),
-        static_cast<int>(position.y),
-        width,
-        height};
+        static_cast<int>(position.x * zoom),
+        static_cast<int>(position.y * zoom),
+        width * zoom,
+        height * zoom};
 
     Game::Instance()->getWindow()->renderImage(
         m_textureMap[id],
@@ -87,18 +89,20 @@ void TextureManager::drawTile(
     const int width,
     const int height,
     const int currentRow,
-    const int currentFrame)
+    const int currentFrame,
+    const int zoom)
 {
     SDL_Rect const srcRect{
         margin + (spacing + width) * currentFrame,
         margin + (spacing + height) * currentRow,
         width,
         height};
+
     SDL_Rect const destRect{
-        static_cast<int>(position.x),
-        static_cast<int>(position.y),
-        width,
-        height};
+        static_cast<int>(position.x * zoom),
+        static_cast<int>(position.y * zoom),
+        static_cast<int>(width * zoom),
+        static_cast<int>(height * zoom)};
 
     Game::Instance()->getWindow()->renderImage(m_textureMap[id], &srcRect, &destRect);
 }

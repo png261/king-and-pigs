@@ -44,14 +44,14 @@ void Animation::update()
     }
 }
 
-void Animation::draw(const b2Vec2 position, const float angle, const bool bFlipped)
+void Animation::draw(const b2Vec2 position, const float angle, const bool bFlipped, const int zoom)
 {
     if (!this->isRunning() || m_framerate == 0) {
         return;
     }
 
     TextureManager::Instance()
-        ->drawFrame(m_textureID, position, m_width, m_height, 0, m_curFrame, angle, bFlipped);
+        ->drawFrame(m_textureID, position, m_width, m_height, 0, m_curFrame, angle, bFlipped, zoom);
 }
 
 void Animation::start()

@@ -136,7 +136,6 @@ bool PlayState::load()
         return false;
     }
 
-    /* Camera::Instance()->setZoom(2); */
 
     m_bLoaded = true;
 
@@ -154,6 +153,7 @@ bool PlayState::loadLevel()
         return false;
     }
     Camera::Instance()->setTarget(m_pLevel->getPlayer());
+    Camera::Instance()->setZoom(2);
 
     return true;
 }

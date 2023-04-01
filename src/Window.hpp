@@ -11,6 +11,7 @@ public:
     Window(const uint width, const uint height, const std::string title = "");
     virtual ~Window();
 
+    void clear();
     void destroy();
 
     void renderImage(
@@ -31,7 +32,8 @@ public:
 
     void fill(const Color color);
 
-    void clear();
+    void print(std::string text, int fontSize, int x, int y, Color color);
+
     void setBackgroundColor(const Color color = Color(0, 0, 0));
     void setTitle(const std::string title);
 
@@ -41,8 +43,6 @@ public:
     SDL_Renderer* getRenderer() const;
 
     void delayFramerateIfNeeded();
-
-    void print(std::string text, int fontSize, int x, int y, Color color);
 
 private:
     SDL_Window* m_pWindow;

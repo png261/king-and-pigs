@@ -38,7 +38,8 @@ void GameObject::draw()
     m_animations[m_curAnimation]->draw(
         this->getPosition() - halfSize - Camera::Instance()->getPosition(),
         this->getAngle(),
-        m_bFlipped);
+        m_bFlipped,
+        Camera::Instance()->getZoom());
 }
 
 void GameObject::update()

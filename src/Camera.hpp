@@ -1,7 +1,7 @@
 #pragma once
 
-#include "PhysicWorld.hpp"
 #include "GameObject.hpp"
+#include "PhysicWorld.hpp"
 
 class Camera
 {
@@ -26,4 +26,3 @@ private:
 };
 
 typedef Camera Camera;
-

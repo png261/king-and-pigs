@@ -15,7 +15,8 @@ public:
         const bool bLoop = true);
     virtual ~Animation();
 
-    virtual void draw(const b2Vec2 position, const float angle = 0, const bool flip = false);
+    virtual void
+    draw(const b2Vec2 position, const float angle = 0, const bool flip = false, const int zoom = 1);
     virtual void update();
 
     void start();

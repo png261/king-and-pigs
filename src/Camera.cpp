@@ -2,7 +2,7 @@
 #include "Game.hpp"
 
 Camera::Camera()
-    : m_pTarget(0)
+    : m_pTarget(nullptr)
     , m_position(0, 0)
     , m_zoom(1)
 {}
@@ -70,5 +70,4 @@ void Camera::setPosition(const b2Vec2& position)
 void Camera::setZoom(const float zoom)
 {
     m_zoom = zoom;
-    SDL_RenderSetScale(Game::Instance()->getWindow()->getRenderer(), m_zoom, m_zoom);
 }

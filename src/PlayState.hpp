@@ -5,7 +5,6 @@
 #include "GameObject.hpp"
 #include "GameState.hpp"
 #include "Level.hpp"
-#include "UiObject.hpp"
 
 class PlayState final : public GameState
 {
