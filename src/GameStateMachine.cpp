@@ -64,3 +64,8 @@ void GameStateMachine::changeState(GameState* const pState)
     pState->onEnter();
     m_gameStates.push_back(pState);
 }
+
+GameState* GameStateMachine::getCurrentState()
+{
+    return m_gameStates.back();
+}

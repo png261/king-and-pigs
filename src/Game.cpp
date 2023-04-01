@@ -90,7 +90,8 @@ void Game::setLevel(Level* const pLevel)
 
 void Game::nextLevel()
 {
-    PlayState* playState = dynamic_cast<PlayState*>(GameStateMachine::Instance()->getState());
+    PlayState* playState =
+        dynamic_cast<PlayState*>(GameStateMachine::Instance()->getCurrentState());
     if (playState == nullptr) {
         return;
     }
