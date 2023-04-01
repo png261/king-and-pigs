@@ -90,13 +90,18 @@ void Game::setLevel(Level* const pLevel)
 
 void Game::nextLevel()
 {
+    PlayState* playState = dynamic_cast<PlayState*>(GameStateMachine::Instance()->getState());
+    if (playState == nullptr) {
+        return;
+    }
+
     m_currentLevel += 1;
     if (m_currentLevel >= m_levelFiles.size()) {
         /* TODO: win screen */
         return;
     }
 
-    GameStateMachine::Instance()->changeState(new PlayState());
+    playState->loadNewLevel();
 }
 
 int Game::getCurrentLevel() const

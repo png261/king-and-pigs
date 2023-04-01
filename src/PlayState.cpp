@@ -132,15 +132,14 @@ bool PlayState::load()
     texture->load(ASSETS_DIR + "UI/Button/pressed.png", "button pressed");
 
     sound->loadMusic(ASSETS_DIR + "sounds/background.ogg", "background");
-    sound->playMusic("background");
     sound->loadSFX(ASSETS_DIR + "sounds/jump.wav", "jump");
+    sound->playMusic("background");
 
 
     if (this->loadLevel() == false) {
         return false;
     }
 
-    Camera::Instance()->setTarget(m_pLevel->getPlayer());
     /* Camera::Instance()->setZoom(2); */
 
     m_bLoaded = true;
@@ -158,7 +157,19 @@ bool PlayState::loadLevel()
     if (m_pLevel == nullptr) {
         return false;
     }
+    Camera::Instance()->setTarget(m_pLevel->getPlayer());
+
     return true;
+}
+
+void PlayState::loadNewLevel()
+{
+    this->onExit();
+    if (this->loadLevel()) {
+        this->resume();
+    } else {
+        Log::error("fail to load next level");
+    }
 }
 
 bool PlayState::onExit()
