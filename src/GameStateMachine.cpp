@@ -26,8 +26,8 @@ void GameStateMachine::update()
 
 void GameStateMachine::render()
 {
-    if (!m_gameStates.empty()) {
-        m_gameStates.back()->render();
+    for (auto& obj : m_gameStates) {
+        obj->render();
     }
 }
 
