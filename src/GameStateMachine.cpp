@@ -52,9 +52,9 @@ void GameStateMachine::popState()
 void GameStateMachine::changeState(GameState* const pState)
 {
     if (!m_gameStates.empty()) {
-        /* if (m_gameStates.back()->getStateID() == pState->getStateID()) { */
-        /*     return; */
-        /* } */
+        if (m_gameStates.back()->getStateID() == pState->getStateID()) {
+            return;
+        }
 
         m_gameStates.back()->onExit();
         delete m_gameStates.back();
