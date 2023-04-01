@@ -51,10 +51,6 @@ bool PlayState::load()
     GameObjectFactory* const factory = GameObjectFactory::Instance();
     TextureManager* const texture = TextureManager::Instance();
     SoundManager* const sound = SoundManager::Instance();
-    Button* mute = new Button("mute", 500, 0, 176, 64);
-
-    mute->setCallback(s_mute);
-    m_uiObjects.push_back(mute);
 
     factory->registerType("Player", new Creator<Player>);
     factory->registerType("Pig", new Creator<Pig>);
@@ -198,13 +194,6 @@ void PlayState::update()
     PhysicWorld::Instance()->update();
     m_pLevel->update();
     Camera::Instance()->update();
-
-    for (auto& obj : m_uiObjects) {
-        if (obj == nullptr) {
-            continue;
-        }
-        obj->update();
-    }
 }
 
 void PlayState::render()
@@ -214,9 +203,6 @@ void PlayState::render()
     }
 
     m_pLevel->render();
-    for (auto& obj : m_uiObjects) {
-        obj->draw();
-    }
 
     if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
         m_bDebug = !m_bDebug;

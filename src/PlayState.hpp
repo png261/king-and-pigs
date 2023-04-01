@@ -28,6 +28,5 @@ private:
 
     bool m_bDebug;
     static const std::string s_stateID;
-    std::vector<UiObject*> m_uiObjects;
     std::unique_ptr<Level> m_pLevel;
 };
