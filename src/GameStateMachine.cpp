@@ -1,5 +1,9 @@
 #include "GameStateMachine.hpp"
 
+GameStateMachine::GameStateMachine() {}
+
+GameStateMachine::~GameStateMachine() {}
+
 GameStateMachine* GameStateMachine::Instance()
 {
     static GameStateMachine* const s_pInstance = new GameStateMachine;
@@ -9,12 +13,14 @@ GameStateMachine* GameStateMachine::Instance()
 void GameStateMachine::clean()
 {
     if (!m_gameStates.empty()) {
-        m_gameStates.back()->onExit();
-
-        delete m_gameStates.back();
-
-        m_gameStates.clear();
+        return;
     }
+
+    for (auto& state : m_gameStates) {
+        state->onExit();
+        delete state;
+    }
+    m_gameStates.clear();
 }
 
 void GameStateMachine::update()
@@ -26,8 +32,8 @@ void GameStateMachine::update()
 
 void GameStateMachine::render()
 {
-    for (auto& obj : m_gameStates) {
-        obj->render();
+    for (auto& state : m_gameStates) {
+        state->render();
     }
 }
 
@@ -41,8 +47,6 @@ void GameStateMachine::popState()
 {
     if (!m_gameStates.empty()) {
         m_gameStates.back()->onExit();
-        /* TODO */
-        /* delete m_gameStates.back(); */
         m_gameStates.pop_back();
     }
 
@@ -57,7 +61,6 @@ void GameStateMachine::changeState(GameState* const pState)
         }
 
         m_gameStates.back()->onExit();
-        delete m_gameStates.back();
         m_gameStates.pop_back();
     }
 

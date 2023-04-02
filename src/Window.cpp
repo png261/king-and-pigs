@@ -89,11 +89,11 @@ void Window::refresh()
     SDL_RenderPresent(m_pRenderer);
 }
 
-SDL_Texture* Window::loadImage(const std::string filename)
+SDL_Texture* Window::loadImage(const std::string path)
 {
-    SDL_Texture* const pTexture = IMG_LoadTexture(m_pRenderer, filename.c_str());
+    SDL_Texture* const pTexture = IMG_LoadTexture(m_pRenderer, path.c_str());
     if (!pTexture) {
-        Log::error("IMG_LoadTexture: Couldn't open image '" + filename + "': " + IMG_GetError());
+        Log::error("IMG_LoadTexture: Couldn't open image '" + path + "': " + IMG_GetError());
     }
     return pTexture;
 }

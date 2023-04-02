@@ -22,7 +22,7 @@ public:
         const SDL_Point* center = 0,
         const SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-    SDL_Texture* loadImage(const std::string filename);
+    SDL_Texture* loadImage(const std::string path);
 
     void freeImage(SDL_Texture* const image);
 

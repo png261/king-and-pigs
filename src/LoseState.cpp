@@ -3,6 +3,7 @@
 #include "CONSTANT.hpp"
 #include "Game.hpp"
 #include "GameStateMachine.hpp"
+#include "MainMenuState.hpp"
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
@@ -27,9 +28,6 @@ void LoseState::update()
     }
 
     for (auto& obj : m_uiObjects) {
-        if (obj == nullptr) {
-            continue;
-        }
         obj->update();
     }
 };
@@ -40,9 +38,6 @@ void LoseState::render()
         return;
     }
     for (auto& obj : m_uiObjects) {
-        if (obj == nullptr) {
-            continue;
-        }
         obj->draw();
     }
 
@@ -51,7 +46,7 @@ void LoseState::render()
 
 void LoseState::s_mainMenu()
 {
-    GameStateMachine::Instance()->changeState(new PlayState());
+    GameStateMachine::Instance()->changeState(new MainMenuState());
 }
 
 void LoseState::s_exit()

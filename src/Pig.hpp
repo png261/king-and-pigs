@@ -27,6 +27,8 @@ private:
         HIT,
     };
 
+    virtual void handleSound();
+
     virtual void handleMovement();
     virtual void changeDirection();
 

@@ -1,6 +1,7 @@
 #include "Box.hpp"
 #include "Game.hpp"
 #include "PhysicWorld.hpp"
+#include "SoundManager.hpp"
 
 Box::Box()
     : GameObject()
@@ -34,6 +35,7 @@ void Box::update()
 {
     if (this->isDead()) {
         /* this->breakIntoPieces(); */
+        SoundManager::Instance()->playSFX("box broken");
         this->disappear();
         return;
     }

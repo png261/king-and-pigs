@@ -4,20 +4,19 @@
 #include "Game.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
-#include "Log.hpp"
 #include "MainMenuState.hpp"
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
-const std::string PauseState::s_stateID = "MAIN_MENU";
+const std::string PauseState::s_stateID = "PAUSE";
 
 PauseState::PauseState(){};
 
 PauseState::~PauseState()
 {
-    Log::log("pause state delete");
     for (auto& obj : m_uiObjects) {
         delete obj;
+        obj = nullptr;
     }
     m_uiObjects.clear();
 };
@@ -36,10 +35,11 @@ void PauseState::update()
         return;
     }
 
+    if (InputHandler::Instance()->isKeyDown(KEY_ESCAPE)) {
+        s_resume();
+    }
+
     for (auto& obj : m_uiObjects) {
-        if (obj == nullptr) {
-            continue;
-        }
         obj->update();
     }
 };
@@ -49,10 +49,8 @@ void PauseState::render()
     if (!m_bLoaded || m_bPaused) {
         return;
     }
+
     for (auto& obj : m_uiObjects) {
-        if (obj == nullptr) {
-            continue;
-        }
         obj->draw();
     }
 };
@@ -64,7 +62,6 @@ void PauseState::s_resume()
 
 void PauseState::s_mainMenu()
 {
-    GameStateMachine::Instance()->popState();
     GameStateMachine::Instance()->changeState(new MainMenuState());
 }
 

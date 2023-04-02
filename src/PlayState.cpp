@@ -127,16 +127,30 @@ bool PlayState::load()
     texture->load(ASSETS_DIR + "UI/Button/hovered.png", "button hovered");
     texture->load(ASSETS_DIR + "UI/Button/pressed.png", "button pressed");
 
-    sound->loadMusic(ASSETS_DIR + "sounds/background.ogg", "background");
-    sound->loadSFX(ASSETS_DIR + "sounds/jump.wav", "jump");
-    sound->playMusic("background");
+    sound->loadMusic(ASSETS_DIR + "sounds/PlayState/background.wav", "playstate background");
 
+    sound->loadSFX(ASSETS_DIR + "sounds/Player/attack.wav", "player attack");
+    sound->loadSFX(ASSETS_DIR + "sounds/Player/dying.wav", "player dying");
+    sound->loadSFX(ASSETS_DIR + "sounds/Player/jump.wav", "player jump");
+
+    sound->loadSFX(ASSETS_DIR + "sounds/Pig/attack.wav", "pig attack");
+    sound->loadSFX(ASSETS_DIR + "sounds/Pig/dying.wav", "pig dying");
+
+    sound->loadSFX(ASSETS_DIR + "sounds/Door/close.wav", "door close");
+    sound->loadSFX(ASSETS_DIR + "sounds/Door/open.wav", "door open");
+
+    sound->loadSFX(ASSETS_DIR + "sounds/Bomb/on.wav", "bomb on");
+    sound->loadSFX(ASSETS_DIR + "sounds/Bomb/explode.wav", "bomb explode");
+
+    sound->loadSFX(ASSETS_DIR + "sounds/Box/break.wav", "box broken");
+
+    sound->loadSFX(ASSETS_DIR + "sounds/Heart/bonus.wav", "heart bonus");
 
     if (this->loadLevel() == false) {
         return false;
     }
 
-
+    sound->playMusic("playstate background");
     m_bLoaded = true;
 
     return true;
@@ -179,9 +193,14 @@ void PlayState::update()
     if (!m_bLoaded || m_bPaused || m_pLevel == nullptr) {
         return;
     }
+
     if (InputHandler::Instance()->isKeyDown(KEY_ESCAPE)) {
         GameStateMachine::Instance()->pushState(new PauseState());
     }
+
+    if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
+        m_bDebug = !m_bDebug;
+    };
 
     PhysicWorld::Instance()->update();
     m_pLevel->update();
@@ -195,10 +214,6 @@ void PlayState::render()
     }
 
     m_pLevel->render();
-
-    if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
-        m_bDebug = !m_bDebug;
-    };
 
     if (m_bDebug) {
         PhysicWorld::Instance()->debugDraw();

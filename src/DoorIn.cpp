@@ -1,6 +1,5 @@
 #include "DoorIn.hpp"
 #include "Game.hpp"
-#include "Log.hpp"
 
 DoorIn::DoorIn() {}
 

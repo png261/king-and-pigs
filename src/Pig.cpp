@@ -3,6 +3,7 @@
 #include "DamageableObject.hpp"
 #include "Game.hpp"
 #include "PhysicWorld.hpp"
+#include "SoundManager.hpp"
 
 Pig::Pig()
     : GameObject()
@@ -74,6 +75,18 @@ void Pig::update()
     DamageableObject::update();
     AttackerObject::update();
     this->updateAnimation();
+    this->handleSound();
+}
+
+void Pig::handleSound()
+{
+    if (this->isDying()) {
+        SoundManager::Instance()->playSFX("pig dying");
+    }
+
+    if (this->isAttack()) {
+        SoundManager::Instance()->playSFX("pig attack");
+    }
 }
 
 void Pig::handleMovement()

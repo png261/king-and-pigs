@@ -1,6 +1,8 @@
 #include "Button.hpp"
+#include "CONSTANT.hpp"
 #include "Game.hpp"
 #include "InputHandler.hpp"
+#include "SoundManager.hpp"
 
 Button::Button(std::string text, int x, int y, int width, int height)
     : UiObject()
@@ -15,6 +17,7 @@ Button::Button(std::string text, int x, int y, int width, int height)
 
     m_curAnimation = NORMAL;
     m_animations[m_curAnimation]->start();
+    SoundManager::Instance()->loadSFX(ASSETS_DIR + "sounds/Button/clicked.mp3", "button clicked");
 }
 
 Button::~Button() {}
@@ -46,6 +49,7 @@ void Button::update()
 
     if (m_bHovered) {
         if (InputHandler::Instance()->isMouseDown(MOUSE_LEFT)) {
+            SoundManager::Instance()->playSFX("button clicked");
             m_callback();
         }
     }

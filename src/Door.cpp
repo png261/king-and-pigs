@@ -1,4 +1,6 @@
 #include "Door.hpp"
+#include "Log.hpp"
+#include "SoundManager.hpp"
 
 Door::Door()
     : GameObject()
@@ -20,7 +22,7 @@ void Door::loadAnimation()
 {
     m_animations[DOOR_CLOSED] = new Animation("door idle", 46, 56, 1);
     m_animations[DOOR_OPENING] = new Animation("door open", 46, 56, 5, false);
-    m_animations[DOOR_CLOSING] = new Animation("door close", 46, 56, 5, false);
+    m_animations[DOOR_CLOSING] = new Animation("door close", 46, 56, 3, false);
 
     m_curAnimation = DOOR_CLOSED;
     m_animations[m_curAnimation]->start();
@@ -29,6 +31,17 @@ void Door::loadAnimation()
 void Door::update()
 {
     GameObject::update();
+    if (m_curAnimation == DOOR_CLOSING && m_animations[DOOR_CLOSING]->isFinished()) {
+        m_curAnimation = DOOR_CLOSED;
+        m_animations[m_curAnimation]->start();
+        SoundManager::Instance()->playSFX("door close");
+        m_bOpened = false;
+    }
+
+    if (m_curAnimation == DOOR_OPENING && m_animations[DOOR_OPENING]->isFinished()) {
+        SoundManager::Instance()->playSFX("door open");
+        m_bOpened = true;
+    }
 }
 
 void Door::open()
@@ -39,22 +52,17 @@ void Door::open()
 
     m_curAnimation = DOOR_OPENING;
     m_animations[m_curAnimation]->start();
-    if (m_animations[DOOR_OPENING]->isFinished()) {
-        m_bOpened = true;
-    }
 }
 
 void Door::close()
 {
     if (this->isClosed()) {
+        Log::log("is closed");
         return;
     }
 
     m_curAnimation = DOOR_CLOSING;
     m_animations[m_curAnimation]->start();
-    if (m_animations[DOOR_CLOSING]->isFinished()) {
-        m_bOpened = false;
-    }
 }
 
 bool Door::isOpened() const

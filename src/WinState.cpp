@@ -3,6 +3,7 @@
 #include "CONSTANT.hpp"
 #include "Game.hpp"
 #include "GameStateMachine.hpp"
+#include "MainMenuState.hpp"
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
@@ -40,9 +41,6 @@ void WinState::render()
         return;
     }
     for (auto& obj : m_uiObjects) {
-        if (obj == nullptr) {
-            continue;
-        }
         obj->draw();
     }
     Game::Instance()->getWindow()->print("you are win", 40, 320, 50, {});
@@ -50,7 +48,7 @@ void WinState::render()
 
 void WinState::s_mainMenu()
 {
-    GameStateMachine::Instance()->changeState(new PlayState());
+    GameStateMachine::Instance()->changeState(new MainMenuState());
 }
 
 void WinState::s_exit()

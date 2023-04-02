@@ -10,10 +10,10 @@ class TextureManager final
 public:
     static TextureManager* Instance();
 
-    bool load(const std::string filename, const std::string textureID);
+    bool load(const std::string path, const std::string id);
 
     void draw(
-        const std::string textureID,
+        const std::string id,
         const b2Vec2 position,
         const int width,
         const int height,

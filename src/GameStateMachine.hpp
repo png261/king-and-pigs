@@ -20,6 +20,7 @@ public:
     void clean();
 
 private:
-    GameStateMachine(){};
+    GameStateMachine();
+    ~GameStateMachine();
     std::vector<GameState*> m_gameStates;
 };

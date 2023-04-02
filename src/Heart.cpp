@@ -1,6 +1,7 @@
 #include "Heart.hpp"
 #include "Game.hpp"
 #include "PhysicWorld.hpp"
+#include "SoundManager.hpp"
 
 void Heart::load(std::unique_ptr<LoaderParams> const& pParams)
 {
@@ -23,6 +24,7 @@ void Heart::update()
 {
     ItemObject::update();
     if (m_curAnimation == HIT && m_animations[m_curAnimation]->isFinished()) {
+        SoundManager::Instance()->playSFX("heart bonus");
         Game::Instance()->getLevel()->getPlayer()->heal(1);
         this->disappear();
     }

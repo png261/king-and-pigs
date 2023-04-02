@@ -81,7 +81,7 @@ void Player::loadAnimation()
 void Player::update()
 {
     if (this->isDead()) {
-        GameStateMachine::Instance()->changeState(new LoseState());
+        GameStateMachine::Instance()->pushState(new LoseState());
         return;
     }
 
@@ -106,6 +106,7 @@ void Player::update()
     DamageableObject::update();
     AttackerObject::update();
     this->updateAnimation();
+    this->handleSound();
 }
 
 void Player::draw()
@@ -115,6 +116,16 @@ void Player::draw()
     }
 
     GameObject::draw();
+}
+
+void Player::handleSound()
+{
+    if (this->isDying()) {
+        SoundManager::Instance()->playSFX("player dying");
+    }
+    if (this->isAttack()) {
+        SoundManager::Instance()->playSFX("player attack");
+    }
 }
 
 void Player::handleInput()
@@ -143,6 +154,7 @@ void Player::handleInput()
 
         if (input->isKeyPressed(KEY_SPACE)) {
             this->jump();
+            SoundManager::Instance()->playSFX("player jump");
         }
     }
 
@@ -157,6 +169,7 @@ void Player::handleInput()
 
     if (input->isKeyPressed(KEY_A)) {
         this->attack();
+        SoundManager::Instance()->playSFX("player attack");
     }
 
     m_bFlipped = m_direction == LEFT;

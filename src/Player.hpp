@@ -38,6 +38,7 @@ private:
     };
 
     void handleInput();
+    void handleSound();
     void doorOut();
 
     Timer doorOutTimer;

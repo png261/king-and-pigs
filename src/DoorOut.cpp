@@ -1,4 +1,5 @@
 #include "DoorOut.hpp"
+#include "Log.hpp"
 
 void DoorOut::load(std::unique_ptr<LoaderParams> const& pParams)
 {
@@ -9,4 +10,12 @@ void DoorOut::load(std::unique_ptr<LoaderParams> const& pParams)
     filter.maskBits = PhysicWorld::MASK_DOOR_OUT;
     m_pFixture->SetFilterData(filter);
     this->open();
+}
+
+void DoorOut::update()
+{
+    Door::update();
+    if (this->isOpened()) {
+        this->close();
+    }
 }

@@ -3,6 +3,8 @@
 #include "CONSTANT.hpp"
 #include "Game.hpp"
 #include "GameStateMachine.hpp"
+#include "Log.hpp"
+#include "PauseState.hpp"
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
@@ -10,7 +12,14 @@ const std::string MainMenuState::s_stateID = "MAIN_MENU";
 
 MainMenuState::MainMenuState(){};
 
-MainMenuState::~MainMenuState(){};
+MainMenuState::~MainMenuState()
+{
+    for (auto& obj : m_uiObjects) {
+        delete obj;
+        obj = nullptr;
+    }
+    m_uiObjects.clear();
+};
 
 bool MainMenuState::onEnter()
 {
@@ -27,9 +36,6 @@ void MainMenuState::update()
     }
 
     for (auto& obj : m_uiObjects) {
-        if (obj == nullptr) {
-            continue;
-        }
         obj->update();
     }
 };
@@ -40,9 +46,6 @@ void MainMenuState::render()
         return;
     }
     for (auto& obj : m_uiObjects) {
-        if (obj == nullptr) {
-            continue;
-        }
         obj->draw();
     }
 };

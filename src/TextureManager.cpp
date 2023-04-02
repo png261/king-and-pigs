@@ -14,25 +14,25 @@ TextureManager* TextureManager::Instance()
     return s_pInstance;
 }
 
-bool TextureManager::load(const std::string filename, const std::string textureID)
+bool TextureManager::load(const std::string path, const std::string id)
 {
-    if (m_textureMap.find(textureID) != m_textureMap.end()) {
+    if (m_textureMap.find(id) != m_textureMap.end()) {
         return false;
     }
 
-    SDL_Texture* const pTexture = Game::Instance()->getWindow()->loadImage(filename.c_str());
+    SDL_Texture* const pTexture = Game::Instance()->getWindow()->loadImage(path.c_str());
     if (pTexture == nullptr) {
-        Log::error("fail to create Texture for: " + filename);
+        Log::error("Fail to create Texture for: " + path);
         return false;
     }
 
-    m_textureMap[textureID] = pTexture;
+    m_textureMap[id] = pTexture;
 
     return true;
 }
 
 void TextureManager::draw(
-    const std::string textureID,
+    const std::string id,
     const b2Vec2 position,
     const int width,
     const int height,
@@ -46,7 +46,7 @@ void TextureManager::draw(
         height};
 
     Game::Instance()->getWindow()->renderImage(
-        m_textureMap[textureID],
+        m_textureMap[id],
         &srcRect,
         &destRect,
         0,

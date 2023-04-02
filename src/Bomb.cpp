@@ -1,6 +1,7 @@
 #include "Bomb.hpp"
 #include "InputHandler.hpp"
 #include "Log.hpp"
+#include "SoundManager.hpp"
 
 Bomb::Bomb()
     : GameObject()
@@ -47,8 +48,7 @@ void Bomb::loadAnimation()
 {
     m_animations[OFF] = new Animation("bomb off", 52, 56);
     m_animations[ON] = new Animation("bomb on", 52, 56, 4);
-    m_animations[EXPLODE] =
-        new Animation("bomb explode", 52, 56, 6, false);
+    m_animations[EXPLODE] = new Animation("bomb explode", 52, 56, 6, false);
 
     m_curAnimation = OFF;
     m_animations[m_curAnimation]->start();
@@ -73,6 +73,7 @@ void Bomb::update()
 
 void Bomb::turnOn()
 {
+    SoundManager::Instance()->playSFX("bomb on");
     m_bOn = true;
     onTimer.start();
     m_curAnimation = ON;
@@ -81,6 +82,7 @@ void Bomb::turnOn()
 
 void Bomb::explode()
 {
+    SoundManager::Instance()->playSFX("bomb explode");
     this->attack();
 }
 
