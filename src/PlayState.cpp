@@ -144,6 +144,7 @@ bool PlayState::load()
 
 bool PlayState::loadLevel()
 {
+    this->onExit();
     LevelParser levelParser;
     m_pLevel = std::unique_ptr<Level>(levelParser.parseLevel(
         Game::Instance()->loadLevel(Game::Instance()->getCurrentLevel()).c_str()));
@@ -153,19 +154,10 @@ bool PlayState::loadLevel()
         return false;
     }
     Camera::Instance()->setTarget(m_pLevel->getPlayer());
-    Camera::Instance()->setZoom(2);
+    Camera::Instance()->setZoom(1);
+    this->resume();
 
     return true;
-}
-
-void PlayState::loadNewLevel()
-{
-    this->onExit();
-    if (this->loadLevel()) {
-        this->resume();
-    } else {
-        Log::error("fail to load next level");
-    }
 }
 
 bool PlayState::onExit()

@@ -102,7 +102,7 @@ void Game::nextLevel()
         return;
     }
 
-    playState->loadNewLevel();
+    playState->loadLevel();
 }
 
 int Game::getCurrentLevel() const

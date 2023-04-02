@@ -20,7 +20,6 @@ public:
     std::string getStateID() const override;
 
     bool loadLevel();
-    void loadNewLevel();
 
 private:
     static void s_mute();
