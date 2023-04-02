@@ -5,18 +5,20 @@ DamageableObject::DamageableObject(
     const int invulnerableTime,
     const int dyingTime)
     : m_hp(initialHp)
-    , m_bDead(false)
-    , m_bDying(false)
-    , m_bInvulnerable(false)
+    , m_maxHp(initialHp)
     , m_invulnerableTime(invulnerableTime)
     , m_dyingTime(dyingTime)
     , invulnerableTimer(invulnerableTime)
     , dyingTimer(dyingTime)
+    , m_bDead(false)
+    , m_bDying(false)
+    , m_bInvulnerable(false)
 {}
 
 void DamageableObject::heal(const int d)
 {
     m_hp += d;
+    m_hp = std::max(0, std::min(m_maxHp, m_hp));
 }
 
 bool DamageableObject::isDead() const

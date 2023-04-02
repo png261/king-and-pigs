@@ -30,6 +30,8 @@ protected:
     bool m_bDying;
     bool m_bInvulnerable;
     int m_invulnerableTime;
+
     int m_hp;
+    int m_maxHp;
     int m_dyingTime;
 };
