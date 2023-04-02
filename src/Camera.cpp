@@ -28,10 +28,9 @@ b2Vec2 Camera::getPosition() const
 
     b2Vec2 pos =
         m_pTarget->getPosition() -
-        b2Vec2(
-            ((Game::Instance()->getWindow()->getWidth() - m_pTarget->getWidth()) / m_zoom / 2.0f),
-            ((Game::Instance()->getWindow()->getHeight() - m_pTarget->getHeight()) / m_zoom /
-             2.0f));
+        0.5 * b2Vec2(
+                  Game::Instance()->getWindow()->getWidth() / m_zoom - m_pTarget->getWidth(),
+                  Game::Instance()->getWindow()->getHeight() / m_zoom - m_pTarget->getHeight());
 
     if (pos.x < 0) {
         pos.x = 0;
