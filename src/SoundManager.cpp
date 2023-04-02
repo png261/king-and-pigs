@@ -1,4 +1,5 @@
 #include "SoundManager.hpp"
+#include "Log.hpp"
 
 SoundManager* SoundManager::Instance()
 {
@@ -26,34 +27,50 @@ void SoundManager::clean()
     m_sfxMap.clear();
 }
 
-bool SoundManager::loadMusic(const std::string filename, const std::string soundID)
+bool SoundManager::loadMusic(const std::string path, const std::string id)
 {
-    Mix_Music* const pMusic = Mix_LoadMUS(filename.c_str());
+    Mix_Music* const pMusic = Mix_LoadMUS(path.c_str());
     if (pMusic == nullptr) {
+        Log::warning("can't load music: " + path);
         return false;
     }
-    m_musicMap[soundID] = pMusic;
+    if (m_musicMap.find(id) != m_musicMap.end()) {
+        return false;
+    }
+    m_musicMap[id] = pMusic;
     return true;
 }
 
-bool SoundManager::loadSFX(const std::string filename, const std::string soundID)
+bool SoundManager::loadSFX(const std::string path, const std::string id)
 {
-    Mix_Chunk* const pSFX = Mix_LoadWAV(filename.c_str());
+    Mix_Chunk* const pSFX = Mix_LoadWAV(path.c_str());
     if (pSFX == nullptr) {
+        Log::warning("can't load SFX: " + path);
         return false;
     }
-    m_sfxMap[soundID] = pSFX;
+    if (m_musicMap.find(id) != m_musicMap.end()) {
+        return false;
+    }
+    m_sfxMap[id] = pSFX;
     return true;
 }
 
-void SoundManager::playMusic(const std::string soundID, const int loop)
+void SoundManager::playMusic(const std::string id, const int loop)
 {
-    Mix_PlayMusic(m_musicMap[soundID], loop);
+    if (m_musicMap.find(id) == m_musicMap.end()) {
+        Log::warning("MusicID not exist: " + id);
+        return;
+    }
+    Mix_PlayMusic(m_musicMap[id], loop);
 }
 
-void SoundManager::playSFX(const std::string soundID, const int loop)
+void SoundManager::playSFX(const std::string id, const int loop)
 {
-    Mix_PlayChannel(-1, m_sfxMap[soundID], loop);
+    if (m_sfxMap.find(id) == m_sfxMap.end()) {
+        Log::warning("sfxID not exist: " + id);
+        return;
+    }
+    Mix_PlayChannel(-1, m_sfxMap[id], loop);
 }
 
 void SoundManager::setVolume(const int percent)
