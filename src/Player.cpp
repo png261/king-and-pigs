@@ -9,8 +9,10 @@
 #include "DebugDraw.hpp"
 #include "Game.hpp"
 #include "GameObject.hpp"
+#include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
 #include "Log.hpp"
+#include "LoseState.hpp"
 #include "PhysicWorld.hpp"
 #include "SoundManager.hpp"
 #include "VisionObject.hpp"
@@ -79,9 +81,9 @@ void Player::loadAnimation()
 void Player::update()
 {
     if (this->isDead()) {
+        GameStateMachine::Instance()->changeState(new LoseState());
         return;
     }
-
 
     GameObject::update();
     this->handleInput();
@@ -108,11 +110,19 @@ void Player::update()
 
 void Player::draw()
 {
+    if (this->isDead()) {
+        return;
+    }
+
     GameObject::draw();
 }
 
 void Player::handleInput()
 {
+    if (this->isDead()) {
+        return;
+    }
+
     if (this->isDying()) {
         return;
     }

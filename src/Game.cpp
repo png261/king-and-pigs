@@ -9,6 +9,7 @@
 #include "PlayState.hpp"
 #include "SoundManager.hpp"
 #include "TextureManager.hpp"
+#include "WinState.hpp"
 
 Game::Game()
     : m_pWindow(nullptr)
@@ -16,8 +17,8 @@ Game::Game()
     , m_bRunning(false)
 {
     m_levelFiles.push_back(LEVELS_DIR + "level1.tmx");
-    m_levelFiles.push_back(LEVELS_DIR + "level2.tmx");
-    m_levelFiles.push_back(LEVELS_DIR + "test.tmx");
+    /* m_levelFiles.push_back(LEVELS_DIR + "level2.tmx"); */
+    /* m_levelFiles.push_back(LEVELS_DIR + "test.tmx"); */
     m_currentLevel = 0;
 }
 
@@ -98,7 +99,7 @@ void Game::nextLevel()
 
     m_currentLevel += 1;
     if (m_currentLevel >= m_levelFiles.size()) {
-        /* TODO: win screen */
+        GameStateMachine::Instance()->changeState(new WinState());
         return;
     }
 
