@@ -17,15 +17,14 @@ public:
     void render();
     void clean();
     void quit();
+    bool isRunning() const;
 
     Window* getWindow();
-    bool isRunning() const;
-    int getCurrentLevel() const;
-    int getNextLevel() const;
+    int getLevelIndex() const;
     void nextLevel();
-    std::string loadLevel(const int index);
+    std::string getLevelPath(const int index);
 
-    void setCurrentLevel(int const currentLevel);
+    void setLevelIndex(int const currentLevel);
 
     void setLevel(Level* const pLevel);
     Level* getLevel();
@@ -36,6 +35,6 @@ private:
     Window* m_pWindow;
     Level* m_pLevel;
     bool m_bRunning;
-    int m_currentLevel;
+    int m_levelIndex;
     std::vector<std::string> m_levelFiles;
 };

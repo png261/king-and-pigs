@@ -17,9 +17,9 @@ Game::Game()
     , m_bRunning(false)
 {
     m_levelFiles.push_back(LEVELS_DIR + "level1.tmx");
-    /* m_levelFiles.push_back(LEVELS_DIR + "level2.tmx"); */
-    /* m_levelFiles.push_back(LEVELS_DIR + "test.tmx"); */
-    m_currentLevel = 0;
+    m_levelFiles.push_back(LEVELS_DIR + "level2.tmx");
+    m_levelFiles.push_back(LEVELS_DIR + "test.tmx");
+    m_levelIndex = 0;
 }
 
 Game::~Game() {}
@@ -36,7 +36,7 @@ bool Game::init()
         return false;
     };
 
-    m_pWindow = new Window(700, 400);
+    m_pWindow = new Window(1280, 720);
 
     if (PhysicWorld::Instance()->init(m_pWindow) == false) {
         return false;
@@ -97,8 +97,8 @@ void Game::nextLevel()
         return;
     }
 
-    m_currentLevel += 1;
-    if (m_currentLevel >= m_levelFiles.size()) {
+    m_levelIndex += 1;
+    if (m_levelIndex >= m_levelFiles.size()) {
         GameStateMachine::Instance()->changeState(new WinState());
         return;
     }
@@ -106,9 +106,9 @@ void Game::nextLevel()
     playState->loadLevel();
 }
 
-int Game::getCurrentLevel() const
+int Game::getLevelIndex() const
 {
-    return m_currentLevel;
+    return m_levelIndex;
 }
 
 bool Game::isRunning() const
@@ -116,8 +116,7 @@ bool Game::isRunning() const
     return m_bRunning;
 }
 
-
-std::string Game::loadLevel(int index)
+std::string Game::getLevelPath(int index)
 {
     return m_levelFiles[index];
 }
