@@ -1,12 +1,8 @@
 #include "GameStateMachine.hpp"
 
-GameStateMachine::GameStateMachine() {}
-
-GameStateMachine::~GameStateMachine() {}
-
-GameStateMachine* GameStateMachine::Instance()
+std::shared_ptr<GameStateMachine> GameStateMachine::Instance()
 {
-    static GameStateMachine* const s_pInstance = new GameStateMachine;
+    static std::shared_ptr<GameStateMachine> s_pInstance{new GameStateMachine};
     return s_pInstance;
 }
 

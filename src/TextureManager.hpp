@@ -8,7 +8,7 @@
 class TextureManager final
 {
 public:
-    static TextureManager* Instance();
+    static std::shared_ptr<TextureManager> Instance();
 
     bool load(const std::string path, const std::string id);
 
@@ -44,7 +44,6 @@ public:
     void clean();
 
 private:
-    TextureManager();
-    ~TextureManager();
+    TextureManager() = default;
     std::unordered_map<std::string, SDL_Texture*> m_textureMap;
 };

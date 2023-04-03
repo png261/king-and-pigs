@@ -4,13 +4,9 @@
 #include "Log.hpp"
 #include "SDL.hpp"
 
-TextureManager::TextureManager() {}
-
-TextureManager::~TextureManager() {}
-
-TextureManager* TextureManager::Instance()
+std::shared_ptr<TextureManager> TextureManager::Instance()
 {
-    static TextureManager* const s_pInstance = new TextureManager;
+    static std::shared_ptr<TextureManager> s_pInstance{new TextureManager};
     return s_pInstance;
 }
 

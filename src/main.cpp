@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv[])
 {
-    Game* game = Game::Instance();
+    const auto game = Game::Instance();
 
     if (game->init() == false) {
         return -1;

@@ -22,11 +22,9 @@ Game::Game()
     m_levelIndex = 0;
 }
 
-Game::~Game() {}
-
-Game* Game::Instance()
+std::shared_ptr<Game> Game::Instance()
 {
-    static Game* const s_pInstance = new Game();
+    static std::shared_ptr<Game> s_pInstance{new Game};
     return s_pInstance;
 }
 

@@ -6,7 +6,7 @@
 class Camera
 {
 public:
-    static Camera* Instance();
+    static std::shared_ptr<Camera> Instance();
     void update();
 
     b2Vec2 getPosition() const;
@@ -18,7 +18,6 @@ public:
 
 private:
     Camera();
-    ~Camera();
 
     GameObject* m_pTarget;
     b2Vec2 m_position;

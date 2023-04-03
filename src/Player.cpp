@@ -147,7 +147,7 @@ void Player::handleInput()
         return;
     }
 
-    InputHandler* const input = InputHandler::Instance();
+    const auto input = InputHandler::Instance();
 
     if (this->isOnGround()) {
         m_bWantDoorIn = input->isKeyDown(KEY_W);

@@ -1,7 +1,8 @@
 #pragma once
 
-#include <unordered_map>
+#include <memory>
 #include <string>
+#include <unordered_map>
 #include "SDL.hpp"
 
 // music: .ogg
@@ -10,7 +11,7 @@
 class SoundManager
 {
 public:
-    static SoundManager* Instance();
+    static std::shared_ptr<SoundManager> Instance();
 
     bool loadSFX(const std::string path, const std::string id);
     bool loadMusic(const std::string path, const std::string id);
@@ -36,7 +37,6 @@ public:
 
 private:
     SoundManager();
-    ~SoundManager();
     void setVolumeMusic(const float percent);
     void setVolumeSFX(const float percent);
 

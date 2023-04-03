@@ -13,13 +13,7 @@ GameObject::GameObject()
     , m_direction(RIGHT)
 {}
 
-GameObject::~GameObject()
-{
-    for (const auto& animation : m_animations) {
-        delete animation.second;
-    }
-    m_animations.clear();
-}
+GameObject::~GameObject() {}
 
 void GameObject::load(std::unique_ptr<LoaderParams> const& pParams)
 {

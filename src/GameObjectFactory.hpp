@@ -1,7 +1,7 @@
 #pragma once
 
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 #include "GameObject.hpp"
 
 class BaseCreator
@@ -21,13 +21,12 @@ public:
 class GameObjectFactory final
 {
 public:
-    static GameObjectFactory* Instance();
+    static std::shared_ptr<GameObjectFactory> Instance();
     bool registerType(const std::string typeID, BaseCreator* const pCreator);
     GameObject* create(const std::string typeID);
 
 private:
-    GameObjectFactory() {}
-    ~GameObjectFactory() {}
+    GameObjectFactory() = default;
 
     std::unordered_map<std::string, BaseCreator*> m_creators;
 };

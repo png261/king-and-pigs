@@ -1,12 +1,13 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 #include "GameState.hpp"
 
 class GameStateMachine final
 {
 public:
-    static GameStateMachine* Instance();
+    static std::shared_ptr<GameStateMachine> Instance();
 
     void update();
     void render();
@@ -20,7 +21,6 @@ public:
     void clean();
 
 private:
-    GameStateMachine();
-    ~GameStateMachine();
+    GameStateMachine() = default;
     std::vector<GameState*> m_gameStates;
 };

@@ -3,9 +3,9 @@
 #include "Game.hpp"
 #include "InputDefinitions.hpp"
 
-InputHandler* InputHandler::Instance()
+std::shared_ptr<InputHandler> InputHandler::Instance()
 {
-    static InputHandler* const s_pInstance = new InputHandler;
+    static std::shared_ptr<InputHandler> s_pInstance{new InputHandler};
     return s_pInstance;
 }
 
@@ -25,8 +25,6 @@ InputHandler::InputHandler()
         m_bMouseUp[i] = false;
     }
 }
-
-InputHandler::~InputHandler() {}
 
 void InputHandler::update()
 {

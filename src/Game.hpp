@@ -9,7 +9,7 @@
 class Game final
 {
 public:
-    static Game* Instance();
+    static std::shared_ptr<Game> Instance();
 
     bool init();
     void handleEvents();
@@ -31,7 +31,6 @@ public:
 
 private:
     Game();
-    ~Game();
 
     Window* m_pWindow;
     Level* m_pLevel;

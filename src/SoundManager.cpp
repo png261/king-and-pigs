@@ -1,9 +1,9 @@
 #include "SoundManager.hpp"
 #include "Log.hpp"
 
-SoundManager* SoundManager::Instance()
+std::shared_ptr<SoundManager> SoundManager::Instance()
 {
-    static SoundManager* const s_pInstance = new SoundManager;
+    static std::shared_ptr<SoundManager> s_pInstance{new SoundManager};
     return s_pInstance;
 }
 
@@ -14,11 +14,6 @@ SoundManager::SoundManager()
 {
     this->setVolume(100);
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
-}
-
-SoundManager::~SoundManager()
-{
-    Mix_CloseAudio();
 }
 
 void SoundManager::clean()

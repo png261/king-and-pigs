@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 #include "InputDefinitions.hpp"
 #include "PhysicWorld.hpp"
@@ -9,7 +10,7 @@
 class InputHandler final
 {
 public:
-    static InputHandler* Instance();
+    static std::shared_ptr<InputHandler> Instance();
 
     void update();
 
@@ -29,7 +30,6 @@ public:
 
 private:
     InputHandler();
-    ~InputHandler();
 
     void onKeyDown(SDL_Event const& event);
     void onKeyUp(SDL_Event const& event);

@@ -2,10 +2,10 @@
 
 #include "Log.hpp"
 
-GameObjectFactory* GameObjectFactory::Instance()
+std::shared_ptr<GameObjectFactory> GameObjectFactory::Instance()
 {
-    static GameObjectFactory* const s_pInstance = new GameObjectFactory();
-    return s_pInstance;
+    static std::shared_ptr<GameObjectFactory> s_instance{new GameObjectFactory};
+    return s_instance;
 }
 
 bool GameObjectFactory::registerType(const std::string typeID, BaseCreator* const pCreator)

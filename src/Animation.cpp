@@ -22,8 +22,6 @@ Animation::Animation(
     m_framerate = 10;
 }
 
-Animation::~Animation() {}
-
 bool Animation::isRunning() const
 {
     return m_bRunning;

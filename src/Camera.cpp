@@ -7,12 +7,10 @@ Camera::Camera()
     , m_zoom(1)
 {}
 
-Camera::~Camera() {}
-
-Camera* Camera::Instance()
+std::shared_ptr<Camera> Camera::Instance()
 {
-    static Camera* const s_pCamera = new Camera();
-    return s_pCamera;
+    static std::shared_ptr<Camera> s_pInstance{new Camera};
+    return s_pInstance;
 }
 
 float Camera::getZoom() const

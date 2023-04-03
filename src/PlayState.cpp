@@ -48,9 +48,9 @@ void PlayState::s_mute()
 bool PlayState::load()
 {
     m_bLoaded = false;
-    GameObjectFactory* const factory = GameObjectFactory::Instance();
-    TextureManager* const texture = TextureManager::Instance();
-    SoundManager* const sound = SoundManager::Instance();
+    const auto factory = GameObjectFactory::Instance();
+    const auto texture = TextureManager::Instance();
+    const auto sound = SoundManager::Instance();
 
     factory->registerType("Player", new Creator<Player>);
     factory->registerType("Pig", new Creator<Pig>);
