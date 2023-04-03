@@ -7,6 +7,9 @@ class Camera
 {
 public:
     static std::shared_ptr<Camera> Instance();
+    Camera(Camera const&) = delete;
+    Camera& operator=(Camera const&) = delete;
+
     void update();
 
     b2Vec2 getPosition() const;

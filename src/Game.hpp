@@ -10,6 +10,8 @@ class Game final
 {
 public:
     static std::shared_ptr<Game> Instance();
+    Game(Game const&) = delete;
+    Game& operator=(Game const&) = delete;
 
     bool init();
     void handleEvents();

@@ -12,6 +12,8 @@ class SoundManager
 {
 public:
     static std::shared_ptr<SoundManager> Instance();
+    SoundManager(SoundManager const&) = delete;
+    SoundManager& operator=(SoundManager const&) = delete;
 
     bool loadSFX(const std::string path, const std::string id);
     bool loadMusic(const std::string path, const std::string id);

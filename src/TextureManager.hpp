@@ -9,6 +9,8 @@ class TextureManager final
 {
 public:
     static std::shared_ptr<TextureManager> Instance();
+    TextureManager(TextureManager const&) = delete;
+    TextureManager& operator=(TextureManager const&) = delete;
 
     bool load(const std::string path, const std::string id);
 

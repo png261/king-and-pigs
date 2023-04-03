@@ -8,6 +8,8 @@ class GameStateMachine final
 {
 public:
     static std::shared_ptr<GameStateMachine> Instance();
+    GameStateMachine(GameStateMachine const&) = delete;
+    GameStateMachine& operator=(GameStateMachine const&) = delete;
 
     void update();
     void render();
