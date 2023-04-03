@@ -18,9 +18,4 @@ private:
 
     int m_width;
     int m_height;
-
-    int m_textureWidth;
-    int m_textureHeight;
-    int m_textureX;
-    int m_textureY;
 };
