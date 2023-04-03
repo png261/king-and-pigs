@@ -41,9 +41,11 @@ public:
         MASK_PIG_VISION_SENSOR = CAT_ALL,
     };
 
-    static PhysicWorld* Instance();
+    static std::shared_ptr<PhysicWorld> Instance();
+    PhysicWorld(PhysicWorld const&) = delete;
+    PhysicWorld& operator=(PhysicWorld const&) = delete;
 
-    bool init(Window* window);
+    bool init(std::shared_ptr<Window> const& window);
     void update();
     void clean();
 

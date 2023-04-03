@@ -6,7 +6,7 @@
 class DebugDraw final : public b2Draw
 {
 public:
-    DebugDraw(Window* window);
+    DebugDraw(std::shared_ptr<Window> const& window);
 
     void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
 
@@ -24,6 +24,6 @@ public:
     void DrawPoint(const b2Vec2& p, float size, const b2Color& color);
 
 private:
-    Window* m_pWindow;
+    std::shared_ptr<Window> m_pWindow;
     SDL_Renderer* m_pRenderer;
 };

@@ -17,17 +17,15 @@ const float PhysicWorld::DEG_PER_RAD = b2_pi / 180;
 const float PhysicWorld::GROUND_FRICTION = 5;
 const b2Vec2 PhysicWorld::GRAVITY = {0.0f, 10.0f};
 
-PhysicWorld::PhysicWorld()
-    : m_pWorld(nullptr)
-{}
+PhysicWorld::PhysicWorld() {}
 
-PhysicWorld* PhysicWorld::Instance()
+std::shared_ptr<PhysicWorld> PhysicWorld::Instance()
 {
-    static PhysicWorld* const pInstance = new PhysicWorld();
-    return pInstance;
+    static std::shared_ptr<PhysicWorld> s_pInstance{new PhysicWorld};
+    return s_pInstance;
 }
 
-bool PhysicWorld::init(Window* window)
+bool PhysicWorld::init(std::shared_ptr<Window> const& window)
 {
     m_pWorld = new b2World(GRAVITY);
     m_contactListener = std::make_unique<ContactListener>(ContactListener());

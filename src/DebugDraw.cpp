@@ -4,8 +4,7 @@
 #include "SDL.hpp"
 #include "Utils.hpp"
 
-DebugDraw::DebugDraw(Window* window)
-    : m_pWindow(window)
+DebugDraw::DebugDraw(std::shared_ptr<Window> const& window)
 {
     m_pRenderer = window->getRenderer();
     uint32 flags = 0;

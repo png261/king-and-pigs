@@ -21,7 +21,7 @@ public:
     void quit();
     bool isRunning() const;
 
-    Window* getWindow();
+    std::shared_ptr<Window> getWindow();
     int getLevelIndex() const;
     void nextLevel();
     std::string getLevelPath(const int index);
@@ -34,7 +34,7 @@ public:
 private:
     Game();
 
-    Window* m_pWindow;
+    std::shared_ptr<Window> m_pWindow;
     Level* m_pLevel;
     bool m_bRunning;
     int m_levelIndex;

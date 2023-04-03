@@ -12,8 +12,7 @@
 #include "WinState.hpp"
 
 Game::Game()
-    : m_pWindow(nullptr)
-    , m_pLevel(nullptr)
+    : m_pLevel(nullptr)
     , m_bRunning(false)
 {
     m_levelFiles.push_back(LEVELS_DIR + "level1.tmx");
@@ -34,7 +33,7 @@ bool Game::init()
         return false;
     };
 
-    m_pWindow = new Window(1280, 720);
+    m_pWindow = std::make_shared<Window>(1280, 720);
 
     if (PhysicWorld::Instance()->init(m_pWindow) == false) {
         return false;
@@ -118,7 +117,7 @@ std::string Game::getLevelPath(int index)
     return m_levelFiles[index];
 }
 
-Window* Game::getWindow()
+std::shared_ptr<Window> Game::getWindow()
 {
     return m_pWindow;
 }
