@@ -11,9 +11,9 @@ Button::Button(std::string text, int x, int y, int width, int height)
     , m_callback(nullptr)
     , m_bHovered(false)
 {
-    m_animations[NORMAL] = new Animation("button normal", 178, 64);
-    m_animations[HOVERED] = new Animation("button hovered", 178, 64);
-    m_animations[PRESSED] = new Animation("button pressed", 178, 64);
+    m_animations[NORMAL] = std::make_unique<Animation>("button normal", 178, 64);
+    m_animations[HOVERED] = std::make_unique<Animation>("button hovered", 178, 64);
+    m_animations[PRESSED] = std::make_unique<Animation>("button pressed", 178, 64);
 
     m_curAnimation = NORMAL;
     m_animations[m_curAnimation]->start();

@@ -46,9 +46,9 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Bomb::loadAnimation()
 {
-    m_animations[OFF] = new Animation("bomb off", 52, 56);
-    m_animations[ON] = new Animation("bomb on", 52, 56, 4);
-    m_animations[EXPLODE] = new Animation("bomb explode", 52, 56, 6, false);
+    m_animations[OFF] = std::make_unique<Animation>("bomb off", 52, 56);
+    m_animations[ON] = std::make_unique<Animation>("bomb on", 52, 56, 4);
+    m_animations[EXPLODE] = std::make_unique<Animation>("bomb explode", 52, 56, 6, false);
 
     m_curAnimation = OFF;
     m_animations[m_curAnimation]->start();

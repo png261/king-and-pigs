@@ -21,7 +21,7 @@ private:
     std::string m_text;
 
     int m_curAnimation;
-    std::unordered_map<int, Animation*> m_animations;
+    std::unordered_map<int, std::unique_ptr<Animation>> m_animations;
 
     bool m_bHovered;
 

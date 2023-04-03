@@ -13,8 +13,8 @@ void Heart::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Heart::loadAnimation()
 {
-    m_animations[NORMAL] = new Animation("heart idle", 18, 14, 7);
-    m_animations[HIT] = new Animation("heart hit", 18, 14, 2, false);
+    m_animations[NORMAL] = std::make_unique<Animation>("heart idle", 18, 14, 7);
+    m_animations[HIT] = std::make_unique<Animation>("heart hit", 18, 14, 2, false);
 
     m_curAnimation = NORMAL;
     m_animations[m_curAnimation]->start();

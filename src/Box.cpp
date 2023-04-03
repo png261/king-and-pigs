@@ -24,8 +24,8 @@ void Box::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Box::loadAnimation()
 {
-    m_animations[NORMAL] = new Animation("box idle", 22, 16, 1);
-    m_animations[HIT] = new Animation("box hit", 22, 16, 2);
+    m_animations[NORMAL] = std::make_unique<Animation>("box idle", 22, 16, 1);
+    m_animations[HIT] = std::make_unique<Animation>("box hit", 22, 16, 2);
 
     m_curAnimation = NORMAL;
     m_animations[m_curAnimation]->start();

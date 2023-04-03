@@ -61,16 +61,16 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Player::loadAnimation()
 {
-    m_animations[IDLE] = new Animation("player idle", 78, 58, 11);
-    m_animations[RUN] = new Animation("player run", 78, 58, 8);
-    m_animations[JUMP] = new Animation("player jump", 78, 58, 1);
-    m_animations[FALL] = new Animation("player fall", 78, 58, 1);
-    m_animations[GROUND] = new Animation("player ground", 78, 58, 1);
-    m_animations[ATTACK] = new Animation("player attack", 78, 58, 3, false);
-    m_animations[HIT] = new Animation("player hit", 78, 58, 2);
-    m_animations[DYING] = new Animation("player dead", 78, 58, 4, false);
-    m_animations[DOOR_IN] = new Animation("player door in", 78, 58, 8, false);
-    m_animations[DOOR_OUT] = new Animation("player door out", 78, 58, 8, false);
+    m_animations[IDLE] = std::make_unique<Animation>("player idle", 78, 58, 11);
+    m_animations[RUN] = std::make_unique<Animation>("player run", 78, 58, 8);
+    m_animations[JUMP] = std::make_unique<Animation>("player jump", 78, 58, 1);
+    m_animations[FALL] = std::make_unique<Animation>("player fall", 78, 58, 1);
+    m_animations[GROUND] = std::make_unique<Animation>("player ground", 78, 58, 1);
+    m_animations[ATTACK] = std::make_unique<Animation>("player attack", 78, 58, 3, false);
+    m_animations[HIT] = std::make_unique<Animation>("player hit", 78, 58, 2);
+    m_animations[DYING] = std::make_unique<Animation>("player dead", 78, 58, 4, false);
+    m_animations[DOOR_IN] = std::make_unique<Animation>("player door in", 78, 58, 8, false);
+    m_animations[DOOR_OUT] = std::make_unique<Animation>("player door out", 78, 58, 8, false);
 
     doorOutTimer.setTime(300);
     m_curAnimation = DOOR_OUT;
