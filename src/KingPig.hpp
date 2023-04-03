@@ -2,11 +2,12 @@
 
 #include "Pig.hpp"
 
-class KingPig : public Pig
+class KingPig final : public Pig
 {
 public:
     KingPig();
-    virtual void loadAnimation() override;
+    ~KingPig() = default;
+    void loadAnimation() override;
 
 private:
     enum animations {

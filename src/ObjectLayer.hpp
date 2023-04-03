@@ -8,10 +8,10 @@ class GameObject;
 class ObjectLayer final : public Layer
 {
 public:
-    virtual ~ObjectLayer();
+    ~ObjectLayer();
 
-    virtual void update();
-    virtual void render();
+    void update();
+    void render();
 
     std::vector<GameObject*>* getGameObjects();
     void addGameObject(GameObject*);

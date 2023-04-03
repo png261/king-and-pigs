@@ -8,6 +8,7 @@ class DamageableObject
 {
 public:
     DamageableObject(const int initialHp, const int invulnerableTime, const int dyingTime);
+    virtual ~DamageableObject() = default;
 
     virtual void update();
 

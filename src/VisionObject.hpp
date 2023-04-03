@@ -31,6 +31,7 @@ class VisionObject
 {
 public:
     VisionObject(int range);
+    virtual ~VisionObject() = default;
     virtual void update(b2Vec2 start, b2Vec2 end);
     virtual void debugDraw();
 

@@ -6,6 +6,7 @@ class Door : public GameObject
 {
 public:
     Door();
+    virtual ~Door() = default;
     virtual void load(std::unique_ptr<LoaderParams> const& pParams) override;
     virtual void update() override;
     virtual void loadAnimation() override;

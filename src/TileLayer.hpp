@@ -13,8 +13,8 @@ public:
         int const mapHeight,
         const std::vector<Tileset>& tilesets);
     ~TileLayer();
-    virtual void update();
-    virtual void render();
+    void update();
+    void render();
 
     void setTileIDs(const std::vector<std::vector<int>>& data);
     void setTileSize(int const tileSize);

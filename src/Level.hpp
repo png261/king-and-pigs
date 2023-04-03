@@ -56,6 +56,6 @@ private:
 
     ObjectLayer* m_spawnLayer;
     std::vector<Layer*> m_layers;
-    std::unordered_map<int, CollisionShape> m_collisionShapes;
     std::vector<Tileset> m_tilesets;
+    std::unordered_map<int, CollisionShape> m_collisionShapes;
 };

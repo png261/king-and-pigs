@@ -32,6 +32,7 @@ public:
 private:
     Game();
     ~Game();
+
     Window* m_pWindow;
     Level* m_pLevel;
     bool m_bRunning;

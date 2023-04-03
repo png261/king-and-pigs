@@ -9,5 +9,5 @@ public:
     virtual void bonus() = 0;
 
 protected:
-    virtual ~ItemObject(){};
+    virtual ~ItemObject() = default;
 };

@@ -9,6 +9,7 @@ class Pig : public GameObject, public VisionObject, public DamageableObject, pub
 {
 public:
     Pig();
+    virtual ~Pig() = default;
     virtual void load(std::unique_ptr<LoaderParams> const& pParams) override;
     virtual void loadAnimation() override;
     virtual void update() override;

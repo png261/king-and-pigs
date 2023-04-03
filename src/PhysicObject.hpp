@@ -5,7 +5,7 @@ class PhysicObject
 {
 public:
     PhysicObject();
-    ~PhysicObject();
+    virtual ~PhysicObject();
     virtual void update();
 
     virtual b2Body* getBody() const;

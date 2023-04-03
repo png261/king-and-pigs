@@ -1,7 +1,7 @@
 #pragma once
 
-#include <unordered_map>
 #include <memory>
+#include <unordered_map>
 #include "Animation.hpp"
 #include "LoaderParams.hpp"
 #include "PhysicObject.hpp"
@@ -11,6 +11,7 @@
 class GameObject : public PhysicObject
 {
 public:
+    GameObject();
     virtual ~GameObject();
 
     virtual void load(std::unique_ptr<LoaderParams> const& pParams);
@@ -27,7 +28,6 @@ public:
     virtual void disappear();
 
 protected:
-    GameObject();
     enum direction {
         RIGHT = 1,
         LEFT = -1,
