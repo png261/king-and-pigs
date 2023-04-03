@@ -15,7 +15,6 @@
 #include "InputHandler.hpp"
 #include "KingPig.hpp"
 #include "LevelParser.hpp"
-#include "Log.hpp"
 #include "PauseState.hpp"
 #include "Pig.hpp"
 #include "PigWithBomb.hpp"
@@ -161,20 +160,21 @@ bool PlayState::load()
 bool PlayState::loadLevel()
 {
     this->onExit();
+
     LevelParser levelParser;
     m_pLevel.reset();
     m_pLevel = std::unique_ptr<Level>(levelParser.parseLevel(
         Game::Instance()->getLevelPath(Game::Instance()->getLevelIndex()).c_str()));
-    Game::Instance()->setLevel(m_pLevel.get());
 
     if (m_pLevel == nullptr) {
         return false;
     }
 
+    Game::Instance()->setLevel(m_pLevel.get());
     Camera::Instance()->setTarget(m_pLevel->getPlayer());
     Camera::Instance()->setZoom(3);
-    this->resume();
 
+    this->resume();
     return true;
 }
 

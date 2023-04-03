@@ -3,7 +3,6 @@
 #include "CONSTANT.hpp"
 #include "Game.hpp"
 #include "GameStateMachine.hpp"
-#include "Log.hpp"
 #include "PauseState.hpp"
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
@@ -68,7 +67,7 @@ bool MainMenuState::load()
     texture->load(ASSETS_DIR + "UI/Button/hovered.png", "button hovered");
     texture->load(ASSETS_DIR + "UI/Button/pressed.png", "button pressed");
 
-    Button* btn = new Button("Play", 250, 100, 176, 64);
+    Button* btn = new Button("New Game", 250, 100, 176, 64);
     btn->setCallback(s_enterPlay);
 
     Button* btn2 = new Button("Exit", 250, 200, 176, 64);

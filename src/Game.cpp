@@ -98,6 +98,7 @@ void Game::nextLevel()
     m_levelIndex += 1;
     if (m_levelIndex >= m_levelFiles.size()) {
         GameStateMachine::Instance()->changeState(new WinState());
+        m_levelIndex = 0;
         return;
     }
 
