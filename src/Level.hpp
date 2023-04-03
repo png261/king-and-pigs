@@ -1,6 +1,6 @@
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include "Layer.hpp"
 #include "ObjectLayer.hpp"
@@ -37,7 +37,7 @@ public:
     void render();
 
     std::vector<Tileset>* getTilesets();
-    std::map<int, CollisionShape>* getCollisionShapes();
+    std::unordered_map<int, CollisionShape>* getCollisionShapes();
     std::vector<Layer*>* getLayers();
     void addLayer(Layer*);
     void addTileSet(Tileset tileset);
@@ -56,6 +56,6 @@ private:
 
     ObjectLayer* m_spawnLayer;
     std::vector<Layer*> m_layers;
-    std::map<int, CollisionShape> m_collisionShapes;
+    std::unordered_map<int, CollisionShape> m_collisionShapes;
     std::vector<Tileset> m_tilesets;
 };

@@ -27,7 +27,7 @@ void WinState::update()
         return;
     }
 
-    for (auto& obj : m_uiObjects) {
+    for (const auto& obj : m_uiObjects) {
         if (obj == nullptr) {
             continue;
         }
@@ -40,7 +40,7 @@ void WinState::render()
     if (!m_bLoaded || m_bPaused) {
         return;
     }
-    for (auto& obj : m_uiObjects) {
+    for (const auto& obj : m_uiObjects) {
         obj->draw();
     }
     Game::Instance()->getWindow()->print("you are win", 40, 320, 50, {});

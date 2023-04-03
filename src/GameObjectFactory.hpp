@@ -1,6 +1,6 @@
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <string>
 #include "GameObject.hpp"
 
@@ -29,5 +29,5 @@ private:
     GameObjectFactory() {}
     ~GameObjectFactory() {}
 
-    std::map<std::string, BaseCreator*> m_creators;
+    std::unordered_map<std::string, BaseCreator*> m_creators;
 };

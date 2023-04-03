@@ -34,7 +34,7 @@ void MainMenuState::update()
         return;
     }
 
-    for (auto& obj : m_uiObjects) {
+    for (const auto& obj : m_uiObjects) {
         obj->update();
     }
 };
@@ -44,7 +44,7 @@ void MainMenuState::render()
     if (!m_bLoaded || m_bPaused) {
         return;
     }
-    for (auto& obj : m_uiObjects) {
+    for (const auto& obj : m_uiObjects) {
         obj->draw();
     }
 };
@@ -77,7 +77,6 @@ bool MainMenuState::load()
     m_uiObjects.push_back(btn2);
 
     m_bLoaded = true;
-
     return true;
 };
 

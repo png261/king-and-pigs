@@ -1,6 +1,6 @@
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <memory>
 #include "Animation.hpp"
 #include "LoaderParams.hpp"
@@ -41,6 +41,6 @@ protected:
     bool m_bFlipped;
     bool m_bExist;
 
-    std::map<int, Animation*> m_animations;
+    std::unordered_map<int, Animation*> m_animations;
     int m_curAnimation;
 };

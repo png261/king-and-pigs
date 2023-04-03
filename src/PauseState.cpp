@@ -39,7 +39,7 @@ void PauseState::update()
         s_resume();
     }
 
-    for (auto& obj : m_uiObjects) {
+    for (const auto& obj : m_uiObjects) {
         obj->update();
     }
 };
@@ -50,7 +50,7 @@ void PauseState::render()
         return;
     }
 
-    for (auto& obj : m_uiObjects) {
+    for (const auto& obj : m_uiObjects) {
         obj->draw();
     }
 };

@@ -13,7 +13,7 @@ Level::Level()
 
 Level::~Level()
 {
-    for (auto& layer : m_layers) {
+    for (const auto& layer : m_layers) {
         delete layer;
     }
     m_layers.clear();
@@ -24,7 +24,7 @@ Level::~Level()
 
 void Level::render()
 {
-    for (auto& layer : m_layers) {
+    for (const auto& layer : m_layers) {
         layer->render();
     }
     m_spawnLayer->render();
@@ -32,7 +32,7 @@ void Level::render()
 
 void Level::update()
 {
-    for (auto& layer : m_layers) {
+    for (const auto& layer : m_layers) {
         layer->update();
     }
     m_spawnLayer->update();
@@ -43,7 +43,7 @@ std::vector<Tileset>* Level::getTilesets()
     return &m_tilesets;
 }
 
-std::map<int, CollisionShape>* Level::getCollisionShapes()
+std::unordered_map<int, CollisionShape>* Level::getCollisionShapes()
 {
     return &m_collisionShapes;
 }

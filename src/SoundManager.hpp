@@ -1,6 +1,6 @@
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <string>
 #include "SDL.hpp"
 
@@ -44,6 +44,6 @@ private:
     bool m_bMutedSFX;
     float m_volume;
 
-    std::map<std::string, Mix_Music*> m_musicMap;
-    std::map<std::string, Mix_Chunk*> m_sfxMap;
+    std::unordered_map<std::string, Mix_Music*> m_musicMap;
+    std::unordered_map<std::string, Mix_Chunk*> m_sfxMap;
 };

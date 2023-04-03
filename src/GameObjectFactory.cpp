@@ -21,7 +21,7 @@ bool GameObjectFactory::registerType(const std::string typeID, BaseCreator* cons
 
 GameObject* GameObjectFactory::create(const std::string typeID)
 {
-    std::map<std::string, BaseCreator*>::iterator it = m_creators.find(typeID);
+    std::unordered_map<std::string, BaseCreator*>::iterator it = m_creators.find(typeID);
 
     if (it == m_creators.end()) {
         Log::warning("could not find type: " + typeID);

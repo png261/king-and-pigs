@@ -202,7 +202,7 @@ void LevelParser::parseTileLayer(XMLElement* const pTileElement, Level* pLevel)
     pTileLayer->setTileIDs(IDs);
     pLevel->addLayer(pTileLayer);
 
-    std::map<int, CollisionShape>* pCollisionShape = pLevel->getCollisionShapes();
+    std::unordered_map<int, CollisionShape>* pCollisionShape = pLevel->getCollisionShapes();
     if (!pCollisionShape->empty()) {
         for (int row = 0; row < m_height; row++) {
             for (int col = 0; col < m_width; col++) {
@@ -210,7 +210,7 @@ void LevelParser::parseTileLayer(XMLElement* const pTileElement, Level* pLevel)
                 if (id == 0) {
                     continue;
                 }
-                std::map<int, CollisionShape>::iterator shape = pCollisionShape->find(id);
+                std::unordered_map<int, CollisionShape>::iterator shape = pCollisionShape->find(id);
                 if (shape == pCollisionShape->end()) {
                     continue;
                 }

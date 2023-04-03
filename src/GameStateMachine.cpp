@@ -16,7 +16,7 @@ void GameStateMachine::clean()
         return;
     }
 
-    for (auto& state : m_gameStates) {
+    for (const auto& state : m_gameStates) {
         state->onExit();
         delete state;
     }
@@ -32,7 +32,7 @@ void GameStateMachine::update()
 
 void GameStateMachine::render()
 {
-    for (auto& state : m_gameStates) {
+    for (const auto& state : m_gameStates) {
         state->render();
     }
 }

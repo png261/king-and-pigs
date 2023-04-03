@@ -1,5 +1,5 @@
 #pragma once
-#include <map>
+#include <unordered_map>
 #include "Animation.hpp"
 #include "Shapes.hpp"
 #include "UiObject.hpp"
@@ -21,7 +21,7 @@ private:
     std::string m_text;
 
     int m_curAnimation;
-    std::map<int, Animation*> m_animations;
+    std::unordered_map<int, Animation*> m_animations;
 
     bool m_bHovered;
 

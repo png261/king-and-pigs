@@ -1,7 +1,7 @@
 #pragma once
 
-#include <map>
 #include <string>
+#include <unordered_map>
 #include "PhysicWorld.hpp"
 #include "SDL.hpp"
 
@@ -46,5 +46,5 @@ public:
 private:
     TextureManager();
     ~TextureManager();
-    std::map<std::string, SDL_Texture*> m_textureMap;
+    std::unordered_map<std::string, SDL_Texture*> m_textureMap;
 };

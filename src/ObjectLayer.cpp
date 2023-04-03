@@ -6,7 +6,7 @@
 
 ObjectLayer::~ObjectLayer()
 {
-    for (auto& obj : m_gameObjects) {
+    for (const auto& obj : m_gameObjects) {
         delete (obj);
     }
     m_gameObjects.clear();
@@ -14,7 +14,7 @@ ObjectLayer::~ObjectLayer()
 
 void ObjectLayer::update()
 {
-    for (auto& obj : m_gameObjects) {
+    for (const auto& obj : m_gameObjects) {
         if (obj->getPosition().x >
                 Camera::Instance()->getPosition().x + Game::Instance()->getWindow()->getWidth() &&
             obj->getPosition().y >
@@ -39,7 +39,7 @@ void ObjectLayer::update()
 
 void ObjectLayer::render()
 {
-    for (auto& obj : m_gameObjects) {
+    for (const auto& obj : m_gameObjects) {
         obj->draw();
     }
 }

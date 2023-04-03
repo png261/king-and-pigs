@@ -27,7 +27,7 @@ void LoseState::update()
         return;
     }
 
-    for (auto& obj : m_uiObjects) {
+    for (const auto& obj : m_uiObjects) {
         obj->update();
     }
 };
@@ -37,7 +37,7 @@ void LoseState::render()
     if (!m_bLoaded || m_bPaused) {
         return;
     }
-    for (auto& obj : m_uiObjects) {
+    for (const auto& obj : m_uiObjects) {
         obj->draw();
     }
 
