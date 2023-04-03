@@ -1,4 +1,5 @@
 #include "PlayState.hpp"
+
 #include "Bomb.hpp"
 #include "Box.hpp"
 #include "Button.hpp"
@@ -150,6 +151,7 @@ bool PlayState::load()
         return false;
     }
 
+    sound->setVolume(0);
     sound->playMusic("playstate background");
     m_bLoaded = true;
 
@@ -160,15 +162,17 @@ bool PlayState::loadLevel()
 {
     this->onExit();
     LevelParser levelParser;
+    m_pLevel.reset();
     m_pLevel = std::unique_ptr<Level>(levelParser.parseLevel(
-        Game::Instance()->loadLevel(Game::Instance()->getCurrentLevel()).c_str()));
+        Game::Instance()->getLevelPath(Game::Instance()->getLevelIndex()).c_str()));
     Game::Instance()->setLevel(m_pLevel.get());
 
     if (m_pLevel == nullptr) {
         return false;
     }
+
     Camera::Instance()->setTarget(m_pLevel->getPlayer());
-    Camera::Instance()->setZoom(2);
+    Camera::Instance()->setZoom(3);
     this->resume();
 
     return true;
@@ -218,6 +222,18 @@ void PlayState::render()
     if (m_bDebug) {
         PhysicWorld::Instance()->debugDraw();
     }
+
+    TextureManager::Instance()->draw("health bar", {20, 10}, 154, 62);
+    for (int i = 0; i < m_pLevel->getPlayer()->getHp(); i++) {
+        TextureManager::Instance()->draw("health heart", {60 + i * 25.0f, 30}, 22, 19);
+    }
+
+    Game::Instance()->getWindow()->print(
+        "level: " + std::to_string(Game::Instance()->getLevelIndex() + 1),
+        30,
+        300,
+        40,
+        {255, 255, 255, 255});
 }
 
 std::string PlayState::getStateID() const

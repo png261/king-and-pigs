@@ -131,15 +131,6 @@ b2Body* PhysicWorld::createStaticBody(
     return body;
 }
 
-void PhysicWorld::handleEvents()
-{
-    for (b2Contact* contact = getWorld()->GetContactList(); contact != nullptr;
-         contact = contact->GetNext()) {
-        AttackListener(contact);
-        DoorInListener(contact);
-    }
-}
-
 void PhysicWorld::DoorInListener(b2Contact* contact)
 {
     b2Fixture* fixtureA = contact->GetFixtureA();
@@ -147,14 +138,12 @@ void PhysicWorld::DoorInListener(b2Contact* contact)
     uint16 catA = fixtureA->GetFilterData().categoryBits;
     uint16 catB = fixtureB->GetFilterData().categoryBits;
 
-    bool isPlayerDoor = catA == CAT_DOOR_IN && catB == CAT_PLAYER;
-    if (!isPlayerDoor) {
+    if (catA != CAT_DOOR_IN || catB != CAT_PLAYER) {
         return;
     }
 
-    DoorIn* door = dynamic_cast<DoorIn*>((GameObject*)(fixtureA->GetBody()->GetUserData().pointer));
-    Player* player =
-        dynamic_cast<Player*>((GameObject*)(fixtureB->GetBody()->GetUserData().pointer));
+    DoorIn* door = (DoorIn*)(fixtureA->GetBody()->GetUserData().pointer);
+    Player* player = (Player*)(fixtureB->GetBody()->GetUserData().pointer);
 
     if (player == nullptr || door == nullptr) {
         return;
@@ -204,6 +193,12 @@ void PhysicWorld::handleAttack(b2Fixture* Attacker, b2Fixture* Defender)
 void PhysicWorld::update()
 {
     getWorld()->Step(m_timeStep, m_velocityIterations, m_positionIterations);
+
+    for (b2Contact* contact = getWorld()->GetContactList(); contact != nullptr;
+         contact = contact->GetNext()) {
+        AttackListener(contact);
+        DoorInListener(contact);
+    }
 }
 
 void PhysicWorld::debugDraw()
@@ -228,8 +223,6 @@ void PhysicWorld::clean()
 
     m_contactListener = std::make_unique<ContactListener>(ContactListener());
     m_pWorld->SetContactListener(m_contactListener.get());
-    /* delete m_pWorld; */
-    /* m_pWorld = nullptr; */
 }
 
 b2Fixture* PhysicWorld::createPolygonSensor(

@@ -51,8 +51,6 @@ bool Game::init()
 void Game::handleEvents()
 {
     InputHandler::Instance()->update();
-
-    PhysicWorld::Instance()->handleEvents();
 }
 
 void Game::update()

@@ -45,7 +45,6 @@ public:
 
     bool init(Window* window);
     void update();
-    void handleEvents();
     void clean();
 
     b2Fixture* createCircleBody(
