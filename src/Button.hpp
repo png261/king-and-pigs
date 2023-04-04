@@ -10,7 +10,6 @@ public:
     Button(std::string text, int x, int y, int width, int height);
     ~Button();
     void draw();
-    void load();
     void update();
     void setCallback(void (*callback)());
 

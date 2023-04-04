@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Level.hpp"
 #include <tinyxml2.h>
+#include "Level.hpp"
 
 class LevelParser final
 {

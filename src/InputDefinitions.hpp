@@ -253,4 +253,3 @@ enum KeyboardKey {
 };
 
 enum MouseButton { MOUSE_LEFT = 0, MOUSE_RIGHT, MOUSE_MAX };
-

@@ -11,9 +11,9 @@ Button::Button(std::string text, int x, int y, int width, int height)
     , m_callback(nullptr)
     , m_bHovered(false)
 {
-    m_animations[NORMAL] = std::make_unique<Animation>("button normal", 178, 64);
-    m_animations[HOVERED] = std::make_unique<Animation>("button hovered", 178, 64);
-    m_animations[PRESSED] = std::make_unique<Animation>("button pressed", 178, 64);
+    m_animations[NORMAL] = std::make_unique<Animation>("button normal", 250, 70);
+    m_animations[HOVERED] = std::make_unique<Animation>("button hovered", 250, 70);
+    m_animations[PRESSED] = std::make_unique<Animation>("button pressed", 250, 70);
 
     m_curAnimation = NORMAL;
     m_animations[m_curAnimation]->start();
@@ -22,17 +22,15 @@ Button::Button(std::string text, int x, int y, int width, int height)
 
 Button::~Button() {}
 
-void Button::load(){};
-
 void Button::draw()
 {
-    m_animations[m_curAnimation]->draw(b2Vec2(m_rectangle.x, m_rectangle.y));
+    /* m_animations[m_curAnimation]->draw(b2Vec2(m_rectangle.x, m_rectangle.y)); */
+    Game::Instance()->getWindow()->drawBox(m_rectangle);
     Game::Instance()->getWindow()->print(
         m_text,
         40,
         m_rectangle.x + m_rectangle.w / 2,
-        m_rectangle.y + m_rectangle.h / 2,
-        {});
+        m_rectangle.y + m_rectangle.h / 2);
 };
 
 void Button::update()
@@ -54,11 +52,11 @@ void Button::update()
         }
     }
 
-    if (newAnimation != m_curAnimation) {
-        m_animations[m_curAnimation]->stop();
-        m_curAnimation = newAnimation;
-        m_animations[m_curAnimation]->start();
-    }
+    /*     if (newAnimation != m_curAnimation) { */
+    /*         m_animations[m_curAnimation]->stop(); */
+    /*         m_curAnimation = newAnimation; */
+    /*         m_animations[m_curAnimation]->start(); */
+    /*     } */
 };
 
 void Button::setCallback(void (*callback)())

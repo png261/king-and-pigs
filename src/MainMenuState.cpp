@@ -67,10 +67,20 @@ bool MainMenuState::load()
     texture->load(ASSETS_DIR + "UI/Button/hovered.png", "button hovered");
     texture->load(ASSETS_DIR + "UI/Button/pressed.png", "button pressed");
 
-    Button* btn = new Button("New Game", 250, 100, 176, 64);
+    Button* btn = new Button(
+        "New Game",
+        Game::Instance()->getWindow()->getCenterX() - 250 / 2,
+        Game::Instance()->getWindow()->getCenterY() - 70 / 2,
+        250,
+        70);
     btn->setCallback(s_enterPlay);
 
-    Button* btn2 = new Button("Exit", 250, 200, 176, 64);
+    Button* btn2 = new Button(
+        "Exit",
+        Game::Instance()->getWindow()->getCenterX() - 250 / 2,
+        Game::Instance()->getWindow()->getCenterY() - 70 / 2 + 100,
+        250,
+        70);
     btn2->setCallback(s_exit);
 
     m_uiObjects.push_back(btn);

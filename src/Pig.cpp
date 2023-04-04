@@ -8,7 +8,10 @@
 Pig::Pig()
     : GameObject()
     , VisionObject(100)
-    , DamageableObject(3, 300, 1000)
+    , DamageableObject(
+          3,
+          Game::Instance()->getWindow()->getCenterX() - 250 / 2,
+          Game::Instance()->getWindow()->getCenterY() - 70 / 20)
     , AttackerObject(1, 20, 300)
 {}
 

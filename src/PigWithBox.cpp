@@ -19,8 +19,7 @@ void PigWithBox::loadAnimation()
 
     m_animations[IDLE] = std::make_unique<Animation>("pigWithBox idle", 26, 30, 9);
     m_animations[RUN] = std::make_unique<Animation>("pigWithBox run", 26, 30, 6);
-    m_animations[THROWING] =
-        std::make_unique<Animation>("pigWithBox throwing", 26, 30, 5);
+    m_animations[THROWING] = std::make_unique<Animation>("pigWithBox throwing", 26, 30, 5);
 
     m_curAnimation = IDLE;
     m_animations[m_curAnimation]->start();

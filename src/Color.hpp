@@ -18,4 +18,3 @@ private:
     uint8_t m_blue;
     uint8_t m_alpha;
 };
-

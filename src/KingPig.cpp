@@ -11,8 +11,7 @@ void KingPig::loadAnimation()
     m_animations[JUMP] = std::make_unique<Animation>("kingPig jump", 38, 28, 1);
     m_animations[FALL] = std::make_unique<Animation>("kingPig fall", 38, 28, 1);
     m_animations[GROUND] = std::make_unique<Animation>("kingPig ground", 38, 28, 1);
-    m_animations[ATTACK] =
-        std::make_unique<Animation>("kingPig attack", 38, 28, 3, false);
+    m_animations[ATTACK] = std::make_unique<Animation>("kingPig attack", 38, 28, 3, false);
     m_animations[HIT] = std::make_unique<Animation>("kingPig hit", 38, 28, 2);
     m_animations[DYING] = std::make_unique<Animation>("kingPig dead", 38, 28, 4, false);
 

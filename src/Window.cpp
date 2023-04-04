@@ -166,7 +166,8 @@ void Window::print(std::string text, int fontSize, int x, int y, Color color)
         Log::error("Window::print: fail to load font");
         return;
     }
-    SDL_Surface* surface = TTF_RenderText_Blended(m_font, text.c_str(), {255, 255, 255, 255});
+    SDL_Surface* surface =
+        TTF_RenderText_Blended(m_font, text.c_str(), {color.r(), color.g(), color.b(), color.a()});
     if (!surface) {
         Log::error("Window::print: fail to create surface");
         return;
@@ -186,6 +187,19 @@ void Window::print(std::string text, int fontSize, int x, int y, Color color)
     SDL_DestroyTexture(texture);
 };
 
+void Window::drawBox(Rectangle box, Color color) const
+{
+    SDL_Rect rect{
+        static_cast<int>(box.x),
+        static_cast<int>(box.y),
+        box.w,
+        box.h,
+    };
+
+    SDL_SetRenderDrawColor(m_pRenderer, color.r(), color.g(), color.b(), color.a());
+    SDL_RenderFillRect(m_pRenderer, &rect);
+}
+
 uint Window::getDelta() const
 {
     return m_currentFrameDelta;
@@ -204,4 +218,14 @@ uint Window::getWidth() const
 uint Window::getHeight() const
 {
     return m_height;
+}
+
+uint Window::getCenterX() const
+{
+    return m_width / 2;
+}
+
+uint Window::getCenterY() const
+{
+    return m_height / 2;
 }

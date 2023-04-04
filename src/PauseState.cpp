@@ -73,10 +73,20 @@ bool PauseState::load()
     texture->load(ASSETS_DIR + "UI/Button/hovered.png", "button hovered");
     texture->load(ASSETS_DIR + "UI/Button/pressed.png", "button pressed");
 
-    Button* btn = new Button("resume", 250, 100, 176, 64);
+    Button* btn = new Button(
+        "Resume",
+        Game::Instance()->getWindow()->getCenterX() - 250 / 2,
+        Game::Instance()->getWindow()->getCenterY() - 70 / 2,
+        250,
+        70);
     btn->setCallback(s_resume);
 
-    Button* btn2 = new Button("main menu", 250, 200, 176, 64);
+    Button* btn2 = new Button(
+        "Main Menu",
+        Game::Instance()->getWindow()->getCenterX() - 250 / 2,
+        Game::Instance()->getWindow()->getCenterY() - 70 / 2 + 100,
+        250,
+        70);
     btn2->setCallback(s_mainMenu);
 
     m_uiObjects.push_back(btn);

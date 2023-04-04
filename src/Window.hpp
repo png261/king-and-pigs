@@ -3,6 +3,7 @@
 #include <string>
 #include "Color.hpp"
 #include "SDL.hpp"
+#include "Shapes.hpp"
 #include "Stopwatch.hpp"
 
 class Window final
@@ -31,14 +32,16 @@ public:
     void resize(const std::string title, const uint width, const uint height);
 
     void fill(const Color color);
-
-    void print(std::string text, int fontSize, int x, int y, Color color);
+    void print(std::string text, int fontSize, int x, int y, Color color = {0, 0, 0});
+    void drawBox(Rectangle rect, Color color = {255, 255, 255}) const;
 
     void setBackgroundColor(const Color color = Color(0, 0, 0));
     void setTitle(const std::string title);
 
     uint getDelta() const;
     uint getWidth() const;
+    uint getCenterX() const;
+    uint getCenterY() const;
     uint getHeight() const;
     SDL_Renderer* getRenderer() const;
 
