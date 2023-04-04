@@ -31,3 +31,8 @@ GameObject* GameObjectFactory::create(const std::string typeID)
     BaseCreator* const pCreator = (*it).second;
     return pCreator->createGameObject();
 }
+
+void GameObjectFactory::clean()
+{
+    m_creators.clear();
+}

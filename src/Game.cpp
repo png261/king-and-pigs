@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "CONSTANT.hpp"
+#include "GameObjectFactory.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
 #include "MainMenuState.hpp"
@@ -68,6 +69,7 @@ void Game::clean()
 {
     PhysicWorld::Instance()->clean();
     GameStateMachine::Instance()->clean();
+    GameObjectFactory::Instance()->clean();
     InputHandler::Instance()->clean();
     TextureManager::Instance()->clean();
     SoundManager::Instance()->clean();

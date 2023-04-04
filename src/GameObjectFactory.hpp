@@ -8,7 +8,7 @@ class BaseCreator
 {
 public:
     virtual GameObject* createGameObject() const = 0;
-    virtual ~BaseCreator() {}
+    virtual ~BaseCreator() = default;
 };
 
 template <class T>
@@ -27,6 +27,7 @@ public:
 
     bool registerType(const std::string typeID, BaseCreator* const pCreator);
     GameObject* create(const std::string typeID);
+    void clean();
 
 private:
     GameObjectFactory() = default;
