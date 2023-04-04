@@ -17,6 +17,7 @@ PhysicObject::~PhysicObject() {}
 void PhysicObject::update()
 {
     m_bOnGround = this->getFootContact() > 0;
+    m_bCanJump = this->getBody()->GetLinearVelocity().y >= 0;
     m_bRunning = false;
 }
 
@@ -95,14 +96,11 @@ void PhysicObject::jump()
         return;
     }
 
-    /* T = (2h/g)^(1/2) */
     float timeToJumpPeak =
         sqrt(2 * PhysicWorld::pixelToMeter(m_jumpHeight) / PhysicWorld::GRAVITY.y);
 
-    /* F = 1/2.m.v^2 */
     float velocity = PhysicWorld::pixelToMeter(m_jumpHeight) / timeToJumpPeak;
-
-    b2Vec2 impulse = m_pBody->GetMass() * 0.5 * std::pow(velocity, 2) * b2Vec2(0, -1);
+    b2Vec2 impulse = m_pBody->GetMass() * std::pow(velocity, 2) * b2Vec2(0, -1);
 
     m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
 }
