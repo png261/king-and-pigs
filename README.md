@@ -65,7 +65,7 @@
 ### Installation
 1. Clone the repo
    ```sh
-   https://github.com/png261/king-and-pigs.git
+   git clone https://github.com/png261/king-and-pigs.git
    ```
 2. Complie
    ```sh
