@@ -12,7 +12,7 @@ public:
 };
 
 template <class T>
-class Creator : public BaseCreator
+class Creator final : public BaseCreator
 {
 public:
     virtual GameObject* createGameObject() const { return new T(); };
@@ -32,5 +32,5 @@ public:
 private:
     GameObjectFactory() = default;
 
-    std::unordered_map<std::string, BaseCreator*> m_creators;
+    std::unordered_map<std::string, std::unique_ptr<BaseCreator>> m_creators;
 };

@@ -4,8 +4,8 @@
 
 std::shared_ptr<GameObjectFactory> GameObjectFactory::Instance()
 {
-    static std::shared_ptr<GameObjectFactory> s_instance{new GameObjectFactory};
-    return s_instance;
+    static std::shared_ptr<GameObjectFactory> s_pInstance{new GameObjectFactory};
+    return s_pInstance;
 }
 
 bool GameObjectFactory::registerType(const std::string typeID, BaseCreator* const pCreator)
@@ -14,22 +14,22 @@ bool GameObjectFactory::registerType(const std::string typeID, BaseCreator* cons
         return false;
     }
 
-    m_creators[typeID] = pCreator;
+    m_creators[typeID] = std::unique_ptr<BaseCreator>(pCreator);
 
     return true;
 }
 
 GameObject* GameObjectFactory::create(const std::string typeID)
 {
-    std::unordered_map<std::string, BaseCreator*>::iterator it = m_creators.find(typeID);
+    std::unordered_map<std::string, std::unique_ptr<BaseCreator>>::iterator it =
+        m_creators.find(typeID);
 
     if (it == m_creators.end()) {
         Log::warning("could not find type: " + typeID);
         return nullptr;
     }
 
-    BaseCreator* const pCreator = (*it).second;
-    return pCreator->createGameObject();
+    return it->second->createGameObject();
 }
 
 void GameObjectFactory::clean()
