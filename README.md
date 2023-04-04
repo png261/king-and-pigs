@@ -57,6 +57,10 @@
   ```sh
   sudo apt install libbox2d-dev
   ```
+* tinyxml2
+  ```sh
+  sudo apt install libtinyxml2-dev
+  ```
 
 ### Installation
 1. Clone the repo
