@@ -80,8 +80,8 @@ bool WinState::load()
         70);
     btn2->onClick(s_exit);
 
-    m_uiObjects.push_back(btn);
-    m_uiObjects.push_back(btn2);
+    m_uiObjects.push_back(std::unique_ptr<UiObject>(std::unique_ptr<UiObject>(btn)));
+    m_uiObjects.push_back(std::unique_ptr<UiObject>(std::unique_ptr<UiObject>(btn2)));
 
     m_bLoaded = true;
 

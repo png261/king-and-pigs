@@ -1,4 +1,6 @@
 #pragma once
+
+#include <memory>
 #include "GameState.hpp"
 #include "UiObject.hpp"
 
@@ -17,6 +19,6 @@ public:
 private:
     static void s_mainMenu();
     static void s_exit();
-    std::vector<UiObject*> m_uiObjects;
+    std::vector<std::unique_ptr<UiObject>> m_uiObjects;
     static const std::string s_stateID;
 };

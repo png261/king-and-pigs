@@ -14,10 +14,6 @@ PauseState::PauseState(){};
 
 PauseState::~PauseState()
 {
-    for (auto& obj : m_uiObjects) {
-        delete obj;
-        obj = nullptr;
-    }
     m_uiObjects.clear();
 };
 
@@ -89,8 +85,8 @@ bool PauseState::load()
         70);
     btn2->onClick(s_mainMenu);
 
-    m_uiObjects.push_back(btn);
-    m_uiObjects.push_back(btn2);
+    m_uiObjects.push_back(std::unique_ptr<UiObject>(btn));
+    m_uiObjects.push_back(std::unique_ptr<UiObject>(btn2));
 
     m_bLoaded = true;
     return true;
