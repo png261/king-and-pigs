@@ -79,7 +79,7 @@ bool PauseState::load()
         Game::Instance()->getWindow()->getCenterY() - 70 / 2,
         250,
         70);
-    btn->setCallback(s_resume);
+    btn->onClick(s_resume);
 
     Button* btn2 = new Button(
         "Main Menu",
@@ -87,7 +87,7 @@ bool PauseState::load()
         Game::Instance()->getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
-    btn2->setCallback(s_mainMenu);
+    btn2->onClick(s_mainMenu);
 
     m_uiObjects.push_back(btn);
     m_uiObjects.push_back(btn2);

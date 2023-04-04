@@ -11,7 +11,7 @@ public:
     ~Button();
     void draw();
     void update();
-    void setCallback(void (*callback)());
+    void onClick(void (*callback)());
 
 private:
     enum { NORMAL, HOVERED, PRESSED };

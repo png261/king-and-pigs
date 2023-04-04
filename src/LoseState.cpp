@@ -68,7 +68,7 @@ bool LoseState::load()
         Game::Instance()->getWindow()->getCenterY() - 70 / 2,
         250,
         70);
-    btn->setCallback(s_mainMenu);
+    btn->onClick(s_mainMenu);
 
     Button* btn2 = new Button(
         "Exit",
@@ -76,7 +76,7 @@ bool LoseState::load()
         Game::Instance()->getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
-    btn2->setCallback(s_exit);
+    btn2->onClick(s_exit);
 
     m_uiObjects.push_back(btn);
     m_uiObjects.push_back(btn2);

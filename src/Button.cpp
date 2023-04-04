@@ -59,7 +59,7 @@ void Button::update()
     /*     } */
 };
 
-void Button::setCallback(void (*callback)())
+void Button::onClick(void (*callback)())
 {
     m_callback = callback;
 }
