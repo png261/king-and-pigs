@@ -5,10 +5,7 @@ void DoorOut::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     Door::load(std::move(pParams));
 
-    b2Filter filter;
-    filter.categoryBits = PhysicWorld::CAT_DOOR_OUT;
-    filter.maskBits = PhysicWorld::MASK_DOOR_OUT;
-    m_pFixture->SetFilterData(filter);
+    this->setFilterData(PhysicWorld::CAT_DOOR_OUT, PhysicWorld::MASK_DOOR_OUT);
     this->open();
 }
 

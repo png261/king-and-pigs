@@ -7,10 +7,7 @@ void DoorIn::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     Door::load(std::move(pParams));
     this->createSensor();
-    b2Filter filter;
-    filter.categoryBits = PhysicWorld::CAT_DOOR_IN;
-    filter.maskBits = PhysicWorld::MASK_DOOR_IN;
-    m_pFixture->SetFilterData(filter);
+    this->setFilterData(PhysicWorld::CAT_DOOR_IN, PhysicWorld::MASK_DOOR_IN);
 }
 
 void DoorIn::createSensor()

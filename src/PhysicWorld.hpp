@@ -27,6 +27,7 @@ public:
     };
 
     enum Mask : uint16 {
+        MASK_NONE = CAT_NONE,
         MASK_PLAYER = CAT_ALL,
         MASK_WALL = CAT_ALL,
         MASK_DOOR_OUT = CAT_PLAYER,

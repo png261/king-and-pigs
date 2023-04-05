@@ -13,10 +13,7 @@ void Box::load(std::unique_ptr<LoaderParams> const& pParams)
     GameObject::load(std::move(pParams));
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
 
-    b2Filter filter;
-    filter.categoryBits = PhysicWorld::CAT_BOX;
-    filter.maskBits = PhysicWorld::MASK_BOX;
-    m_pFixture->SetFilterData(filter);
+    this->setFilterData(PhysicWorld::CAT_BOX, PhysicWorld::MASK_BOX);
     m_pBody->SetFixedRotation(false);
 
     this->loadAnimation();

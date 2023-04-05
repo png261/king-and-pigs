@@ -7,10 +7,7 @@ void Candle::load(std::unique_ptr<LoaderParams> const& pParams)
 
     m_pBody->SetGravityScale(0);
 
-    b2Filter filter;
-    filter.categoryBits = PhysicWorld::CAT_NONE;
-    m_pFixture->SetFilterData(filter);
-    m_pFixture->SetSensor(true);
+    this->setFilterData(PhysicWorld::CAT_NONE, PhysicWorld::MASK_NONE);
     this->loadAnimation();
 };
 

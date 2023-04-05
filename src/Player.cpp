@@ -32,15 +32,7 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
-
-    m_moveSpeed = 90;
-    m_jumpHeight = 32.0f;
-    m_direction = RIGHT;
-
-    b2Filter filter;
-    filter.categoryBits = PhysicWorld::CAT_PLAYER;
-    filter.maskBits = PhysicWorld::MASK_PLAYER;
-    m_pFixture->SetFilterData(filter);
+    this->setFilterData(PhysicWorld::CAT_PLAYER, PhysicWorld::MASK_PLAYER);
 
     PhysicWorld::Instance()->createCircleSensor(
         m_pBody,
@@ -55,6 +47,10 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
         m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
+
+    m_moveSpeed = 90;
+    m_jumpHeight = 32.0f;
+    m_direction = RIGHT;
 
     this->loadAnimation();
 }

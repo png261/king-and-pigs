@@ -29,6 +29,8 @@ public:
     virtual void setMoveRight(bool bMoveRight);
     virtual void setMoveLeft(bool bMoveLeft);
 
+    virtual void setFilterData(PhysicWorld::Category category, PhysicWorld::Mask mask);
+
 protected:
     b2Body* m_pBody;
     b2Fixture* m_pFixture;

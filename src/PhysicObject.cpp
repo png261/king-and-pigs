@@ -169,3 +169,15 @@ bool PhysicObject::isDisableJump() const
 {
     return m_bDisableJump;
 }
+
+void PhysicObject::setFilterData(PhysicWorld::Category category, PhysicWorld::Mask mask)
+{
+    if (m_pFixture == nullptr) {
+        return;
+    }
+
+    b2Filter filter;
+    filter.categoryBits = category;
+    filter.maskBits = mask;
+    m_pFixture->SetFilterData(filter);
+}

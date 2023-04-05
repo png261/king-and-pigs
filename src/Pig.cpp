@@ -19,15 +19,8 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
     this->createBody(pParams->x(), pParams->y(), m_width, m_height);
-    m_moveSpeed = 40;
-    m_jumpHeight = 32.0f;
-    m_direction = LEFT;
-
-    b2Filter filter;
-    filter.categoryBits = PhysicWorld::CAT_PIG;
-    filter.maskBits = PhysicWorld::MASK_PIG;
+    this->setFilterData(PhysicWorld::CAT_PIG, PhysicWorld::MASK_PIG);
     m_pFixture->SetDensity(50);
-    m_pFixture->SetFilterData(filter);
 
     PhysicWorld::Instance()->createCircleSensor(
         m_pBody,
@@ -42,6 +35,10 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
         m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_PIG_ATTACK_SENSOR);
+
+    m_moveSpeed = 40;
+    m_jumpHeight = 32.0f;
+    m_direction = LEFT;
 
     this->loadAnimation();
 }

@@ -265,3 +265,4 @@ b2Fixture* PhysicWorld::createCircleSensor(
 
     return body->CreateFixture(&fixtureDef);
 }
+
