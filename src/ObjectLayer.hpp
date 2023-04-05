@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 #include "Layer.hpp"
 
@@ -13,10 +14,9 @@ public:
     void update();
     void render();
 
-    std::vector<GameObject*>* getGameObjects();
+    std::vector<std::unique_ptr<GameObject>>* getGameObjects();
     void addGameObject(GameObject*);
 
 private:
-    std::vector<GameObject*> m_gameObjects;
-    std::vector<GameObject*> m_willDelete;
+    std::vector<std::unique_ptr<GameObject>> m_gameObjects;
 };

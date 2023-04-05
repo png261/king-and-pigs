@@ -19,15 +19,13 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
     this->setFilterData(PhysicWorld::CAT_PIG, PhysicWorld::MASK_PIG);
     m_pFixture->SetDensity(50);
 
-    PhysicWorld::Instance()->createCircleSensor(
-        m_pBody,
+    this->createCircleSensor(
         -b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
         m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_PIG_ATTACK_SENSOR);
 
-    PhysicWorld::Instance()->createCircleSensor(
-        m_pBody,
+    this->createCircleSensor(
         b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
         m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,

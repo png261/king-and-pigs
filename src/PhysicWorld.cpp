@@ -70,32 +70,6 @@ float PhysicWorld::degToRad(const float deg)
     return deg * RAD_PER_DEG;
 };
 
-b2Fixture* PhysicWorld::createCircleBody(
-    b2Body*& body,
-    const b2Vec2 position,
-    const int radius,
-    const Category category,
-    const Mask mask)
-{
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position = PhysicWorld::pixelToMeter(b2Vec2(position) + 0.5 * b2Vec2(radius, radius));
-    bodyDef.fixedRotation = true;
-    body = PhysicWorld::Instance()->getWorld()->CreateBody(&bodyDef);
-
-    b2CircleShape circle;
-    circle.m_radius = PhysicWorld::pixelToMeter(radius);
-
-    b2FixtureDef fixture;
-    fixture.shape = &circle;
-    fixture.density = 1;
-    fixture.friction = 0.3;
-    fixture.filter.categoryBits = category;
-    fixture.filter.maskBits = mask;
-
-    return body->CreateFixture(&fixture);
-}
-
 b2Body* PhysicWorld::createStaticBody(
     const b2Vec2 position,
     const int width,
@@ -129,19 +103,19 @@ b2Body* PhysicWorld::createStaticBody(
     return body;
 }
 
-void PhysicWorld::DoorInListener(b2Contact* contact)
+void PhysicWorld::DoorInListener(b2Contact* const contact)
 {
-    b2Fixture* fixtureA = contact->GetFixtureA();
-    b2Fixture* fixtureB = contact->GetFixtureB();
-    uint16 catA = fixtureA->GetFilterData().categoryBits;
-    uint16 catB = fixtureB->GetFilterData().categoryBits;
+    b2Fixture* const fixtureA = contact->GetFixtureA();
+    b2Fixture* const fixtureB = contact->GetFixtureB();
+    const uint16 catA = fixtureA->GetFilterData().categoryBits;
+    const uint16 catB = fixtureB->GetFilterData().categoryBits;
 
     if (catA != CAT_DOOR_IN || catB != CAT_PLAYER) {
         return;
     }
 
-    DoorIn* door = (DoorIn*)(fixtureA->GetBody()->GetUserData().pointer);
-    Player* player = (Player*)(fixtureB->GetBody()->GetUserData().pointer);
+    DoorIn* const door = (DoorIn*)(fixtureA->GetBody()->GetUserData().pointer);
+    Player* const player = (Player*)(fixtureB->GetBody()->GetUserData().pointer);
 
     if (player == nullptr || door == nullptr) {
         return;
@@ -157,7 +131,7 @@ void PhysicWorld::DoorInListener(b2Contact* contact)
     }
 }
 
-void PhysicWorld::AttackListener(b2Contact* contact)
+void PhysicWorld::AttackListener(b2Contact* const contact)
 {
     b2Fixture* const A = contact->GetFixtureA();
     b2Fixture* const B = contact->GetFixtureB();
@@ -173,7 +147,7 @@ void PhysicWorld::AttackListener(b2Contact* contact)
     handleAttack(B, A);
 }
 
-void PhysicWorld::handleAttack(b2Fixture* Attacker, b2Fixture* Defender)
+void PhysicWorld::handleAttack(b2Fixture* const Attacker, b2Fixture* const Defender)
 {
     AttackerObject* const A =
         dynamic_cast<AttackerObject*>((GameObject*)(Attacker->GetBody()->GetUserData().pointer));
@@ -214,55 +188,6 @@ void PhysicWorld::clean()
 {
     m_pWorld->SetContactListener(nullptr);
     m_contactListener.reset();
-
-    for (b2Body* body = m_pWorld->GetBodyList(); body; body = body->GetNext()) {
-        m_pWorld->DestroyBody(body);
-    }
-
     m_contactListener = std::make_unique<ContactListener>(ContactListener());
     m_pWorld->SetContactListener(m_contactListener.get());
 }
-
-b2Fixture* PhysicWorld::createPolygonSensor(
-    b2Body* body,
-    b2Vec2 position,
-    int width,
-    int height,
-    Category category,
-    Mask mask)
-{
-    b2PolygonShape polygon;
-    polygon.SetAsBox(
-        PhysicWorld::pixelToMeter(width * 0.5),
-        PhysicWorld::pixelToMeter(height * 0.5),
-        PhysicWorld::pixelToMeter(position),
-        0);
-
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &polygon;
-    fixtureDef.isSensor = true;
-    fixtureDef.filter.categoryBits = category;
-    fixtureDef.filter.maskBits = mask;
-    return body->CreateFixture(&fixtureDef);
-}
-
-b2Fixture* PhysicWorld::createCircleSensor(
-    b2Body* const body,
-    const b2Vec2 position,
-    const int radius,
-    const Category category,
-    const Mask mask)
-{
-    b2CircleShape circle;
-    circle.m_p = PhysicWorld::pixelToMeter(position);
-    circle.m_radius = PhysicWorld::pixelToMeter(radius);
-
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &circle;
-    fixtureDef.isSensor = true;
-    fixtureDef.filter.categoryBits = category;
-    fixtureDef.filter.maskBits = mask;
-
-    return body->CreateFixture(&fixtureDef);
-}
-

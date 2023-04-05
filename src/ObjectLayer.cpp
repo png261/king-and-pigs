@@ -6,9 +6,6 @@
 
 ObjectLayer::~ObjectLayer()
 {
-    for (const auto& obj : m_gameObjects) {
-        delete (obj);
-    }
     m_gameObjects.clear();
 }
 
@@ -31,8 +28,6 @@ void ObjectLayer::update()
             continue;
         }
 
-        PhysicWorld::Instance()->getWorld()->DestroyBody((*it)->getBody());
-        delete (*it);
         m_gameObjects.erase(it);
     }
 }
@@ -44,13 +39,7 @@ void ObjectLayer::render()
     }
 }
 
-
-std::vector<GameObject*>* ObjectLayer::getGameObjects()
-{
-    return &m_gameObjects;
-}
-
 void ObjectLayer::addGameObject(GameObject* obj)
 {
-    m_gameObjects.push_back(obj);
+    m_gameObjects.push_back(std::unique_ptr<GameObject>(obj));
 }

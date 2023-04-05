@@ -50,32 +50,10 @@ public:
     void update();
     void clean();
 
-    b2Fixture* createCircleBody(
-        b2Body*& body,
-        const b2Vec2 position,
-        const int radius,
-        const Category category,
-        const Mask mask);
-
     b2Body* createStaticBody(
         const b2Vec2 position,
         const int width,
         const int height,
-        const Category category,
-        const Mask mask);
-
-    b2Fixture* createPolygonSensor(
-        b2Body* const body,
-        const b2Vec2 position,
-        const int width,
-        const int height,
-        const Category category,
-        const Mask mask);
-
-    b2Fixture* createCircleSensor(
-        b2Body* const body,
-        const b2Vec2 position,
-        const int radius,
         const Category category,
         const Mask mask);
 
@@ -92,19 +70,20 @@ public:
     static float radToDeg(float rad);
     static float degToRad(float deg);
 
+    static const b2Vec2 GRAVITY;
+
+private:
     static const float PIXEL_PER_METER;
     static const float METER_PER_PIXEL;
     static const float RAD_PER_DEG;
     static const float DEG_PER_RAD;
     static const float GROUND_FRICTION;
-    static const b2Vec2 GRAVITY;
 
-private:
     PhysicWorld();
-    void AttackListener(b2Contact* contact);
-    void handleAttack(b2Fixture* Attacker, b2Fixture* Defender);
-    void DoorInListener(b2Contact* contact);
-    void BombListener(b2Contact* contact);
+    void AttackListener(b2Contact* const contact);
+    void handleAttack(b2Fixture* const Attacker, b2Fixture* const Defender);
+    void DoorInListener(b2Contact* const contact);
+    void BombListener(b2Contact* const contact);
 
     b2World* m_pWorld;
     std::unique_ptr<DebugDraw> m_pDebugDraw;

@@ -16,7 +16,6 @@ TileLayer::TileLayer(
 {
     m_numColumns = mapWidth;
     m_numRows = mapHeight;
-
     m_mapWidth = mapWidth;
 }
 
@@ -84,8 +83,8 @@ Tileset TileLayer::getTilesetByID(int const tileID) const
         }
     }
 
-    Log::warning("did not find tileset, return empty tileset");
-    return Tileset{};
+    Log::warning("can't find tileset, return empty tileset");
+    return {};
 }
 
 void TileLayer::setTileIDs(const std::vector<std::vector<int>>& data)

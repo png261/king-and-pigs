@@ -8,18 +8,12 @@
 
 Level::Level()
 {
-    m_spawnLayer = new ObjectLayer();
+    m_spawnLayer = std::make_unique<ObjectLayer>();
 }
 
 Level::~Level()
 {
-    for (const auto& layer : m_layers) {
-        delete layer;
-    }
     m_layers.clear();
-    delete m_spawnLayer;
-
-    Log::log("deleted level");
 }
 
 void Level::render()
@@ -48,14 +42,9 @@ std::unordered_map<int, CollisionShape>* Level::getCollisionShapes()
     return &m_collisionShapes;
 }
 
-std::vector<Layer*>* Level::getLayers()
-{
-    return &m_layers;
-}
-
 void Level::addLayer(Layer* layer)
 {
-    m_layers.push_back(layer);
+    m_layers.push_back(std::unique_ptr<Layer>(layer));
 }
 
 void Level::addTileSet(Tileset tileset)

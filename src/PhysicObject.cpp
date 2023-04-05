@@ -1,5 +1,6 @@
 #include "PhysicObject.hpp"
 #include <iostream>
+#include "Log.hpp"
 
 PhysicObject::PhysicObject()
     : m_jumpHeight(0)
@@ -13,7 +14,10 @@ PhysicObject::PhysicObject()
     , m_bDisableJump(false)
 {}
 
-PhysicObject::~PhysicObject() {}
+PhysicObject::~PhysicObject()
+{
+    PhysicWorld::Instance()->getWorld()->DestroyBody(this->getBody());
+}
 
 void PhysicObject::update()
 {
@@ -42,8 +46,7 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
     fixtureDef.friction = 1;
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
-    PhysicWorld::Instance()->createPolygonSensor(
-        m_pBody,
+    this->createPolygonSensor(
         b2Vec2(0, height * 0.5),
         width - 0.5,
         1,
@@ -180,4 +183,71 @@ void PhysicObject::setFilterData(PhysicWorld::Category category, PhysicWorld::Ma
     filter.categoryBits = category;
     filter.maskBits = mask;
     m_pFixture->SetFilterData(filter);
+}
+
+b2Fixture* PhysicObject::createPolygonSensor(
+    b2Vec2 position,
+    int width,
+    int height,
+    PhysicWorld::Category category,
+    PhysicWorld::Mask mask)
+{
+    b2PolygonShape polygon;
+    polygon.SetAsBox(
+        PhysicWorld::pixelToMeter(width * 0.5),
+        PhysicWorld::pixelToMeter(height * 0.5),
+        PhysicWorld::pixelToMeter(position),
+        0);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &polygon;
+    fixtureDef.isSensor = true;
+    fixtureDef.filter.categoryBits = category;
+    fixtureDef.filter.maskBits = mask;
+    return this->getBody()->CreateFixture(&fixtureDef);
+}
+
+b2Fixture* PhysicObject::createCircleSensor(
+    const b2Vec2 position,
+    const int radius,
+    const PhysicWorld::Category category,
+    const PhysicWorld::Mask mask)
+{
+    b2CircleShape circle;
+    circle.m_p = PhysicWorld::pixelToMeter(position);
+    circle.m_radius = PhysicWorld::pixelToMeter(radius);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &circle;
+    fixtureDef.isSensor = true;
+    fixtureDef.filter.categoryBits = category;
+    fixtureDef.filter.maskBits = mask;
+
+    return this->getBody()->CreateFixture(&fixtureDef);
+}
+
+b2Fixture* PhysicObject::createCircleBody(
+    b2Body*& body,
+    const b2Vec2 position,
+    const int radius,
+    const PhysicWorld::Category category,
+    const PhysicWorld::Mask mask)
+{
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position = PhysicWorld::pixelToMeter(b2Vec2(position) + 0.5 * b2Vec2(radius, radius));
+    bodyDef.fixedRotation = true;
+    body = PhysicWorld::Instance()->getWorld()->CreateBody(&bodyDef);
+
+    b2CircleShape circle;
+    circle.m_radius = PhysicWorld::pixelToMeter(radius);
+
+    b2FixtureDef fixture;
+    fixture.shape = &circle;
+    fixture.density = 1;
+    fixture.friction = 0.3;
+    fixture.filter.categoryBits = category;
+    fixture.filter.maskBits = mask;
+
+    return body->CreateFixture(&fixture);
 }

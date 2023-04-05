@@ -33,8 +33,7 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
     fixtureDef.filter.maskBits = PhysicWorld::MASK_BOMB;
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
-    PhysicWorld::Instance()->createCircleSensor(
-        m_pBody,
+    this->createCircleSensor(
         {0, 0},
         m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,

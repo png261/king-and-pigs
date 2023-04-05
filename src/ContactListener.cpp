@@ -29,9 +29,9 @@ void ContactListener::OneWayPreSolve(b2Contact* const contact, const b2Manifold*
 {
     b2Fixture* const fixtureA = contact->GetFixtureA();
     b2Fixture* const fixtureB = contact->GetFixtureB();
-    PhysicWorld::Category const categoryA =
+    auto const categoryA =
         static_cast<PhysicWorld::Category>(fixtureA->GetFilterData().categoryBits);
-    PhysicWorld::Category const categoryB =
+    auto const categoryB =
         static_cast<PhysicWorld::Category>(fixtureB->GetFilterData().categoryBits);
 
     if (categoryA == PhysicWorld::CAT_ONE_WAY_WALL) {
@@ -50,9 +50,9 @@ void ContactListener::ItemBeginContact(b2Contact* const contact)
 {
     b2Fixture* const fixtureA = contact->GetFixtureA();
     b2Fixture* const fixtureB = contact->GetFixtureB();
-    PhysicWorld::Category const categoryA =
+    auto const categoryA =
         static_cast<PhysicWorld::Category>(fixtureA->GetFilterData().categoryBits);
-    PhysicWorld::Category const categoryB =
+    auto const categoryB =
         static_cast<PhysicWorld::Category>(fixtureB->GetFilterData().categoryBits);
     if (categoryA != PhysicWorld::CAT_ITEM || categoryB != PhysicWorld::CAT_PLAYER) {
         return;
@@ -65,16 +65,16 @@ void ContactListener::FootBeginContact(b2Contact* const contact)
 {
     b2Fixture* const fixtureA = contact->GetFixtureA();
     b2Fixture* const fixtureB = contact->GetFixtureB();
-    PhysicWorld::Category const categoryA =
+    auto const categoryA =
         static_cast<PhysicWorld::Category>(fixtureA->GetFilterData().categoryBits);
-    PhysicWorld::Category const categoryB =
+    auto const categoryB =
         static_cast<PhysicWorld::Category>(fixtureB->GetFilterData().categoryBits);
     if (!((categoryA | categoryB) & PhysicWorld::CAT_FOOT_SENSOR)) {
         return;
     }
 
-    GameObject* const A = (GameObject*)(fixtureA->GetBody()->GetUserData().pointer);
-    GameObject* const B = (GameObject*)(fixtureB->GetBody()->GetUserData().pointer);
+    auto* const A = (GameObject*)(fixtureA->GetBody()->GetUserData().pointer);
+    auto* const B = (GameObject*)(fixtureB->GetBody()->GetUserData().pointer);
 
     if (categoryA == PhysicWorld::CAT_FOOT_SENSOR) {
         A->changeFootContact(+1);
@@ -87,16 +87,16 @@ void ContactListener::FootEndContact(b2Contact* const contact)
 {
     b2Fixture* const fixtureA = contact->GetFixtureA();
     b2Fixture* const fixtureB = contact->GetFixtureB();
-    PhysicWorld::Category const categoryA =
+    auto const categoryA =
         static_cast<PhysicWorld::Category>(fixtureA->GetFilterData().categoryBits);
-    PhysicWorld::Category const categoryB =
+    auto const categoryB =
         static_cast<PhysicWorld::Category>(fixtureB->GetFilterData().categoryBits);
     if (!((categoryA | categoryB) & PhysicWorld::CAT_FOOT_SENSOR)) {
         return;
     }
 
-    GameObject* A = (GameObject*)(fixtureA->GetBody()->GetUserData().pointer);
-    GameObject* B = (GameObject*)(fixtureB->GetBody()->GetUserData().pointer);
+    auto* const A = (GameObject*)(fixtureA->GetBody()->GetUserData().pointer);
+    auto* const B = (GameObject*)(fixtureB->GetBody()->GetUserData().pointer);
 
     if (categoryA == PhysicWorld::CAT_FOOT_SENSOR) {
         A->changeFootContact(-1);

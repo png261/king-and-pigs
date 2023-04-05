@@ -99,7 +99,7 @@ void LevelParser::parseCollisionObject(XMLElement* pTilesetRoot, Level* pLevel, 
     for (XMLElement* e = pTilesetRoot->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
         if (e->Value() == std::string("tile")) {
-            XMLElement* obj = e->FirstChildElement()->FirstChildElement();
+            XMLElement* const obj = e->FirstChildElement()->FirstChildElement();
             int id = std::stoi(e->Attribute("id")) + firstGridID;
             bool isOneWay = getType(e) == std::string("oneway");
 
@@ -150,17 +150,19 @@ void LevelParser::parseObjectLayer(XMLElement* const pObjectEl, Level* const pLe
 {
     ObjectLayer* const pObjectLayer = new ObjectLayer();
 
+    bool isHaveObjects = false;
     for (XMLElement* e = pObjectEl->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
         if (e->Value() == std::string("object")) {
             GameObject* obj = parseObject(e, pLevel);
             if (obj != nullptr) {
+                isHaveObjects = true;
                 pObjectLayer->addGameObject(obj);
             }
         }
     }
 
-    if (!pObjectLayer->getGameObjects()->empty()) {
+    if (isHaveObjects) {
         pLevel->addLayer(pObjectLayer);
     }
 }
@@ -210,20 +212,17 @@ void LevelParser::parseTileLayer(XMLElement* const pTileElement, Level* pLevel)
                 if (id == 0) {
                     continue;
                 }
-                std::unordered_map<int, CollisionShape>::iterator shape = pCollisionShape->find(id);
-                if (shape == pCollisionShape->end()) {
+                std::unordered_map<int, CollisionShape>::iterator it = pCollisionShape->find(id);
+                if (it == pCollisionShape->end()) {
                     continue;
                 }
-
-                b2Vec2 position = m_tileSize * b2Vec2(col, row);
-                PhysicWorld::Category category =
-                    shape->second.isOneWay ? PhysicWorld::CAT_ONE_WAY_WALL : PhysicWorld::CAT_WALL;
+                CollisionShape shape = it->second;
 
                 PhysicWorld::Instance()->createStaticBody(
-                    position,
-                    shape->second.width,
-                    shape->second.height,
-                    category,
+                    m_tileSize * b2Vec2(col, row),
+                    shape.width,
+                    shape.height,
+                    shape.isOneWay ? PhysicWorld::CAT_ONE_WAY_WALL : PhysicWorld::CAT_WALL,
                     PhysicWorld::MASK_WALL);
             }
         }

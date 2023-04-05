@@ -31,6 +31,27 @@ public:
 
     virtual void setFilterData(PhysicWorld::Category category, PhysicWorld::Mask mask);
 
+    b2Fixture* createCircleBody(
+        b2Body*& body,
+        const b2Vec2 position,
+        const int radius,
+        const PhysicWorld::Category category,
+        const PhysicWorld::Mask mask);
+
+    b2Fixture* createPolygonSensor(
+        const b2Vec2 position,
+        const int width,
+        const int height,
+        const PhysicWorld::Category category,
+        const PhysicWorld::Mask mask);
+
+    b2Fixture* createCircleSensor(
+        const b2Vec2 position,
+        const int radius,
+        const PhysicWorld::Category category,
+        const PhysicWorld::Mask mask);
+
+
 protected:
     b2Body* m_pBody;
     b2Fixture* m_pFixture;

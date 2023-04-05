@@ -54,8 +54,8 @@ private:
     void createTileObject();
     Player* m_pPlayer;
 
-    ObjectLayer* m_spawnLayer;
-    std::vector<Layer*> m_layers;
+    std::unique_ptr<ObjectLayer> m_spawnLayer;
+    std::vector<std::unique_ptr<Layer>> m_layers;
     std::vector<Tileset> m_tilesets;
     std::unordered_map<int, CollisionShape> m_collisionShapes;
 };
