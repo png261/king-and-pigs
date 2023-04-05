@@ -8,7 +8,7 @@ PigWithBomb::PigWithBomb()
     : Pig()
     , m_bThrowing(false)
 {
-    m_bCanJump = false;
+    m_bDisableJump = true;
 }
 
 PigWithBomb::~PigWithBomb() {}
@@ -33,7 +33,7 @@ void PigWithBomb::loadAnimation()
 void PigWithBomb::update()
 {
     Pig::update();
-    if (m_seeingCategory == PhysicWorld::CAT_PLAYER && m_nearestDistance <= 100) {
+    if (m_seeingCategory == PhysicWorld::CAT_PLAYER && m_visionNearestDistance <= 100) {
         this->throwBomb();
         this->becomeNormal();
     }

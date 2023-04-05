@@ -31,12 +31,16 @@ public:
     void setLevel(Level* const pLevel);
     Level* getLevel();
 
+    bool isDebug() const;
+    void toggleDebug();
+
 private:
     Game();
 
     std::shared_ptr<Window> m_pWindow;
     Level* m_pLevel;
     bool m_bRunning;
+    bool m_bDebug;
     int m_levelIndex;
     std::vector<std::string> m_levelFiles;
 };

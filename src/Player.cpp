@@ -19,7 +19,7 @@
 
 Player::Player()
     : GameObject()
-    , VisionObject(32)
+    , VisionObject(32.0f)
     , DamageableObject(3, 300, 500)
     , AttackerObject(1, 20, 300)
     , m_bDoorIn(false)
@@ -88,11 +88,18 @@ void Player::update()
     GameObject::update();
     this->handleInput();
 
-    b2Vec2 start = this->getPosition() + m_direction * b2Vec2(m_width / 2.0f, 0);
-    b2Vec2 end = start + m_direction * b2Vec2(m_orignRange, 0);
-    VisionObject::update(start, end);
+    m_raycast.clear();
+    float nray = 50;
+    for (int i = 0; i < nray; ++i) {
+        b2Vec2 start = this->getPosition() + m_direction * (b2Vec2(m_width / 2.0f, 0)) +
+                       b2Vec2(0, -m_height / 2.0f + i * m_height / nray);
+        b2Vec2 end = start + m_direction * b2Vec2(m_visionRange, 0);
+        m_raycast.push_back({start, end});
+    }
 
-    if (this->m_seeingCategory == PhysicWorld::CAT_WALL && this->m_nearestDistance == 0) {
+    VisionObject::update();
+
+    if (this->m_seeingCategory & PhysicWorld::CAT_WALL && this->m_visionNearestDistance < 0.1) {
         if (m_direction == RIGHT) {
             this->setMoveRight(false);
         } else {
@@ -116,6 +123,7 @@ void Player::draw()
     }
 
     GameObject::draw();
+    VisionObject::debugDraw();
 }
 
 void Player::handleSound()

@@ -17,6 +17,7 @@ public:
     virtual bool canMoveRight() const;
     virtual bool canMoveLeft() const;
     virtual bool canJump() const;
+    virtual bool isDisableJump() const;
 
     virtual void createBody(const int x, const int y, const int width, const int height);
     virtual void changeFootContact(const int n);
@@ -37,6 +38,7 @@ protected:
     bool m_bCanJump;
     bool m_bOnGround;
     bool m_bRunning;
+    bool m_bDisableJump;
 
     float m_moveSpeed;
     float m_jumpHeight;

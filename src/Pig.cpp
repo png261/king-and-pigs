@@ -69,9 +69,17 @@ void Pig::update()
     }
 
     GameObject::update();
-    b2Vec2 start = this->getPosition() + m_direction * b2Vec2(m_width / 2.0f, 0);
-    b2Vec2 end = start + m_direction * b2Vec2(m_orignRange, 0);
-    VisionObject::update(start, end);
+    m_raycast.clear();
+    float nray = 50;
+    for (int i = 0; i < nray; ++i) {
+        b2Vec2 start = this->getPosition() + m_direction * (b2Vec2(m_width / 2.0f, 0)) +
+                       b2Vec2(0, -m_height / 2.0f + i * m_height / nray);
+        b2Vec2 end = start + m_direction * b2Vec2(m_visionRange, 0);
+        m_raycast.push_back({start, end});
+    }
+
+    VisionObject::update();
+    VisionObject::update();
     this->handleMovement();
     m_bFlipped = m_direction == RIGHT;
 
@@ -104,53 +112,45 @@ void Pig::handleMovement()
         this->moveLeft();
     }
 
-    switch (m_seeingCategory) {
-    case PhysicWorld::CAT_WALL:
-        this->seeingWall();
-        break;
-    case PhysicWorld::CAT_BOX:
-        this->seeingBox();
-        break;
-    case PhysicWorld::CAT_PLAYER:
-        /* TODO */
-        /* this->seeingPlayer(); */
-        break;
-    case PhysicWorld::CAT_PIG:
-        this->seeingPig();
-        break;
-    default:
-        break;
+    if (m_seeingCategory & PhysicWorld::CAT_PLAYER) {
+        this->seeingPlayer();
     }
-
-    if (m_nearestDistance == 0) {
-        this->changeDirection();
-        return;
+    if (m_seeingCategory & PhysicWorld::CAT_WALL) {
+        this->seeingWall();
+    }
+    if (m_seeingCategory & PhysicWorld::CAT_BOX) {
+        this->seeingBox();
+    }
+    if (m_seeingCategory & PhysicWorld::CAT_PIG) {
+        this->seeingPig();
     }
 }
 
 void Pig::seeingPlayer()
 {
-    if (m_nearestDistance >= 10) {
+    if (m_visionNearestDistance >= m_attackRange) {
         return;
     }
-    this->attack();
+    if (this->canAttack()) {
+        this->attack();
+    }
 }
 
 void Pig::changeDirection()
 {
     if (m_direction == RIGHT) {
         this->setMoveRight(false);
+        this->setMoveLeft(true);
         m_direction = LEFT;
     } else {
         this->setMoveLeft(false);
+        this->setMoveRight(true);
         m_direction = RIGHT;
     }
 }
 void Pig::seeingWall()
 {
-    if (m_nearestDistance >= 10) {
-        this->setMoveRight(true);
-        this->setMoveLeft(true);
+    if (m_visionNearestDistance >= 1) {
         return;
     }
     this->changeDirection();
@@ -158,28 +158,23 @@ void Pig::seeingWall()
 
 void Pig::seeingBox()
 {
-    if (m_nearestDistance >= 10) {
+    if (m_visionNearestDistance >= 10) {
         return;
     }
-    this->jump();
-    if (m_direction == RIGHT) {
-        this->moveRight();
+    if (this->isDisableJump()) {
+        this->changeDirection();
     } else {
-        this->moveLeft();
+        this->jump();
     }
 }
 
 void Pig::seeingPig()
 {
-    if (m_nearestDistance >= 10) {
+    if (m_visionNearestDistance >= 10) {
         return;
     }
-    this->jump();
-    if (m_direction == RIGHT) {
-        this->moveRight();
-    } else {
-        this->moveLeft();
-    }
+
+    this->changeDirection();
 }
 
 void Pig::updateAnimation()
@@ -216,4 +211,5 @@ void Pig::updateAnimation()
 void Pig::draw()
 {
     GameObject::draw();
+    VisionObject::debugDraw();
 }

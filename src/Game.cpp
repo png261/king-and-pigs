@@ -15,6 +15,7 @@
 Game::Game()
     : m_pLevel(nullptr)
     , m_bRunning(false)
+    , m_bDebug(false)
 {
     m_levelFiles.push_back(LEVELS_DIR + "level1.tmx");
     m_levelFiles.push_back(LEVELS_DIR + "level2.tmx");
@@ -127,4 +128,14 @@ std::shared_ptr<Window> Game::getWindow()
 Level* Game::getLevel()
 {
     return m_pLevel;
+}
+
+bool Game::isDebug() const
+{
+    return m_bDebug;
+}
+
+void Game::toggleDebug()
+{
+    m_bDebug = !m_bDebug;
 }

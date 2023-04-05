@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include "PhysicWorld.hpp"
 
 class VisionRayCastCallback : public b2RayCastCallback
@@ -27,21 +28,24 @@ public:
     float m_fraction;
 };
 
+struct raycast
+{
+    b2Vec2 start;
+    b2Vec2 end;
+};
+
 class VisionObject
 {
 public:
-    VisionObject(int range);
+    VisionObject(float range);
     virtual ~VisionObject() = default;
-    virtual void update(b2Vec2 start, b2Vec2 end);
+    virtual void update();
     virtual void debugDraw();
 
 protected:
-    PhysicWorld::Category m_seeingCategory;
-    float m_fraction;
-    int m_orignRange;
-    int m_nearestDistance;
-
-private:
-    b2Vec2 m_start;
-    b2Vec2 m_end;
+    uint16 m_seeingCategory;
+    float m_visionFraction;
+    int m_visionRange;
+    float m_visionNearestDistance;
+    std::vector<raycast> m_raycast;
 };

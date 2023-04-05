@@ -28,7 +28,7 @@ void PigWithBox::loadAnimation()
 void PigWithBox::update()
 {
     Pig::update();
-    if (m_seeingCategory == PhysicWorld::CAT_PLAYER && m_nearestDistance <= 100) {
+    if (m_seeingCategory & PhysicWorld::CAT_PLAYER && m_visionNearestDistance <= 100) {
         this->throwBox();
         this->becomeNormal();
     }

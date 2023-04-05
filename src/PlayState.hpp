@@ -24,7 +24,6 @@ public:
 private:
     static void s_mute();
 
-    bool m_bDebug;
     static const std::string s_stateID;
     std::unique_ptr<Level> m_pLevel;
 };

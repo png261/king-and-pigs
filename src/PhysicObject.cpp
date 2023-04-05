@@ -10,6 +10,7 @@ PhysicObject::PhysicObject()
     , m_bCanMoveLeft(true)
     , m_bRunning(false)
     , m_bCanJump(true)
+    , m_bDisableJump(false)
 {}
 
 PhysicObject::~PhysicObject() {}
@@ -88,6 +89,10 @@ void PhysicObject::moveLeft()
 
 void PhysicObject::jump()
 {
+    if (m_bDisableJump) {
+        return;
+    }
+
     if (this->canJump() == false) {
         return;
     }
@@ -158,4 +163,9 @@ bool PhysicObject::canMoveLeft() const
 bool PhysicObject::canJump() const
 {
     return m_bCanJump;
+}
+
+bool PhysicObject::isDisableJump() const
+{
+    return m_bDisableJump;
 }

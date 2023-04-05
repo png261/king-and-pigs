@@ -29,7 +29,6 @@ PlayState::~PlayState() {}
 
 PlayState::PlayState()
     : GameState()
-    , m_bDebug(false)
 {}
 
 bool PlayState::onEnter()
@@ -203,7 +202,7 @@ void PlayState::update()
     }
 
     if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
-        m_bDebug = !m_bDebug;
+        Game::Instance()->toggleDebug();
     };
 
     PhysicWorld::Instance()->update();
@@ -219,7 +218,7 @@ void PlayState::render()
 
     m_pLevel->render();
 
-    if (m_bDebug) {
+    if (Game::Instance()->isDebug()) {
         PhysicWorld::Instance()->debugDraw();
     }
 
