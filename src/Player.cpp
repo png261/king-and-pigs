@@ -93,7 +93,7 @@ void Player::update()
 
     VisionObject::update();
 
-    if (this->m_seeingCategory & PhysicWorld::CAT_WALL && this->m_visionNearestDistance < 0.1) {
+    if (this->m_seeingCategory & PhysicWorld::CAT_WALL && this->m_visionNearestDistance < 1) {
         if (m_direction == RIGHT) {
             this->setMoveRight(false);
         } else {
