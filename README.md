@@ -71,18 +71,22 @@ The binary file will be placed in the `bin/` directory.
 
 The controls for the game are shown in the table below:
 
-| Key                   | Action                   |
-| --------------------- | ------------------------ |
-| Arrow Right           | Move right               |
-| Arrow Left            | Move left                |
-| A                     | Attack                   |
-| W                     | Go to door to next level |
+| Key                   | Action                           |
+| --------------------- | -------------------------------- |
+| Arrow Right           | Move right                       |
+| Arrow Left            | Move left                        |
+| A                     | Attack                           |
+| W                     | Enter the door to the next level |
 
 ## Features
 ### Editing Maps
 ![image](https://user-images.githubusercontent.com/63899044/230425871-7bcc41a5-cab9-41a6-85a4-83d8db867fd5.png)
 You can edit the game maps using Tiled Map Editor. The maps are stored in the `levels/` directory in TMX format. 
 To edit a map, open it in Tiled, make your changes, and save the file. The game will automatically reload the updated map the next time you start the game.
+
+
+# Source Code Structure
+For more details please see Docs generate by Doxygen: https://png261.github.io/king-and-pigs/
 
 <!-- CONTACT -->
 ## Contact
