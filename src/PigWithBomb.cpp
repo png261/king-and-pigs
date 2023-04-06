@@ -41,7 +41,7 @@ void PigWithBomb::update()
 
 void PigWithBomb::throwBomb()
 {
-    std::unique_ptr<LoaderParams> pParams = std::make_unique<LoaderParams>(LoaderParams(
+    auto pParams = std::make_unique<LoaderParams>(LoaderParams(
         this->getPosition().x - m_width / 2.0f,
         this->getPosition().y - m_height / 2.0f - 10,
         7,
@@ -58,7 +58,7 @@ void PigWithBomb::throwBomb()
 void PigWithBomb::becomeNormal()
 {
     this->disappear();
-    std::unique_ptr<LoaderParams> pParams2 = std::make_unique<LoaderParams>(LoaderParams(
+    auto pParams2 = std::make_unique<LoaderParams>(LoaderParams(
         this->getPosition().x - (20 * 0.5f),
         this->getPosition().y - (20 * 0.5f),
         20,

@@ -61,7 +61,7 @@ void Box::updateAnimation()
 
 void Box::breakIntoPieces()
 {
-    std::unique_ptr<LoaderParams> pParams = std::make_unique<LoaderParams>(LoaderParams(
+    auto pParams = std::make_unique<LoaderParams>(LoaderParams(
         this->getPosition().x - 10 / 2.0f,
         this->getPosition().y - 10 / 2.0f - 20,
         10,
