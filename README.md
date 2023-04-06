@@ -71,11 +71,12 @@ The binary file will be placed in the `bin/` directory.
 
 The controls for the game are shown in the table below:
 
-| Key          | Action        |
-| ------------ | ------------- |
-| Arrow keys   | Move character|
-| Space bar    | Jump          |
-| Left control | Attack        |
+| Key                   | Action                   |
+| --------------------- | ------------------------ |
+| Arrow Right           | Move right               |
+| Arrow Left            | Move left                |
+| A                     | Attack                   |
+| W                     | Go to door to next level |
 
 ## Features
 ### Editing Maps
