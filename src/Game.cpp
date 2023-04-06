@@ -87,6 +87,11 @@ void Game::setLevel(Level* const pLevel)
     m_pLevel = pLevel;
 }
 
+void Game::setLevelIndex(const int index)
+{
+    m_levelIndex = index;
+}
+
 void Game::nextLevel()
 {
     PlayState* playState =

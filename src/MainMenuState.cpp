@@ -47,6 +47,7 @@ void MainMenuState::render()
 
 void MainMenuState::s_enterPlay()
 {
+    Game::Instance()->setLevelIndex(0);
     GameStateMachine::Instance()->changeState(new PlayState());
 }
 
