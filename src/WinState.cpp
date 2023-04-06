@@ -70,7 +70,7 @@ bool WinState::load()
         Game::Instance()->getWindow()->getCenterY() - 70 / 2,
         250,
         70);
-    btn->onClick(s_mainMenu);
+    btn->onClick([this]() { s_mainMenu(); });
 
     Button* btn2 = new Button(
         "Exit",
@@ -78,7 +78,7 @@ bool WinState::load()
         Game::Instance()->getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
-    btn2->onClick(s_exit);
+    btn2->onClick([this]() { s_exit(); });
 
     m_uiObjects.push_back(std::unique_ptr<UiObject>(std::unique_ptr<UiObject>(btn)));
     m_uiObjects.push_back(std::unique_ptr<UiObject>(std::unique_ptr<UiObject>(btn2)));

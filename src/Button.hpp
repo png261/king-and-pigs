@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include <unordered_map>
 #include "Animation.hpp"
 #include "Shapes.hpp"
@@ -11,7 +12,7 @@ public:
     ~Button();
     void draw();
     void update();
-    void onClick(void (*callback)());
+    void onClick(std::function<void()> callback);
 
 private:
     enum { NORMAL, HOVERED, PRESSED };
@@ -24,5 +25,5 @@ private:
 
     bool m_bHovered;
 
-    void (*m_callback)();
+    std::function<void()> m_callback;
 };

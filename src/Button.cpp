@@ -59,7 +59,7 @@ void Button::update()
     /*     } */
 };
 
-void Button::onClick(void (*callback)())
+void Button::onClick(std::function<void()> callback)
 {
     m_callback = callback;
 }
