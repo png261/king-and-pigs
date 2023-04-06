@@ -14,6 +14,8 @@ Level::Level()
 Level::~Level()
 {
     m_layers.clear();
+    m_tilesets.clear();
+    m_collisionShapes.clear();
 }
 
 void Level::render()
