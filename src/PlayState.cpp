@@ -15,6 +15,7 @@
 #include "InputHandler.hpp"
 #include "KingPig.hpp"
 #include "LevelParser.hpp"
+#include "Log.hpp"
 #include "PauseState.hpp"
 #include "Pig.hpp"
 #include "PigWithBomb.hpp"
@@ -25,7 +26,10 @@
 
 const std::string PlayState::s_stateID = "PLAY";
 
-PlayState::~PlayState() {}
+PlayState::~PlayState()
+{
+    Log::log("delete playstate");
+}
 
 PlayState::PlayState()
     : GameState()

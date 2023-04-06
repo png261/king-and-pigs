@@ -14,10 +14,7 @@ PhysicObject::PhysicObject()
     , m_bDisableJump(false)
 {}
 
-PhysicObject::~PhysicObject()
-{
-    PhysicWorld::Instance()->getWorld()->DestroyBody(this->getBody());
-}
+PhysicObject::~PhysicObject() {}
 
 void PhysicObject::update()
 {

@@ -188,6 +188,9 @@ void PhysicWorld::clean()
 {
     m_pWorld->SetContactListener(nullptr);
     m_contactListener.reset();
+    for (b2Body* body = m_pWorld->GetBodyList(); body; body = body->GetNext()) {
+        m_pWorld->DestroyBody(body);
+    }
     m_contactListener = std::make_unique<ContactListener>(ContactListener());
     m_pWorld->SetContactListener(m_contactListener.get());
 }

@@ -28,6 +28,7 @@ void ObjectLayer::update()
             continue;
         }
 
+        PhysicWorld::Instance()->getWorld()->DestroyBody((*it)->getBody());
         m_gameObjects.erase(it);
     }
 }
