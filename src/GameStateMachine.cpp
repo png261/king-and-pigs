@@ -8,10 +8,6 @@ std::shared_ptr<GameStateMachine> GameStateMachine::Instance()
 
 void GameStateMachine::clean()
 {
-    if (!m_gameStates.empty()) {
-        return;
-    }
-
     for (const auto& state : m_gameStates) {
         state->onExit();
         delete state;
