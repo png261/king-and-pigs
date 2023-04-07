@@ -105,5 +105,8 @@ void TextureManager::drawTile(
 
 void TextureManager::clean()
 {
+    for (auto& texture : m_textureMap) {
+        Game::Instance()->getWindow()->freeImage(texture.second);
+    }
     m_textureMap.clear();
 }
