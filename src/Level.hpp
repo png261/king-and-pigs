@@ -6,8 +6,6 @@
 #include "ObjectLayer.hpp"
 #include "Player.hpp"
 
-class TileLayer;
-
 struct Tileset
 {
     int firstGridID;
@@ -28,29 +26,30 @@ struct CollisionShape
     int height;
 };
 
-class Level
+class Level final
 {
 public:
     ~Level();
+    Level();
 
     void update();
     void render();
 
     std::vector<Tileset>* getTilesets();
     std::unordered_map<int, CollisionShape>* getCollisionShapes();
-    std::vector<Layer*>* getLayers();
-    void addLayer(Layer*);
-    void addTileSet(Tileset tileset);
-    void addCollisionShape(std::pair<int, CollisionShape> shape);
+    void addLayer(Layer* const layer);
+    void addTileSet(const Tileset tileset);
+    void addCollisionShape(const int id, const CollisionShape shape);
 
-    Player* getPlayer();
-    void setPlayer(Player* player);
-    GameObject* spawnGameObject(std::string type, std::unique_ptr<LoaderParams> const& pParams);
+    Player* getPlayer() const;
+    void setPlayer(Player* const player);
+    GameObject* spawnGameObject(
+        const std::string type,
+        std::unique_ptr<LoaderParams> const& pParams);
 
 private:
     friend class LevelParser;
 
-    Level();
     void createTileObject();
     Player* m_pPlayer;
 

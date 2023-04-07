@@ -13,8 +13,7 @@
 #include "WinState.hpp"
 
 Game::Game()
-    : m_pLevel(nullptr)
-    , m_bRunning(false)
+    : m_bRunning(false)
     , m_bDebug(false)
 {
     m_levelFiles.push_back(LEVELS_DIR + "level1.tmx");
@@ -82,7 +81,7 @@ void Game::quit()
     m_bRunning = false;
 }
 
-void Game::setLevel(Level* const pLevel)
+void Game::setLevel(std::shared_ptr<Level> const& pLevel)
 {
     m_pLevel = pLevel;
 }
@@ -125,12 +124,12 @@ std::string Game::getLevelPath(int index)
     return m_levelFiles[index];
 }
 
-std::shared_ptr<Window> Game::getWindow()
+std::shared_ptr<Window> Game::getWindow() const
 {
     return m_pWindow;
 }
 
-Level* Game::getLevel()
+std::shared_ptr<Level> Game::getLevel() const
 {
     return m_pLevel;
 }

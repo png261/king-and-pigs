@@ -21,15 +21,14 @@ public:
     void quit();
     bool isRunning() const;
 
-    std::shared_ptr<Window> getWindow();
+    std::shared_ptr<Window> getWindow() const;
+    std::shared_ptr<Level> getLevel() const;
     int getLevelIndex() const;
-    void nextLevel();
     std::string getLevelPath(const int index);
 
+    void nextLevel();
+    void setLevel(std::shared_ptr<Level> const& pLevel);
     void setLevelIndex(int const currentLevel);
-
-    void setLevel(Level* const pLevel);
-    Level* getLevel();
 
     bool isDebug() const;
     void toggleDebug();
@@ -38,7 +37,7 @@ private:
     Game();
 
     std::shared_ptr<Window> m_pWindow;
-    Level* m_pLevel;
+    std::shared_ptr<Level> m_pLevel;
     bool m_bRunning;
     bool m_bDebug;
     int m_levelIndex;

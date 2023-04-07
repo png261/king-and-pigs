@@ -25,5 +25,5 @@ private:
     static void s_mute();
 
     static const std::string s_stateID;
-    std::unique_ptr<Level> m_pLevel;
+    std::shared_ptr<Level> m_pLevel;
 };

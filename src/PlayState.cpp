@@ -166,14 +166,14 @@ bool PlayState::loadLevel()
 
     LevelParser levelParser;
     m_pLevel.reset();
-    m_pLevel = std::unique_ptr<Level>(levelParser.parseLevel(
-        Game::Instance()->getLevelPath(Game::Instance()->getLevelIndex()).c_str()));
+    m_pLevel = levelParser.parseLevel(
+        Game::Instance()->getLevelPath(Game::Instance()->getLevelIndex()).c_str());
 
     if (m_pLevel == nullptr) {
         return false;
     }
 
-    Game::Instance()->setLevel(m_pLevel.get());
+    Game::Instance()->setLevel(m_pLevel);
     Camera::Instance()->setTarget(m_pLevel->getPlayer());
     Camera::Instance()->setZoom(3);
 

@@ -12,14 +12,14 @@
 
 using namespace tinyxml2;
 
-Level* LevelParser::parseLevel(const char* levelFile)
+std::shared_ptr<Level> LevelParser::parseLevel(const char* levelFile)
 {
     XMLDocument levelDocument;
     if (levelDocument.LoadFile(levelFile) != XML_SUCCESS) {
         Log::error(std::string("fail to load level file: ") + levelFile);
     }
 
-    Level* const pLevel = new Level();
+    auto const pLevel = std::make_shared<Level>();
     XMLElement* const pRoot = levelDocument.RootElement();
     if (pRoot == nullptr) {
         Log::error(std::string(levelFile) + ": missing  root element");
@@ -52,7 +52,7 @@ Level* LevelParser::parseLevel(const char* levelFile)
     return pLevel;
 }
 
-void LevelParser::parseTilesets(XMLElement* const pTilesetRoot, Level* pLevel)
+void LevelParser::parseTilesets(XMLElement* const pTilesetRoot, std::shared_ptr<Level> pLevel)
 {
     XMLElement* const pImagieEl = pTilesetRoot->FirstChildElement();
 
@@ -94,7 +94,10 @@ void LevelParser::parseTilesets(XMLElement* const pTilesetRoot, Level* pLevel)
     parseCollisionObject(pTilesetRoot, pLevel, tileset.firstGridID);
 }
 
-void LevelParser::parseCollisionObject(XMLElement* pTilesetRoot, Level* pLevel, int firstGridID)
+void LevelParser::parseCollisionObject(
+    XMLElement* pTilesetRoot,
+    std::shared_ptr<Level> pLevel,
+    int firstGridID)
 {
     for (XMLElement* e = pTilesetRoot->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
@@ -105,13 +108,14 @@ void LevelParser::parseCollisionObject(XMLElement* pTilesetRoot, Level* pLevel, 
 
             int width = std::stoi(obj->Attribute("width"));
             int height = std::stoi(obj->Attribute("height"));
-            pLevel->addCollisionShape(
-                std::pair<int, CollisionShape>(id, {isOneWay, width, height}));
+            pLevel->addCollisionShape(id, {isOneWay, width, height});
         }
     }
 }
 
-GameObject* LevelParser::parseObject(XMLElement* const pObjectElement, Level* const pLevel)
+GameObject* LevelParser::parseObject(
+    XMLElement* const pObjectElement,
+    std::shared_ptr<Level> const pLevel)
 {
     int x = std::stoi(pObjectElement->Attribute("x"));
     int y = std::stoi(pObjectElement->Attribute("y"));
@@ -146,7 +150,7 @@ GameObject* LevelParser::parseObject(XMLElement* const pObjectElement, Level* co
     return pGameObject;
 }
 
-void LevelParser::parseObjectLayer(XMLElement* const pObjectEl, Level* const pLevel)
+void LevelParser::parseObjectLayer(XMLElement* const pObjectEl, std::shared_ptr<Level> const pLevel)
 {
     ObjectLayer* const pObjectLayer = new ObjectLayer();
 
@@ -188,7 +192,7 @@ std::vector<std::vector<int>> LevelParser::parseData(std::string dataText)
     return data;
 }
 
-void LevelParser::parseTileLayer(XMLElement* const pTileElement, Level* pLevel)
+void LevelParser::parseTileLayer(XMLElement* const pTileElement, std::shared_ptr<Level> pLevel)
 {
     TileLayer* const pTileLayer =
         new TileLayer(m_tileSize, m_width, m_height, *pLevel->getTilesets());
