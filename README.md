@@ -75,6 +75,7 @@ The controls for the game are shown in the table below:
 | --------------------- | -------------------------------- |
 | Arrow Right           | Move right                       |
 | Arrow Left            | Move left                        |
+| Space                 | Jump                             |
 | A                     | Attack                           |
 | W                     | Enter the door to the next level |
 
