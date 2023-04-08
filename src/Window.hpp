@@ -50,7 +50,7 @@ public:
 private:
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
-    TTF_Font* m_font;
+    TTF_Font* m_pFont;
 
     uint m_width;
     uint m_height;

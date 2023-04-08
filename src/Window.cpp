@@ -24,8 +24,8 @@ Window::Window(const uint width, const uint height, const std::string title)
         Log::error("Window(): Couldn't create Window");
         throw "Window() Fail";
     }
-    m_font = TTF_OpenFont("fonts/UbuntuMono.ttf", 28);
-    if (m_font == nullptr) {
+    m_pFont = TTF_OpenFont("fonts/m6x11.ttf", 28);
+    if (m_pFont == nullptr) {
         Log::error("Window(): Couldn't load font");
     }
 
@@ -48,21 +48,18 @@ void Window::resize(std::string title, uint width, uint height)
     // Taken from the Migration Guide
     // (http://wiki.libsdl.org/MigrationGuide)
     //
-    // It creates a nice window independent of the user's
-    // monitor size.
+    // It creates a nice window independent of the user's monitor size.
     SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN, &m_pWindow, &m_pRenderer);
 
-    if (!m_pWindow || !m_pRenderer) {
+    if (m_pWindow == nullptr || m_pRenderer == nullptr) {
         Log::error("Window::resize: Couldn't create SDL_Window or SDL_Renderer");
         return;
     }
 
-    // And here we fake a "logical" size of the window,
-    // independent of it's real size.
+    // And here we fake a "logical" size of the window, independent of it's real size.
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_RenderSetLogicalSize(m_pRenderer, width, height);
 
-    // Lil' title
     this->setTitle(title);
 
     m_width = width;
@@ -92,7 +89,7 @@ void Window::refresh()
 SDL_Texture* Window::loadImage(const std::string path)
 {
     SDL_Texture* const pTexture = IMG_LoadTexture(m_pRenderer, path.c_str());
-    if (!pTexture) {
+    if (pTexture == nullptr) {
         Log::error("IMG_LoadTexture: Couldn't open image '" + path + "': " + IMG_GetError());
     }
     return pTexture;
@@ -100,7 +97,7 @@ SDL_Texture* Window::loadImage(const std::string path)
 
 void Window::freeImage(SDL_Texture* const pTexture)
 {
-    if (!pTexture) {
+    if (pTexture == nullptr) {
         return;
     }
 
@@ -161,30 +158,32 @@ void Window::delayFramerateIfNeeded()
 
 void Window::print(std::string text, int fontSize, int x, int y, Color color)
 {
-    TTF_SetFontSize(m_font, fontSize);
-    if (!m_font) {
+    if (m_pFont == nullptr) {
         Log::error("Window::print: fail to load font");
         return;
     }
-    SDL_Surface* surface =
-        TTF_RenderText_Blended(m_font, text.c_str(), {color.r(), color.g(), color.b(), color.a()});
-    if (!surface) {
+    TTF_SetFontSize(m_pFont, fontSize);
+
+    SDL_Surface* pSurface =
+        TTF_RenderText_Blended(m_pFont, text.c_str(), {color.r(), color.g(), color.b(), color.a()});
+    if (pSurface == nullptr) {
         Log::error("Window::print: fail to create surface");
         return;
     }
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(m_pRenderer, surface);
-    SDL_FreeSurface(surface);
 
-    if (!texture) {
+    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
+    SDL_FreeSurface(pSurface);
+
+    if (pTexture == nullptr) {
         Log::error("Window::print: fail to create texture");
         return;
     }
 
-    SDL_Rect dest_rect = {x - surface->w / 2, y - surface->h / 2, surface->w, surface->h};
+    SDL_Rect dest_rect{x - pSurface->w / 2, y - pSurface->h / 2, pSurface->w, pSurface->h};
 
-    SDL_RenderCopy(m_pRenderer, texture, NULL, &dest_rect);
+    SDL_RenderCopy(m_pRenderer, pTexture, NULL, &dest_rect);
 
-    SDL_DestroyTexture(texture);
+    SDL_DestroyTexture(pTexture);
 };
 
 void Window::drawBox(Rectangle box, Color color) const

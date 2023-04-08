@@ -173,7 +173,7 @@ bool PlayState::loadLevel()
         return false;
     }
 
-    Game::Instance()->setLevel(m_pLevel);
+    Game::Instance()->setLevel(std::move(m_pLevel));
     Camera::Instance()->setTarget(m_pLevel->getPlayer());
     Camera::Instance()->setZoom(3);
 

@@ -34,9 +34,9 @@ bool Game::init()
         return false;
     };
 
-    m_pWindow = std::make_shared<Window>(1280, 720);
+    m_pWindow = std::make_shared<Window>(1280, 720, "King and Pig");
 
-    if (PhysicWorld::Instance()->init(m_pWindow) == false) {
+    if (PhysicWorld::Instance()->init(std::move(m_pWindow)) == false) {
         return false;
     };
 
