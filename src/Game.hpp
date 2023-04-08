@@ -16,7 +16,7 @@ public:
     bool init();
     void handleEvents();
     void update();
-    void render();
+    void render() const;
     void clean();
     void quit();
     bool isRunning() const;

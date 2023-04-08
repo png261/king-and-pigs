@@ -50,7 +50,7 @@ void MainMenuState::update()
     }
 };
 
-void MainMenuState::render()
+void MainMenuState::render() const
 {
     if (!m_bLoaded || m_bPaused) {
         return;

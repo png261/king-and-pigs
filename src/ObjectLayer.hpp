@@ -12,7 +12,7 @@ public:
     ~ObjectLayer();
 
     void update();
-    void render();
+    void render() const;
 
     std::vector<std::unique_ptr<GameObject>>* getGameObjects();
     void addGameObject(GameObject*);

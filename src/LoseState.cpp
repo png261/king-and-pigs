@@ -45,7 +45,7 @@ void LoseState::update()
     }
 };
 
-void LoseState::render()
+void LoseState::render() const
 {
     if (!m_bLoaded || m_bPaused) {
         return;

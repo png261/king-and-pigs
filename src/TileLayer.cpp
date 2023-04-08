@@ -23,7 +23,7 @@ TileLayer::~TileLayer() {}
 
 void TileLayer::update() {}
 
-void TileLayer::render()
+void TileLayer::render() const
 {
     int x, y, x2, y2 = 0;
 

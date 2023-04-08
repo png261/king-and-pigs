@@ -13,7 +13,7 @@ Level::Level()
 
 Level::~Level() {}
 
-void Level::render()
+void Level::render() const
 {
     for (const auto& layer : m_layers) {
         layer->render();

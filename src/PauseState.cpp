@@ -54,7 +54,7 @@ void PauseState::update()
     }
 };
 
-void PauseState::render()
+void PauseState::render() const
 {
     if (!m_bLoaded || m_bPaused) {
         return;

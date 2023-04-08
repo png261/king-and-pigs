@@ -46,7 +46,7 @@ void WinState::update()
     }
 };
 
-void WinState::render()
+void WinState::render() const
 {
     if (!m_bLoaded || m_bPaused) {
         return;

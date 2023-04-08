@@ -214,7 +214,7 @@ void PlayState::update()
     Camera::Instance()->update();
 }
 
-void PlayState::render()
+void PlayState::render() const
 {
     if (!m_bLoaded || m_bPaused || m_pLevel == nullptr) {
         return;

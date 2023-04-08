@@ -14,7 +14,7 @@ public:
         const std::vector<Tileset>& tilesets);
     ~TileLayer();
     void update();
-    void render();
+    void render() const;
 
     void setTileIDs(const std::vector<std::vector<int>>& data);
     void setTileSize(int const tileSize);

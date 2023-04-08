@@ -12,7 +12,7 @@ public:
     GameStateMachine& operator=(GameStateMachine const&) = delete;
 
     void update();
-    void render();
+    void render() const;
 
     void pushState(std::shared_ptr<GameState> const& pState);
     void changeState(std::shared_ptr<GameState> const& pState);

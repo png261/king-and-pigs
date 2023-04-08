@@ -21,7 +21,7 @@ void GameStateMachine::update()
     }
 }
 
-void GameStateMachine::render()
+void GameStateMachine::render() const
 {
     for (const auto& state : m_gameStates) {
         state->render();

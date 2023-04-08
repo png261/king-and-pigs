@@ -56,10 +56,9 @@ void Game::update()
     GameStateMachine::Instance()->update();
 }
 
-void Game::render()
+void Game::render() const
 {
     m_pWindow->clear();
-
     GameStateMachine::Instance()->render();
     m_pWindow->refresh();
     m_pWindow->delayFramerateIfNeeded();
@@ -93,7 +92,7 @@ void Game::setLevelIndex(const int index)
 
 void Game::nextLevel()
 {
-    PlayState* playState =
+    PlayState* const playState =
         dynamic_cast<PlayState*>(GameStateMachine::Instance()->getCurrentState());
     if (playState == nullptr) {
         return;

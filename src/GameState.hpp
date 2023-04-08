@@ -8,7 +8,7 @@ class GameState
 public:
     virtual ~GameState() = default;
     virtual void update() = 0;
-    virtual void render() = 0;
+    virtual void render() const = 0;
 
     virtual bool onEnter() = 0;
     virtual bool load() = 0;

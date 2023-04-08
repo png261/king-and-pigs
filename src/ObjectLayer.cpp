@@ -34,7 +34,7 @@ void ObjectLayer::update()
     }
 }
 
-void ObjectLayer::render()
+void ObjectLayer::render() const
 {
     for (const auto& obj : m_gameObjects) {
         obj->draw();

@@ -33,7 +33,7 @@ public:
     Level();
 
     void update();
-    void render();
+    void render() const;
 
     std::vector<Tileset>* getTilesets();
     std::unordered_map<int, CollisionShape>* getCollisionShapes();
