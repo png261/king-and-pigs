@@ -3,13 +3,16 @@
 #include "CONSTANT.hpp"
 #include "Game.hpp"
 #include "GameStateMachine.hpp"
+#include "InputHandler.hpp"
 #include "MainMenuState.hpp"
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
 const std::string WinState::s_stateID = "WIN";
 
-WinState::WinState(){};
+WinState::WinState()
+    : m_bEnterMainMenu(false)
+    , m_bEnterExit(false){};
 
 WinState::~WinState(){};
 
@@ -27,10 +30,18 @@ void WinState::update()
         return;
     }
 
+
+    if (m_bEnterMainMenu) {
+        GameStateMachine::Instance()->changeState(std::make_shared<MainMenuState>());
+        return;
+    }
+
+    if (m_bEnterExit) {
+        Game::Instance()->quit();
+        return;
+    }
+
     for (const auto& obj : m_uiObjects) {
-        if (obj == nullptr) {
-            continue;
-        }
         obj->update();
     }
 };
@@ -46,16 +57,6 @@ void WinState::render()
     Game::Instance()->getWindow()->print("you are win", 40, 320, 50, {});
 };
 
-void WinState::s_mainMenu()
-{
-    GameStateMachine::Instance()->changeState(new MainMenuState());
-}
-
-void WinState::s_exit()
-{
-    Game::Instance()->quit();
-}
-
 bool WinState::load()
 {
     m_bLoaded = false;
@@ -64,24 +65,25 @@ bool WinState::load()
     texture->load(ASSETS_DIR + "UI/Button/hovered.png", "button hovered");
     texture->load(ASSETS_DIR + "UI/Button/pressed.png", "button pressed");
 
-    Button* btn = new Button(
+    Button* mainMenuButton = new Button(
         "Main Menu",
         Game::Instance()->getWindow()->getCenterX() - 250 / 2,
         Game::Instance()->getWindow()->getCenterY() - 70 / 2,
         250,
         70);
-    btn->onClick([this]() { s_mainMenu(); });
 
-    Button* btn2 = new Button(
+    Button* exitButton = new Button(
         "Exit",
         Game::Instance()->getWindow()->getCenterX() - 250 / 2,
         Game::Instance()->getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
-    btn2->onClick([this]() { s_exit(); });
 
-    m_uiObjects.push_back(std::unique_ptr<UiObject>(std::unique_ptr<UiObject>(btn)));
-    m_uiObjects.push_back(std::unique_ptr<UiObject>(std::unique_ptr<UiObject>(btn2)));
+    mainMenuButton->onClick([this]() { m_bEnterMainMenu = true; });
+    exitButton->onClick([this]() { m_bEnterExit = true; });
+
+    m_uiObjects.push_back(std::unique_ptr<UiObject>(mainMenuButton));
+    m_uiObjects.push_back(std::unique_ptr<UiObject>(exitButton));
 
     m_bLoaded = true;
 
@@ -91,6 +93,7 @@ bool WinState::load()
 bool WinState::onExit()
 {
     m_bPaused = true;
+    InputHandler::Instance()->reset();
     return true;
 };
 

@@ -11,12 +11,7 @@ Level::Level()
     m_spawnLayer = std::make_unique<ObjectLayer>();
 }
 
-Level::~Level()
-{
-    m_layers.clear();
-    m_tilesets.clear();
-    m_collisionShapes.clear();
-}
+Level::~Level() {}
 
 void Level::render()
 {

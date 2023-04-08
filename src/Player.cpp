@@ -75,7 +75,7 @@ void Player::loadAnimation()
 void Player::update()
 {
     if (this->isDead()) {
-        GameStateMachine::Instance()->pushState(new LoseState());
+        GameStateMachine::Instance()->pushState(std::make_shared<LoseState>());
         return;
     }
 

@@ -3,6 +3,7 @@
 #include "Camera.hpp"
 #include "Game.hpp"
 #include "Level.hpp"
+#include "Log.hpp"
 
 ObjectLayer::~ObjectLayer()
 {

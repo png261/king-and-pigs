@@ -184,8 +184,8 @@ bool PlayState::loadLevel()
 bool PlayState::onExit()
 {
     m_bPaused = true;
-    InputHandler::Instance()->reset();
     PhysicWorld::Instance()->clean();
+    InputHandler::Instance()->reset();
 
     return true;
 }
@@ -202,7 +202,7 @@ void PlayState::update()
     }
 
     if (InputHandler::Instance()->isKeyDown(KEY_ESCAPE)) {
-        GameStateMachine::Instance()->pushState(new PauseState());
+        GameStateMachine::Instance()->pushState(std::make_shared<PauseState>());
     }
 
     if (InputHandler::Instance()->isKeyDown(KEY_Q)) {

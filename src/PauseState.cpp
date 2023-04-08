@@ -4,16 +4,20 @@
 #include "Game.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
+#include "Log.hpp"
 #include "MainMenuState.hpp"
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
 const std::string PauseState::s_stateID = "PAUSE";
 
-PauseState::PauseState(){};
+PauseState::PauseState()
+    : m_bEnterResume(false)
+    , m_bEnterMainMenu(false){};
 
 PauseState::~PauseState()
 {
+    Log::log("PauseState deleted");
     m_uiObjects.clear();
 };
 
@@ -31,8 +35,18 @@ void PauseState::update()
         return;
     }
 
+    if (m_bEnterResume) {
+        GameStateMachine::Instance()->popState();
+        return;
+    }
+    if (m_bEnterMainMenu) {
+        GameStateMachine::Instance()->popState();
+        GameStateMachine::Instance()->changeState(std::make_shared<MainMenuState>());
+        return;
+    }
+
     if (InputHandler::Instance()->isKeyDown(KEY_ESCAPE)) {
-        s_resume();
+        m_bEnterResume = true;
     }
 
     for (const auto& obj : m_uiObjects) {
@@ -51,16 +65,6 @@ void PauseState::render()
     }
 };
 
-void PauseState::s_resume()
-{
-    GameStateMachine::Instance()->popState();
-}
-
-void PauseState::s_mainMenu()
-{
-    GameStateMachine::Instance()->changeState(new MainMenuState());
-}
-
 bool PauseState::load()
 {
     m_bLoaded = false;
@@ -69,24 +73,25 @@ bool PauseState::load()
     texture->load(ASSETS_DIR + "UI/Button/hovered.png", "button hovered");
     texture->load(ASSETS_DIR + "UI/Button/pressed.png", "button pressed");
 
-    Button* btn = new Button(
+    Button* resumeButton = new Button(
         "Resume",
         Game::Instance()->getWindow()->getCenterX() - 250 / 2,
         Game::Instance()->getWindow()->getCenterY() - 70 / 2,
         250,
         70);
-    btn->onClick([this]() { s_resume(); });
 
-    Button* btn2 = new Button(
+    Button* mainMenuButton = new Button(
         "Main Menu",
         Game::Instance()->getWindow()->getCenterX() - 250 / 2,
         Game::Instance()->getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
-    btn2->onClick([this]() { s_mainMenu(); });
 
-    m_uiObjects.push_back(std::unique_ptr<UiObject>(btn));
-    m_uiObjects.push_back(std::unique_ptr<UiObject>(btn2));
+    resumeButton->onClick([this]() { m_bEnterResume = true; });
+    mainMenuButton->onClick([this]() { m_bEnterMainMenu = true; });
+
+    m_uiObjects.push_back(std::unique_ptr<UiObject>(resumeButton));
+    m_uiObjects.push_back(std::unique_ptr<UiObject>(mainMenuButton));
 
     m_bLoaded = true;
     return true;

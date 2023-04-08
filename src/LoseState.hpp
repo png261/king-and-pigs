@@ -21,4 +21,6 @@ private:
     void s_exit();
     std::vector<std::unique_ptr<UiObject>> m_uiObjects;
     static const std::string s_stateID;
+    bool m_bEnterMainMenu;
+    bool m_bEnterExit;
 };

@@ -3,13 +3,16 @@
 #include "CONSTANT.hpp"
 #include "Game.hpp"
 #include "GameStateMachine.hpp"
+#include "InputHandler.hpp"
 #include "MainMenuState.hpp"
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
-const std::string LoseState::s_stateID = "WIN";
+const std::string LoseState::s_stateID = "LOSE";
 
-LoseState::LoseState(){};
+LoseState::LoseState()
+    : m_bEnterMainMenu(false)
+    , m_bEnterExit(false){};
 
 LoseState::~LoseState(){};
 
@@ -24,6 +27,16 @@ bool LoseState::onEnter()
 void LoseState::update()
 {
     if (!m_bLoaded || m_bPaused) {
+        return;
+    }
+
+    if (m_bEnterMainMenu) {
+        GameStateMachine::Instance()->changeState(std::make_shared<MainMenuState>());
+        return;
+    }
+
+    if (m_bEnterExit) {
+        Game::Instance()->quit();
         return;
     }
 
@@ -46,7 +59,7 @@ void LoseState::render()
 
 void LoseState::s_mainMenu()
 {
-    GameStateMachine::Instance()->changeState(new MainMenuState());
+    GameStateMachine::Instance()->changeState(std::make_shared<MainMenuState>());
 }
 
 void LoseState::s_exit()
@@ -62,24 +75,25 @@ bool LoseState::load()
     texture->load(ASSETS_DIR + "UI/Button/hovered.png", "button hovered");
     texture->load(ASSETS_DIR + "UI/Button/pressed.png", "button pressed");
 
-    Button* btn = new Button(
+    Button* mainMenuButton = new Button(
         "Main Menu",
         Game::Instance()->getWindow()->getCenterX() - 250 / 2,
         Game::Instance()->getWindow()->getCenterY() - 70 / 2,
         250,
         70);
-    btn->onClick([this]() { [this]() { s_mainMenu(); }(); });
 
-    Button* btn2 = new Button(
+    Button* exitButton = new Button(
         "Exit",
         Game::Instance()->getWindow()->getCenterX() - 250 / 2,
         Game::Instance()->getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
-    btn2->onClick([this]() { [this]() { s_exit(); }(); });
 
-    m_uiObjects.push_back(std::unique_ptr<UiObject>(std::unique_ptr<UiObject>(btn)));
-    m_uiObjects.push_back(std::unique_ptr<UiObject>(std::unique_ptr<UiObject>(btn2)));
+    mainMenuButton->onClick([this]() { m_bEnterMainMenu = true; });
+    exitButton->onClick([this]() { m_bEnterExit = true; });
+
+    m_uiObjects.push_back(std::unique_ptr<UiObject>(mainMenuButton));
+    m_uiObjects.push_back(std::unique_ptr<UiObject>(exitButton));
 
     m_bLoaded = true;
 
@@ -89,6 +103,7 @@ bool LoseState::load()
 bool LoseState::onExit()
 {
     m_bPaused = true;
+    InputHandler::Instance()->reset();
     return true;
 };
 

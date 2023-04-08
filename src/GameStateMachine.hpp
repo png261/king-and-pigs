@@ -14,8 +14,8 @@ public:
     void update();
     void render();
 
-    void pushState(GameState* const pState);
-    void changeState(GameState* const pState);
+    void pushState(std::shared_ptr<GameState> const& pState);
+    void changeState(std::shared_ptr<GameState> const& pState);
     void popState();
 
     GameState* getCurrentState();
@@ -24,5 +24,5 @@ public:
 
 private:
     GameStateMachine() = default;
-    std::vector<GameState*> m_gameStates;
+    std::vector<std::shared_ptr<GameState>> m_gameStates;
 };

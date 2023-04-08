@@ -17,8 +17,8 @@ public:
     std::string getStateID() const override;
 
 private:
-    void s_enterPlay();
-    void s_exit();
     std::vector<std::unique_ptr<UiObject>> m_uiObjects;
     static const std::string s_stateID;
+    bool m_bEnterPlayState;
+    bool m_bEnterQuit;
 };
