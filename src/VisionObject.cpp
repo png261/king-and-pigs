@@ -24,8 +24,8 @@ void VisionObject::update()
         m_seeingCategory = m_seeingCategory | callback.m_seeingCategory;
 
         m_visionNearestDistance = callback.m_fraction * m_visionRange < m_visionNearestDistance
-                                ? callback.m_fraction * m_visionRange
-                                : m_visionNearestDistance;
+                                      ? callback.m_fraction * m_visionRange
+                                      : m_visionNearestDistance;
     }
 }
 
@@ -34,11 +34,11 @@ void VisionObject::debugDraw()
     if (Game::Instance()->isDebug() == false) {
         return;
     }
+
+    DebugDraw debug(Game::Instance()->getWindow());
     for (auto& raycast : m_raycast) {
         b2Vec2 start = PhysicWorld::pixelToMeter(raycast.start);
         b2Vec2 end = PhysicWorld::pixelToMeter(raycast.end);
-
-        DebugDraw* debug = new DebugDraw(Game::Instance()->getWindow());
-        debug->DrawSegment(start, end, {1, 1, 1, 1});
+        debug.DrawSegment(start, end, {1, 1, 1, 1});
     }
 }
