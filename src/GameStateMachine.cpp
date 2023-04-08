@@ -30,7 +30,7 @@ void GameStateMachine::render() const
 
 void GameStateMachine::pushState(std::shared_ptr<GameState> const& pState)
 {
-    m_gameStates.push_back(pState);
+    m_gameStates.push_back(std::move(pState));
     m_gameStates.back()->onEnter();
 }
 
@@ -59,7 +59,7 @@ void GameStateMachine::changeState(std::shared_ptr<GameState> const& pState)
     }
 
     pState->onEnter();
-    m_gameStates.push_back(pState);
+    m_gameStates.push_back(std::move(pState));
 }
 
 GameState* GameStateMachine::getCurrentState()
