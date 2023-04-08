@@ -152,7 +152,7 @@ GameObject* LevelParser::parseObject(
 
 void LevelParser::parseObjectLayer(XMLElement* const pObjectEl, std::shared_ptr<Level> const pLevel)
 {
-    ObjectLayer* const pObjectLayer = new ObjectLayer();
+    auto const pObjectLayer = std::make_shared<ObjectLayer>();
 
     bool isHaveObjects = false;
     for (XMLElement* e = pObjectEl->FirstChildElement(); e != nullptr;
@@ -194,8 +194,8 @@ std::vector<std::vector<int>> LevelParser::parseData(std::string dataText)
 
 void LevelParser::parseTileLayer(XMLElement* const pTileElement, std::shared_ptr<Level> pLevel)
 {
-    TileLayer* const pTileLayer =
-        new TileLayer(m_tileSize, m_width, m_height, *pLevel->getTilesets());
+    auto const pTileLayer =
+        std::make_shared<TileLayer>(m_tileSize, m_width, m_height, *pLevel->getTilesets());
 
     std::vector<std::vector<int>> IDs;
     for (XMLElement* e = pTileElement->FirstChildElement(); e != nullptr;
