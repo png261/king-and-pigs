@@ -17,7 +17,7 @@ Button::Button(std::string text, int x, int y, int width, int height)
 
     m_curAnimation = NORMAL;
     m_animations[m_curAnimation]->start();
-    SoundManager::Instance()->loadSFX(ASSETS_DIR + "sounds/Button/clicked.mp3", "button clicked");
+    SoundManager::Instance()->loadSFX(SOUND_DIR + "Button/clicked.mp3", "button clicked");
 }
 
 Button::~Button() {}

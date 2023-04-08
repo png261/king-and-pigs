@@ -69,9 +69,9 @@ bool PauseState::load()
 {
     m_bLoaded = false;
     const auto texture = TextureManager::Instance();
-    texture->load(ASSETS_DIR + "UI/Button/normal.png", "button normal");
-    texture->load(ASSETS_DIR + "UI/Button/hovered.png", "button hovered");
-    texture->load(ASSETS_DIR + "UI/Button/pressed.png", "button pressed");
+    texture->load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
+    texture->load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
+    texture->load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
 
     Button* resumeButton = new Button(
         "Resume",
