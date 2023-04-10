@@ -34,13 +34,13 @@ bool Game::init()
         return false;
     };
 
-    m_pWindow = std::make_shared<Window>(1280, 720, "King and Pig");
+    m_pWindow = std::make_unique<Window>(1280, 720, "King and Pig");
 
-    if (!PhysicWorld::Instance().init(std::move(m_pWindow))) {
+    if (!PhysicWorld::Instance().init(m_pWindow.get())) {
         return false;
     };
 
-    GameStateMachine::Instance().changeState(std::make_shared<MainMenuState>());
+    GameStateMachine::Instance().changeState(new MainMenuState());
     m_bRunning = true;
 
     return true;
@@ -80,7 +80,7 @@ void Game::quit()
     m_bRunning = false;
 }
 
-void Game::setLevel(std::shared_ptr<Level> const& pLevel)
+void Game::setLevel(Level* const pLevel)
 {
     m_pLevel = pLevel;
 }
@@ -100,7 +100,7 @@ void Game::nextLevel()
 
     m_levelIndex += 1;
     if (m_levelIndex >= m_levelFiles.size()) {
-        GameStateMachine::Instance().changeState(std::make_shared<WinState>());
+        GameStateMachine::Instance().changeState(new WinState());
         m_levelIndex = 0;
         return;
     }
@@ -123,12 +123,12 @@ std::string Game::getLevelPath(int index)
     return m_levelFiles[index];
 }
 
-std::shared_ptr<Window> Game::getWindow() const
+Window* Game::getWindow() const
 {
-    return m_pWindow;
+    return m_pWindow.get();
 }
 
-std::shared_ptr<Level> Game::getLevel() const
+Level* Game::getLevel() const
 {
     return m_pLevel;
 }

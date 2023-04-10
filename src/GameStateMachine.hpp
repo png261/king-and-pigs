@@ -7,15 +7,15 @@
 class GameStateMachine final
 {
 public:
-    static GameStateMachine& Instance(); 
+    static GameStateMachine& Instance();
     GameStateMachine(GameStateMachine const&) = delete;
     GameStateMachine& operator=(GameStateMachine const&) = delete;
 
     void update();
     void render() const;
 
-    void pushState(std::shared_ptr<GameState> const& pState);
-    void changeState(std::shared_ptr<GameState> const& pState);
+    void pushState(GameState* const pState);
+    void changeState(GameState* const pState);
     void popState();
 
     GameState* getCurrentState();
@@ -24,5 +24,5 @@ public:
 
 private:
     GameStateMachine() = default;
-    std::vector<std::shared_ptr<GameState>> m_gameStates;
+    std::vector<std::unique_ptr<GameState>> m_gameStates;
 };

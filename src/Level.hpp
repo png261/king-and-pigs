@@ -37,7 +37,7 @@ public:
 
     std::vector<Tileset>* getTilesets();
     std::unordered_map<int, CollisionShape>* getCollisionShapes();
-    void addLayer(std::shared_ptr<Layer> const& layer);
+    void addLayer(Layer* const layer);
     void addTileSet(const Tileset tileset);
     void addCollisionShape(const int id, const CollisionShape shape);
 
@@ -54,7 +54,7 @@ private:
     Player* m_pPlayer;
 
     std::unique_ptr<ObjectLayer> m_spawnLayer;
-    std::vector<std::shared_ptr<Layer>> m_layers;
+    std::vector<std::unique_ptr<Layer>> m_layers;
     std::vector<Tileset> m_tilesets;
     std::unordered_map<int, CollisionShape> m_collisionShapes;
 };

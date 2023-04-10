@@ -39,9 +39,9 @@ std::unordered_map<int, CollisionShape>* Level::getCollisionShapes()
     return &m_collisionShapes;
 }
 
-void Level::addLayer(std::shared_ptr<Layer> const& layer)
+void Level::addLayer(Layer* const layer)
 {
-    m_layers.push_back(std::move(layer));
+    m_layers.push_back(std::unique_ptr<Layer>(layer));
 }
 
 void Level::addTileSet(const Tileset tileset)

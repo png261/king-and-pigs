@@ -6,22 +6,22 @@
 class LevelParser final
 {
 public:
-    std::shared_ptr<Level> parseLevel(const char* levelFile);
+    Level* parseLevel(const char* levelFile);
 
 private:
-    void parseTilesets(tinyxml2::XMLElement* const pTilesetRoot, std::shared_ptr<Level> pLevel);
+    void parseTilesets(tinyxml2::XMLElement* const pTilesetRoot, Level* pLevel);
     void parseObjectLayer(
         tinyxml2::XMLElement* const pObjectElement,
-        std::shared_ptr<Level> const pLevel);
-    void parseTileLayer(tinyxml2::XMLElement* const pTileElement, std::shared_ptr<Level> pLevel);
+        Level* const pLevel);
+    void parseTileLayer(tinyxml2::XMLElement* const pTileElement, Level* pLevel);
     std::vector<std::vector<int>> parseData(const std::string& dataText);
     void parseCollisionObject(
         tinyxml2::XMLElement* pTilesetRoot,
-        std::shared_ptr<Level> pLevel,
+        Level* pLevel,
         int firstGridID);
     GameObject* parseObject(
         tinyxml2::XMLElement* const pObjectElement,
-        std::shared_ptr<Level> const pLevel);
+        Level* const pLevel);
     std::string getType(tinyxml2::XMLElement* const element);
 
     int m_tileSize;

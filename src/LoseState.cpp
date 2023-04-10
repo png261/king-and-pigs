@@ -23,7 +23,7 @@ void LoseState::update()
     }
 
     if (m_bEnterMainMenu) {
-        GameStateMachine::Instance().changeState(std::make_shared<MainMenuState>());
+        GameStateMachine::Instance().changeState(new MainMenuState());
         return;
     }
 
@@ -56,7 +56,7 @@ void LoseState::render() const
 
 void LoseState::s_mainMenu()
 {
-    GameStateMachine::Instance().changeState(std::make_shared<MainMenuState>());
+    GameStateMachine::Instance().changeState(new MainMenuState());
 }
 
 void LoseState::s_exit()

@@ -28,7 +28,7 @@ void MainMenuState::update()
 
     if (m_bEnterPlayState) {
         Game::Instance().setLevelIndex(0);
-        GameStateMachine::Instance().changeState(std::make_shared<PlayState>());
+        GameStateMachine::Instance().changeState(new PlayState());
         return;
     }
 

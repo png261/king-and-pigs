@@ -24,7 +24,7 @@ void WinState::update()
 
 
     if (m_bEnterMainMenu) {
-        GameStateMachine::Instance().changeState(std::make_shared<MainMenuState>());
+        GameStateMachine::Instance().changeState(new MainMenuState());
         return;
     }
 

@@ -152,15 +152,15 @@ bool PlayState::loadLevel()
     exit();
 
     LevelParser levelParser;
-    m_pLevel = levelParser.parseLevel(
-        Game::Instance().getLevelPath(Game::Instance().getLevelIndex()).c_str());
+    m_pLevel = std::unique_ptr<Level>(levelParser.parseLevel(
+        Game::Instance().getLevelPath(Game::Instance().getLevelIndex()).c_str()));
 
     if (m_pLevel == nullptr) {
         return false;
     }
 
     PhysicWorld::Instance().createContactListener();
-    Game::Instance().setLevel(std::move(m_pLevel));
+    Game::Instance().setLevel(m_pLevel.get());
     Camera::Instance().setTarget(m_pLevel->getPlayer());
     Camera::Instance().setZoom(3);
 
@@ -189,7 +189,7 @@ void PlayState::update()
     }
 
     if (InputHandler::Instance().isKeyDown(KEY_ESCAPE)) {
-        GameStateMachine::Instance().pushState(std::make_shared<PauseState>());
+        GameStateMachine::Instance().pushState(new PauseState());
     }
 
     if (InputHandler::Instance().isKeyDown(KEY_Q)) {

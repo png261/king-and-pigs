@@ -25,10 +25,10 @@ PhysicWorld& PhysicWorld::Instance()
     return s_instance;
 }
 
-bool PhysicWorld::init(std::shared_ptr<Window> const& window)
+bool PhysicWorld::init(Window* const window)
 {
     m_pWorld = new b2World(GRAVITY);
-    m_pDebugDraw = std::make_unique<DebugDraw>(DebugDraw(window));
+    m_pDebugDraw = std::make_unique<DebugDraw>(window);
     m_pWorld->SetDebugDraw(m_pDebugDraw.get());
     createContactListener();
 
