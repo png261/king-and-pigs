@@ -213,6 +213,11 @@ void PlayState::render() const
         PhysicWorld::Instance().debugDraw();
     }
 
+    renderStatusBar();
+}
+
+void PlayState::renderStatusBar() const {
+
     TextureManager::Instance().draw("health bar", {20, 10}, 154, 62);
     for (int i = 0; i < m_pLevel->getPlayer()->getHp(); i++) {
         TextureManager::Instance().draw("health heart", {60 + i * 25.0f, 30}, 22, 19);
@@ -220,11 +225,11 @@ void PlayState::render() const
 
     Game::Instance().getWindow()->print(
         "level: " + std::to_string(Game::Instance().getLevelIndex() + 1),
-        30,
-        300,
         40,
+        300,
+        50,
         Color::WHITE);
-}
+} 
 
 std::string PlayState::getStateID() const
 {

@@ -20,6 +20,7 @@ public:
     bool loadLevel();
 
 private:
+    void renderStatusBar() const;
     static const std::string s_stateID;
     std::shared_ptr<Level> m_pLevel;
 };
