@@ -46,7 +46,12 @@ void WinState::render() const
     for (const auto& obj : m_uiObjects) {
         obj->draw();
     }
-    Game::Instance().getWindow()->print("you are win", 40, 320, 50, {});
+    Game::Instance().getWindow()->print(
+        "You are win",
+        150,
+        Game::Instance().getWindow()->getCenterX(),
+        Game::Instance().getWindow()->getCenterY() - 150,
+        {255, 255, 255});
 };
 
 bool WinState::enter()

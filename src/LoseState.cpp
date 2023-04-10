@@ -46,7 +46,12 @@ void LoseState::render() const
         obj->draw();
     }
 
-    Game::Instance().getWindow()->print("you are died", 40, 320, 50, {});
+    Game::Instance().getWindow()->print(
+        "You are died",
+        150,
+        Game::Instance().getWindow()->getCenterX(),
+        Game::Instance().getWindow()->getCenterY() - 150,
+        {255, 255, 255});
 };
 
 void LoseState::s_mainMenu()
