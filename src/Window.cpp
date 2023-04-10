@@ -2,7 +2,7 @@
 #include "CONSTANT.hpp"
 #include "Log.hpp"
 
-Window::Window(const uint width, const uint height, const std::string title)
+Window::Window(const uint width, const uint height, const std::string& title)
     : m_pWindow(nullptr)
     , m_pRenderer(nullptr)
     , m_width(width)
@@ -41,7 +41,7 @@ Window::~Window()
     destroy();
 }
 
-void Window::resize(std::string title, uint width, uint height)
+void Window::resize(const std::string& title, const uint width, const uint height)
 {
     // Just in case we already have a window
     destroy();
@@ -87,7 +87,7 @@ void Window::refresh()
     SDL_RenderPresent(m_pRenderer);
 }
 
-SDL_Texture* Window::loadImage(const std::string path)
+SDL_Texture* Window::loadImage(const std::string& path)
 {
     SDL_Texture* const pTexture = IMG_LoadTexture(m_pRenderer, path.c_str());
     if (pTexture == nullptr) {
@@ -132,7 +132,7 @@ void Window::clear()
     fill(m_bgColor);
 }
 
-void Window::setTitle(const std::string title)
+void Window::setTitle(const std::string& title)
 {
     if (m_pWindow == nullptr) {
         return;
@@ -157,7 +157,7 @@ void Window::delayFramerateIfNeeded()
     m_framerateStopwatch.restart();
 }
 
-void Window::print(std::string text, int fontSize, int x, int y, Color color)
+void Window::print(std::string text, const int fontSize, const int x, const int y, const Color color)
 {
     if (m_pFont == nullptr) {
         Log::error("Window::print: fail to load font");

@@ -173,7 +173,7 @@ void LevelParser::parseObjectLayer(XMLElement* const pObjectEl, std::shared_ptr<
     }
 }
 
-std::vector<std::vector<int>> LevelParser::parseData(std::string dataText)
+std::vector<std::vector<int>> LevelParser::parseData(const std::string& dataText)
 {
     std::vector<std::vector<int>> data;
 

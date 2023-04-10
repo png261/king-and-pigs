@@ -8,7 +8,7 @@ GameObjectFactory& GameObjectFactory::Instance()
     return s_instance;
 }
 
-bool GameObjectFactory::registerType(const std::string id, BaseCreator* const pCreator)
+bool GameObjectFactory::registerType(const std::string& id, BaseCreator* const pCreator)
 {
     if (m_creators.find(id) != m_creators.end()) {
         return false;
@@ -19,7 +19,7 @@ bool GameObjectFactory::registerType(const std::string id, BaseCreator* const pC
     return true;
 }
 
-GameObject* GameObjectFactory::create(const std::string id)
+GameObject* GameObjectFactory::create(const std::string& id)
 {
     if (m_creators.find(id) == m_creators.end()) {
         Log::warning("GameObjectFactory: could not find type " + id);

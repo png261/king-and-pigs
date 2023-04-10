@@ -8,7 +8,7 @@ class Animation final
 {
 public:
     Animation(
-        const std::string textureID,
+        const std::string& textureID,
         const uint width,
         const uint height,
         const uint nFrames = 1,

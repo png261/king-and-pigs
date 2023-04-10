@@ -22,7 +22,7 @@ void SoundManager::clean()
     m_sfxMap.clear();
 }
 
-bool SoundManager::loadMusic(const std::string path, const std::string id)
+bool SoundManager::loadMusic(const std::string& path, const std::string& id)
 {
     Mix_Music* const pMusic = Mix_LoadMUS(path.c_str());
     if (pMusic == nullptr) {
@@ -36,7 +36,7 @@ bool SoundManager::loadMusic(const std::string path, const std::string id)
     return true;
 }
 
-bool SoundManager::loadSFX(const std::string path, const std::string id)
+bool SoundManager::loadSFX(const std::string& path, const std::string& id)
 {
     Mix_Chunk* const pSFX = Mix_LoadWAV(path.c_str());
     if (pSFX == nullptr) {
@@ -50,7 +50,7 @@ bool SoundManager::loadSFX(const std::string path, const std::string id)
     return true;
 }
 
-void SoundManager::playMusic(const std::string id, const int loop)
+void SoundManager::playMusic(const std::string& id, const int loop)
 {
     if (m_musicMap.find(id) == m_musicMap.end()) {
         Log::warning("MusicID not exist: " + id);
@@ -59,7 +59,7 @@ void SoundManager::playMusic(const std::string id, const int loop)
     Mix_PlayMusic(m_musicMap[id], loop);
 }
 
-void SoundManager::playSFX(const std::string id, const int loop)
+void SoundManager::playSFX(const std::string& id, const int loop)
 {
     if (m_sfxMap.find(id) == m_sfxMap.end()) {
         Log::warning("sfxID not exist: " + id);

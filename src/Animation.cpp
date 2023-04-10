@@ -4,7 +4,7 @@
 #include "TextureManager.hpp"
 
 Animation::Animation(
-    const std::string textureID,
+    const std::string& textureID,
     const uint width,
     const uint height,
     const uint nFrames,

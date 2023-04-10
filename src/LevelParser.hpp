@@ -14,7 +14,7 @@ private:
         tinyxml2::XMLElement* const pObjectElement,
         std::shared_ptr<Level> const pLevel);
     void parseTileLayer(tinyxml2::XMLElement* const pTileElement, std::shared_ptr<Level> pLevel);
-    std::vector<std::vector<int>> parseData(const std::string dataText);
+    std::vector<std::vector<int>> parseData(const std::string& dataText);
     void parseCollisionObject(
         tinyxml2::XMLElement* pTilesetRoot,
         std::shared_ptr<Level> pLevel,

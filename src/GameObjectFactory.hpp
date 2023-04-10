@@ -25,8 +25,8 @@ public:
     GameObjectFactory(GameObjectFactory const&) = delete;
     GameObjectFactory& operator=(GameObjectFactory const&) = delete;
 
-    bool registerType(const std::string typeID, BaseCreator* const pCreator);
-    GameObject* create(const std::string typeID);
+    bool registerType(const std::string& typeID, BaseCreator* const pCreator);
+    GameObject* create(const std::string& typeID);
     void clean();
 
 private:

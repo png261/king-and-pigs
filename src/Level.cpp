@@ -65,7 +65,7 @@ void Level::setPlayer(Player* const player)
 }
 
 GameObject* Level::spawnGameObject(
-    const std::string type,
+    const std::string& type,
     std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject* const pGameObject = GameObjectFactory::Instance().create(type);

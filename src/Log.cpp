@@ -15,17 +15,17 @@ const std::string bold_yellow = "\e[1;33m";
 const std::string yellow = "\e[0;33m";
 const std::string reset_color = "\e[0m";
 
-void Log::error(const std::string msg)
+void Log::error(const std::string& msg)
 {
     std::cerr << bold_red << errorPrefix << msg << reset_color << std::endl;
 }
 
-void Log::warning(const std::string msg)
+void Log::warning(const std::string& msg)
 {
     std::cerr << bold_yellow << warningPrefix << msg << reset_color << std::endl;
 }
 
-void Log::log(const std::string msg)
+void Log::log(const std::string& msg)
 {
     std::cout << bold_green << logPrefix << msg << reset_color << std::endl;
 }

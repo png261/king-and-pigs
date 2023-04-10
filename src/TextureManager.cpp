@@ -10,7 +10,7 @@ TextureManager& TextureManager::Instance()
     return s_instance;
 }
 
-bool TextureManager::load(const std::string path, const std::string id)
+bool TextureManager::load(const std::string& path, const std::string& id)
 {
     if (m_textureMap.find(id) != m_textureMap.end()) {
         return false;
@@ -28,7 +28,7 @@ bool TextureManager::load(const std::string path, const std::string id)
 }
 
 void TextureManager::draw(
-    const std::string id,
+    const std::string& id,
     const b2Vec2 position,
     const int width,
     const int height,
@@ -51,7 +51,7 @@ void TextureManager::draw(
 }
 
 void TextureManager::drawFrame(
-    const std::string id,
+    const std::string& id,
     const b2Vec2 position,
     const int width,
     const int height,
@@ -78,7 +78,7 @@ void TextureManager::drawFrame(
 }
 
 void TextureManager::drawTile(
-    const std::string id,
+    const std::string& id,
     const int margin,
     const int spacing,
     const b2Vec2 position,

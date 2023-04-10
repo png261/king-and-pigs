@@ -12,17 +12,17 @@ public:
     TextureManager(TextureManager const&) = delete;
     TextureManager& operator=(TextureManager const&) = delete;
 
-    bool load(const std::string path, const std::string id);
+    bool load(const std::string& path, const std::string& id);
 
     void draw(
-        const std::string id,
+        const std::string& id,
         const b2Vec2 position,
         const int width,
         const int height,
         const bool bFlipped = false);
 
     void drawFrame(
-        const std::string id,
+        const std::string& id,
         const b2Vec2 position,
         const int width,
         const int height,
@@ -33,7 +33,7 @@ public:
         const int zoom = 1);
 
     void drawTile(
-        const std::string id,
+        const std::string& id,
         const int margin,
         const int spacing,
         const b2Vec2 position,

@@ -9,7 +9,7 @@
 class Window final
 {
 public:
-    Window(const uint width, const uint height, const std::string title = "");
+    Window(const uint width, const uint height, const std::string& title = "");
     ~Window();
 
     void clear();
@@ -23,20 +23,21 @@ public:
         const SDL_Point* center = 0,
         const SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-    SDL_Texture* loadImage(const std::string path);
+    SDL_Texture* loadImage(const std::string& path);
 
     void freeImage(SDL_Texture* const image);
 
     void refresh();
 
-    void resize(const std::string title, const uint width, const uint height);
+    void resize(const std::string& title, const uint width, const uint height);
 
     void fill(const Color color);
-    void print(std::string text, int fontSize, int x, int y, Color color = Color(Color::BLACK));
-    void drawBox(Rectangle rect, Color color = Color(Color::WHITE)) const;
+    void
+    print(std::string text, const int fontSize, const int x, const int y, const Color color = Color(Color::BLACK));
+    void drawBox(const Rectangle rect, const Color color = Color(Color::WHITE)) const;
 
     void setBackgroundColor(const Color color = Color(Color::BLACK));
-    void setTitle(const std::string title);
+    void setTitle(const std::string& title);
 
     uint getDelta() const;
     uint getWidth() const;

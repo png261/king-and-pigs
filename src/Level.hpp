@@ -44,7 +44,7 @@ public:
     Player* getPlayer() const;
     void setPlayer(Player* const player);
     GameObject* spawnGameObject(
-        const std::string type,
+        const std::string& type,
         std::unique_ptr<LoaderParams> const& pParams);
 
 private:
