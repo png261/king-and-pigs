@@ -16,9 +16,9 @@ Game::Game()
     : m_bRunning(false)
     , m_bDebug(false)
 {
-    m_levelFiles.push_back(LEVEL_DIR + "level1.tmx");
-    m_levelFiles.push_back(LEVEL_DIR + "level2.tmx");
-    m_levelFiles.push_back(LEVEL_DIR + "test.tmx");
+    m_levelFiles.push_back(LEVEL_DIRECTORY + "level1.tmx");
+    m_levelFiles.push_back(LEVEL_DIRECTORY + "level2.tmx");
+    m_levelFiles.push_back(LEVEL_DIRECTORY + "test.tmx");
     m_levelIndex = 0;
 }
 
@@ -30,13 +30,13 @@ Game& Game::Instance()
 
 bool Game::init()
 {
-    if (SDL::init() == false) {
+    if (!SDL::init()) {
         return false;
     };
 
     m_pWindow = std::make_shared<Window>(1280, 720, "King and Pig");
 
-    if (PhysicWorld::Instance().init(std::move(m_pWindow)) == false) {
+    if (!PhysicWorld::Instance().init(std::move(m_pWindow))) {
         return false;
     };
 

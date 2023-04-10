@@ -11,7 +11,7 @@ public:
     virtual ~BaseCreator() = default;
 };
 
-template <class T>
+template <class T = GameObject>
 class Creator final : public BaseCreator
 {
 public:
@@ -21,7 +21,7 @@ public:
 class GameObjectFactory final
 {
 public:
-    static GameObjectFactory& Instance(); 
+    static GameObjectFactory& Instance();
     GameObjectFactory(GameObjectFactory const&) = delete;
     GameObjectFactory& operator=(GameObjectFactory const&) = delete;
 

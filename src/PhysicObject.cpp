@@ -58,7 +58,7 @@ void PhysicObject::changeFootContact(int n)
 
 void PhysicObject::moveRight()
 {
-    if (canMoveRight() == false) {
+    if (!canMoveRight()) {
         return;
     }
 
@@ -73,7 +73,7 @@ void PhysicObject::moveRight()
 
 void PhysicObject::moveLeft()
 {
-    if (canMoveLeft() == false) {
+    if (!canMoveLeft()) {
         return;
     }
 
@@ -93,11 +93,11 @@ void PhysicObject::jump()
         return;
     }
 
-    if (canJump() == false) {
+    if (!canJump()) {
         return;
     }
 
-    if (isOnGround() == false) {
+    if (!isOnGround()) {
         return;
     }
 

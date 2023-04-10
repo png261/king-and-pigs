@@ -8,7 +8,7 @@
 class TextureManager final
 {
 public:
-    static TextureManager& Instance(); 
+    static TextureManager& Instance();
     TextureManager(TextureManager const&) = delete;
     TextureManager& operator=(TextureManager const&) = delete;
 

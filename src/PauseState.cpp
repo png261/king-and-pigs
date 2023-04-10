@@ -21,14 +21,6 @@ PauseState::~PauseState()
     m_uiObjects.clear();
 };
 
-bool PauseState::onEnter()
-{
-    if (load() == false) {
-        return false;
-    }
-    return true;
-};
-
 void PauseState::update()
 {
     if (!m_bLoaded || m_bPaused) {
@@ -65,13 +57,13 @@ void PauseState::render() const
     }
 };
 
-bool PauseState::load()
+bool PauseState::enter()
 {
     m_bLoaded = false;
     TextureManager& texture = TextureManager::Instance();
-    texture.load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
-    texture.load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
-    texture.load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
+    texture.load(IMAGE_DIRECTORY + "UI/Button/normal.png", "button normal");
+    texture.load(IMAGE_DIRECTORY + "UI/Button/hovered.png", "button hovered");
+    texture.load(IMAGE_DIRECTORY + "UI/Button/pressed.png", "button pressed");
 
     Button* resumeButton = new Button(
         "Resume",
@@ -97,7 +89,7 @@ bool PauseState::load()
     return true;
 };
 
-bool PauseState::onExit()
+bool PauseState::exit()
 {
     m_bPaused = true;
     InputHandler::Instance().reset();

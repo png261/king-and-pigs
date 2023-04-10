@@ -16,14 +16,6 @@ WinState::WinState()
 
 WinState::~WinState(){};
 
-bool WinState::onEnter()
-{
-    if (load() == false) {
-        return false;
-    }
-    return true;
-};
-
 void WinState::update()
 {
     if (!m_bLoaded || m_bPaused) {
@@ -57,13 +49,13 @@ void WinState::render() const
     Game::Instance().getWindow()->print("you are win", 40, 320, 50, {});
 };
 
-bool WinState::load()
+bool WinState::enter()
 {
     m_bLoaded = false;
     TextureManager& texture = TextureManager::Instance();
-    texture.load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
-    texture.load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
-    texture.load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
+    texture.load(IMAGE_DIRECTORY + "UI/Button/normal.png", "button normal");
+    texture.load(IMAGE_DIRECTORY + "UI/Button/hovered.png", "button hovered");
+    texture.load(IMAGE_DIRECTORY + "UI/Button/pressed.png", "button pressed");
 
     Button* mainMenuButton = new Button(
         "Main Menu",
@@ -90,7 +82,7 @@ bool WinState::load()
     return true;
 };
 
-bool WinState::onExit()
+bool WinState::exit()
 {
     m_bPaused = true;
     InputHandler::Instance().reset();

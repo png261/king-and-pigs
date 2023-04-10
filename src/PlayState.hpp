@@ -13,17 +13,13 @@ public:
     PlayState();
     void update() override;
     void render() const override;
-    bool onEnter() override;
-    bool load() override;
+    bool enter() override;
     void resume() override;
-    bool onExit() override;
+    bool exit() override;
     std::string getStateID() const override;
-
     bool loadLevel();
 
 private:
-    static void s_mute();
-
     static const std::string s_stateID;
     std::shared_ptr<Level> m_pLevel;
 };

@@ -15,15 +15,8 @@ public:
     void onClick(std::function<void()> callback);
 
 private:
-    enum { NORMAL, HOVERED, PRESSED };
-
     Rectangle m_rectangle;
     std::string m_text;
-
-    int m_curAnimation;
-    std::unordered_map<int, std::unique_ptr<Animation>> m_animations;
-
-    bool m_bHovered;
 
     std::function<void()> m_callback;
 };

@@ -25,7 +25,7 @@ Window::Window(const uint width, const uint height, const std::string title)
         Log::error("Window(): Couldn't create Window");
         throw "Window() Fail";
     }
-    m_pFont = TTF_OpenFont((FONT_DIR + "m6x11.ttf").c_str(), 28);
+    m_pFont = TTF_OpenFont((FONT_DIRECTORY + "m6x11.ttf").c_str(), 28);
     if (m_pFont == nullptr) {
         Log::error("Window(): Couldn't load font");
     }

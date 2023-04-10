@@ -10,7 +10,7 @@ class Window final
 {
 public:
     Window(const uint width, const uint height, const std::string title = "");
-    virtual ~Window();
+    ~Window();
 
     void clear();
     void destroy();

@@ -51,7 +51,7 @@ void TileLayer::render() const
                                 position.y > -m_tileSize &&
                                 position.y < Game::Instance().getWindow()->getHeight();
 
-            if (isInViewPort == false) {
+            if (!isInViewPort) {
                 continue;
             }
 

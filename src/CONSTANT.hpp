@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 
-const std::string ASSETS_DIR = "assets/";
-const std::string IMAGE_DIR = "assets/images/";
-const std::string SOUND_DIR = "assets/sounds/";
-const std::string FONT_DIR = "assets/fonts/";
-const std::string LEVEL_DIR = "assets/levels/";
+const std::string ASSETS_DIRECTORY = "assets/";
+const std::string IMAGE_DIRECTORY = "assets/images/";
+const std::string SOUND_DIRECTORY = "assets/sounds/";
+const std::string FONT_DIRECTORY = "assets/fonts/";
+const std::string LEVEL_DIRECTORY = "assets/levels/";

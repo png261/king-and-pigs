@@ -31,7 +31,7 @@ void VisionObject::update()
 
 void VisionObject::debugDraw()
 {
-    if (Game::Instance().isDebug() == false) {
+    if (!Game::Instance().isDebug()) {
         return;
     }
 

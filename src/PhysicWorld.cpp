@@ -21,7 +21,7 @@ PhysicWorld::PhysicWorld() {}
 
 PhysicWorld& PhysicWorld::Instance()
 {
-    static PhysicWorld s_instance{}; 
+    static PhysicWorld s_instance{};
     return s_instance;
 }
 
@@ -138,13 +138,9 @@ void PhysicWorld::AttackListener(b2Contact* const contact)
     uint16 const catA = A->GetFilterData().categoryBits;
     uint16 const catB = B->GetFilterData().categoryBits;
 
-    bool isAttack = catB == CAT_ATTACK_SENSOR && catA & (CAT_PIG | CAT_PLAYER | CAT_BOX);
-
-    if (!isAttack) {
-        return;
+    if (catB == CAT_ATTACK_SENSOR && catA & (CAT_PIG | CAT_PLAYER | CAT_BOX)) {
+        handleAttack(B, A);
     }
-
-    handleAttack(B, A);
 }
 
 void PhysicWorld::handleAttack(b2Fixture* const Attacker, b2Fixture* const Defender)
@@ -154,7 +150,7 @@ void PhysicWorld::handleAttack(b2Fixture* const Attacker, b2Fixture* const Defen
     DamageableObject* const B =
         dynamic_cast<DamageableObject*>((GameObject*)(Defender->GetBody()->GetUserData().pointer));
 
-    if (A == nullptr || B == nullptr || A->isDaming() == false) {
+    if (A == nullptr || B == nullptr || !A->isDaming()) {
         return;
     }
 

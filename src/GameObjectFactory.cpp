@@ -4,32 +4,29 @@
 
 GameObjectFactory& GameObjectFactory::Instance()
 {
-    static GameObjectFactory s_instance{}; 
+    static GameObjectFactory s_instance{};
     return s_instance;
 }
 
-bool GameObjectFactory::registerType(const std::string typeID, BaseCreator* const pCreator)
+bool GameObjectFactory::registerType(const std::string id, BaseCreator* const pCreator)
 {
-    if (m_creators.find(typeID) != m_creators.end()) {
+    if (m_creators.find(id) != m_creators.end()) {
         return false;
     }
 
-    m_creators[typeID] = std::unique_ptr<BaseCreator>(pCreator);
+    m_creators[id] = std::unique_ptr<BaseCreator>(pCreator);
 
     return true;
 }
 
-GameObject* GameObjectFactory::create(const std::string typeID)
+GameObject* GameObjectFactory::create(const std::string id)
 {
-    std::unordered_map<std::string, std::unique_ptr<BaseCreator>>::iterator it =
-        m_creators.find(typeID);
-
-    if (it == m_creators.end()) {
-        Log::warning("could not find type: " + typeID);
+    if (m_creators.find(id) == m_creators.end()) {
+        Log::warning("GameObjectFactory: could not find type " + id);
         return nullptr;
     }
 
-    return it->second->createGameObject();
+    return m_creators[id]->createGameObject();
 }
 
 void GameObjectFactory::clean()

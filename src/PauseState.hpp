@@ -11,9 +11,8 @@ public:
     PauseState();
     void update() override;
     void render() const override;
-    bool onEnter() override;
-    bool load() override;
-    bool onExit() override;
+    bool enter() override;
+    bool exit() override;
     std::string getStateID() const override;
 
 private:

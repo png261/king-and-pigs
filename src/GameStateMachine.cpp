@@ -2,14 +2,14 @@
 
 GameStateMachine& GameStateMachine::Instance()
 {
-    static GameStateMachine s_instance{}; 
+    static GameStateMachine s_instance{};
     return s_instance;
 }
 
 void GameStateMachine::clean()
 {
     for (const auto& state : m_gameStates) {
-        state->onExit();
+        state->exit();
     }
     m_gameStates.clear();
 }
@@ -31,7 +31,7 @@ void GameStateMachine::render() const
 void GameStateMachine::pushState(std::shared_ptr<GameState> const& pState)
 {
     m_gameStates.push_back(std::move(pState));
-    m_gameStates.back()->onEnter();
+    m_gameStates.back()->enter();
 }
 
 void GameStateMachine::popState()
@@ -40,7 +40,7 @@ void GameStateMachine::popState()
         return;
     }
 
-    m_gameStates.back()->onExit();
+    m_gameStates.back()->exit();
     m_gameStates.pop_back();
     if (!m_gameStates.empty()) {
         m_gameStates.back()->resume();
@@ -54,11 +54,11 @@ void GameStateMachine::changeState(std::shared_ptr<GameState> const& pState)
             return;
         }
 
-        m_gameStates.back()->onExit();
+        m_gameStates.back()->exit();
         m_gameStates.pop_back();
     }
 
-    pState->onEnter();
+    pState->enter();
     m_gameStates.push_back(std::move(pState));
 }
 

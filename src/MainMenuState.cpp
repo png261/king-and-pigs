@@ -20,14 +20,6 @@ MainMenuState::~MainMenuState()
     m_uiObjects.clear();
 };
 
-bool MainMenuState::onEnter()
-{
-    if (load() == false) {
-        return false;
-    }
-    return true;
-};
-
 void MainMenuState::update()
 {
     if (!m_bLoaded || m_bPaused) {
@@ -60,13 +52,13 @@ void MainMenuState::render() const
     }
 };
 
-bool MainMenuState::load()
+bool MainMenuState::enter()
 {
     m_bLoaded = false;
     TextureManager& texture = TextureManager::Instance();
-    texture.load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
-    texture.load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
-    texture.load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
+    texture.load(IMAGE_DIRECTORY + "UI/Button/normal.png", "button normal");
+    texture.load(IMAGE_DIRECTORY + "UI/Button/hovered.png", "button hovered");
+    texture.load(IMAGE_DIRECTORY + "UI/Button/pressed.png", "button pressed");
 
     Button* newGameButton = new Button(
         "New Game",
@@ -92,7 +84,7 @@ bool MainMenuState::load()
     return true;
 };
 
-bool MainMenuState::onExit()
+bool MainMenuState::exit()
 {
     m_bPaused = true;
     InputHandler::Instance().reset();
