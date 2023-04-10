@@ -80,8 +80,17 @@ void Player::update()
     }
 
     GameObject::update();
+    VisionObject::update();
+    DamageableObject::update();
+    AttackerObject::update();
     handleInput();
+    handleVision();
+    handleSound();
+    updateAnimation();
+}
 
+void Player::handleVision()
+{
     m_raycast.clear();
     float nray = 50;
     for (int i = 0; i < nray; ++i) {
@@ -90,8 +99,6 @@ void Player::update()
         b2Vec2 end = start + m_direction * b2Vec2(m_visionRange, 0);
         m_raycast.push_back({start, end});
     }
-
-    VisionObject::update();
 
     if (m_seeingCategory & PhysicWorld::CAT_WALL && m_visionNearestDistance < 1) {
         if (m_direction == RIGHT) {
@@ -103,11 +110,6 @@ void Player::update()
         setMoveRight(true);
         setMoveLeft(true);
     }
-
-    DamageableObject::update();
-    AttackerObject::update();
-    updateAnimation();
-    handleSound();
 }
 
 void Player::draw()
@@ -166,10 +168,6 @@ void Player::handleInput()
 
 void Player::updateAnimation()
 {
-    if (isEnteringDoor()) {
-        return;
-    }
-
     int newAnimation = m_curAnimation;
 
     if (isOnGround()) {
@@ -194,6 +192,10 @@ void Player::updateAnimation()
         newAnimation = ATTACK;
     }
 
+    if (isEnteringDoor()) {
+        newAnimation = DOOR_IN;
+    }
+
     if (exitDoorTimer.isDone()) {
         if (newAnimation != m_curAnimation) {
             m_animations[m_curAnimation]->stop();
@@ -206,8 +208,6 @@ void Player::updateAnimation()
 void Player::enterDoor()
 {
     m_bEnteringDoor = true;
-    m_curAnimation = DOOR_IN;
-    m_animations[m_curAnimation]->start();
 }
 
 void Player::exitDoor()

@@ -39,6 +39,7 @@ private:
 
     void handleInput();
     void handleSound();
+    void handleVision();
     void exitDoor();
 
     Timer exitDoorTimer;
