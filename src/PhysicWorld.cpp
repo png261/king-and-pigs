@@ -121,7 +121,7 @@ void PhysicWorld::DoorInListener(b2Contact* const contact)
         return;
     }
 
-    if (!player->isWantDoorIn()) {
+    if (!player->isWantEnterDoor()) {
         return;
     }
 
@@ -130,7 +130,7 @@ void PhysicWorld::DoorInListener(b2Contact* const contact)
         return;
     }
 
-    player->doorIn();
+    player->enterDoor();
     door->open();
 }
 

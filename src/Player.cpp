@@ -22,8 +22,8 @@ Player::Player()
     , VisionObject(32.0f)
     , DamageableObject(3, 300, 500)
     , AttackerObject(1, 20, 300)
-    , m_bDoorIn(false)
-    , m_bWantDoorIn(false)
+    , m_bEnteringDoor(false)
+    , m_bWantEnterDoor(false)
 {}
 
 Player::~Player() {}
@@ -66,10 +66,10 @@ void Player::loadAnimation()
     m_animations[DOOR_IN] = std::make_unique<Animation>("player door in", 78, 58, 8, false);
     m_animations[DOOR_OUT] = std::make_unique<Animation>("player door out", 78, 58, 8, false);
 
-    doorOutTimer.setTime(300);
+    exitDoorTimer.setTime(300);
     m_curAnimation = DOOR_OUT;
     m_animations[m_curAnimation]->start();
-    doorOutTimer.start();
+    exitDoorTimer.start();
 }
 
 void Player::update()
@@ -132,27 +132,14 @@ void Player::handleSound()
 
 void Player::handleInput()
 {
-    if (isDead()) {
-        return;
-    }
-
-    if (isDying()) {
-        return;
-    }
-
-    if (isInvulnerable()) {
-        return;
-    }
-
-    if (m_bDoorIn) {
-        m_bWantDoorIn = true;
+    if (isDead() || isDying() || isInvulnerable() || isEnteringDoor()) {
         return;
     }
 
     InputHandler& input = InputHandler::Instance();
 
     if (isOnGround()) {
-        m_bWantDoorIn = input.isKeyDown(KEY_W);
+        m_bWantEnterDoor = input.isKeyDown(KEY_W);
 
         if (input.isKeyPressed(KEY_SPACE)) {
             jump();
@@ -179,7 +166,7 @@ void Player::handleInput()
 
 void Player::updateAnimation()
 {
-    if (m_bDoorIn) {
+    if (isEnteringDoor()) {
         return;
     }
 
@@ -207,7 +194,7 @@ void Player::updateAnimation()
         newAnimation = ATTACK;
     }
 
-    if (doorOutTimer.isDone()) {
+    if (exitDoorTimer.isDone()) {
         if (newAnimation != m_curAnimation) {
             m_animations[m_curAnimation]->stop();
             m_curAnimation = newAnimation;
@@ -216,25 +203,25 @@ void Player::updateAnimation()
     }
 }
 
-void Player::doorIn()
+void Player::enterDoor()
 {
-    m_bDoorIn = true;
+    m_bEnteringDoor = true;
     m_curAnimation = DOOR_IN;
     m_animations[m_curAnimation]->start();
 }
 
-void Player::doorOut()
+void Player::exitDoor()
 {
     m_curAnimation = DOOR_OUT;
     m_animations[m_curAnimation]->start();
 }
 
-bool Player::isWantDoorIn()
+bool Player::isWantEnterDoor()
 {
-    return m_bWantDoorIn;
+    return m_bWantEnterDoor;
 }
 
-bool Player::isDoorIn()
+bool Player::isEnteringDoor()
 {
-    return m_bDoorIn;
+    return m_bEnteringDoor;
 }

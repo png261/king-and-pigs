@@ -19,9 +19,9 @@ public:
     void loadAnimation() override;
     void draw() override;
 
-    bool isWantDoorIn();
-    bool isDoorIn();
-    void doorIn();
+    bool isWantEnterDoor();
+    bool isEnteringDoor();
+    void enterDoor();
 
 private:
     enum animations {
@@ -39,9 +39,9 @@ private:
 
     void handleInput();
     void handleSound();
-    void doorOut();
+    void exitDoor();
 
-    Timer doorOutTimer;
-    bool m_bDoorIn;
-    bool m_bWantDoorIn;
+    Timer exitDoorTimer;
+    bool m_bEnteringDoor;
+    bool m_bWantEnterDoor;
 };
