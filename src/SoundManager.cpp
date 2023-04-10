@@ -1,10 +1,10 @@
 #include "SoundManager.hpp"
 #include "Log.hpp"
 
-std::shared_ptr<SoundManager> SoundManager::Instance()
+SoundManager& SoundManager::Instance()
 {
-    static std::shared_ptr<SoundManager> s_pInstance{new SoundManager};
-    return s_pInstance;
+    static SoundManager s_instance{}; 
+    return s_instance;
 }
 
 SoundManager::SoundManager()

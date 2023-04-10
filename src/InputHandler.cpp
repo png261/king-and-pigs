@@ -3,10 +3,10 @@
 #include "Game.hpp"
 #include "InputDefinitions.hpp"
 
-std::shared_ptr<InputHandler> InputHandler::Instance()
+InputHandler& InputHandler::Instance()
 {
-    static std::shared_ptr<InputHandler> s_pInstance{new InputHandler};
-    return s_pInstance;
+    static InputHandler s_instance{}; 
+    return s_instance;
 }
 
 InputHandler::InputHandler()
@@ -43,7 +43,7 @@ void InputHandler::update()
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
         case SDL_QUIT:
-            Game::Instance()->quit();
+            Game::Instance().quit();
             break;
         case SDL_KEYDOWN:
             onKeyDown(event);

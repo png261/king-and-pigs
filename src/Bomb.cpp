@@ -20,7 +20,7 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
         b2Vec2(pParams->x(), pParams->y()) + 0.5 * b2Vec2(m_width, m_height));
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
-    m_pBody = PhysicWorld::Instance()->getWorld()->CreateBody(&bodyDef);
+    m_pBody = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
 
     b2CircleShape circle;
     circle.m_radius = PhysicWorld::pixelToMeter(m_width);
@@ -72,7 +72,7 @@ void Bomb::update()
 
 void Bomb::turnOn()
 {
-    SoundManager::Instance()->playSFX("bomb on");
+    SoundManager::Instance().playSFX("bomb on");
     m_bOn = true;
     onTimer.start();
     m_curAnimation = ON;
@@ -81,7 +81,7 @@ void Bomb::turnOn()
 
 void Bomb::explode()
 {
-    SoundManager::Instance()->playSFX("bomb explode");
+    SoundManager::Instance().playSFX("bomb explode");
     attack();
 }
 

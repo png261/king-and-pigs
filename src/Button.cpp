@@ -17,7 +17,7 @@ Button::Button(std::string text, int x, int y, int width, int height)
 
     m_curAnimation = NORMAL;
     m_animations[m_curAnimation]->start();
-    SoundManager::Instance()->loadSFX(SOUND_DIR + "Button/clicked.mp3", "button clicked");
+    SoundManager::Instance().loadSFX(SOUND_DIR + "Button/clicked.mp3", "button clicked");
 }
 
 Button::~Button() {}
@@ -25,8 +25,8 @@ Button::~Button() {}
 void Button::draw()
 {
     /* m_animations[m_curAnimation]->draw(b2Vec2(m_rectangle.x, m_rectangle.y)); */
-    Game::Instance()->getWindow()->drawBox(m_rectangle);
-    Game::Instance()->getWindow()->print(
+    Game::Instance().getWindow()->drawBox(m_rectangle);
+    Game::Instance().getWindow()->print(
         m_text,
         40,
         m_rectangle.x + m_rectangle.w / 2,
@@ -37,7 +37,7 @@ void Button::update()
 {
     int newAnimation = m_curAnimation;
 
-    if (InputHandler::Instance()->isMouseInside(m_rectangle)) {
+    if (InputHandler::Instance().isMouseInside(m_rectangle)) {
         m_bHovered = true;
         newAnimation = HOVERED;
     } else {
@@ -46,8 +46,8 @@ void Button::update()
     }
 
     if (m_bHovered) {
-        if (InputHandler::Instance()->isMouseDown(MOUSE_LEFT)) {
-            SoundManager::Instance()->playSFX("button clicked");
+        if (InputHandler::Instance().isMouseDown(MOUSE_LEFT)) {
+            SoundManager::Instance().playSFX("button clicked");
             m_callback();
         }
     }

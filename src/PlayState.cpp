@@ -45,116 +45,116 @@ bool PlayState::onEnter()
 
 void PlayState::s_mute()
 {
-    SoundManager::Instance()->muteMusic();
+    SoundManager::Instance().muteMusic();
 }
 
 bool PlayState::load()
 {
     m_bLoaded = false;
-    const auto factory = GameObjectFactory::Instance();
-    const auto texture = TextureManager::Instance();
-    const auto sound = SoundManager::Instance();
+    GameObjectFactory& factory = GameObjectFactory::Instance();
+    TextureManager& texture = TextureManager::Instance();
+    SoundManager& sound = SoundManager::Instance();
 
-    factory->registerType("Player", new Creator<Player>);
-    factory->registerType("Pig", new Creator<Pig>);
-    factory->registerType("KingPig", new Creator<KingPig>);
-    factory->registerType("PigWithBomb", new Creator<PigWithBomb>);
-    factory->registerType("PigWithBox", new Creator<PigWithBox>);
-    factory->registerType("Bomb", new Creator<Bomb>);
-    factory->registerType("Box", new Creator<Box>);
-    factory->registerType("Heart", new Creator<Heart>);
-    factory->registerType("DoorOut", new Creator<DoorOut>);
-    factory->registerType("DoorIn", new Creator<DoorIn>);
-    factory->registerType("Candle", new Creator<Candle>);
+    factory.registerType("Player", new Creator<Player>);
+    factory.registerType("Pig", new Creator<Pig>);
+    factory.registerType("KingPig", new Creator<KingPig>);
+    factory.registerType("PigWithBomb", new Creator<PigWithBomb>);
+    factory.registerType("PigWithBox", new Creator<PigWithBox>);
+    factory.registerType("Bomb", new Creator<Bomb>);
+    factory.registerType("Box", new Creator<Box>);
+    factory.registerType("Heart", new Creator<Heart>);
+    factory.registerType("DoorOut", new Creator<DoorOut>);
+    factory.registerType("DoorIn", new Creator<DoorIn>);
+    factory.registerType("Candle", new Creator<Candle>);
 
-    texture->load(IMAGE_DIR + "Player/Idle.png", "player idle");
-    texture->load(IMAGE_DIR + "Player/Run.png", "player run");
-    texture->load(IMAGE_DIR + "Player/Jump.png", "player jump");
-    texture->load(IMAGE_DIR + "Player/Attack.png", "player attack");
-    texture->load(IMAGE_DIR + "Player/Dead.png", "player dead");
-    texture->load(IMAGE_DIR + "Player/Fall.png", "player fall");
-    texture->load(IMAGE_DIR + "Player/Ground.png", "player ground");
-    texture->load(IMAGE_DIR + "Player/Hit.png", "player hit");
-    texture->load(IMAGE_DIR + "Player/Door In.png", "player door in");
-    texture->load(IMAGE_DIR + "Player/Door Out.png", "player door out");
+    texture.load(IMAGE_DIR + "Player/Idle.png", "player idle");
+    texture.load(IMAGE_DIR + "Player/Run.png", "player run");
+    texture.load(IMAGE_DIR + "Player/Jump.png", "player jump");
+    texture.load(IMAGE_DIR + "Player/Attack.png", "player attack");
+    texture.load(IMAGE_DIR + "Player/Dead.png", "player dead");
+    texture.load(IMAGE_DIR + "Player/Fall.png", "player fall");
+    texture.load(IMAGE_DIR + "Player/Ground.png", "player ground");
+    texture.load(IMAGE_DIR + "Player/Hit.png", "player hit");
+    texture.load(IMAGE_DIR + "Player/Door In.png", "player door in");
+    texture.load(IMAGE_DIR + "Player/Door Out.png", "player door out");
 
-    texture->load(IMAGE_DIR + "Enemy/Pig/Idle.png", "pig idle");
-    texture->load(IMAGE_DIR + "Enemy/Pig/Run.png", "pig run");
-    texture->load(IMAGE_DIR + "Enemy/Pig/Jump.png", "pig jump");
-    texture->load(IMAGE_DIR + "Enemy/Pig/Attack.png", "pig attack");
-    texture->load(IMAGE_DIR + "Enemy/Pig/Dead.png", "pig dead");
-    texture->load(IMAGE_DIR + "Enemy/Pig/Fall.png", "pig fall");
-    texture->load(IMAGE_DIR + "Enemy/Pig/Ground.png", "pig ground");
-    texture->load(IMAGE_DIR + "Enemy/Pig/Hit.png", "pig hit");
+    texture.load(IMAGE_DIR + "Enemy/Pig/Idle.png", "pig idle");
+    texture.load(IMAGE_DIR + "Enemy/Pig/Run.png", "pig run");
+    texture.load(IMAGE_DIR + "Enemy/Pig/Jump.png", "pig jump");
+    texture.load(IMAGE_DIR + "Enemy/Pig/Attack.png", "pig attack");
+    texture.load(IMAGE_DIR + "Enemy/Pig/Dead.png", "pig dead");
+    texture.load(IMAGE_DIR + "Enemy/Pig/Fall.png", "pig fall");
+    texture.load(IMAGE_DIR + "Enemy/Pig/Ground.png", "pig ground");
+    texture.load(IMAGE_DIR + "Enemy/Pig/Hit.png", "pig hit");
 
-    texture->load(IMAGE_DIR + "Enemy/KingPig/Idle.png", "kingPig idle");
-    texture->load(IMAGE_DIR + "Enemy/KingPig/Run.png", "kingPig run");
-    texture->load(IMAGE_DIR + "Enemy/KingPig/Jump.png", "kingPig jump");
-    texture->load(IMAGE_DIR + "Enemy/KingPig/Attack.png", "kingPig attack");
-    texture->load(IMAGE_DIR + "Enemy/KingPig/Dead.png", "kingPig dead");
-    texture->load(IMAGE_DIR + "Enemy/KingPig/Fall.png", "kingPig fall");
-    texture->load(IMAGE_DIR + "Enemy/KingPig/Ground.png", "kingPig ground");
-    texture->load(IMAGE_DIR + "Enemy/KingPig/Hit.png", "kingPig hit");
+    texture.load(IMAGE_DIR + "Enemy/KingPig/Idle.png", "kingPig idle");
+    texture.load(IMAGE_DIR + "Enemy/KingPig/Run.png", "kingPig run");
+    texture.load(IMAGE_DIR + "Enemy/KingPig/Jump.png", "kingPig jump");
+    texture.load(IMAGE_DIR + "Enemy/KingPig/Attack.png", "kingPig attack");
+    texture.load(IMAGE_DIR + "Enemy/KingPig/Dead.png", "kingPig dead");
+    texture.load(IMAGE_DIR + "Enemy/KingPig/Fall.png", "kingPig fall");
+    texture.load(IMAGE_DIR + "Enemy/KingPig/Ground.png", "kingPig ground");
+    texture.load(IMAGE_DIR + "Enemy/KingPig/Hit.png", "kingPig hit");
 
-    texture->load(IMAGE_DIR + "Enemy/PigWithBomb/Idle.png", "pigWithBomb idle");
-    texture->load(IMAGE_DIR + "Enemy/PigWithBomb/Run.png", "pigWithBomb run");
-    texture->load(IMAGE_DIR + "Enemy/PigWithBomb/Throwing.png", "pigWithBomb throwing");
+    texture.load(IMAGE_DIR + "Enemy/PigWithBomb/Idle.png", "pigWithBomb idle");
+    texture.load(IMAGE_DIR + "Enemy/PigWithBomb/Run.png", "pigWithBomb run");
+    texture.load(IMAGE_DIR + "Enemy/PigWithBomb/Throwing.png", "pigWithBomb throwing");
 
-    texture->load(IMAGE_DIR + "Enemy/PigWithBox/Idle.png", "pigWithBox idle");
-    texture->load(IMAGE_DIR + "Enemy/PigWithBox/Run.png", "pigWithBox run");
-    texture->load(IMAGE_DIR + "Enemy/PigWithBox/Throwing.png", "pigWithBox throwing");
+    texture.load(IMAGE_DIR + "Enemy/PigWithBox/Idle.png", "pigWithBox idle");
+    texture.load(IMAGE_DIR + "Enemy/PigWithBox/Run.png", "pigWithBox run");
+    texture.load(IMAGE_DIR + "Enemy/PigWithBox/Throwing.png", "pigWithBox throwing");
 
-    texture->load(IMAGE_DIR + "Item/Heart/Idle.png", "heart idle");
-    texture->load(IMAGE_DIR + "Item/Heart/Hit.png", "heart hit");
+    texture.load(IMAGE_DIR + "Item/Heart/Idle.png", "heart idle");
+    texture.load(IMAGE_DIR + "Item/Heart/Hit.png", "heart hit");
 
-    texture->load(IMAGE_DIR + "Item/Diamond/Idle.png", "diamond idle");
-    texture->load(IMAGE_DIR + "Item/Diamond/Hit.png", "diamond hit");
+    texture.load(IMAGE_DIR + "Item/Diamond/Idle.png", "diamond idle");
+    texture.load(IMAGE_DIR + "Item/Diamond/Hit.png", "diamond hit");
 
-    texture->load(IMAGE_DIR + "Item/Door/Idle.png", "door idle");
-    texture->load(IMAGE_DIR + "Item/Door/Open.png", "door open");
-    texture->load(IMAGE_DIR + "Item/Door/Close.png", "door close");
+    texture.load(IMAGE_DIR + "Item/Door/Idle.png", "door idle");
+    texture.load(IMAGE_DIR + "Item/Door/Open.png", "door open");
+    texture.load(IMAGE_DIR + "Item/Door/Close.png", "door close");
 
-    texture->load(IMAGE_DIR + "Item/Candle/Idle.png", "candle idle");
+    texture.load(IMAGE_DIR + "Item/Candle/Idle.png", "candle idle");
 
-    texture->load(IMAGE_DIR + "Item/Box/Idle.png", "box idle");
-    texture->load(IMAGE_DIR + "Item/Box/Hit.png", "box hit");
+    texture.load(IMAGE_DIR + "Item/Box/Idle.png", "box idle");
+    texture.load(IMAGE_DIR + "Item/Box/Hit.png", "box hit");
 
-    texture->load(IMAGE_DIR + "Item/Bomb/On.png", "bomb on");
-    texture->load(IMAGE_DIR + "Item/Bomb/Off.png", "bomb off");
-    texture->load(IMAGE_DIR + "Item/Bomb/Explode.png", "bomb explode");
+    texture.load(IMAGE_DIR + "Item/Bomb/On.png", "bomb on");
+    texture.load(IMAGE_DIR + "Item/Bomb/Off.png", "bomb off");
+    texture.load(IMAGE_DIR + "Item/Bomb/Explode.png", "bomb explode");
 
-    texture->load(IMAGE_DIR + "UI/Health Bar/Health Bar.png", "health bar");
-    texture->load(IMAGE_DIR + "UI/Health Bar/Heart.png", "health heart");
+    texture.load(IMAGE_DIR + "UI/Health Bar/Health Bar.png", "health bar");
+    texture.load(IMAGE_DIR + "UI/Health Bar/Heart.png", "health heart");
 
-    texture->load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
-    texture->load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
-    texture->load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
+    texture.load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
+    texture.load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
+    texture.load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
 
-    sound->loadMusic(SOUND_DIR + "PlayState/background.wav", "playstate background");
+    sound.loadMusic(SOUND_DIR + "PlayState/background.wav", "playstate background");
 
-    sound->loadSFX(SOUND_DIR + "Player/attack.wav", "player attack");
-    sound->loadSFX(SOUND_DIR + "Player/dying.wav", "player dying");
-    sound->loadSFX(SOUND_DIR + "Player/jump.wav", "player jump");
+    sound.loadSFX(SOUND_DIR + "Player/attack.wav", "player attack");
+    sound.loadSFX(SOUND_DIR + "Player/dying.wav", "player dying");
+    sound.loadSFX(SOUND_DIR + "Player/jump.wav", "player jump");
 
-    sound->loadSFX(SOUND_DIR + "Pig/attack.wav", "pig attack");
-    sound->loadSFX(SOUND_DIR + "Pig/dying.wav", "pig dying");
+    sound.loadSFX(SOUND_DIR + "Pig/attack.wav", "pig attack");
+    sound.loadSFX(SOUND_DIR + "Pig/dying.wav", "pig dying");
 
-    sound->loadSFX(SOUND_DIR + "Door/close.wav", "door close");
-    sound->loadSFX(SOUND_DIR + "Door/open.wav", "door open");
+    sound.loadSFX(SOUND_DIR + "Door/close.wav", "door close");
+    sound.loadSFX(SOUND_DIR + "Door/open.wav", "door open");
 
-    sound->loadSFX(SOUND_DIR + "Bomb/on.wav", "bomb on");
-    sound->loadSFX(SOUND_DIR + "Bomb/explode.wav", "bomb explode");
+    sound.loadSFX(SOUND_DIR + "Bomb/on.wav", "bomb on");
+    sound.loadSFX(SOUND_DIR + "Bomb/explode.wav", "bomb explode");
 
-    sound->loadSFX(SOUND_DIR + "Box/break.wav", "box broken");
+    sound.loadSFX(SOUND_DIR + "Box/break.wav", "box broken");
 
-    sound->loadSFX(SOUND_DIR + "Heart/bonus.wav", "heart bonus");
+    sound.loadSFX(SOUND_DIR + "Heart/bonus.wav", "heart bonus");
 
     if (loadLevel() == false) {
         return false;
     }
 
-    sound->setVolume(0);
-    sound->playMusic("playstate background");
+    sound.setVolume(0);
+    sound.playMusic("playstate background");
     m_bLoaded = true;
 
     return true;
@@ -167,15 +167,15 @@ bool PlayState::loadLevel()
     LevelParser levelParser;
     m_pLevel.reset();
     m_pLevel = levelParser.parseLevel(
-        Game::Instance()->getLevelPath(Game::Instance()->getLevelIndex()).c_str());
+        Game::Instance().getLevelPath(Game::Instance().getLevelIndex()).c_str());
 
     if (m_pLevel == nullptr) {
         return false;
     }
 
-    Game::Instance()->setLevel(std::move(m_pLevel));
-    Camera::Instance()->setTarget(m_pLevel->getPlayer());
-    Camera::Instance()->setZoom(3);
+    Game::Instance().setLevel(std::move(m_pLevel));
+    Camera::Instance().setTarget(m_pLevel->getPlayer());
+    Camera::Instance().setZoom(3);
 
     resume();
     return true;
@@ -184,8 +184,8 @@ bool PlayState::loadLevel()
 bool PlayState::onExit()
 {
     m_bPaused = true;
-    PhysicWorld::Instance()->clean();
-    InputHandler::Instance()->reset();
+    PhysicWorld::Instance().clean();
+    InputHandler::Instance().reset();
 
     return true;
 }
@@ -201,17 +201,17 @@ void PlayState::update()
         return;
     }
 
-    if (InputHandler::Instance()->isKeyDown(KEY_ESCAPE)) {
-        GameStateMachine::Instance()->pushState(std::make_shared<PauseState>());
+    if (InputHandler::Instance().isKeyDown(KEY_ESCAPE)) {
+        GameStateMachine::Instance().pushState(std::make_shared<PauseState>());
     }
 
-    if (InputHandler::Instance()->isKeyDown(KEY_Q)) {
-        Game::Instance()->toggleDebug();
+    if (InputHandler::Instance().isKeyDown(KEY_Q)) {
+        Game::Instance().toggleDebug();
     };
 
-    PhysicWorld::Instance()->update();
+    PhysicWorld::Instance().update();
     m_pLevel->update();
-    Camera::Instance()->update();
+    Camera::Instance().update();
 }
 
 void PlayState::render() const
@@ -222,17 +222,17 @@ void PlayState::render() const
 
     m_pLevel->render();
 
-    if (Game::Instance()->isDebug()) {
-        PhysicWorld::Instance()->debugDraw();
+    if (Game::Instance().isDebug()) {
+        PhysicWorld::Instance().debugDraw();
     }
 
-    TextureManager::Instance()->draw("health bar", {20, 10}, 154, 62);
+    TextureManager::Instance().draw("health bar", {20, 10}, 154, 62);
     for (int i = 0; i < m_pLevel->getPlayer()->getHp(); i++) {
-        TextureManager::Instance()->draw("health heart", {60 + i * 25.0f, 30}, 22, 19);
+        TextureManager::Instance().draw("health heart", {60 + i * 25.0f, 30}, 22, 19);
     }
 
-    Game::Instance()->getWindow()->print(
-        "level: " + std::to_string(Game::Instance()->getLevelIndex() + 1),
+    Game::Instance().getWindow()->print(
+        "level: " + std::to_string(Game::Instance().getLevelIndex() + 1),
         30,
         300,
         40,

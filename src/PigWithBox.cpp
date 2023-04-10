@@ -42,7 +42,7 @@ void PigWithBox::throwBox()
         20,
         20));
 
-    GameObject* box = Game::Instance()->getLevel()->spawnGameObject("Box", std::move(pParams));
+    GameObject* box = Game::Instance().getLevel()->spawnGameObject("Box", std::move(pParams));
     box->getBody()->ApplyForce(
         b2Vec2(m_direction * 100, -32),
         box->getBody()->GetWorldCenter(),
@@ -57,5 +57,5 @@ void PigWithBox::becomeNormal()
         getPosition().y - (20 * 0.5f),
         20,
         20));
-    GameObject* obj = Game::Instance()->getLevel()->spawnGameObject("Pig", std::move(pParams2));
+    GameObject* obj = Game::Instance().getLevel()->spawnGameObject("Pig", std::move(pParams2));
 }

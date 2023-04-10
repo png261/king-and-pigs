@@ -68,7 +68,7 @@ GameObject* Level::spawnGameObject(
     const std::string type,
     std::unique_ptr<LoaderParams> const& pParams)
 {
-    GameObject* const pGameObject = GameObjectFactory::Instance()->create(type);
+    GameObject* const pGameObject = GameObjectFactory::Instance().create(type);
     pGameObject->load(std::move(pParams));
     m_spawnLayer->addGameObject(pGameObject);
     return pGameObject;

@@ -1,9 +1,9 @@
 #include "GameStateMachine.hpp"
 
-std::shared_ptr<GameStateMachine> GameStateMachine::Instance()
+GameStateMachine& GameStateMachine::Instance()
 {
-    static std::shared_ptr<GameStateMachine> s_pInstance{new GameStateMachine};
-    return s_pInstance;
+    static GameStateMachine s_instance{}; 
+    return s_instance;
 }
 
 void GameStateMachine::clean()

@@ -21,7 +21,7 @@ public:
 class GameObjectFactory final
 {
 public:
-    static std::shared_ptr<GameObjectFactory> Instance();
+    static GameObjectFactory& Instance(); 
     GameObjectFactory(GameObjectFactory const&) = delete;
     GameObjectFactory& operator=(GameObjectFactory const&) = delete;
 

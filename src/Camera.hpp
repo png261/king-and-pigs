@@ -6,7 +6,7 @@
 class Camera
 {
 public:
-    static std::shared_ptr<Camera> Instance();
+    static Camera& Instance();
     Camera(Camera const&) = delete;
     Camera& operator=(Camera const&) = delete;
 

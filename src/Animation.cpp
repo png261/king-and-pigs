@@ -49,7 +49,7 @@ void Animation::draw(const b2Vec2 position, const float angle, const bool bFlipp
     }
 
     TextureManager::Instance()
-        ->drawFrame(m_textureID, position, m_width, m_height, 0, m_curFrame, angle, bFlipped, zoom);
+        .drawFrame(m_textureID, position, m_width, m_height, 0, m_curFrame, angle, bFlipped, zoom);
 }
 
 void Animation::start()

@@ -30,7 +30,7 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
     bodyDef.position = PhysicWorld::pixelToMeter(b2Vec2(x + width * 0.5f, y + height * 0.5f));
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
-    m_pBody = PhysicWorld::Instance()->getWorld()->CreateBody(&bodyDef);
+    m_pBody = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
 
     b2FixtureDef fixtureDef;
     b2PolygonShape dynamicBox;
@@ -234,7 +234,7 @@ b2Fixture* PhysicObject::createCircleBody(
     bodyDef.type = b2_dynamicBody;
     bodyDef.position = PhysicWorld::pixelToMeter(b2Vec2(position) + 0.5 * b2Vec2(radius, radius));
     bodyDef.fixedRotation = true;
-    body = PhysicWorld::Instance()->getWorld()->CreateBody(&bodyDef);
+    body = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
 
     b2CircleShape circle;
     circle.m_radius = PhysicWorld::pixelToMeter(radius);

@@ -8,7 +8,7 @@
 class TextureManager final
 {
 public:
-    static std::shared_ptr<TextureManager> Instance();
+    static TextureManager& Instance(); 
     TextureManager(TextureManager const&) = delete;
     TextureManager& operator=(TextureManager const&) = delete;
 

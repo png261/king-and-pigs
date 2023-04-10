@@ -10,7 +10,7 @@
 class InputHandler final
 {
 public:
-    static std::shared_ptr<InputHandler> Instance();
+    static InputHandler& Instance();
     InputHandler(InputHandler const&) = delete;
     InputHandler& operator=(InputHandler const&) = delete;
 

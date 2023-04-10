@@ -31,12 +31,12 @@ void LoseState::update()
     }
 
     if (m_bEnterMainMenu) {
-        GameStateMachine::Instance()->changeState(std::make_shared<MainMenuState>());
+        GameStateMachine::Instance().changeState(std::make_shared<MainMenuState>());
         return;
     }
 
     if (m_bEnterExit) {
-        Game::Instance()->quit();
+        Game::Instance().quit();
         return;
     }
 
@@ -54,38 +54,38 @@ void LoseState::render() const
         obj->draw();
     }
 
-    Game::Instance()->getWindow()->print("you are died", 40, 320, 50, {});
+    Game::Instance().getWindow()->print("you are died", 40, 320, 50, {});
 };
 
 void LoseState::s_mainMenu()
 {
-    GameStateMachine::Instance()->changeState(std::make_shared<MainMenuState>());
+    GameStateMachine::Instance().changeState(std::make_shared<MainMenuState>());
 }
 
 void LoseState::s_exit()
 {
-    Game::Instance()->quit();
+    Game::Instance().quit();
 }
 
 bool LoseState::load()
 {
     m_bLoaded = false;
-    const auto texture = TextureManager::Instance();
-    texture->load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
-    texture->load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
-    texture->load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
+    TextureManager& texture = TextureManager::Instance();
+    texture.load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
+    texture.load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
+    texture.load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
 
     Button* mainMenuButton = new Button(
         "Main Menu",
-        Game::Instance()->getWindow()->getCenterX() - 250 / 2,
-        Game::Instance()->getWindow()->getCenterY() - 70 / 2,
+        Game::Instance().getWindow()->getCenterX() - 250 / 2,
+        Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
         70);
 
     Button* exitButton = new Button(
         "Exit",
-        Game::Instance()->getWindow()->getCenterX() - 250 / 2,
-        Game::Instance()->getWindow()->getCenterY() - 70 / 2 + 100,
+        Game::Instance().getWindow()->getCenterX() - 250 / 2,
+        Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
 
@@ -103,7 +103,7 @@ bool LoseState::load()
 bool LoseState::onExit()
 {
     m_bPaused = true;
-    InputHandler::Instance()->reset();
+    InputHandler::Instance().reset();
     return true;
 };
 

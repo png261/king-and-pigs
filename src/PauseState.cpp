@@ -36,16 +36,16 @@ void PauseState::update()
     }
 
     if (m_bEnterResume) {
-        GameStateMachine::Instance()->popState();
+        GameStateMachine::Instance().popState();
         return;
     }
     if (m_bEnterMainMenu) {
-        GameStateMachine::Instance()->popState();
-        GameStateMachine::Instance()->changeState(std::make_shared<MainMenuState>());
+        GameStateMachine::Instance().popState();
+        GameStateMachine::Instance().changeState(std::make_shared<MainMenuState>());
         return;
     }
 
-    if (InputHandler::Instance()->isKeyDown(KEY_ESCAPE)) {
+    if (InputHandler::Instance().isKeyDown(KEY_ESCAPE)) {
         m_bEnterResume = true;
     }
 
@@ -68,22 +68,22 @@ void PauseState::render() const
 bool PauseState::load()
 {
     m_bLoaded = false;
-    const auto texture = TextureManager::Instance();
-    texture->load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
-    texture->load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
-    texture->load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
+    TextureManager& texture = TextureManager::Instance();
+    texture.load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
+    texture.load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
+    texture.load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
 
     Button* resumeButton = new Button(
         "Resume",
-        Game::Instance()->getWindow()->getCenterX() - 250 / 2,
-        Game::Instance()->getWindow()->getCenterY() - 70 / 2,
+        Game::Instance().getWindow()->getCenterX() - 250 / 2,
+        Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
         70);
 
     Button* mainMenuButton = new Button(
         "Main Menu",
-        Game::Instance()->getWindow()->getCenterX() - 250 / 2,
-        Game::Instance()->getWindow()->getCenterY() - 70 / 2 + 100,
+        Game::Instance().getWindow()->getCenterX() - 250 / 2,
+        Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
 
@@ -100,7 +100,7 @@ bool PauseState::load()
 bool PauseState::onExit()
 {
     m_bPaused = true;
-    InputHandler::Instance()->reset();
+    InputHandler::Instance().reset();
     return true;
 };
 

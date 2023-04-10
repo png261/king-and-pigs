@@ -89,7 +89,7 @@ void LevelParser::parseTilesets(XMLElement* const pTilesetRoot, std::shared_ptr<
 
     tileset.numColumns = tileset.width / (tileset.tileWidth + tileset.spacing);
 
-    TextureManager::Instance()->load(ASSETS_DIR + pImagieEl->Attribute("source"), tileset.name);
+    TextureManager::Instance().load(ASSETS_DIR + pImagieEl->Attribute("source"), tileset.name);
     pLevel->addTileSet(tileset);
     parseCollisionObject(pTilesetRoot, pLevel, tileset.firstGridID);
 }
@@ -123,7 +123,7 @@ GameObject* LevelParser::parseObject(
     int height = std::stoi(pObjectElement->Attribute("height"));
     std::string type = getType(pObjectElement);
 
-    GameObject* const pGameObject = GameObjectFactory::Instance()->create(type);
+    GameObject* const pGameObject = GameObjectFactory::Instance().create(type);
     if (pGameObject == nullptr) {
         return nullptr;
     }
@@ -222,7 +222,7 @@ void LevelParser::parseTileLayer(XMLElement* const pTileElement, std::shared_ptr
                 }
                 CollisionShape shape = it->second;
 
-                PhysicWorld::Instance()->createStaticBody(
+                PhysicWorld::Instance().createStaticBody(
                     m_tileSize * b2Vec2(col, row),
                     shape.width,
                     shape.height,

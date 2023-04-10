@@ -7,10 +7,10 @@ Camera::Camera()
     , m_zoom(1)
 {}
 
-std::shared_ptr<Camera> Camera::Instance()
+Camera& Camera::Instance()
 {
-    static std::shared_ptr<Camera> s_pInstance{new Camera};
-    return s_pInstance;
+    static Camera s_instance{};
+    return s_instance;
 }
 
 float Camera::getZoom() const
@@ -27,8 +27,8 @@ b2Vec2 Camera::getPosition() const
     b2Vec2 pos =
         m_pTarget->getPosition() -
         0.5 * b2Vec2(
-                  Game::Instance()->getWindow()->getWidth() / m_zoom - m_pTarget->getWidth(),
-                  Game::Instance()->getWindow()->getHeight() / m_zoom - m_pTarget->getHeight());
+                  Game::Instance().getWindow()->getWidth() / m_zoom - m_pTarget->getWidth(),
+                  Game::Instance().getWindow()->getHeight() / m_zoom - m_pTarget->getHeight());
 
     if (pos.x < 0) {
         pos.x = 0;

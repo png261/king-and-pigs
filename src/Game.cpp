@@ -22,10 +22,10 @@ Game::Game()
     m_levelIndex = 0;
 }
 
-std::shared_ptr<Game> Game::Instance()
+Game& Game::Instance()
 {
-    static std::shared_ptr<Game> s_pInstance{new Game};
-    return s_pInstance;
+    static Game s_instance{};
+    return s_instance;
 }
 
 bool Game::init()
@@ -36,11 +36,11 @@ bool Game::init()
 
     m_pWindow = std::make_shared<Window>(1280, 720, "King and Pig");
 
-    if (PhysicWorld::Instance()->init(std::move(m_pWindow)) == false) {
+    if (PhysicWorld::Instance().init(std::move(m_pWindow)) == false) {
         return false;
     };
 
-    GameStateMachine::Instance()->changeState(std::make_shared<MainMenuState>());
+    GameStateMachine::Instance().changeState(std::make_shared<MainMenuState>());
     m_bRunning = true;
 
     return true;
@@ -48,30 +48,30 @@ bool Game::init()
 
 void Game::handleEvents()
 {
-    InputHandler::Instance()->update();
+    InputHandler::Instance().update();
 }
 
 void Game::update()
 {
-    GameStateMachine::Instance()->update();
+    GameStateMachine::Instance().update();
 }
 
 void Game::render() const
 {
     m_pWindow->clear();
-    GameStateMachine::Instance()->render();
+    GameStateMachine::Instance().render();
     m_pWindow->refresh();
     m_pWindow->delayFramerateIfNeeded();
 }
 
 void Game::clean()
 {
-    PhysicWorld::Instance()->clean();
-    GameStateMachine::Instance()->clean();
-    GameObjectFactory::Instance()->clean();
-    InputHandler::Instance()->clean();
-    TextureManager::Instance()->clean();
-    SoundManager::Instance()->clean();
+    PhysicWorld::Instance().clean();
+    GameStateMachine::Instance().clean();
+    GameObjectFactory::Instance().clean();
+    InputHandler::Instance().clean();
+    TextureManager::Instance().clean();
+    SoundManager::Instance().clean();
     SDL::exit();
 }
 
@@ -93,14 +93,14 @@ void Game::setLevelIndex(const int index)
 void Game::nextLevel()
 {
     PlayState* const playState =
-        dynamic_cast<PlayState*>(GameStateMachine::Instance()->getCurrentState());
+        dynamic_cast<PlayState*>(GameStateMachine::Instance().getCurrentState());
     if (playState == nullptr) {
         return;
     }
 
     m_levelIndex += 1;
     if (m_levelIndex >= m_levelFiles.size()) {
-        GameStateMachine::Instance()->changeState(std::make_shared<WinState>());
+        GameStateMachine::Instance().changeState(std::make_shared<WinState>());
         m_levelIndex = 0;
         return;
     }

@@ -75,7 +75,7 @@ void Player::loadAnimation()
 void Player::update()
 {
     if (isDead()) {
-        GameStateMachine::Instance()->pushState(std::make_shared<LoseState>());
+        GameStateMachine::Instance().pushState(std::make_shared<LoseState>());
         return;
     }
 
@@ -123,10 +123,10 @@ void Player::draw()
 void Player::handleSound()
 {
     if (isDying()) {
-        SoundManager::Instance()->playSFX("player dying");
+        SoundManager::Instance().playSFX("player dying");
     }
     if (isAttack()) {
-        SoundManager::Instance()->playSFX("player attack");
+        SoundManager::Instance().playSFX("player attack");
     }
 }
 
@@ -149,29 +149,29 @@ void Player::handleInput()
         return;
     }
 
-    const auto input = InputHandler::Instance();
+    InputHandler& input = InputHandler::Instance();
 
     if (isOnGround()) {
-        m_bWantDoorIn = input->isKeyDown(KEY_W);
+        m_bWantDoorIn = input.isKeyDown(KEY_W);
 
-        if (input->isKeyPressed(KEY_SPACE)) {
+        if (input.isKeyPressed(KEY_SPACE)) {
             jump();
-            SoundManager::Instance()->playSFX("player jump");
+            SoundManager::Instance().playSFX("player jump");
         }
     }
 
-    if (input->isKeyPressed(KEY_RIGHT)) {
+    if (input.isKeyPressed(KEY_RIGHT)) {
         moveRight();
         m_direction = RIGHT;
     }
-    if (input->isKeyPressed(KEY_LEFT)) {
+    if (input.isKeyPressed(KEY_LEFT)) {
         moveLeft();
         m_direction = LEFT;
     }
 
-    if (input->isKeyPressed(KEY_A)) {
+    if (input.isKeyPressed(KEY_A)) {
         attack();
-        SoundManager::Instance()->playSFX("player attack");
+        SoundManager::Instance().playSFX("player attack");
     }
 
     m_bFlipped = m_direction == LEFT;

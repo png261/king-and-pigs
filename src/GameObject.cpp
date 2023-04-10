@@ -30,10 +30,10 @@ void GameObject::draw()
         b2Vec2(m_animations[m_curAnimation]->getWidth(), m_animations[m_curAnimation]->getHeight());
 
     m_animations[m_curAnimation]->draw(
-        getPosition() - halfSize - Camera::Instance()->getPosition(),
+        getPosition() - halfSize - Camera::Instance().getPosition(),
         getAngle(),
         m_bFlipped,
-        Camera::Instance()->getZoom());
+        Camera::Instance().getZoom());
 }
 
 void GameObject::update()

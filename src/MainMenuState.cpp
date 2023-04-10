@@ -35,13 +35,13 @@ void MainMenuState::update()
     }
 
     if (m_bEnterPlayState) {
-        Game::Instance()->setLevelIndex(0);
-        GameStateMachine::Instance()->changeState(std::make_shared<PlayState>());
+        Game::Instance().setLevelIndex(0);
+        GameStateMachine::Instance().changeState(std::make_shared<PlayState>());
         return;
     }
 
     if (m_bEnterQuit) {
-        Game::Instance()->quit();
+        Game::Instance().quit();
         return;
     }
 
@@ -63,22 +63,22 @@ void MainMenuState::render() const
 bool MainMenuState::load()
 {
     m_bLoaded = false;
-    const auto texture = TextureManager::Instance();
-    texture->load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
-    texture->load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
-    texture->load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
+    TextureManager& texture = TextureManager::Instance();
+    texture.load(IMAGE_DIR + "UI/Button/normal.png", "button normal");
+    texture.load(IMAGE_DIR + "UI/Button/hovered.png", "button hovered");
+    texture.load(IMAGE_DIR + "UI/Button/pressed.png", "button pressed");
 
     Button* newGameButton = new Button(
         "New Game",
-        Game::Instance()->getWindow()->getCenterX() - 250 / 2,
-        Game::Instance()->getWindow()->getCenterY() - 70 / 2,
+        Game::Instance().getWindow()->getCenterX() - 250 / 2,
+        Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
         70);
 
     Button* exitButton = new Button(
         "Exit",
-        Game::Instance()->getWindow()->getCenterX() - 250 / 2,
-        Game::Instance()->getWindow()->getCenterY() - 70 / 2 + 100,
+        Game::Instance().getWindow()->getCenterX() - 250 / 2,
+        Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
 
@@ -95,7 +95,7 @@ bool MainMenuState::load()
 bool MainMenuState::onExit()
 {
     m_bPaused = true;
-    InputHandler::Instance()->reset();
+    InputHandler::Instance().reset();
     return true;
 };
 

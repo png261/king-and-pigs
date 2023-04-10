@@ -32,7 +32,7 @@ void Box::update()
 {
     if (isDead()) {
         /* breakIntoPieces(); */
-        SoundManager::Instance()->playSFX("box broken");
+        SoundManager::Instance().playSFX("box broken");
         disappear();
         return;
     }
@@ -67,8 +67,8 @@ void Box::breakIntoPieces()
         10,
         10));
 
-    Game::Instance()->getLevel()->spawnGameObject("Box", std::move(pParams));
-    Game::Instance()->getLevel()->spawnGameObject("Box", std::move(pParams));
-    Game::Instance()->getLevel()->spawnGameObject("Box", std::move(pParams));
-    Game::Instance()->getLevel()->spawnGameObject("Box", std::move(pParams));
+    Game::Instance().getLevel()->spawnGameObject("Box", std::move(pParams));
+    Game::Instance().getLevel()->spawnGameObject("Box", std::move(pParams));
+    Game::Instance().getLevel()->spawnGameObject("Box", std::move(pParams));
+    Game::Instance().getLevel()->spawnGameObject("Box", std::move(pParams));
 }

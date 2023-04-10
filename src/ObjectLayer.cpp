@@ -14,9 +14,9 @@ void ObjectLayer::update()
 {
     for (const auto& obj : m_gameObjects) {
         if (obj->getPosition().x >
-                Camera::Instance()->getPosition().x + Game::Instance()->getWindow()->getWidth() &&
+                Camera::Instance().getPosition().x + Game::Instance().getWindow()->getWidth() &&
             obj->getPosition().y >
-                Camera::Instance()->getPosition().y + Game::Instance()->getWindow()->getHeight()) {
+                Camera::Instance().getPosition().y + Game::Instance().getWindow()->getHeight()) {
             continue;
         }
 
@@ -29,7 +29,7 @@ void ObjectLayer::update()
             continue;
         }
 
-        PhysicWorld::Instance()->getWorld()->DestroyBody((*it)->getBody());
+        PhysicWorld::Instance().getWorld()->DestroyBody((*it)->getBody());
         m_gameObjects.erase(it);
     }
 }

@@ -44,12 +44,12 @@ void TileLayer::render() const
             }
 
             b2Vec2 position = b2Vec2(((j * m_tileSize) - x2), ((i * m_tileSize) - y2)) -
-                              Camera::Instance()->getPosition();
+                              Camera::Instance().getPosition();
 
             bool isInViewPort = position.x > -m_tileSize &&
-                                position.x < Game::Instance()->getWindow()->getWidth() &&
+                                position.x < Game::Instance().getWindow()->getWidth() &&
                                 position.y > -m_tileSize &&
-                                position.y < Game::Instance()->getWindow()->getHeight();
+                                position.y < Game::Instance().getWindow()->getHeight();
 
             if (isInViewPort == false) {
                 continue;
@@ -57,7 +57,7 @@ void TileLayer::render() const
 
             Tileset tileset = getTilesetByID(id);
 
-            TextureManager::Instance()->drawTile(
+            TextureManager::Instance().drawTile(
                 tileset.name,
                 tileset.margin,
                 tileset.spacing,
@@ -66,7 +66,7 @@ void TileLayer::render() const
                 m_tileSize,
                 (id - tileset.firstGridID) / tileset.numColumns,
                 (id - tileset.firstGridID) % tileset.numColumns,
-                Camera::Instance()->getZoom());
+                Camera::Instance().getZoom());
         }
     }
 }

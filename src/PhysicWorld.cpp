@@ -19,10 +19,10 @@ const b2Vec2 PhysicWorld::GRAVITY = {0.0f, 10.0f};
 
 PhysicWorld::PhysicWorld() {}
 
-std::shared_ptr<PhysicWorld> PhysicWorld::Instance()
+PhysicWorld& PhysicWorld::Instance()
 {
-    static std::shared_ptr<PhysicWorld> s_pInstance{new PhysicWorld};
-    return s_pInstance;
+    static PhysicWorld s_instance{}; 
+    return s_instance;
 }
 
 bool PhysicWorld::init(std::shared_ptr<Window> const& window)
@@ -123,7 +123,7 @@ void PhysicWorld::DoorInListener(b2Contact* const contact)
 
     if (player->isWantDoorIn()) {
         if (door->isOpened()) {
-            Game::Instance()->nextLevel();
+            Game::Instance().nextLevel();
         } else {
             door->open();
             player->doorIn();

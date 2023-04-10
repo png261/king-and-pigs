@@ -34,12 +34,12 @@ void Door::update()
     if (m_curAnimation == DOOR_CLOSING && m_animations[DOOR_CLOSING]->isFinished()) {
         m_curAnimation = DOOR_CLOSED;
         m_animations[m_curAnimation]->start();
-        SoundManager::Instance()->playSFX("door close");
+        SoundManager::Instance().playSFX("door close");
         m_bOpened = false;
     }
 
     if (m_curAnimation == DOOR_OPENING && m_animations[DOOR_OPENING]->isFinished()) {
-        SoundManager::Instance()->playSFX("door open");
+        SoundManager::Instance().playSFX("door open");
         m_bOpened = true;
     }
 }

@@ -20,7 +20,7 @@ void VisionObject::update()
         b2Vec2 end = PhysicWorld::pixelToMeter(raycast.end);
 
         VisionRayCastCallback callback;
-        PhysicWorld::Instance()->getWorld()->RayCast(&callback, start, end);
+        PhysicWorld::Instance().getWorld()->RayCast(&callback, start, end);
         m_seeingCategory = m_seeingCategory | callback.m_seeingCategory;
 
         m_visionNearestDistance = callback.m_fraction * m_visionRange < m_visionNearestDistance
@@ -31,11 +31,11 @@ void VisionObject::update()
 
 void VisionObject::debugDraw()
 {
-    if (Game::Instance()->isDebug() == false) {
+    if (Game::Instance().isDebug() == false) {
         return;
     }
 
-    DebugDraw debug(Game::Instance()->getWindow());
+    DebugDraw debug(Game::Instance().getWindow());
     for (auto& raycast : m_raycast) {
         b2Vec2 start = PhysicWorld::pixelToMeter(raycast.start);
         b2Vec2 end = PhysicWorld::pixelToMeter(raycast.end);

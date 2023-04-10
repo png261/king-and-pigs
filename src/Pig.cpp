@@ -84,11 +84,11 @@ void Pig::update()
 void Pig::handleSound()
 {
     if (isDying()) {
-        SoundManager::Instance()->playSFX("pig dying");
+        SoundManager::Instance().playSFX("pig dying");
     }
 
     if (isAttack()) {
-        SoundManager::Instance()->playSFX("pig attack");
+        SoundManager::Instance().playSFX("pig attack");
     }
 }
 

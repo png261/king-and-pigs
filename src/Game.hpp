@@ -9,7 +9,7 @@
 class Game final
 {
 public:
-    static std::shared_ptr<Game> Instance();
+    static Game& Instance();
     Game(Game const&) = delete;
     Game& operator=(Game const&) = delete;
 

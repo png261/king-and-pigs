@@ -4,10 +4,10 @@
 #include "Log.hpp"
 #include "SDL.hpp"
 
-std::shared_ptr<TextureManager> TextureManager::Instance()
+TextureManager& TextureManager::Instance()
 {
-    static std::shared_ptr<TextureManager> s_pInstance{new TextureManager};
-    return s_pInstance;
+    static TextureManager s_instance{}; 
+    return s_instance;
 }
 
 bool TextureManager::load(const std::string path, const std::string id)
@@ -16,7 +16,7 @@ bool TextureManager::load(const std::string path, const std::string id)
         return false;
     }
 
-    SDL_Texture* const pTexture = Game::Instance()->getWindow()->loadImage(path.c_str());
+    SDL_Texture* const pTexture = Game::Instance().getWindow()->loadImage(path.c_str());
     if (pTexture == nullptr) {
         Log::error("Fail to create Texture for: " + path);
         return false;
@@ -41,7 +41,7 @@ void TextureManager::draw(
         width,
         height};
 
-    Game::Instance()->getWindow()->renderImage(
+    Game::Instance().getWindow()->renderImage(
         m_textureMap[id],
         &srcRect,
         &destRect,
@@ -68,7 +68,7 @@ void TextureManager::drawFrame(
         width * zoom,
         height * zoom};
 
-    Game::Instance()->getWindow()->renderImage(
+    Game::Instance().getWindow()->renderImage(
         m_textureMap[id],
         &srcRect,
         &destRect,
@@ -100,13 +100,13 @@ void TextureManager::drawTile(
         static_cast<int>(width * zoom),
         static_cast<int>(height * zoom)};
 
-    Game::Instance()->getWindow()->renderImage(m_textureMap[id], &srcRect, &destRect);
+    Game::Instance().getWindow()->renderImage(m_textureMap[id], &srcRect, &destRect);
 }
 
 void TextureManager::clean()
 {
     for (auto& texture : m_textureMap) {
-        Game::Instance()->getWindow()->freeImage(texture.second);
+        Game::Instance().getWindow()->freeImage(texture.second);
     }
     m_textureMap.clear();
 }
