@@ -32,8 +32,6 @@ void Door::update()
 {
     GameObject::update();
     if (m_curAnimation == DOOR_CLOSING && m_animations[DOOR_CLOSING]->isFinished()) {
-        m_curAnimation = DOOR_CLOSED;
-        m_animations[m_curAnimation]->start();
         SoundManager::Instance().playSFX("door close");
         m_bOpened = false;
     }
@@ -57,7 +55,6 @@ void Door::open()
 void Door::close()
 {
     if (isClosed()) {
-        Log::log("is closed");
         return;
     }
 

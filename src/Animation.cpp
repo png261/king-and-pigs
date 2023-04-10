@@ -29,6 +29,10 @@ bool Animation::isRunning() const
 
 void Animation::update()
 {
+    if (m_framerate == 0) {
+        return;
+    }
+
     const Uint32 time_between_frames = (1000.0f / m_framerate);
     m_curFrame = (m_stopwatch.delta() / time_between_frames);
 
@@ -44,7 +48,7 @@ void Animation::update()
 
 void Animation::draw(const b2Vec2 position, const float angle, const bool bFlipped, const int zoom)
 {
-    if (!isRunning() || m_framerate == 0) {
+    if (!isRunning()) {
         return;
     }
 
@@ -54,11 +58,7 @@ void Animation::draw(const b2Vec2 position, const float angle, const bool bFlipp
 
 void Animation::start()
 {
-    if (m_framerate == 0) {
-        return;
-    }
-
-    if (isRunning()) {
+    if (m_framerate == 0 || isRunning()) {
         return;
     }
 

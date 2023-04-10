@@ -152,7 +152,6 @@ bool PlayState::loadLevel()
     exit();
 
     LevelParser levelParser;
-    m_pLevel.reset();
     m_pLevel = levelParser.parseLevel(
         Game::Instance().getLevelPath(Game::Instance().getLevelIndex()).c_str());
 
@@ -216,8 +215,8 @@ void PlayState::render() const
     renderStatusBar();
 }
 
-void PlayState::renderStatusBar() const {
-
+void PlayState::renderStatusBar() const
+{
     TextureManager::Instance().draw("health bar", {20, 10}, 154, 62);
     for (int i = 0; i < m_pLevel->getPlayer()->getHp(); i++) {
         TextureManager::Instance().draw("health heart", {60 + i * 25.0f, 30}, 22, 19);
@@ -229,7 +228,7 @@ void PlayState::renderStatusBar() const {
         300,
         50,
         Color::WHITE);
-} 
+}
 
 std::string PlayState::getStateID() const
 {

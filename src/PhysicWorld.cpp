@@ -121,14 +121,17 @@ void PhysicWorld::DoorInListener(b2Contact* const contact)
         return;
     }
 
-    if (player->isWantDoorIn()) {
-        if (door->isOpened()) {
-            Game::Instance().nextLevel();
-        } else {
-            door->open();
-            player->doorIn();
-        }
+    if (!player->isWantDoorIn()) {
+        return;
     }
+
+    if (door->isOpened()) {
+        Game::Instance().nextLevel();
+        return;
+    }
+
+    player->doorIn();
+    door->open();
 }
 
 void PhysicWorld::AttackListener(b2Contact* const contact)
