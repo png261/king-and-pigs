@@ -28,10 +28,9 @@ PhysicWorld& PhysicWorld::Instance()
 bool PhysicWorld::init(std::shared_ptr<Window> const& window)
 {
     m_pWorld = new b2World(GRAVITY);
-    m_contactListener = std::make_unique<ContactListener>(ContactListener());
     m_pDebugDraw = std::make_unique<DebugDraw>(DebugDraw(window));
-    m_pWorld->SetContactListener(new ContactListener);
     m_pWorld->SetDebugDraw(m_pDebugDraw.get());
+    createContactListener();
 
     m_timeStep = 1.0f / 60.f;
     m_velocityIterations = 10;
@@ -190,6 +189,9 @@ void PhysicWorld::clean()
     for (b2Body* body = m_pWorld->GetBodyList(); body; body = body->GetNext()) {
         m_pWorld->DestroyBody(body);
     }
+}
+void PhysicWorld::createContactListener()
+{
     m_contactListener = std::make_unique<ContactListener>(ContactListener());
     m_pWorld->SetContactListener(m_contactListener.get());
 }

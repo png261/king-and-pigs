@@ -42,7 +42,7 @@ public:
         MASK_PIG_VISION_SENSOR = CAT_ALL,
     };
 
-    static PhysicWorld& Instance(); 
+    static PhysicWorld& Instance();
     PhysicWorld(PhysicWorld const&) = delete;
     PhysicWorld& operator=(PhysicWorld const&) = delete;
 
@@ -58,6 +58,7 @@ public:
         const Mask mask);
 
     void debugDraw();
+    void createContactListener();
 
     b2World* getWorld();
 

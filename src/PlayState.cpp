@@ -159,6 +159,7 @@ bool PlayState::loadLevel()
         return false;
     }
 
+    PhysicWorld::Instance().createContactListener();
     Game::Instance().setLevel(std::move(m_pLevel));
     Camera::Instance().setTarget(m_pLevel->getPlayer());
     Camera::Instance().setZoom(3);
