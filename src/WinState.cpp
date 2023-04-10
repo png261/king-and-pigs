@@ -18,7 +18,7 @@ WinState::~WinState(){};
 
 bool WinState::onEnter()
 {
-    if (this->load() == false) {
+    if (load() == false) {
         return false;
     }
     return true;

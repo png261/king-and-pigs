@@ -80,7 +80,7 @@ b2Body* PhysicWorld::createStaticBody(
     b2BodyDef bodyDef;
     bodyDef.position = pixelToMeter(position + b2Vec2(width * 0.5, height * 0.5));
     bodyDef.type = b2_staticBody;
-    b2Body* const body = this->getWorld()->CreateBody(&bodyDef);
+    b2Body* const body = getWorld()->CreateBody(&bodyDef);
 
     float w = pixelToMeter(width);
     float h = pixelToMeter(height);

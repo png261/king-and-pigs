@@ -10,12 +10,12 @@ Door::Door()
 void Door::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
-    this->createBody(pParams->x(), pParams->y(), m_width, m_height);
+    createBody(pParams->x(), pParams->y(), m_width, m_height);
 
     m_pBody->SetGravityScale(0);
     m_pFixture->SetSensor(true);
 
-    this->loadAnimation();
+    loadAnimation();
 }
 
 void Door::loadAnimation()
@@ -46,7 +46,7 @@ void Door::update()
 
 void Door::open()
 {
-    if (this->isOpened()) {
+    if (isOpened()) {
         return;
     }
 
@@ -56,7 +56,7 @@ void Door::open()
 
 void Door::close()
 {
-    if (this->isClosed()) {
+    if (isClosed()) {
         Log::log("is closed");
         return;
     }

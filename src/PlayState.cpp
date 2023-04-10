@@ -37,7 +37,7 @@ PlayState::PlayState()
 
 bool PlayState::onEnter()
 {
-    if (this->load() == false) {
+    if (load() == false) {
         return false;
     };
     return true;
@@ -149,7 +149,7 @@ bool PlayState::load()
 
     sound->loadSFX(SOUND_DIR + "Heart/bonus.wav", "heart bonus");
 
-    if (this->loadLevel() == false) {
+    if (loadLevel() == false) {
         return false;
     }
 
@@ -162,7 +162,7 @@ bool PlayState::load()
 
 bool PlayState::loadLevel()
 {
-    this->onExit();
+    onExit();
 
     LevelParser levelParser;
     m_pLevel.reset();
@@ -177,7 +177,7 @@ bool PlayState::loadLevel()
     Camera::Instance()->setTarget(m_pLevel->getPlayer());
     Camera::Instance()->setZoom(3);
 
-    this->resume();
+    resume();
     return true;
 }
 

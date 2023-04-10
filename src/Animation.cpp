@@ -44,7 +44,7 @@ void Animation::update()
 
 void Animation::draw(const b2Vec2 position, const float angle, const bool bFlipped, const int zoom)
 {
-    if (!this->isRunning() || m_framerate == 0) {
+    if (!isRunning() || m_framerate == 0) {
         return;
     }
 
@@ -58,7 +58,7 @@ void Animation::start()
         return;
     }
 
-    if (this->isRunning()) {
+    if (isRunning()) {
         return;
     }
 
@@ -70,8 +70,8 @@ void Animation::start()
 
 void Animation::restart()
 {
-    this->stop();
-    this->start();
+    stop();
+    start();
 }
 
 void Animation::stop()
@@ -80,7 +80,7 @@ void Animation::stop()
         return;
     }
 
-    if (!this->isRunning()) {
+    if (!isRunning()) {
         return;
     }
 

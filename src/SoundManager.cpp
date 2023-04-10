@@ -12,7 +12,7 @@ SoundManager::SoundManager()
     , m_bMutedSFX(false)
     , m_volume(100)
 {
-    this->setVolume(100);
+    setVolume(100);
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 }
 
@@ -73,54 +73,54 @@ void SoundManager::setVolume(const int percent)
     m_volume = std::min(100, std::max(0, percent));
     m_bMutedMusic = false;
     m_bMutedSFX = false;
-    this->setVolumeMusic(m_volume);
-    this->setVolumeSFX(m_volume);
+    setVolumeMusic(m_volume);
+    setVolumeSFX(m_volume);
 }
 
 void SoundManager::changeVolume(const int percent)
 {
-    this->setVolume(m_volume + percent);
+    setVolume(m_volume + percent);
 }
 
 void SoundManager::muteMusic()
 {
     m_bMutedMusic = true;
-    this->setVolumeMusic(0);
+    setVolumeMusic(0);
 }
 
 void SoundManager::muteSFX()
 {
     m_bMutedSFX = true;
-    this->setVolumeSFX(0);
+    setVolumeSFX(0);
 }
 
 void SoundManager::unMuteMusic()
 {
     m_bMutedMusic = false;
-    this->setVolumeMusic(m_volume);
+    setVolumeMusic(m_volume);
 }
 
 void SoundManager::unMuteSFX()
 {
     m_bMutedSFX = false;
-    this->setVolumeSFX(m_volume);
+    setVolumeSFX(m_volume);
 }
 
 void SoundManager::toggleMuteMusic()
 {
-    if (this->isMutedMusic()) {
-        this->unMuteMusic();
+    if (isMutedMusic()) {
+        unMuteMusic();
     } else {
-        this->muteMusic();
+        muteMusic();
     }
 }
 
 void SoundManager::toggleMuteSFX()
 {
-    if (this->isMutedSFX()) {
-        this->unMuteSFX();
+    if (isMutedSFX()) {
+        unMuteSFX();
     } else {
-        this->muteSFX();
+        muteSFX();
     }
 }
 

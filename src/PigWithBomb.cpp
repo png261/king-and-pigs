@@ -16,7 +16,7 @@ PigWithBomb::~PigWithBomb() {}
 void PigWithBomb::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     Pig::load(std::move(pParams));
-    this->loadAnimation();
+    loadAnimation();
 }
 void PigWithBomb::loadAnimation()
 {
@@ -34,16 +34,16 @@ void PigWithBomb::update()
 {
     Pig::update();
     if (m_seeingCategory == PhysicWorld::CAT_PLAYER && m_visionNearestDistance <= 100) {
-        this->throwBomb();
-        this->becomeNormal();
+        throwBomb();
+        becomeNormal();
     }
 }
 
 void PigWithBomb::throwBomb()
 {
     auto pParams = std::make_unique<LoaderParams>(LoaderParams(
-        this->getPosition().x - m_width / 2.0f,
-        this->getPosition().y - m_height / 2.0f - 10,
+        getPosition().x - m_width / 2.0f,
+        getPosition().y - m_height / 2.0f - 10,
         7,
         7));
 
@@ -57,10 +57,10 @@ void PigWithBomb::throwBomb()
 
 void PigWithBomb::becomeNormal()
 {
-    this->disappear();
+    disappear();
     auto pParams2 = std::make_unique<LoaderParams>(LoaderParams(
-        this->getPosition().x - (20 * 0.5f),
-        this->getPosition().y - (20 * 0.5f),
+        getPosition().x - (20 * 0.5f),
+        getPosition().y - (20 * 0.5f),
         20,
         20));
     GameObject* obj = Game::Instance()->getLevel()->spawnGameObject("Pig", std::move(pParams2));

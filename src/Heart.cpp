@@ -8,7 +8,7 @@ void Heart::load(std::unique_ptr<LoaderParams> const& pParams)
     ItemObject::load(pParams);
     m_pBody->SetGravityScale(0);
     m_pFixture->SetSensor(true);
-    this->loadAnimation();
+    loadAnimation();
 }
 
 void Heart::loadAnimation()
@@ -26,7 +26,7 @@ void Heart::update()
     if (m_curAnimation == HIT && m_animations[m_curAnimation]->isFinished()) {
         SoundManager::Instance()->playSFX("heart bonus");
         Game::Instance()->getLevel()->getPlayer()->heal(1);
-        this->disappear();
+        disappear();
     }
 }
 

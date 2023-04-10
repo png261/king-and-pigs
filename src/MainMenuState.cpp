@@ -22,7 +22,7 @@ MainMenuState::~MainMenuState()
 
 bool MainMenuState::onEnter()
 {
-    if (this->load() == false) {
+    if (load() == false) {
         return false;
     }
     return true;

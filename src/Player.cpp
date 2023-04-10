@@ -31,16 +31,16 @@ Player::~Player() {}
 void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
-    this->createBody(pParams->x(), pParams->y(), m_width, m_height);
-    this->setFilterData(PhysicWorld::CAT_PLAYER, PhysicWorld::MASK_PLAYER);
+    createBody(pParams->x(), pParams->y(), m_width, m_height);
+    setFilterData(PhysicWorld::CAT_PLAYER, PhysicWorld::MASK_PLAYER);
 
-    this->createCircleSensor(
+    createCircleSensor(
         -b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
         m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
 
-    this->createCircleSensor(
+    createCircleSensor(
         b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
         m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
@@ -50,7 +50,7 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
     m_jumpHeight = 32.0f;
     m_direction = RIGHT;
 
-    this->loadAnimation();
+    loadAnimation();
 }
 
 void Player::loadAnimation()
@@ -74,18 +74,18 @@ void Player::loadAnimation()
 
 void Player::update()
 {
-    if (this->isDead()) {
+    if (isDead()) {
         GameStateMachine::Instance()->pushState(std::make_shared<LoseState>());
         return;
     }
 
     GameObject::update();
-    this->handleInput();
+    handleInput();
 
     m_raycast.clear();
     float nray = 50;
     for (int i = 0; i < nray; ++i) {
-        b2Vec2 start = this->getPosition() + m_direction * (b2Vec2(m_width / 2.0f, 0)) +
+        b2Vec2 start = getPosition() + m_direction * (b2Vec2(m_width / 2.0f, 0)) +
                        b2Vec2(0, -m_height / 2.0f + i * m_height / nray);
         b2Vec2 end = start + m_direction * b2Vec2(m_visionRange, 0);
         m_raycast.push_back({start, end});
@@ -93,26 +93,26 @@ void Player::update()
 
     VisionObject::update();
 
-    if (this->m_seeingCategory & PhysicWorld::CAT_WALL && this->m_visionNearestDistance < 1) {
+    if (m_seeingCategory & PhysicWorld::CAT_WALL && m_visionNearestDistance < 1) {
         if (m_direction == RIGHT) {
-            this->setMoveRight(false);
+            setMoveRight(false);
         } else {
-            this->setMoveLeft(false);
+            setMoveLeft(false);
         }
     } else {
-        this->setMoveRight(true);
-        this->setMoveLeft(true);
+        setMoveRight(true);
+        setMoveLeft(true);
     }
 
     DamageableObject::update();
     AttackerObject::update();
-    this->updateAnimation();
-    this->handleSound();
+    updateAnimation();
+    handleSound();
 }
 
 void Player::draw()
 {
-    if (this->isDead()) {
+    if (isDead()) {
         return;
     }
 
@@ -122,25 +122,25 @@ void Player::draw()
 
 void Player::handleSound()
 {
-    if (this->isDying()) {
+    if (isDying()) {
         SoundManager::Instance()->playSFX("player dying");
     }
-    if (this->isAttack()) {
+    if (isAttack()) {
         SoundManager::Instance()->playSFX("player attack");
     }
 }
 
 void Player::handleInput()
 {
-    if (this->isDead()) {
+    if (isDead()) {
         return;
     }
 
-    if (this->isDying()) {
+    if (isDying()) {
         return;
     }
 
-    if (this->isInvulnerable()) {
+    if (isInvulnerable()) {
         return;
     }
 
@@ -151,26 +151,26 @@ void Player::handleInput()
 
     const auto input = InputHandler::Instance();
 
-    if (this->isOnGround()) {
+    if (isOnGround()) {
         m_bWantDoorIn = input->isKeyDown(KEY_W);
 
         if (input->isKeyPressed(KEY_SPACE)) {
-            this->jump();
+            jump();
             SoundManager::Instance()->playSFX("player jump");
         }
     }
 
     if (input->isKeyPressed(KEY_RIGHT)) {
-        this->moveRight();
+        moveRight();
         m_direction = RIGHT;
     }
     if (input->isKeyPressed(KEY_LEFT)) {
-        this->moveLeft();
+        moveLeft();
         m_direction = LEFT;
     }
 
     if (input->isKeyPressed(KEY_A)) {
-        this->attack();
+        attack();
         SoundManager::Instance()->playSFX("player attack");
     }
 
@@ -185,13 +185,13 @@ void Player::updateAnimation()
 
     int newAnimation = m_curAnimation;
 
-    if (this->isOnGround()) {
+    if (isOnGround()) {
         newAnimation = IDLE;
-        if (this->isRunning()) {
+        if (isRunning()) {
             newAnimation = RUN;
         }
     } else {
-        if (this->getBody()->GetLinearVelocity().y < 0) {
+        if (getBody()->GetLinearVelocity().y < 0) {
             newAnimation = JUMP;
         } else {
             newAnimation = FALL;
@@ -199,11 +199,11 @@ void Player::updateAnimation()
     }
 
 
-    if (this->isDying()) {
+    if (isDying()) {
         newAnimation = DYING;
-    } else if (this->isInvulnerable()) {
+    } else if (isInvulnerable()) {
         newAnimation = HIT;
-    } else if (this->isAttack()) {
+    } else if (isAttack()) {
         newAnimation = ATTACK;
     }
 

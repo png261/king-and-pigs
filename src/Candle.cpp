@@ -3,12 +3,12 @@
 void Candle::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
-    this->createBody(pParams->x(), pParams->y(), m_width, m_height);
+    createBody(pParams->x(), pParams->y(), m_width, m_height);
 
     m_pBody->SetGravityScale(0);
 
-    this->setFilterData(PhysicWorld::CAT_NONE, PhysicWorld::MASK_NONE);
-    this->loadAnimation();
+    setFilterData(PhysicWorld::CAT_NONE, PhysicWorld::MASK_NONE);
+    loadAnimation();
 };
 
 void Candle::loadAnimation()

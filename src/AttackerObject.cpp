@@ -29,7 +29,7 @@ int AttackerObject::getDamage() const
 
 void AttackerObject::attack()
 {
-    if (this->isAttack() || this->canAttack() == false) {
+    if (isAttack() || canAttack() == false) {
         return;
     }
 

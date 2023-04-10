@@ -187,5 +187,5 @@ bool InputHandler::isMouseInside(Rectangle rectangle) const
 
 void InputHandler::clean()
 {
-    this->reset();
+    reset();
 }

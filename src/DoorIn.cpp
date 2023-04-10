@@ -6,8 +6,8 @@ DoorIn::DoorIn() {}
 void DoorIn::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     Door::load(std::move(pParams));
-    this->createSensor();
-    this->setFilterData(PhysicWorld::CAT_DOOR_IN, PhysicWorld::MASK_DOOR_IN);
+    createSensor();
+    setFilterData(PhysicWorld::CAT_DOOR_IN, PhysicWorld::MASK_DOOR_IN);
 }
 
 void DoorIn::createSensor()

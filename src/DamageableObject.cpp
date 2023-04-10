@@ -33,7 +33,7 @@ bool DamageableObject::isInvulnerable() const
 
 void DamageableObject::startInvulnerable()
 {
-    if (this->isInvulnerable() || this->isDead()) {
+    if (isInvulnerable() || isDead()) {
         return;
     }
 
@@ -48,7 +48,7 @@ void DamageableObject::stopInvulnerable()
 
 void DamageableObject::damage(const int d)
 {
-    if (this->isInvulnerable() || this->isDead()) {
+    if (isInvulnerable() || isDead()) {
         return;
     }
 
@@ -60,7 +60,7 @@ void DamageableObject::damage(const int d)
         return;
     }
 
-    this->startInvulnerable();
+    startInvulnerable();
 };
 
 void DamageableObject::update()
@@ -70,7 +70,7 @@ void DamageableObject::update()
     }
 
     if (invulnerableTimer.isDone()) {
-        this->stopInvulnerable();
+        stopInvulnerable();
     }
 
     if (m_bDying && dyingTimer.isDone()) {

@@ -18,7 +18,7 @@ LoseState::~LoseState(){};
 
 bool LoseState::onEnter()
 {
-    if (this->load() == false) {
+    if (load() == false) {
         return false;
     }
     return true;

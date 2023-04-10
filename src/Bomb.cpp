@@ -33,13 +33,13 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
     fixtureDef.filter.maskBits = PhysicWorld::MASK_BOMB;
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
-    this->createCircleSensor(
+    createCircleSensor(
         {0, 0},
         m_attackRange,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_PIG_ATTACK_SENSOR);
 
-    this->loadAnimation();
+    loadAnimation();
     onTimer.setTime(1000);
 }
 
@@ -55,19 +55,19 @@ void Bomb::loadAnimation()
 
 void Bomb::update()
 {
-    if (this->isOn() && m_curAnimation == EXPLODE && m_animations[m_curAnimation]->isFinished()) {
-        this->disappear();
+    if (isOn() && m_curAnimation == EXPLODE && m_animations[m_curAnimation]->isFinished()) {
+        disappear();
         return;
     }
 
     GameObject::update();
     AttackerObject::update();
 
-    if (this->isOn() && onTimer.isDone()) {
-        this->explode();
+    if (isOn() && onTimer.isDone()) {
+        explode();
     }
 
-    this->updateAnimaton();
+    updateAnimaton();
 }
 
 void Bomb::turnOn()
@@ -82,13 +82,13 @@ void Bomb::turnOn()
 void Bomb::explode()
 {
     SoundManager::Instance()->playSFX("bomb explode");
-    this->attack();
+    attack();
 }
 
 
 void Bomb::updateAnimaton()
 {
-    if (this->isAttack()) {
+    if (isAttack()) {
         m_curAnimation = EXPLODE;
         m_animations[m_curAnimation]->start();
     }

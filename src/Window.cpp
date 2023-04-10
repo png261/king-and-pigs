@@ -18,7 +18,7 @@ Window::Window(const uint width, const uint height, const std::string title)
 {
     // Calling for the first time CREATES a window.
     // Storing it on m_pWindow
-    this->resize(title, width, height);
+    resize(title, width, height);
 
 
     if (!m_pWindow || !m_pRenderer) {
@@ -30,21 +30,21 @@ Window::Window(const uint width, const uint height, const std::string title)
         Log::error("Window(): Couldn't load font");
     }
 
-    this->m_framerateStopwatch.start();
+    m_framerateStopwatch.start();
 
-    this->clear();
-    this->refresh();
+    clear();
+    refresh();
 }
 
 Window::~Window()
 {
-    this->destroy();
+    destroy();
 }
 
 void Window::resize(std::string title, uint width, uint height)
 {
     // Just in case we already have a window
-    this->destroy();
+    destroy();
 
     // Taken from the Migration Guide
     // (http://wiki.libsdl.org/MigrationGuide)
@@ -61,7 +61,7 @@ void Window::resize(std::string title, uint width, uint height)
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_RenderSetLogicalSize(m_pRenderer, width, height);
 
-    this->setTitle(title);
+    setTitle(title);
 
     m_width = width;
     m_height = height;
@@ -129,7 +129,7 @@ void Window::fill(const Color color)
 
 void Window::clear()
 {
-    this->fill(m_bgColor);
+    fill(m_bgColor);
 }
 
 void Window::setTitle(const std::string title)

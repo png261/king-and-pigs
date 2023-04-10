@@ -18,8 +18,8 @@ PhysicObject::~PhysicObject() {}
 
 void PhysicObject::update()
 {
-    m_bOnGround = this->getFootContact() > 0;
-    m_bCanJump = this->getBody()->GetLinearVelocity().y >= 0;
+    m_bOnGround = getFootContact() > 0;
+    m_bCanJump = getBody()->GetLinearVelocity().y >= 0;
     m_bRunning = false;
 }
 
@@ -43,7 +43,7 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
     fixtureDef.friction = 1;
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);
 
-    this->createPolygonSensor(
+    createPolygonSensor(
         b2Vec2(0, height * 0.5),
         width - 0.5,
         1,
@@ -58,11 +58,11 @@ void PhysicObject::changeFootContact(int n)
 
 void PhysicObject::moveRight()
 {
-    if (this->canMoveRight() == false) {
+    if (canMoveRight() == false) {
         return;
     }
 
-    if (this->isOnGround()) {
+    if (isOnGround()) {
         m_bRunning = true;
     }
 
@@ -73,11 +73,11 @@ void PhysicObject::moveRight()
 
 void PhysicObject::moveLeft()
 {
-    if (this->canMoveLeft() == false) {
+    if (canMoveLeft() == false) {
         return;
     }
 
-    if (this->isOnGround()) {
+    if (isOnGround()) {
         m_bRunning = true;
     }
 
@@ -93,11 +93,11 @@ void PhysicObject::jump()
         return;
     }
 
-    if (this->canJump() == false) {
+    if (canJump() == false) {
         return;
     }
 
-    if (this->isOnGround() == false) {
+    if (isOnGround() == false) {
         return;
     }
 
@@ -201,7 +201,7 @@ b2Fixture* PhysicObject::createPolygonSensor(
     fixtureDef.isSensor = true;
     fixtureDef.filter.categoryBits = category;
     fixtureDef.filter.maskBits = mask;
-    return this->getBody()->CreateFixture(&fixtureDef);
+    return getBody()->CreateFixture(&fixtureDef);
 }
 
 b2Fixture* PhysicObject::createCircleSensor(
@@ -220,7 +220,7 @@ b2Fixture* PhysicObject::createCircleSensor(
     fixtureDef.filter.categoryBits = category;
     fixtureDef.filter.maskBits = mask;
 
-    return this->getBody()->CreateFixture(&fixtureDef);
+    return getBody()->CreateFixture(&fixtureDef);
 }
 
 b2Fixture* PhysicObject::createCircleBody(

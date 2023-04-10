@@ -46,7 +46,7 @@ void Stopwatch::pause()
     }
     m_bRunning = false;
     m_bPaused = true;
-    m_pausedMark = (SDL_GetTicks() - this->m_startMark);
+    m_pausedMark = (SDL_GetTicks() - m_startMark);
 }
 
 void Stopwatch::resume()
@@ -57,7 +57,7 @@ void Stopwatch::resume()
 
     m_bRunning = false;
     m_bPaused = true;
-    m_startMark = (SDL_GetTicks() - this->m_pausedMark);
+    m_startMark = (SDL_GetTicks() - m_pausedMark);
     m_pausedMark = 0;
 }
 

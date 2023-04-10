@@ -11,12 +11,12 @@ Box::Box()
 void Box::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
-    this->createBody(pParams->x(), pParams->y(), m_width, m_height);
+    createBody(pParams->x(), pParams->y(), m_width, m_height);
 
-    this->setFilterData(PhysicWorld::CAT_BOX, PhysicWorld::MASK_BOX);
+    setFilterData(PhysicWorld::CAT_BOX, PhysicWorld::MASK_BOX);
     m_pBody->SetFixedRotation(false);
 
-    this->loadAnimation();
+    loadAnimation();
 }
 
 void Box::loadAnimation()
@@ -30,23 +30,23 @@ void Box::loadAnimation()
 
 void Box::update()
 {
-    if (this->isDead()) {
-        /* this->breakIntoPieces(); */
+    if (isDead()) {
+        /* breakIntoPieces(); */
         SoundManager::Instance()->playSFX("box broken");
-        this->disappear();
+        disappear();
         return;
     }
 
     GameObject::update();
     DamageableObject::update();
-    this->updateAnimation();
+    updateAnimation();
 }
 
 void Box::updateAnimation()
 {
     int newAnimation = m_curAnimation;
 
-    if (this->isDying()) {
+    if (isDying()) {
         newAnimation = HIT;
     } else {
         newAnimation = NORMAL;
@@ -62,8 +62,8 @@ void Box::updateAnimation()
 void Box::breakIntoPieces()
 {
     auto pParams = std::make_unique<LoaderParams>(LoaderParams(
-        this->getPosition().x - 10 / 2.0f,
-        this->getPosition().y - 10 / 2.0f - 20,
+        getPosition().x - 10 / 2.0f,
+        getPosition().y - 10 / 2.0f - 20,
         10,
         10));
 

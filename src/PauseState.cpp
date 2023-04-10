@@ -23,7 +23,7 @@ PauseState::~PauseState()
 
 bool PauseState::onEnter()
 {
-    if (this->load() == false) {
+    if (load() == false) {
         return false;
     }
     return true;
