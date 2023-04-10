@@ -60,7 +60,7 @@ void Player::loadAnimation()
     m_animations[JUMP] = std::make_unique<Animation>("player jump", 78, 58, 1);
     m_animations[FALL] = std::make_unique<Animation>("player fall", 78, 58, 1);
     m_animations[GROUND] = std::make_unique<Animation>("player ground", 78, 58, 1);
-    m_animations[ATTACK] = std::make_unique<Animation>("player attack", 78, 58, 3, false);
+    m_animations[ATTACK] = std::make_unique<Animation>("player attack", 78, 58, 3);
     m_animations[HIT] = std::make_unique<Animation>("player hit", 78, 58, 2);
     m_animations[DYING] = std::make_unique<Animation>("player dead", 78, 58, 4, false);
     m_animations[DOOR_IN] = std::make_unique<Animation>("player door in", 78, 58, 8, false);
