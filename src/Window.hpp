@@ -32,10 +32,10 @@ public:
     void resize(const std::string title, const uint width, const uint height);
 
     void fill(const Color color);
-    void print(std::string text, int fontSize, int x, int y, Color color = {0, 0, 0});
-    void drawBox(Rectangle rect, Color color = {255, 255, 255}) const;
+    void print(std::string text, int fontSize, int x, int y, Color color = Color(Color::BLACK));
+    void drawBox(Rectangle rect, Color color = Color(Color::WHITE)) const;
 
-    void setBackgroundColor(const Color color = Color(0, 0, 0));
+    void setBackgroundColor(const Color color = Color(Color::BLACK));
     void setTitle(const std::string title);
 
     uint getDelta() const;

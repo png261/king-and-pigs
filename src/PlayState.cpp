@@ -223,7 +223,7 @@ void PlayState::render() const
         30,
         300,
         40,
-        {255, 255, 255, 255});
+        Color::WHITE);
 }
 
 std::string PlayState::getStateID() const

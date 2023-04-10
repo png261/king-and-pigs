@@ -51,7 +51,7 @@ void WinState::render() const
         150,
         Game::Instance().getWindow()->getCenterX(),
         Game::Instance().getWindow()->getCenterY() - 150,
-        {255, 255, 255});
+        Color::WHITE);
 };
 
 bool WinState::enter()
