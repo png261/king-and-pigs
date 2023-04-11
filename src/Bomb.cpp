@@ -9,8 +9,6 @@ Bomb::Bomb()
     , m_bOn(false)
 {}
 
-Bomb::~Bomb() {}
-
 void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));

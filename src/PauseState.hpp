@@ -7,7 +7,6 @@
 class PauseState final : public GameState
 {
 public:
-    ~PauseState();
     PauseState();
     void update() override;
     void render() const override;

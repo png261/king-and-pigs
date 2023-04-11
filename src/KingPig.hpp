@@ -6,7 +6,6 @@ class KingPig final : public Pig
 {
 public:
     KingPig();
-    ~KingPig() = default;
     void loadAnimation() override;
 
 private:

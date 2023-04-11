@@ -15,11 +15,6 @@ MainMenuState::MainMenuState()
     : m_bEnterPlayState(false)
     , m_bEnterQuit(false){};
 
-MainMenuState::~MainMenuState()
-{
-    m_uiObjects.clear();
-};
-
 void MainMenuState::update()
 {
     if (!m_bLoaded || m_bPaused) {

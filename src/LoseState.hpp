@@ -7,7 +7,6 @@
 class LoseState final : public GameState
 {
 public:
-    ~LoseState();
     LoseState();
     void update() override;
     void render() const override;

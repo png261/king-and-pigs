@@ -7,7 +7,6 @@ class Box final : public GameObject, public DamageableObject
 {
 public:
     Box();
-    ~Box() = default;
 
     void load(std::unique_ptr<LoaderParams> const& pParams) override;
     void update() override;

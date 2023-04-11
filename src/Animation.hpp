@@ -13,7 +13,6 @@ public:
         const uint height,
         const uint nFrames = 1,
         const bool bLoop = true);
-    ~Animation() = default;
 
     void
     draw(const b2Vec2 position, const float angle = 0, const bool flip = false, const int zoom = 1);

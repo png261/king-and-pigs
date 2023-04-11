@@ -9,8 +9,6 @@ class GameObject;
 class ObjectLayer final : public Layer
 {
 public:
-    ~ObjectLayer();
-
     void update();
     void render() const;
 

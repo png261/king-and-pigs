@@ -12,7 +12,6 @@ class Player final : public GameObject,
 {
 public:
     Player();
-    ~Player();
     void load(std::unique_ptr<LoaderParams> const& pParams) override;
     void update() override;
     void updateAnimation() override;

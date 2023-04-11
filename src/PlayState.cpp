@@ -26,11 +26,6 @@
 
 const std::string PlayState::s_stateID = "PLAY";
 
-PlayState::~PlayState()
-{
-    Log::log("delete playstate");
-}
-
 PlayState::PlayState()
     : GameState()
 {}

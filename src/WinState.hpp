@@ -7,7 +7,6 @@
 class WinState final : public GameState
 {
 public:
-    ~WinState();
     WinState();
     void update() override;
     void render() const override;

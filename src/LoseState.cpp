@@ -14,8 +14,6 @@ LoseState::LoseState()
     : m_bEnterMainMenu(false)
     , m_bEnterExit(false){};
 
-LoseState::~LoseState(){};
-
 void LoseState::update()
 {
     if (!m_bLoaded || m_bPaused) {

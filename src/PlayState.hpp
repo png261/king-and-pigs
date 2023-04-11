@@ -9,7 +9,6 @@
 class PlayState final : public GameState
 {
 public:
-    ~PlayState();
     PlayState();
     void update() override;
     void render() const override;

@@ -6,7 +6,6 @@ class PigWithBomb : public Pig
 {
 public:
     PigWithBomb();
-    ~PigWithBomb();
 
     void load(std::unique_ptr<LoaderParams> const& pParams) override;
     void update() override;

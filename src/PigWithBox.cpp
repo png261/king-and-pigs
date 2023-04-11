@@ -11,8 +11,6 @@ PigWithBox::PigWithBox()
     m_bCanJump = false;
 }
 
-PigWithBox::~PigWithBox() {}
-
 void PigWithBox::loadAnimation()
 {
     Pig::loadAnimation();

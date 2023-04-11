@@ -14,8 +14,6 @@ PhysicObject::PhysicObject()
     , m_bDisableJump(false)
 {}
 
-PhysicObject::~PhysicObject() {}
-
 void PhysicObject::update()
 {
     m_bOnGround = getFootContact() > 0;

@@ -15,12 +15,6 @@ PauseState::PauseState()
     : m_bEnterResume(false)
     , m_bEnterMainMenu(false){};
 
-PauseState::~PauseState()
-{
-    Log::log("PauseState deleted");
-    m_uiObjects.clear();
-};
-
 void PauseState::update()
 {
     if (!m_bLoaded || m_bPaused) {

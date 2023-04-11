@@ -13,8 +13,6 @@ GameObject::GameObject()
     , m_direction(RIGHT)
 {}
 
-GameObject::~GameObject() {}
-
 void GameObject::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     m_width = pParams->width();

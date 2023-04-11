@@ -9,7 +9,6 @@ class Button final : public UiObject
 {
 public:
     Button(std::string text, int x, int y, int width, int height);
-    ~Button();
     void draw();
     void update();
     void onClick(std::function<void()> callback);

@@ -13,8 +13,6 @@ Button::Button(std::string text, int x, int y, int width, int height)
     SoundManager::Instance().loadSFX(SOUND_DIRECTORY + "Button/clicked.mp3", "button clicked");
 }
 
-Button::~Button() {}
-
 void Button::draw()
 {
     Game::Instance().getWindow()->drawBox(m_rectangle);

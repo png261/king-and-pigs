@@ -19,8 +19,6 @@ TileLayer::TileLayer(
     m_mapWidth = mapWidth;
 }
 
-TileLayer::~TileLayer() {}
-
 void TileLayer::update() {}
 
 void TileLayer::render() const

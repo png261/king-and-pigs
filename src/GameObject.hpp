@@ -12,7 +12,6 @@ class GameObject : public PhysicObject
 {
 public:
     GameObject();
-    virtual ~GameObject();
 
     virtual void load(std::unique_ptr<LoaderParams> const& pParams);
     virtual void update();

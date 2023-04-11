@@ -9,7 +9,6 @@ class AttackerObject
 {
 public:
     AttackerObject(const int damage, const int range, const int attackSpeed);
-    virtual ~AttackerObject() = default;
 
     virtual void update();
     virtual void attack();

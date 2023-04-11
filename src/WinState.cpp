@@ -14,8 +14,6 @@ WinState::WinState()
     : m_bEnterMainMenu(false)
     , m_bEnterExit(false){};
 
-WinState::~WinState(){};
-
 void WinState::update()
 {
     if (!m_bLoaded || m_bPaused) {

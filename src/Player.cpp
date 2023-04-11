@@ -26,8 +26,6 @@ Player::Player()
     , m_bWantEnterDoor(false)
 {}
 
-Player::~Player() {}
-
 void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     GameObject::load(std::move(pParams));
@@ -158,7 +156,7 @@ void Player::handleInput()
         m_direction = LEFT;
     }
 
-    if (input.isKeyPressed(KEY_A)) {
+    if (input.isKeyDown(KEY_A)) {
         attack();
         SoundManager::Instance().playSFX("player attack");
     }

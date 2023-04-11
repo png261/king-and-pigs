@@ -11,8 +11,6 @@ Level::Level()
     m_spawnLayer = std::make_unique<ObjectLayer>();
 }
 
-Level::~Level() {}
-
 void Level::render() const
 {
     for (const auto& layer : m_layers) {

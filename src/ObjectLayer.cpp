@@ -5,11 +5,6 @@
 #include "Level.hpp"
 #include "Log.hpp"
 
-ObjectLayer::~ObjectLayer()
-{
-    m_gameObjects.clear();
-}
-
 void ObjectLayer::update()
 {
     for (const auto& obj : m_gameObjects) {

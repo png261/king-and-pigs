@@ -12,7 +12,6 @@ public:
         int const mapWidth,
         int const mapHeight,
         const std::vector<Tileset>& tilesets);
-    ~TileLayer();
     void update();
     void render() const;
 

@@ -29,7 +29,6 @@ struct CollisionShape
 class Level final
 {
 public:
-    ~Level();
     Level();
 
     void update();

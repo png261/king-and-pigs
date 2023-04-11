@@ -38,7 +38,6 @@ class VisionObject
 {
 public:
     VisionObject(float range);
-    virtual ~VisionObject() = default;
     virtual void update();
     virtual void debugDraw();
 

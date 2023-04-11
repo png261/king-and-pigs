@@ -11,8 +11,6 @@ PigWithBomb::PigWithBomb()
     m_bDisableJump = true;
 }
 
-PigWithBomb::~PigWithBomb() {}
-
 void PigWithBomb::load(std::unique_ptr<LoaderParams> const& pParams)
 {
     Pig::load(std::move(pParams));

@@ -6,7 +6,6 @@ class PigWithBox : public Pig
 {
 public:
     PigWithBox();
-    ~PigWithBox();
 
     void update() override;
     void loadAnimation() override;

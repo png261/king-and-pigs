@@ -7,7 +7,6 @@
 class MainMenuState final : public GameState
 {
 public:
-    ~MainMenuState();
     MainMenuState();
     void update() override;
     void render() const override;

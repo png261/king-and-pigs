@@ -8,7 +8,6 @@ class BaseCreator
 {
 public:
     virtual GameObject* createGameObject() const = 0;
-    virtual ~BaseCreator() = default;
 };
 
 template <class T = GameObject>
