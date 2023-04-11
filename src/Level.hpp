@@ -46,12 +46,19 @@ public:
     GameObject* spawnGameObject(
         const std::string& type,
         std::unique_ptr<LoaderParams> const& pParams);
+    void setMapWidth(int width);
+    void setMapHeight(int height);
+
+    int getMapWidth() const;
+    int getMapHeight() const;
 
 private:
     friend class LevelParser;
 
     void createTileObject();
     Player* m_pPlayer;
+    int m_mapWidth;
+    int m_mapHeight;
 
     std::unique_ptr<ObjectLayer> m_spawnLayer;
     std::vector<std::unique_ptr<Layer>> m_layers;

@@ -1,4 +1,5 @@
 #include "LevelParser.hpp"
+#include <iostream>
 
 #include "CONSTANT.hpp"
 #include "GameObjectFactory.hpp"
@@ -19,7 +20,6 @@ Level* LevelParser::parseLevel(const char* levelFile)
         Log::error(std::string("fail to load level file: ") + levelFile);
     }
 
-    Level* const pLevel = new Level();
     XMLElement* const pRoot = levelDocument.RootElement();
     if (pRoot == nullptr) {
         Log::error(std::string(levelFile) + ": missing  root element");
@@ -28,6 +28,10 @@ Level* LevelParser::parseLevel(const char* levelFile)
     m_tileSize = std::stoi(pRoot->Attribute("tilewidth"));
     m_width = std::stoi(pRoot->Attribute("width"));
     m_height = std::stoi(pRoot->Attribute("height"));
+
+    Level* const pLevel = new Level();
+    pLevel->setMapWidth(m_width * m_tileSize);
+    pLevel->setMapHeight(m_width * m_tileSize);
 
     for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("tileset")) {

@@ -1,4 +1,5 @@
 #include "Camera.hpp"
+#include <iostream>
 #include "Game.hpp"
 
 Camera::Camera()
@@ -25,7 +26,7 @@ b2Vec2 Camera::getPosition() const
     }
 
     b2Vec2 pos =
-        m_pTarget->getPosition() -
+        m_position -
         0.5 * b2Vec2(
                   Game::Instance().getWindow()->getWidth() / m_zoom - m_pTarget->getWidth(),
                   Game::Instance().getWindow()->getHeight() / m_zoom - m_pTarget->getHeight());
@@ -43,7 +44,22 @@ b2Vec2 Camera::getPosition() const
 
 void Camera::update()
 {
+    Game& game = Game::Instance();
     m_position = m_pTarget->getPosition();
+
+    float maxX = game.getLevel()->getMapWidth() -
+                 (game.getWindow()->getWidth() / m_zoom + m_pTarget->getWidth()) * 0.5;
+    float maxY = game.getLevel()->getMapHeight() -
+                 (game.getWindow()->getHeight() / m_zoom + m_pTarget->getHeight()) * 0.5;
+
+    if (m_position.x > maxX) {
+        m_position.x = maxX;
+    }
+
+    if (m_position.y > maxY) {
+        m_position.y = maxY;
+    }
+
 
     if (m_position.x < 0) {
         m_position.x = 0;

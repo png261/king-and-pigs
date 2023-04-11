@@ -73,3 +73,22 @@ GameObject* Level::spawnGameObject(
     m_spawnLayer->addGameObject(pGameObject);
     return pGameObject;
 }
+
+void Level::setMapWidth(int width)
+{
+    m_mapWidth = width;
+}
+void Level::setMapHeight(int height)
+{
+    m_mapHeight = height;
+}
+
+int Level::getMapWidth() const
+{
+    return m_mapWidth;
+}
+
+int Level::getMapHeight() const
+{
+    return m_mapHeight;
+}
