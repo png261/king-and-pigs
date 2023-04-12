@@ -6,6 +6,7 @@
 #include "CONSTANT.hpp"
 #include "Camera.hpp"
 #include "Candle.hpp"
+#include "Diamond.hpp"
 #include "DoorIn.hpp"
 #include "DoorOut.hpp"
 #include "Game.hpp"
@@ -45,6 +46,7 @@ bool PlayState::enter()
     factory.registerType<Bomb>("Bomb");
     factory.registerType<Box>("Box");
     factory.registerType<Heart>("Heart");
+    factory.registerType<Diamond>("Diamond");
     factory.registerType<DoorOut>("DoorOut");
     factory.registerType<DoorIn>("DoorIn");
     factory.registerType<Candle>("Candle");
@@ -88,6 +90,8 @@ bool PlayState::enter()
 
     texture.load(IMAGE_DIRECTORY + "Item/Heart/Idle.png", "heart idle");
     texture.load(IMAGE_DIRECTORY + "Item/Heart/Hit.png", "heart hit");
+    texture.load(IMAGE_DIRECTORY + "Item/Diamond/Idle.png", "diamond idle");
+    texture.load(IMAGE_DIRECTORY + "Item/Diamond/Hit.png", "diamond hit");
 
     texture.load(IMAGE_DIRECTORY + "Item/Diamond/Idle.png", "diamond idle");
     texture.load(IMAGE_DIRECTORY + "Item/Diamond/Hit.png", "diamond hit");
@@ -135,7 +139,7 @@ bool PlayState::enter()
         return false;
     }
 
-    sound.setVolume(0);
+    /* sound.setVolume(0); */
     sound.playMusic("playstate background");
     m_bLoaded = true;
 
@@ -222,6 +226,13 @@ void PlayState::renderStatusBar() const
         "level: " + std::to_string(Game::Instance().getLevelIndex() + 1),
         40,
         300,
+        50,
+        Color::WHITE);
+
+    Game::Instance().getWindow()->print(
+        "diamond: " + std::to_string(Game::Instance().getDiamond()),
+        40,
+        300 + 200,
         50,
         Color::WHITE);
 }

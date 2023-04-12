@@ -30,6 +30,9 @@ public:
     void setLevel(Level* const pLevel);
     void setLevelIndex(int const currentLevel);
 
+    void addDiamond(int n);
+    int getDiamond() const;
+
     bool isDebug() const;
     void toggleDebug();
 
@@ -38,6 +41,7 @@ private:
 
     std::unique_ptr<Window> m_pWindow;
     Level* m_pLevel;
+    int m_nDiamond;
     bool m_bRunning;
     bool m_bDebug;
     int m_levelIndex;

@@ -74,11 +74,15 @@ void Box::breakIntoPieces()
 void Box::randomBonus()
 {
     srand(time(NULL));
+    auto pParams =
+        std::make_unique<LoaderParams>(LoaderParams(getPosition().x, getPosition().y, 10, 10));
     if (rand() % 2 != 0) {
+        Game::Instance().getLevel()->spawnGameObject("Heart", std::move(pParams));
         return;
     }
 
-    auto pParams =
-        std::make_unique<LoaderParams>(LoaderParams(getPosition().x, getPosition().y, 10, 10));
-    Game::Instance().getLevel()->spawnGameObject("Heart", std::move(pParams));
+    if (rand() % 3 != 0) {
+        Game::Instance().getLevel()->spawnGameObject("Diamond", std::move(pParams));
+        return;
+    }
 }

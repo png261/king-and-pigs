@@ -142,3 +142,13 @@ void Game::toggleDebug()
 {
     m_bDebug = !m_bDebug;
 }
+
+void Game::addDiamond(int n)
+{
+    m_nDiamond += n;
+}
+
+int Game::getDiamond() const
+{
+    return m_nDiamond;
+}
