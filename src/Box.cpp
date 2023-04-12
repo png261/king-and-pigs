@@ -32,6 +32,7 @@ void Box::update()
 {
     if (isDead()) {
         /* breakIntoPieces(); */
+        randomBonus();
         SoundManager::Instance().playSFX("box broken");
         disappear();
         return;
@@ -61,14 +62,23 @@ void Box::updateAnimation()
 
 void Box::breakIntoPieces()
 {
-    auto pParams = std::make_unique<LoaderParams>(LoaderParams(
-        getPosition().x - 10 / 2.0f,
-        getPosition().y - 10 / 2.0f - 20,
-        10,
-        10));
+    auto pParams = std::make_unique<LoaderParams>(
+        LoaderParams(getPosition().x - 10 / 2.0f, getPosition().y - 10 / 2.0f - 20, 10, 10));
 
     Game::Instance().getLevel()->spawnGameObject("Box", std::move(pParams));
     Game::Instance().getLevel()->spawnGameObject("Box", std::move(pParams));
     Game::Instance().getLevel()->spawnGameObject("Box", std::move(pParams));
     Game::Instance().getLevel()->spawnGameObject("Box", std::move(pParams));
+}
+
+void Box::randomBonus()
+{
+    srand(time(NULL));
+    if (rand() % 2 != 0) {
+        return;
+    }
+
+    auto pParams =
+        std::make_unique<LoaderParams>(LoaderParams(getPosition().x, getPosition().y, 10, 10));
+    Game::Instance().getLevel()->spawnGameObject("Heart", std::move(pParams));
 }

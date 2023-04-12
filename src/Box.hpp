@@ -13,8 +13,9 @@ public:
     void loadAnimation() override;
     void updateAnimation() override;
 
+private:
+    void randomBonus();
     void breakIntoPieces();
 
-private:
     enum animation { NORMAL, HIT };
 };
