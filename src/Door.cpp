@@ -31,12 +31,12 @@ void Door::loadAnimation()
 void Door::update()
 {
     GameObject::update();
-    if (m_curAnimation == DOOR_CLOSING && m_animations[DOOR_CLOSING]->isFinished()) {
+    if (isOpened() && m_curAnimation == DOOR_CLOSING && m_animations[DOOR_CLOSING]->isFinished()) {
         SoundManager::Instance().playSFX("door close");
         m_bOpened = false;
     }
 
-    if (m_curAnimation == DOOR_OPENING && m_animations[DOOR_OPENING]->isFinished()) {
+    if (isClosed() && m_curAnimation == DOOR_OPENING && m_animations[DOOR_OPENING]->isFinished()) {
         SoundManager::Instance().playSFX("door open");
         m_bOpened = true;
     }
