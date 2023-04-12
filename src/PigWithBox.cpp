@@ -8,7 +8,7 @@ PigWithBox::PigWithBox()
     : Pig()
     , m_bThrowing(false)
 {
-    m_bCanJump = false;
+    m_bDisableJump = true;
 }
 
 void PigWithBox::loadAnimation()
@@ -25,6 +25,11 @@ void PigWithBox::loadAnimation()
 
 void PigWithBox::update()
 {
+    if (isInvulnerable()) {
+        becomeNormal();
+        disappear();
+        return;
+    }
     Pig::update();
     if (m_seeingCategory & PhysicWorld::CAT_PLAYER && m_visionNearestDistance <= 100) {
         throwBox();
@@ -50,10 +55,7 @@ void PigWithBox::throwBox()
 void PigWithBox::becomeNormal()
 {
     disappear();
-    auto pParams2 = std::make_unique<LoaderParams>(LoaderParams(
-        getPosition().x - (20 * 0.5f),
-        getPosition().y - (20 * 0.5f),
-        20,
-        20));
+    auto pParams2 = std::make_unique<LoaderParams>(
+        LoaderParams(getPosition().x - (20 * 0.5f), getPosition().y - (20 * 0.5f), 20, 20));
     GameObject* obj = Game::Instance().getLevel()->spawnGameObject("Pig", std::move(pParams2));
 }
