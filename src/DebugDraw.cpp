@@ -22,7 +22,7 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
 
     SDL_SetRenderDrawColor(m_pRenderer, color.r * 255, color.g * 255, color.b * 255, color.a * 255);
 
-    std::vector<SDL_Point> sdlVertices(vertexCount);
+    std::vector<SDL_Point> sdlVertices;
     for (int i = 0; i < vertexCount; i++) {
         sdlVertices.push_back(Utils::b2Vec2ToSDLPoint(
             PhysicWorld::meterToPixel(zoom * vertices[i]) -
@@ -32,10 +32,10 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
     SDL_RenderDrawLines(m_pRenderer, sdlVertices.data(), sdlVertices.size());
     SDL_RenderDrawLine(
         m_pRenderer,
-        sdlVertices[vertexCount - 1].x,
-        sdlVertices[vertexCount - 1].y,
-        sdlVertices[0].x,
-        sdlVertices[0].y);
+        sdlVertices.back().x,
+        sdlVertices.back().y,
+        sdlVertices.front().x,
+        sdlVertices.front().y);
 }
 
 
@@ -53,7 +53,7 @@ void DebugDraw::DrawCircle(const b2Vec2& center, float radius, const b2Color& co
     const int k_segments = 16;
     const int vertexCount = k_segments + 1;
 
-    std::vector<b2Vec2> vertices(vertexCount);
+    std::vector<b2Vec2> vertices;
 
     float theta = 0.0f;
     float deltaTheta = 2.0f * b2_pi / float(k_segments);
@@ -62,9 +62,9 @@ void DebugDraw::DrawCircle(const b2Vec2& center, float radius, const b2Color& co
         vertices.push_back(center + radius * b2Vec2(cosf(theta), sinf(theta)));
         theta += deltaTheta;
     }
-    vertices[k_segments] = vertices[0];
+    vertices.push_back(vertices.back());
 
-    std::vector<SDL_Point> sdlVertices(vertexCount);
+    std::vector<SDL_Point> sdlVertices;
     for (int32 i = 0; i < vertexCount; ++i) {
         sdlVertices.push_back(Utils::b2Vec2ToSDLPoint(
             PhysicWorld::meterToPixel(zoom * vertices[i]) -
@@ -88,8 +88,7 @@ void DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& c
     int zoom = Camera::Instance().getZoom();
 
     SDL_SetRenderDrawColor(m_pRenderer, color.r * 255, color.g * 255, color.b * 255, color.a * 255);
-    int vertexCount = 2;
-    std::vector<SDL_Point> sdlVertices(vertexCount);
+    std::vector<SDL_Point> sdlVertices;
 
     sdlVertices.push_back(Utils::b2Vec2ToSDLPoint(
         PhysicWorld::meterToPixel(zoom * p1) - zoom * Camera::Instance().getPosition()));
