@@ -26,15 +26,10 @@ public:
 
 
 private:
-    int m_numColumns;
-    int m_numRows;
     int m_tileSize;
-
-    int m_mapWidth;
-
+    int m_nCols;
+    int m_nRows;
     b2Vec2 m_position;
-
     const std::vector<Tileset>& m_tilesets;
-
     std::vector<std::vector<int>> m_tileIDs;
 };

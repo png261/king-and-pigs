@@ -23,15 +23,15 @@ protected:
     virtual void startInvulnerable();
     virtual void stopInvulnerable();
 
+    int m_hp;
+    int m_maxHp;
+    int m_dyingTime;
+    int m_invulnerableTime;
+
     Timer invulnerableTimer;
     Timer dyingTimer;
 
     bool m_bDead;
     bool m_bDying;
     bool m_bInvulnerable;
-    int m_invulnerableTime;
-
-    int m_hp;
-    int m_maxHp;
-    int m_dyingTime;
 };

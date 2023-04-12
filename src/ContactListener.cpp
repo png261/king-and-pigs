@@ -22,9 +22,7 @@ void ContactListener::PreSolve(b2Contact* const contact, const b2Manifold* oldMa
     OneWayPreSolve(contact, oldManifold);
 }
 
-void ContactListener::PostSolve(b2Contact* const contact, const b2ContactImpulse* impulse){
-
-};
+void ContactListener::PostSolve(b2Contact* const, const b2ContactImpulse*){};
 
 void ContactListener::OneWayPreSolve(b2Contact* const contact, const b2Manifold* oldManifold)
 {
@@ -32,13 +30,9 @@ void ContactListener::OneWayPreSolve(b2Contact* const contact, const b2Manifold*
     b2Fixture* const fixtureB = contact->GetFixtureB();
     auto const categoryA =
         static_cast<PhysicWorld::Category>(fixtureA->GetFilterData().categoryBits);
-    auto const categoryB =
-        static_cast<PhysicWorld::Category>(fixtureB->GetFilterData().categoryBits);
 
     if (categoryA == PhysicWorld::CAT_ONE_WAY_WALL) {
-        b2WorldManifold worldManifold;
-        contact->GetWorldManifold(&worldManifold);
-        if (worldManifold.normal.y < 0 && fixtureB->GetBody()->GetLinearVelocity().y >= 0) {
+        if (oldManifold->localNormal.y < 0 && fixtureB->GetBody()->GetLinearVelocity().y >= 0) {
             contact->SetEnabled(true);
         } else {
             contact->SetEnabled(false);

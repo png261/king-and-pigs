@@ -59,11 +59,11 @@ private:
     uint m_originalWidth;
     uint m_originalHeight;
 
+    bool m_bFullscreen;
+
     uint m_framerate;
     uint m_frameDelay;
     uint m_currentFrameDelta;
-
-    bool m_bFullscreen;
 
     std::string m_title;
     Color m_bgColor;

@@ -6,7 +6,7 @@ public:
     float x;
     float y;
     Point();
-    Point(const float x, const float y);
+    Point(const float _x, const float _y);
 };
 
 struct Rectangle
@@ -32,28 +32,16 @@ struct Rectangle
     Point bottomRight;
     Point bottomCenter;
 
-    Rectangle(const float x, const float y, const int w, const int h);
+    Rectangle(const float _x, const float _y, const int _w, const int _h);
     Rectangle(const Point topLeft, const Point bottomRight);
     Rectangle(Rectangle* const other);
     Rectangle();
     void copy(Rectangle* const other);
-    void addX(const float x);
-    void addY(const float y);
-    void setX(const float x);
-    void setY(const float y);
+    void addX(const float _x);
+    void addY(const float _y);
+    void setX(const float _x);
+    void setY(const float _y);
     void stretch(const float scale);
     void stretch(const float scaleX, const float scaleY);
     void update();
-};
-
-struct Circle
-{
-    float x;
-    float y;
-    int r;
-    float centerX;
-    float centerY;
-    Circle(const float x, const float y, const int r);
-    void addX(const float x);
-    void addY(const float y);
 };

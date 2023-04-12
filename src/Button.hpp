@@ -14,8 +14,8 @@ public:
     void onClick(std::function<void()> callback);
 
 private:
-    Rectangle m_rectangle;
     std::string m_text;
+    Rectangle m_rectangle;
 
     std::function<void()> m_callback;
 };

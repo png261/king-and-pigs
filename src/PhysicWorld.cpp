@@ -44,7 +44,7 @@ int PhysicWorld::meterToPixel(const float meter)
     return static_cast<int>(floor(meter * PIXEL_PER_METER));
 }
 
-float PhysicWorld::pixelToMeter(const float pixel)
+float PhysicWorld::pixelToMeter(const int pixel)
 {
     return static_cast<float>(pixel * METER_PER_PIXEL);
 }
@@ -156,7 +156,6 @@ void PhysicWorld::handleAttack(b2Fixture* const Attacker, b2Fixture* const Defen
         return;
     }
 
-    const char* direction = (const char*)Attacker->GetUserData().pointer;
     B->damage(A->getDamage());
 }
 

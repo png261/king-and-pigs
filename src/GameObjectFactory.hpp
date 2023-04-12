@@ -32,7 +32,7 @@ public:
         }
 
         m_creators[id] = std::make_unique<Creator<T>>();
-    };
+    }
 
     GameObject* create(const std::string& id);
     void clean();

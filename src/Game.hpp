@@ -44,6 +44,6 @@ private:
     int m_nDiamond;
     bool m_bRunning;
     bool m_bDebug;
-    int m_levelIndex;
+    std::size_t m_levelIndex;
     std::vector<std::string> m_levelFiles;
 };

@@ -19,8 +19,8 @@ void Button::draw()
     Game::Instance().getWindow()->print(
         m_text,
         40,
-        m_rectangle.x + m_rectangle.w / 2,
-        m_rectangle.y + m_rectangle.h / 2);
+        m_rectangle.x + m_rectangle.w * 0.5f,
+        m_rectangle.y + m_rectangle.h * 0.5f);
 };
 
 void Button::update()

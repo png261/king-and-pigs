@@ -1,9 +1,9 @@
 #include "Shapes.hpp"
 #include <cmath>
 
-Point::Point(const float x, const float y)
-    : x(x)
-    , y(y)
+Point::Point(const float _x, const float _y)
+    : x(_x)
+    , y(_y)
 {}
 
 Point::Point()
@@ -12,11 +12,11 @@ Point::Point()
 {}
 
 
-Rectangle::Rectangle(const float x, const float y, const int w, const int h)
-    : x(x)
-    , y(y)
-    , w(w)
-    , h(h)
+Rectangle::Rectangle(const float _x, const float _y, const int _w, const int _h)
+    : x(_x)
+    , y(_y)
+    , w(_w)
+    , h(_h)
 {
     update();
 }
@@ -113,26 +113,4 @@ void Rectangle::update()
     bottomCenter = Point(center.x, bottom);
     leftCenter = Point(leftmost, center.y);
     rightCenter = Point(rightmost, center.y);
-}
-
-
-Circle::Circle(const float x, const float y, const int r)
-    : x(x)
-    , y(y)
-    , r(r)
-{
-    centerX = x + r;
-    centerY = y + r;
-}
-
-void Circle::addX(const float _x)
-{
-    x += _x;
-    centerX += x;
-}
-
-void Circle::addY(const float _y)
-{
-    y += _y;
-    centerY += _y;
 }

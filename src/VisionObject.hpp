@@ -10,8 +10,7 @@ public:
         : m_fraction(1)
     {}
 
-    float
-    ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
+    float ReportFixture(b2Fixture* fixture, const b2Vec2&, const b2Vec2&, float fraction)
     {
         if (fixture->IsSensor()) {
             return 1;

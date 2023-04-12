@@ -32,13 +32,13 @@ protected:
         LEFT = -1,
     };
 
-    direction m_direction;
-
     int m_width;
     int m_height;
 
-    bool m_bFlipped;
     bool m_bExist;
+    bool m_bFlipped;
+
+    direction m_direction;
 
     std::unordered_map<int, std::unique_ptr<Animation>> m_animations;
     int m_curAnimation;

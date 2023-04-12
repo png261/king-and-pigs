@@ -6,7 +6,7 @@
 
 void ObjectLayer::update()
 {
-    for (int i = 0; i < m_gameObjects.size(); i++) {
+    for (std::size_t i = 0; i < m_gameObjects.size(); i++) {
         if (m_gameObjects[i]->getPosition().x >
                 Camera::Instance().getPosition().x + Game::Instance().getWindow()->getWidth() &&
             m_gameObjects[i]->getPosition().y >

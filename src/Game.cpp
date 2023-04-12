@@ -18,7 +18,6 @@ Game::Game()
 {
     m_levelFiles.push_back(LEVEL_DIRECTORY + "level1.tmx");
     m_levelFiles.push_back(LEVEL_DIRECTORY + "level2.tmx");
-    m_levelFiles.push_back(LEVEL_DIRECTORY + "test.tmx");
     m_levelIndex = 0;
 }
 

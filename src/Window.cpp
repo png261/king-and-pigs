@@ -5,16 +5,17 @@
 Window::Window(const uint width, const uint height, const std::string& title)
     : m_pWindow(nullptr)
     , m_pRenderer(nullptr)
+    , m_pFont(nullptr)
     , m_width(width)
     , m_height(height)
     , m_originalWidth(width)
     , m_originalHeight(height)
     , m_bFullscreen(false)
-    , m_title(title)
-    , m_bgColor(0, 0, 0)
     , m_framerate(60)
     , m_frameDelay(0)
     , m_currentFrameDelta(0)
+    , m_title(title)
+    , m_bgColor(0, 0, 0)
 {
     // Calling for the first time CREATES a window.
     // Storing it on m_pWindow
@@ -157,7 +158,12 @@ void Window::delayFramerateIfNeeded()
     m_framerateStopwatch.restart();
 }
 
-void Window::print(std::string text, const int fontSize, const int x, const int y, const Color color)
+void Window::print(
+    std::string text,
+    const int fontSize,
+    const int x,
+    const int y,
+    const Color color)
 {
     if (m_pFont == nullptr) {
         Log::error("Window::print: fail to load font");

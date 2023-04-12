@@ -56,10 +56,7 @@ void PigWithBomb::throwBomb()
 void PigWithBomb::becomeNormal()
 {
     disappear();
-    auto pParams2 = std::make_unique<LoaderParams>(LoaderParams(
-        getPosition().x - (20 * 0.5f),
-        getPosition().y - (20 * 0.5f),
-        20,
-        20));
-    GameObject* obj = Game::Instance().getLevel()->spawnGameObject("Pig", std::move(pParams2));
+    auto pParams2 = std::make_unique<LoaderParams>(
+        LoaderParams(getPosition().x - (20 * 0.5f), getPosition().y - (20 * 0.5f), 20, 20));
+    Game::Instance().getLevel()->spawnGameObject("Pig", std::move(pParams2));
 }

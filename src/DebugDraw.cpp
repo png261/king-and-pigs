@@ -22,14 +22,14 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
 
     SDL_SetRenderDrawColor(m_pRenderer, color.r * 255, color.g * 255, color.b * 255, color.a * 255);
 
-    SDL_Point sdlVertices[vertexCount];
+    std::vector<SDL_Point> sdlVertices(vertexCount);
     for (int i = 0; i < vertexCount; i++) {
-        sdlVertices[i] = Utils::b2Vec2ToSDLPoint(
+        sdlVertices.push_back(Utils::b2Vec2ToSDLPoint(
             PhysicWorld::meterToPixel(zoom * vertices[i]) -
-            zoom * Camera::Instance().getPosition());
+            zoom * Camera::Instance().getPosition()));
     }
 
-    SDL_RenderDrawLines(m_pRenderer, sdlVertices, vertexCount);
+    SDL_RenderDrawLines(m_pRenderer, sdlVertices.data(), sdlVertices.size());
     SDL_RenderDrawLine(
         m_pRenderer,
         sdlVertices[vertexCount - 1].x,
@@ -37,6 +37,7 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
         sdlVertices[0].x,
         sdlVertices[0].y);
 }
+
 
 void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
 {
@@ -52,31 +53,31 @@ void DebugDraw::DrawCircle(const b2Vec2& center, float radius, const b2Color& co
     const int k_segments = 16;
     const int vertexCount = k_segments + 1;
 
-    b2Vec2 vertices[vertexCount];
+    std::vector<b2Vec2> vertices(vertexCount);
 
     float theta = 0.0f;
     float deltaTheta = 2.0f * b2_pi / float(k_segments);
 
     for (int32 i = 0; i < k_segments; ++i) {
-        vertices[i] = center + radius * b2Vec2(cosf(theta), sinf(theta));
+        vertices.push_back(center + radius * b2Vec2(cosf(theta), sinf(theta)));
         theta += deltaTheta;
     }
     vertices[k_segments] = vertices[0];
 
-    SDL_Point sdlVertices[vertexCount];
+    std::vector<SDL_Point> sdlVertices(vertexCount);
     for (int32 i = 0; i < vertexCount; ++i) {
-        sdlVertices[i] = Utils::b2Vec2ToSDLPoint(
+        sdlVertices.push_back(Utils::b2Vec2ToSDLPoint(
             PhysicWorld::meterToPixel(zoom * vertices[i]) -
-            zoom * Camera::Instance().getPosition());
+            zoom * Camera::Instance().getPosition()));
     }
 
-    SDL_RenderDrawLines(m_pRenderer, sdlVertices, vertexCount);
+    SDL_RenderDrawLines(m_pRenderer, sdlVertices.data(), sdlVertices.size());
 }
 
 void DebugDraw::DrawSolidCircle(
     const b2Vec2& center,
     float radius,
-    const b2Vec2& axis,
+    const b2Vec2&,
     const b2Color& color)
 {
     DebugDraw::DrawCircle(center, radius, color);
@@ -88,13 +89,14 @@ void DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& c
 
     SDL_SetRenderDrawColor(m_pRenderer, color.r * 255, color.g * 255, color.b * 255, color.a * 255);
     int vertexCount = 2;
-    SDL_Point sdlVertices[vertexCount];
-    sdlVertices[0] = Utils::b2Vec2ToSDLPoint(
-        PhysicWorld::meterToPixel(zoom * p1) - zoom * Camera::Instance().getPosition());
-    sdlVertices[1] = Utils::b2Vec2ToSDLPoint(
-        PhysicWorld::meterToPixel(zoom * p2) - zoom * Camera::Instance().getPosition());
+    std::vector<SDL_Point> sdlVertices(vertexCount);
 
-    SDL_RenderDrawLines(m_pRenderer, sdlVertices, vertexCount);
+    sdlVertices.push_back(Utils::b2Vec2ToSDLPoint(
+        PhysicWorld::meterToPixel(zoom * p1) - zoom * Camera::Instance().getPosition()));
+    sdlVertices.push_back(Utils::b2Vec2ToSDLPoint(
+        PhysicWorld::meterToPixel(zoom * p2) - zoom * Camera::Instance().getPosition()));
+
+    SDL_RenderDrawLines(m_pRenderer, sdlVertices.data(), sdlVertices.size());
 }
 
 void DebugDraw::DrawTransform(const b2Transform& xf)

@@ -11,13 +11,11 @@ TileLayer::TileLayer(
     int const mapHeight,
     const std::vector<Tileset>& tilesets)
     : m_tileSize(tileSize)
-    , m_tilesets(tilesets)
+    , m_nCols(mapWidth)
+    , m_nRows(mapHeight)
     , m_position(0, 0)
-{
-    m_numColumns = mapWidth;
-    m_numRows = mapHeight;
-    m_mapWidth = mapWidth;
-}
+    , m_tilesets(tilesets)
+{}
 
 void TileLayer::update() {}
 
@@ -31,8 +29,8 @@ void TileLayer::render() const
     x2 = int(m_position.x) % m_tileSize;
     y2 = int(m_position.y) % m_tileSize;
 
-    for (int i = 0; i < m_numRows; i++) {
-        for (int j = 0; j < m_numColumns; j++) {
+    for (int i = 0; i < m_nRows; i++) {
+        for (int j = 0; j < m_nCols; j++) {
             int id = m_tileIDs[i + y][j + x];
 
             const int EMPTY_TILE = 0;
@@ -44,10 +42,9 @@ void TileLayer::render() const
             b2Vec2 position = b2Vec2(((j * m_tileSize) - x2), ((i * m_tileSize) - y2)) -
                               Camera::Instance().getPosition();
 
-            bool isInViewPort = position.x > -m_tileSize &&
-                                position.x < Game::Instance().getWindow()->getWidth() &&
-                                position.y > -m_tileSize &&
-                                position.y < Game::Instance().getWindow()->getHeight();
+            bool isInViewPort =
+                position.x > -m_tileSize && position.x < Game::Instance().getWindow()->getWidth() &&
+                position.y > -m_tileSize && position.y < Game::Instance().getWindow()->getHeight();
 
             if (!isInViewPort) {
                 continue;
@@ -71,7 +68,7 @@ void TileLayer::render() const
 
 Tileset TileLayer::getTilesetByID(int const tileID) const
 {
-    for (int i = 0; i < m_tilesets.size(); i++) {
+    for (std::size_t i = 0; i < m_tilesets.size(); i++) {
         if (i + 1 <= m_tilesets.size() - 1) {
             if (tileID >= m_tilesets[i].firstGridID && tileID < m_tilesets[i + 1].firstGridID) {
                 return m_tilesets[i];

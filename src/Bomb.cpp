@@ -15,7 +15,7 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position = PhysicWorld::pixelToMeter(
-        b2Vec2(pParams->x(), pParams->y()) + 0.5 * b2Vec2(m_width, m_height));
+        b2Vec2(pParams->x(), pParams->y()) + 0.5f * b2Vec2(m_width, m_height));
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
     m_pBody = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
@@ -26,7 +26,7 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &circle;
     fixtureDef.density = 1;
-    fixtureDef.friction = 0.3;
+    fixtureDef.friction = 0.3f;
     fixtureDef.filter.categoryBits = PhysicWorld::CAT_BOMB;
     fixtureDef.filter.maskBits = PhysicWorld::MASK_BOMB;
     m_pFixture = m_pBody->CreateFixture(&fixtureDef);

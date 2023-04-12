@@ -24,14 +24,14 @@ void Heart::update()
 {
     ItemObject::update();
     if (m_curAnimation == HIT && m_animations[m_curAnimation]->isFinished()) {
-        SoundManager::Instance().playSFX("heart bonus");
-        Game::Instance().getLevel()->getPlayer()->heal(1);
         disappear();
     }
 }
 
 void Heart::bonus()
 {
+    SoundManager::Instance().playSFX("heart bonus");
+    Game::Instance().getLevel()->getPlayer()->heal(1);
     m_curAnimation = HIT;
     m_animations[m_curAnimation]->start();
 }

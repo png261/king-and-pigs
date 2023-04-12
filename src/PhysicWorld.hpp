@@ -63,7 +63,7 @@ public:
     b2World* getWorld();
 
     static int meterToPixel(float meter);
-    static float pixelToMeter(float pixel);
+    static float pixelToMeter(int pixel);
 
     static b2Vec2 meterToPixel(b2Vec2 meter);
     static b2Vec2 pixelToMeter(b2Vec2 pixel);

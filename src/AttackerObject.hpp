@@ -19,12 +19,12 @@ public:
     virtual bool isDaming() const;
 
 protected:
-    Timer attackTimer;
-    Timer delayTimer;
-
     int m_attackDamage;
     int m_attackRange;
     int m_attackSpeed;
+
+    Timer attackTimer;
+    Timer delayTimer;
 
     bool m_bAttacking;
     bool m_bDaming;

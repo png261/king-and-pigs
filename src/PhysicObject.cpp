@@ -3,15 +3,15 @@
 #include "Log.hpp"
 
 PhysicObject::PhysicObject()
-    : m_jumpHeight(0)
-    , m_moveSpeed(0)
-    , m_footContact(0)
-    , m_bOnGround(false)
-    , m_bCanMoveRight(true)
+    : m_bCanMoveRight(true)
     , m_bCanMoveLeft(true)
-    , m_bRunning(false)
     , m_bCanJump(true)
+    , m_bOnGround(false)
+    , m_bRunning(false)
     , m_bDisableJump(false)
+    , m_moveSpeed(0)
+    , m_jumpHeight(0)
+    , m_footContact(0)
 {}
 
 void PhysicObject::update()

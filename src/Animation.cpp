@@ -12,15 +12,14 @@ Animation::Animation(
     : m_textureID(textureID)
     , m_width(width)
     , m_height(height)
+    , m_framerate(10)
     , m_nFrames(nFrames)
-    , m_bLoop(bLoop)
-    , m_timesLooped(0)
     , m_curFrame(0)
+    , m_timesLooped(0)
     , m_bRunning(false)
     , m_bFinished(false)
-{
-    m_framerate = 10;
-}
+    , m_bLoop(bLoop)
+{}
 
 bool Animation::isRunning() const
 {
@@ -33,7 +32,7 @@ void Animation::update()
         return;
     }
 
-    const Uint32 time_between_frames = (1000.0f / m_framerate);
+    const Uint32 time_between_frames = (1000 / m_framerate);
     m_curFrame = (m_stopwatch.delta() / time_between_frames);
 
     if (m_curFrame >= m_nFrames) {

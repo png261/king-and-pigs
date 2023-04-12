@@ -31,12 +31,12 @@ private:
     Stopwatch m_stopwatch;
     std::string m_textureID;
 
-    uint m_framerate;
     uint m_width;
     uint m_height;
+    uint m_framerate;
 
-    uint m_curFrame;
     uint m_nFrames;
+    uint m_curFrame;
     uint m_timesLooped;
 
     bool m_bRunning;
