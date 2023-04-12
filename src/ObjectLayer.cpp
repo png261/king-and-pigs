@@ -3,19 +3,18 @@
 #include "Camera.hpp"
 #include "Game.hpp"
 #include "Level.hpp"
-#include "Log.hpp"
 
 void ObjectLayer::update()
 {
-    for (const auto& obj : m_gameObjects) {
-        if (obj->getPosition().x >
+    for (int i = 0; i < m_gameObjects.size(); i++) {
+        if (m_gameObjects[i]->getPosition().x >
                 Camera::Instance().getPosition().x + Game::Instance().getWindow()->getWidth() &&
-            obj->getPosition().y >
+            m_gameObjects[i]->getPosition().y >
                 Camera::Instance().getPosition().y + Game::Instance().getWindow()->getHeight()) {
             continue;
         }
 
-        obj->update();
+        m_gameObjects[i]->update();
     }
 
     for (auto it = m_gameObjects.begin(); it != m_gameObjects.end();) {
