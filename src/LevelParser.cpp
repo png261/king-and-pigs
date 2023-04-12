@@ -93,9 +93,7 @@ void LevelParser::parseTilesets(XMLElement* const pTilesetRoot, Level* pLevel)
 
     tileset.numColumns = tileset.width / (tileset.tileWidth + tileset.spacing);
 
-    TextureManager::Instance().load(
-        ASSETS_DIRECTORY + pImagieEl->Attribute("source"),
-        tileset.name);
+    TextureManager::Instance().load(LEVEL_DIRECTORY + pImagieEl->Attribute("source"), tileset.name);
     pLevel->addTileSet(tileset);
     parseCollisionObject(pTilesetRoot, pLevel, tileset.firstGridID);
 }
