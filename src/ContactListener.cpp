@@ -3,6 +3,7 @@
 #include "ItemObject.hpp"
 #include "Log.hpp"
 #include "PhysicObject.hpp"
+#include "PhysicWorld.hpp"
 #include "Pig.hpp"
 
 void ContactListener::BeginContact(b2Contact* const contact)
@@ -54,11 +55,23 @@ void ContactListener::ItemBeginContact(b2Contact* const contact)
         static_cast<PhysicWorld::Category>(fixtureA->GetFilterData().categoryBits);
     auto const categoryB =
         static_cast<PhysicWorld::Category>(fixtureB->GetFilterData().categoryBits);
-    if (categoryA != PhysicWorld::CAT_ITEM || categoryB != PhysicWorld::CAT_PLAYER) {
+
+    if ((categoryA | categoryB) != (PhysicWorld::CAT_ITEM | PhysicWorld::CAT_PLAYER)) {
         return;
     }
 
-    ((ItemObject*)(fixtureA->GetBody()->GetUserData().pointer))->bonus();
+    ItemObject* bonusItem = nullptr;
+    if (categoryA == PhysicWorld::CAT_ITEM) {
+        bonusItem = ((ItemObject*)(fixtureA->GetBody()->GetUserData().pointer));
+    } else {
+        bonusItem = ((ItemObject*)(fixtureB->GetBody()->GetUserData().pointer));
+    }
+
+    if (bonusItem == nullptr) {
+        return;
+    }
+
+    bonusItem->bonus();
 }
 
 void ContactListener::FootBeginContact(b2Contact* const contact)
