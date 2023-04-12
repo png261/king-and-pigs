@@ -55,14 +55,14 @@ bool MainMenuState::enter()
     texture.load(IMAGE_DIRECTORY + "UI/Button/hovered.png", "button hovered");
     texture.load(IMAGE_DIRECTORY + "UI/Button/pressed.png", "button pressed");
 
-    Button* newGameButton = new Button(
+    std::unique_ptr<Button> newGameButton = std::make_unique<Button>(
         "New Game",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
         70);
 
-    Button* exitButton = new Button(
+    std::unique_ptr<Button> exitButton = std::make_unique<Button>(
         "Exit",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
@@ -72,8 +72,8 @@ bool MainMenuState::enter()
     newGameButton->onClick([this]() { m_bEnterPlayState = true; });
     exitButton->onClick([this]() { m_bEnterQuit = true; });
 
-    m_uiObjects.push_back(std::unique_ptr<UiObject>(newGameButton));
-    m_uiObjects.push_back(std::unique_ptr<UiObject>(exitButton));
+    m_uiObjects.push_back(std::move(newGameButton));
+    m_uiObjects.push_back(std::move(exitButton));
 
     m_bLoaded = true;
     return true;

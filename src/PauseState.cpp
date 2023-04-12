@@ -59,14 +59,14 @@ bool PauseState::enter()
     texture.load(IMAGE_DIRECTORY + "UI/Button/hovered.png", "button hovered");
     texture.load(IMAGE_DIRECTORY + "UI/Button/pressed.png", "button pressed");
 
-    Button* resumeButton = new Button(
+    std::unique_ptr<Button> resumeButton = std::make_unique<Button>(
         "Resume",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
         70);
 
-    Button* mainMenuButton = new Button(
+    std::unique_ptr<Button> mainMenuButton = std::make_unique<Button>(
         "Main Menu",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
@@ -76,8 +76,8 @@ bool PauseState::enter()
     resumeButton->onClick([this]() { m_bEnterResume = true; });
     mainMenuButton->onClick([this]() { m_bEnterMainMenu = true; });
 
-    m_uiObjects.push_back(std::unique_ptr<UiObject>(resumeButton));
-    m_uiObjects.push_back(std::unique_ptr<UiObject>(mainMenuButton));
+    m_uiObjects.push_back(std::move(resumeButton));
+    m_uiObjects.push_back(std::move(mainMenuButton));
 
     m_bLoaded = true;
     return true;
