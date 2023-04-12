@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include "PhysicWorld.hpp"
 #include "SoundManager.hpp"
+#include "Utils.hpp"
 
 Box::Box()
     : GameObject()
@@ -73,15 +74,14 @@ void Box::breakIntoPieces()
 
 void Box::randomBonus()
 {
-    srand(time(NULL));
     auto pParams =
         std::make_unique<LoaderParams>(LoaderParams(getPosition().x, getPosition().y, 10, 10));
-    if (rand() % 2 != 0) {
+    if (Utils::isProbable(30)) {
         Game::Instance().getLevel()->spawnGameObject("Heart", std::move(pParams));
         return;
     }
 
-    if (rand() % 3 != 0) {
+    if (Utils::isProbable(10)) {
         Game::Instance().getLevel()->spawnGameObject("Diamond", std::move(pParams));
         return;
     }

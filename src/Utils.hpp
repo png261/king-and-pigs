@@ -3,4 +3,5 @@
 
 namespace Utils {
 SDL_Point b2Vec2ToSDLPoint(const b2Vec2& vec);
-}
+bool isProbable(int percent);
+} // namespace Utils
