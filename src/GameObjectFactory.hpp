@@ -24,8 +24,17 @@ public:
     GameObjectFactory(GameObjectFactory const&) = delete;
     GameObjectFactory& operator=(GameObjectFactory const&) = delete;
 
-    bool registerType(const std::string& typeID, BaseCreator* const pCreator);
-    GameObject* create(const std::string& typeID);
+    template <class T = GameObject>
+    void registerType(const std::string& id)
+    {
+        if (m_creators.find(id) != m_creators.end()) {
+            return;
+        }
+
+        m_creators[id] = std::make_unique<Creator<T>>();
+    };
+
+    GameObject* create(const std::string& id);
     void clean();
 
 private:

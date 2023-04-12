@@ -37,17 +37,17 @@ bool PlayState::enter()
     TextureManager& texture = TextureManager::Instance();
     SoundManager& sound = SoundManager::Instance();
 
-    factory.registerType("Player", new Creator<Player>);
-    factory.registerType("Pig", new Creator<Pig>);
-    factory.registerType("KingPig", new Creator<KingPig>);
-    factory.registerType("PigWithBomb", new Creator<PigWithBomb>);
-    factory.registerType("PigWithBox", new Creator<PigWithBox>);
-    factory.registerType("Bomb", new Creator<Bomb>);
-    factory.registerType("Box", new Creator<Box>);
-    factory.registerType("Heart", new Creator<Heart>);
-    factory.registerType("DoorOut", new Creator<DoorOut>);
-    factory.registerType("DoorIn", new Creator<DoorIn>);
-    factory.registerType("Candle", new Creator<Candle>);
+    factory.registerType<Player>("Player");
+    factory.registerType<Pig>("Pig");
+    factory.registerType<KingPig>("KingPig");
+    factory.registerType<PigWithBomb>("PigWithBomb");
+    factory.registerType<PigWithBox>("PigWithBox");
+    factory.registerType<Bomb>("Bomb");
+    factory.registerType<Box>("Box");
+    factory.registerType<Heart>("Heart");
+    factory.registerType<DoorOut>("DoorOut");
+    factory.registerType<DoorIn>("DoorIn");
+    factory.registerType<Candle>("Candle");
 
     texture.load(IMAGE_DIRECTORY + "Player/Idle.png", "player idle");
     texture.load(IMAGE_DIRECTORY + "Player/Run.png", "player run");

@@ -8,16 +8,15 @@ GameObjectFactory& GameObjectFactory::Instance()
     return s_instance;
 }
 
-bool GameObjectFactory::registerType(const std::string& id, BaseCreator* const pCreator)
-{
-    if (m_creators.find(id) != m_creators.end()) {
-        return false;
-    }
+/* template <class T> */
+/* void GameObjectFactory::registerType(const std::string& id) */
+/* { */
+/*     if (m_creators.find(id) != m_creators.end()) { */
+/*         return; */
+/*     } */
 
-    m_creators[id] = std::unique_ptr<BaseCreator>(pCreator);
-
-    return true;
-}
+/*     m_creators[id] = std::make_unique<Creator<T>>(); */
+/* } */
 
 GameObject* GameObjectFactory::create(const std::string& id)
 {
