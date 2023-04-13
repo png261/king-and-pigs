@@ -188,7 +188,7 @@ void PlayState::update()
     }
 
     if (InputHandler::Instance().isKeyDown(KEY_ESCAPE)) {
-        GameStateMachine::Instance().pushState(new PauseState());
+        GameStateMachine::Instance().pushState(std::make_unique<PauseState>());
     }
 
     if (InputHandler::Instance().isKeyDown(KEY_Q)) {

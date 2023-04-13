@@ -27,7 +27,7 @@ void PauseState::update()
     }
     if (m_bEnterMainMenu) {
         GameStateMachine::Instance().popState();
-        GameStateMachine::Instance().changeState(new MainMenuState());
+        GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
         return;
     }
 

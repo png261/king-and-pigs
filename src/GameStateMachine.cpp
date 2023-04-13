@@ -28,9 +28,9 @@ void GameStateMachine::render() const
     }
 }
 
-void GameStateMachine::pushState(GameState* const pState)
+void GameStateMachine::pushState(std::unique_ptr<GameState> pState)
 {
-    m_gameStates.push_back(std::unique_ptr<GameState>(pState));
+    m_gameStates.push_back(std::move(pState));
     m_gameStates.back()->enter();
 }
 
@@ -47,7 +47,7 @@ void GameStateMachine::popState()
     }
 }
 
-void GameStateMachine::changeState(GameState* const pState)
+void GameStateMachine::changeState(std::unique_ptr<GameState> pState)
 {
     if (!m_gameStates.empty()) {
         if (m_gameStates.back()->getStateID() == pState->getStateID()) {
@@ -59,7 +59,7 @@ void GameStateMachine::changeState(GameState* const pState)
     }
 
     pState->enter();
-    m_gameStates.push_back(std::unique_ptr<GameState>(pState));
+    m_gameStates.push_back(std::move(pState));
 }
 
 GameState* GameStateMachine::getCurrentState()

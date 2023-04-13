@@ -39,7 +39,7 @@ bool Game::init()
         return false;
     };
 
-    GameStateMachine::Instance().changeState(new MainMenuState());
+    GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
     m_bRunning = true;
 
     return true;
@@ -99,7 +99,7 @@ void Game::nextLevel()
 
     m_levelIndex += 1;
     if (m_levelIndex >= m_levelFiles.size()) {
-        GameStateMachine::Instance().pushState(new WinState());
+        GameStateMachine::Instance().pushState(std::make_unique<WinState>());
         m_levelIndex = 0;
         return;
     }

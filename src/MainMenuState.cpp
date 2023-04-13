@@ -23,7 +23,7 @@ void MainMenuState::update()
 
     if (m_bEnterPlayState) {
         Game::Instance().setLevelIndex(0);
-        GameStateMachine::Instance().changeState(new PlayState());
+        GameStateMachine::Instance().changeState(std::make_unique<PlayState>());
         return;
     }
 

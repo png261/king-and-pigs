@@ -22,7 +22,7 @@ void WinState::update()
 
 
     if (m_bEnterMainMenu) {
-        GameStateMachine::Instance().changeState(new MainMenuState());
+        GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
         return;
     }
 

@@ -14,8 +14,8 @@ public:
     void update();
     void render() const;
 
-    void pushState(GameState* const pState);
-    void changeState(GameState* const pState);
+    void pushState(std::unique_ptr<GameState> pState);
+    void changeState(std::unique_ptr<GameState> pState);
     void popState();
 
     GameState* getCurrentState();

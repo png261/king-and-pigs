@@ -186,9 +186,10 @@ void Window::print(
         return;
     }
 
-    SDL_Rect dest_rect{x - pSurface->w / 2, y - pSurface->h / 2, pSurface->w, pSurface->h};
+    SDL_Rect* dest_rect =
+        new SDL_Rect{x - pSurface->w / 2, y - pSurface->h / 2, pSurface->w, pSurface->h};
 
-    SDL_RenderCopy(m_pRenderer, pTexture, NULL, &dest_rect);
+    SDL_RenderCopy(m_pRenderer, pTexture, NULL, dest_rect);
 
     SDL_DestroyTexture(pTexture);
 };

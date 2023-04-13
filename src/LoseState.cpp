@@ -21,7 +21,7 @@ void LoseState::update()
     }
 
     if (m_bEnterMainMenu) {
-        GameStateMachine::Instance().changeState(new MainMenuState());
+        GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
         return;
     }
 
@@ -51,16 +51,6 @@ void LoseState::render() const
         Game::Instance().getWindow()->getCenterY() - 150,
         Color::WHITE);
 };
-
-void LoseState::s_mainMenu()
-{
-    GameStateMachine::Instance().changeState(new MainMenuState());
-}
-
-void LoseState::s_exit()
-{
-    Game::Instance().quit();
-}
 
 bool LoseState::enter()
 {
