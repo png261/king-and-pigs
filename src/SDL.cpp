@@ -1,4 +1,5 @@
 #include "SDL.hpp"
+#include <SDL2/SDL_ttf.h>
 #include "Log.hpp"
 
 
@@ -8,7 +9,7 @@ bool SDL::init()
 
     if (SDL_Init(0) < 0) {
         Log::error("SDL_Init: Couldn't start SDL");
-        Log::error(std::string(SDL_GetError()));
+        Log::error(SDL_GetError());
         return false;
     }
 
@@ -22,7 +23,7 @@ bool SDL::init()
 
     if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0) {
         Log::error("SDL_Init: Couldn't start Audio");
-        Log::error(std::string(SDL_GetError()));
+        Log::error(SDL_GetError());
         return false;
     }
 
@@ -49,22 +50,22 @@ bool SDL::init()
 
     if (SDL_WasInit(SDL_INIT_VIDEO) != 0) {
         Log::error("SDL_WasInit: Tried to reinitailize Video");
-        Log::error(std::string(SDL_GetError()));
+        Log::error(SDL_GetError());
         return false;
     }
     if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0) {
         Log::error("SDL_Init: Couldn't start Video");
-        Log::error(std::string(SDL_GetError()));
+        Log::error(SDL_GetError());
         return false;
     }
     if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
         Log::error("IMG_Init: Couldn't start PNG support");
-        Log::error(std::string(IMG_GetError()));
+        Log::error(IMG_GetError());
         return false;
     }
     if (TTF_Init() == -1) {
         Log::error("TTF_Init: Couldn't start TTF support");
-        Log::error(std::string(TTF_GetError()));
+        Log::error(TTF_GetError());
         return false;
     }
 
@@ -74,11 +75,8 @@ bool SDL::init()
 void SDL::exit()
 {
     Mix_AllocateChannels(0);
-
     Mix_Quit();
     Mix_CloseAudio();
-
-    if (TTF_WasInit()) TTF_Quit();
-
+    TTF_Quit();
     SDL_Quit();
 };

@@ -1,9 +1,10 @@
 #include "SoundManager.hpp"
+#include <SDL2/SDL_mixer.h>
 #include "Log.hpp"
 
 SoundManager& SoundManager::Instance()
 {
-    static SoundManager s_instance{}; 
+    static SoundManager s_instance{};
     return s_instance;
 }
 
@@ -18,7 +19,14 @@ SoundManager::SoundManager()
 
 void SoundManager::clean()
 {
+    for (auto& music : m_musicMap) {
+        Mix_FreeMusic(music.second);
+    }
     m_musicMap.clear();
+
+    for (auto& sfx : m_sfxMap) {
+        Mix_FreeChunk(sfx.second);
+    }
     m_sfxMap.clear();
 }
 

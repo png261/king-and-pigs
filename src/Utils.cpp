@@ -7,6 +7,6 @@ SDL_Point Utils::b2Vec2ToSDLPoint(const b2Vec2& vec)
 
 bool Utils::isProbable(int percent)
 {
-    srand(time(NULL));
+    srand(time(0));
     return (rand() % 100) < percent;
 }

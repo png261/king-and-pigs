@@ -5,6 +5,7 @@ class PhysicObject
 {
 public:
     PhysicObject();
+    virtual ~PhysicObject() = default;
     virtual void update();
 
     virtual b2Body* getBody() const;

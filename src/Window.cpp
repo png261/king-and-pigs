@@ -72,6 +72,7 @@ void Window::resize(const std::string& title, const uint width, const uint heigh
 
 void Window::destroy()
 {
+    Log::log("window destroy");
     if (m_pRenderer) {
         SDL_DestroyRenderer(m_pRenderer);
         m_pRenderer = nullptr;
@@ -179,19 +180,18 @@ void Window::print(
     }
 
     SDL_Texture* pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
-    SDL_FreeSurface(pSurface);
 
     if (pTexture == nullptr) {
+        SDL_FreeSurface(pSurface);
         Log::error("Window::print: fail to create texture");
         return;
     }
 
-    SDL_Rect* dest_rect =
-        new SDL_Rect{x - pSurface->w / 2, y - pSurface->h / 2, pSurface->w, pSurface->h};
-
-    SDL_RenderCopy(m_pRenderer, pTexture, NULL, dest_rect);
+    SDL_Rect dest_rect = {x - pSurface->w / 2, y - pSurface->h / 2, pSurface->w, pSurface->h};
+    SDL_RenderCopy(m_pRenderer, pTexture, nullptr, &dest_rect);
 
     SDL_DestroyTexture(pTexture);
+    SDL_FreeSurface(pSurface);
 };
 
 void Window::drawBox(Rectangle box, Color color) const

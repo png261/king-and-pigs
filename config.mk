@@ -24,10 +24,11 @@ LIBS = `sdl2-config --cflags --libs` -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
 # STACK = -fstack-protector-all -Wstack-protector
 
 # Specifies to GCC the required warnings
-# -Wconversion -fsanitize=undefined,address
-WARNS = -Wall -Wextra -Wpedantic -Wshadow  -Werror 
+# -Wconversion -fsanitize=undefined,address -Werror 
+WARNS = -Wall -Wextra -Wpedantic -Wshadow -Werror  
 
 # Flags for compiling 
+# -O3
 CFLAGS = -O3 $(STD) $(STACK) $(WARNS)
 
 # Debug options

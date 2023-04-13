@@ -11,7 +11,7 @@
 class SoundManager
 {
 public:
-    static SoundManager& Instance(); 
+    static SoundManager& Instance();
     SoundManager(SoundManager const&) = delete;
     SoundManager& operator=(SoundManager const&) = delete;
 
