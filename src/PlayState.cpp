@@ -151,8 +151,8 @@ bool PlayState::loadLevel()
     exit();
 
     LevelParser levelParser;
-    m_pLevel = std::unique_ptr<Level>(levelParser.parseLevel(
-        Game::Instance().getLevelPath(Game::Instance().getLevelIndex()).c_str()));
+    m_pLevel = levelParser.parseLevel(
+        Game::Instance().getLevelPath(Game::Instance().getLevelIndex()).c_str());
 
     if (m_pLevel == nullptr) {
         return false;

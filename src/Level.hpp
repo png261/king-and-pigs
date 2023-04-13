@@ -36,7 +36,7 @@ public:
 
     std::vector<Tileset>* getTilesets();
     std::unordered_map<int, CollisionShape>* getCollisionShapes();
-    void addLayer(Layer* const layer);
+    void addLayer(std::unique_ptr<Layer> layer);
     void addTileSet(const Tileset tileset);
     void addCollisionShape(const int id, const CollisionShape shape);
 
