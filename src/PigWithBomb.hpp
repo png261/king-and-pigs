@@ -18,3 +18,8 @@ private:
     enum animations { IDLE, RUN, THROWING };
     bool m_bThrowing;
 };
+
+class PigWithBombCreator : public BaseCreator
+{
+    std::unique_ptr<GameObject> create() const { return std::make_unique<PigWithBomb>(); }
+};

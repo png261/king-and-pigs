@@ -3,6 +3,7 @@
 #include "AttackerObject.hpp"
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
+#include "GameObjectFactory.hpp"
 #include "VisionObject.hpp"
 
 class Player final : public GameObject,
@@ -44,4 +45,9 @@ private:
     Timer exitDoorTimer;
     bool m_bEnteringDoor;
     bool m_bWantEnterDoor;
+};
+
+class PlayerCreator : public BaseCreator
+{
+    std::unique_ptr<GameObject> create() const { return std::make_unique<Player>(); }
 };

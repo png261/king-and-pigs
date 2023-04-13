@@ -14,7 +14,9 @@ private:
     void parseTileLayer(tinyxml2::XMLElement* const pTileElement, Level* pLevel);
     std::vector<std::vector<int>> parseData(const std::string& dataText);
     void parseCollisionObject(tinyxml2::XMLElement* pTilesetRoot, Level* pLevel, int firstGridID);
-    GameObject* parseObject(tinyxml2::XMLElement* const pObjectElement, Level* const pLevel);
+    std::unique_ptr<GameObject> parseObject(
+        tinyxml2::XMLElement* const pObjectElement,
+        Level* const pLevel);
     std::string getType(tinyxml2::XMLElement* const element);
 
     int m_tileSize;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DamageableObject.hpp"
+#include "GameObjectFactory.hpp"
 #include "GameObject.hpp"
 
 class Box final : public GameObject, public DamageableObject
@@ -18,4 +19,9 @@ private:
     void breakIntoPieces();
 
     enum animation { NORMAL, HIT };
+};
+
+class BoxCreator : public BaseCreator
+{
+    std::unique_ptr<GameObject> create() const { return std::make_unique<Box>(); }
 };

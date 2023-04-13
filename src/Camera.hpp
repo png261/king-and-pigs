@@ -26,5 +26,3 @@ private:
     b2Vec2 m_position;
     float m_zoom;
 };
-
-typedef Camera Camera;

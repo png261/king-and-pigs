@@ -3,6 +3,7 @@
 #include "AttackerObject.hpp"
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
+#include "GameObjectFactory.hpp"
 #include "VisionObject.hpp"
 
 class Pig : public GameObject, public VisionObject, public DamageableObject, public AttackerObject
@@ -36,4 +37,9 @@ private:
     virtual void seeingPig();
     virtual void seeingPlayer();
     virtual void seeingWall();
+};
+
+class PigCreator : public BaseCreator
+{
+    std::unique_ptr<GameObject> create() const { return std::make_unique<Pig>(); }
 };

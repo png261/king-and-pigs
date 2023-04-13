@@ -1,5 +1,6 @@
 #pragma once
 
+#include "GameObjectFactory.hpp"
 #include "ItemObject.hpp"
 
 class Diamond final : public ItemObject
@@ -12,4 +13,9 @@ public:
 
 private:
     enum animations { NORMAL, HIT };
+};
+
+class DiamondCreator : public BaseCreator
+{
+    std::unique_ptr<GameObject> create() const { return std::make_unique<Diamond>(); }
 };

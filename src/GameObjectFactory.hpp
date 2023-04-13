@@ -7,14 +7,7 @@
 class BaseCreator
 {
 public:
-    virtual GameObject* createGameObject() const = 0;
-};
-
-template <class T = GameObject>
-class Creator final : public BaseCreator
-{
-public:
-    virtual GameObject* createGameObject() const { return new T(); };
+    virtual std::unique_ptr<GameObject> create() const = 0;
 };
 
 class GameObjectFactory final
@@ -24,17 +17,8 @@ public:
     GameObjectFactory(GameObjectFactory const&) = delete;
     GameObjectFactory& operator=(GameObjectFactory const&) = delete;
 
-    template <class T = GameObject>
-    void registerType(const std::string& id)
-    {
-        if (m_creators.find(id) != m_creators.end()) {
-            return;
-        }
-
-        m_creators[id] = std::make_unique<Creator<T>>();
-    }
-
-    GameObject* create(const std::string& id);
+    void registerType(const std::string& id, std::unique_ptr<BaseCreator> creator);
+    std::unique_ptr<GameObject> create(const std::string& id);
     void clean();
 
 private:

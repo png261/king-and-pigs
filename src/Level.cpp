@@ -66,10 +66,11 @@ GameObject* Level::spawnGameObject(
     const std::string& type,
     std::unique_ptr<LoaderParams> const& pParams)
 {
-    GameObject* const pGameObject = GameObjectFactory::Instance().create(type);
+    std::unique_ptr<GameObject> pGameObject = GameObjectFactory::Instance().create(type);
+    GameObject* newObject = pGameObject.get();
     pGameObject->load(std::move(pParams));
-    m_spawnLayer->addGameObject(pGameObject);
-    return pGameObject;
+    m_spawnLayer->addGameObject(std::move(pGameObject));
+    return newObject;
 }
 
 void Level::setMapWidth(int width)

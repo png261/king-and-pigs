@@ -8,24 +8,23 @@ GameObjectFactory& GameObjectFactory::Instance()
     return s_instance;
 }
 
-/* template <class T> */
-/* void GameObjectFactory::registerType(const std::string& id) */
-/* { */
-/*     if (m_creators.find(id) != m_creators.end()) { */
-/*         return; */
-/*     } */
+void GameObjectFactory::registerType(const std::string& id, std::unique_ptr<BaseCreator> creator)
+{
+    if (m_creators.find(id) != m_creators.end()) {
+        return;
+    }
 
-/*     m_creators[id] = std::make_unique<Creator<T>>(); */
-/* } */
+    m_creators[id] = std::move(creator);
+}
 
-GameObject* GameObjectFactory::create(const std::string& id)
+std::unique_ptr<GameObject> GameObjectFactory::create(const std::string& id)
 {
     if (m_creators.find(id) == m_creators.end()) {
         Log::warning("GameObjectFactory: could not find type " + id);
         return nullptr;
     }
 
-    return m_creators[id]->createGameObject();
+    return m_creators[id]->create();
 }
 
 void GameObjectFactory::clean()

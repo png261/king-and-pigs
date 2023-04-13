@@ -38,18 +38,18 @@ bool PlayState::enter()
     TextureManager& texture = TextureManager::Instance();
     SoundManager& sound = SoundManager::Instance();
 
-    factory.registerType<Player>("Player");
-    factory.registerType<Pig>("Pig");
-    factory.registerType<KingPig>("KingPig");
-    factory.registerType<PigWithBomb>("PigWithBomb");
-    factory.registerType<PigWithBox>("PigWithBox");
-    factory.registerType<Bomb>("Bomb");
-    factory.registerType<Box>("Box");
-    factory.registerType<Heart>("Heart");
-    factory.registerType<Diamond>("Diamond");
-    factory.registerType<DoorOut>("DoorOut");
-    factory.registerType<DoorIn>("DoorIn");
-    factory.registerType<Candle>("Candle");
+    factory.registerType("Player", std::make_unique<PlayerCreator>());
+    factory.registerType("Pig", std::make_unique<PigCreator>());
+    factory.registerType("KingPig", std::make_unique<KingPigCreator>());
+    factory.registerType("PigWithBomb", std::make_unique<PigWithBombCreator>());
+    factory.registerType("PigWithBox", std::make_unique<PigWithBoxCreator>());
+    factory.registerType("Bomb", std::make_unique<BombCreator>());
+    factory.registerType("Box", std::make_unique<BoxCreator>());
+    factory.registerType("Heart", std::make_unique<HeartCreator>());
+    factory.registerType("Diamond", std::make_unique<DiamondCreator>());
+    factory.registerType("DoorOut", std::make_unique<DoorOutCreator>());
+    factory.registerType("DoorIn", std::make_unique<DoorInCreator>());
+    factory.registerType("Candle", std::make_unique<CandleCreator>());
 
     texture.load(IMAGE_DIRECTORY + "Player/Idle.png", "player idle");
     texture.load(IMAGE_DIRECTORY + "Player/Run.png", "player run");

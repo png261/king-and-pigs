@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.hpp"
+#include "GameObjectFactory.hpp"
 
 class Candle : public GameObject
 {
@@ -12,4 +13,9 @@ private:
     enum animations {
         NORMAL,
     };
+};
+
+class CandleCreator : public BaseCreator
+{
+    std::unique_ptr<GameObject> create() const { return std::make_unique<Candle>(); }
 };

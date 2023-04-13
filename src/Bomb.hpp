@@ -2,6 +2,7 @@
 
 #include "AttackerObject.hpp"
 #include "GameObject.hpp"
+#include "GameObjectFactory.hpp"
 
 class Bomb final : public GameObject, public AttackerObject
 {
@@ -23,4 +24,9 @@ private:
     enum animations { OFF, ON, EXPLODE };
     bool m_bOn;
     Timer onTimer;
+};
+
+class BombCreator : public BaseCreator
+{
+    std::unique_ptr<GameObject> create() const { return std::make_unique<Bomb>(); }
 };

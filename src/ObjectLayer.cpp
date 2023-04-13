@@ -35,7 +35,7 @@ void ObjectLayer::render() const
     }
 }
 
-void ObjectLayer::addGameObject(GameObject* obj)
+void ObjectLayer::addGameObject(std::unique_ptr<GameObject> obj)
 {
-    m_gameObjects.push_back(std::unique_ptr<GameObject>(obj));
+    m_gameObjects.push_back(std::move(obj));
 }

@@ -114,7 +114,9 @@ void LevelParser::parseCollisionObject(XMLElement* pTilesetRoot, Level* pLevel, 
     }
 }
 
-GameObject* LevelParser::parseObject(XMLElement* const pObjectElement, Level* const pLevel)
+std::unique_ptr<GameObject> LevelParser::parseObject(
+    XMLElement* const pObjectElement,
+    Level* const pLevel)
 {
     int x = std::stoi(pObjectElement->Attribute("x"));
     int y = std::stoi(pObjectElement->Attribute("y"));
@@ -122,7 +124,7 @@ GameObject* LevelParser::parseObject(XMLElement* const pObjectElement, Level* co
     int height = std::stoi(pObjectElement->Attribute("height"));
     std::string type = getType(pObjectElement);
 
-    GameObject* const pGameObject = GameObjectFactory::Instance().create(type);
+    std::unique_ptr<GameObject> pGameObject = GameObjectFactory::Instance().create(type);
     if (pGameObject == nullptr) {
         return nullptr;
     }
@@ -143,7 +145,7 @@ GameObject* LevelParser::parseObject(XMLElement* const pObjectElement, Level* co
     pGameObject->load(std::make_unique<LoaderParams>(LoaderParams(x, y, width, height)));
 
     if (type == "Player") {
-        pLevel->setPlayer(dynamic_cast<Player*>(pGameObject));
+        pLevel->setPlayer(dynamic_cast<Player*>(pGameObject.get()));
     }
 
     return pGameObject;
@@ -157,10 +159,10 @@ void LevelParser::parseObjectLayer(XMLElement* const pObjectEl, Level* const pLe
     for (XMLElement* e = pObjectEl->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
         if (e->Value() == std::string("object")) {
-            GameObject* obj = parseObject(e, pLevel);
+            std::unique_ptr<GameObject> obj = parseObject(e, pLevel);
             if (obj != nullptr) {
                 isHaveObjects = true;
-                pObjectLayer->addGameObject(obj);
+                pObjectLayer->addGameObject(std::move(obj));
             }
         }
     }
