@@ -15,11 +15,8 @@
 Game::Game()
     : m_bRunning(false)
     , m_bDebug(false)
-{
-    m_levelFiles.push_back(LEVEL_DIRECTORY + "level1.tmx");
-    m_levelFiles.push_back(LEVEL_DIRECTORY + "level2.tmx");
-    m_levelIndex = 0;
-}
+    , m_levelIndex(0)
+{}
 
 Game& Game::Instance()
 {
@@ -27,22 +24,17 @@ Game& Game::Instance()
     return s_instance;
 }
 
-bool Game::init()
+void Game::init()
 {
-    if (!SDL::init()) {
-        return false;
-    };
-
+    SDL::init();
     m_pWindow = std::make_unique<Window>(1280, 720, "King and Pig");
+    PhysicWorld::Instance().init(m_pWindow.get());
 
-    if (!PhysicWorld::Instance().init(m_pWindow.get())) {
-        return false;
-    };
-
+    m_levelFiles.push_back(LEVEL_DIRECTORY + "level1.tmx");
+    m_levelFiles.push_back(LEVEL_DIRECTORY + "level2.tmx");
     GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
-    m_bRunning = true;
 
-    return true;
+    m_bRunning = true;
 }
 
 void Game::handleEvents()

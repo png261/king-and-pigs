@@ -1,4 +1,5 @@
 #include "Window.hpp"
+#include <stdexcept>
 #include "CONSTANT.hpp"
 #include "Log.hpp"
 
@@ -17,14 +18,11 @@ Window::Window(const uint width, const uint height, const std::string& title)
     , m_title(title)
     , m_bgColor(0, 0, 0)
 {
-    // Calling for the first time CREATES a window.
-    // Storing it on m_pWindow
     resize(title, width, height);
-
 
     if (!m_pWindow || !m_pRenderer) {
         Log::error("Window(): Couldn't create Window");
-        throw "Window() Fail";
+        throw std::runtime_error("Window() Fail");
     }
     m_pFont = TTF_OpenFont((FONT_DIRECTORY + "m6x11.ttf").c_str(), 28);
     if (m_pFont == nullptr) {

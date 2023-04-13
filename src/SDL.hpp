@@ -6,6 +6,6 @@
 #include <SDL2/SDL_ttf.h> // SDL2_TTF
 
 namespace SDL {
-bool init();
+void init();
 void exit();
 } // namespace SDL

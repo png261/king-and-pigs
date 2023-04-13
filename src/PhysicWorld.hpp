@@ -46,7 +46,7 @@ public:
     PhysicWorld(PhysicWorld const&) = delete;
     PhysicWorld& operator=(PhysicWorld const&) = delete;
 
-    bool init(Window* const window);
+    void init(Window* const window);
     void update();
     void clean();
 

@@ -25,7 +25,7 @@ PhysicWorld& PhysicWorld::Instance()
     return s_instance;
 }
 
-bool PhysicWorld::init(Window* const window)
+void PhysicWorld::init(Window* const window)
 {
     m_pWorld = new b2World(GRAVITY);
     m_pDebugDraw = std::make_unique<DebugDraw>(window);
@@ -35,7 +35,6 @@ bool PhysicWorld::init(Window* const window)
     m_timeStep = 1.0f / 60.f;
     m_velocityIterations = 10;
     m_positionIterations = 8;
-    return true;
 }
 
 

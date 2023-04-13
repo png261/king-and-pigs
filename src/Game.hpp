@@ -13,7 +13,7 @@ public:
     Game(Game const&) = delete;
     Game& operator=(Game const&) = delete;
 
-    bool init();
+    void init();
     void handleEvents();
     void update();
     void render() const;
