@@ -27,7 +27,7 @@ PhysicWorld& PhysicWorld::Instance()
 
 void PhysicWorld::init(Window* const window)
 {
-    m_pWorld = new b2World(GRAVITY);
+    m_pWorld = std::make_unique<b2World>(GRAVITY);
     m_pDebugDraw = std::make_unique<DebugDraw>(window);
     m_pWorld->SetDebugDraw(m_pDebugDraw.get());
     createContactListener();
@@ -177,7 +177,7 @@ void PhysicWorld::debugDraw()
 
 b2World* PhysicWorld::getWorld()
 {
-    return m_pWorld;
+    return m_pWorld.get();
 }
 
 void PhysicWorld::clean()

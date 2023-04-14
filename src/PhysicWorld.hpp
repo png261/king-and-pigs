@@ -86,7 +86,7 @@ private:
     void DoorInListener(b2Contact* const contact);
     void BombListener(b2Contact* const contact);
 
-    b2World* m_pWorld;
+    std::unique_ptr<b2World> m_pWorld;
     std::unique_ptr<DebugDraw> m_pDebugDraw;
     std::unique_ptr<ContactListener> m_contactListener;
 
