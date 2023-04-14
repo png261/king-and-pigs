@@ -1,5 +1,6 @@
 #include "LevelParser.hpp"
 #include <iostream>
+#include <stdexcept>
 
 #include "CONSTANT.hpp"
 #include "GameObjectFactory.hpp"
@@ -17,7 +18,7 @@ std::unique_ptr<Level> LevelParser::parseLevel(const char* levelFile)
 {
     XMLDocument levelDocument;
     if (levelDocument.LoadFile(levelFile) != XML_SUCCESS) {
-        Log::error(std::string("fail to load level file: ") + levelFile);
+        throw std::runtime_error("LevelParser: " + std::string("fail to load: ") + levelFile);
     }
 
     XMLElement* const pRoot = levelDocument.RootElement();

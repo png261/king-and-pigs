@@ -21,12 +21,12 @@ Window::Window(const uint width, const uint height, const std::string& title)
     resize(title, width, height);
 
     if (!m_pWindow || !m_pRenderer) {
-        Log::error("Window(): Couldn't create Window");
-        throw std::runtime_error("Window() Fail");
+        throw std::runtime_error("Window: Couldn't create Window");
     }
+
     m_pFont = TTF_OpenFont((FONT_DIRECTORY + "m6x11.ttf").c_str(), 28);
     if (m_pFont == nullptr) {
-        Log::error("Window(): Couldn't load font");
+        throw std::runtime_error("Window: Fail load font");
     }
 
     m_framerateStopwatch.start();
