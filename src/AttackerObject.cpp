@@ -5,7 +5,7 @@ AttackerObject::AttackerObject(const int damage, const int range, const int atta
     : m_attackDamage(damage)
     , m_attackRange(range)
     , m_attackSpeed(attackSpeed)
-    , attackTimer(100)
+    , attackTimer(10)
     , delayTimer(attackSpeed)
     , m_bAttacking(false)
     , m_bDaming(false)

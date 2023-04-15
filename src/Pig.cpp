@@ -45,7 +45,7 @@ void Pig::loadAnimation()
     m_animations[JUMP] = std::make_unique<Animation>("pig jump", 34, 28, 1);
     m_animations[FALL] = std::make_unique<Animation>("pig fall", 34, 28, 1);
     m_animations[GROUND] = std::make_unique<Animation>("pig ground", 34, 28, 1);
-    m_animations[ATTACK] = std::make_unique<Animation>("pig attack", 34, 28, 3, false);
+    m_animations[ATTACK] = std::make_unique<Animation>("pig attack", 34, 28, 5);
     m_animations[HIT] = std::make_unique<Animation>("pig hit", 34, 28, 2);
     m_animations[DYING] = std::make_unique<Animation>("pig dead", 34, 28, 4, false);
 
