@@ -31,7 +31,7 @@ void PigWithBox::update()
         return;
     }
     Pig::update();
-    if (m_seeingCategory & PhysicWorld::CAT_PLAYER && m_visionNearestDistance <= 100) {
+    if (isSeeing(PhysicWorld::CAT_PLAYER) && m_visionNearestDistance <= 100) {
         throwBox();
         becomeNormal();
     }

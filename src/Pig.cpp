@@ -9,7 +9,7 @@ Pig::Pig()
     : GameObject()
     , VisionObject(100)
     , DamageableObject(3, 300, 500)
-    , AttackerObject(1, 20, 300)
+    , AttackerObject(1, 20, 500)
 {}
 
 void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
@@ -104,16 +104,16 @@ void Pig::handleMovement()
         moveLeft();
     }
 
-    if (m_seeingCategory & PhysicWorld::CAT_PLAYER) {
+    if (isSeeing(PhysicWorld::CAT_PLAYER)) {
         seeingPlayer();
     }
-    if (m_seeingCategory & PhysicWorld::CAT_WALL) {
+    if (isSeeing(PhysicWorld::CAT_WALL)) {
         seeingWall();
     }
-    if (m_seeingCategory & PhysicWorld::CAT_BOX) {
+    if (isSeeing(PhysicWorld::CAT_BOX)) {
         seeingBox();
     }
-    if (m_seeingCategory & PhysicWorld::CAT_PIG) {
+    if (isSeeing(PhysicWorld::CAT_PIG)) {
         seeingPig();
     }
 }

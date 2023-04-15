@@ -98,7 +98,7 @@ void Player::handleVision()
         m_raycast.push_back({start, end});
     }
 
-    if (m_seeingCategory & PhysicWorld::CAT_WALL && m_visionNearestDistance < 1) {
+    if (isSeeing(PhysicWorld::CAT_WALL) && m_visionNearestDistance < 1) {
         if (m_direction == RIGHT) {
             setMoveRight(false);
         } else {

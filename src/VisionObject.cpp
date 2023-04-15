@@ -42,3 +42,8 @@ void VisionObject::debugDraw()
         debug.DrawSegment(start, end, {1, 1, 1, 1});
     }
 }
+
+bool VisionObject::isSeeing(PhysicWorld::Category category)
+{
+    return m_seeingCategory & category;
+}

@@ -39,6 +39,7 @@ public:
     VisionObject(float range);
     virtual void update();
     virtual void debugDraw();
+    bool isSeeing(PhysicWorld::Category category);
 
 protected:
     uint16 m_seeingCategory;
