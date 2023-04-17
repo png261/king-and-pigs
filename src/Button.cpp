@@ -6,6 +6,7 @@
 
 Button::Button(std::string text, int x, int y, int width, int height)
     : UiObject()
+    , m_bDisabled(false)
     , m_text(text)
     , m_rectangle(x, y, width, height)
     , m_callback(nullptr)
@@ -15,7 +16,12 @@ Button::Button(std::string text, int x, int y, int width, int height)
 
 void Button::draw()
 {
-    Game::Instance().getWindow()->drawBox(m_rectangle);
+    if (isDisabled()) {
+        Game::Instance().getWindow()->drawBox(m_rectangle, Color::GRAY);
+    } else {
+        Game::Instance().getWindow()->drawBox(m_rectangle);
+    }
+
     Game::Instance().getWindow()->print(
         m_text,
         40,
@@ -25,6 +31,10 @@ void Button::draw()
 
 void Button::update()
 {
+    if (isDisabled()) {
+        return;
+    }
+
     if (InputHandler::Instance().isMouseInside(m_rectangle)) {
         if (InputHandler::Instance().isMouseDown(MOUSE_LEFT)) {
             SoundManager::Instance().playSFX("button clicked");
@@ -36,4 +46,19 @@ void Button::update()
 void Button::onClick(std::function<void()> callback)
 {
     m_callback = callback;
+}
+
+void Button::disable()
+{
+    m_bDisabled = true;
+}
+
+void Button::enable()
+{
+    m_bDisabled = false;
+}
+
+bool Button::isDisabled() const
+{
+    return m_bDisabled;
 }

@@ -16,13 +16,19 @@ Color::Color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a)
 
 Color::Color(Colors colorName)
 {
-    uint8_t r, g, b;
+    uint8_t r, g, b, a = 255;
     switch (colorName) {
     default:
     case WHITE:
         r = 255;
         g = 255;
         b = 255;
+        break;
+    case GRAY:
+        r = 194;
+        g = 214;
+        b = 214;
+        a = 100;
         break;
     case BLACK:
         r = 0;
@@ -64,7 +70,7 @@ Color::Color(Colors colorName)
     m_red = r;
     m_blue = b;
     m_green = g;
-    m_alpha = 255;
+    m_alpha = a;
 }
 
 uint8_t Color::r() const

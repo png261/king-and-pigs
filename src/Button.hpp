@@ -12,8 +12,12 @@ public:
     void draw();
     void update();
     void onClick(std::function<void()> callback);
+    void disable();
+    void enable();
+    bool isDisabled() const;
 
 private:
+    bool m_bDisabled;
     std::string m_text;
     Rectangle m_rectangle;
 
