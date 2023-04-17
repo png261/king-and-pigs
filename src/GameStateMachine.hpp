@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include "GameState.hpp"
+#include "Timer.hpp"
 
 class GameStateMachine final
 {
@@ -22,7 +23,14 @@ public:
 
     void clean();
 
+    bool isLoading() const;
+    void setLoading(bool bLoading);
+    void loading();
+
 private:
-    GameStateMachine() = default;
+    Timer loadingTimer;
+    bool m_bLoading;
+    std::unique_ptr<GameState> m_loadingState;
+    GameStateMachine();
     std::vector<std::unique_ptr<GameState>> m_gameStates;
 };

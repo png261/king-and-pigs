@@ -5,6 +5,7 @@
 #include "GameObjectFactory.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
+#include "LoadingState.hpp"
 #include "MainMenuState.hpp"
 #include "PhysicWorld.hpp"
 #include "PlayState.hpp"
@@ -32,7 +33,7 @@ void Game::init()
 
     m_levelFiles.push_back(LEVEL_DIRECTORY + "level1.tmx");
     m_levelFiles.push_back(LEVEL_DIRECTORY + "level2.tmx");
-    GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
+    GameStateMachine::Instance().changeState(std::make_unique<PlayState>());
 
     m_bRunning = true;
 }
@@ -96,6 +97,7 @@ void Game::nextLevel()
         return;
     }
 
+    GameStateMachine::Instance().loading();
     playState->loadLevel();
 }
 

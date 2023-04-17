@@ -1,4 +1,13 @@
 #include "GameStateMachine.hpp"
+#include <memory>
+
+#include "LoadingState.hpp"
+
+GameStateMachine::GameStateMachine()
+    : loadingTimer(500)
+{
+    m_loadingState = std::make_unique<LoadingState>();
+}
 
 GameStateMachine& GameStateMachine::Instance()
 {
@@ -16,6 +25,13 @@ void GameStateMachine::clean()
 
 void GameStateMachine::update()
 {
+    if (isLoading()) {
+        if (loadingTimer.isDone() && m_gameStates.back()->isLoaded()) {
+            setLoading(false);
+        }
+        return;
+    }
+
     if (!m_gameStates.empty()) {
         m_gameStates.back()->update();
     }
@@ -23,6 +39,11 @@ void GameStateMachine::update()
 
 void GameStateMachine::render() const
 {
+    if (isLoading()) {
+        m_loadingState->render();
+        return;
+    }
+
     for (const auto& state : m_gameStates) {
         state->render();
     }
@@ -58,6 +79,7 @@ void GameStateMachine::changeState(std::unique_ptr<GameState> pState)
         m_gameStates.pop_back();
     }
 
+    loading();
     pState->enter();
     m_gameStates.push_back(std::move(pState));
 }
@@ -65,4 +87,20 @@ void GameStateMachine::changeState(std::unique_ptr<GameState> pState)
 GameState* GameStateMachine::getCurrentState()
 {
     return m_gameStates.back().get();
+}
+
+bool GameStateMachine::isLoading() const
+{
+    return m_bLoading;
+}
+
+void GameStateMachine::setLoading(bool bLoading)
+{
+    m_bLoading = bLoading;
+}
+
+void GameStateMachine::loading()
+{
+    setLoading(true);
+    loadingTimer.restart();
 }
