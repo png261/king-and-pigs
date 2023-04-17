@@ -50,10 +50,6 @@ void MainMenuState::render() const
 bool MainMenuState::enter()
 {
     m_bLoaded = false;
-    TextureManager& texture = TextureManager::Instance();
-    texture.load(IMAGE_DIRECTORY + "UI/Button/normal.png", "button normal");
-    texture.load(IMAGE_DIRECTORY + "UI/Button/hovered.png", "button hovered");
-    texture.load(IMAGE_DIRECTORY + "UI/Button/pressed.png", "button pressed");
 
     std::unique_ptr<Button> newGameButton = std::make_unique<Button>(
         "New Game",

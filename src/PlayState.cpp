@@ -112,10 +112,6 @@ bool PlayState::enter()
     texture.load(IMAGE_DIRECTORY + "UI/Health Bar/Health Bar.png", "health bar");
     texture.load(IMAGE_DIRECTORY + "UI/Health Bar/Heart.png", "health heart");
 
-    texture.load(IMAGE_DIRECTORY + "UI/Button/normal.png", "button normal");
-    texture.load(IMAGE_DIRECTORY + "UI/Button/hovered.png", "button hovered");
-    texture.load(IMAGE_DIRECTORY + "UI/Button/pressed.png", "button pressed");
-
     sound.loadSFX(SOUND_DIRECTORY + "Player/attack.wav", "player attack");
     sound.loadSFX(SOUND_DIRECTORY + "Player/dying.wav", "player dying");
     sound.loadSFX(SOUND_DIRECTORY + "Player/jump.wav", "player jump");
