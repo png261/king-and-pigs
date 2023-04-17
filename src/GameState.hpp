@@ -11,10 +11,13 @@ public:
     virtual void render() const = 0;
 
     virtual bool enter() = 0;
-    virtual void resume(){};
+    virtual void resume();
+    virtual void pause();
     virtual bool exit() = 0;
 
     virtual std::string getStateID() const = 0;
+    bool isLoaded() const;
+    bool isPaused() const;
 
 protected:
     GameState()

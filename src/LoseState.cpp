@@ -16,7 +16,7 @@ LoseState::LoseState()
 
 void LoseState::update()
 {
-    if (!m_bLoaded || m_bPaused) {
+    if (!isLoaded() || isPaused()) {
         return;
     }
 
@@ -43,7 +43,7 @@ void LoseState::update()
 
 void LoseState::render() const
 {
-    if (!m_bLoaded || m_bPaused) {
+    if (!isLoaded() || isPaused()) {
         return;
     }
     for (const auto& obj : m_uiObjects) {
@@ -102,7 +102,7 @@ bool LoseState::enter()
 
 bool LoseState::exit()
 {
-    m_bPaused = true;
+    pause();
     InputHandler::Instance().reset();
     return true;
 };

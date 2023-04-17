@@ -165,21 +165,16 @@ bool PlayState::loadLevel()
 
 bool PlayState::exit()
 {
-    m_bPaused = true;
+    pause();
     PhysicWorld::Instance().clean();
     InputHandler::Instance().reset();
 
     return true;
 }
 
-void PlayState::resume()
-{
-    m_bPaused = false;
-}
-
 void PlayState::update()
 {
-    if (!m_bLoaded || m_bPaused || m_pLevel == nullptr) {
+    if (!isLoaded() || isPaused() || m_pLevel == nullptr) {
         return;
     }
 
@@ -198,7 +193,7 @@ void PlayState::update()
 
 void PlayState::render() const
 {
-    if (!m_bLoaded || m_bPaused || m_pLevel == nullptr) {
+    if (!isLoaded() || isPaused() || m_pLevel == nullptr) {
         return;
     }
 

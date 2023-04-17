@@ -16,7 +16,7 @@ WinState::WinState()
 
 void WinState::update()
 {
-    if (!m_bLoaded || m_bPaused) {
+    if (!isLoaded() || isPaused()) {
         return;
     }
 
@@ -38,7 +38,7 @@ void WinState::update()
 
 void WinState::render() const
 {
-    if (!m_bLoaded || m_bPaused) {
+    if (!isLoaded() || isPaused()) {
         return;
     }
     for (const auto& obj : m_uiObjects) {
@@ -83,7 +83,7 @@ bool WinState::enter()
 
 bool WinState::exit()
 {
-    m_bPaused = true;
+    pause();
     InputHandler::Instance().reset();
     return true;
 };

@@ -13,7 +13,6 @@ public:
     void update() override;
     void render() const override;
     bool enter() override;
-    void resume() override;
     bool exit() override;
     std::string getStateID() const override;
     bool loadLevel();

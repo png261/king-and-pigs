@@ -17,7 +17,7 @@ PauseState::PauseState()
 
 void PauseState::update()
 {
-    if (!m_bLoaded || m_bPaused) {
+    if (!isLoaded() || isPaused()) {
         return;
     }
 
@@ -42,7 +42,7 @@ void PauseState::update()
 
 void PauseState::render() const
 {
-    if (!m_bLoaded || m_bPaused) {
+    if (!isLoaded() || isPaused()) {
         return;
     }
 
@@ -81,7 +81,7 @@ bool PauseState::enter()
 
 bool PauseState::exit()
 {
-    m_bPaused = true;
+    pause();
     InputHandler::Instance().reset();
     return true;
 };

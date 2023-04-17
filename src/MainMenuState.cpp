@@ -17,7 +17,7 @@ MainMenuState::MainMenuState()
 
 void MainMenuState::update()
 {
-    if (!m_bLoaded || m_bPaused) {
+    if (!isLoaded() || isPaused()) {
         return;
     }
 
@@ -39,7 +39,7 @@ void MainMenuState::update()
 
 void MainMenuState::render() const
 {
-    if (!m_bLoaded || m_bPaused) {
+    if (!isLoaded() || isPaused()) {
         return;
     }
     for (const auto& obj : m_uiObjects) {
@@ -77,7 +77,7 @@ bool MainMenuState::enter()
 
 bool MainMenuState::exit()
 {
-    m_bPaused = true;
+    pause();
     InputHandler::Instance().reset();
     return true;
 };
