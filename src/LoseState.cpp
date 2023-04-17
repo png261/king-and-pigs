@@ -20,6 +20,12 @@ void LoseState::update()
         return;
     }
 
+    if (m_bEnterRespawn) {
+        Game::Instance().useDiamond(2);
+        GameStateMachine::Instance().changeState(std::make_unique<PlayState>());
+        return;
+    }
+
     if (m_bEnterMainMenu) {
         GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
         return;
@@ -60,23 +66,36 @@ bool LoseState::enter()
     texture.load(IMAGE_DIRECTORY + "UI/Button/hovered.png", "button hovered");
     texture.load(IMAGE_DIRECTORY + "UI/Button/pressed.png", "button pressed");
 
+    std::unique_ptr<Button> respawnButton = std::make_unique<Button>(
+        "Respawn",
+        Game::Instance().getWindow()->getCenterX() - 250 / 2,
+        Game::Instance().getWindow()->getCenterY() - 70 / 2,
+        250,
+        70);
+
     std::unique_ptr<Button> mainMenuButton = std::make_unique<Button>(
         "Main Menu",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
-        Game::Instance().getWindow()->getCenterY() - 70 / 2,
+        Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
 
     std::unique_ptr<Button> exitButton = std::make_unique<Button>(
         "Exit",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
-        Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
+        Game::Instance().getWindow()->getCenterY() - 70 / 2 + 200,
         250,
         70);
+
+    if (Game::Instance().getDiamond() < 2) {
+        respawnButton->disable();
+    }
+    respawnButton->onClick([this]() { m_bEnterRespawn = true; });
 
     mainMenuButton->onClick([this]() { m_bEnterMainMenu = true; });
     exitButton->onClick([this]() { m_bEnterExit = true; });
 
+    m_uiObjects.push_back(std::move(respawnButton));
     m_uiObjects.push_back(std::move(mainMenuButton));
     m_uiObjects.push_back(std::move(exitButton));
 

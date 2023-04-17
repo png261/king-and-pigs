@@ -31,6 +31,7 @@ public:
     void setLevelIndex(int const currentLevel);
 
     void addDiamond(int n);
+    void useDiamond(int n);
     int getDiamond() const;
 
     bool isDebug() const;

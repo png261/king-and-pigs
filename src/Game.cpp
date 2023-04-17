@@ -143,3 +143,8 @@ int Game::getDiamond() const
 {
     return m_nDiamond;
 }
+
+void Game::useDiamond(int n)
+{
+    m_nDiamond -= n;
+}
