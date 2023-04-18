@@ -45,6 +45,12 @@ void MainMenuState::render() const
     for (const auto& obj : m_uiObjects) {
         obj->draw();
     }
+    Game::Instance().getWindow()->print(
+        "King and Pigs",
+        150,
+        Game::Instance().getWindow()->getCenterX(),
+        Game::Instance().getWindow()->getCenterY() - 150,
+        Color::WHITE);
 };
 
 bool MainMenuState::enter()

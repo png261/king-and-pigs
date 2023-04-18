@@ -33,7 +33,7 @@ void Game::init()
 
     m_levelFiles.push_back(LEVEL_DIRECTORY + "level1.tmx");
     m_levelFiles.push_back(LEVEL_DIRECTORY + "level2.tmx");
-    GameStateMachine::Instance().changeState(std::make_unique<PlayState>());
+    GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
 
     m_bRunning = true;
 }
