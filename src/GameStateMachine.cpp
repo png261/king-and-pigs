@@ -79,7 +79,6 @@ void GameStateMachine::changeState(std::unique_ptr<GameState> pState)
         m_gameStates.pop_back();
     }
 
-    loading();
     pState->enter();
     m_gameStates.push_back(std::move(pState));
 }
