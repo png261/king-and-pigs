@@ -101,19 +101,27 @@ b2Body* PhysicWorld::createStaticBody(
     return body;
 }
 
-void PhysicWorld::DoorInListener(b2Contact* const contact)
+void PhysicWorld::EnterDoorListener(b2Contact* const contact)
 {
     b2Fixture* const fixtureA = contact->GetFixtureA();
     b2Fixture* const fixtureB = contact->GetFixtureB();
     const uint16 catA = fixtureA->GetFilterData().categoryBits;
     const uint16 catB = fixtureB->GetFilterData().categoryBits;
 
-    if (catA != CAT_DOOR_IN || catB != CAT_PLAYER) {
+    if ((catA | catB) != (CAT_DOOR_IN | CAT_PLAYER)) {
         return;
     }
 
-    DoorIn* const door = (DoorIn*)(fixtureA->GetBody()->GetUserData().pointer);
-    Player* const player = (Player*)(fixtureB->GetBody()->GetUserData().pointer);
+    DoorIn* door = nullptr;
+    Player* player = nullptr;
+
+    if(catA == CAT_DOOR_IN) {
+        door = (DoorIn*)(fixtureA->GetBody()->GetUserData().pointer);
+        player = (Player*)(fixtureB->GetBody()->GetUserData().pointer);
+    } else {
+        door = (DoorIn*)(fixtureB->GetBody()->GetUserData().pointer);
+        player = (Player*)(fixtureA->GetBody()->GetUserData().pointer);
+    }
 
     if (player == nullptr || door == nullptr) {
         return;
@@ -165,7 +173,7 @@ void PhysicWorld::update()
     for (b2Contact* contact = getWorld()->GetContactList(); contact != nullptr;
          contact = contact->GetNext()) {
         AttackListener(contact);
-        DoorInListener(contact);
+        EnterDoorListener(contact);
     }
 }
 

@@ -83,7 +83,7 @@ private:
     PhysicWorld();
     void AttackListener(b2Contact* const contact);
     void handleAttack(b2Fixture* const Attacker, b2Fixture* const Defender);
-    void DoorInListener(b2Contact* const contact);
+    void EnterDoorListener(b2Contact* const contact);
     void BombListener(b2Contact* const contact);
 
     std::unique_ptr<b2World> m_pWorld;
