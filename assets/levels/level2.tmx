@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="114">
- <tileset firstgid="1" name="Decorations" tilewidth="32" tileheight="32" tilecount="42" columns="7">
-  <image source="tilesets/Decorations.png" width="224" height="192"/>
+ <tileset firstgid="1" name="decorations" tilewidth="32" tileheight="32" tilecount="42" columns="7">
+  <image source="tilesets/decorations.png" width="224" height="192"/>
   <tile id="9" type="oneway">
    <objectgroup draworder="index" id="5">
     <object id="4" x="0" y="0" width="32" height="5"/>
@@ -43,8 +43,8 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="43" name="Terrain" tilewidth="32" tileheight="32" tilecount="247" columns="19">
-  <image source="tilesets/Terrain.png" width="608" height="416"/>
+ <tileset firstgid="43" name="terrain" tilewidth="32" tileheight="32" tilecount="247" columns="19">
+  <image source="tilesets/terrain.png" width="608" height="416"/>
   <tile id="20">
    <objectgroup draworder="index" id="3">
     <object id="2" x="0" y="0" width="32" height="32"/>

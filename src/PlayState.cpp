@@ -51,85 +51,85 @@ bool PlayState::enter()
     factory.registerType("DoorIn", std::make_unique<DoorInCreator>());
     factory.registerType("Candle", std::make_unique<CandleCreator>());
 
-    texture.load(IMAGE_DIRECTORY + "Player/Idle.png", "player idle");
-    texture.load(IMAGE_DIRECTORY + "Player/Run.png", "player run");
-    texture.load(IMAGE_DIRECTORY + "Player/Jump.png", "player jump");
-    texture.load(IMAGE_DIRECTORY + "Player/Attack.png", "player attack");
-    texture.load(IMAGE_DIRECTORY + "Player/Dead.png", "player dead");
-    texture.load(IMAGE_DIRECTORY + "Player/Fall.png", "player fall");
-    texture.load(IMAGE_DIRECTORY + "Player/Ground.png", "player ground");
-    texture.load(IMAGE_DIRECTORY + "Player/Hit.png", "player hit");
-    texture.load(IMAGE_DIRECTORY + "Player/Door In.png", "player door in");
-    texture.load(IMAGE_DIRECTORY + "Player/Door Out.png", "player door out");
+    texture.load(IMAGE_DIRECTORY + "player/idle.png", "player idle");
+    texture.load(IMAGE_DIRECTORY + "player/run.png", "player run");
+    texture.load(IMAGE_DIRECTORY + "player/jump.png", "player jump");
+    texture.load(IMAGE_DIRECTORY + "player/attack.png", "player attack");
+    texture.load(IMAGE_DIRECTORY + "player/dead.png", "player dead");
+    texture.load(IMAGE_DIRECTORY + "player/fall.png", "player fall");
+    texture.load(IMAGE_DIRECTORY + "player/ground.png", "player ground");
+    texture.load(IMAGE_DIRECTORY + "player/hit.png", "player hit");
+    texture.load(IMAGE_DIRECTORY + "player/entering_door.png", "player entering door");
+    texture.load(IMAGE_DIRECTORY + "player/leaving_door.png", "player leaving door");
 
-    texture.load(IMAGE_DIRECTORY + "Enemy/Pig/Idle.png", "pig idle");
-    texture.load(IMAGE_DIRECTORY + "Enemy/Pig/Run.png", "pig run");
-    texture.load(IMAGE_DIRECTORY + "Enemy/Pig/Jump.png", "pig jump");
-    texture.load(IMAGE_DIRECTORY + "Enemy/Pig/Attack.png", "pig attack");
-    texture.load(IMAGE_DIRECTORY + "Enemy/Pig/Dead.png", "pig dead");
-    texture.load(IMAGE_DIRECTORY + "Enemy/Pig/Fall.png", "pig fall");
-    texture.load(IMAGE_DIRECTORY + "Enemy/Pig/Ground.png", "pig ground");
-    texture.load(IMAGE_DIRECTORY + "Enemy/Pig/Hit.png", "pig hit");
+    texture.load(IMAGE_DIRECTORY + "enemy/pig/idle.png", "pig idle");
+    texture.load(IMAGE_DIRECTORY + "enemy/pig/run.png", "pig run");
+    texture.load(IMAGE_DIRECTORY + "enemy/pig/jump.png", "pig jump");
+    texture.load(IMAGE_DIRECTORY + "enemy/pig/attack.png", "pig attack");
+    texture.load(IMAGE_DIRECTORY + "enemy/pig/dead.png", "pig dead");
+    texture.load(IMAGE_DIRECTORY + "enemy/pig/fall.png", "pig fall");
+    texture.load(IMAGE_DIRECTORY + "enemy/pig/ground.png", "pig ground");
+    texture.load(IMAGE_DIRECTORY + "enemy/pig/hit.png", "pig hit");
 
-    texture.load(IMAGE_DIRECTORY + "Enemy/KingPig/Idle.png", "kingPig idle");
-    texture.load(IMAGE_DIRECTORY + "Enemy/KingPig/Run.png", "kingPig run");
-    texture.load(IMAGE_DIRECTORY + "Enemy/KingPig/Jump.png", "kingPig jump");
-    texture.load(IMAGE_DIRECTORY + "Enemy/KingPig/Attack.png", "kingPig attack");
-    texture.load(IMAGE_DIRECTORY + "Enemy/KingPig/Dead.png", "kingPig dead");
-    texture.load(IMAGE_DIRECTORY + "Enemy/KingPig/Fall.png", "kingPig fall");
-    texture.load(IMAGE_DIRECTORY + "Enemy/KingPig/Ground.png", "kingPig ground");
-    texture.load(IMAGE_DIRECTORY + "Enemy/KingPig/Hit.png", "kingPig hit");
+    texture.load(IMAGE_DIRECTORY + "enemy/kingpig/idle.png", "kingPig idle");
+    texture.load(IMAGE_DIRECTORY + "enemy/kingpig/run.png", "kingPig run");
+    texture.load(IMAGE_DIRECTORY + "enemy/kingpig/jump.png", "kingPig jump");
+    texture.load(IMAGE_DIRECTORY + "enemy/kingpig/attack.png", "kingPig attack");
+    texture.load(IMAGE_DIRECTORY + "enemy/kingpig/dead.png", "kingPig dead");
+    texture.load(IMAGE_DIRECTORY + "enemy/kingpig/fall.png", "kingPig fall");
+    texture.load(IMAGE_DIRECTORY + "enemy/kingpig/ground.png", "kingPig ground");
+    texture.load(IMAGE_DIRECTORY + "enemy/kingpig/hit.png", "kingPig hit");
 
-    texture.load(IMAGE_DIRECTORY + "Enemy/PigWithBomb/Idle.png", "pigWithBomb idle");
-    texture.load(IMAGE_DIRECTORY + "Enemy/PigWithBomb/Run.png", "pigWithBomb run");
-    texture.load(IMAGE_DIRECTORY + "Enemy/PigWithBomb/Throwing.png", "pigWithBomb throwing");
+    texture.load(IMAGE_DIRECTORY + "enemy/pigwithbomb/idle.png", "pigWithBomb idle");
+    texture.load(IMAGE_DIRECTORY + "enemy/pigwithbomb/run.png", "pigWithBomb run");
+    texture.load(IMAGE_DIRECTORY + "enemy/pigwithbomb/throwing.png", "pigWithBomb throwing");
 
-    texture.load(IMAGE_DIRECTORY + "Enemy/PigWithBox/Idle.png", "pigWithBox idle");
-    texture.load(IMAGE_DIRECTORY + "Enemy/PigWithBox/Run.png", "pigWithBox run");
-    texture.load(IMAGE_DIRECTORY + "Enemy/PigWithBox/Throwing.png", "pigWithBox throwing");
+    texture.load(IMAGE_DIRECTORY + "enemy/pigwithbox/idle.png", "pigWithBox idle");
+    texture.load(IMAGE_DIRECTORY + "enemy/pigwithbox/run.png", "pigWithBox run");
+    texture.load(IMAGE_DIRECTORY + "enemy/pigwithbox/throwing.png", "pigWithBox throwing");
 
-    texture.load(IMAGE_DIRECTORY + "Item/Heart/Idle.png", "heart idle");
-    texture.load(IMAGE_DIRECTORY + "Item/Heart/Hit.png", "heart hit");
-    texture.load(IMAGE_DIRECTORY + "Item/Diamond/Idle.png", "diamond idle");
-    texture.load(IMAGE_DIRECTORY + "Item/Diamond/Hit.png", "diamond hit");
+    texture.load(IMAGE_DIRECTORY + "item/heart/idle.png", "heart idle");
+    texture.load(IMAGE_DIRECTORY + "item/heart/hit.png", "heart hit");
+    texture.load(IMAGE_DIRECTORY + "item/diamond/idle.png", "diamond idle");
+    texture.load(IMAGE_DIRECTORY + "item/diamond/hit.png", "diamond hit");
 
-    texture.load(IMAGE_DIRECTORY + "Item/Diamond/Idle.png", "diamond idle");
-    texture.load(IMAGE_DIRECTORY + "Item/Diamond/Hit.png", "diamond hit");
+    texture.load(IMAGE_DIRECTORY + "item/diamond/idle.png", "diamond idle");
+    texture.load(IMAGE_DIRECTORY + "item/diamond/hit.png", "diamond hit");
 
-    texture.load(IMAGE_DIRECTORY + "Item/Door/Idle.png", "door idle");
-    texture.load(IMAGE_DIRECTORY + "Item/Door/Open.png", "door open");
-    texture.load(IMAGE_DIRECTORY + "Item/Door/Close.png", "door close");
+    texture.load(IMAGE_DIRECTORY + "item/door/idle.png", "door idle");
+    texture.load(IMAGE_DIRECTORY + "item/door/open.png", "door open");
+    texture.load(IMAGE_DIRECTORY + "item/door/close.png", "door close");
 
-    texture.load(IMAGE_DIRECTORY + "Item/Candle/Idle.png", "candle idle");
+    texture.load(IMAGE_DIRECTORY + "item/candle/idle.png", "candle idle");
 
-    texture.load(IMAGE_DIRECTORY + "Item/Box/Idle.png", "box idle");
-    texture.load(IMAGE_DIRECTORY + "Item/Box/Hit.png", "box hit");
+    texture.load(IMAGE_DIRECTORY + "item/box/idle.png", "box idle");
+    texture.load(IMAGE_DIRECTORY + "item/box/hit.png", "box hit");
 
-    texture.load(IMAGE_DIRECTORY + "Item/Bomb/On.png", "bomb on");
-    texture.load(IMAGE_DIRECTORY + "Item/Bomb/Off.png", "bomb off");
-    texture.load(IMAGE_DIRECTORY + "Item/Bomb/Explode.png", "bomb explode");
+    texture.load(IMAGE_DIRECTORY + "item/bomb/on.png", "bomb on");
+    texture.load(IMAGE_DIRECTORY + "item/bomb/off.png", "bomb off");
+    texture.load(IMAGE_DIRECTORY + "item/bomb/explode.png", "bomb explode");
 
-    texture.load(IMAGE_DIRECTORY + "UI/Health Bar/Health Bar.png", "health bar");
-    texture.load(IMAGE_DIRECTORY + "UI/Health Bar/Heart.png", "health heart");
+    texture.load(IMAGE_DIRECTORY + "ui/healthbar/healthbar.png", "health bar");
+    texture.load(IMAGE_DIRECTORY + "ui/healthbar/heart.png", "health heart");
 
-    sound.loadSFX(SOUND_DIRECTORY + "Player/attack.wav", "player attack");
-    sound.loadSFX(SOUND_DIRECTORY + "Player/dying.wav", "player dying");
-    sound.loadSFX(SOUND_DIRECTORY + "Player/jump.wav", "player jump");
+    sound.loadSFX(SOUND_DIRECTORY + "player/attack.wav", "player attack");
+    sound.loadSFX(SOUND_DIRECTORY + "player/dying.wav", "player dying");
+    sound.loadSFX(SOUND_DIRECTORY + "player/jump.wav", "player jump");
 
-    sound.loadSFX(SOUND_DIRECTORY + "Pig/attack.wav", "pig attack");
-    sound.loadSFX(SOUND_DIRECTORY + "Pig/dying.wav", "pig dying");
+    sound.loadSFX(SOUND_DIRECTORY + "pig/attack.wav", "pig attack");
+    sound.loadSFX(SOUND_DIRECTORY + "pig/dying.wav", "pig dying");
 
-    sound.loadSFX(SOUND_DIRECTORY + "Door/close.wav", "door close");
-    sound.loadSFX(SOUND_DIRECTORY + "Door/open.wav", "door open");
+    sound.loadSFX(SOUND_DIRECTORY + "door/close.wav", "door close");
+    sound.loadSFX(SOUND_DIRECTORY + "door/open.wav", "door open");
 
-    sound.loadSFX(SOUND_DIRECTORY + "Bomb/on.wav", "bomb on");
-    sound.loadSFX(SOUND_DIRECTORY + "Bomb/explode.wav", "bomb explode");
+    sound.loadSFX(SOUND_DIRECTORY + "bomb/on.wav", "bomb on");
+    sound.loadSFX(SOUND_DIRECTORY + "bomb/explode.wav", "bomb explode");
 
-    sound.loadSFX(SOUND_DIRECTORY + "Box/break.wav", "box broken");
+    sound.loadSFX(SOUND_DIRECTORY + "box/break.wav", "box broken");
 
-    sound.loadSFX(SOUND_DIRECTORY + "Heart/bonus.wav", "heart bonus");
+    sound.loadSFX(SOUND_DIRECTORY + "heart/bonus.wav", "heart bonus");
 
-    sound.loadMusic(SOUND_DIRECTORY + "PlayState/background.wav", "playstate background");
+    sound.loadMusic(SOUND_DIRECTORY + "playstate/background.wav", "playstate background");
 
     if (!loadLevel()) {
         return false;

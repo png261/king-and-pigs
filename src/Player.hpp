@@ -33,16 +33,16 @@ private:
         ATTACK,
         DYING,
         HIT,
-        DOOR_IN,
-        DOOR_OUT,
+        ENTERING_DOOR,
+        LEAVING_DOOR,
     };
 
     void handleInput();
     void handleSound();
     void handleVision();
-    void exitDoor();
+    void leavingDoor();
 
-    Timer exitDoorTimer;
+    Timer leavingDoorTimer;
     bool m_bEnteringDoor;
     bool m_bWantEnterDoor;
 };

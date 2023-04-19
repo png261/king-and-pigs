@@ -61,13 +61,15 @@ void Player::loadAnimation()
     m_animations[ATTACK] = std::make_unique<Animation>("player attack", 78, 58, 3);
     m_animations[HIT] = std::make_unique<Animation>("player hit", 78, 58, 2);
     m_animations[DYING] = std::make_unique<Animation>("player dead", 78, 58, 4, false);
-    m_animations[DOOR_IN] = std::make_unique<Animation>("player door in", 78, 58, 8, false);
-    m_animations[DOOR_OUT] = std::make_unique<Animation>("player door out", 78, 58, 8, false);
+    m_animations[ENTERING_DOOR] =
+        std::make_unique<Animation>("player entering door", 78, 58, 8, false);
+    m_animations[LEAVING_DOOR] =
+        std::make_unique<Animation>("player leaving door", 78, 58, 8, false);
 
-    exitDoorTimer.setTime(300);
-    m_curAnimation = DOOR_OUT;
+    leavingDoorTimer.setTime(300);
+    m_curAnimation = LEAVING_DOOR;
     m_animations[m_curAnimation]->start();
-    exitDoorTimer.start();
+    leavingDoorTimer.start();
 }
 
 void Player::update()
@@ -195,10 +197,10 @@ void Player::updateAnimation()
     }
 
     if (isEnteringDoor()) {
-        newAnimation = DOOR_IN;
+        newAnimation = ENTERING_DOOR;
     }
 
-    if (exitDoorTimer.isDone()) {
+    if (leavingDoorTimer.isDone()) {
         if (newAnimation != m_curAnimation) {
             m_animations[m_curAnimation]->stop();
             m_curAnimation = newAnimation;
@@ -212,9 +214,9 @@ void Player::enterDoor()
     m_bEnteringDoor = true;
 }
 
-void Player::exitDoor()
+void Player::leavingDoor()
 {
-    m_curAnimation = DOOR_OUT;
+    m_curAnimation = LEAVING_DOOR;
     m_animations[m_curAnimation]->start();
 }
 
