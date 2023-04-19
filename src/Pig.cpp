@@ -40,14 +40,14 @@ void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Pig::loadAnimation()
 {
-    m_animations[IDLE] = std::make_unique<Animation>("pig idle", 34, 28, 11);
-    m_animations[RUN] = std::make_unique<Animation>("pig run", 34, 28, 6);
-    m_animations[JUMP] = std::make_unique<Animation>("pig jump", 34, 28, 1);
-    m_animations[FALL] = std::make_unique<Animation>("pig fall", 34, 28, 1);
-    m_animations[GROUND] = std::make_unique<Animation>("pig ground", 34, 28, 1);
-    m_animations[ATTACK] = std::make_unique<Animation>("pig attack", 34, 28, 5);
-    m_animations[HIT] = std::make_unique<Animation>("pig hit", 34, 28, 2);
-    m_animations[DYING] = std::make_unique<Animation>("pig dead", 34, 28, 4, false);
+    m_animations[IDLE] = std::make_unique<Animation>("pig_idle", 34, 28, 11);
+    m_animations[RUN] = std::make_unique<Animation>("pig_run", 34, 28, 6);
+    m_animations[JUMP] = std::make_unique<Animation>("pig_jump", 34, 28, 1);
+    m_animations[FALL] = std::make_unique<Animation>("pig_fall", 34, 28, 1);
+    m_animations[GROUND] = std::make_unique<Animation>("pig_ground", 34, 28, 1);
+    m_animations[ATTACK] = std::make_unique<Animation>("pig_attack", 34, 28, 5);
+    m_animations[HIT] = std::make_unique<Animation>("pig_hit", 34, 28, 2);
+    m_animations[DYING] = std::make_unique<Animation>("pig_dead", 34, 28, 4, false);
 
     m_curAnimation = IDLE;
     m_animations[m_curAnimation]->start();
@@ -84,11 +84,11 @@ void Pig::update()
 void Pig::handleSound()
 {
     if (isDying()) {
-        SoundManager::Instance().playSFX("pig dying");
+        SoundManager::Instance().playSFX("pig_dying");
     }
 
     if (isAttack()) {
-        SoundManager::Instance().playSFX("pig attack");
+        SoundManager::Instance().playSFX("pig_attack");
     }
 }
 

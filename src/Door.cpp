@@ -20,9 +20,9 @@ void Door::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Door::loadAnimation()
 {
-    m_animations[DOOR_CLOSED] = std::make_unique<Animation>("door idle", 46, 56, 1);
-    m_animations[DOOR_OPENING] = std::make_unique<Animation>("door open", 46, 56, 5, false);
-    m_animations[DOOR_CLOSING] = std::make_unique<Animation>("door close", 46, 56, 3, false);
+    m_animations[DOOR_CLOSED] = std::make_unique<Animation>("door_idle", 46, 56, 1);
+    m_animations[DOOR_OPENING] = std::make_unique<Animation>("door_open", 46, 56, 5, false);
+    m_animations[DOOR_CLOSING] = std::make_unique<Animation>("door_close", 46, 56, 3, false);
 
     m_curAnimation = DOOR_CLOSED;
     m_animations[m_curAnimation]->start();
@@ -32,12 +32,12 @@ void Door::update()
 {
     GameObject::update();
     if (isOpened() && m_curAnimation == DOOR_CLOSING && m_animations[DOOR_CLOSING]->isFinished()) {
-        SoundManager::Instance().playSFX("door close");
+        SoundManager::Instance().playSFX("door_close");
         m_bOpened = false;
     }
 
     if (isClosed() && m_curAnimation == DOOR_OPENING && m_animations[DOOR_OPENING]->isFinished()) {
-        SoundManager::Instance().playSFX("door open");
+        SoundManager::Instance().playSFX("door_open");
         m_bOpened = true;
     }
 }

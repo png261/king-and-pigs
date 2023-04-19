@@ -43,9 +43,9 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Bomb::loadAnimation()
 {
-    m_animations[OFF] = std::make_unique<Animation>("bomb off", 52, 56);
-    m_animations[ON] = std::make_unique<Animation>("bomb on", 52, 56, 4);
-    m_animations[EXPLODE] = std::make_unique<Animation>("bomb explode", 52, 56, 6, false);
+    m_animations[OFF] = std::make_unique<Animation>("bomb_off", 52, 56);
+    m_animations[ON] = std::make_unique<Animation>("bomb_on", 52, 56, 4);
+    m_animations[EXPLODE] = std::make_unique<Animation>("bomb_explode", 52, 56, 6, false);
 
     m_curAnimation = OFF;
     m_animations[m_curAnimation]->start();
@@ -70,7 +70,7 @@ void Bomb::update()
 
 void Bomb::turnOn()
 {
-    SoundManager::Instance().playSFX("bomb on");
+    SoundManager::Instance().playSFX("bomb_on");
     m_bOn = true;
     onTimer.start();
     m_curAnimation = ON;
@@ -79,7 +79,7 @@ void Bomb::turnOn()
 
 void Bomb::explode()
 {
-    SoundManager::Instance().playSFX("bomb explode");
+    SoundManager::Instance().playSFX("bomb_explode");
     attack();
 }
 

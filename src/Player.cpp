@@ -53,18 +53,18 @@ void Player::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Player::loadAnimation()
 {
-    m_animations[IDLE] = std::make_unique<Animation>("player idle", 78, 58, 11);
-    m_animations[RUN] = std::make_unique<Animation>("player run", 78, 58, 8);
-    m_animations[JUMP] = std::make_unique<Animation>("player jump", 78, 58, 1);
-    m_animations[FALL] = std::make_unique<Animation>("player fall", 78, 58, 1);
-    m_animations[GROUND] = std::make_unique<Animation>("player ground", 78, 58, 1);
-    m_animations[ATTACK] = std::make_unique<Animation>("player attack", 78, 58, 3);
-    m_animations[HIT] = std::make_unique<Animation>("player hit", 78, 58, 2);
-    m_animations[DYING] = std::make_unique<Animation>("player dead", 78, 58, 4, false);
+    m_animations[IDLE] = std::make_unique<Animation>("player_idle", 78, 58, 11);
+    m_animations[RUN] = std::make_unique<Animation>("player_run", 78, 58, 8);
+    m_animations[JUMP] = std::make_unique<Animation>("player_jump", 78, 58, 1);
+    m_animations[FALL] = std::make_unique<Animation>("player_fall", 78, 58, 1);
+    m_animations[GROUND] = std::make_unique<Animation>("player_ground", 78, 58, 1);
+    m_animations[ATTACK] = std::make_unique<Animation>("player_attack", 78, 58, 3);
+    m_animations[HIT] = std::make_unique<Animation>("player_hit", 78, 58, 2);
+    m_animations[DYING] = std::make_unique<Animation>("player_dead", 78, 58, 4, false);
     m_animations[ENTERING_DOOR] =
-        std::make_unique<Animation>("player entering door", 78, 58, 8, false);
+        std::make_unique<Animation>("player_entering_door", 78, 58, 8, false);
     m_animations[LEAVING_DOOR] =
-        std::make_unique<Animation>("player leaving door", 78, 58, 8, false);
+        std::make_unique<Animation>("player_leaving_door", 78, 58, 8, false);
 
     leavingDoorTimer.setTime(300);
     m_curAnimation = LEAVING_DOOR;
@@ -125,10 +125,10 @@ void Player::draw()
 void Player::handleSound()
 {
     if (isDying()) {
-        SoundManager::Instance().playSFX("player dying");
+        SoundManager::Instance().playSFX("player_dying");
     }
     if (isAttack()) {
-        SoundManager::Instance().playSFX("player attack");
+        SoundManager::Instance().playSFX("player_attack");
     }
 }
 
@@ -145,7 +145,7 @@ void Player::handleInput()
 
         if (input.isKeyPressed(KEY_SPACE)) {
             jump();
-            SoundManager::Instance().playSFX("player jump");
+            SoundManager::Instance().playSFX("player_jump");
         }
     }
 
@@ -160,7 +160,7 @@ void Player::handleInput()
 
     if (input.isKeyDown(KEY_A)) {
         attack();
-        SoundManager::Instance().playSFX("player attack");
+        SoundManager::Instance().playSFX("player_attack");
     }
 
     m_bFlipped = m_direction == LEFT;

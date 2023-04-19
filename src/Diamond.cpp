@@ -13,8 +13,8 @@ void Diamond::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Diamond::loadAnimation()
 {
-    m_animations[NORMAL] = std::make_unique<Animation>("diamond idle", 18, 14, 7);
-    m_animations[HIT] = std::make_unique<Animation>("diamond hit", 18, 14, 2, false);
+    m_animations[NORMAL] = std::make_unique<Animation>("diamond_idle", 18, 14, 7);
+    m_animations[HIT] = std::make_unique<Animation>("diamond_hit", 18, 14, 2, false);
 
     m_curAnimation = NORMAL;
     m_animations[m_curAnimation]->start();
