@@ -169,7 +169,11 @@ void Player::updateAnimation()
     int newAnimation = m_curAnimation;
 
     if (isOnGround()) {
-        newAnimation = IDLE;
+        if (m_curAnimation == FALL) {
+            newAnimation = GROUND;
+        } else {
+            newAnimation = IDLE;
+        }
         if (isRunning()) {
             newAnimation = RUN;
         }
