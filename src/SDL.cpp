@@ -64,3 +64,8 @@ void SDL::exit()
     TTF_Quit();
     SDL_Quit();
 };
+
+void SDL::hideCursor()
+{
+    SDL_ShowCursor(SDL_DISABLE);
+}

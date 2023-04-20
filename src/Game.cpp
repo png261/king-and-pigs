@@ -48,6 +48,7 @@ void Game::handleEvents()
 
 void Game::update()
 {
+    m_cursor->resetState();
     GameStateMachine::Instance().update();
 }
 
@@ -155,4 +156,9 @@ int Game::getDiamond() const
 void Game::useDiamond(int n)
 {
     m_nDiamond -= n;
+}
+
+Cursor* Game::getCursor()
+{
+    return m_cursor.get();
 }

@@ -26,6 +26,7 @@ public:
     Level* getLevel() const;
     int getLevelIndex() const;
     std::string getLevelPath(const int index);
+    Cursor* getCursor();
 
     void nextLevel();
     void setLevel(Level* const pLevel);

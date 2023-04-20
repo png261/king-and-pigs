@@ -8,4 +8,5 @@
 namespace SDL {
 void init();
 void exit();
-} // namespace SDL
+void hideCursor();
+}; // namespace SDL

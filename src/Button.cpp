@@ -36,6 +36,7 @@ void Button::update()
     }
 
     if (InputHandler::Instance().isMouseInside(m_rectangle)) {
+        Game::Instance().getCursor()->hover();
         if (InputHandler::Instance().isMouseDown(MOUSE_LEFT)) {
             SoundManager::Instance().playSFX("button clicked");
             m_callback();
