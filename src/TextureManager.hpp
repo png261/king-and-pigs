@@ -16,14 +16,14 @@ public:
 
     void draw(
         const std::string& id,
-        const b2Vec2 position,
+        const b2Vec2& position,
         const int width,
         const int height,
         const bool bFlipped = false);
 
     void drawFrame(
         const std::string& id,
-        const b2Vec2 position,
+        const b2Vec2& position,
         const int width,
         const int height,
         const int currentRow,
@@ -36,7 +36,7 @@ public:
         const std::string& id,
         const int margin,
         const int spacing,
-        const b2Vec2 position,
+        const b2Vec2& position,
         const int width,
         const int height,
         const int currentRow,

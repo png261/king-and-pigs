@@ -5,7 +5,7 @@
 
 InputHandler& InputHandler::Instance()
 {
-    static InputHandler s_instance{}; 
+    static InputHandler s_instance{};
     return s_instance;
 }
 
@@ -176,7 +176,7 @@ bool InputHandler::isMousePressed(const MouseButton button) const
     return false;
 }
 
-bool InputHandler::isMouseInside(Rectangle rectangle) const
+bool InputHandler::isMouseInside(const Rectangle& rectangle) const
 {
     if ((m_mousePosition.x >= rectangle.x) && (m_mousePosition.x <= rectangle.x + rectangle.w) &&
         (m_mousePosition.y >= rectangle.y) && (m_mousePosition.y <= rectangle.y + rectangle.h))

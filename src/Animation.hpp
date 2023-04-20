@@ -15,7 +15,7 @@ public:
         const bool bLoop = true);
 
     void
-    draw(const b2Vec2 position, const float angle = 0, const bool flip = false, const int zoom = 1);
+    draw(const b2Vec2& position, const float angle = 0, const bool flip = false, const int zoom = 1);
     void update();
 
     void start();

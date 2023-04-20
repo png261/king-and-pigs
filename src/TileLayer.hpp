@@ -17,7 +17,7 @@ public:
 
     void setTileIDs(const std::vector<std::vector<int>>& data);
     void setTileSize(int const tileSize);
-    void setPosition(b2Vec2 const position);
+    void setPosition(const b2Vec2& position);
 
     const std::vector<std::vector<int>>& getTileIDs();
     int getTileSize() const;

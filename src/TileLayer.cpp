@@ -107,7 +107,7 @@ b2Vec2 TileLayer::getPosition() const
     return m_position;
 }
 
-void TileLayer::setPosition(b2Vec2 const position)
+void TileLayer::setPosition(const b2Vec2& position)
 {
     m_position = position;
 }

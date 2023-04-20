@@ -25,7 +25,7 @@ public:
     bool isMouseDown(const MouseButton button) const;
     bool isMouseUp(const MouseButton button) const;
     bool isMousePressed(const MouseButton button) const;
-    bool isMouseInside(const Rectangle rectangle) const;
+    bool isMouseInside(const Rectangle& rectangle) const;
 
     void reset();
     void clean();

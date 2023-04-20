@@ -51,7 +51,7 @@ public:
     void clean();
 
     b2Body* createStaticBody(
-        const b2Vec2 position,
+        const b2Vec2& position,
         const int width,
         const int height,
         const Category category,
@@ -65,8 +65,8 @@ public:
     static int meterToPixel(float meter);
     static float pixelToMeter(int pixel);
 
-    static b2Vec2 meterToPixel(b2Vec2 meter);
-    static b2Vec2 pixelToMeter(b2Vec2 pixel);
+    static b2Vec2 meterToPixel(const b2Vec2& meter);
+    static b2Vec2 pixelToMeter(const b2Vec2& pixel);
 
     static float radToDeg(float rad);
     static float degToRad(float deg);

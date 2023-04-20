@@ -181,7 +181,7 @@ void PhysicObject::setFilterData(PhysicWorld::Category category, PhysicWorld::Ma
 }
 
 b2Fixture* PhysicObject::createPolygonSensor(
-    b2Vec2 position,
+    const b2Vec2& position,
     int width,
     int height,
     PhysicWorld::Category category,
@@ -203,7 +203,7 @@ b2Fixture* PhysicObject::createPolygonSensor(
 }
 
 b2Fixture* PhysicObject::createCircleSensor(
-    const b2Vec2 position,
+    const b2Vec2& position,
     const int radius,
     const PhysicWorld::Category category,
     const PhysicWorld::Mask mask)
@@ -223,7 +223,7 @@ b2Fixture* PhysicObject::createCircleSensor(
 
 b2Fixture* PhysicObject::createCircleBody(
     b2Body*& body,
-    const b2Vec2 position,
+    const b2Vec2& position,
     const int radius,
     const PhysicWorld::Category category,
     const PhysicWorld::Mask mask)

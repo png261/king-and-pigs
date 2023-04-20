@@ -48,12 +48,12 @@ float PhysicWorld::pixelToMeter(const int pixel)
     return static_cast<float>(pixel * METER_PER_PIXEL);
 }
 
-b2Vec2 PhysicWorld::meterToPixel(const b2Vec2 meter)
+b2Vec2 PhysicWorld::meterToPixel(const b2Vec2& meter)
 {
     return PIXEL_PER_METER * meter;
 };
 
-b2Vec2 PhysicWorld::pixelToMeter(const b2Vec2 pixel)
+b2Vec2 PhysicWorld::pixelToMeter(const b2Vec2& pixel)
 {
     return METER_PER_PIXEL * pixel;
 };
@@ -69,7 +69,7 @@ float PhysicWorld::degToRad(const float deg)
 };
 
 b2Body* PhysicWorld::createStaticBody(
-    const b2Vec2 position,
+    const b2Vec2& position,
     const int width,
     const int height,
     const Category category,
@@ -115,7 +115,7 @@ void PhysicWorld::EnterDoorListener(b2Contact* const contact)
     DoorIn* door = nullptr;
     Player* player = nullptr;
 
-    if(catA == CAT_DOOR_IN) {
+    if (catA == CAT_DOOR_IN) {
         door = (DoorIn*)(fixtureA->GetBody()->GetUserData().pointer);
         player = (Player*)(fixtureB->GetBody()->GetUserData().pointer);
     } else {

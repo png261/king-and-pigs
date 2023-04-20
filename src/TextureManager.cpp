@@ -29,7 +29,7 @@ bool TextureManager::load(const std::string& path, const std::string& id)
 
 void TextureManager::draw(
     const std::string& id,
-    const b2Vec2 position,
+    const b2Vec2& position,
     const int width,
     const int height,
     const bool bFlipped)
@@ -52,7 +52,7 @@ void TextureManager::draw(
 
 void TextureManager::drawFrame(
     const std::string& id,
-    const b2Vec2 position,
+    const b2Vec2& position,
     const int width,
     const int height,
     const int currentRow,
@@ -81,7 +81,7 @@ void TextureManager::drawTile(
     const std::string& id,
     const int margin,
     const int spacing,
-    const b2Vec2 position,
+    const b2Vec2& position,
     const int width,
     const int height,
     const int currentRow,
