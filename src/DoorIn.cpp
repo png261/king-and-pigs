@@ -1,5 +1,4 @@
 #include "DoorIn.hpp"
-#include "Game.hpp"
 
 DoorIn::DoorIn() {}
 

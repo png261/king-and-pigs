@@ -1,7 +1,10 @@
 #include "SDL.hpp"
+
+#include <stdexcept>
+
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_ttf.h>
-#include <stdexcept>
+
 #include "Log.hpp"
 
 

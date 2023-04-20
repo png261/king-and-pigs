@@ -1,5 +1,5 @@
 #include "VisionObject.hpp"
-#include <iostream>
+
 #include "DebugDraw.hpp"
 #include "Game.hpp"
 #include "GameState.hpp"

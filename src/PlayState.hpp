@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <vector>
+
 #include "GameObject.hpp"
 #include "GameState.hpp"
 #include "Level.hpp"

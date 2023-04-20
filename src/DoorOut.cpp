@@ -1,5 +1,4 @@
 #include "DoorOut.hpp"
-#include "Log.hpp"
 
 void DoorOut::load(std::unique_ptr<LoaderParams> const& params)
 {

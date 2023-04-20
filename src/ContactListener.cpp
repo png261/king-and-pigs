@@ -1,5 +1,5 @@
 #include "ContactListener.hpp"
-#include <iostream>
+
 #include "ItemObject.hpp"
 #include "Log.hpp"
 #include "PhysicObject.hpp"

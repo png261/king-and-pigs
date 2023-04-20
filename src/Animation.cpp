@@ -1,4 +1,5 @@
 #include "Animation.hpp"
+
 #include "Game.hpp"
 #include "Log.hpp"
 #include "TextureManager.hpp"

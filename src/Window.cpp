@@ -1,5 +1,7 @@
 #include "Window.hpp"
+
 #include <stdexcept>
+
 #include "CONSTANT.hpp"
 #include "Log.hpp"
 

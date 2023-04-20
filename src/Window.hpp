@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+
 #include "Color.hpp"
 #include "SDL.hpp"
 #include "Shapes.hpp"

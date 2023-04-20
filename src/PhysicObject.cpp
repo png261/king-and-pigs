@@ -1,5 +1,5 @@
 #include "PhysicObject.hpp"
-#include <iostream>
+
 #include "Log.hpp"
 
 PhysicObject::PhysicObject()

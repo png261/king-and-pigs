@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 const std::string ASSETS_DIRECTORY = "assets/";

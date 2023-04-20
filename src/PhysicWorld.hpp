@@ -2,7 +2,9 @@
 
 #include <box2d/b2_types.h>
 #include <box2d/box2d.h>
+
 #include <memory>
+
 #include "Window.hpp"
 
 class DebugDraw;

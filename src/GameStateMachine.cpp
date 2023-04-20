@@ -1,4 +1,5 @@
 #include "GameStateMachine.hpp"
+
 #include <memory>
 
 #include "LoadingState.hpp"

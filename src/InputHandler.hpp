@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <vector>
+
 #include "InputDefinitions.hpp"
 #include "PhysicWorld.hpp"
 #include "SDL.hpp"

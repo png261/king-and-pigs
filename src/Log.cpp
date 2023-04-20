@@ -1,4 +1,5 @@
 #include "Log.hpp"
+
 #include <iostream>
 
 const std::string error_prefix = "Error:   ";

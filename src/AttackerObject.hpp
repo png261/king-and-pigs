@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DamageableObject.hpp"
+
 #include "GameObject.hpp"
 #include "PhysicWorld.hpp"
 #include "Stopwatch.hpp"

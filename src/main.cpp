@@ -1,4 +1,5 @@
 #include "Game.hpp"
+
 #include "Log.hpp"
 
 int main()

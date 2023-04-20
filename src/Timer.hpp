@@ -1,4 +1,5 @@
 #pragma once
+
 #include "SDL.hpp"
 #include "Stopwatch.hpp"
 

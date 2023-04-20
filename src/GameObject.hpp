@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <unordered_map>
+
 #include "Animation.hpp"
 #include "LoaderParams.hpp"
 #include "PhysicObject.hpp"

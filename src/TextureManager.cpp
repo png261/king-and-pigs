@@ -1,4 +1,5 @@
 #include "TextureManager.hpp"
+
 #include "Camera.hpp"
 #include "Game.hpp"
 #include "Log.hpp"

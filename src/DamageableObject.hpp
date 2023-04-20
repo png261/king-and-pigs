@@ -1,4 +1,5 @@
 #pragma once
+
 #include "GameObject.hpp"
 #include "LoaderParams.hpp"
 #include "Stopwatch.hpp"

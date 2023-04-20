@@ -1,4 +1,5 @@
 #include "PigWithBomb.hpp"
+
 #include "Bomb.hpp"
 #include "DamageableObject.hpp"
 #include "Game.hpp"

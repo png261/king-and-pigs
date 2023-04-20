@@ -1,5 +1,5 @@
 #include "Camera.hpp"
-#include <iostream>
+
 #include "Game.hpp"
 
 Camera::Camera()

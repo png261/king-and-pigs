@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
 #include <memory>
+
 #include "CONSTANT.hpp"
 #include "GameObjectFactory.hpp"
 #include "GameStateMachine.hpp"

@@ -1,4 +1,5 @@
 #include "SoundManager.hpp"
+
 #include "Log.hpp"
 
 SoundManager& SoundManager::Instance()

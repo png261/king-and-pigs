@@ -1,4 +1,5 @@
 #include "Shapes.hpp"
+
 #include <cmath>
 
 Point::Point(const float _x, const float _y)

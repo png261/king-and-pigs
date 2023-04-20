@@ -1,4 +1,5 @@
 #include "PigWithBox.hpp"
+
 #include "Box.hpp"
 #include "DamageableObject.hpp"
 #include "Game.hpp"

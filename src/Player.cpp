@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
-#include <iostream>
 #include <memory>
+
 #include "Animation.hpp"
 #include "AttackerObject.hpp"
 #include "Camera.hpp"

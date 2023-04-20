@@ -1,5 +1,5 @@
 #include "Pig.hpp"
-#include <iostream>
+
 #include "DamageableObject.hpp"
 #include "Game.hpp"
 #include "PhysicWorld.hpp"

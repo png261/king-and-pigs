@@ -1,6 +1,7 @@
 #pragma once
-#include <iostream>
+
 #include <vector>
+
 #include "PhysicWorld.hpp"
 
 class VisionRayCastCallback : public b2RayCastCallback

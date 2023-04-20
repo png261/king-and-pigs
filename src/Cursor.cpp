@@ -1,4 +1,5 @@
 #include "Cursor.hpp"
+
 #include "CONSTANT.hpp"
 #include "InputHandler.hpp"
 #include "SDL.hpp"

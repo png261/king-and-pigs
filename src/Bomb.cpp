@@ -1,4 +1,5 @@
 #include "Bomb.hpp"
+
 #include "InputHandler.hpp"
 #include "Log.hpp"
 #include "SoundManager.hpp"

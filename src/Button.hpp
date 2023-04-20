@@ -1,6 +1,8 @@
 #pragma once
+
 #include <functional>
 #include <unordered_map>
+
 #include "Animation.hpp"
 #include "Shapes.hpp"
 #include "UiObject.hpp"
