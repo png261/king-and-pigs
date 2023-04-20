@@ -13,9 +13,9 @@ public:
     int height() const;
 
 private:
-    int m_x;
-    int m_y;
+    int x_;
+    int y_;
 
-    int m_width;
-    int m_height;
+    int width_;
+    int height_;
 };

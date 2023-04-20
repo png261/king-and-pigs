@@ -1,17 +1,16 @@
 #include "SoundManager.hpp"
-#include <SDL2/SDL_mixer.h>
 #include "Log.hpp"
 
 SoundManager& SoundManager::Instance()
 {
-    static SoundManager s_instance{};
-    return s_instance;
+    static SoundManager instance{};
+    return instance;
 }
 
 SoundManager::SoundManager()
-    : m_bMutedMusic(false)
-    , m_bMutedSFX(false)
-    , m_volume(100)
+    : is_muted_music_(false)
+    , is_muted_sfx_(false)
+    , volume_(100)
 {
     setVolume(100);
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
@@ -19,15 +18,15 @@ SoundManager::SoundManager()
 
 void SoundManager::clean()
 {
-    for (auto& music : m_musicMap) {
+    for (auto& music : musics_) {
         Mix_FreeMusic(music.second);
     }
-    m_musicMap.clear();
+    musics_.clear();
 
-    for (auto& sfx : m_sfxMap) {
+    for (auto& sfx : sfxs_) {
         Mix_FreeChunk(sfx.second);
     }
-    m_sfxMap.clear();
+    sfxs_.clear();
 }
 
 bool SoundManager::loadMusic(const std::string& path, const std::string& id)
@@ -37,10 +36,10 @@ bool SoundManager::loadMusic(const std::string& path, const std::string& id)
         Log::warning("can't load music: " + path);
         return false;
     }
-    if (m_musicMap.find(id) != m_musicMap.end()) {
+    if (musics_.find(id) != musics_.end()) {
         return false;
     }
-    m_musicMap[id] = pMusic;
+    musics_[id] = pMusic;
     return true;
 }
 
@@ -51,67 +50,67 @@ bool SoundManager::loadSFX(const std::string& path, const std::string& id)
         Log::warning("can't load SFX: " + path);
         return false;
     }
-    if (m_musicMap.find(id) != m_musicMap.end()) {
+    if (musics_.find(id) != musics_.end()) {
         return false;
     }
-    m_sfxMap[id] = pSFX;
+    sfxs_[id] = pSFX;
     return true;
 }
 
 void SoundManager::playMusic(const std::string& id, const int loop)
 {
-    if (m_musicMap.find(id) == m_musicMap.end()) {
+    if (musics_.find(id) == musics_.end()) {
         Log::warning("MusicID not exist: " + id);
         return;
     }
-    Mix_PlayMusic(m_musicMap[id], loop);
+    Mix_PlayMusic(musics_[id], loop);
 }
 
 void SoundManager::playSFX(const std::string& id, const int loop)
 {
-    if (m_sfxMap.find(id) == m_sfxMap.end()) {
+    if (sfxs_.find(id) == sfxs_.end()) {
         Log::warning("sfxID not exist: " + id);
         return;
     }
-    Mix_PlayChannel(-1, m_sfxMap[id], loop);
+    Mix_PlayChannel(-1, sfxs_[id], loop);
 }
 
 void SoundManager::setVolume(const int percent)
 {
-    m_volume = std::min(100, std::max(0, percent));
-    m_bMutedMusic = false;
-    m_bMutedSFX = false;
-    setVolumeMusic(m_volume);
-    setVolumeSFX(m_volume);
+    volume_ = std::min(100, std::max(0, percent));
+    is_muted_music_ = false;
+    is_muted_sfx_ = false;
+    setVolumeMusic(volume_);
+    setVolumeSFX(volume_);
 }
 
 void SoundManager::changeVolume(const int percent)
 {
-    setVolume(m_volume + percent);
+    setVolume(volume_ + percent);
 }
 
 void SoundManager::muteMusic()
 {
-    m_bMutedMusic = true;
+    is_muted_music_ = true;
     setVolumeMusic(0);
 }
 
 void SoundManager::muteSFX()
 {
-    m_bMutedSFX = true;
+    is_muted_sfx_ = true;
     setVolumeSFX(0);
 }
 
 void SoundManager::unMuteMusic()
 {
-    m_bMutedMusic = false;
-    setVolumeMusic(m_volume);
+    is_muted_music_ = false;
+    setVolumeMusic(volume_);
 }
 
 void SoundManager::unMuteSFX()
 {
-    m_bMutedSFX = false;
-    setVolumeSFX(m_volume);
+    is_muted_sfx_ = false;
+    setVolumeSFX(volume_);
 }
 
 void SoundManager::toggleMuteMusic()
@@ -134,12 +133,12 @@ void SoundManager::toggleMuteSFX()
 
 bool SoundManager::isMutedMusic() const
 {
-    return m_bMutedMusic;
+    return is_muted_music_;
 }
 
 bool SoundManager::isMutedSFX() const
 {
-    return m_bMutedSFX;
+    return is_muted_sfx_;
 }
 
 void SoundManager::setVolumeMusic(const float percent)
@@ -154,5 +153,5 @@ void SoundManager::setVolumeSFX(const float percent)
 
 int SoundManager::getVolume() const
 {
-    return m_volume;
+    return volume_;
 }

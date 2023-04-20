@@ -8,28 +8,28 @@ class TileLayer final : public Layer
 {
 public:
     TileLayer(
-        int const tileSize,
-        int const mapWidth,
-        int const mapHeight,
-        const std::vector<Tileset>& tilesets);
+        int const tile_size,
+        int const map_width,
+        int const map_height,
+        const std::vector<Tileset>& tile_sets);
     void update();
     void render() const;
 
     void setTileIDs(const std::vector<std::vector<int>>& data);
-    void setTileSize(int const tileSize);
+    void setTileSize(int const tile_size);
     void setPosition(const b2Vec2& position);
 
     const std::vector<std::vector<int>>& getTileIDs();
     int getTileSize() const;
-    Tileset getTilesetByID(int const tileID) const;
+    Tileset getTilesetByID(int const tile_id) const;
     b2Vec2 getPosition() const;
 
 
 private:
-    int m_tileSize;
-    int m_nCols;
-    int m_nRows;
-    b2Vec2 m_position;
-    const std::vector<Tileset>& m_tilesets;
-    std::vector<std::vector<int>> m_tileIDs;
+    int tile_size_;
+    int columns_;
+    int rows_;
+    b2Vec2 position_;
+    const std::vector<Tileset>& tile_sets_;
+    std::vector<std::vector<int>> tile_ids_;
 };

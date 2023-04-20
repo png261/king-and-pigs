@@ -26,8 +26,8 @@ public:
     virtual void moveRight();
     virtual void jump();
 
-    virtual void setMoveRight(bool bMoveRight);
-    virtual void setMoveLeft(bool bMoveLeft);
+    virtual void setMoveRight(bool can_move_right);
+    virtual void setMoveLeft(bool can_move_left);
 
     virtual void setFilterData(PhysicWorld::Category category, PhysicWorld::Mask mask);
 
@@ -53,17 +53,17 @@ public:
 
 
 protected:
-    b2Body* m_pBody;
-    b2Fixture* m_pFixture;
+    b2Body* body_;
+    b2Fixture* fixture_;
 
-    bool m_bCanMoveRight;
-    bool m_bCanMoveLeft;
-    bool m_bCanJump;
-    bool m_bOnGround;
-    bool m_bRunning;
-    bool m_bDisableJump;
+    bool can_move_right_;
+    bool can_move_left_;
+    bool can_jump_;
+    bool is_ground_;
+    bool is_running_;
+    bool is_disabled_jump_;
 
-    float m_moveSpeed;
-    float m_jumpHeight;
-    int m_footContact;
+    float move_speed_;
+    float jump_height_;
+    int num_foot_touch_;
 };

@@ -6,23 +6,23 @@
 
 TextureManager& TextureManager::Instance()
 {
-    static TextureManager s_instance{}; 
-    return s_instance;
+    static TextureManager instance{};
+    return instance;
 }
 
 bool TextureManager::load(const std::string& path, const std::string& id)
 {
-    if (m_textureMap.find(id) != m_textureMap.end()) {
+    if (textures_.find(id) != textures_.end()) {
         return false;
     }
 
-    SDL_Texture* const pTexture = Game::Instance().getWindow()->loadImage(path.c_str());
-    if (pTexture == nullptr) {
+    SDL_Texture* const texture = Game::Instance().getWindow()->loadImage(path.c_str());
+    if (texture == nullptr) {
         Log::error("Fail to create Texture for: " + path);
         return false;
     }
 
-    m_textureMap[id] = pTexture;
+    textures_[id] = texture;
 
     return true;
 }
@@ -32,7 +32,7 @@ void TextureManager::draw(
     const b2Vec2& position,
     const int width,
     const int height,
-    const bool bFlipped)
+    const bool is_flipped)
 {
     SDL_Rect const srcRect{0, 0, width, height};
     SDL_Rect const destRect{
@@ -42,12 +42,12 @@ void TextureManager::draw(
         height};
 
     Game::Instance().getWindow()->renderImage(
-        m_textureMap[id],
+        textures_[id],
         &srcRect,
         &destRect,
         0,
         0,
-        bFlipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+        is_flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
 
 void TextureManager::drawFrame(
@@ -55,13 +55,13 @@ void TextureManager::drawFrame(
     const b2Vec2& position,
     const int width,
     const int height,
-    const int currentRow,
-    const int currentFrame,
+    const int row,
+    const int frame,
     const float angle,
-    const bool bFlipped,
+    const bool is_flipped,
     const int zoom)
 {
-    SDL_Rect const srcRect{width * currentFrame, height * currentRow, width, height};
+    SDL_Rect const srcRect{width * frame, height * row, width, height};
     SDL_Rect const destRect{
         static_cast<int>(position.x * zoom),
         static_cast<int>(position.y * zoom),
@@ -69,12 +69,12 @@ void TextureManager::drawFrame(
         height * zoom};
 
     Game::Instance().getWindow()->renderImage(
-        m_textureMap[id],
+        textures_[id],
         &srcRect,
         &destRect,
         angle,
         0,
-        bFlipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+        is_flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
 
 void TextureManager::drawTile(
@@ -84,13 +84,13 @@ void TextureManager::drawTile(
     const b2Vec2& position,
     const int width,
     const int height,
-    const int currentRow,
-    const int currentFrame,
+    const int row,
+    const int frame,
     const int zoom)
 {
     SDL_Rect const srcRect{
-        margin + (spacing + width) * currentFrame,
-        margin + (spacing + height) * currentRow,
+        margin + (spacing + width) * frame,
+        margin + (spacing + height) * row,
         width,
         height};
 
@@ -100,13 +100,13 @@ void TextureManager::drawTile(
         static_cast<int>(width * zoom),
         static_cast<int>(height * zoom)};
 
-    Game::Instance().getWindow()->renderImage(m_textureMap[id], &srcRect, &destRect);
+    Game::Instance().getWindow()->renderImage(textures_[id], &srcRect, &destRect);
 }
 
 void TextureManager::clean()
 {
-    for (auto& texture : m_textureMap) {
+    for (auto& texture : textures_) {
         Game::Instance().getWindow()->freeImage(texture.second);
     }
-    m_textureMap.clear();
+    textures_.clear();
 }

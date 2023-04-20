@@ -17,9 +17,9 @@ public:
     bool isDisabled() const;
 
 private:
-    bool m_bDisabled;
-    std::string m_text;
-    Rectangle m_rectangle;
+    bool is_disabled_;
+    std::string text_;
+    Rectangle rectangle_;
 
-    std::function<void()> m_callback;
+    std::function<void()> callback_;
 };

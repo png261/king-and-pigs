@@ -14,7 +14,7 @@ public:
     bool isRunning();
 
 private:
-    Uint32 m_time;
-    bool m_bDone;
-    Stopwatch m_stopwatch;
+    Uint32 time_;
+    bool is_done_;
+    Stopwatch stopwatch_;
 };

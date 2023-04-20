@@ -6,7 +6,7 @@
 class DoorOut final : public Door
 {
 public:
-    void load(std::unique_ptr<LoaderParams> const& pParams) override;
+    void load(std::unique_ptr<LoaderParams> const& params) override;
     void update() override;
 };
 

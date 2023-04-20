@@ -8,7 +8,7 @@
 class AttackerObject
 {
 public:
-    AttackerObject(const int damage, const int range, const int attackSpeed);
+    AttackerObject(const int damage, const int range, const int speed);
 
     virtual void update();
     virtual void attack();
@@ -18,15 +18,19 @@ public:
     virtual bool isAttack() const;
     virtual bool isDaming() const;
 
+    virtual int GetAttackDamage();
+    virtual int GetAttackRange();
+    virtual int GetAttackSpeed();
+
 protected:
-    int m_attackDamage;
-    int m_attackRange;
-    int m_attackSpeed;
+    int attack_damage_;
+    int attack_range_;
+    int attack_speed_;
 
-    Timer attackTimer;
-    Timer delayTimer;
+    Timer attack_timer_;
+    Timer delay_timer_;
 
-    bool m_bAttacking;
-    bool m_bDaming;
-    bool m_bCanAttack;
+    bool is_attacking_;
+    bool is_daming_;
+    bool can_attack_;
 };

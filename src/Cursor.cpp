@@ -5,8 +5,8 @@
 #include "TextureManager.hpp"
 
 Cursor::Cursor()
-    : m_size(32)
-    , m_bHover(false)
+    : size_(32)
+    , is_hover_(false)
 {}
 
 void Cursor::init()
@@ -20,23 +20,23 @@ void Cursor::draw()
 {
     b2Vec2 position = InputHandler::Instance().getMousePosition();
     if (isHover()) {
-        TextureManager::Instance().draw("cursor_hover", position, m_size, m_size);
+        TextureManager::Instance().draw("cursor_hover", position, size_, size_);
     } else {
-        TextureManager::Instance().draw("cursor_normal", position, m_size, m_size);
+        TextureManager::Instance().draw("cursor_normal", position, size_, size_);
     }
 }
 
 void Cursor::resetState()
 {
-    m_bHover = false;
+    is_hover_ = false;
 }
 
 void Cursor::hover()
 {
-    m_bHover = true;
+    is_hover_ = true;
 }
 
 bool Cursor::isHover() const
 {
-    return m_bHover;
+    return is_hover_;
 }

@@ -25,7 +25,7 @@
 #include "SoundManager.hpp"
 #include "TextureManager.hpp"
 
-const std::string PlayState::s_stateID = "PLAY";
+const std::string PlayState::kId_ = "PLAY";
 
 PlayState::PlayState()
     : GameState()
@@ -33,7 +33,7 @@ PlayState::PlayState()
 
 bool PlayState::enter()
 {
-    m_bLoaded = false;
+    is_loaded_ = false;
     GameObjectFactory& factory = GameObjectFactory::Instance();
     TextureManager& texture = TextureManager::Instance();
     SoundManager& sound = SoundManager::Instance();
@@ -137,7 +137,7 @@ bool PlayState::enter()
 
     /* sound.setVolume(0); */
     sound.playMusic("playstate_background");
-    m_bLoaded = true;
+    is_loaded_ = true;
 
     return true;
 }
@@ -147,16 +147,16 @@ bool PlayState::loadLevel()
     exit();
 
     LevelParser levelParser;
-    m_pLevel = levelParser.parseLevel(
+    level_ = levelParser.parseLevel(
         Game::Instance().getLevelPath(Game::Instance().getLevelIndex()).c_str());
 
-    if (m_pLevel == nullptr) {
+    if (level_ == nullptr) {
         return false;
     }
 
     PhysicWorld::Instance().createContactListener();
-    Game::Instance().setLevel(m_pLevel.get());
-    Camera::Instance().setTarget(m_pLevel->getPlayer());
+    Game::Instance().setLevel(level_.get());
+    Camera::Instance().setTarget(level_->getPlayer());
     Camera::Instance().setZoom(3);
 
     resume();
@@ -174,7 +174,7 @@ bool PlayState::exit()
 
 void PlayState::update()
 {
-    if (!isLoaded() || isPaused() || m_pLevel == nullptr) {
+    if (!isLoaded() || isPaused() || level_ == nullptr) {
         return;
     }
 
@@ -187,17 +187,17 @@ void PlayState::update()
     };
 
     PhysicWorld::Instance().update();
-    m_pLevel->update();
+    level_->update();
     Camera::Instance().update();
 }
 
 void PlayState::render() const
 {
-    if (!isLoaded() || isPaused() || m_pLevel == nullptr) {
+    if (!isLoaded() || isPaused() || level_ == nullptr) {
         return;
     }
 
-    m_pLevel->render();
+    level_->render();
 
     if (Game::Instance().isDebug()) {
         PhysicWorld::Instance().debugDraw();
@@ -209,7 +209,7 @@ void PlayState::render() const
 void PlayState::renderStatusBar() const
 {
     TextureManager::Instance().draw("health_bar", {20, 10}, 154, 62);
-    for (int i = 0; i < m_pLevel->getPlayer()->getHp(); ++i) {
+    for (int i = 0; i < level_->getPlayer()->getHp(); ++i) {
         TextureManager::Instance().draw("health_heart", {60 + i * 25.0f, 30}, 22, 19);
     }
 
@@ -230,5 +230,5 @@ void PlayState::renderStatusBar() const
 
 std::string PlayState::getStateID() const
 {
-    return s_stateID;
+    return kId_;
 }

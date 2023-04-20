@@ -7,7 +7,7 @@ class PigWithBomb : public Pig
 public:
     PigWithBomb();
 
-    void load(std::unique_ptr<LoaderParams> const& pParams) override;
+    void load(std::unique_ptr<LoaderParams> const& params) override;
     void update() override;
     void loadAnimation() override;
 
@@ -16,7 +16,7 @@ public:
 
 private:
     enum animations { IDLE, RUN, THROWING };
-    bool m_bThrowing;
+    bool is_throwing_;
 };
 
 class PigWithBombCreator : public BaseCreator

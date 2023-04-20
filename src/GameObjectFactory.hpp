@@ -24,5 +24,5 @@ public:
 private:
     GameObjectFactory() = default;
 
-    std::unordered_map<std::string, std::unique_ptr<BaseCreator>> m_creators;
+    std::unordered_map<std::string, std::unique_ptr<BaseCreator>> creators_;
 };

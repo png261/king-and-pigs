@@ -6,36 +6,36 @@
 
 void ObjectLayer::update()
 {
-    for (std::size_t i = 0; i < m_gameObjects.size(); ++i) {
-        if (m_gameObjects[i]->getPosition().x >
+    for (std::size_t i = 0; i < gameObjects_.size(); ++i) {
+        if (gameObjects_[i]->getPosition().x >
                 Camera::Instance().getPosition().x + Game::Instance().getWindow()->getWidth() &&
-            m_gameObjects[i]->getPosition().y >
+            gameObjects_[i]->getPosition().y >
                 Camera::Instance().getPosition().y + Game::Instance().getWindow()->getHeight()) {
             continue;
         }
 
-        m_gameObjects[i]->update();
+        gameObjects_[i]->update();
     }
 
-    for (auto it = m_gameObjects.begin(); it != m_gameObjects.end();) {
+    for (auto it = gameObjects_.begin(); it != gameObjects_.end();) {
         if ((*it)->isExist()) {
             it++;
             continue;
         }
 
         PhysicWorld::Instance().getWorld()->DestroyBody((*it)->getBody());
-        m_gameObjects.erase(it);
+        gameObjects_.erase(it);
     }
 }
 
 void ObjectLayer::render() const
 {
-    for (const auto& obj : m_gameObjects) {
+    for (const auto& obj : gameObjects_) {
         obj->draw();
     }
 }
 
 void ObjectLayer::addGameObject(std::unique_ptr<GameObject> obj)
 {
-    m_gameObjects.push_back(std::move(obj));
+    gameObjects_.push_back(std::move(obj));
 }

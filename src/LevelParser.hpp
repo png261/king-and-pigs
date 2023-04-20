@@ -19,7 +19,7 @@ private:
         Level* const pLevel);
     std::string getType(tinyxml2::XMLElement* const element);
 
-    int m_tileSize;
-    int m_width;
-    int m_height;
+    int tile_size_;
+    int width_;
+    int height_;
 };

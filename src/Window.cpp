@@ -4,32 +4,32 @@
 #include "Log.hpp"
 
 Window::Window(const uint width, const uint height, const std::string& title)
-    : m_pWindow(nullptr)
-    , m_pRenderer(nullptr)
-    , m_pFont(nullptr)
-    , m_width(width)
-    , m_height(height)
-    , m_originalWidth(width)
-    , m_originalHeight(height)
-    , m_bFullscreen(false)
-    , m_framerate(60)
-    , m_frameDelay(0)
-    , m_currentFrameDelta(0)
-    , m_title(title)
-    , m_bgColor(0, 0, 0)
+    : window_(nullptr)
+    , renderer_(nullptr)
+    , font_(nullptr)
+    , width_(width)
+    , height_(height)
+    , origin_width_(width)
+    , origin_height_(height)
+    , is_fullscreen_(false)
+    , framerate_(60)
+    , frame_delay_(0)
+    , current_frame_delta_(0)
+    , title_(title)
+    , background_color_(0, 0, 0)
 {
     resize(title, width, height);
 
-    if (!m_pWindow || !m_pRenderer) {
+    if (!window_ || !renderer_) {
         throw std::runtime_error("Window: Couldn't create Window");
     }
 
-    m_pFont = TTF_OpenFont((FONT_DIRECTORY + "m6x11.ttf").c_str(), 28);
-    if (m_pFont == nullptr) {
+    font_ = TTF_OpenFont((FONT_DIRECTORY + "m6x11.ttf").c_str(), 28);
+    if (font_ == nullptr) {
         throw std::runtime_error("Window: Fail load font");
     }
 
-    m_framerateStopwatch.start();
+    framerate_stopwatch_.start();
 
     clear();
     refresh();
@@ -49,47 +49,47 @@ void Window::resize(const std::string& title, const uint width, const uint heigh
     // (http://wiki.libsdl.org/MigrationGuide)
     //
     // It creates a nice window independent of the user's monitor size.
-    SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN, &m_pWindow, &m_pRenderer);
+    SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN, &window_, &renderer_);
 
-    if (m_pWindow == nullptr || m_pRenderer == nullptr) {
+    if (window_ == nullptr || renderer_ == nullptr) {
         Log::error("Window::resize: Couldn't create SDL_Window or SDL_Renderer");
         return;
     }
 
     // And here we fake a "logical" size of the window, independent of it's real size.
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
-    SDL_RenderSetLogicalSize(m_pRenderer, width, height);
+    SDL_RenderSetLogicalSize(renderer_, width, height);
 
     setTitle(title);
 
-    m_width = width;
-    m_height = height;
+    width_ = width;
+    height_ = height;
 
-    m_frameDelay = 1000.f / m_framerate;
+    frame_delay_ = 1000.f / framerate_;
 }
 
 void Window::destroy()
 {
     Log::log("window destroy");
-    if (m_pRenderer) {
-        SDL_DestroyRenderer(m_pRenderer);
-        m_pRenderer = nullptr;
+    if (renderer_) {
+        SDL_DestroyRenderer(renderer_);
+        renderer_ = nullptr;
     }
 
-    if (m_pWindow) {
-        SDL_DestroyWindow(m_pWindow);
-        m_pWindow = nullptr;
+    if (window_) {
+        SDL_DestroyWindow(window_);
+        window_ = nullptr;
     }
 }
 
 void Window::refresh()
 {
-    SDL_RenderPresent(m_pRenderer);
+    SDL_RenderPresent(renderer_);
 }
 
 SDL_Texture* Window::loadImage(const std::string& path)
 {
-    SDL_Texture* const pTexture = IMG_LoadTexture(m_pRenderer, path.c_str());
+    SDL_Texture* const pTexture = IMG_LoadTexture(renderer_, path.c_str());
     if (pTexture == nullptr) {
         Log::error("IMG_LoadTexture: Couldn't open image '" + path + "': " + IMG_GetError());
     }
@@ -118,43 +118,43 @@ void Window::renderImage(
         return;
     }
 
-    SDL_RenderCopyEx(m_pRenderer, texture, srcrect, dstrect, angle, center, flip);
+    SDL_RenderCopyEx(renderer_, texture, srcrect, dstrect, angle, center, flip);
 }
 
 void Window::fill(const Color color)
 {
-    SDL_SetRenderDrawColor(m_pRenderer, color.r(), color.g(), color.b(), color.a());
-    SDL_RenderClear(m_pRenderer);
+    SDL_SetRenderDrawColor(renderer_, color.r(), color.g(), color.b(), color.a());
+    SDL_RenderClear(renderer_);
 }
 
 void Window::clear()
 {
-    fill(m_bgColor);
+    fill(background_color_);
 }
 
 void Window::setTitle(const std::string& title)
 {
-    if (m_pWindow == nullptr) {
+    if (window_ == nullptr) {
         return;
     }
 
-    SDL_SetWindowTitle(m_pWindow, title.c_str());
+    SDL_SetWindowTitle(window_, title.c_str());
 }
 
 void Window::setBackgroundColor(const Color color)
 {
-    m_bgColor = color;
+    background_color_ = color;
 }
 
 void Window::delayFramerateIfNeeded()
 {
-    m_currentFrameDelta = m_framerateStopwatch.delta();
+    current_frame_delta_ = framerate_stopwatch_.delta();
 
-    if ((m_currentFrameDelta) < (m_frameDelay)) {
-        SDL_Delay((m_frameDelay)-m_currentFrameDelta);
+    if ((current_frame_delta_) < (frame_delay_)) {
+        SDL_Delay((frame_delay_)-current_frame_delta_);
     };
 
-    m_framerateStopwatch.restart();
+    framerate_stopwatch_.restart();
 }
 
 void Window::print(
@@ -164,20 +164,20 @@ void Window::print(
     const int y,
     const Color color)
 {
-    if (m_pFont == nullptr) {
+    if (font_ == nullptr) {
         Log::error("Window::print: fail to load font");
         return;
     }
-    TTF_SetFontSize(m_pFont, fontSize);
+    TTF_SetFontSize(font_, fontSize);
 
     SDL_Surface* pSurface =
-        TTF_RenderText_Blended(m_pFont, text.c_str(), {color.r(), color.g(), color.b(), color.a()});
+        TTF_RenderText_Blended(font_, text.c_str(), {color.r(), color.g(), color.b(), color.a()});
     if (pSurface == nullptr) {
         Log::error("Window::print: fail to create surface");
         return;
     }
 
-    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
+    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(renderer_, pSurface);
 
     if (pTexture == nullptr) {
         SDL_FreeSurface(pSurface);
@@ -186,7 +186,7 @@ void Window::print(
     }
 
     SDL_Rect dest_rect = {x - pSurface->w / 2, y - pSurface->h / 2, pSurface->w, pSurface->h};
-    SDL_RenderCopy(m_pRenderer, pTexture, nullptr, &dest_rect);
+    SDL_RenderCopy(renderer_, pTexture, nullptr, &dest_rect);
 
     SDL_DestroyTexture(pTexture);
     SDL_FreeSurface(pSurface);
@@ -201,36 +201,36 @@ void Window::drawBox(Rectangle box, Color color) const
         box.h,
     };
 
-    SDL_SetRenderDrawColor(m_pRenderer, color.r(), color.g(), color.b(), color.a());
-    SDL_RenderFillRect(m_pRenderer, &rect);
+    SDL_SetRenderDrawColor(renderer_, color.r(), color.g(), color.b(), color.a());
+    SDL_RenderFillRect(renderer_, &rect);
 }
 
 uint Window::getDelta() const
 {
-    return m_currentFrameDelta;
+    return current_frame_delta_;
 }
 
 SDL_Renderer* Window::getRenderer() const
 {
-    return m_pRenderer;
+    return renderer_;
 }
 
 uint Window::getWidth() const
 {
-    return m_width;
+    return width_;
 }
 
 uint Window::getHeight() const
 {
-    return m_height;
+    return height_;
 }
 
 uint Window::getCenterX() const
 {
-    return m_width / 2;
+    return width_ / 2;
 }
 
 uint Window::getCenterY() const
 {
-    return m_height / 2;
+    return height_ / 2;
 }

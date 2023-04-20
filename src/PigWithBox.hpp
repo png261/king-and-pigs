@@ -15,7 +15,7 @@ public:
 
 private:
     enum animations { IDLE, RUN, THROWING };
-    bool m_bThrowing;
+    bool is_throwing_;
 };
 
 class PigWithBoxCreator : public BaseCreator

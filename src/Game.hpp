@@ -25,12 +25,12 @@ public:
     Window* getWindow() const;
     Level* getLevel() const;
     int getLevelIndex() const;
-    std::string getLevelPath(const int index);
+    std::string getLevelPath(const int level_index);
     Cursor* getCursor();
 
     void nextLevel();
-    void setLevel(Level* const pLevel);
-    void setLevelIndex(int const currentLevel);
+    void setLevel(Level* const level);
+    void setLevelIndex(int const level_index);
 
     void addDiamond(int n);
     void useDiamond(int n);
@@ -42,12 +42,12 @@ public:
 private:
     Game();
 
-    std::unique_ptr<Window> m_pWindow;
-    Level* m_pLevel;
-    std::unique_ptr<Cursor> m_cursor;
-    int m_nDiamond;
-    bool m_bRunning;
-    bool m_bDebug;
-    std::size_t m_levelIndex;
-    std::vector<std::string> m_levelFiles;
+    std::unique_ptr<Window> window_;
+    Level* level_;
+    std::unique_ptr<Cursor> cursor_;
+    int num_diamond_;
+    bool is_running_;
+    bool is_debug_;
+    std::size_t level_index_;
+    std::vector<std::string> level_files_;
 };

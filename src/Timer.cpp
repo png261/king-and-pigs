@@ -1,34 +1,34 @@
 #include "Timer.hpp"
 
 Timer::Timer()
-    : m_time(0)
-    , m_bDone(false)
+    : time_(0)
+    , is_done_(false)
 {}
 
 Timer::Timer(Uint32 time)
-    : m_time(time)
-    , m_bDone(false)
+    : time_(time)
+    , is_done_(false)
 {}
 
 void Timer::setTime(Uint32 time)
 {
-    m_time = time;
+    time_ = time;
 }
 
 void Timer::start()
 {
-    m_stopwatch.start();
+    stopwatch_.start();
 }
 
 void Timer::restart()
 {
-    m_stopwatch.restart();
+    stopwatch_.restart();
 }
 
 bool Timer::isDone()
 {
-    if (m_stopwatch.delta() >= m_time) {
-        m_stopwatch.stop();
+    if (stopwatch_.delta() >= time_) {
+        stopwatch_.stop();
         return true;
     }
     return false;

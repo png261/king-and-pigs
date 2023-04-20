@@ -2,11 +2,11 @@
 
 Stopwatch::Stopwatch()
 {
-    m_startMark = 0;
-    m_stopMark = 0;
-    m_pausedMark = 0;
-    m_bRunning = false;
-    m_bPaused = false;
+    start_mark_ = 0;
+    stop_mark_ = 0;
+    paused_mark_ = 0;
+    is_running_ = false;
+    is_paused_ = false;
 }
 
 void Stopwatch::start()
@@ -15,11 +15,11 @@ void Stopwatch::start()
         return;
     }
 
-    m_startMark = SDL_GetTicks();
-    m_stopMark = 0;
-    m_pausedMark = 0;
-    m_bRunning = true;
-    m_bPaused = false;
+    start_mark_ = SDL_GetTicks();
+    stop_mark_ = 0;
+    paused_mark_ = 0;
+    is_running_ = true;
+    is_paused_ = false;
 }
 
 void Stopwatch::stop()
@@ -28,9 +28,9 @@ void Stopwatch::stop()
         return;
     }
 
-    m_stopMark = SDL_GetTicks();
-    m_bRunning = false;
-    m_bPaused = false;
+    stop_mark_ = SDL_GetTicks();
+    is_running_ = false;
+    is_paused_ = false;
 }
 
 void Stopwatch::restart()
@@ -44,9 +44,9 @@ void Stopwatch::pause()
     if (!isRunning() || isPaused()) {
         return;
     }
-    m_bRunning = false;
-    m_bPaused = true;
-    m_pausedMark = (SDL_GetTicks() - m_startMark);
+    is_running_ = false;
+    is_paused_ = true;
+    paused_mark_ = (SDL_GetTicks() - start_mark_);
 }
 
 void Stopwatch::resume()
@@ -55,25 +55,25 @@ void Stopwatch::resume()
         return;
     }
 
-    m_bRunning = false;
-    m_bPaused = true;
-    m_startMark = (SDL_GetTicks() - m_pausedMark);
-    m_pausedMark = 0;
+    is_running_ = false;
+    is_paused_ = true;
+    start_mark_ = (SDL_GetTicks() - paused_mark_);
+    paused_mark_ = 0;
 }
 
 bool Stopwatch::isRunning() const
 {
-    return m_bRunning;
+    return is_running_;
 }
 
 bool Stopwatch::isPaused() const
 {
-    return m_bPaused;
+    return is_paused_;
 }
 
 Uint32 Stopwatch::currentTime() const
 {
-    return SDL_GetTicks() - m_startMark;
+    return SDL_GetTicks() - start_mark_;
 }
 
 Uint32 Stopwatch::delta() const
@@ -83,12 +83,12 @@ Uint32 Stopwatch::delta() const
     }
 
     if (isPaused()) {
-        return m_pausedMark;
+        return paused_mark_;
     }
 
-    if (m_startMark == 0) {
+    if (start_mark_ == 0) {
         return 0;
     }
 
-    return m_stopMark - m_startMark;
+    return stop_mark_ - start_mark_;
 }

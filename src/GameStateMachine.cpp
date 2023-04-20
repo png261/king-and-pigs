@@ -4,102 +4,102 @@
 #include "LoadingState.hpp"
 
 GameStateMachine::GameStateMachine()
-    : loadingTimer(500)
+    : loading_timer_(500)
 {
-    m_loadingState = std::make_unique<LoadingState>();
+    loading_state_ = std::make_unique<LoadingState>();
 }
 
 GameStateMachine& GameStateMachine::Instance()
 {
-    static GameStateMachine s_instance{};
-    return s_instance;
+    static GameStateMachine instance{};
+    return instance;
 }
 
 void GameStateMachine::clean()
 {
-    for (const auto& state : m_gameStates) {
+    for (const auto& state : states_) {
         state->exit();
     }
-    m_gameStates.clear();
+    states_.clear();
 }
 
 void GameStateMachine::update()
 {
     if (isLoading()) {
-        if (loadingTimer.isDone() && m_gameStates.back()->isLoaded()) {
+        if (loading_timer_.isDone() && states_.back()->isLoaded()) {
             setLoading(false);
         }
         return;
     }
 
-    if (!m_gameStates.empty()) {
-        m_gameStates.back()->update();
+    if (!states_.empty()) {
+        states_.back()->update();
     }
 }
 
 void GameStateMachine::render() const
 {
     if (isLoading()) {
-        m_loadingState->render();
+        loading_state_->render();
         return;
     }
 
-    for (const auto& state : m_gameStates) {
+    for (const auto& state : states_) {
         state->render();
     }
 }
 
-void GameStateMachine::pushState(std::unique_ptr<GameState> pState)
+void GameStateMachine::pushState(std::unique_ptr<GameState> state)
 {
-    m_gameStates.push_back(std::move(pState));
-    m_gameStates.back()->enter();
+    states_.push_back(std::move(state));
+    states_.back()->enter();
 }
 
 void GameStateMachine::popState()
 {
-    if (m_gameStates.empty()) {
+    if (states_.empty()) {
         return;
     }
 
-    m_gameStates.back()->exit();
-    m_gameStates.pop_back();
-    if (!m_gameStates.empty()) {
-        m_gameStates.back()->resume();
+    states_.back()->exit();
+    states_.pop_back();
+    if (!states_.empty()) {
+        states_.back()->resume();
     }
 }
 
-void GameStateMachine::changeState(std::unique_ptr<GameState> pState)
+void GameStateMachine::changeState(std::unique_ptr<GameState> state)
 {
-    if (!m_gameStates.empty()) {
-        if (m_gameStates.back()->getStateID() == pState->getStateID()) {
+    if (!states_.empty()) {
+        if (states_.back()->getStateID() == state->getStateID()) {
             return;
         }
 
-        m_gameStates.back()->exit();
-        m_gameStates.pop_back();
+        states_.back()->exit();
+        states_.pop_back();
     }
 
-    pState->enter();
-    m_gameStates.push_back(std::move(pState));
+    state->enter();
+    states_.push_back(std::move(state));
 }
 
 GameState* GameStateMachine::getCurrentState()
 {
-    return m_gameStates.back().get();
+    return states_.back().get();
 }
 
 bool GameStateMachine::isLoading() const
 {
-    return m_bLoading;
+    return is_loading_;
 }
 
-void GameStateMachine::setLoading(bool bLoading)
+void GameStateMachine::setLoading(bool is_loading)
 {
-    m_bLoading = bLoading;
+    is_loading_ = is_loading;
 }
 
 void GameStateMachine::loading()
 {
     setLoading(true);
-    loadingTimer.restart();
+    loading_timer_.restart();
 }

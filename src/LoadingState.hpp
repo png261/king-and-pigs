@@ -15,6 +15,6 @@ public:
     std::string getStateID() const override;
 
 private:
-    std::vector<std::unique_ptr<UiObject>> m_uiObjects;
-    static const std::string s_stateID;
+    std::vector<std::unique_ptr<UiObject>> ui_objects_;
+    static const std::string kId_;
 };

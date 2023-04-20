@@ -1,11 +1,11 @@
 #include "Candle.hpp"
 
-void Candle::load(std::unique_ptr<LoaderParams> const& pParams)
+void Candle::load(std::unique_ptr<LoaderParams> const& params)
 {
-    GameObject::load(std::move(pParams));
-    createBody(pParams->x(), pParams->y(), m_width, m_height);
+    GameObject::load(std::move(params));
+    createBody(params->x(), params->y(), width_, height_);
 
-    m_pBody->SetGravityScale(0);
+    body_->SetGravityScale(0);
 
     setFilterData(PhysicWorld::CAT_NONE, PhysicWorld::MASK_NONE);
     loadAnimation();
@@ -13,7 +13,7 @@ void Candle::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void Candle::loadAnimation()
 {
-    m_animations[NORMAL] = std::make_unique<Animation>("candle_idle", 14, 32, 8);
-    m_curAnimation = NORMAL;
-    m_animations[m_curAnimation]->start();
+    animations_[NORMAL] = std::make_unique<Animation>("candle_idle", 14, 32, 8);
+    current_animation_ = NORMAL;
+    animations_[current_animation_]->start();
 }

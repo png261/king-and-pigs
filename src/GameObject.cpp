@@ -6,58 +6,58 @@
 
 GameObject::GameObject()
     : PhysicObject()
-    , m_width(0)
-    , m_height(0)
-    , m_bExist(true)
-    , m_bFlipped(false)
-    , m_direction(RIGHT)
+    , width_(0)
+    , height_(0)
+    , is_exist_(true)
+    , is_flipped_(false)
+    , direction_(RIGHT)
 {}
 
 void GameObject::load(std::unique_ptr<LoaderParams> const& pParams)
 {
-    m_width = pParams->width();
-    m_height = pParams->height();
+    width_ = pParams->width();
+    height_ = pParams->height();
 }
 
 void GameObject::loadAnimation(){};
 
 void GameObject::draw()
 {
-    b2Vec2 halfSize =
-        0.5 *
-        b2Vec2(m_animations[m_curAnimation]->getWidth(), m_animations[m_curAnimation]->getHeight());
+    b2Vec2 halfSize = 0.5 * b2Vec2(
+                                animations_[current_animation_]->getWidth(),
+                                animations_[current_animation_]->getHeight());
 
-    m_animations[m_curAnimation]->draw(
+    animations_[current_animation_]->draw(
         getPosition() - halfSize - Camera::Instance().getPosition(),
         getAngle(),
-        m_bFlipped,
+        is_flipped_,
         Camera::Instance().getZoom());
 }
 
 void GameObject::update()
 {
     PhysicObject::update();
-    m_animations[m_curAnimation]->update();
+    animations_[current_animation_]->update();
 }
 
 void GameObject::updateAnimation() {}
 
 bool GameObject::isExist() const
 {
-    return m_bExist;
+    return is_exist_;
 }
 
 void GameObject::disappear()
 {
-    m_bExist = false;
+    is_exist_ = false;
 }
 
 int GameObject::getWidth() const
 {
-    return m_width;
+    return width_;
 }
 
 int GameObject::getHeight() const
 {
-    return m_height;
+    return height_;
 }

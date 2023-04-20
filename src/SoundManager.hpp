@@ -42,10 +42,10 @@ private:
     void setVolumeMusic(const float percent);
     void setVolumeSFX(const float percent);
 
-    bool m_bMutedMusic;
-    bool m_bMutedSFX;
-    float m_volume;
+    bool is_muted_music_;
+    bool is_muted_sfx_;
+    float volume_;
 
-    std::unordered_map<std::string, Mix_Music*> m_musicMap;
-    std::unordered_map<std::string, Mix_Chunk*> m_sfxMap;
+    std::unordered_map<std::string, Mix_Music*> musics_;
+    std::unordered_map<std::string, Mix_Chunk*> sfxs_;
 };

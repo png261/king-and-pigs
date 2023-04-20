@@ -14,31 +14,31 @@
 #include "WinState.hpp"
 
 Game::Game()
-    : m_bRunning(false)
-    , m_bDebug(false)
-    , m_levelIndex(0)
+    : is_running_(false)
+    , is_debug_(false)
+    , level_index_(0)
 {}
 
 Game& Game::Instance()
 {
-    static Game s_instance{};
-    return s_instance;
+    static Game instance{};
+    return instance;
 }
 
 void Game::init()
 {
     SDL::init();
-    m_pWindow = std::make_unique<Window>(1280, 720, "King and Pig");
-    PhysicWorld::Instance().init(m_pWindow.get());
+    window_ = std::make_unique<Window>(1280, 720, "King and Pig");
+    PhysicWorld::Instance().init(window_.get());
 
-    m_cursor = std::make_unique<Cursor>();
-    m_cursor->init();
+    cursor_ = std::make_unique<Cursor>();
+    cursor_->init();
 
-    m_levelFiles.push_back(LEVEL_DIRECTORY + "level1.tmx");
-    m_levelFiles.push_back(LEVEL_DIRECTORY + "level2.tmx");
+    level_files_.push_back(LEVEL_DIRECTORY + "level1.tmx");
+    level_files_.push_back(LEVEL_DIRECTORY + "level2.tmx");
     GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
 
-    m_bRunning = true;
+    is_running_ = true;
 }
 
 void Game::handleEvents()
@@ -48,19 +48,19 @@ void Game::handleEvents()
 
 void Game::update()
 {
-    m_cursor->resetState();
+    cursor_->resetState();
     GameStateMachine::Instance().update();
 }
 
 void Game::render() const
 {
-    m_pWindow->clear();
+    window_->clear();
 
     GameStateMachine::Instance().render();
-    m_cursor->draw();
+    cursor_->draw();
 
-    m_pWindow->refresh();
-    m_pWindow->delayFramerateIfNeeded();
+    window_->refresh();
+    window_->delayFramerateIfNeeded();
 }
 
 void Game::clean()
@@ -76,89 +76,89 @@ void Game::clean()
 
 void Game::quit()
 {
-    m_bRunning = false;
+    is_running_ = false;
 }
 
-void Game::setLevel(Level* const pLevel)
+void Game::setLevel(Level* const level)
 {
-    m_pLevel = pLevel;
+    level_ = level;
 }
 
-void Game::setLevelIndex(const int index)
+void Game::setLevelIndex(const int level_index)
 {
-    m_levelIndex = index;
+    level_index_ = level_index;
 }
 
 void Game::nextLevel()
 {
-    PlayState* const playState =
+    PlayState* const play_state =
         dynamic_cast<PlayState*>(GameStateMachine::Instance().getCurrentState());
-    if (playState == nullptr) {
+    if (play_state == nullptr) {
         return;
     }
 
-    m_levelIndex += 1;
-    if (m_levelIndex >= m_levelFiles.size()) {
+    level_index_ += 1;
+    if (level_index_ >= level_files_.size()) {
         GameStateMachine::Instance().pushState(std::make_unique<WinState>());
-        m_levelIndex = 0;
+        level_index_ = 0;
         return;
     }
 
     GameStateMachine::Instance().loading();
-    playState->loadLevel();
+    play_state->loadLevel();
 }
 
 int Game::getLevelIndex() const
 {
-    return m_levelIndex;
+    return level_index_;
 }
 
 bool Game::isRunning() const
 {
-    return m_bRunning;
+    return is_running_;
 }
 
-std::string Game::getLevelPath(int index)
+std::string Game::getLevelPath(int level_index)
 {
-    return m_levelFiles[index];
+    return level_files_[level_index];
 }
 
 Window* Game::getWindow() const
 {
-    return m_pWindow.get();
+    return window_.get();
 }
 
 Level* Game::getLevel() const
 {
-    return m_pLevel;
+    return level_;
 }
 
 bool Game::isDebug() const
 {
-    return m_bDebug;
+    return is_debug_;
 }
 
 void Game::toggleDebug()
 {
-    m_bDebug = !m_bDebug;
+    is_debug_ = !is_debug_;
 }
 
 void Game::addDiamond(int n)
 {
-    m_nDiamond += n;
+    num_diamond_ += n;
 }
 
 int Game::getDiamond() const
 {
-    return m_nDiamond;
+    return num_diamond_;
 }
 
 void Game::useDiamond(int n)
 {
-    m_nDiamond -= n;
+    num_diamond_ -= n;
 }
 
 Cursor* Game::getCursor()
 {
-    return m_cursor.get();
+    return cursor_.get();
 }

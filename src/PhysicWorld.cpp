@@ -21,20 +21,20 @@ PhysicWorld::PhysicWorld() {}
 
 PhysicWorld& PhysicWorld::Instance()
 {
-    static PhysicWorld s_instance{};
-    return s_instance;
+    static PhysicWorld instance{};
+    return instance;
 }
 
 void PhysicWorld::init(Window* const window)
 {
-    m_pWorld = std::make_unique<b2World>(GRAVITY);
-    m_pDebugDraw = std::make_unique<DebugDraw>(window);
-    m_pWorld->SetDebugDraw(m_pDebugDraw.get());
+    world_ = std::make_unique<b2World>(GRAVITY);
+    debugDraw_ = std::make_unique<DebugDraw>(window);
+    world_->SetDebugDraw(debugDraw_.get());
     createContactListener();
 
-    m_timeStep = 1.0f / 60.f;
-    m_velocityIterations = 10;
-    m_positionIterations = 8;
+    time_step_ = 1.0f / 60.f;
+    velocity_iterations_ = 10;
+    position_iterations_ = 8;
 }
 
 
@@ -168,7 +168,7 @@ void PhysicWorld::handleAttack(b2Fixture* const Attacker, b2Fixture* const Defen
 
 void PhysicWorld::update()
 {
-    getWorld()->Step(m_timeStep, m_velocityIterations, m_positionIterations);
+    getWorld()->Step(time_step_, velocity_iterations_, position_iterations_);
 
     for (b2Contact* contact = getWorld()->GetContactList(); contact != nullptr;
          contact = contact->GetNext()) {
@@ -185,19 +185,19 @@ void PhysicWorld::debugDraw()
 
 b2World* PhysicWorld::getWorld()
 {
-    return m_pWorld.get();
+    return world_.get();
 }
 
 void PhysicWorld::clean()
 {
-    m_pWorld->SetContactListener(nullptr);
-    m_contactListener.reset();
-    for (b2Body* body = m_pWorld->GetBodyList(); body; body = body->GetNext()) {
-        m_pWorld->DestroyBody(body);
+    world_->SetContactListener(nullptr);
+    contactListener_.reset();
+    for (b2Body* body = world_->GetBodyList(); body; body = body->GetNext()) {
+        world_->DestroyBody(body);
     }
 }
 void PhysicWorld::createContactListener()
 {
-    m_contactListener = std::make_unique<ContactListener>(ContactListener());
-    m_pWorld->SetContactListener(m_contactListener.get());
+    contactListener_ = std::make_unique<ContactListener>(ContactListener());
+    world_->SetContactListener(contactListener_.get());
 }

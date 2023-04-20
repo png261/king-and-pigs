@@ -1,28 +1,28 @@
 #include "LoaderParams.hpp"
 
 LoaderParams::LoaderParams(const int x, const int y, const int width, const int height)
-    : m_x(x)
-    , m_y(y)
-    , m_width(width)
-    , m_height(height)
+    : x_(x)
+    , y_(y)
+    , width_(width)
+    , height_(height)
 {}
 
 int LoaderParams::x() const
 {
-    return m_x;
+    return x_;
 }
 
 int LoaderParams::y() const
 {
-    return m_y;
+    return y_;
 }
 
 int LoaderParams::width() const
 {
-    return m_width;
+    return width_;
 }
 
 int LoaderParams::height() const
 {
-    return m_height;
+    return height_;
 }

@@ -6,10 +6,10 @@
 
 Button::Button(std::string text, int x, int y, int width, int height)
     : UiObject()
-    , m_bDisabled(false)
-    , m_text(text)
-    , m_rectangle(x, y, width, height)
-    , m_callback(nullptr)
+    , is_disabled_(false)
+    , text_(text)
+    , rectangle_(x, y, width, height)
+    , callback_(nullptr)
 {
     SoundManager::Instance().loadSFX(SOUND_DIRECTORY + "Button/clicked.mp3", "button clicked");
 }
@@ -17,16 +17,16 @@ Button::Button(std::string text, int x, int y, int width, int height)
 void Button::draw()
 {
     if (isDisabled()) {
-        Game::Instance().getWindow()->drawBox(m_rectangle, Color::GRAY);
+        Game::Instance().getWindow()->drawBox(rectangle_, Color::GRAY);
     } else {
-        Game::Instance().getWindow()->drawBox(m_rectangle);
+        Game::Instance().getWindow()->drawBox(rectangle_);
     }
 
     Game::Instance().getWindow()->print(
-        m_text,
+        text_,
         40,
-        m_rectangle.x + m_rectangle.w * 0.5f,
-        m_rectangle.y + m_rectangle.h * 0.5f);
+        rectangle_.x + rectangle_.w * 0.5f,
+        rectangle_.y + rectangle_.h * 0.5f);
 };
 
 void Button::update()
@@ -35,31 +35,31 @@ void Button::update()
         return;
     }
 
-    if (InputHandler::Instance().isMouseInside(m_rectangle)) {
+    if (InputHandler::Instance().isMouseInside(rectangle_)) {
         Game::Instance().getCursor()->hover();
         if (InputHandler::Instance().isMouseDown(MOUSE_LEFT)) {
             SoundManager::Instance().playSFX("button clicked");
-            m_callback();
+            callback_();
         }
     }
 };
 
 void Button::onClick(std::function<void()> callback)
 {
-    m_callback = callback;
+    callback_ = callback;
 }
 
 void Button::disable()
 {
-    m_bDisabled = true;
+    is_disabled_ = true;
 }
 
 void Button::enable()
 {
-    m_bDisabled = false;
+    is_disabled_ = false;
 }
 
 bool Button::isDisabled() const
 {
-    return m_bDisabled;
+    return is_disabled_;
 }

@@ -40,12 +40,12 @@ private:
     void onMouseDown(SDL_Event const& event);
     void onMouseUp(SDL_Event const& event);
 
-    const Uint8* m_keyboard;
-    bool m_bKeyDown[KEYBOARD_SIZE];
-    bool m_bKeyUp[KEYBOARD_SIZE];
+    const Uint8* keyboard_;
+    bool is_key_down_[KEYBOARD_SIZE];
+    bool is_key_up_[KEYBOARD_SIZE];
 
-    uint32_t m_mouse;
-    b2Vec2 m_mousePosition;
-    bool m_bMouseDown[MOUSE_MAX];
-    bool m_bMouseUp[MOUSE_MAX];
+    uint32_t mouse_;
+    b2Vec2 mouse_position_;
+    bool is_mouse_down_[MOUSE_MAX];
+    bool is_mouse_up_[MOUSE_MAX];
 };

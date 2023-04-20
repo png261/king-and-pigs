@@ -6,22 +6,22 @@
 Bomb::Bomb()
     : GameObject()
     , AttackerObject(1, 20, 9999)
-    , m_bOn(false)
+    , is_on_(false)
 {}
 
-void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
+void Bomb::load(std::unique_ptr<LoaderParams> const& params)
 {
-    GameObject::load(std::move(pParams));
+    GameObject::load(std::move(params));
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position = PhysicWorld::pixelToMeter(
-        b2Vec2(pParams->x(), pParams->y()) + 0.5f * b2Vec2(m_width, m_height));
+        b2Vec2(params->x(), params->y()) + 0.5f * b2Vec2(width_, height_));
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
-    m_pBody = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
+    body_ = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
 
     b2CircleShape circle;
-    circle.m_radius = PhysicWorld::pixelToMeter(m_width);
+    circle.m_radius = PhysicWorld::pixelToMeter(width_);
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &circle;
@@ -29,31 +29,31 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& pParams)
     fixtureDef.friction = 0.3f;
     fixtureDef.filter.categoryBits = PhysicWorld::CAT_BOMB;
     fixtureDef.filter.maskBits = PhysicWorld::MASK_BOMB;
-    m_pFixture = m_pBody->CreateFixture(&fixtureDef);
+    fixture_ = body_->CreateFixture(&fixtureDef);
 
     createCircleSensor(
         {0, 0},
-        m_attackRange,
+        attack_range_,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_PIG_ATTACK_SENSOR);
 
     loadAnimation();
-    onTimer.setTime(1000);
+    on_timer_.setTime(1000);
 }
 
 void Bomb::loadAnimation()
 {
-    m_animations[OFF] = std::make_unique<Animation>("bomb_off", 52, 56);
-    m_animations[ON] = std::make_unique<Animation>("bomb_on", 52, 56, 4);
-    m_animations[EXPLODE] = std::make_unique<Animation>("bomb_explode", 52, 56, 6, false);
+    animations_[OFF] = std::make_unique<Animation>("bomb_off", 52, 56);
+    animations_[ON] = std::make_unique<Animation>("bomb_on", 52, 56, 4);
+    animations_[EXPLODE] = std::make_unique<Animation>("bomb_explode", 52, 56, 6, false);
 
-    m_curAnimation = OFF;
-    m_animations[m_curAnimation]->start();
+    current_animation_ = OFF;
+    animations_[current_animation_]->start();
 }
 
 void Bomb::update()
 {
-    if (isOn() && m_curAnimation == EXPLODE && m_animations[m_curAnimation]->isFinished()) {
+    if (isOn() && current_animation_ == EXPLODE && animations_[current_animation_]->isFinished()) {
         disappear();
         return;
     }
@@ -61,7 +61,7 @@ void Bomb::update()
     GameObject::update();
     AttackerObject::update();
 
-    if (isOn() && onTimer.isDone()) {
+    if (isOn() && on_timer_.isDone()) {
         explode();
     }
 
@@ -71,10 +71,10 @@ void Bomb::update()
 void Bomb::turnOn()
 {
     SoundManager::Instance().playSFX("bomb_on");
-    m_bOn = true;
-    onTimer.start();
-    m_curAnimation = ON;
-    m_animations[m_curAnimation]->start();
+    is_on_ = true;
+    on_timer_.start();
+    current_animation_ = ON;
+    animations_[current_animation_]->start();
 }
 
 void Bomb::explode()
@@ -87,12 +87,12 @@ void Bomb::explode()
 void Bomb::updateAnimaton()
 {
     if (isAttack()) {
-        m_curAnimation = EXPLODE;
-        m_animations[m_curAnimation]->start();
+        current_animation_ = EXPLODE;
+        animations_[current_animation_]->start();
     }
 }
 
 bool Bomb::isOn() const
 {
-    return m_bOn;
+    return is_on_;
 }

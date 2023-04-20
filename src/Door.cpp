@@ -4,41 +4,43 @@
 
 Door::Door()
     : GameObject()
-    , m_bOpened(false)
+    , is_opened_(false)
 {}
 
-void Door::load(std::unique_ptr<LoaderParams> const& pParams)
+void Door::load(std::unique_ptr<LoaderParams> const& params)
 {
-    GameObject::load(std::move(pParams));
-    createBody(pParams->x(), pParams->y(), m_width, m_height);
+    GameObject::load(std::move(params));
+    createBody(params->x(), params->y(), width_, height_);
 
-    m_pBody->SetGravityScale(0);
-    m_pFixture->SetSensor(true);
+    body_->SetGravityScale(0);
+    fixture_->SetSensor(true);
 
     loadAnimation();
 }
 
 void Door::loadAnimation()
 {
-    m_animations[DOOR_CLOSED] = std::make_unique<Animation>("door_idle", 46, 56, 1);
-    m_animations[DOOR_OPENING] = std::make_unique<Animation>("door_open", 46, 56, 5, false);
-    m_animations[DOOR_CLOSING] = std::make_unique<Animation>("door_close", 46, 56, 3, false);
+    animations_[DOOR_CLOSED] = std::make_unique<Animation>("door_idle", 46, 56, 1);
+    animations_[DOOR_OPENING] = std::make_unique<Animation>("door_open", 46, 56, 5, false);
+    animations_[DOOR_CLOSING] = std::make_unique<Animation>("door_close", 46, 56, 3, false);
 
-    m_curAnimation = DOOR_CLOSED;
-    m_animations[m_curAnimation]->start();
+    current_animation_ = DOOR_CLOSED;
+    animations_[current_animation_]->start();
 }
 
 void Door::update()
 {
     GameObject::update();
-    if (isOpened() && m_curAnimation == DOOR_CLOSING && m_animations[DOOR_CLOSING]->isFinished()) {
+    if (isOpened() && current_animation_ == DOOR_CLOSING &&
+        animations_[DOOR_CLOSING]->isFinished()) {
         SoundManager::Instance().playSFX("door_close");
-        m_bOpened = false;
+        is_opened_ = false;
     }
 
-    if (isClosed() && m_curAnimation == DOOR_OPENING && m_animations[DOOR_OPENING]->isFinished()) {
+    if (isClosed() && current_animation_ == DOOR_OPENING &&
+        animations_[DOOR_OPENING]->isFinished()) {
         SoundManager::Instance().playSFX("door_open");
-        m_bOpened = true;
+        is_opened_ = true;
     }
 }
 
@@ -48,8 +50,8 @@ void Door::open()
         return;
     }
 
-    m_curAnimation = DOOR_OPENING;
-    m_animations[m_curAnimation]->start();
+    current_animation_ = DOOR_OPENING;
+    animations_[current_animation_]->start();
 }
 
 void Door::close()
@@ -58,16 +60,16 @@ void Door::close()
         return;
     }
 
-    m_curAnimation = DOOR_CLOSING;
-    m_animations[m_curAnimation]->start();
+    current_animation_ = DOOR_CLOSING;
+    animations_[current_animation_]->start();
 }
 
 bool Door::isOpened() const
 {
-    return m_bOpened;
+    return is_opened_;
 }
 
 bool Door::isClosed() const
 {
-    return !m_bOpened;
+    return !is_opened_;
 }

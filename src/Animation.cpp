@@ -4,43 +4,43 @@
 #include "TextureManager.hpp"
 
 Animation::Animation(
-    const std::string& textureID,
+    const std::string& texture_id,
     const uint width,
     const uint height,
-    const uint nFrames,
+    const uint num_frames,
     const bool bLoop)
-    : m_textureID(textureID)
-    , m_width(width)
-    , m_height(height)
-    , m_framerate(10)
-    , m_nFrames(nFrames)
-    , m_curFrame(0)
-    , m_timesLooped(0)
-    , m_bRunning(false)
-    , m_bFinished(false)
-    , m_bLoop(bLoop)
+    : texture_id_(texture_id)
+    , width_(width)
+    , height_(height)
+    , framerate_(10)
+    , num_frames_(num_frames)
+    , current_frame_(0)
+    , times_looped_(0)
+    , is_running_(false)
+    , is_finished_(false)
+    , is_loop_(bLoop)
 {}
 
 bool Animation::isRunning() const
 {
-    return m_bRunning;
+    return is_running_;
 }
 
 void Animation::update()
 {
-    if (m_framerate == 0) {
+    if (framerate_ == 0) {
         return;
     }
 
-    const Uint32 time_between_frames = (1000 / m_framerate);
-    m_curFrame = (m_stopwatch.delta() / time_between_frames);
+    const Uint32 time_between_frames = (1000 / framerate_);
+    current_frame_ = (stopwatch_.delta() / time_between_frames);
 
-    if (m_curFrame >= m_nFrames) {
-        if (m_bLoop) {
-            m_curFrame %= m_nFrames;
+    if (current_frame_ >= num_frames_) {
+        if (is_loop_) {
+            current_frame_ %= num_frames_;
         } else {
-            m_curFrame = m_nFrames - 1;
-            m_bFinished = true;
+            current_frame_ = num_frames_ - 1;
+            is_finished_ = true;
         }
     }
 }
@@ -51,20 +51,28 @@ void Animation::draw(const b2Vec2& position, const float angle, const bool bFlip
         return;
     }
 
-    TextureManager::Instance()
-        .drawFrame(m_textureID, position, m_width, m_height, 0, m_curFrame, angle, bFlipped, zoom);
+    TextureManager::Instance().drawFrame(
+        texture_id_,
+        position,
+        width_,
+        height_,
+        0,
+        current_frame_,
+        angle,
+        bFlipped,
+        zoom);
 }
 
 void Animation::start()
 {
-    if (m_framerate == 0 || isRunning()) {
+    if (framerate_ == 0 || isRunning()) {
         return;
     }
 
-    m_curFrame = 0;
-    m_timesLooped = 0;
-    m_bRunning = true;
-    m_stopwatch.start();
+    current_frame_ = 0;
+    times_looped_ = 0;
+    is_running_ = true;
+    stopwatch_.start();
 }
 
 void Animation::restart()
@@ -75,7 +83,7 @@ void Animation::restart()
 
 void Animation::stop()
 {
-    if (m_framerate == 0) {
+    if (framerate_ == 0) {
         return;
     }
 
@@ -83,21 +91,21 @@ void Animation::stop()
         return;
     }
 
-    m_bRunning = false;
-    m_stopwatch.stop();
+    is_running_ = false;
+    stopwatch_.stop();
 }
 
 bool Animation::isFinished() const
 {
-    return m_bFinished;
+    return is_finished_;
 }
 
 int Animation::getWidth() const
 {
-    return m_width;
+    return width_;
 }
 
 int Animation::getHeight() const
 {
-    return m_height;
+    return height_;
 }

@@ -3,9 +3,9 @@
 
 DoorIn::DoorIn() {}
 
-void DoorIn::load(std::unique_ptr<LoaderParams> const& pParams)
+void DoorIn::load(std::unique_ptr<LoaderParams> const& params)
 {
-    Door::load(std::move(pParams));
+    Door::load(std::move(params));
     createSensor();
     setFilterData(PhysicWorld::CAT_DOOR_IN, PhysicWorld::MASK_DOOR_IN);
 }
@@ -18,8 +18,8 @@ void DoorIn::createSensor()
         PhysicWorld::pixelToMeter(sensorSize) / 2.0f,
         PhysicWorld::pixelToMeter(sensorSize) / 2.0f,
         b2Vec2(
-            PhysicWorld::pixelToMeter(m_width / 4.0f - sensorSize),
-            PhysicWorld::pixelToMeter(m_height / 4.0f - sensorSize)),
+            PhysicWorld::pixelToMeter(width_ / 4.0f - sensorSize),
+            PhysicWorld::pixelToMeter(height_ / 4.0f - sensorSize)),
         0);
 
     b2FixtureDef sensorDef;
@@ -27,5 +27,5 @@ void DoorIn::createSensor()
     sensorDef.isSensor = true;
     sensorDef.filter.categoryBits = PhysicWorld::CAT_DOOR_IN;
     sensorDef.filter.maskBits = PhysicWorld::MASK_DOOR_IN;
-    m_pBody->CreateFixture(&sensorDef);
+    body_->CreateFixture(&sensorDef);
 }

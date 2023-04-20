@@ -1,34 +1,31 @@
 #include "DamageableObject.hpp"
 
-DamageableObject::DamageableObject(
-    const int initialHp,
-    const int invulnerableTime,
-    const int dyingTime)
-    : m_hp(initialHp)
-    , m_maxHp(initialHp)
-    , m_dyingTime(dyingTime)
-    , m_invulnerableTime(invulnerableTime)
-    , invulnerableTimer(invulnerableTime)
-    , dyingTimer(dyingTime)
-    , m_bDead(false)
-    , m_bDying(false)
-    , m_bInvulnerable(false)
+DamageableObject::DamageableObject(const int hp, const int invulnerab_time, const int dying_time)
+    : hp_(hp)
+    , max_hp_(hp)
+    , dying_time_(dying_time)
+    , invulnerable_time_(invulnerab_time)
+    , invulnerable_timer_(invulnerab_time)
+    , dying_timer_(dying_time)
+    , is_dead_(false)
+    , is_dying_(false)
+    , is_invulnerable_(false)
 {}
 
-void DamageableObject::heal(const int d)
+void DamageableObject::heal(const int n)
 {
-    m_hp += d;
-    m_hp = std::max(0, std::min(m_maxHp, m_hp));
+    hp_ += n;
+    hp_ = std::max(0, std::min(max_hp_, hp_));
 }
 
 bool DamageableObject::isDead() const
 {
-    return m_bDead;
+    return is_dead_;
 }
 
 bool DamageableObject::isInvulnerable() const
 {
-    return m_bInvulnerable;
+    return is_invulnerable_;
 }
 
 void DamageableObject::startInvulnerable()
@@ -37,26 +34,26 @@ void DamageableObject::startInvulnerable()
         return;
     }
 
-    m_bInvulnerable = true;
-    invulnerableTimer.start();
+    is_invulnerable_ = true;
+    invulnerable_timer_.start();
 };
 
 void DamageableObject::stopInvulnerable()
 {
-    m_bInvulnerable = false;
+    is_invulnerable_ = false;
 };
 
-void DamageableObject::damage(const int d)
+void DamageableObject::damage(const int n)
 {
     if (isInvulnerable() || isDead()) {
         return;
     }
 
-    m_hp -= d;
-    if (m_hp <= 0) {
-        m_hp = 0;
-        m_bDying = true;
-        dyingTimer.start();
+    hp_ -= n;
+    if (hp_ <= 0) {
+        hp_ = 0;
+        is_dying_ = true;
+        dying_timer_.start();
         return;
     }
 
@@ -65,25 +62,25 @@ void DamageableObject::damage(const int d)
 
 void DamageableObject::update()
 {
-    if (m_bDead) {
+    if (is_dead_) {
         return;
     }
 
-    if (invulnerableTimer.isDone()) {
+    if (invulnerable_timer_.isDone()) {
         stopInvulnerable();
     }
 
-    if (m_bDying && dyingTimer.isDone()) {
-        m_bDead = true;
+    if (is_dying_ && dying_timer_.isDone()) {
+        is_dead_ = true;
     };
 }
 
 int DamageableObject::getHp() const
 {
-    return m_hp;
+    return hp_;
 };
 
 bool DamageableObject::isDying() const
 {
-    return m_bDying;
+    return is_dying_;
 }

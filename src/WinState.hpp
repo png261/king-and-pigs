@@ -15,8 +15,8 @@ public:
     std::string getStateID() const override;
 
 private:
-    std::vector<std::unique_ptr<UiObject>> m_uiObjects;
-    static const std::string s_stateID;
-    bool m_bEnterMainMenu;
-    bool m_bEnterExit;
+    std::vector<std::unique_ptr<UiObject>> ui_objects_;
+    static const std::string kId_;
+    bool is_enter_main_menu_;
+    bool is_enter_exit_;
 };

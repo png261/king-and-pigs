@@ -7,12 +7,12 @@
 class DamageableObject
 {
 public:
-    DamageableObject(const int initialHp, const int invulnerableTime, const int dyingTime);
+    DamageableObject(const int hp, const int invulnerab_time, const int dying_time);
 
     virtual void update();
 
-    virtual void heal(const int d);
-    virtual void damage(const int d);
+    virtual void heal(const int n);
+    virtual void damage(const int n);
 
     virtual int getHp() const;
     virtual bool isDying() const;
@@ -23,15 +23,15 @@ protected:
     virtual void startInvulnerable();
     virtual void stopInvulnerable();
 
-    int m_hp;
-    int m_maxHp;
-    int m_dyingTime;
-    int m_invulnerableTime;
+    int hp_;
+    int max_hp_;
+    int dying_time_;
+    int invulnerable_time_;
 
-    Timer invulnerableTimer;
-    Timer dyingTimer;
+    Timer invulnerable_timer_;
+    Timer dying_timer_;
 
-    bool m_bDead;
-    bool m_bDying;
-    bool m_bInvulnerable;
+    bool is_dead_;
+    bool is_dying_;
+    bool is_invulnerable_;
 };

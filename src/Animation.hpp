@@ -8,14 +8,17 @@ class Animation final
 {
 public:
     Animation(
-        const std::string& textureID,
+        const std::string& texture_id,
         const uint width,
         const uint height,
-        const uint nFrames = 1,
-        const bool bLoop = true);
+        const uint num_frames = 1,
+        const bool is_loop = true);
 
-    void
-    draw(const b2Vec2& position, const float angle = 0, const bool flip = false, const int zoom = 1);
+    void draw(
+        const b2Vec2& position,
+        const float angle = 0,
+        const bool flip = false,
+        const int zoom = 1);
     void update();
 
     void start();
@@ -28,18 +31,18 @@ public:
     int getHeight() const;
 
 private:
-    Stopwatch m_stopwatch;
-    std::string m_textureID;
+    Stopwatch stopwatch_;
+    std::string texture_id_;
 
-    uint m_width;
-    uint m_height;
-    uint m_framerate;
+    uint width_;
+    uint height_;
+    uint framerate_;
 
-    uint m_nFrames;
-    uint m_curFrame;
-    uint m_timesLooped;
+    uint num_frames_;
+    uint current_frame_;
+    uint times_looped_;
 
-    bool m_bRunning;
-    bool m_bFinished;
-    bool m_bLoop;
+    bool is_running_;
+    bool is_finished_;
+    bool is_loop_;
 };

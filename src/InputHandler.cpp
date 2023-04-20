@@ -5,24 +5,24 @@
 
 InputHandler& InputHandler::Instance()
 {
-    static InputHandler s_instance{};
-    return s_instance;
+    static InputHandler instance{};
+    return instance;
 }
 
 InputHandler::InputHandler()
-    : m_keyboard(nullptr)
-    , m_mouse(0)
-    , m_mousePosition(0, 0)
+    : keyboard_(nullptr)
+    , mouse_(0)
+    , mouse_position_(0, 0)
 {
     int i;
     for (i = 0; i < KEYBOARD_SIZE; ++i) {
-        m_bKeyDown[i] = false;
-        m_bKeyUp[i] = false;
+        is_key_down_[i] = false;
+        is_key_up_[i] = false;
     }
 
     for (i = 0; i < MOUSE_MAX; ++i) {
-        m_bMouseDown[i] = false;
-        m_bMouseUp[i] = false;
+        is_mouse_down_[i] = false;
+        is_mouse_up_[i] = false;
     }
 }
 
@@ -30,13 +30,13 @@ void InputHandler::update()
 {
     int i;
     for (i = 0; i < KEYBOARD_SIZE; ++i) {
-        m_bKeyDown[i] = false;
-        m_bKeyUp[i] = false;
+        is_key_down_[i] = false;
+        is_key_up_[i] = false;
     }
 
     for (i = 0; i < MOUSE_MAX; ++i) {
-        m_bMouseDown[i] = false;
-        m_bMouseUp[i] = false;
+        is_mouse_down_[i] = false;
+        is_mouse_up_[i] = false;
     }
 
     SDL_Event event;
@@ -66,14 +66,14 @@ void InputHandler::update()
 
 void InputHandler::onMouseDown(SDL_Event const& event)
 {
-    m_mouse = SDL_GetMouseState(nullptr, nullptr);
+    mouse_ = SDL_GetMouseState(nullptr, nullptr);
 
     switch (event.button.button) {
     case SDL_BUTTON_LEFT:
-        m_bMouseDown[MOUSE_LEFT] = true;
+        is_mouse_down_[MOUSE_LEFT] = true;
         break;
     case SDL_BUTTON_RIGHT:
-        m_bMouseDown[MOUSE_RIGHT] = true;
+        is_mouse_down_[MOUSE_RIGHT] = true;
         break;
     }
 }
@@ -82,91 +82,91 @@ void InputHandler::onMouseUp(SDL_Event const& event)
 {
     switch (event.button.button) {
     case SDL_BUTTON_LEFT:
-        m_bMouseUp[MOUSE_LEFT] = false;
+        is_mouse_up_[MOUSE_LEFT] = false;
         break;
     case SDL_BUTTON_RIGHT:
-        m_bMouseUp[MOUSE_RIGHT] = false;
+        is_mouse_up_[MOUSE_RIGHT] = false;
         break;
     }
 }
 
 void InputHandler::onKeyDown(SDL_Event const& event)
 {
-    m_keyboard = SDL_GetKeyboardState(0);
+    keyboard_ = SDL_GetKeyboardState(0);
 
     int index = event.key.keysym.scancode;
-    m_bKeyDown[index] = true;
+    is_key_down_[index] = true;
 }
 
 void InputHandler::onKeyUp(SDL_Event const& event)
 {
-    m_keyboard = SDL_GetKeyboardState(0);
+    keyboard_ = SDL_GetKeyboardState(0);
 
     int index = event.key.keysym.scancode;
-    m_bKeyUp[index] = true;
+    is_key_up_[index] = true;
 }
 
 void InputHandler::onMouseMove(SDL_Event const& event)
 {
-    m_mousePosition.x = event.motion.x;
-    m_mousePosition.y = event.motion.y;
+    mouse_position_.x = event.motion.x;
+    mouse_position_.y = event.motion.y;
 }
 
 bool InputHandler::isKeyPressed(const KeyboardKey key) const
 {
-    return m_keyboard != 0 && m_keyboard[key] == 1;
+    return keyboard_ != 0 && keyboard_[key] == 1;
 }
 
 bool InputHandler::isKeyDown(const KeyboardKey key) const
 {
-    return m_bKeyDown[key];
+    return is_key_down_[key];
 }
 
 bool InputHandler::isKeyUp(const KeyboardKey key) const
 {
-    return m_bKeyUp[key];
+    return is_key_up_[key];
 }
 
 void InputHandler::reset()
 {
-    m_keyboard = nullptr;
+    keyboard_ = nullptr;
     int i;
     for (i = 0; i < KEYBOARD_SIZE; ++i) {
-        m_bKeyDown[i] = false;
-        m_bKeyUp[i] = false;
+        is_key_down_[i] = false;
+        is_key_up_[i] = false;
     }
 
-    m_mouse = 0;
+    mouse_ = 0;
     for (i = 0; i < MOUSE_MAX; ++i) {
-        m_bMouseDown[i] = false;
-        m_bMouseUp[i] = false;
+        is_mouse_down_[i] = false;
+        is_mouse_up_[i] = false;
     }
 }
 
 b2Vec2 InputHandler::getMousePosition() const
 {
-    return m_mousePosition;
+    return mouse_position_;
 }
 
 bool InputHandler::isMouseDown(const MouseButton button) const
 {
-    return m_bMouseDown[button];
+    return is_mouse_down_[button];
 };
 
 bool InputHandler::isMouseUp(const MouseButton button) const
 {
-    return m_bMouseUp[button];
+    return is_mouse_up_[button];
 };
 
 bool InputHandler::isMousePressed(const MouseButton button) const
 {
     switch (button) {
     case MOUSE_LEFT:
-        if (m_mouse & SDL_BUTTON(1)) return true;
+        if (mouse_ & SDL_BUTTON(1)) return true;
         break;
 
     case MOUSE_RIGHT:
-        if (m_mouse & SDL_BUTTON(3)) return true;
+        if (mouse_ & SDL_BUTTON(3)) return true;
         break;
 
     default:
@@ -178,8 +178,8 @@ bool InputHandler::isMousePressed(const MouseButton button) const
 
 bool InputHandler::isMouseInside(const Rectangle& rectangle) const
 {
-    if ((m_mousePosition.x >= rectangle.x) && (m_mousePosition.x <= rectangle.x + rectangle.w) &&
-        (m_mousePosition.y >= rectangle.y) && (m_mousePosition.y <= rectangle.y + rectangle.h))
+    if ((mouse_position_.x >= rectangle.x) && (mouse_position_.x <= rectangle.x + rectangle.w) &&
+        (mouse_position_.y >= rectangle.y) && (mouse_position_.y <= rectangle.y + rectangle.h))
         return true;
 
     return false;

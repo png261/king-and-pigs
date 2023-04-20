@@ -2,20 +2,20 @@
 
 void GameState::resume()
 {
-    m_bPaused = false;
+    is_paused_ = false;
 };
 
 void GameState::pause()
 {
-    m_bPaused = true;
+    is_paused_ = true;
 };
 
 bool GameState::isLoaded() const
 {
-    return m_bLoaded;
+    return is_loaded_;
 }
 
 bool GameState::isPaused() const
 {
-    return m_bPaused;
+    return is_paused_;
 }

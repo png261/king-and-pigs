@@ -53,23 +53,23 @@ public:
     void delayFramerateIfNeeded();
 
 private:
-    SDL_Window* m_pWindow;
-    SDL_Renderer* m_pRenderer;
-    TTF_Font* m_pFont;
+    SDL_Window* window_;
+    SDL_Renderer* renderer_;
+    TTF_Font* font_;
 
-    uint m_width;
-    uint m_height;
+    uint width_;
+    uint height_;
 
-    uint m_originalWidth;
-    uint m_originalHeight;
+    uint origin_width_;
+    uint origin_height_;
 
-    bool m_bFullscreen;
+    bool is_fullscreen_;
 
-    uint m_framerate;
-    uint m_frameDelay;
-    uint m_currentFrameDelta;
+    uint framerate_;
+    uint frame_delay_;
+    uint current_frame_delta_;
 
-    std::string m_title;
-    Color m_bgColor;
-    Stopwatch m_framerateStopwatch;
+    std::string title_;
+    Color background_color_;
+    Stopwatch framerate_stopwatch_;
 };

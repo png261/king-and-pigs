@@ -19,17 +19,17 @@ public:
         const b2Vec2& position,
         const int width,
         const int height,
-        const bool bFlipped = false);
+        const bool is_flipped = false);
 
     void drawFrame(
         const std::string& id,
         const b2Vec2& position,
         const int width,
         const int height,
-        const int currentRow,
-        const int currentFrame,
+        const int row,
+        const int frame,
         const float angle = 0,
-        const bool bFlipped = false,
+        const bool is_flipped = false,
         const int zoom = 1);
 
     void drawTile(
@@ -39,13 +39,13 @@ public:
         const b2Vec2& position,
         const int width,
         const int height,
-        const int currentRow,
-        const int currentFrame,
+        const int row,
+        const int frame,
         const int zoom = 1);
 
     void clean();
 
 private:
     TextureManager() = default;
-    std::unordered_map<std::string, SDL_Texture*> m_textureMap;
+    std::unordered_map<std::string, SDL_Texture*> textures_;
 };

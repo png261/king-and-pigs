@@ -9,15 +9,15 @@ public:
     enum Colors { WHITE, GRAY, BLACK, RED, GREEN, BLUE, CYAN, YELLOW, MAGENTA };
     Color();
     Color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a = 255);
-    Color(Colors colorName);
+    Color(Colors color);
     uint8_t r() const;
     uint8_t g() const;
     uint8_t b() const;
     uint8_t a() const;
 
 private:
-    uint8_t m_red;
-    uint8_t m_green;
-    uint8_t m_blue;
-    uint8_t m_alpha;
+    uint8_t red_;
+    uint8_t green_;
+    uint8_t blue_;
+    uint8_t alpha_;
 };

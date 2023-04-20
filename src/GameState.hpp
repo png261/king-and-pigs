@@ -21,9 +21,9 @@ public:
 
 protected:
     GameState()
-        : m_bLoaded(false)
-        , m_bPaused(false)
+        : is_loaded_(false)
+        , is_paused_(false)
     {}
-    bool m_bLoaded;
-    bool m_bPaused;
+    bool is_loaded_;
+    bool is_paused_;
 };

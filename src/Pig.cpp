@@ -12,45 +12,45 @@ Pig::Pig()
     , AttackerObject(1, 20, 500)
 {}
 
-void Pig::load(std::unique_ptr<LoaderParams> const& pParams)
+void Pig::load(std::unique_ptr<LoaderParams> const& params)
 {
-    GameObject::load(std::move(pParams));
-    createBody(pParams->x(), pParams->y(), m_width, m_height);
+    GameObject::load(std::move(params));
+    createBody(params->x(), params->y(), width_, height_);
     setFilterData(PhysicWorld::CAT_PIG, PhysicWorld::MASK_PIG);
-    m_pFixture->SetDensity(50);
+    fixture_->SetDensity(50);
 
     createCircleSensor(
-        -b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
-        m_attackRange,
+        -b2Vec2((width_ * 0.5 + attack_range_) * 0.5, 0),
+        attack_range_,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_PIG_ATTACK_SENSOR);
 
     createCircleSensor(
-        b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
-        m_attackRange,
+        b2Vec2((width_ * 0.5 + attack_range_) * 0.5, 0),
+        attack_range_,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_PIG_ATTACK_SENSOR);
 
-    m_moveSpeed = 40;
-    m_jumpHeight = 32.0f;
-    m_direction = LEFT;
+    move_speed_ = 40;
+    jump_height_ = 32.0f;
+    direction_ = LEFT;
 
     loadAnimation();
 }
 
 void Pig::loadAnimation()
 {
-    m_animations[IDLE] = std::make_unique<Animation>("pig_idle", 34, 28, 11);
-    m_animations[RUN] = std::make_unique<Animation>("pig_run", 34, 28, 6);
-    m_animations[JUMP] = std::make_unique<Animation>("pig_jump", 34, 28, 1);
-    m_animations[FALL] = std::make_unique<Animation>("pig_fall", 34, 28, 1);
-    m_animations[GROUND] = std::make_unique<Animation>("pig_ground", 34, 28, 1);
-    m_animations[ATTACK] = std::make_unique<Animation>("pig_attack", 34, 28, 5);
-    m_animations[HIT] = std::make_unique<Animation>("pig_hit", 34, 28, 2);
-    m_animations[DYING] = std::make_unique<Animation>("pig_dead", 34, 28, 4, false);
+    animations_[IDLE] = std::make_unique<Animation>("pig_idle", 34, 28, 11);
+    animations_[RUN] = std::make_unique<Animation>("pig_run", 34, 28, 6);
+    animations_[JUMP] = std::make_unique<Animation>("pig_jump", 34, 28, 1);
+    animations_[FALL] = std::make_unique<Animation>("pig_fall", 34, 28, 1);
+    animations_[GROUND] = std::make_unique<Animation>("pig_ground", 34, 28, 1);
+    animations_[ATTACK] = std::make_unique<Animation>("pig_attack", 34, 28, 5);
+    animations_[HIT] = std::make_unique<Animation>("pig_hit", 34, 28, 2);
+    animations_[DYING] = std::make_unique<Animation>("pig_dead", 34, 28, 4, false);
 
-    m_curAnimation = IDLE;
-    m_animations[m_curAnimation]->start();
+    current_animation_ = IDLE;
+    animations_[current_animation_]->start();
 }
 
 void Pig::update()
@@ -61,19 +61,19 @@ void Pig::update()
     }
 
     GameObject::update();
-    m_raycast.clear();
+    raycast_.clear();
     float nray = 50;
     for (int i = 0; i < nray; ++i) {
-        b2Vec2 start = getPosition() + m_direction * (b2Vec2(m_width / 2.0f, 0)) +
-                       b2Vec2(0, -m_height / 2.0f + i * m_height / nray);
-        b2Vec2 end = start + m_direction * b2Vec2(m_visionRange, 0);
-        m_raycast.push_back({start, end});
+        b2Vec2 start = getPosition() + direction_ * (b2Vec2(width_ / 2.0f, 0)) +
+                       b2Vec2(0, -height_ / 2.0f + i * height_ / nray);
+        b2Vec2 end = start + direction_ * b2Vec2(vision_range_, 0);
+        raycast_.push_back({start, end});
     }
 
     VisionObject::update();
     VisionObject::update();
     handleMovement();
-    m_bFlipped = m_direction == RIGHT;
+    is_flipped_ = direction_ == RIGHT;
 
     DamageableObject::update();
     AttackerObject::update();
@@ -98,7 +98,7 @@ void Pig::handleMovement()
         return;
     }
 
-    if (m_direction == RIGHT) {
+    if (direction_ == RIGHT) {
         moveRight();
     } else {
         moveLeft();
@@ -120,7 +120,7 @@ void Pig::handleMovement()
 
 void Pig::seeingPlayer()
 {
-    if (m_visionNearestDistance >= m_attackRange) {
+    if (vision_nearest_distance_ >= attack_range_) {
         return;
     }
     if (canAttack()) {
@@ -130,19 +130,19 @@ void Pig::seeingPlayer()
 
 void Pig::changeDirection()
 {
-    if (m_direction == RIGHT) {
+    if (direction_ == RIGHT) {
         setMoveRight(false);
         setMoveLeft(true);
-        m_direction = LEFT;
+        direction_ = LEFT;
     } else {
         setMoveLeft(false);
         setMoveRight(true);
-        m_direction = RIGHT;
+        direction_ = RIGHT;
     }
 }
 void Pig::seeingWall()
 {
-    if (m_visionNearestDistance >= 1) {
+    if (vision_nearest_distance_ >= 1) {
         return;
     }
     changeDirection();
@@ -150,7 +150,7 @@ void Pig::seeingWall()
 
 void Pig::seeingBox()
 {
-    if (m_visionNearestDistance >= 10) {
+    if (vision_nearest_distance_ >= 10) {
         return;
     }
     if (isDisableJump()) {
@@ -162,7 +162,7 @@ void Pig::seeingBox()
 
 void Pig::seeingPig()
 {
-    if (m_visionNearestDistance >= 10) {
+    if (vision_nearest_distance_ >= 10) {
         return;
     }
 
@@ -171,10 +171,10 @@ void Pig::seeingPig()
 
 void Pig::updateAnimation()
 {
-    int newAnimation = m_curAnimation;
+    int newAnimation = current_animation_;
 
     if (isOnGround()) {
-        if (m_curAnimation == FALL) {
+        if (current_animation_ == FALL) {
             newAnimation = GROUND;
         } else {
             newAnimation = IDLE;
@@ -198,9 +198,9 @@ void Pig::updateAnimation()
         newAnimation = ATTACK;
     }
 
-    if (newAnimation != m_curAnimation) {
-        m_curAnimation = newAnimation;
-        m_animations[m_curAnimation]->start();
+    if (newAnimation != current_animation_) {
+        current_animation_ = newAnimation;
+        animations_[current_animation_]->start();
     }
 }
 

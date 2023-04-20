@@ -9,7 +9,7 @@ class Bomb final : public GameObject, public AttackerObject
 public:
     Bomb();
 
-    void load(std::unique_ptr<LoaderParams> const& pParams) override;
+    void load(std::unique_ptr<LoaderParams> const& params) override;
     void update() override;
     void loadAnimation() override;
 
@@ -22,8 +22,8 @@ public:
 
 private:
     enum animations { OFF, ON, EXPLODE };
-    bool m_bOn;
-    Timer onTimer;
+    bool is_on_;
+    Timer on_timer_;
 };
 
 class BombCreator : public BaseCreator

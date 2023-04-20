@@ -19,6 +19,6 @@ public:
 
 private:
     void renderStatusBar() const;
-    static const std::string s_stateID;
-    std::unique_ptr<Level> m_pLevel;
+    static const std::string kId_;
+    std::unique_ptr<Level> level_;
 };

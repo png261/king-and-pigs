@@ -7,7 +7,7 @@ class VisionRayCastCallback : public b2RayCastCallback
 {
 public:
     VisionRayCastCallback()
-        : m_fraction(1)
+        : fraction_(1)
     {}
 
     float ReportFixture(b2Fixture* fixture, const b2Vec2&, const b2Vec2&, float fraction)
@@ -16,15 +16,15 @@ public:
             return 1;
         }
 
-        m_seeingCategory =
+        seeing_category_ =
             static_cast<PhysicWorld::Category>(fixture->GetFilterData().categoryBits);
-        m_fraction = fraction;
+        fraction_ = fraction;
 
         return fraction;
     }
 
-    PhysicWorld::Category m_seeingCategory;
-    float m_fraction;
+    PhysicWorld::Category seeing_category_;
+    float fraction_;
 };
 
 struct raycast
@@ -42,9 +42,9 @@ public:
     bool isSeeing(PhysicWorld::Category category);
 
 protected:
-    uint16 m_seeingCategory;
-    float m_visionFraction;
-    int m_visionRange;
-    float m_visionNearestDistance;
-    std::vector<raycast> m_raycast;
+    uint16 seeing_category_;
+    float fraction_;
+    int vision_range_;
+    float vision_nearest_distance_;
+    std::vector<raycast> raycast_;
 };

@@ -8,11 +8,11 @@
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
-const std::string WinState::s_stateID = "WIN";
+const std::string WinState::kId_ = "WIN";
 
 WinState::WinState()
-    : m_bEnterMainMenu(false)
-    , m_bEnterExit(false){};
+    : is_enter_main_menu_(false)
+    , is_enter_exit_(false){};
 
 void WinState::update()
 {
@@ -21,18 +21,18 @@ void WinState::update()
     }
 
 
-    if (m_bEnterMainMenu) {
+    if (is_enter_main_menu_) {
         GameStateMachine::Instance().clean();
         GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
         return;
     }
 
-    if (m_bEnterExit) {
+    if (is_enter_exit_) {
         Game::Instance().quit();
         return;
     }
 
-    for (const auto& obj : m_uiObjects) {
+    for (const auto& obj : ui_objects_) {
         obj->update();
     }
 };
@@ -42,7 +42,7 @@ void WinState::render() const
     if (!isLoaded() || isPaused()) {
         return;
     }
-    for (const auto& obj : m_uiObjects) {
+    for (const auto& obj : ui_objects_) {
         obj->draw();
     }
     Game::Instance().getWindow()->print(
@@ -55,29 +55,29 @@ void WinState::render() const
 
 bool WinState::enter()
 {
-    m_bLoaded = false;
+    is_loaded_ = false;
 
-    std::unique_ptr<Button> mainMenuButton = std::make_unique<Button>(
+    std::unique_ptr<Button> main_menu_button = std::make_unique<Button>(
         "Main Menu",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
         70);
 
-    std::unique_ptr<Button> exitButton = std::make_unique<Button>(
+    std::unique_ptr<Button> exit_button = std::make_unique<Button>(
         "Exit",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
 
-    mainMenuButton->onClick([this]() { m_bEnterMainMenu = true; });
-    exitButton->onClick([this]() { m_bEnterExit = true; });
+    main_menu_button->onClick([this]() { is_enter_main_menu_ = true; });
+    exit_button->onClick([this]() { is_enter_exit_ = true; });
 
-    m_uiObjects.push_back(std::move(mainMenuButton));
-    m_uiObjects.push_back(std::move(exitButton));
+    ui_objects_.push_back(std::move(main_menu_button));
+    ui_objects_.push_back(std::move(exit_button));
 
-    m_bLoaded = true;
+    is_loaded_ = true;
 
     return true;
 };
@@ -91,5 +91,5 @@ bool WinState::exit()
 
 std::string WinState::getStateID() const
 {
-    return s_stateID;
+    return kId_;
 };

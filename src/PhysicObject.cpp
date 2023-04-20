@@ -3,22 +3,22 @@
 #include "Log.hpp"
 
 PhysicObject::PhysicObject()
-    : m_bCanMoveRight(true)
-    , m_bCanMoveLeft(true)
-    , m_bCanJump(true)
-    , m_bOnGround(false)
-    , m_bRunning(false)
-    , m_bDisableJump(false)
-    , m_moveSpeed(0)
-    , m_jumpHeight(0)
-    , m_footContact(0)
+    : can_move_right_(true)
+    , can_move_left_(true)
+    , can_jump_(true)
+    , is_ground_(false)
+    , is_running_(false)
+    , is_disabled_jump_(false)
+    , move_speed_(0)
+    , jump_height_(0)
+    , num_foot_touch_(0)
 {}
 
 void PhysicObject::update()
 {
-    m_bOnGround = getFootContact() > 0;
-    m_bCanJump = getBody()->GetLinearVelocity().y >= 0;
-    m_bRunning = false;
+    is_ground_ = getFootContact() > 0;
+    can_jump_ = getBody()->GetLinearVelocity().y >= 0;
+    is_running_ = false;
 }
 
 void PhysicObject::createBody(const int x, const int y, const int width, const int height)
@@ -28,7 +28,7 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
     bodyDef.position = PhysicWorld::pixelToMeter(b2Vec2(x + width * 0.5f, y + height * 0.5f));
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
-    m_pBody = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
+    body_ = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
 
     b2FixtureDef fixtureDef;
     b2PolygonShape dynamicBox;
@@ -39,7 +39,7 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1;
     fixtureDef.friction = 1;
-    m_pFixture = m_pBody->CreateFixture(&fixtureDef);
+    fixture_ = body_->CreateFixture(&fixtureDef);
 
     createPolygonSensor(
         b2Vec2(0, height * 0.5),
@@ -51,7 +51,7 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
 
 void PhysicObject::changeFootContact(int n)
 {
-    m_footContact += n;
+    num_foot_touch_ += n;
 }
 
 void PhysicObject::moveRight()
@@ -61,12 +61,12 @@ void PhysicObject::moveRight()
     }
 
     if (isOnGround()) {
-        m_bRunning = true;
+        is_running_ = true;
     }
 
-    float speedDifference = PhysicWorld::pixelToMeter(m_moveSpeed) - m_pBody->GetLinearVelocity().x;
-    b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
-    m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
+    float speedDifference = PhysicWorld::pixelToMeter(move_speed_) - body_->GetLinearVelocity().x;
+    b2Vec2 impulse{body_->GetMass() * speedDifference, 0};
+    body_->ApplyLinearImpulse(impulse, body_->GetWorldCenter(), true);
 }
 
 void PhysicObject::moveLeft()
@@ -76,18 +76,17 @@ void PhysicObject::moveLeft()
     }
 
     if (isOnGround()) {
-        m_bRunning = true;
+        is_running_ = true;
     }
 
-    float speedDifference =
-        PhysicWorld::pixelToMeter(-m_moveSpeed) - m_pBody->GetLinearVelocity().x;
-    b2Vec2 impulse{m_pBody->GetMass() * speedDifference, 0};
-    m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
+    float speedDifference = PhysicWorld::pixelToMeter(-move_speed_) - body_->GetLinearVelocity().x;
+    b2Vec2 impulse{body_->GetMass() * speedDifference, 0};
+    body_->ApplyLinearImpulse(impulse, body_->GetWorldCenter(), true);
 }
 
 void PhysicObject::jump()
 {
-    if (m_bDisableJump) {
+    if (is_disabled_jump_) {
         return;
     }
 
@@ -100,84 +99,84 @@ void PhysicObject::jump()
     }
 
     float timeToJumpPeak =
-        sqrt(2 * PhysicWorld::pixelToMeter(m_jumpHeight) / PhysicWorld::GRAVITY.y);
+        sqrt(2 * PhysicWorld::pixelToMeter(jump_height_) / PhysicWorld::GRAVITY.y);
 
-    float velocity = PhysicWorld::pixelToMeter(m_jumpHeight) / timeToJumpPeak;
-    b2Vec2 impulse = m_pBody->GetMass() * std::pow(velocity, 2) * b2Vec2(0, -1);
+    float velocity = PhysicWorld::pixelToMeter(jump_height_) / timeToJumpPeak;
+    b2Vec2 impulse = body_->GetMass() * std::pow(velocity, 2) * b2Vec2(0, -1);
 
-    m_pBody->ApplyLinearImpulse(impulse, m_pBody->GetWorldCenter(), true);
+    body_->ApplyLinearImpulse(impulse, body_->GetWorldCenter(), true);
 }
 
 b2Body* PhysicObject::getBody() const
 {
-    return m_pBody;
+    return body_;
 }
 
 b2Vec2 PhysicObject::getPosition() const
 {
-    return PhysicWorld::meterToPixel(m_pBody->GetPosition());
+    return PhysicWorld::meterToPixel(body_->GetPosition());
 }
 
 float PhysicObject::getAngle() const
 {
-    return PhysicWorld::degToRad(m_pBody->GetAngle());
+    return PhysicWorld::degToRad(body_->GetAngle());
 }
 
 int PhysicObject::getFootContact() const
 {
-    return m_footContact;
+    return num_foot_touch_;
 }
 
 bool PhysicObject::isOnGround() const
 {
-    return m_bOnGround;
+    return is_ground_;
 }
 
-void PhysicObject::setMoveRight(bool bMoveRight)
+void PhysicObject::setMoveRight(bool can_move_right)
 {
-    m_bCanMoveRight = bMoveRight;
+    can_move_right_ = can_move_right;
 }
 
-void PhysicObject::setMoveLeft(bool bMoveLeft)
+void PhysicObject::setMoveLeft(bool can_move_left)
 {
-    m_bCanMoveLeft = bMoveLeft;
+    can_move_left_ = can_move_left;
 }
 
 bool PhysicObject::isRunning() const
 {
-    return m_bRunning;
+    return is_running_;
 }
 
 bool PhysicObject::canMoveRight() const
 {
-    return m_bCanMoveRight;
+    return can_move_right_;
 }
 
 bool PhysicObject::canMoveLeft() const
 {
-    return m_bCanMoveLeft;
+    return can_move_left_;
 }
 
 bool PhysicObject::canJump() const
 {
-    return m_bCanJump;
+    return can_jump_;
 }
 
 bool PhysicObject::isDisableJump() const
 {
-    return m_bDisableJump;
+    return is_disabled_jump_;
 }
 
 void PhysicObject::setFilterData(PhysicWorld::Category category, PhysicWorld::Mask mask)
 {
-    if (m_pFixture == nullptr) {
+    if (fixture_ == nullptr) {
         return;
     }
 
     b2Filter filter;
     filter.categoryBits = category;
     filter.maskBits = mask;
-    m_pFixture->SetFilterData(filter);
+    fixture_->SetFilterData(filter);
 }
 
 b2Fixture* PhysicObject::createPolygonSensor(

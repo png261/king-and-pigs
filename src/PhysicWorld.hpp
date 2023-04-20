@@ -86,11 +86,11 @@ private:
     void EnterDoorListener(b2Contact* const contact);
     void BombListener(b2Contact* const contact);
 
-    std::unique_ptr<b2World> m_pWorld;
-    std::unique_ptr<DebugDraw> m_pDebugDraw;
-    std::unique_ptr<ContactListener> m_contactListener;
+    std::unique_ptr<b2World> world_;
+    std::unique_ptr<DebugDraw> debugDraw_;
+    std::unique_ptr<ContactListener> contactListener_;
 
-    float m_timeStep;
-    int32 m_velocityIterations;
-    int32 m_positionIterations;
+    float time_step_;
+    int32 velocity_iterations_;
+    int32 position_iterations_;
 };

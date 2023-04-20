@@ -1,23 +1,23 @@
 #include "Color.hpp"
 
 Color::Color()
-    : m_red(0)
-    , m_green(0)
-    , m_blue(0)
-    , m_alpha(255)
+    : red_(0)
+    , green_(0)
+    , blue_(0)
+    , alpha_(255)
 {}
 
 Color::Color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a)
-    : m_red(r)
-    , m_green(g)
-    , m_blue(b)
-    , m_alpha(a)
+    : red_(r)
+    , green_(g)
+    , blue_(b)
+    , alpha_(a)
 {}
 
-Color::Color(Colors colorName)
+Color::Color(Colors color)
 {
     uint8_t r, g, b, a = 255;
-    switch (colorName) {
+    switch (color) {
     default:
     case WHITE:
         r = 255;
@@ -67,28 +67,28 @@ Color::Color(Colors colorName)
         break;
     }
 
-    m_red = r;
-    m_blue = b;
-    m_green = g;
-    m_alpha = a;
+    red_ = r;
+    blue_ = b;
+    green_ = g;
+    alpha_ = a;
 }
 
 uint8_t Color::r() const
 {
-    return m_red;
+    return red_;
 }
 
 uint8_t Color::g() const
 {
-    return m_green;
+    return green_;
 }
 
 uint8_t Color::b() const
 {
-    return m_blue;
+    return blue_;
 }
 
 uint8_t Color::a() const
 {
-    return m_alpha;
+    return alpha_;
 }

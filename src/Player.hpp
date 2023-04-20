@@ -13,7 +13,7 @@ class Player final : public GameObject,
 {
 public:
     Player();
-    void load(std::unique_ptr<LoaderParams> const& pParams) override;
+    void load(std::unique_ptr<LoaderParams> const& params) override;
     void update() override;
     void updateAnimation() override;
     void loadAnimation() override;
@@ -43,8 +43,8 @@ private:
     void leavingDoor();
 
     Timer leavingDoorTimer;
-    bool m_bEnteringDoor;
-    bool m_bWantEnterDoor;
+    bool is_entering_door_;
+    bool is_want_enter_door_;
 };
 
 class PlayerCreator : public BaseCreator

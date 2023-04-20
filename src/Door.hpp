@@ -6,7 +6,7 @@ class Door : public GameObject
 {
 public:
     Door();
-    virtual void load(std::unique_ptr<LoaderParams> const& pParams) override;
+    virtual void load(std::unique_ptr<LoaderParams> const& params) override;
     virtual void update() override;
     virtual void loadAnimation() override;
 
@@ -22,5 +22,5 @@ protected:
         DOOR_CLOSING,
     };
 
-    bool m_bOpened;
+    bool is_opened_;
 };

@@ -1,9 +1,9 @@
 #include "DoorOut.hpp"
 #include "Log.hpp"
 
-void DoorOut::load(std::unique_ptr<LoaderParams> const& pParams)
+void DoorOut::load(std::unique_ptr<LoaderParams> const& params)
 {
-    Door::load(std::move(pParams));
+    Door::load(std::move(params));
 
     setFilterData(PhysicWorld::CAT_DOOR_OUT, PhysicWorld::MASK_DOOR_OUT);
     open();

@@ -17,9 +17,9 @@ public:
     bool isPaused() const;
 
 protected:
-    Uint32 m_startMark;
-    Uint32 m_stopMark;
-    Uint32 m_pausedMark;
-    bool m_bRunning;
-    bool m_bPaused;
+    Uint32 start_mark_;
+    Uint32 stop_mark_;
+    Uint32 paused_mark_;
+    bool is_running_;
+    bool is_paused_;
 };

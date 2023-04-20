@@ -14,7 +14,7 @@ public:
     GameObject();
     virtual ~GameObject() = default;
 
-    virtual void load(std::unique_ptr<LoaderParams> const& pParams);
+    virtual void load(std::unique_ptr<LoaderParams> const& params);
     virtual void update();
     virtual void updateAnimation();
     virtual void draw();
@@ -33,14 +33,14 @@ protected:
         LEFT = -1,
     };
 
-    int m_width;
-    int m_height;
+    int width_;
+    int height_;
 
-    bool m_bExist;
-    bool m_bFlipped;
+    bool is_exist_;
+    bool is_flipped_;
 
-    direction m_direction;
+    direction direction_;
 
-    std::unordered_map<int, std::unique_ptr<Animation>> m_animations;
-    int m_curAnimation;
+    std::unordered_map<int, std::unique_ptr<Animation>> animations_;
+    int current_animation_;
 };

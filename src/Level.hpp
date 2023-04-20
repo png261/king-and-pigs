@@ -8,20 +8,20 @@
 
 struct Tileset
 {
-    int firstGridID;
-    int tileWidth;
-    int tileHeight;
+    int first_grid_id;
+    int tile_width;
+    int tile_height;
     int spacing;
     int margin;
     int width;
     int height;
-    int numColumns;
+    int columns;
     std::string name;
 };
 
 struct CollisionShape
 {
-    bool isOneWay;
+    bool is_one_way;
     int width;
     int height;
 };
@@ -44,7 +44,7 @@ public:
     void setPlayer(Player* const player);
     GameObject* spawnGameObject(
         const std::string& type,
-        std::unique_ptr<LoaderParams> const& pParams);
+        std::unique_ptr<LoaderParams> const& params);
     void setMapWidth(int width);
     void setMapHeight(int height);
 
@@ -55,12 +55,12 @@ private:
     friend class LevelParser;
 
     void createTileObject();
-    Player* m_pPlayer;
-    int m_mapWidth;
-    int m_mapHeight;
+    Player* player_;
+    int map_width_;
+    int map_height_;
 
-    std::unique_ptr<ObjectLayer> m_spawnLayer;
-    std::vector<std::unique_ptr<Layer>> m_layers;
-    std::vector<Tileset> m_tilesets;
-    std::unordered_map<int, CollisionShape> m_collisionShapes;
+    std::unique_ptr<ObjectLayer> spawn_layer_;
+    std::vector<std::unique_ptr<Layer>> layers_;
+    std::vector<Tileset> tilesets_;
+    std::unordered_map<int, CollisionShape> collision_shapes_;
 };

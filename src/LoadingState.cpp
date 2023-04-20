@@ -9,7 +9,7 @@
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
-const std::string LoadingState::s_stateID = "LOADING";
+const std::string LoadingState::kId_ = "LOADING";
 
 LoadingState::LoadingState() {}
 
@@ -39,5 +39,5 @@ bool LoadingState::exit()
 
 std::string LoadingState::getStateID() const
 {
-    return s_stateID;
+    return kId_;
 };

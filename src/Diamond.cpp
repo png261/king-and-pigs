@@ -3,27 +3,27 @@
 #include "PhysicWorld.hpp"
 #include "SoundManager.hpp"
 
-void Diamond::load(std::unique_ptr<LoaderParams> const& pParams)
+void Diamond::load(std::unique_ptr<LoaderParams> const& params)
 {
-    ItemObject::load(pParams);
-    m_pBody->SetGravityScale(0);
-    m_pFixture->SetSensor(true);
+    ItemObject::load(params);
+    body_->SetGravityScale(0);
+    fixture_->SetSensor(true);
     loadAnimation();
 }
 
 void Diamond::loadAnimation()
 {
-    m_animations[NORMAL] = std::make_unique<Animation>("diamond_idle", 18, 14, 7);
-    m_animations[HIT] = std::make_unique<Animation>("diamond_hit", 18, 14, 2, false);
+    animations_[NORMAL] = std::make_unique<Animation>("diamond_idle", 18, 14, 7);
+    animations_[HIT] = std::make_unique<Animation>("diamond_hit", 18, 14, 2, false);
 
-    m_curAnimation = NORMAL;
-    m_animations[m_curAnimation]->start();
+    current_animation_ = NORMAL;
+    animations_[current_animation_]->start();
 }
 
 void Diamond::update()
 {
     ItemObject::update();
-    if (m_curAnimation == HIT && m_animations[m_curAnimation]->isFinished()) {
+    if (current_animation_ == HIT && animations_[current_animation_]->isFinished()) {
         disappear();
     }
 }
@@ -32,6 +32,6 @@ void Diamond::bonus()
 {
     SoundManager::Instance().playSFX("heart bonus");
     Game::Instance().addDiamond(+1);
-    m_curAnimation = HIT;
-    m_animations[m_curAnimation]->start();
+    current_animation_ = HIT;
+    animations_[current_animation_]->start();
 }

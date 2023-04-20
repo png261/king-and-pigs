@@ -5,7 +5,7 @@
 class Log final
 {
 public:
-    static void error(const std::string& msg);
-    static void warning(const std::string& msg);
-    static void log(const std::string& msg);
+    static void error(const std::string& messsage);
+    static void warning(const std::string& message);
+    static void log(const std::string& message);
 };

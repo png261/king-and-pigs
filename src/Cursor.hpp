@@ -11,6 +11,6 @@ public:
     bool isHover() const;
 
 private:
-    int m_size;
-    bool m_bHover;
+    int size_;
+    bool is_hover_;
 };

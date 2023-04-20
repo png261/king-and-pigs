@@ -6,15 +6,15 @@
 #include "TextureManager.hpp"
 
 TileLayer::TileLayer(
-    int const tileSize,
-    int const mapWidth,
-    int const mapHeight,
-    const std::vector<Tileset>& tilesets)
-    : m_tileSize(tileSize)
-    , m_nCols(mapWidth)
-    , m_nRows(mapHeight)
-    , m_position(0, 0)
-    , m_tilesets(tilesets)
+    int const tile_size,
+    int const columns,
+    int const rows,
+    const std::vector<Tileset>& tile_sets)
+    : tile_size_(tile_size)
+    , columns_(columns)
+    , rows_(rows)
+    , position_(0, 0)
+    , tile_sets_(tile_sets)
 {}
 
 void TileLayer::update() {}
@@ -23,15 +23,15 @@ void TileLayer::render() const
 {
     int x, y, x2, y2 = 0;
 
-    x = m_position.x / m_tileSize;
-    y = m_position.y / m_tileSize;
+    x = position_.x / tile_size_;
+    y = position_.y / tile_size_;
 
-    x2 = int(m_position.x) % m_tileSize;
-    y2 = int(m_position.y) % m_tileSize;
+    x2 = int(position_.x) % tile_size_;
+    y2 = int(position_.y) % tile_size_;
 
-    for (int i = 0; i < m_nRows; ++i) {
-        for (int j = 0; j < m_nCols; j++) {
-            int id = m_tileIDs[i + y][j + x];
+    for (int i = 0; i < rows_; ++i) {
+        for (int j = 0; j < columns_; j++) {
+            int id = tile_ids_[i + y][j + x];
 
             const int EMPTY_TILE = 0;
 
@@ -39,12 +39,12 @@ void TileLayer::render() const
                 continue;
             }
 
-            b2Vec2 position = b2Vec2(((j * m_tileSize) - x2), ((i * m_tileSize) - y2)) -
+            b2Vec2 position = b2Vec2(((j * tile_size_) - x2), ((i * tile_size_) - y2)) -
                               Camera::Instance().getPosition();
 
             bool isInViewPort =
-                position.x > -m_tileSize && position.x < Game::Instance().getWindow()->getWidth() &&
-                position.y > -m_tileSize && position.y < Game::Instance().getWindow()->getHeight();
+                position.x > -tile_size_ && position.x < Game::Instance().getWindow()->getWidth() &&
+                position.y > -tile_size_ && position.y < Game::Instance().getWindow()->getHeight();
 
             if (!isInViewPort) {
                 continue;
@@ -57,24 +57,25 @@ void TileLayer::render() const
                 tileset.margin,
                 tileset.spacing,
                 position,
-                m_tileSize,
-                m_tileSize,
-                (id - tileset.firstGridID) / tileset.numColumns,
-                (id - tileset.firstGridID) % tileset.numColumns,
+                tile_size_,
+                tile_size_,
+                (id - tileset.first_grid_id) / tileset.columns,
+                (id - tileset.first_grid_id) % tileset.columns,
                 Camera::Instance().getZoom());
         }
     }
 }
 
-Tileset TileLayer::getTilesetByID(int const tileID) const
+Tileset TileLayer::getTilesetByID(int const tile_id) const
 {
-    for (std::size_t i = 0; i < m_tilesets.size(); ++i) {
-        if (i + 1 <= m_tilesets.size() - 1) {
-            if (tileID >= m_tilesets[i].firstGridID && tileID < m_tilesets[i + 1].firstGridID) {
-                return m_tilesets[i];
+    for (std::size_t i = 0; i < tile_sets_.size(); ++i) {
+        if (i + 1 <= tile_sets_.size() - 1) {
+            if (tile_id >= tile_sets_[i].first_grid_id &&
+                tile_id < tile_sets_[i + 1].first_grid_id) {
+                return tile_sets_[i];
             }
         } else {
-            return m_tilesets[i];
+            return tile_sets_[i];
         }
     }
 
@@ -84,30 +85,30 @@ Tileset TileLayer::getTilesetByID(int const tileID) const
 
 void TileLayer::setTileIDs(const std::vector<std::vector<int>>& data)
 {
-    m_tileIDs = data;
+    tile_ids_ = data;
 }
 
-void TileLayer::setTileSize(int const tileSize)
+void TileLayer::setTileSize(int const tile_size)
 {
-    m_tileSize = tileSize;
+    tile_size_ = tile_size;
 }
 
 int TileLayer::getTileSize() const
 {
-    return m_tileSize;
+    return tile_size_;
 }
 
 const std::vector<std::vector<int>>& TileLayer::getTileIDs()
 {
-    return m_tileIDs;
+    return tile_ids_;
 }
 
 b2Vec2 TileLayer::getPosition() const
 {
-    return m_position;
+    return position_;
 }
 
 void TileLayer::setPosition(const b2Vec2& position)
 {
-    m_position = position;
+    position_ = position;
 }

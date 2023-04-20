@@ -6,26 +6,26 @@
 #include "GameStateMachine.hpp"
 
 VisionObject::VisionObject(float range)
-    : m_visionFraction(1)
-    , m_visionRange(range)
-    , m_visionNearestDistance(range)
+    : fraction_(1)
+    , vision_range_(range)
+    , vision_nearest_distance_(range)
 {}
 
 void VisionObject::update()
 {
-    m_seeingCategory = 0;
-    m_visionNearestDistance = m_visionRange;
-    for (auto& raycast : m_raycast) {
+    seeing_category_ = 0;
+    vision_nearest_distance_ = vision_range_;
+    for (auto& raycast : raycast_) {
         b2Vec2 start = PhysicWorld::pixelToMeter(raycast.start);
         b2Vec2 end = PhysicWorld::pixelToMeter(raycast.end);
 
         VisionRayCastCallback callback;
         PhysicWorld::Instance().getWorld()->RayCast(&callback, start, end);
-        m_seeingCategory = m_seeingCategory | callback.m_seeingCategory;
+        seeing_category_ = seeing_category_ | callback.seeing_category_;
 
-        m_visionNearestDistance = callback.m_fraction * m_visionRange < m_visionNearestDistance
-                                      ? callback.m_fraction * m_visionRange
-                                      : m_visionNearestDistance;
+        vision_nearest_distance_ = callback.fraction_ * vision_range_ < vision_nearest_distance_
+                                       ? callback.fraction_ * vision_range_
+                                       : vision_nearest_distance_;
     }
 }
 
@@ -36,7 +36,7 @@ void VisionObject::debugDraw()
     }
 
     DebugDraw debug(Game::Instance().getWindow());
-    for (auto& raycast : m_raycast) {
+    for (auto& raycast : raycast_) {
         b2Vec2 start = PhysicWorld::pixelToMeter(raycast.start);
         b2Vec2 end = PhysicWorld::pixelToMeter(raycast.end);
         debug.DrawSegment(start, end, {1, 1, 1, 1});
@@ -45,5 +45,5 @@ void VisionObject::debugDraw()
 
 bool VisionObject::isSeeing(PhysicWorld::Category category)
 {
-    return m_seeingCategory & category;
+    return seeing_category_ & category;
 }

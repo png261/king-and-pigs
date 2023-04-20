@@ -8,86 +8,86 @@
 
 Level::Level()
 {
-    m_spawnLayer = std::make_unique<ObjectLayer>();
+    spawn_layer_ = std::make_unique<ObjectLayer>();
 }
 
 void Level::render() const
 {
-    for (const auto& layer : m_layers) {
+    for (const auto& layer : layers_) {
         layer->render();
     }
-    m_spawnLayer->render();
+    spawn_layer_->render();
 }
 
 void Level::update()
 {
-    for (const auto& layer : m_layers) {
+    for (const auto& layer : layers_) {
         layer->update();
     }
-    m_spawnLayer->update();
+    spawn_layer_->update();
 }
 
 std::vector<Tileset>* Level::getTilesets()
 {
-    return &m_tilesets;
+    return &tilesets_;
 }
 
 std::unordered_map<int, CollisionShape>* Level::getCollisionShapes()
 {
-    return &m_collisionShapes;
+    return &collision_shapes_;
 }
 
 void Level::addLayer(std::unique_ptr<Layer> layer)
 {
-    m_layers.push_back(std::move(layer));
+    layers_.push_back(std::move(layer));
 }
 
 void Level::addTileSet(const Tileset tileset)
 {
-    m_tilesets.push_back(tileset);
+    tilesets_.push_back(tileset);
 }
 
 void Level::addCollisionShape(const int id, const CollisionShape shape)
 {
-    m_collisionShapes[id] = shape;
+    collision_shapes_[id] = shape;
 }
 
 Player* Level::getPlayer() const
 {
-    return m_pPlayer;
+    return player_;
 }
 
 void Level::setPlayer(Player* const player)
 {
-    m_pPlayer = player;
+    player_ = player;
 }
 
 GameObject* Level::spawnGameObject(
     const std::string& type,
-    std::unique_ptr<LoaderParams> const& pParams)
+    std::unique_ptr<LoaderParams> const& params)
 {
     std::unique_ptr<GameObject> pGameObject = GameObjectFactory::Instance().create(type);
     GameObject* newObject = pGameObject.get();
-    pGameObject->load(std::move(pParams));
-    m_spawnLayer->addGameObject(std::move(pGameObject));
+    pGameObject->load(std::move(params));
+    spawn_layer_->addGameObject(std::move(pGameObject));
     return newObject;
 }
 
 void Level::setMapWidth(int width)
 {
-    m_mapWidth = width;
+    map_width_ = width;
 }
 void Level::setMapHeight(int height)
 {
-    m_mapHeight = height;
+    map_height_ = height;
 }
 
 int Level::getMapWidth() const
 {
-    return m_mapWidth;
+    return map_width_;
 }
 
 int Level::getMapHeight() const
 {
-    return m_mapHeight;
+    return map_height_;
 }

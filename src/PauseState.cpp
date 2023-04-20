@@ -9,11 +9,11 @@
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
-const std::string PauseState::s_stateID = "PAUSE";
+const std::string PauseState::kId_ = "PAUSE";
 
 PauseState::PauseState()
-    : m_bEnterResume(false)
-    , m_bEnterMainMenu(false){};
+    : is_enterResume_(false)
+    , is_enter_main_menu(false){};
 
 void PauseState::update()
 {
@@ -21,21 +21,21 @@ void PauseState::update()
         return;
     }
 
-    if (m_bEnterResume) {
+    if (is_enterResume_) {
         GameStateMachine::Instance().popState();
         return;
     }
-    if (m_bEnterMainMenu) {
+    if (is_enter_main_menu) {
         GameStateMachine::Instance().popState();
         GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
         return;
     }
 
     if (InputHandler::Instance().isKeyDown(KEY_ESCAPE)) {
-        m_bEnterResume = true;
+        is_enterResume_ = true;
     }
 
-    for (const auto& obj : m_uiObjects) {
+    for (const auto& obj : ui_objects_) {
         obj->update();
     }
 };
@@ -46,36 +46,36 @@ void PauseState::render() const
         return;
     }
 
-    for (const auto& obj : m_uiObjects) {
+    for (const auto& obj : ui_objects_) {
         obj->draw();
     }
 };
 
 bool PauseState::enter()
 {
-    m_bLoaded = false;
+    is_loaded_ = false;
 
-    std::unique_ptr<Button> resumeButton = std::make_unique<Button>(
+    std::unique_ptr<Button> resume_button = std::make_unique<Button>(
         "Resume",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
         70);
 
-    std::unique_ptr<Button> mainMenuButton = std::make_unique<Button>(
+    std::unique_ptr<Button> main_menu_button = std::make_unique<Button>(
         "Main Menu",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
 
-    resumeButton->onClick([this]() { m_bEnterResume = true; });
-    mainMenuButton->onClick([this]() { m_bEnterMainMenu = true; });
+    resume_button->onClick([this]() { is_enterResume_ = true; });
+    main_menu_button->onClick([this]() { is_enter_main_menu = true; });
 
-    m_uiObjects.push_back(std::move(resumeButton));
-    m_uiObjects.push_back(std::move(mainMenuButton));
+    ui_objects_.push_back(std::move(resume_button));
+    ui_objects_.push_back(std::move(main_menu_button));
 
-    m_bLoaded = true;
+    is_loaded_ = true;
     return true;
 };
 
@@ -88,5 +88,5 @@ bool PauseState::exit()
 
 std::string PauseState::getStateID() const
 {
-    return s_stateID;
+    return kId_;
 };

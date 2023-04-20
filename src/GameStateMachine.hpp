@@ -15,8 +15,8 @@ public:
     void update();
     void render() const;
 
-    void pushState(std::unique_ptr<GameState> pState);
-    void changeState(std::unique_ptr<GameState> pState);
+    void pushState(std::unique_ptr<GameState> state);
+    void changeState(std::unique_ptr<GameState> state);
     void popState();
 
     GameState* getCurrentState();
@@ -24,13 +24,13 @@ public:
     void clean();
 
     bool isLoading() const;
-    void setLoading(bool bLoading);
+    void setLoading(bool is_loading);
     void loading();
 
 private:
-    Timer loadingTimer;
-    bool m_bLoading;
-    std::unique_ptr<GameState> m_loadingState;
+    Timer loading_timer_;
+    bool is_loading_;
+    std::unique_ptr<GameState> loading_state_;
     GameStateMachine();
-    std::vector<std::unique_ptr<GameState>> m_gameStates;
+    std::vector<std::unique_ptr<GameState>> states_;
 };

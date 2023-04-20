@@ -22,53 +22,53 @@ Player::Player()
     , VisionObject(32.0f)
     , DamageableObject(3, 300, 300)
     , AttackerObject(1, 20, 300)
-    , m_bEnteringDoor(false)
-    , m_bWantEnterDoor(false)
+    , is_entering_door_(false)
+    , is_want_enter_door_(false)
 {}
 
-void Player::load(std::unique_ptr<LoaderParams> const& pParams)
+void Player::load(std::unique_ptr<LoaderParams> const& params)
 {
-    GameObject::load(std::move(pParams));
-    createBody(pParams->x(), pParams->y(), m_width, m_height);
+    GameObject::load(std::move(params));
+    createBody(params->x(), params->y(), width_, height_);
     setFilterData(PhysicWorld::CAT_PLAYER, PhysicWorld::MASK_PLAYER);
 
     createCircleSensor(
-        -b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
-        m_attackRange,
+        -b2Vec2((width_ * 0.5 + attack_range_) * 0.5, 0),
+        attack_range_,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
 
     createCircleSensor(
-        b2Vec2((m_width * 0.5 + m_attackRange) * 0.5, 0),
-        m_attackRange,
+        b2Vec2((width_ * 0.5 + attack_range_) * 0.5, 0),
+        attack_range_,
         PhysicWorld::CAT_ATTACK_SENSOR,
         PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
 
-    m_moveSpeed = 90;
-    m_jumpHeight = 32.0f;
-    m_direction = RIGHT;
+    move_speed_ = 90;
+    jump_height_ = 32.0f;
+    direction_ = RIGHT;
 
     loadAnimation();
 }
 
 void Player::loadAnimation()
 {
-    m_animations[IDLE] = std::make_unique<Animation>("player_idle", 78, 58, 11);
-    m_animations[RUN] = std::make_unique<Animation>("player_run", 78, 58, 8);
-    m_animations[JUMP] = std::make_unique<Animation>("player_jump", 78, 58, 1);
-    m_animations[FALL] = std::make_unique<Animation>("player_fall", 78, 58, 1);
-    m_animations[GROUND] = std::make_unique<Animation>("player_ground", 78, 58, 1);
-    m_animations[ATTACK] = std::make_unique<Animation>("player_attack", 78, 58, 3);
-    m_animations[HIT] = std::make_unique<Animation>("player_hit", 78, 58, 2);
-    m_animations[DYING] = std::make_unique<Animation>("player_dead", 78, 58, 4, false);
-    m_animations[ENTERING_DOOR] =
+    animations_[IDLE] = std::make_unique<Animation>("player_idle", 78, 58, 11);
+    animations_[RUN] = std::make_unique<Animation>("player_run", 78, 58, 8);
+    animations_[JUMP] = std::make_unique<Animation>("player_jump", 78, 58, 1);
+    animations_[FALL] = std::make_unique<Animation>("player_fall", 78, 58, 1);
+    animations_[GROUND] = std::make_unique<Animation>("player_ground", 78, 58, 1);
+    animations_[ATTACK] = std::make_unique<Animation>("player_attack", 78, 58, 3);
+    animations_[HIT] = std::make_unique<Animation>("player_hit", 78, 58, 2);
+    animations_[DYING] = std::make_unique<Animation>("player_dead", 78, 58, 4, false);
+    animations_[ENTERING_DOOR] =
         std::make_unique<Animation>("player_entering_door", 78, 58, 8, false);
-    m_animations[LEAVING_DOOR] =
+    animations_[LEAVING_DOOR] =
         std::make_unique<Animation>("player_leaving_door", 78, 58, 8, false);
 
     leavingDoorTimer.setTime(300);
-    m_curAnimation = LEAVING_DOOR;
-    m_animations[m_curAnimation]->start();
+    current_animation_ = LEAVING_DOOR;
+    animations_[current_animation_]->start();
     leavingDoorTimer.start();
 }
 
@@ -91,17 +91,17 @@ void Player::update()
 
 void Player::handleVision()
 {
-    m_raycast.clear();
+    raycast_.clear();
     float nray = 50;
     for (int i = 0; i < nray; ++i) {
-        b2Vec2 start = getPosition() + m_direction * (b2Vec2(m_width / 2.0f, 0)) +
-                       b2Vec2(0, -m_height / 2.0f + i * m_height / nray);
-        b2Vec2 end = start + m_direction * b2Vec2(m_visionRange, 0);
-        m_raycast.push_back({start, end});
+        b2Vec2 start = getPosition() + direction_ * (b2Vec2(width_ / 2.0f, 0)) +
+                       b2Vec2(0, -height_ / 2.0f + i * height_ / nray);
+        b2Vec2 end = start + direction_ * b2Vec2(vision_range_, 0);
+        raycast_.push_back({start, end});
     }
 
-    if (isSeeing(PhysicWorld::CAT_WALL) && m_visionNearestDistance < 1) {
-        if (m_direction == RIGHT) {
+    if (isSeeing(PhysicWorld::CAT_WALL) && vision_nearest_distance_ < 1) {
+        if (direction_ == RIGHT) {
             setMoveRight(false);
         } else {
             setMoveLeft(false);
@@ -141,7 +141,7 @@ void Player::handleInput()
     InputHandler& input = InputHandler::Instance();
 
     if (isOnGround()) {
-        m_bWantEnterDoor = input.isKeyDown(KEY_W);
+        is_want_enter_door_ = input.isKeyDown(KEY_W);
 
         if (input.isKeyPressed(KEY_SPACE)) {
             jump();
@@ -151,11 +151,11 @@ void Player::handleInput()
 
     if (input.isKeyPressed(KEY_RIGHT)) {
         moveRight();
-        m_direction = RIGHT;
+        direction_ = RIGHT;
     }
     if (input.isKeyPressed(KEY_LEFT)) {
         moveLeft();
-        m_direction = LEFT;
+        direction_ = LEFT;
     }
 
     if (input.isKeyDown(KEY_A)) {
@@ -163,15 +163,15 @@ void Player::handleInput()
         SoundManager::Instance().playSFX("player_attack");
     }
 
-    m_bFlipped = m_direction == LEFT;
+    is_flipped_ = direction_ == LEFT;
 };
 
 void Player::updateAnimation()
 {
-    int newAnimation = m_curAnimation;
+    int newAnimation = current_animation_;
 
     if (isOnGround()) {
-        if (m_curAnimation == FALL) {
+        if (current_animation_ == FALL) {
             newAnimation = GROUND;
         } else {
             newAnimation = IDLE;
@@ -201,31 +201,31 @@ void Player::updateAnimation()
     }
 
     if (leavingDoorTimer.isDone()) {
-        if (newAnimation != m_curAnimation) {
-            m_animations[m_curAnimation]->stop();
-            m_curAnimation = newAnimation;
-            m_animations[m_curAnimation]->start();
+        if (newAnimation != current_animation_) {
+            animations_[current_animation_]->stop();
+            current_animation_ = newAnimation;
+            animations_[current_animation_]->start();
         }
     }
 }
 
 void Player::enterDoor()
 {
-    m_bEnteringDoor = true;
+    is_entering_door_ = true;
 }
 
 void Player::leavingDoor()
 {
-    m_curAnimation = LEAVING_DOOR;
-    m_animations[m_curAnimation]->start();
+    current_animation_ = LEAVING_DOOR;
+    animations_[current_animation_]->start();
 }
 
 bool Player::isWantEnterDoor()
 {
-    return m_bWantEnterDoor;
+    return is_want_enter_door_;
 }
 
 bool Player::isEnteringDoor()
 {
-    return m_bEnteringDoor;
+    return is_entering_door_;
 }

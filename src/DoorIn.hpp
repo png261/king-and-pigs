@@ -7,7 +7,7 @@ class DoorIn final : public Door
 {
 public:
     DoorIn();
-    void load(std::unique_ptr<LoaderParams> const& pParams) override;
+    void load(std::unique_ptr<LoaderParams> const& params) override;
     void createSensor();
 };
 
