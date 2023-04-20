@@ -64,21 +64,21 @@ bool LoseState::enter()
 {
     is_loaded_ = false;
 
-    std::unique_ptr<Button> respwan_button = std::make_unique<Button>(
+    auto respwan_button = std::make_unique<Button>(
         "Respawn",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
         70);
 
-    std::unique_ptr<Button> main_menu_button = std::make_unique<Button>(
+    auto main_menu_button = std::make_unique<Button>(
         "Main Menu",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
         250,
         70);
 
-    std::unique_ptr<Button> exit_button = std::make_unique<Button>(
+    auto exit_button = std::make_unique<Button>(
         "Exit",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2 + 200,

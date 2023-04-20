@@ -59,14 +59,14 @@ bool MainMenuState::enter()
 {
     is_loaded_ = false;
 
-    std::unique_ptr<Button> newGameButton = std::make_unique<Button>(
+    auto newGameButton = std::make_unique<Button>(
         "New Game",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
         70);
 
-    std::unique_ptr<Button> exit_button = std::make_unique<Button>(
+    auto exit_button = std::make_unique<Button>(
         "Exit",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,

@@ -56,14 +56,14 @@ bool PauseState::enter()
 {
     is_loaded_ = false;
 
-    std::unique_ptr<Button> resume_button = std::make_unique<Button>(
+    auto resume_button = std::make_unique<Button>(
         "Resume",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
         70);
 
-    std::unique_ptr<Button> main_menu_button = std::make_unique<Button>(
+    auto main_menu_button = std::make_unique<Button>(
         "Main Menu",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
