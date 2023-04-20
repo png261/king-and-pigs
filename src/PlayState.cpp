@@ -209,7 +209,7 @@ void PlayState::render() const
 void PlayState::renderStatusBar() const
 {
     TextureManager::Instance().draw("health_bar", {20, 10}, 154, 62);
-    for (int i = 0; i < m_pLevel->getPlayer()->getHp(); i++) {
+    for (int i = 0; i < m_pLevel->getPlayer()->getHp(); ++i) {
         TextureManager::Instance().draw("health_heart", {60 + i * 25.0f, 30}, 22, 19);
     }
 

@@ -3,6 +3,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "Cursor.hpp"
 #include "Level.hpp"
 #include "Window.hpp"
 
@@ -42,6 +43,7 @@ private:
 
     std::unique_ptr<Window> m_pWindow;
     Level* m_pLevel;
+    std::unique_ptr<Cursor> m_cursor;
     int m_nDiamond;
     bool m_bRunning;
     bool m_bDebug;

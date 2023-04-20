@@ -23,7 +23,7 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
     SDL_SetRenderDrawColor(m_pRenderer, color.r * 255, color.g * 255, color.b * 255, color.a * 255);
 
     std::vector<SDL_Point> sdlVertices;
-    for (int i = 0; i < vertexCount; i++) {
+    for (int i = 0; i < vertexCount; ++i) {
         sdlVertices.push_back(Utils::b2Vec2ToSDLPoint(
             PhysicWorld::meterToPixel(zoom * vertices[i]) -
             zoom * Camera::Instance().getPosition()));

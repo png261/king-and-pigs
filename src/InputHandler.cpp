@@ -15,12 +15,12 @@ InputHandler::InputHandler()
     , m_mousePosition(0, 0)
 {
     int i;
-    for (i = 0; i < KEYBOARD_SIZE; i++) {
+    for (i = 0; i < KEYBOARD_SIZE; ++i) {
         m_bKeyDown[i] = false;
         m_bKeyUp[i] = false;
     }
 
-    for (i = 0; i < MOUSE_MAX; i++) {
+    for (i = 0; i < MOUSE_MAX; ++i) {
         m_bMouseDown[i] = false;
         m_bMouseUp[i] = false;
     }
@@ -29,12 +29,12 @@ InputHandler::InputHandler()
 void InputHandler::update()
 {
     int i;
-    for (i = 0; i < KEYBOARD_SIZE; i++) {
+    for (i = 0; i < KEYBOARD_SIZE; ++i) {
         m_bKeyDown[i] = false;
         m_bKeyUp[i] = false;
     }
 
-    for (i = 0; i < MOUSE_MAX; i++) {
+    for (i = 0; i < MOUSE_MAX; ++i) {
         m_bMouseDown[i] = false;
         m_bMouseUp[i] = false;
     }
@@ -131,13 +131,13 @@ void InputHandler::reset()
 {
     m_keyboard = nullptr;
     int i;
-    for (i = 0; i < KEYBOARD_SIZE; i++) {
+    for (i = 0; i < KEYBOARD_SIZE; ++i) {
         m_bKeyDown[i] = false;
         m_bKeyUp[i] = false;
     }
 
     m_mouse = 0;
-    for (i = 0; i < MOUSE_MAX; i++) {
+    for (i = 0; i < MOUSE_MAX; ++i) {
         m_bMouseDown[i] = false;
         m_bMouseUp[i] = false;
     }

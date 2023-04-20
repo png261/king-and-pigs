@@ -20,7 +20,7 @@
 Player::Player()
     : GameObject()
     , VisionObject(32.0f)
-    , DamageableObject(3, 300, 500)
+    , DamageableObject(3, 300, 300)
     , AttackerObject(1, 20, 300)
     , m_bEnteringDoor(false)
     , m_bWantEnterDoor(false)

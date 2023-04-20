@@ -178,7 +178,7 @@ std::vector<std::vector<int>> LevelParser::parseData(const std::string& dataText
     std::vector<std::vector<int>> data;
 
     std::vector<int> layerRow(m_width);
-    for (int i = 0; i < m_height; i++) {
+    for (int i = 0; i < m_height; ++i) {
         data.push_back(layerRow);
     }
 

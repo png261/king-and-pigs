@@ -29,7 +29,7 @@ void TileLayer::render() const
     x2 = int(m_position.x) % m_tileSize;
     y2 = int(m_position.y) % m_tileSize;
 
-    for (int i = 0; i < m_nRows; i++) {
+    for (int i = 0; i < m_nRows; ++i) {
         for (int j = 0; j < m_nCols; j++) {
             int id = m_tileIDs[i + y][j + x];
 
@@ -68,7 +68,7 @@ void TileLayer::render() const
 
 Tileset TileLayer::getTilesetByID(int const tileID) const
 {
-    for (std::size_t i = 0; i < m_tilesets.size(); i++) {
+    for (std::size_t i = 0; i < m_tilesets.size(); ++i) {
         if (i + 1 <= m_tilesets.size() - 1) {
             if (tileID >= m_tilesets[i].firstGridID && tileID < m_tilesets[i + 1].firstGridID) {
                 return m_tilesets[i];

@@ -31,6 +31,9 @@ void Game::init()
     m_pWindow = std::make_unique<Window>(1280, 720, "King and Pig");
     PhysicWorld::Instance().init(m_pWindow.get());
 
+    m_cursor = std::make_unique<Cursor>();
+    m_cursor->init();
+
     m_levelFiles.push_back(LEVEL_DIRECTORY + "level1.tmx");
     m_levelFiles.push_back(LEVEL_DIRECTORY + "level2.tmx");
     GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
@@ -51,7 +54,10 @@ void Game::update()
 void Game::render() const
 {
     m_pWindow->clear();
+
     GameStateMachine::Instance().render();
+    m_cursor->draw();
+
     m_pWindow->refresh();
     m_pWindow->delayFramerateIfNeeded();
 }
