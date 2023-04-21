@@ -42,7 +42,7 @@ private:
     void handleVision();
     void leavingDoor();
 
-    Timer leavingDoorTimer;
+    Timer leaving_door_timer_;
     bool is_entering_door_;
     bool is_want_enter_door_;
 };

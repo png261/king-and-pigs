@@ -1,11 +1,10 @@
 #include "Game.hpp"
-
 #include "Log.hpp"
 
 int main()
 {
-    Game& game = Game::Instance();
     try {
+        Game& game = Game::Instance();
         game.init();
         while (game.isRunning()) {
             game.handleEvents();
@@ -13,8 +12,8 @@ int main()
             game.render();
         }
         game.clean();
-    } catch (std::exception const& exeption) {
-        Log::error("Exception caught:\n" + std::string(exeption.what()) + "\nQuitting...");
+    } catch (const std::exception& exception) {
+        Log::error("Exception caught:\n" + std::string(exception.what()) + "\nQuitting...");
         return -1;
     }
     return 0;

@@ -12,7 +12,7 @@ Button::Button(std::string text, int x, int y, int width, int height)
     , rectangle_(x, y, width, height)
     , callback_(nullptr)
 {
-    SoundManager::Instance().loadSFX(SOUND_DIRECTORY + "Button/clicked.mp3", "button clicked");
+    SoundManager::Instance().loadSFX(SOUND_DIRECTORY + "button/clicked.mp3", "button clicked");
 }
 
 void Button::draw()

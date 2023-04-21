@@ -56,6 +56,7 @@ void Pig::loadAnimation()
 void Pig::update()
 {
     if (isDead()) {
+        Game::Instance().addScore(10);
         disappear();
         return;
     }
@@ -171,35 +172,35 @@ void Pig::seeingPig()
 
 void Pig::updateAnimation()
 {
-    int newAnimation = current_animation_;
+    int new_animation = current_animation_;
 
     if (isOnGround()) {
         if (current_animation_ == FALL) {
-            newAnimation = GROUND;
+            new_animation = GROUND;
         } else {
-            newAnimation = IDLE;
+            new_animation = IDLE;
         }
         if (isRunning()) {
-            newAnimation = RUN;
+            new_animation = RUN;
         }
     } else {
         if (getBody()->GetLinearVelocity().y < 0) {
-            newAnimation = JUMP;
+            new_animation = JUMP;
         } else {
-            newAnimation = FALL;
+            new_animation = FALL;
         }
     }
 
     if (isDying()) {
-        newAnimation = DYING;
+        new_animation = DYING;
     } else if (isInvulnerable()) {
-        newAnimation = HIT;
+        new_animation = HIT;
     } else if (isAttack()) {
-        newAnimation = ATTACK;
+        new_animation = ATTACK;
     }
 
-    if (newAnimation != current_animation_) {
-        current_animation_ = newAnimation;
+    if (new_animation != current_animation_) {
+        current_animation_ = new_animation;
         animations_[current_animation_]->start();
     }
 }

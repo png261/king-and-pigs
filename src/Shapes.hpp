@@ -1,6 +1,6 @@
 #pragma once
 
-class Point
+class Point final
 {
 public:
     float x;
@@ -9,8 +9,9 @@ public:
     Point(const float _x, const float _y);
 };
 
-struct Rectangle
+class Rectangle final
 {
+public:
     float x;
     float y;
     int w;

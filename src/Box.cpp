@@ -47,17 +47,17 @@ void Box::update()
 
 void Box::updateAnimation()
 {
-    int newAnimation = current_animation_;
+    int new_animation = current_animation_;
 
     if (isDying()) {
-        newAnimation = HIT;
+        new_animation = HIT;
     } else {
-        newAnimation = NORMAL;
+        new_animation = NORMAL;
     }
 
-    if (newAnimation != current_animation_) {
+    if (new_animation != current_animation_) {
         animations_[current_animation_]->stop();
-        current_animation_ = newAnimation;
+        current_animation_ = new_animation;
         animations_[current_animation_]->start();
     }
 }

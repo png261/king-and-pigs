@@ -89,8 +89,8 @@ void Rectangle::stretch(const float scaleX, const float scaleY)
     h *= scaleY;
 
     // Centralizing one rectangle on the other
-    x += std::abs(oldW - w) / 2;
-    y += std::abs(oldH - h) / 2;
+    x += std::abs(oldW - w) / 2.0f;
+    y += std::abs(oldH - h) / 2.0f;
 
     update();
 }

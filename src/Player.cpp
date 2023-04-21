@@ -66,10 +66,10 @@ void Player::loadAnimation()
     animations_[LEAVING_DOOR] =
         std::make_unique<Animation>("player_leaving_door", 78, 58, 8, false);
 
-    leavingDoorTimer.setTime(300);
+    leaving_door_timer_.setTime(300);
     current_animation_ = LEAVING_DOOR;
     animations_[current_animation_]->start();
-    leavingDoorTimer.start();
+    leaving_door_timer_.start();
 }
 
 void Player::update()
@@ -92,10 +92,10 @@ void Player::update()
 void Player::handleVision()
 {
     raycast_.clear();
-    float nray = 50;
-    for (int i = 0; i < nray; ++i) {
+    float num_ray = 50.0f;
+    for (int i = 0; i < num_ray; ++i) {
         b2Vec2 start = getPosition() + direction_ * (b2Vec2(width_ / 2.0f, 0)) +
-                       b2Vec2(0, -height_ / 2.0f + i * height_ / nray);
+                       b2Vec2(0, -height_ / 2.0f + i * height_ / num_ray);
         b2Vec2 end = start + direction_ * b2Vec2(vision_range_, 0);
         raycast_.push_back({start, end});
     }
@@ -168,42 +168,42 @@ void Player::handleInput()
 
 void Player::updateAnimation()
 {
-    int newAnimation = current_animation_;
+    int new_animation = current_animation_;
 
     if (isOnGround()) {
         if (current_animation_ == FALL) {
-            newAnimation = GROUND;
+            new_animation = GROUND;
         } else {
-            newAnimation = IDLE;
+            new_animation = IDLE;
         }
         if (isRunning()) {
-            newAnimation = RUN;
+            new_animation = RUN;
         }
     } else {
         if (getBody()->GetLinearVelocity().y < 0) {
-            newAnimation = JUMP;
+            new_animation = JUMP;
         } else {
-            newAnimation = FALL;
+            new_animation = FALL;
         }
     }
 
 
     if (isDying()) {
-        newAnimation = DYING;
+        new_animation = DYING;
     } else if (isInvulnerable()) {
-        newAnimation = HIT;
+        new_animation = HIT;
     } else if (isAttack()) {
-        newAnimation = ATTACK;
+        new_animation = ATTACK;
     }
 
     if (isEnteringDoor()) {
-        newAnimation = ENTERING_DOOR;
+        new_animation = ENTERING_DOOR;
     }
 
-    if (leavingDoorTimer.isDone()) {
-        if (newAnimation != current_animation_) {
+    if (leaving_door_timer_.isDone()) {
+        if (new_animation != current_animation_) {
             animations_[current_animation_]->stop();
-            current_animation_ = newAnimation;
+            current_animation_ = new_animation;
             animations_[current_animation_]->start();
         }
     }

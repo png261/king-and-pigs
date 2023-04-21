@@ -13,8 +13,8 @@
 const std::string MainMenuState::kId_ = "MAIN_MENU";
 
 MainMenuState::MainMenuState()
-    : is_enterPlayState_(false)
-    , is_enterQuit_(false){};
+    : is_enter_play_state(false)
+    , is_enter_quit_(false){};
 
 void MainMenuState::update()
 {
@@ -22,14 +22,14 @@ void MainMenuState::update()
         return;
     }
 
-    if (is_enterPlayState_) {
+    if (is_enter_play_state) {
         Game::Instance().setLevelIndex(0);
         GameStateMachine::Instance().loading();
         GameStateMachine::Instance().changeState(std::make_unique<PlayState>());
         return;
     }
 
-    if (is_enterQuit_) {
+    if (is_enter_quit_) {
         Game::Instance().quit();
         return;
     }
@@ -59,7 +59,7 @@ bool MainMenuState::enter()
 {
     is_loaded_ = false;
 
-    auto newGameButton = std::make_unique<Button>(
+    auto new_game_button = std::make_unique<Button>(
         "New Game",
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2,
@@ -73,10 +73,10 @@ bool MainMenuState::enter()
         250,
         70);
 
-    newGameButton->onClick([this]() { is_enterPlayState_ = true; });
-    exit_button->onClick([this]() { is_enterQuit_ = true; });
+    new_game_button->onClick([this]() { is_enter_play_state = true; });
+    exit_button->onClick([this]() { is_enter_quit_ = true; });
 
-    ui_objects_.push_back(std::move(newGameButton));
+    ui_objects_.push_back(std::move(new_game_button));
     ui_objects_.push_back(std::move(exit_button));
 
     is_loaded_ = true;

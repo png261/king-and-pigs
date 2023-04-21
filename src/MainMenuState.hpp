@@ -18,6 +18,6 @@ public:
 private:
     std::vector<std::unique_ptr<UiObject>> ui_objects_;
     static const std::string kId_;
-    bool is_enterPlayState_;
-    bool is_enterQuit_;
+    bool is_enter_play_state;
+    bool is_enter_quit_;
 };
