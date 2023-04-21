@@ -18,6 +18,8 @@ Game::Game()
     : is_running_(false)
     , is_debug_(false)
     , level_index_(0)
+    , score_(0)
+    , highest_score_(0)
 {}
 
 Game& Game::Instance()
@@ -162,4 +164,25 @@ void Game::useDiamond(int n)
 Cursor* Game::getCursor()
 {
     return cursor_.get();
+}
+
+int Game::getScore() const
+{
+    return score_;
+}
+
+void Game::resetScore()
+{
+    score_ = 0;
+}
+
+int Game::getHighestScore() const
+{
+    return highest_score_;
+}
+
+void Game::addScore(const int score)
+{
+    score_ += score;
+    highest_score_ = std::max(highest_score_, score_);
 }

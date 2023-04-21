@@ -134,6 +134,7 @@ bool PlayState::enter()
     if (!loadLevel()) {
         return false;
     }
+    Game::Instance().resetScore();
 
     /* sound.setVolume(0); */
     sound.playMusic("playstate_background");
@@ -231,6 +232,13 @@ void PlayState::renderStatusBar() const
         "score: " + std::to_string(Game::Instance().getScore()),
         40,
         300 + 400,
+        50,
+        Color::WHITE);
+
+    Game::Instance().getWindow()->print(
+        "highest score: " + std::to_string(Game::Instance().getHighestScore()),
+        40,
+        300 + 650,
         50,
         Color::WHITE);
 }

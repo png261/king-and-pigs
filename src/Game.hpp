@@ -37,6 +37,11 @@ public:
     void useDiamond(int n);
     int getDiamond() const;
 
+    int getScore() const;
+    void resetScore();
+    int getHighestScore() const;
+    void addScore(int score);
+
     bool isDebug() const;
     void toggleDebug();
 
@@ -51,4 +56,6 @@ private:
     bool is_debug_;
     std::size_t level_index_;
     std::vector<std::string> level_files_;
+    int score_;
+    int highest_score_;
 };
