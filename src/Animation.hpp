@@ -18,7 +18,7 @@ public:
     void draw(
         const b2Vec2& position,
         const float angle = 0,
-        const bool flip = false,
+        const bool is_flip = false,
         const int zoom = 1);
     void update();
 

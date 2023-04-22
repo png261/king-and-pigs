@@ -163,7 +163,7 @@ void Player::handleInput()
         SoundManager::Instance().playSFX("player_attack");
     }
 
-    is_flipped_ = direction_ == LEFT;
+    is_flip_ = direction_ == LEFT;
 };
 
 void Player::updateAnimation()

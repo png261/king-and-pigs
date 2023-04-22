@@ -33,7 +33,7 @@ void TextureManager::draw(
     const b2Vec2& position,
     const int width,
     const int height,
-    const bool is_flipped)
+    const bool is_flip)
 {
     SDL_Rect const srcRect{0, 0, width, height};
     SDL_Rect const destRect{
@@ -48,7 +48,7 @@ void TextureManager::draw(
         &destRect,
         0,
         0,
-        is_flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+        is_flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
 
 void TextureManager::drawFrame(
@@ -59,7 +59,7 @@ void TextureManager::drawFrame(
     const int row,
     const int frame,
     const float angle,
-    const bool is_flipped,
+    const bool is_flip,
     const int zoom)
 {
     SDL_Rect const srcRect{width * frame, height * row, width, height};
@@ -75,7 +75,7 @@ void TextureManager::drawFrame(
         &destRect,
         angle,
         0,
-        is_flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+        is_flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
 
 void TextureManager::drawTile(

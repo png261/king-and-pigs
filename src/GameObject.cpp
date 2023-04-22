@@ -9,7 +9,7 @@ GameObject::GameObject()
     , width_(0)
     , height_(0)
     , is_exist_(true)
-    , is_flipped_(false)
+    , is_flip_(false)
     , direction_(RIGHT)
 {}
 
@@ -30,7 +30,7 @@ void GameObject::draw()
     animations_[current_animation_]->draw(
         getPosition() - halfSize - Camera::Instance().getPosition(),
         getAngle(),
-        is_flipped_,
+        is_flip_,
         Camera::Instance().getZoom());
 }
 

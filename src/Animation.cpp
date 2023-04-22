@@ -46,7 +46,7 @@ void Animation::update()
     }
 }
 
-void Animation::draw(const b2Vec2& position, const float angle, const bool bFlipped, const int zoom)
+void Animation::draw(const b2Vec2& position, const float angle, const bool is_flip, const int zoom)
 {
     if (!isRunning()) {
         return;
@@ -60,7 +60,7 @@ void Animation::draw(const b2Vec2& position, const float angle, const bool bFlip
         0,
         current_frame_,
         angle,
-        bFlipped,
+        is_flip,
         zoom);
 }
 

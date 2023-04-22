@@ -74,7 +74,7 @@ void Pig::update()
     VisionObject::update();
     VisionObject::update();
     handleMovement();
-    is_flipped_ = direction_ == RIGHT;
+    is_flip_ = direction_ == RIGHT;
 
     DamageableObject::update();
     AttackerObject::update();

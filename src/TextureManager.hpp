@@ -20,7 +20,7 @@ public:
         const b2Vec2& position,
         const int width,
         const int height,
-        const bool is_flipped = false);
+        const bool is_flip = false);
 
     void drawFrame(
         const std::string& id,
@@ -30,7 +30,7 @@ public:
         const int row,
         const int frame,
         const float angle = 0,
-        const bool is_flipped = false,
+        const bool is_flip = false,
         const int zoom = 1);
 
     void drawTile(

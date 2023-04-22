@@ -38,7 +38,7 @@ protected:
     int height_;
 
     bool is_exist_;
-    bool is_flipped_;
+    bool is_flip_;
 
     direction direction_;
 
