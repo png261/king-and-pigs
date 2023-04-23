@@ -14,212 +14,179 @@
 
 using namespace tinyxml2;
 
-std::unique_ptr<Level> LevelParser::parseLevel(const char* levelFile)
+std::unique_ptr<Level> LevelParser::parseLevel(const std::string& path)
 {
-    XMLDocument levelDocument;
-    if (levelDocument.LoadFile(levelFile) != XML_SUCCESS) {
-        throw std::runtime_error("LevelParser: " + std::string("fail to load: ") + levelFile);
+    XMLDocument document;
+    if (document.LoadFile(path.c_str()) != XML_SUCCESS) {
+        throw std::runtime_error("LevelParser: " + std::string("fail to load: ") + path);
     }
 
-    XMLElement* const pRoot = levelDocument.RootElement();
-    if (pRoot == nullptr) {
-        Log::error(std::string(levelFile) + ": missing  root element");
+    XMLElement* const root = document.RootElement();
+    if (root == nullptr) {
+        Log::error(std::string(path) + ": missing  root element");
     }
 
-    tile_size_ = std::stoi(pRoot->Attribute("tilewidth"));
-    width_ = std::stoi(pRoot->Attribute("width"));
-    height_ = std::stoi(pRoot->Attribute("height"));
+    tile_size_ = getIntAttribute(root, "tilewidth");
+    width_ = getIntAttribute(root, "width");
+    height_ = getIntAttribute(root, "height");
 
-    auto pLevel = std::make_unique<Level>();
-    pLevel->setMapWidth(width_ * tile_size_);
-    pLevel->setMapHeight(width_ * tile_size_);
+    auto level = std::make_unique<Level>();
+    level->setMapWidth(width_ * tile_size_);
+    level->setMapHeight(width_ * tile_size_);
 
-    for (XMLElement* e = pRoot->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+    for (XMLElement* e = root->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("tileset")) {
-            parseTilesets(e, pLevel.get());
+            parseTilesets(e, level.get());
         }
 
         if (e->Value() == std::string("objectgroup") || e->Value() == std::string("layer")) {
-            bool isTileLayer =
+            bool is_tile_layer =
                 e->FirstChildElement()->Value() == std::string("data") ||
                 (e->FirstChildElement()->NextSiblingElement() != 0 &&
                  e->FirstChildElement()->NextSiblingElement()->Value() == std::string("data"));
-            bool isObjectLayer = e->FirstChildElement()->Value() == std::string("object");
+            bool is_object_layer = e->FirstChildElement()->Value() == std::string("object");
 
-            if (isObjectLayer) {
-                parseObjectLayer(e, pLevel.get());
-            } else if (isTileLayer) {
-                parseTileLayer(e, pLevel.get());
+            if (is_object_layer) {
+                parseObjectLayer(e, level.get());
+            } else if (is_tile_layer) {
+                parseTileLayer(e, level.get());
             }
         }
     }
 
-    return pLevel;
+    return level;
 }
 
-void LevelParser::parseTilesets(XMLElement* const pTilesetRoot, Level* pLevel)
+void LevelParser::parseTilesets(XMLElement* const tileset_root, Level* const level) const
 {
-    XMLElement* const pImagieEl = pTilesetRoot->FirstChildElement();
+    XMLElement* const image = tileset_root->FirstChildElement();
 
     Tileset tileset;
 
-    if (pImagieEl->Attribute("width")) {
-        tileset.width = std::stoi(pImagieEl->Attribute("width"));
-    }
-    if (pImagieEl->Attribute("height")) {
-        tileset.height = std::stoi(pImagieEl->Attribute("height"));
-    }
-    if (pTilesetRoot->Attribute("firstgid")) {
-        tileset.first_grid_id = std::stoi(pTilesetRoot->Attribute("firstgid"));
-    }
-    if (pTilesetRoot->Attribute("tilewidth")) {
-        tileset.tile_width = std::stoi(pTilesetRoot->Attribute("tilewidth"));
-    }
-    if (pTilesetRoot->Attribute("tileheight")) {
-        tileset.tile_height = std::stoi(pTilesetRoot->Attribute("tileheight"));
-    }
-    if (pTilesetRoot->Attribute("spacing")) {
-        tileset.spacing = std::stoi(pTilesetRoot->Attribute("spacing"));
-    } else {
-        tileset.spacing = 0;
-    }
-    if (pTilesetRoot->Attribute("margin")) {
-        tileset.margin = std::stoi(pTilesetRoot->Attribute("margin"));
-    } else {
-        tileset.margin = 0;
-    }
-    if (pTilesetRoot->Attribute("name")) {
-        tileset.name = pTilesetRoot->Attribute("name");
-    }
+    tileset.width = getIntAttribute(image, "width");
+    tileset.height = getIntAttribute(image, "height");
+    tileset.first_grid_id = getIntAttribute(tileset_root, "firstgid");
+    tileset.tile_width = getIntAttribute(tileset_root, "tilewidth");
+    tileset.tile_height = getIntAttribute(tileset_root, "tileheight");
+    tileset.spacing = getIntAttribute(tileset_root, "spacing");
+    tileset.margin = getIntAttribute(tileset_root, "margin");
+    tileset.name = getStringAttribute(tileset_root, "name");
 
     tileset.columns = tileset.width / (tileset.tile_width + tileset.spacing);
 
-    TextureManager::Instance().load(LEVEL_DIRECTORY + pImagieEl->Attribute("source"), tileset.name);
-    pLevel->addTileSet(tileset);
-    parseCollisionObject(pTilesetRoot, pLevel, tileset.first_grid_id);
+    TextureManager::Instance().load(LEVEL_DIRECTORY + image->Attribute("source"), tileset.name);
+    level->addTileSet(tileset);
+    parseCollisionObject(tileset_root, level, tileset.first_grid_id);
 }
 
-void LevelParser::parseCollisionObject(XMLElement* pTilesetRoot, Level* pLevel, int firstGridID)
+void LevelParser::parseCollisionObject(
+    XMLElement* tileset_root,
+    Level* const level,
+    const int first_grid_id) const
 {
-    for (XMLElement* e = pTilesetRoot->FirstChildElement(); e != nullptr;
+    for (XMLElement* e = tileset_root->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
         if (e->Value() == std::string("tile")) {
             XMLElement* const obj = e->FirstChildElement()->FirstChildElement();
-            int id = std::stoi(e->Attribute("id")) + firstGridID;
-            bool isOneWay = getType(e) == std::string("oneway");
+            int id = getIntAttribute(e, "id") + first_grid_id;
+            bool is_one_way = getType(e) == std::string("oneway");
 
-            int width = std::stoi(obj->Attribute("width"));
-            int height = std::stoi(obj->Attribute("height"));
-            pLevel->addCollisionShape(id, {isOneWay, width, height});
+            int width = getIntAttribute(obj, "width");
+            int height = getIntAttribute(obj, "height");
+            level->addCollisionShape(id, {is_one_way, width, height});
         }
     }
 }
 
-std::unique_ptr<GameObject> LevelParser::parseObject(
-    XMLElement* const pObjectElement,
-    Level* const pLevel)
+std::unique_ptr<GameObject> LevelParser::parseObject(XMLElement* const element, Level* const level)
+    const
 {
-    int x = std::stoi(pObjectElement->Attribute("x"));
-    int y = std::stoi(pObjectElement->Attribute("y"));
-    int width = std::stoi(pObjectElement->Attribute("width"));
-    int height = std::stoi(pObjectElement->Attribute("height"));
-    std::string type = getType(pObjectElement);
+    int x = getIntAttribute(element, "x");
+    int y = getIntAttribute(element, "y");
+    int width = getIntAttribute(element, "width");
+    int height = getIntAttribute(element, "height");
+    std::string type = getType(element);
 
-    std::unique_ptr<GameObject> pGameObject = GameObjectFactory::Instance().create(type);
-    if (pGameObject == nullptr) {
+    std::unique_ptr<GameObject> object = GameObjectFactory::Instance().create(type);
+    if (object == nullptr) {
         return nullptr;
     }
 
-    for (XMLElement* e = pObjectElement->FirstChildElement(); e != nullptr;
-         e = e->NextSiblingElement()) {
-        if (e->Value() == std::string("properties")) {
-            for (XMLElement* property = e->FirstChildElement(); property != nullptr;
-                 property = property->NextSiblingElement()) {
-                if (property->Value() == std::string("property")) {
-                    std::string propertyName = property->Attribute("name");
-                    std::string propertyValue = property->Attribute("value");
-                }
-            }
-        }
-    }
-
-    pGameObject->load(std::make_unique<LoaderParams>(LoaderParams(x, y, width, height)));
+    object->load(std::make_unique<LoaderParams>(LoaderParams(x, y, width, height)));
 
     if (type == "Player") {
-        pLevel->setPlayer(dynamic_cast<Player*>(pGameObject.get()));
+        level->setPlayer(dynamic_cast<Player*>(object.get()));
     }
 
-    return pGameObject;
+    return object;
 }
 
-void LevelParser::parseObjectLayer(XMLElement* const pObjectEl, Level* const pLevel)
+void LevelParser::parseObjectLayer(XMLElement* const root, Level* const level) const
 {
-    auto pObjectLayer = std::make_unique<ObjectLayer>();
+    auto object_layer = std::make_unique<ObjectLayer>();
 
-    bool isHaveObjects = false;
-    for (XMLElement* e = pObjectEl->FirstChildElement(); e != nullptr;
-         e = e->NextSiblingElement()) {
+    bool is_empty = true;
+    for (XMLElement* e = root->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
         if (e->Value() == std::string("object")) {
-            std::unique_ptr<GameObject> obj = parseObject(e, pLevel);
+            std::unique_ptr<GameObject> obj = parseObject(e, level);
             if (obj != nullptr) {
-                isHaveObjects = true;
-                pObjectLayer->addGameObject(std::move(obj));
+                is_empty = false;
+                object_layer->addGameObject(std::move(obj));
             }
         }
     }
 
-    if (isHaveObjects) {
-        pLevel->addLayer(std::move(pObjectLayer));
+    if (!is_empty) {
+        level->addLayer(std::move(object_layer));
     }
 }
 
-std::vector<std::vector<int>> LevelParser::parseData(const std::string& dataText)
+std::vector<std::vector<int>> LevelParser::parseData(const std::string& dataText) const
 {
-    std::vector<std::vector<int>> data;
-
-    std::vector<int> layerRow(width_);
+    std::vector<std::vector<int>> result;
+    std::vector<int> empty_row(width_);
     for (int i = 0; i < height_; ++i) {
-        data.push_back(layerRow);
+        result.push_back(empty_row);
     }
 
     int start = 0;
-    for (int row = 0; row < height_; row++) {
-        for (int col = 0; col < width_; col++) {
+    for (auto& row : result) {
+        for (auto& col : row) {
             int end = dataText.find(',', start);
-            data[row][col] = std::stoi(dataText.substr(start, end - start));
+            col = std::stoi(dataText.substr(start, end - start));
             start = end + 1;
         }
     }
 
-    return data;
+    return result;
 }
 
-void LevelParser::parseTileLayer(XMLElement* const pTileElement, Level* pLevel)
+void LevelParser::parseTileLayer(XMLElement* const tile_element, Level* const level) const
 {
-    auto pTileLayer =
-        std::make_unique<TileLayer>(tile_size_, width_, height_, *pLevel->getTilesets());
+    auto tile_layer =
+        std::make_unique<TileLayer>(tile_size_, width_, height_, *level->getTilesets());
 
-    std::vector<std::vector<int>> IDs;
-    for (XMLElement* e = pTileElement->FirstChildElement(); e != nullptr;
+    std::vector<std::vector<int>> ids;
+    for (XMLElement* e = tile_element->FirstChildElement(); e != nullptr;
          e = e->NextSiblingElement()) {
         if (e->Value() == std::string("data")) {
-            IDs = parseData(e->GetText());
+            ids = parseData(e->GetText());
         }
     }
 
-    pTileLayer->setTileIDs(IDs);
-    pLevel->addLayer(std::move(pTileLayer));
+    tile_layer->setTileIDs(ids);
+    level->addLayer(std::move(tile_layer));
 
-    std::unordered_map<int, CollisionShape>* pCollisionShape = pLevel->getCollisionShapes();
-    if (!pCollisionShape->empty()) {
+    std::unordered_map<int, CollisionShape>* collision_shape = level->getCollisionShapes();
+    if (!collision_shape->empty()) {
         for (int row = 0; row < height_; row++) {
             for (int col = 0; col < width_; col++) {
-                int id = IDs[row][col];
+                int id = ids[row][col];
                 if (id == 0) {
                     continue;
                 }
-                std::unordered_map<int, CollisionShape>::iterator it = pCollisionShape->find(id);
-                if (it == pCollisionShape->end()) {
+                std::unordered_map<int, CollisionShape>::iterator it = collision_shape->find(id);
+                if (it == collision_shape->end()) {
                     continue;
                 }
                 CollisionShape shape = it->second;
@@ -235,15 +202,36 @@ void LevelParser::parseTileLayer(XMLElement* const pTileElement, Level* pLevel)
     }
 }
 
-std::string LevelParser::getType(XMLElement* const el)
+std::string LevelParser::getType(XMLElement* const element) const
 {
-    if (el->Attribute("class")) {
-        return el->Attribute("class");
+    if (element->Attribute("class")) {
+        return element->Attribute("class");
     }
 
-    if (el->Attribute("type")) {
-        return el->Attribute("type");
+    if (element->Attribute("type")) {
+        return element->Attribute("type");
     }
 
     return "";
+}
+
+
+std::string LevelParser::getStringAttribute(
+    XMLElement* element,
+    const char* attribute_name,
+    std::string default_value) const
+{
+    if (element->Attribute(attribute_name)) {
+        return element->Attribute(attribute_name);
+    }
+    return default_value;
+}
+
+int LevelParser::getIntAttribute(XMLElement* element, const char* attribute_name, int default_value)
+    const
+{
+    if (element->Attribute(attribute_name)) {
+        return std::stoi(element->Attribute(attribute_name));
+    }
+    return default_value;
 }
