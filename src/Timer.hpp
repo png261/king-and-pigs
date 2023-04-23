@@ -6,9 +6,9 @@
 class Timer final
 {
 public:
-    Timer(Uint32 time);
     Timer();
-    void setTime(Uint32 time);
+    Timer(const Uint32 time);
+    void setTime(const Uint32 time);
     void start();
     void restart();
     bool isDone();

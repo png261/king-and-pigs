@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="21" nextobjectid="118">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="21" nextobjectid="119">
  <tileset firstgid="1" name="decorations" tilewidth="32" tileheight="32" tilecount="42" columns="7">
   <image source="tilesets/decorations.png" width="224" height="192"/>
   <tile id="9" type="oneway">
@@ -517,9 +517,10 @@
 </data>
  </layer>
  <objectgroup id="20" name="Item">
-  <object id="114" name="Heart" type="Heart" x="439" y="197" width="22" height="16"/>
+  <object id="114" name="Heart" type="Heart" x="175" y="172" width="22" height="16"/>
   <object id="116" name="Diamond" type="Diamond" x="487" y="138" width="22" height="16"/>
   <object id="117" name="Diamond" type="Diamond" x="448" y="140" width="22" height="16"/>
+  <object id="118" name="Bomb" type="Bomb" x="227" y="175" width="7" height="7"/>
  </objectgroup>
  <objectgroup id="18" name="Door">
   <object id="90" name="DoorOut" type="DoorOut" x="95" y="136" width="46" height="56"/>

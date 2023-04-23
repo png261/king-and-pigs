@@ -1,5 +1,7 @@
 #include "DoorIn.hpp"
 
+#include "Utils.hpp"
+
 DoorIn::DoorIn() {}
 
 void DoorIn::load(std::unique_ptr<LoaderParams> const& params)
@@ -14,11 +16,11 @@ void DoorIn::createSensor()
     float sensorSize = 5;
     b2PolygonShape dynamicBox;
     dynamicBox.SetAsBox(
-        PhysicWorld::pixelToMeter(sensorSize) / 2.0f,
-        PhysicWorld::pixelToMeter(sensorSize) / 2.0f,
+        Utils::pixelToMeter(sensorSize) / 2.0f,
+        Utils::pixelToMeter(sensorSize) / 2.0f,
         b2Vec2(
-            PhysicWorld::pixelToMeter(width_ / 4.0f - sensorSize),
-            PhysicWorld::pixelToMeter(height_ / 4.0f - sensorSize)),
+            Utils::pixelToMeter(width_ / 4.0f - sensorSize),
+            Utils::pixelToMeter(height_ / 4.0f - sensorSize)),
         0);
 
     b2FixtureDef sensorDef;

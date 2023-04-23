@@ -94,7 +94,7 @@ void Game::setLevelIndex(const int level_index)
 
 void Game::nextLevel()
 {
-    PlayState* const play_state =
+    auto const play_state =
         dynamic_cast<PlayState*>(GameStateMachine::Instance().getCurrentState());
     if (play_state == nullptr) {
         return;

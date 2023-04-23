@@ -1,36 +1,27 @@
 #include "Bomb.hpp"
 
 #include "InputHandler.hpp"
-#include "Log.hpp"
+#include "PhysicWorld.hpp"
 #include "SoundManager.hpp"
+#include "Utils.hpp"
 
 Bomb::Bomb()
     : GameObject()
     , AttackerObject(1, 20, 9999)
     , is_on_(false)
+    , on_timer_(1000)
 {}
 
 void Bomb::load(std::unique_ptr<LoaderParams> const& params)
 {
     GameObject::load(std::move(params));
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position = PhysicWorld::pixelToMeter(
-        b2Vec2(params->x(), params->y()) + 0.5f * b2Vec2(width_, height_));
-    bodyDef.fixedRotation = true;
-    bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
-    body_ = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
 
-    b2CircleShape circle;
-    circle.m_radius = PhysicWorld::pixelToMeter(width_);
-
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &circle;
-    fixtureDef.density = 1;
-    fixtureDef.friction = 0.3f;
-    fixtureDef.filter.categoryBits = PhysicWorld::CAT_BOMB;
-    fixtureDef.filter.maskBits = PhysicWorld::MASK_BOMB;
-    fixture_ = body_->CreateFixture(&fixtureDef);
+    PhysicWorld::Instance().createCircleBody(
+        body_,
+        b2Vec2(params->x(), params->y()) + 0.5f * b2Vec2(width_, height_),
+        width_,
+        PhysicWorld::CAT_BOMB,
+        PhysicWorld::MASK_BOMB);
 
     createCircleSensor(
         {0, 0},
@@ -39,7 +30,6 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& params)
         PhysicWorld::MASK_PIG_ATTACK_SENSOR);
 
     loadAnimation();
-    on_timer_.setTime(1000);
 }
 
 void Bomb::loadAnimation()

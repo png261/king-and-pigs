@@ -1,6 +1,8 @@
 #include "PhysicObject.hpp"
 
+#include "CONSTANT.hpp"
 #include "Log.hpp"
+#include "Utils.hpp"
 
 PhysicObject::PhysicObject()
     : can_move_right_(true)
@@ -25,16 +27,14 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position = PhysicWorld::pixelToMeter(b2Vec2(x + width * 0.5f, y + height * 0.5f));
+    bodyDef.position = Utils::pixelToMeter(b2Vec2(x + width * 0.5f, y + height * 0.5f));
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
     body_ = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
 
     b2FixtureDef fixtureDef;
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(
-        PhysicWorld::pixelToMeter(width) / 2.0f,
-        PhysicWorld::pixelToMeter(height) / 2.0f);
+    dynamicBox.SetAsBox(Utils::pixelToMeter(width) / 2.0f, Utils::pixelToMeter(height) / 2.0f);
 
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1;
@@ -64,7 +64,7 @@ void PhysicObject::moveRight()
         is_running_ = true;
     }
 
-    float speedDifference = PhysicWorld::pixelToMeter(move_speed_) - body_->GetLinearVelocity().x;
+    float speedDifference = Utils::pixelToMeter(move_speed_) - body_->GetLinearVelocity().x;
     b2Vec2 impulse{body_->GetMass() * speedDifference, 0};
     body_->ApplyLinearImpulse(impulse, body_->GetWorldCenter(), true);
 }
@@ -79,7 +79,7 @@ void PhysicObject::moveLeft()
         is_running_ = true;
     }
 
-    float speedDifference = PhysicWorld::pixelToMeter(-move_speed_) - body_->GetLinearVelocity().x;
+    float speedDifference = Utils::pixelToMeter(-move_speed_) - body_->GetLinearVelocity().x;
     b2Vec2 impulse{body_->GetMass() * speedDifference, 0};
     body_->ApplyLinearImpulse(impulse, body_->GetWorldCenter(), true);
 }
@@ -98,10 +98,9 @@ void PhysicObject::jump()
         return;
     }
 
-    float timeToJumpPeak =
-        sqrt(2 * PhysicWorld::pixelToMeter(jump_height_) / PhysicWorld::GRAVITY.y);
+    float timeToJumpPeak = sqrt(2 * Utils::pixelToMeter(jump_height_) / GRAVITY);
 
-    float velocity = PhysicWorld::pixelToMeter(jump_height_) / timeToJumpPeak;
+    float velocity = Utils::pixelToMeter(jump_height_) / timeToJumpPeak;
     b2Vec2 impulse = body_->GetMass() * std::pow(velocity, 2) * b2Vec2(0, -1);
 
     body_->ApplyLinearImpulse(impulse, body_->GetWorldCenter(), true);
@@ -114,12 +113,12 @@ b2Body* PhysicObject::getBody() const
 
 b2Vec2 PhysicObject::getPosition() const
 {
-    return PhysicWorld::meterToPixel(body_->GetPosition());
+    return Utils::meterToPixel(body_->GetPosition());
 }
 
 float PhysicObject::getAngle() const
 {
-    return PhysicWorld::degToRad(body_->GetAngle());
+    return Utils::degToRad(body_->GetAngle());
 }
 
 int PhysicObject::getFootContact() const
@@ -188,9 +187,9 @@ b2Fixture* PhysicObject::createPolygonSensor(
 {
     b2PolygonShape polygon;
     polygon.SetAsBox(
-        PhysicWorld::pixelToMeter(width * 0.5),
-        PhysicWorld::pixelToMeter(height * 0.5),
-        PhysicWorld::pixelToMeter(position),
+        Utils::pixelToMeter(width * 0.5),
+        Utils::pixelToMeter(height * 0.5),
+        Utils::pixelToMeter(position),
         0);
 
     b2FixtureDef fixtureDef;
@@ -208,8 +207,8 @@ b2Fixture* PhysicObject::createCircleSensor(
     const PhysicWorld::Mask mask)
 {
     b2CircleShape circle;
-    circle.m_p = PhysicWorld::pixelToMeter(position);
-    circle.m_radius = PhysicWorld::pixelToMeter(radius);
+    circle.m_p = Utils::pixelToMeter(position);
+    circle.m_radius = Utils::pixelToMeter(radius);
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &circle;
@@ -218,30 +217,4 @@ b2Fixture* PhysicObject::createCircleSensor(
     fixtureDef.filter.maskBits = mask;
 
     return getBody()->CreateFixture(&fixtureDef);
-}
-
-b2Fixture* PhysicObject::createCircleBody(
-    b2Body*& body,
-    const b2Vec2& position,
-    const int radius,
-    const PhysicWorld::Category category,
-    const PhysicWorld::Mask mask)
-{
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position = PhysicWorld::pixelToMeter(b2Vec2(position) + 0.5 * b2Vec2(radius, radius));
-    bodyDef.fixedRotation = true;
-    body = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
-
-    b2CircleShape circle;
-    circle.m_radius = PhysicWorld::pixelToMeter(radius);
-
-    b2FixtureDef fixture;
-    fixture.shape = &circle;
-    fixture.density = 1;
-    fixture.friction = 0.3;
-    fixture.filter.categoryBits = category;
-    fixture.filter.maskBits = mask;
-
-    return body->CreateFixture(&fixture);
 }

@@ -5,12 +5,12 @@ Timer::Timer()
     , is_done_(false)
 {}
 
-Timer::Timer(Uint32 time)
+Timer::Timer(const Uint32 time)
     : time_(time)
     , is_done_(false)
 {}
 
-void Timer::setTime(Uint32 time)
+void Timer::setTime(const Uint32 time)
 {
     time_ = time;
 }

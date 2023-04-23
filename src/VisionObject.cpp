@@ -4,6 +4,7 @@
 #include "Game.hpp"
 #include "GameState.hpp"
 #include "GameStateMachine.hpp"
+#include "Utils.hpp"
 
 VisionObject::VisionObject(float range)
     : fraction_(1)
@@ -16,8 +17,8 @@ void VisionObject::update()
     seeing_category_ = 0;
     vision_nearest_distance_ = vision_range_;
     for (auto& raycast : raycast_) {
-        b2Vec2 start = PhysicWorld::pixelToMeter(raycast.start);
-        b2Vec2 end = PhysicWorld::pixelToMeter(raycast.end);
+        b2Vec2 start = Utils::pixelToMeter(raycast.start);
+        b2Vec2 end = Utils::pixelToMeter(raycast.end);
 
         VisionRayCastCallback callback;
         PhysicWorld::Instance().getWorld()->RayCast(&callback, start, end);
@@ -37,8 +38,8 @@ void VisionObject::debugDraw()
 
     DebugDraw debug(Game::Instance().getWindow());
     for (auto& raycast : raycast_) {
-        b2Vec2 start = PhysicWorld::pixelToMeter(raycast.start);
-        b2Vec2 end = PhysicWorld::pixelToMeter(raycast.end);
+        b2Vec2 start = Utils::pixelToMeter(raycast.start);
+        b2Vec2 end = Utils::pixelToMeter(raycast.end);
         debug.DrawSegment(start, end, {1, 1, 1, 1});
     }
 }

@@ -1,17 +1,27 @@
 #pragma once
 
-#include <box2d/b2_types.h>
 #include <box2d/box2d.h>
 
 #include <memory>
 
+#include "ContactListener.hpp"
+#include "DebugDraw.hpp"
 #include "Window.hpp"
 
-class DebugDraw;
-class ContactListener;
 class PhysicWorld final
 {
 public:
+    static PhysicWorld& Instance();
+    PhysicWorld(PhysicWorld const&) = delete;
+    PhysicWorld& operator=(PhysicWorld const&) = delete;
+
+    void init(Window* const window);
+    void update();
+    void clean();
+    void debugDraw();
+    void createContactListener();
+    b2World* getWorld();
+
     enum Category : uint16 {
         CAT_NONE = 0x0000,
         CAT_WALL = 0x0001,
@@ -44,14 +54,6 @@ public:
         MASK_PIG_VISION_SENSOR = CAT_ALL,
     };
 
-    static PhysicWorld& Instance();
-    PhysicWorld(PhysicWorld const&) = delete;
-    PhysicWorld& operator=(PhysicWorld const&) = delete;
-
-    void init(Window* const window);
-    void update();
-    void clean();
-
     b2Body* createStaticBody(
         const b2Vec2& position,
         const int width,
@@ -59,34 +61,15 @@ public:
         const Category category,
         const Mask mask);
 
-    void debugDraw();
-    void createContactListener();
-
-    b2World* getWorld();
-
-    static int meterToPixel(float meter);
-    static float pixelToMeter(int pixel);
-
-    static b2Vec2 meterToPixel(const b2Vec2& meter);
-    static b2Vec2 pixelToMeter(const b2Vec2& pixel);
-
-    static float radToDeg(float rad);
-    static float degToRad(float deg);
-
-    static const b2Vec2 GRAVITY;
+    b2Fixture* createCircleBody(
+        b2Body*& body,
+        const b2Vec2& position,
+        const int radius,
+        const PhysicWorld::Category category,
+        const PhysicWorld::Mask mask);
 
 private:
-    static const float PIXEL_PER_METER;
-    static const float METER_PER_PIXEL;
-    static const float RAD_PER_DEG;
-    static const float DEG_PER_RAD;
-    static const float GROUND_FRICTION;
-
     PhysicWorld();
-    void AttackListener(b2Contact* const contact);
-    void handleAttack(b2Fixture* const Attacker, b2Fixture* const Defender);
-    void EnterDoorListener(b2Contact* const contact);
-    void BombListener(b2Contact* const contact);
 
     std::unique_ptr<b2World> world_;
     std::unique_ptr<DebugDraw> debugDraw_;
