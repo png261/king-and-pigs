@@ -123,7 +123,7 @@ void Window::renderImage(
     SDL_RenderCopyEx(renderer_, texture, srcrect, dstrect, angle, center, flip);
 }
 
-void Window::fill(const Color color)
+void Window::fill(const Color& color)
 {
     SDL_SetRenderDrawColor(renderer_, color.r(), color.g(), color.b(), color.a());
     SDL_RenderClear(renderer_);
@@ -143,7 +143,7 @@ void Window::setTitle(const std::string& title)
     SDL_SetWindowTitle(window_, title.c_str());
 }
 
-void Window::setBackgroundColor(const Color color)
+void Window::setBackgroundColor(const Color& color)
 {
     background_color_ = color;
 }
@@ -160,11 +160,11 @@ void Window::delayFramerateIfNeeded()
 }
 
 void Window::print(
-    std::string text,
+    const std::string& text,
     const int fontSize,
     const int x,
     const int y,
-    const Color color)
+    const Color& color)
 {
     if (font_ == nullptr) {
         Log::error("Window::print: fail to load font");
@@ -194,7 +194,7 @@ void Window::print(
     SDL_FreeSurface(pSurface);
 };
 
-void Window::drawBox(Rectangle box, Color color) const
+void Window::drawBox(const Rectangle& box, const Color& color) const
 {
     SDL_Rect rect{
         static_cast<int>(box.x),
