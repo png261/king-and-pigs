@@ -60,7 +60,6 @@ void Camera::update()
         position_.y = maxY;
     }
 
-
     if (position_.x < 0) {
         position_.x = 0;
     }

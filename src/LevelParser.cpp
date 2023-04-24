@@ -1,5 +1,6 @@
 #include "LevelParser.hpp"
 
+#include <fstream>
 #include <stdexcept>
 
 #include "CONSTANT.hpp"
@@ -12,107 +13,83 @@
 #include "TextureManager.hpp"
 #include "TileLayer.hpp"
 
-using namespace tinyxml2;
 
 std::unique_ptr<Level> LevelParser::parseLevel(const std::string& path)
 {
-    XMLDocument document;
-    if (document.LoadFile(path.c_str()) != XML_SUCCESS) {
+    std::ifstream json_file(path);
+    if (!json_file.is_open()) {
         throw std::runtime_error("LevelParser: " + std::string("fail to load: ") + path);
     }
 
-    XMLElement* const root = document.RootElement();
-    if (root == nullptr) {
-        Log::error(std::string(path) + ": missing  root element");
+    Json::Value root;
+    Json::CharReaderBuilder builder;
+    JSONCPP_STRING err;
+    if (!Json::parseFromStream(builder, json_file, &root, &err)) {
+        throw std::runtime_error("LevelParser: " + std::string("fail to load json data: ") + path);
     }
 
-    tile_size_ = getIntAttribute(root, "tilewidth");
-    width_ = getIntAttribute(root, "width");
-    height_ = getIntAttribute(root, "height");
+    tile_size_ = root["tilewidth"].asInt();
+    width_ = root["width"].asInt();
+    height_ = root["height"].asInt();
 
     auto level = std::make_unique<Level>();
     level->setMapWidth(width_ * tile_size_);
     level->setMapHeight(width_ * tile_size_);
 
-    for (XMLElement* e = root->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
-        if (e->Value() == std::string("tileset")) {
-            parseTilesets(e, level.get());
-        }
+    for (const auto& tileset : root["tilesets"]) {
+        parseTileset(tileset, level.get());
+    }
 
-        if (e->Value() == std::string("objectgroup") || e->Value() == std::string("layer")) {
-            bool is_tile_layer =
-                e->FirstChildElement()->Value() == std::string("data") ||
-                (e->FirstChildElement()->NextSiblingElement() != 0 &&
-                 e->FirstChildElement()->NextSiblingElement()->Value() == std::string("data"));
-            bool is_object_layer = e->FirstChildElement()->Value() == std::string("object");
-
-            if (is_object_layer) {
-                parseObjectLayer(e, level.get());
-            } else if (is_tile_layer) {
-                parseTileLayer(e, level.get());
-            }
+    for (const auto& layer : root["layers"]) {
+        if (layer["type"].asString() == "tilelayer") {
+            parseTileLayer(layer, level.get());
+        } else if (layer["type"].asString() == "objectgroup") {
+            parseObjectLayer(layer, level.get());
         }
     }
 
     return level;
 }
 
-void LevelParser::parseTilesets(XMLElement* const tileset_root, Level* const level) const
+void LevelParser::parseTileset(const Json::Value& tileset_data, Level* const level) const
 {
-    XMLElement* const image = tileset_root->FirstChildElement();
-
     Tileset tileset;
+    tileset.name = tileset_data["name"].asString();
+    tileset.first_grid_id = tileset_data["firstgid"].asInt();
+    tileset.spacing = tileset_data["spacing"].asInt();
+    tileset.margin = tileset_data["margin"].asInt();
+    tileset.columns = tileset_data["columns"].asInt();
 
-    tileset.width = getIntAttribute(image, "width");
-    tileset.height = getIntAttribute(image, "height");
-    tileset.first_grid_id = getIntAttribute(tileset_root, "firstgid");
-    tileset.tile_width = getIntAttribute(tileset_root, "tilewidth");
-    tileset.tile_height = getIntAttribute(tileset_root, "tileheight");
-    tileset.spacing = getIntAttribute(tileset_root, "spacing");
-    tileset.margin = getIntAttribute(tileset_root, "margin");
-    tileset.name = getStringAttribute(tileset_root, "name");
-
-    tileset.columns = tileset.width / (tileset.tile_width + tileset.spacing);
-
-    TextureManager::Instance().load(LEVEL_DIRECTORY + image->Attribute("source"), tileset.name);
+    TextureManager::Instance().load(
+        LEVEL_DIRECTORY + tileset_data["image"].asString(),
+        tileset.name);
     level->addTileSet(tileset);
-    parseCollisionObject(tileset_root, level, tileset.first_grid_id);
-}
 
-void LevelParser::parseCollisionObject(
-    XMLElement* tileset_root,
-    Level* const level,
-    const int first_grid_id) const
-{
-    for (XMLElement* e = tileset_root->FirstChildElement(); e != nullptr;
-         e = e->NextSiblingElement()) {
-        if (e->Value() == std::string("tile")) {
-            XMLElement* const obj = e->FirstChildElement()->FirstChildElement();
-            int id = getIntAttribute(e, "id") + first_grid_id;
-            bool is_one_way = getType(e) == std::string("oneway");
-
-            int width = getIntAttribute(obj, "width");
-            int height = getIntAttribute(obj, "height");
-            level->addCollisionShape(id, {is_one_way, width, height});
-        }
+    for (const auto& tile : tileset_data["tiles"]) {
+        const int id = tile["id"].asInt() + tileset.first_grid_id;
+        const bool is_one_way = tile["type"].asString() == std::string("oneway");
+        const int width = tile["objectgroup"]["objects"][0]["width"].asInt();
+        const int height = tile["objectgroup"]["objects"][0]["height"].asInt();
+        level->addTileCollision(id, {is_one_way, width, height});
     }
 }
 
-std::unique_ptr<GameObject> LevelParser::parseObject(XMLElement* const element, Level* const level)
-    const
+std::unique_ptr<GameObject> LevelParser::parseObject(
+    const Json::Value& object_data,
+    Level* const level) const
 {
-    int x = getIntAttribute(element, "x");
-    int y = getIntAttribute(element, "y");
-    int width = getIntAttribute(element, "width");
-    int height = getIntAttribute(element, "height");
-    std::string type = getType(element);
+    std::string type = object_data["type"].asString();
 
     std::unique_ptr<GameObject> object = GameObjectFactory::Instance().create(type);
     if (object == nullptr) {
         return nullptr;
     }
 
-    object->load(std::make_unique<LoaderParams>(LoaderParams(x, y, width, height)));
+    object->load(std::make_unique<LoaderParams>(LoaderParams(
+        object_data["x"].asInt(),
+        object_data["y"].asInt(),
+        object_data["width"].asInt(),
+        object_data["height"].asInt())));
 
     if (type == "Player") {
         level->setPlayer(dynamic_cast<Player*>(object.get()));
@@ -121,18 +98,16 @@ std::unique_ptr<GameObject> LevelParser::parseObject(XMLElement* const element, 
     return object;
 }
 
-void LevelParser::parseObjectLayer(XMLElement* const root, Level* const level) const
+void LevelParser::parseObjectLayer(const Json::Value& layer, Level* const level) const
 {
     auto object_layer = std::make_unique<ObjectLayer>();
 
     bool is_empty = true;
-    for (XMLElement* e = root->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
-        if (e->Value() == std::string("object")) {
-            std::unique_ptr<GameObject> obj = parseObject(e, level);
-            if (obj != nullptr) {
-                is_empty = false;
-                object_layer->addGameObject(std::move(obj));
-            }
+    for (auto& object : layer["objects"]) {
+        std::unique_ptr<GameObject> obj = parseObject(object, level);
+        if (obj != nullptr) {
+            is_empty = false;
+            object_layer->addGameObject(std::move(obj));
         }
     }
 
@@ -141,55 +116,32 @@ void LevelParser::parseObjectLayer(XMLElement* const root, Level* const level) c
     }
 }
 
-std::vector<std::vector<int>> LevelParser::parseData(const std::string& dataText) const
-{
-    std::vector<std::vector<int>> result;
-    std::vector<int> empty_row(width_);
-    for (int i = 0; i < height_; ++i) {
-        result.push_back(empty_row);
-    }
-
-    int start = 0;
-    for (auto& row : result) {
-        for (auto& col : row) {
-            int end = dataText.find(',', start);
-            col = std::stoi(dataText.substr(start, end - start));
-            start = end + 1;
-        }
-    }
-
-    return result;
-}
-
-void LevelParser::parseTileLayer(XMLElement* const tile_element, Level* const level) const
+void LevelParser::parseTileLayer(const Json::Value& layer, Level* const level) const
 {
     auto tile_layer =
         std::make_unique<TileLayer>(tile_size_, width_, height_, *level->getTilesets());
 
-    std::vector<std::vector<int>> ids;
-    for (XMLElement* e = tile_element->FirstChildElement(); e != nullptr;
-         e = e->NextSiblingElement()) {
-        if (e->Value() == std::string("data")) {
-            ids = parseData(e->GetText());
-        }
+    std::vector<int> data;
+    for (const auto& id : layer["data"]) {
+        data.push_back(id.asInt());
     }
 
-    tile_layer->setTileIDs(ids);
+    tile_layer->setTileData(data);
     level->addLayer(std::move(tile_layer));
 
-    std::unordered_map<int, CollisionShape>* collision_shape = level->getCollisionShapes();
+    std::unordered_map<int, TileCollision>* collision_shape = level->getTileCollisions();
     if (!collision_shape->empty()) {
-        for (int row = 0; row < height_; row++) {
-            for (int col = 0; col < width_; col++) {
-                int id = ids[row][col];
+        for (int row = 0; row < height_; ++row) {
+            for (int col = 0; col < width_; ++col) {
+                const int id = data[row * width_ + col];
                 if (id == 0) {
                     continue;
                 }
-                std::unordered_map<int, CollisionShape>::iterator it = collision_shape->find(id);
+                std::unordered_map<int, TileCollision>::iterator it = collision_shape->find(id);
                 if (it == collision_shape->end()) {
                     continue;
                 }
-                CollisionShape shape = it->second;
+                const TileCollision shape = it->second;
 
                 PhysicWorld::Instance().createStaticBody(
                     tile_size_ * b2Vec2(col, row),
@@ -200,38 +152,4 @@ void LevelParser::parseTileLayer(XMLElement* const tile_element, Level* const le
             }
         }
     }
-}
-
-std::string LevelParser::getType(XMLElement* const element) const
-{
-    if (element->Attribute("class")) {
-        return element->Attribute("class");
-    }
-
-    if (element->Attribute("type")) {
-        return element->Attribute("type");
-    }
-
-    return "";
-}
-
-
-std::string LevelParser::getStringAttribute(
-    XMLElement* element,
-    const char* attribute_name,
-    std::string default_value) const
-{
-    if (element->Attribute(attribute_name)) {
-        return element->Attribute(attribute_name);
-    }
-    return default_value;
-}
-
-int LevelParser::getIntAttribute(XMLElement* element, const char* attribute_name, int default_value)
-    const
-{
-    if (element->Attribute(attribute_name)) {
-        return std::stoi(element->Attribute(attribute_name));
-    }
-    return default_value;
 }

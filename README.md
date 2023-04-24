@@ -7,7 +7,7 @@
 
 # King and Pigs
 
-**King and Pigs** is a 2D game written in C++ using the SDL2 library, Box2D physics engine, and TinyXML2 for level loading. In this game, the player controls a character who must navigate through various levels and defeat enemies.
+**King and Pigs** is a 2D game written in C++ using the SDL2 libraries, Box2D physics engine, and JsonCpp for level parsing. In this game, the player controls a character who must navigate through various levels and defeat enemies.
 
 ## Prerequisites
 
@@ -18,25 +18,25 @@ To build and run the game, you will need the following libraries installed on yo
 - SDL2_mixer (https://www.libsdl.org/projects/SDL_mixer/)
 - SDL2_ttf (https://www.libsdl.org/projects/SDL_ttf/)
 - Box2D (https://box2d.org/)
-- TinyXML2 (https://github.com/leethomason/tinyxml2)
+- JsonCpp (http://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html)
 
 ### Linux
 
 To install the prerequisites on Ubuntu, run the following commands in your terminal:
   ```bash
   sudo apt-get update
-  sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libbox2d-dev libtinyxml2-dev
+  sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libbox2d-dev libjsoncpp-dev
   ```
 For Arch Linux, run:
   ```bash
-  sudo pacman -S sdl2 sdl2-image sdl2-mixer sdl2-ttf box2d tinyxml2
+  sudo pacman -S sdl2 sdl2-image sdl2-mixer sdl2-ttf box2d jsoncpp
   ```
 
 ### macOS
 
 On macOS, you can use Homebrew to install these libraries.
   ```bash
-  brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf box2d tinyxml2
+  brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf box2d jsoncpp
   ```
 
 ### Windows
@@ -82,7 +82,7 @@ The controls for the game are shown in the table below:
 ## Features
 ### Editing Maps
 ![image](https://user-images.githubusercontent.com/63899044/230425871-7bcc41a5-cab9-41a6-85a4-83d8db867fd5.png)
-You can edit the game maps using Tiled Map Editor. The maps are stored in the `assets/levels/` directory in TMX format. 
+You can edit the game maps using Tiled Map Editor. The maps are stored in the `assets/levels/` directory in `.tmj` format. 
 To edit a map, open it in Tiled, make your changes, and save the file. The game will automatically reload the updated map the next time you start the game.
 
 

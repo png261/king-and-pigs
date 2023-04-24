@@ -16,11 +16,11 @@ public:
     void update();
     void render() const;
 
-    void setTileIDs(const std::vector<std::vector<int>>& data);
+    void setTileData(const std::vector<int>& data);
     void setTileSize(int const tile_size);
     void setPosition(const b2Vec2& position);
 
-    const std::vector<std::vector<int>>& getTileIDs();
+    const std::vector<int>& getTileData() const;
     int getTileSize() const;
     Tileset getTilesetByID(int const tile_id) const;
     b2Vec2 getPosition() const;
@@ -32,5 +32,5 @@ private:
     int rows_;
     b2Vec2 position_;
     const std::vector<Tileset>& tile_sets_;
-    std::vector<std::vector<int>> tile_ids_;
+    std::vector<int> tile_ids_;
 };

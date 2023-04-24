@@ -33,9 +33,9 @@ std::vector<Tileset>* Level::getTilesets()
     return &tilesets_;
 }
 
-std::unordered_map<int, CollisionShape>* Level::getCollisionShapes()
+std::unordered_map<int, TileCollision>* Level::getTileCollisions()
 {
-    return &collision_shapes_;
+    return &tiles_collision_;
 }
 
 void Level::addLayer(std::unique_ptr<Layer> layer)
@@ -48,9 +48,9 @@ void Level::addTileSet(const Tileset tileset)
     tilesets_.push_back(tileset);
 }
 
-void Level::addCollisionShape(const int id, const CollisionShape shape)
+void Level::addTileCollision(const int id, const TileCollision shape)
 {
-    collision_shapes_[id] = shape;
+    tiles_collision_[id] = shape;
 }
 
 Player* Level::getPlayer() const

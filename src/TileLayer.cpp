@@ -31,7 +31,7 @@ void TileLayer::render() const
 
     for (int i = 0; i < rows_; ++i) {
         for (int j = 0; j < columns_; j++) {
-            int id = tile_ids_[i + y][j + x];
+            int id = tile_ids_[(i + y) * columns_ + (j + x)];
 
             const int EMPTY_TILE = 0;
 
@@ -83,7 +83,7 @@ Tileset TileLayer::getTilesetByID(int const tile_id) const
     return {};
 }
 
-void TileLayer::setTileIDs(const std::vector<std::vector<int>>& data)
+void TileLayer::setTileData(const std::vector<int>& data)
 {
     tile_ids_ = data;
 }
@@ -98,7 +98,7 @@ int TileLayer::getTileSize() const
     return tile_size_;
 }
 
-const std::vector<std::vector<int>>& TileLayer::getTileIDs()
+const std::vector<int>& TileLayer::getTileData() const
 {
     return tile_ids_;
 }
