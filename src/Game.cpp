@@ -37,8 +37,8 @@ void Game::init()
     cursor_ = std::make_unique<Cursor>();
     cursor_->init();
 
-    level_files_.push_back(LEVEL_DIRECTORY + "level1.tmj");
-    level_files_.push_back(LEVEL_DIRECTORY + "level2.tmj");
+    level_files_.push_back(LEVEL_DIRECTORY + "level1.json");
+    level_files_.push_back(LEVEL_DIRECTORY + "level2.json");
     GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
 
     is_running_ = true;
