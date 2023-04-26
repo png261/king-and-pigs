@@ -1,5 +1,6 @@
 #include "LevelParser.hpp"
 
+#include <tinyxml2.h>
 #include <fstream>
 #include <stdexcept>
 
@@ -14,6 +15,7 @@
 #include "TileLayer.hpp"
 
 
+using namespace tinyxml2;
 std::unique_ptr<Level> LevelParser::parseLevel(const std::string& path)
 {
     std::ifstream json_file(path);
@@ -37,7 +39,7 @@ std::unique_ptr<Level> LevelParser::parseLevel(const std::string& path)
     level->setMapHeight(width_ * tile_size_);
 
     for (const auto& tileset : root["tilesets"]) {
-        parseTileset(tileset, level.get());
+        loadTileset(tileset, level.get());
     }
 
     for (const auto& layer : root["layers"]) {
@@ -51,7 +53,7 @@ std::unique_ptr<Level> LevelParser::parseLevel(const std::string& path)
     return level;
 }
 
-void LevelParser::parseTileset(const Json::Value& tileset_data, Level* const level) const
+void LevelParser::loadTileset(const Json::Value& tileset_data, Level* const level) const
 {
     Tileset tileset;
     tileset.name = tileset_data["name"].asString();
@@ -78,18 +80,45 @@ std::unique_ptr<GameObject> LevelParser::parseObject(
     const Json::Value& object_data,
     Level* const level) const
 {
-    std::string type = object_data["type"].asString();
+    std::string type = "";
+    int x = 0;
+    int y = 0;
+    int w = 0;
+    int h = 0;
+
+    if (object_data.isMember("template")) {
+        x = object_data["x"].asInt();
+        y = object_data["y"].asInt();
+        const std::string templatePath = LEVEL_DIRECTORY + object_data["template"].asString();
+        XMLDocument document;
+        if (document.LoadFile(templatePath.c_str()) != XML_SUCCESS) {
+            throw std::runtime_error(
+                "LevelParser: " + std::string("fail to load template object: ") + templatePath);
+        }
+
+        XMLElement* const root = document.RootElement();
+        for (XMLElement* e = root->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+            if (e->Value() == std::string("object")) {
+                type = e->Attribute("type");
+                w = std::stoi(e->Attribute("width"));
+                h = std::stoi(e->Attribute("height"));
+            }
+        }
+        y -= h;
+    } else {
+        type = object_data["type"].asString();
+        x = object_data["x"].asInt();
+        y = object_data["y"].asInt();
+        w = object_data["width"].asInt();
+        h = object_data["height"].asInt();
+    }
 
     std::unique_ptr<GameObject> object = GameObjectFactory::Instance().create(type);
     if (object == nullptr) {
         return nullptr;
     }
 
-    object->load(std::make_unique<LoaderParams>(LoaderParams(
-        object_data["x"].asInt(),
-        object_data["y"].asInt(),
-        object_data["width"].asInt(),
-        object_data["height"].asInt())));
+    object->load(std::make_unique<LoaderParams>(LoaderParams(x, y, w, h)));
 
     if (type == "Player") {
         level->setPlayer(dynamic_cast<Player*>(object.get()));
