@@ -87,8 +87,8 @@ You can edit the game maps using Tiled Map Editor. The maps are stored in the `a
 To edit a map, open it in Tiled, make your changes, and save the file. The game will automatically reload the updated map the next time you start the game.
 
 
-# Source Code Structure
-For more details please see Docs generate by Doxygen: https://png261.github.io/king-and-pigs/
+# Documentation
+For more details please see Documents generate by Doxygen: https://png261.github.io/king-and-pigs/
 
 <!-- CONTACT -->
 ## Contact
