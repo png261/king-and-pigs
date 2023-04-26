@@ -88,7 +88,7 @@ To edit a map, open it in Tiled, make your changes, and save the file. The game 
 
 
 # Documentation
-For more details please see Documents generate by Doxygen: https://png261.github.io/king-and-pigs/
+For more details please see documents generate by Doxygen: https://png261.github.io/king-and-pigs/
 
 <!-- CONTACT -->
 ## Contact
