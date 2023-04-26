@@ -19,6 +19,7 @@ public:
     void handleEvents();
     void update();
     void render() const;
+    void handleFPS() const;
     void clean();
     void quit();
     bool isRunning() const;

@@ -11,12 +11,8 @@ Window::Window(const uint width, const uint height, const std::string& title)
     , font_(nullptr)
     , width_(width)
     , height_(height)
-    , origin_width_(width)
-    , origin_height_(height)
-    , is_fullscreen_(false)
     , framerate_(60)
     , frame_delay_(0)
-    , current_frame_delta_(0)
     , title_(title)
     , background_color_(0, 0, 0)
 {
@@ -59,7 +55,7 @@ void Window::resize(const std::string& title, const uint width, const uint heigh
     }
 
     // And here we fake a "logical" size of the window, independent of it's real size.
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+    /* SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear"); */
     SDL_RenderSetLogicalSize(renderer_, width, height);
 
     setTitle(title);
@@ -155,10 +151,10 @@ void Window::resetBackgroundColor()
 
 void Window::delayFramerateIfNeeded()
 {
-    current_frame_delta_ = framerate_stopwatch_.delta();
+    uint delta = framerate_stopwatch_.delta();
 
-    if ((current_frame_delta_) < (frame_delay_)) {
-        SDL_Delay((frame_delay_)-current_frame_delta_);
+    if (delta < frame_delay_) {
+        SDL_Delay(frame_delay_ - delta);
     };
 
     framerate_stopwatch_.restart();
@@ -201,20 +197,17 @@ void Window::print(
 
 void Window::drawBox(const Rectangle& box, const Color& color) const
 {
-    SDL_Rect rect{
-        static_cast<int>(box.x),
-        static_cast<int>(box.y),
-        box.w,
-        box.h,
-    };
-
-    SDL_SetRenderDrawColor(renderer_, color.r(), color.g(), color.b(), color.a());
-    SDL_RenderFillRect(renderer_, &rect);
-}
-
-uint Window::getDelta() const
-{
-    return current_frame_delta_;
+    roundedBoxRGBA(
+        renderer_,
+        box.x(),
+        box.y(),
+        box.rightmost(),
+        box.bottom(),
+        box.border_radius(),
+        color.r(),
+        color.g(),
+        color.b(),
+        color.a());
 }
 
 SDL_Renderer* Window::getRenderer() const

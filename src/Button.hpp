@@ -10,10 +10,16 @@
 class Button final : public UiObject
 {
 public:
-    Button(std::string text, int x, int y, int width, int height);
+    Button(
+        const std::string& text,
+        const int x,
+        const int y,
+        const int width,
+        const int height,
+        const float border_radius = 20.0f);
     void draw();
     void update();
-    void onClick(std::function<void()> callback);
+    void onClick(const std::function<void()>& callback);
     void disable();
     void enable();
     bool isDisabled() const;

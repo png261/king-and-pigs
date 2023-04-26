@@ -1,36 +1,82 @@
 {
-    "activeFile": "",
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "level1.json",
     "expandedProjectPaths": [
+        "sticker",
+        ".",
+        "ui"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "level1.json": {
+            "expandedObjectLayers": [
+                12,
+                19,
+                20,
+                18
+            ],
+            "scale": 0.33,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 559.0909090909091,
+                "y": 196.96969696969688
+            }
+        },
+        "level1.json#decorations": {
+            "scaleInDock": 1
+        },
+        "level1.json#terrain": {
+            "scaleInDock": 8
+        },
         "level1.tmj": {
             "expandedObjectLayers": [
                 19,
+                12,
+                20,
                 18
             ],
-            "scale": 2,
-            "selectedLayer": 6,
+            "scale": 0.5,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 1237.75,
-                "y": 177.5
+                "x": 1031,
+                "y": 288
             }
         },
         "level1.tmj#decorations": {
             "scaleInDock": 1
         },
         "level1.tmj#terrain": {
+            "scaleInDock": 8
+        },
+        "level2.json": {
+            "expandedObjectLayers": [
+                18
+            ],
+            "scale": 1,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": -119.5,
+                "y": 64
+            }
+        },
+        "level2.json#decorations": {
+            "scaleInDock": 1
+        },
+        "level2.json#terrain": {
             "scaleInDock": 1
         },
         "level2.tmj": {
             "expandedObjectLayers": [
                 18
             ],
-            "scale": 0.75,
+            "scale": 0.5,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 55.33333333333337,
-                "y": 243.99999999999994
+                "x": -59,
+                "y": 286
             }
         },
         "level2.tmj#decorations": {
@@ -42,17 +88,59 @@
         "sticker/sticker.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1
+        },
+        "ui.tmj": {
+            "expandedObjectLayers": [
+                2,
+                3
+            ],
+            "scale": 0.33,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 380.30303030303025,
+                "y": 499.99999999999994
+            }
+        },
+        "ui.tmx": {
+            "expandedObjectLayers": [
+                2,
+                3
+            ],
+            "scale": 0.33,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1096.969696969697,
+                "y": 583.3333333333333
+            }
+        },
+        "ui/ui.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.125,
+            "scaleInEditor": 0.125
         }
     },
+    "last.imagePath": "/home/png261/Code/king-and-pigs/assets/levels/ui",
+    "last.objectTemplatePath": "/home/png261/Code/king-and-pigs/assets/levels",
     "last.worldFilePath": "/home/png261/Code/king-and-pigs/assets/levels",
     "loadedWorlds": [
         "/home/png261/Code/king-and-pigs/assets/levels/king-and-pig.world"
     ],
+    "map.height": 22,
+    "map.lastUsedFormat": "json",
+    "map.width": 40,
     "openFiles": [
+        "level1.json",
+        "level2.json"
     ],
     "project": "king-and-pigs.tiled-project",
     "recentFiles": [
+        "level2.json",
+        "level1.json",
         "level1.tmj",
+        "ui/ui.tsx",
+        "ui.tmx",
         "level2.tmj"
-    ]
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.type": 1
 }

@@ -5,11 +5,17 @@
 #include "InputHandler.hpp"
 #include "SoundManager.hpp"
 
-Button::Button(std::string text, int x, int y, int width, int height)
+Button::Button(
+    const std::string& text,
+    const int x,
+    const int y,
+    const int width,
+    const int height,
+    const float border_radius)
     : UiObject()
     , is_disabled_(false)
     , text_(text)
-    , rectangle_(x, y, width, height)
+    , rectangle_(x, y, width, height, border_radius)
     , callback_(nullptr)
 {
     SoundManager::Instance().loadSFX(SOUND_DIRECTORY + "button/clicked.mp3", "button clicked");
@@ -26,8 +32,8 @@ void Button::draw()
     Game::Instance().getWindow()->print(
         text_,
         40,
-        rectangle_.x + rectangle_.w * 0.5f,
-        rectangle_.y + rectangle_.h * 0.5f);
+        rectangle_.x() + rectangle_.w() * 0.5f,
+        rectangle_.y() + rectangle_.h() * 0.5f);
 };
 
 void Button::update()
@@ -45,7 +51,7 @@ void Button::update()
     }
 };
 
-void Button::onClick(std::function<void()> callback)
+void Button::onClick(const std::function<void()>& callback)
 {
     callback_ = callback;
 }

@@ -45,7 +45,6 @@ public:
     void resetBackgroundColor();
     void setTitle(const std::string& title);
 
-    uint getDelta() const;
     uint getWidth() const;
     uint getCenterX() const;
     uint getCenterY() const;
@@ -62,14 +61,8 @@ private:
     uint width_;
     uint height_;
 
-    uint origin_width_;
-    uint origin_height_;
-
-    bool is_fullscreen_;
-
     uint framerate_;
     uint frame_delay_;
-    uint current_frame_delta_;
 
     std::string title_;
     Color background_color_;

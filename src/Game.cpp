@@ -63,6 +63,10 @@ void Game::render() const
     cursor_->draw();
 
     window_->refresh();
+}
+
+void Game::handleFPS() const
+{
     window_->delayFramerateIfNeeded();
 }
 

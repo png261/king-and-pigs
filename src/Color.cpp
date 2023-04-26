@@ -28,7 +28,6 @@ Color::Color(Colors color)
         r = 194;
         g = 214;
         b = 214;
-        a = 100;
         break;
     case BLACK:
         r = 0;

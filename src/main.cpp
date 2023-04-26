@@ -10,6 +10,7 @@ int main()
             game.handleEvents();
             game.update();
             game.render();
+            game.handleFPS();
         }
         game.clean();
     } catch (const std::exception& exception) {

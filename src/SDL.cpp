@@ -2,9 +2,6 @@
 
 #include <stdexcept>
 
-#include <SDL2/SDL_error.h>
-#include <SDL2/SDL_ttf.h>
-
 #include "Log.hpp"
 
 
@@ -27,7 +24,7 @@ void SDL::init()
         throw std::runtime_error("SDL_Init: Couldn't start Audio" + std::string(SDL_GetError()));
     }
 
-    int flags = MIX_INIT_OGG | MIX_INIT_MP3;
+    const int flags = MIX_INIT_OGG | MIX_INIT_MP3;
     if ((Mix_Init(flags) & flags) != flags) {
         throw std::runtime_error("Mix_Init: Couldn't start Audio" + std::string(Mix_GetError()));
     }
@@ -37,7 +34,7 @@ void SDL::init()
             "Mix_OpenAudio: Couldn't start Audio" + std::string(Mix_GetError()));
     }
 
-    // Reserving 16 channels (meaning 16 simultaneous SFXs playing)
+    // Reserving 16 channels (meaning 16 simultaneous SFXs playing)sdl
     Mix_AllocateChannels(16);
 
     // Initializing everything related to VIDEO

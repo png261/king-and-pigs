@@ -18,6 +18,7 @@ bool TextureManager::load(const std::string& path, const std::string& id)
     }
 
     SDL_Texture* const texture = Game::Instance().getWindow()->loadImage(path.c_str());
+    /* SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND); */
     if (texture == nullptr) {
         Log::error("Fail to create Texture for: " + path);
         return false;
@@ -68,6 +69,7 @@ void TextureManager::drawFrame(
         static_cast<int>(position.y * zoom),
         width * zoom,
         height * zoom};
+
 
     Game::Instance().getWindow()->renderImage(
         textures_[id],

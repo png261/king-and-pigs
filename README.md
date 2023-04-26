@@ -13,30 +13,31 @@
 
 To build and run the game, you will need the following libraries installed on your system:
 
-- SDL2 (https://www.libsdl.org/)
-- SDL2_image (https://www.libsdl.org/projects/SDL_image/)
-- SDL2_mixer (https://www.libsdl.org/projects/SDL_mixer/)
-- SDL2_ttf (https://www.libsdl.org/projects/SDL_ttf/)
-- Box2D (https://box2d.org/)
-- JsonCpp (http://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html)
+- [SDL2](https://www.libsdl.org/)
+- [SDL2_image](https://www.libsdl.org/projects/SDL_image/)
+- [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
+- [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/)
+- [SDL2_gfx](https://www.ferzkopp.net/Software/SDL2_gfx/Docs/html/index.html)
+- [Box2D](https://box2d.org/)
+- [JsonCpp](http://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html)
 
 ### Linux
 
 To install the prerequisites on Ubuntu, run the following commands in your terminal:
   ```bash
   sudo apt-get update
-  sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libbox2d-dev libjsoncpp-dev
+  sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-gfx-dev libbox2d-dev libjsoncpp-dev
   ```
 For Arch Linux, run:
   ```bash
-  sudo pacman -S sdl2 sdl2-image sdl2-mixer sdl2-ttf box2d jsoncpp
+  sudo pacman -S sdl2 sdl2-image sdl2-mixer sdl2-ttf sdl2_gfx box2d jsoncpp
   ```
 
 ### macOS
 
 On macOS, you can use Homebrew to install these libraries.
   ```bash
-  brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf box2d jsoncpp
+  brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf sdl2_gfx box2d jsoncpp
   ```
 
 ### Windows

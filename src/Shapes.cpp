@@ -2,31 +2,53 @@
 
 #include <cmath>
 
-Point::Point(const float _x, const float _y)
-    : x(_x)
-    , y(_y)
+Point::Point(const float x, const float y)
+    : _x(x)
+    , _y(y)
 {}
 
 Point::Point()
-    : x(0)
-    , y(0)
+    : _x(0)
+    , _y(0)
 {}
 
+float Point::x() const
+{
+    return _x;
+}
+float Point::y() const
+{
+    return _y;
+};
+void Point::setX(const float x)
+{
+    _x = x;
+};
+void Point::setY(const float y)
+{
+    _y = y;
+};
 
-Rectangle::Rectangle(const float _x, const float _y, const int _w, const int _h)
-    : x(_x)
-    , y(_y)
-    , w(_w)
-    , h(_h)
+Rectangle::Rectangle(
+    const float x,
+    const float y,
+    const int width,
+    const int height,
+    const float border_radius)
+    : _x(x)
+    , _y(y)
+    , _width(width)
+    , _height(height)
+    , _border_radius(border_radius)
 {
     update();
 }
 
 Rectangle::Rectangle()
-    : x(0)
-    , y(0)
-    , w(1)
-    , h(1)
+    : _x(0)
+    , _y(0)
+    , _width(1)
+    , _height(1)
 {
     update();
 }
@@ -38,37 +60,37 @@ Rectangle::Rectangle(Rectangle* const other)
 
 void Rectangle::copy(Rectangle* const other)
 {
-    x = other->x;
-    y = other->y;
-    w = other->w;
-    h = other->h;
+    _x = other->x();
+    _y = other->y();
+    _width = other->w();
+    _height = other->h();
 
     update();
 }
 
-void Rectangle::addX(const float _x)
+void Rectangle::addX(const float x)
 {
-    x += _x;
+    _x += x;
 
     update();
 }
 
-void Rectangle::addY(const float _y)
+void Rectangle::addY(const float y)
 {
-    y += _y;
+    _y += y;
 
     update();
 }
 
-void Rectangle::setX(const float _x)
+void Rectangle::setX(const float x)
 {
-    x = _x;
+    _x = x;
 
     update();
 }
-void Rectangle::setY(const float _y)
+void Rectangle::setY(const float y)
 {
-    y = _y;
+    _y = y;
 
     update();
 }
@@ -82,36 +104,110 @@ void Rectangle::stretch(const float scaleX, const float scaleY)
 {
     if ((scaleX <= 0) || (scaleY <= 0)) return;
 
-    const float oldW = w;
-    const float oldH = h;
+    const float oldW = _width;
+    const float oldH = _height;
 
-    w *= scaleX;
-    h *= scaleY;
+    _width *= scaleX;
+    _height *= scaleY;
 
     // Centralizing one rectangle on the other
-    x += std::abs(oldW - w) / 2.0f;
-    y += std::abs(oldH - h) / 2.0f;
+    _x += std::abs(oldW - _width) / 2.0f;
+    _y += std::abs(oldH - _height) / 2.0f;
 
     update();
 }
 
+void Rectangle::setBorderRadius(const float border_radius)
+{
+    _border_radius = border_radius;
+}
+
 void Rectangle::update()
 {
-    top = y;
-    bottom = y + h;
-
-    leftmost = x;
-    rightmost = x + w;
-
-    center = Point(x + (w / 2.0f), y + (h / 2.0f));
-
-    topLeft = Point(x, y);
-    topRight = Point(x + w, y);
-    bottomLeft = Point(x, y + h);
-    bottomRight = Point(x + w, y + h);
-
-    topCenter = Point(center.x, top);
-    bottomCenter = Point(center.x, bottom);
-    leftCenter = Point(leftmost, center.y);
-    rightCenter = Point(rightmost, center.y);
+    _top = _y;
+    _bottom = _y + _height;
+    _leftmost = _x;
+    _rightmost = _x + _width;
+    _center = Point(_x + (_width / 2.0f), _y + (_height / 2.0f));
+    _topLeft = Point(_x, _y);
+    _topRight = Point(_x + _width, _y);
+    _bottomLeft = Point(_x, _y + _height);
+    _bottomRight = Point(_x + _width, _y + _height);
+    _topCenter = Point(_center.x(), _top);
+    _bottomCenter = Point(_center.x(), _bottom);
+    _leftCenter = Point(_leftmost, _center.y());
+    _rightCenter = Point(_rightmost, _center.y());
 }
+
+float Rectangle::x() const
+{
+    return _x;
+};
+float Rectangle::y() const
+{
+    return _y;
+};
+int Rectangle::w() const
+{
+    return _width;
+};
+int Rectangle::h() const
+{
+    return _height;
+};
+float Rectangle::border_radius() const
+{
+    return _border_radius;
+};
+float Rectangle::top() const
+{
+    return _top;
+};
+float Rectangle::bottom() const
+{
+    return _bottom;
+};
+float Rectangle::leftmost() const
+{
+    return _leftmost;
+};
+float Rectangle::rightmost() const
+{
+    return _rightmost;
+};
+Point Rectangle::center() const
+{
+    return _center;
+};
+Point Rectangle::leftCenter() const
+{
+    return _leftCenter;
+};
+Point Rectangle::rightCenter() const
+{
+    return _rightCenter;
+};
+Point Rectangle::topLeft() const
+{
+    return _topLeft;
+};
+Point Rectangle::topRight() const
+{
+    return _topRight;
+};
+Point Rectangle::topCenter() const
+{
+    return _topCenter;
+};
+Point Rectangle::bottomLeft() const
+{
+    return _bottomLeft;
+};
+Point Rectangle::bottomRight() const
+{
+    return _bottomRight;
+};
+Point Rectangle::bottomCenter() const
+{
+    return _bottomCenter;
+};

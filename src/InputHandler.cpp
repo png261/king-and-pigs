@@ -178,8 +178,10 @@ bool InputHandler::isMousePressed(const MouseButton button) const
 
 bool InputHandler::isMouseInside(const Rectangle& rectangle) const
 {
-    if ((mouse_position_.x >= rectangle.x) && (mouse_position_.x <= rectangle.x + rectangle.w) &&
-        (mouse_position_.y >= rectangle.y) && (mouse_position_.y <= rectangle.y + rectangle.h))
+    if ((mouse_position_.x >= rectangle.x()) &&
+        (mouse_position_.x <= rectangle.x() + rectangle.w()) &&
+        (mouse_position_.y >= rectangle.y()) &&
+        (mouse_position_.y <= rectangle.y() + rectangle.h()))
         return true;
 
     return false;
