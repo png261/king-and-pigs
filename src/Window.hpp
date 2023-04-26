@@ -42,6 +42,7 @@ public:
     void drawBox(const Rectangle& rect, const Color& color = Color(Color::WHITE)) const;
 
     void setBackgroundColor(const Color& color = Color(Color::BLACK));
+    void resetBackgroundColor();
     void setTitle(const std::string& title);
 
     uint getDelta() const;

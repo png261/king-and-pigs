@@ -148,6 +148,11 @@ void Window::setBackgroundColor(const Color& color)
     background_color_ = color;
 }
 
+void Window::resetBackgroundColor()
+{
+    background_color_ = Color(Color::BLACK);
+}
+
 void Window::delayFramerateIfNeeded()
 {
     current_frame_delta_ = framerate_stopwatch_.delta();

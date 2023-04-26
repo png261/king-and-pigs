@@ -1,12 +1,17 @@
 #include "Utils.hpp"
+
+#include <iostream>
+#include <sstream>
+
 #include "CONSTANT.hpp"
+
 
 SDL_Point Utils::b2Vec2ToSDLPoint(const b2Vec2& vec)
 {
     return {static_cast<int>(vec.x), static_cast<int>(vec.y)};
 };
 
-bool Utils::isProbable(int percent)
+bool Utils::isProbable(const int percent)
 {
     srand(time(0));
     return (rand() % 100) < percent;
@@ -41,3 +46,12 @@ float Utils::degToRad(const float deg)
 {
     return deg * RAD_PER_DEG;
 };
+
+Color Utils::hexToRgba(const std::string& hex)
+{
+    uint8_t r = std::stoi(hex.substr(1, 2), 0, 16);
+    uint8_t g = std::stoi(hex.substr(3, 2), 0, 16);
+    uint8_t b = std::stoi(hex.substr(5, 2), 0, 16);
+    uint8_t a = 1.0f;
+    return {r, g, b, a};
+}

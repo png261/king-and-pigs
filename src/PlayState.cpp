@@ -159,6 +159,7 @@ bool PlayState::loadLevel()
     Game::Instance().setLevel(level_.get());
     Camera::Instance().setTarget(level_->getPlayer());
     Camera::Instance().setZoom(3);
+    Game::Instance().getWindow()->setBackgroundColor(level_->getBackgroundColor());
 
     resume();
     return true;
@@ -167,6 +168,7 @@ bool PlayState::loadLevel()
 bool PlayState::exit()
 {
     pause();
+    Game::Instance().getWindow()->resetBackgroundColor();
     PhysicWorld::Instance().clean();
     InputHandler::Instance().reset();
 

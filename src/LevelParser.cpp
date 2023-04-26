@@ -2,6 +2,7 @@
 
 #include <tinyxml2.h>
 #include <fstream>
+#include <iostream>
 #include <stdexcept>
 
 #include "CONSTANT.hpp"
@@ -13,6 +14,7 @@
 #include "PhysicWorld.hpp"
 #include "TextureManager.hpp"
 #include "TileLayer.hpp"
+#include "Utils.hpp"
 
 
 using namespace tinyxml2;
@@ -23,26 +25,27 @@ std::unique_ptr<Level> LevelParser::parseLevel(const std::string& path)
         throw std::runtime_error("LevelParser: " + std::string("fail to load: ") + path);
     }
 
-    Json::Value root;
+    Json::Value map;
     Json::CharReaderBuilder builder;
     JSONCPP_STRING err;
-    if (!Json::parseFromStream(builder, json_file, &root, &err)) {
+    if (!Json::parseFromStream(builder, json_file, &map, &err)) {
         throw std::runtime_error("LevelParser: " + std::string("fail to load json data: ") + path);
     }
 
-    tile_size_ = root["tilewidth"].asInt();
-    width_ = root["width"].asInt();
-    height_ = root["height"].asInt();
+    tile_size_ = map["tilewidth"].asInt();
+    width_ = map["width"].asInt();
+    height_ = map["height"].asInt();
 
-    auto level = std::make_unique<Level>();
-    level->setMapWidth(width_ * tile_size_);
-    level->setMapHeight(width_ * tile_size_);
+    auto level = std::make_unique<Level>(
+        width_ * tile_size_,
+        height_ * tile_size_,
+        Utils::hexToRgba(map["backgroundcolor"].asString()));
 
-    for (const auto& tileset : root["tilesets"]) {
+    for (const auto& tileset : map["tilesets"]) {
         loadTileset(tileset, level.get());
     }
 
-    for (const auto& layer : root["layers"]) {
+    for (const auto& layer : map["layers"]) {
         if (layer["type"].asString() == "tilelayer") {
             parseTileLayer(layer, level.get());
         } else if (layer["type"].asString() == "objectgroup") {
@@ -55,6 +58,10 @@ std::unique_ptr<Level> LevelParser::parseLevel(const std::string& path)
 
 void LevelParser::loadTileset(const Json::Value& tileset_data, Level* const level) const
 {
+    if (!tileset_data.isMember("image")) {
+        return;
+    }
+
     Tileset tileset;
     tileset.name = tileset_data["name"].asString();
     tileset.first_grid_id = tileset_data["firstgid"].asInt();

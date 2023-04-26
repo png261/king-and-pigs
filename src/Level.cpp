@@ -8,9 +8,16 @@
 #include "TileLayer.hpp"
 
 Level::Level()
-{
-    spawn_layer_ = std::make_unique<ObjectLayer>();
-}
+    : spawn_layer_(std::make_unique<ObjectLayer>())
+{}
+
+Level::Level(const int width, const int height, const Color& background)
+    : width_(width)
+    , height_(height)
+    , background_color_(background)
+    , spawn_layer_(std::make_unique<ObjectLayer>())
+{}
+
 
 void Level::render() const
 {
@@ -43,7 +50,7 @@ void Level::addLayer(std::unique_ptr<Layer> layer)
     layers_.push_back(std::move(layer));
 }
 
-void Level::addTileSet(const Tileset tileset)
+void Level::addTileSet(const Tileset& tileset)
 {
     tilesets_.push_back(tileset);
 }
@@ -74,21 +81,17 @@ GameObject* Level::spawnGameObject(
     return newObject;
 }
 
-void Level::setMapWidth(int width)
-{
-    map_width_ = width;
-}
-void Level::setMapHeight(int height)
-{
-    map_height_ = height;
-}
-
 int Level::getMapWidth() const
 {
-    return map_width_;
+    return width_;
 }
 
 int Level::getMapHeight() const
 {
-    return map_height_;
+    return height_;
+}
+
+Color Level::getBackgroundColor()
+{
+    return background_color_;
 }
