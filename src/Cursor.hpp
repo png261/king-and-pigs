@@ -6,7 +6,7 @@ public:
     Cursor();
     void init();
     void resetState();
-    void draw();
+    void draw() const;
     void hover();
     bool isHover() const;
 

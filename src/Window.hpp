@@ -28,7 +28,7 @@ public:
 
     void freeImage(SDL_Texture* const image);
 
-    void refresh();
+    void refresh() const;
 
     void resize(const std::string& title, const uint width, const uint height);
 
@@ -38,7 +38,7 @@ public:
         const int fontSize,
         const int x,
         const int y,
-        const Color& color = Color(Color::BLACK));
+        const Color& color = Color(Color::BLACK)) const;
     void drawBox(const Rectangle& rect, const Color& color = Color(Color::WHITE)) const;
 
     void setBackgroundColor(const Color& color = Color(Color::BLACK));

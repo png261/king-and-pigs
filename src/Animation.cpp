@@ -47,21 +47,14 @@ void Animation::update()
 }
 
 void Animation::draw(const b2Vec2& position, const float angle, const bool is_flip, const int zoom)
+    const
 {
     if (!isRunning()) {
         return;
     }
 
-    TextureManager::Instance().drawFrame(
-        texture_id_,
-        position,
-        width_,
-        height_,
-        0,
-        current_frame_,
-        angle,
-        is_flip,
-        zoom);
+    TextureManager::Instance()
+        .drawFrame(texture_id_, position, width_, height_, 0, current_frame_, angle, is_flip, zoom);
 }
 
 void Animation::start()

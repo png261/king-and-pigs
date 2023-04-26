@@ -30,7 +30,7 @@ void VisionObject::update()
     }
 }
 
-void VisionObject::debugDraw()
+void VisionObject::debugDraw() const
 {
     if (!Game::Instance().isDebug()) {
         return;
@@ -44,7 +44,7 @@ void VisionObject::debugDraw()
     }
 }
 
-bool VisionObject::isSeeing(PhysicWorld::Category category)
+bool VisionObject::isSeeing(PhysicWorld::Category category) const
 {
     return seeing_category_ & category;
 }

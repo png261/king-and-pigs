@@ -9,7 +9,7 @@ public:
     void loadAnimation() override;
 
 private:
-    enum animations {
+    enum AnimationID {
         IDLE,
         RUN,
         JUMP,

@@ -205,7 +205,7 @@ void Pig::updateAnimation()
     }
 }
 
-void Pig::draw()
+void Pig::draw() const
 {
     GameObject::draw();
     VisionObject::debugDraw();

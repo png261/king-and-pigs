@@ -17,14 +17,14 @@ public:
     void update() override;
     void updateAnimation() override;
     void loadAnimation() override;
-    void draw() override;
+    void draw() const override;
 
     bool isWantEnterDoor();
     bool isEnteringDoor();
     void enterDoor();
 
 private:
-    enum animations {
+    enum AnimationID {
         IDLE,
         RUN,
         JUMP,

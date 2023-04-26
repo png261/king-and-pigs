@@ -34,7 +34,7 @@ void TextureManager::draw(
     const b2Vec2& position,
     const int width,
     const int height,
-    const bool is_flip)
+    const bool is_flip) const
 {
     SDL_Rect const srcRect{0, 0, width, height};
     SDL_Rect const destRect{
@@ -44,7 +44,7 @@ void TextureManager::draw(
         height};
 
     Game::Instance().getWindow()->renderImage(
-        textures_[id],
+        textures_.at(id),
         &srcRect,
         &destRect,
         0,
@@ -61,7 +61,7 @@ void TextureManager::drawFrame(
     const int frame,
     const float angle,
     const bool is_flip,
-    const int zoom)
+    const int zoom) const
 {
     SDL_Rect const srcRect{width * frame, height * row, width, height};
     SDL_Rect const destRect{
@@ -72,7 +72,7 @@ void TextureManager::drawFrame(
 
 
     Game::Instance().getWindow()->renderImage(
-        textures_[id],
+        textures_.at(id),
         &srcRect,
         &destRect,
         angle,
@@ -89,7 +89,7 @@ void TextureManager::drawTile(
     const int height,
     const int row,
     const int frame,
-    const int zoom)
+    const int zoom) const
 {
     SDL_Rect const srcRect{
         margin + (spacing + width) * frame,
@@ -103,7 +103,7 @@ void TextureManager::drawTile(
         static_cast<int>(width * zoom),
         static_cast<int>(height * zoom)};
 
-    Game::Instance().getWindow()->renderImage(textures_[id], &srcRect, &destRect);
+    Game::Instance().getWindow()->renderImage(textures_.at(id), &srcRect, &destRect);
 }
 
 void TextureManager::clean()

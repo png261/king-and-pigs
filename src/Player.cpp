@@ -112,7 +112,7 @@ void Player::handleVision()
     }
 }
 
-void Player::draw()
+void Player::draw() const
 {
     if (isDead()) {
         return;

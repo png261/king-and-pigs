@@ -17,7 +17,7 @@ void Cursor::init()
     TextureManager::Instance().load(IMAGE_DIRECTORY + "ui/cursor/hover.png", "cursor_hover");
 }
 
-void Cursor::draw()
+void Cursor::draw() const
 {
     b2Vec2 position = InputHandler::Instance().getMousePosition();
     if (isHover()) {

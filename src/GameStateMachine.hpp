@@ -20,9 +20,9 @@ public:
     void changeState(std::unique_ptr<GameState> state);
     void popState();
 
-    GameState* getCurrentState();
-
     void clean();
+
+    GameState* getCurrentState() const;
 
     bool isLoading() const;
     void setLoading(bool is_loading);

@@ -19,7 +19,8 @@ public:
         const b2Vec2& position,
         const float angle = 0,
         const bool is_flip = false,
-        const int zoom = 1);
+        const int zoom = 1) const;
+
     void update();
 
     void start();

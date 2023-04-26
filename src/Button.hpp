@@ -17,7 +17,8 @@ public:
         const int width,
         const int height,
         const float border_radius = 20.0f);
-    void draw();
+
+    void draw() const;
     void update();
     void onClick(const std::function<void()>& callback);
     void disable();

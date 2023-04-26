@@ -12,7 +12,7 @@ public:
     void loadAnimation() override;
 
 private:
-    enum animations { NORMAL, HIT };
+    enum AnimationID { NORMAL, HIT };
 };
 
 class HeartCreator : public BaseCreator

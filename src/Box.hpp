@@ -18,7 +18,7 @@ private:
     void randomBonus();
     void breakIntoPieces();
 
-    enum animation { NORMAL, HIT };
+    enum AnimationID { NORMAL, HIT };
 };
 
 class BoxCreator : public BaseCreator

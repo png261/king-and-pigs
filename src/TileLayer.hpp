@@ -13,6 +13,7 @@ public:
         int const map_width,
         int const map_height,
         const std::vector<Tileset>& tile_sets);
+
     void update();
     void render() const;
 

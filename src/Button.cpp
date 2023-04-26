@@ -21,7 +21,7 @@ Button::Button(
     SoundManager::Instance().loadSFX(SOUND_DIRECTORY + "button/clicked.mp3", "button clicked");
 }
 
-void Button::draw()
+void Button::draw() const
 {
     if (isDisabled()) {
         Game::Instance().getWindow()->drawBox(rectangle_, Color::GRAY);

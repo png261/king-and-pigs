@@ -14,10 +14,10 @@ public:
     virtual void loadAnimation() override;
     virtual void update() override;
     virtual void updateAnimation() override;
-    virtual void draw() override;
+    virtual void draw() const override;
 
 private:
-    enum animations {
+    enum AnimationID {
         IDLE,
         RUN,
         JUMP,

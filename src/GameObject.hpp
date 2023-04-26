@@ -18,7 +18,7 @@ public:
     virtual void load(std::unique_ptr<LoaderParams> const& params);
     virtual void update();
     virtual void updateAnimation();
-    virtual void draw();
+    virtual void draw() const;
     virtual void loadAnimation();
 
     virtual int getWidth() const;

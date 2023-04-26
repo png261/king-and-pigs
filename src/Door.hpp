@@ -16,7 +16,7 @@ public:
     virtual bool isClosed() const;
 
 protected:
-    enum animations {
+    enum AnimationID {
         DOOR_CLOSED,
         DOOR_OPENING,
         DOOR_CLOSING,

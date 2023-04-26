@@ -80,7 +80,7 @@ void Window::destroy()
     }
 }
 
-void Window::refresh()
+void Window::refresh() const
 {
     SDL_RenderPresent(renderer_);
 }
@@ -165,7 +165,7 @@ void Window::print(
     const int fontSize,
     const int x,
     const int y,
-    const Color& color)
+    const Color& color) const
 {
     if (font_ == nullptr) {
         Log::error("Window::print: fail to load font");

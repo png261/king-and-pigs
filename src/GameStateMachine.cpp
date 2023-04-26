@@ -84,7 +84,7 @@ void GameStateMachine::changeState(std::unique_ptr<GameState> state)
     states_.push_back(std::move(state));
 }
 
-GameState* GameStateMachine::getCurrentState()
+GameState* GameStateMachine::getCurrentState() const
 {
     return states_.back().get();
 }

@@ -10,7 +10,7 @@ public:
     void loadAnimation() override;
 
 private:
-    enum animations {
+    enum AnimationID {
         NORMAL,
     };
 };

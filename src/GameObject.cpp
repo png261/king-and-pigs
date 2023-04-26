@@ -21,17 +21,18 @@ void GameObject::load(std::unique_ptr<LoaderParams> const& pParams)
 
 void GameObject::loadAnimation(){};
 
-void GameObject::draw()
+void GameObject::draw() const
 {
     b2Vec2 halfSize = 0.5 * b2Vec2(
-                                animations_[current_animation_]->getWidth(),
-                                animations_[current_animation_]->getHeight());
+                                animations_.at(current_animation_)->getWidth(),
+                                animations_.at(current_animation_)->getHeight());
 
-    animations_[current_animation_]->draw(
-        getPosition() - halfSize - Camera::Instance().getPosition(),
-        getAngle(),
-        is_flip_,
-        Camera::Instance().getZoom());
+    animations_.at(current_animation_)
+        ->draw(
+            getPosition() - halfSize - Camera::Instance().getPosition(),
+            getAngle(),
+            is_flip_,
+            Camera::Instance().getZoom());
 }
 
 void GameObject::update()
