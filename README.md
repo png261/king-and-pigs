@@ -74,11 +74,11 @@ The controls for the game are shown in the table below:
 
 | Key                   | Action                           |
 | --------------------- | -------------------------------- |
-| Arrow Right           | Move right                       |
-| Arrow Left            | Move left                        |
-| Space                 | Jump                             |
-| A                     | Attack                           |
+| D                     | Move right                       |
+| A                     | Move left                        |
 | W                     | Enter the door to the next level |
+| K                     | Jump                             |
+| J                     | Attack                           |
 
 ## Features
 ### Editing Maps
