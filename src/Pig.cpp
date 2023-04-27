@@ -1,14 +1,17 @@
 #include "Pig.hpp"
+#include <iostream>
 
+#include "Camera.hpp"
 #include "DamageableObject.hpp"
 #include "Game.hpp"
 #include "PhysicWorld.hpp"
+#include "Shapes.hpp"
 #include "SoundManager.hpp"
 
 Pig::Pig()
     : GameObject()
     , VisionObject(100)
-    , DamageableObject(3, 300, 500)
+    , DamageableObject(2, 300, 500)
     , AttackerObject(1, 20, 500)
 {}
 
@@ -209,4 +212,36 @@ void Pig::draw() const
 {
     GameObject::draw();
     VisionObject::debugDraw();
+    drawHealthBar();
+}
+
+void Pig::drawHealthBar() const
+{
+    const int kWidth = getMaxHp() * 10;
+    const int kHeight = 1;
+
+    const b2Vec2 position = {
+        (getPosition().x - static_cast<float>(getWidth()) / 2 -
+         Camera::Instance().getPosition().x) *
+            Camera::Instance().getZoom(),
+        (getPosition().y - static_cast<float>(getHeight()) / 2 -
+         Camera::Instance().getPosition().y) *
+            Camera::Instance().getZoom()};
+
+    Rectangle bar{
+        position.x,
+        position.y,
+        static_cast<int>(kWidth * Camera::Instance().getZoom()),
+        static_cast<int>(kHeight * Camera::Instance().getZoom())};
+
+    const float currentHpWidth = kWidth * ((float)getHp() / getMaxHp());
+
+    Rectangle status{
+        position.x,
+        position.y,
+        static_cast<int>(currentHpWidth * Camera::Instance().getZoom()),
+        static_cast<int>(kHeight * Camera::Instance().getZoom())};
+
+    Game::Instance().getWindow()->drawBox(bar, Color::GRAY);
+    Game::Instance().getWindow()->drawBox(status, Color::GREEN);
 }

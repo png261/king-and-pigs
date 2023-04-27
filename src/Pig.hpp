@@ -28,6 +28,8 @@ private:
         HIT,
     };
 
+    virtual void drawHealthBar() const;
+
     virtual void handleSound();
 
     virtual void handleMovement();

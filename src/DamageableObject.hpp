@@ -16,6 +16,7 @@ public:
     virtual void damage(const int n);
 
     virtual int getHp() const;
+    virtual int getMaxHp() const;
     virtual bool isDying() const;
     virtual bool isDead() const;
     virtual bool isInvulnerable() const;

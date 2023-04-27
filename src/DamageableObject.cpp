@@ -80,6 +80,11 @@ int DamageableObject::getHp() const
     return hp_;
 };
 
+int DamageableObject::getMaxHp() const
+{
+    return max_hp_;
+};
+
 bool DamageableObject::isDying() const
 {
     return is_dying_;
