@@ -47,6 +47,7 @@ void PauseState::render() const
         return;
     }
 
+    Game::Instance().getWindow()->drawOverlay({0, 0, 0, 100});
     for (const auto& obj : ui_objects_) {
         obj->draw();
     }

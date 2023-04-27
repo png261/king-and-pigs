@@ -43,6 +43,8 @@ void WinState::render() const
     if (!isLoaded() || isPaused()) {
         return;
     }
+
+    Game::Instance().getWindow()->drawOverlay({0, 0, 0, 100});
     for (const auto& obj : ui_objects_) {
         obj->draw();
     }

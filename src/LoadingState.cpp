@@ -18,6 +18,7 @@ void LoadingState::update(){};
 
 void LoadingState::render() const
 {
+    Game::Instance().getWindow()->drawOverlay({0, 0, 0, 100});
     Game::Instance().getWindow()->print(
         "Loading...",
         100,
