@@ -58,22 +58,22 @@ bool SoundManager::loadSFX(const std::string& path, const std::string& id)
     return true;
 }
 
-void SoundManager::playMusic(const std::string& id, const int loop)
+void SoundManager::playMusic(const std::string& id, const int loop) const
 {
     if (musics_.find(id) == musics_.end()) {
         Log::warning("MusicID not exist: " + id);
         return;
     }
-    Mix_PlayMusic(musics_[id], loop);
+    Mix_PlayMusic(musics_.at(id), loop);
 }
 
-void SoundManager::playSFX(const std::string& id, const int loop)
+void SoundManager::playSFX(const std::string& id, const int loop) const
 {
     if (sfxs_.find(id) == sfxs_.end()) {
         Log::warning("sfxID not exist: " + id);
         return;
     }
-    Mix_PlayChannel(-1, sfxs_[id], loop);
+    Mix_PlayChannel(-1, sfxs_.at(id), loop);
 }
 
 void SoundManager::setVolume(const int percent)

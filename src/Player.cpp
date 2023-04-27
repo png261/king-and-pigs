@@ -220,12 +220,12 @@ void Player::leavingDoor()
     animations_[current_animation_]->start();
 }
 
-bool Player::isWantEnterDoor()
+bool Player::isWantEnterDoor() const
 {
     return is_want_enter_door_;
 }
 
-bool Player::isEnteringDoor()
+bool Player::isEnteringDoor() const
 {
     return is_entering_door_;
 }

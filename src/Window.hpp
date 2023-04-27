@@ -22,11 +22,11 @@ public:
         const SDL_Rect* const dstrect,
         const double angle = 0,
         const SDL_Point* center = 0,
-        const SDL_RendererFlip flip = SDL_FLIP_NONE);
+        const SDL_RendererFlip flip = SDL_FLIP_NONE) const;
 
-    SDL_Texture* loadImage(const std::string& path);
+    SDL_Texture* loadImage(const std::string& path) const;
 
-    void freeImage(SDL_Texture* const image);
+    void freeImage(SDL_Texture* const image) const;
 
     void refresh() const;
 
@@ -40,6 +40,7 @@ public:
         const int y,
         const Color& color = Color(Color::BLACK)) const;
     void drawBox(const Rectangle& rect, const Color& color = Color(Color::WHITE)) const;
+    void drawOverlay(const Color& color = Color(Color::WHITE)) const;
 
     void setBackgroundColor(const Color& color = Color(Color::BLACK));
     void resetBackgroundColor();

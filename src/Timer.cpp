@@ -33,3 +33,8 @@ bool Timer::isDone()
     }
     return false;
 }
+
+bool Timer::isRunning() const
+{
+    return stopwatch_.isRunning();
+}

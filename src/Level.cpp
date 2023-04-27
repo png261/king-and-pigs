@@ -72,7 +72,7 @@ void Level::setPlayer(Player* const player)
 
 GameObject* Level::spawnGameObject(
     const std::string& type,
-    std::unique_ptr<LoaderParams> const& params)
+    std::unique_ptr<LoaderParams> const& params) const
 {
     std::unique_ptr<GameObject> pGameObject = GameObjectFactory::Instance().create(type);
     GameObject* newObject = pGameObject.get();
@@ -91,7 +91,7 @@ int Level::getMapHeight() const
     return height_;
 }
 
-Color Level::getBackgroundColor()
+Color Level::getBackgroundColor() const
 {
     return background_color_;
 }

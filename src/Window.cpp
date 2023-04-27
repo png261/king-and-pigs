@@ -85,38 +85,38 @@ void Window::refresh() const
     SDL_RenderPresent(renderer_);
 }
 
-SDL_Texture* Window::loadImage(const std::string& path)
+SDL_Texture* Window::loadImage(const std::string& path) const
 {
-    SDL_Texture* const pTexture = IMG_LoadTexture(renderer_, path.c_str());
-    if (pTexture == nullptr) {
+    SDL_Texture* const texture = IMG_LoadTexture(renderer_, path.c_str());
+    if (texture == nullptr) {
         Log::error("IMG_LoadTexture: Couldn't open image '" + path + "': " + IMG_GetError());
     }
-    return pTexture;
+    return texture;
 }
 
-void Window::freeImage(SDL_Texture* const pTexture)
+void Window::freeImage(SDL_Texture* const texture) const
 {
-    if (pTexture == nullptr) {
+    if (texture == nullptr) {
         return;
     }
 
-    SDL_DestroyTexture(pTexture);
+    SDL_DestroyTexture(texture);
 }
 
 void Window::renderImage(
     SDL_Texture* const texture,
-    const SDL_Rect* const srcrect,
-    const SDL_Rect* const dstrect,
+    const SDL_Rect* const src_rect,
+    const SDL_Rect* const dest_rect,
     const double angle,
     const SDL_Point* center,
-    const SDL_RendererFlip flip)
+    const SDL_RendererFlip flip) const
 {
-    if (!texture || !srcrect || !dstrect) {
+    if (!texture || !src_rect || !dest_rect) {
         Log::warning("Window::render: Tried to show a nullptr image");
         return;
     }
 
-    SDL_RenderCopyEx(renderer_, texture, srcrect, dstrect, angle, center, flip);
+    SDL_RenderCopyEx(renderer_, texture, src_rect, dest_rect, angle, center, flip);
 }
 
 void Window::fill(const Color& color)
@@ -180,18 +180,18 @@ void Window::print(
         return;
     }
 
-    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(renderer_, pSurface);
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer_, pSurface);
 
-    if (pTexture == nullptr) {
+    if (texture == nullptr) {
         SDL_FreeSurface(pSurface);
         Log::error("Window::print: fail to create texture");
         return;
     }
 
     SDL_Rect dest_rect = {x - pSurface->w / 2, y - pSurface->h / 2, pSurface->w, pSurface->h};
-    SDL_RenderCopy(renderer_, pTexture, nullptr, &dest_rect);
+    SDL_RenderCopy(renderer_, texture, nullptr, &dest_rect);
 
-    SDL_DestroyTexture(pTexture);
+    SDL_DestroyTexture(texture);
     SDL_FreeSurface(pSurface);
 };
 
@@ -208,6 +208,11 @@ void Window::drawBox(const Rectangle& box, const Color& color) const
         color.g(),
         color.b(),
         color.a());
+}
+
+void Window::drawOverlay(const Color& color) const
+{
+    drawBox({0, 0, static_cast<int>(width_), static_cast<int>(height_)}, color);
 }
 
 SDL_Renderer* Window::getRenderer() const

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ItemObject.hpp"
 #include "GameObjectFactory.hpp"
+#include "ItemObject.hpp"
 
 class Heart final : public ItemObject
 {

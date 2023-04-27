@@ -17,14 +17,14 @@ void GameObjectFactory::registerType(const std::string& id, std::unique_ptr<Base
     creators_[id] = std::move(creator);
 }
 
-std::unique_ptr<GameObject> GameObjectFactory::create(const std::string& id)
+std::unique_ptr<GameObject> GameObjectFactory::create(const std::string& id) const
 {
     if (creators_.find(id) == creators_.end()) {
         Log::warning("GameObjectFactory: could not find type " + id);
         return nullptr;
     }
 
-    return creators_[id]->create();
+    return creators_.at(id)->create();
 }
 
 void GameObjectFactory::clean()

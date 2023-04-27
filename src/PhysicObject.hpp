@@ -25,25 +25,25 @@ public:
 
     virtual void moveLeft();
     virtual void moveRight();
-    virtual void jump();
+    virtual void jump() const;
 
     virtual void setMoveRight(bool can_move_right);
     virtual void setMoveLeft(bool can_move_left);
 
-    virtual void setFilterData(PhysicWorld::Category category, PhysicWorld::Mask mask);
+    virtual void setFilterData(PhysicWorld::Category category, PhysicWorld::Mask mask) const;
 
     b2Fixture* createPolygonSensor(
         const b2Vec2& position,
         const int width,
         const int height,
         const PhysicWorld::Category category,
-        const PhysicWorld::Mask mask);
+        const PhysicWorld::Mask mask) const;
 
     b2Fixture* createCircleSensor(
         const b2Vec2& position,
         const int radius,
         const PhysicWorld::Category category,
-        const PhysicWorld::Mask mask);
+        const PhysicWorld::Mask mask) const;
 
 protected:
     b2Body* body_;

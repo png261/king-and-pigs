@@ -48,12 +48,12 @@ void PhysicWorld::clean()
     }
 }
 
-void PhysicWorld::debugDraw()
+void PhysicWorld::debugDraw() const
 {
     getWorld()->DebugDraw();
 }
 
-b2World* PhysicWorld::getWorld()
+b2World* PhysicWorld::getWorld() const
 {
     return world_.get();
 }
@@ -69,7 +69,7 @@ b2Body* PhysicWorld::createStaticBody(
     const int width,
     const int height,
     const Category category,
-    const Mask mask)
+    const Mask mask) const
 {
     b2BodyDef bodyDef;
     bodyDef.position = Utils::pixelToMeter(position + b2Vec2(width * 0.5, height * 0.5));
@@ -102,7 +102,7 @@ b2Fixture* PhysicWorld::createCircleBody(
     const b2Vec2& position,
     const int radius,
     const PhysicWorld::Category category,
-    const PhysicWorld::Mask mask)
+    const PhysicWorld::Mask mask) const
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;

@@ -13,7 +13,6 @@ public:
     void update();
     void render() const;
 
-    std::vector<std::unique_ptr<GameObject>>* getGameObjects();
     void addGameObject(std::unique_ptr<GameObject> object);
 
 private:

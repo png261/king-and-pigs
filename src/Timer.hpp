@@ -12,7 +12,7 @@ public:
     void start();
     void restart();
     bool isDone();
-    bool isRunning();
+    bool isRunning() const;
 
 private:
     Uint32 time_;

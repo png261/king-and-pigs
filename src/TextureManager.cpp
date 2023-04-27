@@ -18,7 +18,6 @@ bool TextureManager::load(const std::string& path, const std::string& id)
     }
 
     SDL_Texture* const texture = Game::Instance().getWindow()->loadImage(path.c_str());
-    /* SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND); */
     if (texture == nullptr) {
         Log::error("Fail to create Texture for: " + path);
         return false;
@@ -36,8 +35,8 @@ void TextureManager::draw(
     const int height,
     const bool is_flip) const
 {
-    SDL_Rect const srcRect{0, 0, width, height};
-    SDL_Rect const destRect{
+    SDL_Rect const src_rect{0, 0, width, height};
+    SDL_Rect const dest_rect{
         static_cast<int>(position.x),
         static_cast<int>(position.y),
         width,
@@ -45,8 +44,8 @@ void TextureManager::draw(
 
     Game::Instance().getWindow()->renderImage(
         textures_.at(id),
-        &srcRect,
-        &destRect,
+        &src_rect,
+        &dest_rect,
         0,
         0,
         is_flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
@@ -63,8 +62,8 @@ void TextureManager::drawFrame(
     const bool is_flip,
     const int zoom) const
 {
-    SDL_Rect const srcRect{width * frame, height * row, width, height};
-    SDL_Rect const destRect{
+    SDL_Rect const src_rect{width * frame, height * row, width, height};
+    SDL_Rect const dest_rect{
         static_cast<int>(position.x * zoom),
         static_cast<int>(position.y * zoom),
         width * zoom,
@@ -73,8 +72,8 @@ void TextureManager::drawFrame(
 
     Game::Instance().getWindow()->renderImage(
         textures_.at(id),
-        &srcRect,
-        &destRect,
+        &src_rect,
+        &dest_rect,
         angle,
         0,
         is_flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
@@ -91,19 +90,19 @@ void TextureManager::drawTile(
     const int frame,
     const int zoom) const
 {
-    SDL_Rect const srcRect{
+    SDL_Rect const src_rect{
         margin + (spacing + width) * frame,
         margin + (spacing + height) * row,
         width,
         height};
 
-    SDL_Rect const destRect{
+    SDL_Rect const dest_rect{
         static_cast<int>(position.x * zoom),
         static_cast<int>(position.y * zoom),
         static_cast<int>(width * zoom),
         static_cast<int>(height * zoom)};
 
-    Game::Instance().getWindow()->renderImage(textures_.at(id), &srcRect, &destRect);
+    Game::Instance().getWindow()->renderImage(textures_.at(id), &src_rect, &dest_rect);
 }
 
 void TextureManager::clean()

@@ -84,7 +84,7 @@ void PhysicObject::moveLeft()
     body_->ApplyLinearImpulse(impulse, body_->GetWorldCenter(), true);
 }
 
-void PhysicObject::jump()
+void PhysicObject::jump() const
 {
     if (is_disabled_jump_) {
         return;
@@ -166,7 +166,7 @@ bool PhysicObject::isDisableJump() const
     return is_disabled_jump_;
 }
 
-void PhysicObject::setFilterData(PhysicWorld::Category category, PhysicWorld::Mask mask)
+void PhysicObject::setFilterData(PhysicWorld::Category category, PhysicWorld::Mask mask) const
 {
     if (fixture_ == nullptr) {
         return;
@@ -183,7 +183,7 @@ b2Fixture* PhysicObject::createPolygonSensor(
     int width,
     int height,
     PhysicWorld::Category category,
-    PhysicWorld::Mask mask)
+    PhysicWorld::Mask mask) const
 {
     b2PolygonShape polygon;
     polygon.SetAsBox(
@@ -204,7 +204,7 @@ b2Fixture* PhysicObject::createCircleSensor(
     const b2Vec2& position,
     const int radius,
     const PhysicWorld::Category category,
-    const PhysicWorld::Mask mask)
+    const PhysicWorld::Mask mask) const
 {
     b2CircleShape circle;
     circle.m_p = Utils::pixelToMeter(position);

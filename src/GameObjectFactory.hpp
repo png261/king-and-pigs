@@ -19,7 +19,7 @@ public:
     GameObjectFactory& operator=(GameObjectFactory const&) = delete;
 
     void registerType(const std::string& id, std::unique_ptr<BaseCreator> creator);
-    std::unique_ptr<GameObject> create(const std::string& id);
+    std::unique_ptr<GameObject> create(const std::string& id) const;
     void clean();
 
 private:

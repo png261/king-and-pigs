@@ -19,8 +19,8 @@ public:
     bool loadSFX(const std::string& path, const std::string& id);
     bool loadMusic(const std::string& path, const std::string& id);
 
-    void playSFX(const std::string& id, const int loop = 0);
-    void playMusic(const std::string& id, const int loop = 0);
+    void playSFX(const std::string& id, const int loop = 0) const;
+    void playMusic(const std::string& id, const int loop = 0) const;
 
     void setVolume(const int percent);
     void changeVolume(const int percent);

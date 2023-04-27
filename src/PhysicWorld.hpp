@@ -18,9 +18,9 @@ public:
     void init(Window* const window);
     void update();
     void clean();
-    void debugDraw();
+    void debugDraw() const;
     void createContactListener();
-    b2World* getWorld();
+    b2World* getWorld() const;
 
     enum Category : uint16 {
         CAT_NONE = 0x0000,
@@ -59,14 +59,14 @@ public:
         const int width,
         const int height,
         const Category category,
-        const Mask mask);
+        const Mask mask) const;
 
     b2Fixture* createCircleBody(
         b2Body*& body,
         const b2Vec2& position,
         const int radius,
         const PhysicWorld::Category category,
-        const PhysicWorld::Mask mask);
+        const PhysicWorld::Mask mask) const;
 
 private:
     PhysicWorld();

@@ -19,8 +19,8 @@ public:
     void loadAnimation() override;
     void draw() const override;
 
-    bool isWantEnterDoor();
-    bool isEnteringDoor();
+    bool isWantEnterDoor() const;
+    bool isEnteringDoor() const;
     void enterDoor();
 
 private:
