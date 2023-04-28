@@ -13,7 +13,6 @@ TileLayer::TileLayer(
     : tile_size_(tile_size)
     , columns_(columns)
     , rows_(rows)
-    , position_(0, 0)
     , tile_sets_(tile_sets)
 {}
 
@@ -21,28 +20,17 @@ void TileLayer::update() {}
 
 void TileLayer::render() const
 {
-    int x, y, x2, y2 = 0;
-
-    x = position_.x / tile_size_;
-    y = position_.y / tile_size_;
-
-    x2 = int(position_.x) % tile_size_;
-    y2 = int(position_.y) % tile_size_;
-
     for (int i = 0; i < rows_; ++i) {
         for (int j = 0; j < columns_; j++) {
-            int id = tile_ids_[(i + y) * columns_ + (j + x)];
-
-            const int EMPTY_TILE = 0;
-
-            if (id == EMPTY_TILE) {
+            const int id = tile_ids_[i * columns_ + j];
+            if (id == 0) {
                 continue;
             }
 
-            b2Vec2 position = b2Vec2(((j * tile_size_) - x2), ((i * tile_size_) - y2)) -
-                              Camera::Instance().getPosition();
+            const b2Vec2 position =
+                b2Vec2(j * tile_size_, i * tile_size_) - Camera::Instance().getPosition();
 
-            bool isInViewPort =
+            const bool isInViewPort =
                 position.x > -tile_size_ && position.x < Game::Instance().getWindow()->getWidth() &&
                 position.y > -tile_size_ && position.y < Game::Instance().getWindow()->getHeight();
 
@@ -50,7 +38,7 @@ void TileLayer::render() const
                 continue;
             }
 
-            Tileset tileset = getTilesetByID(id);
+            const Tileset tileset = getTilesetByID(id);
 
             TextureManager::Instance().drawTile(
                 tileset.name,
@@ -69,12 +57,11 @@ void TileLayer::render() const
 Tileset TileLayer::getTilesetByID(int const tile_id) const
 {
     for (std::size_t i = 0; i < tile_sets_.size(); ++i) {
-        if (i + 1 <= tile_sets_.size() - 1) {
-            if (tile_id >= tile_sets_[i].first_grid_id &&
-                tile_id < tile_sets_[i + 1].first_grid_id) {
-                return tile_sets_[i];
-            }
-        } else {
+        if (i == tile_sets_.size() - 1) {
+            return tile_sets_[i];
+        }
+
+        if (tile_id >= tile_sets_[i].first_grid_id && tile_id < tile_sets_[i + 1].first_grid_id) {
             return tile_sets_[i];
         }
     }
@@ -101,14 +88,4 @@ int TileLayer::getTileSize() const
 const std::vector<int>& TileLayer::getTileData() const
 {
     return tile_ids_;
-}
-
-b2Vec2 TileLayer::getPosition() const
-{
-    return position_;
-}
-
-void TileLayer::setPosition(const b2Vec2& position)
-{
-    position_ = position;
 }
