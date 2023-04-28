@@ -2,7 +2,7 @@
 
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
-#include "GameObjectFactory.hpp"
+#include "ObjectFactory.hpp"
 
 class Box final : public GameObject, public DamageableObject
 {
@@ -23,5 +23,5 @@ private:
 
 class BoxCreator : public BaseCreator
 {
-    std::unique_ptr<GameObject> create() const { return std::make_unique<Box>(); }
+    std::unique_ptr<Object> create() const { return std::make_unique<Box>(); }
 };

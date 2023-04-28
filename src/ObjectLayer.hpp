@@ -4,8 +4,7 @@
 #include <vector>
 
 #include "Layer.hpp"
-
-class GameObject;
+#include "Object.hpp"
 
 class ObjectLayer final : public Layer
 {
@@ -13,8 +12,8 @@ public:
     void update();
     void render() const;
 
-    void addGameObject(std::unique_ptr<GameObject> object);
+    void addObject(std::unique_ptr<Object> object);
 
 private:
-    std::vector<std::unique_ptr<GameObject>> gameObjects_;
+    std::vector<std::unique_ptr<Object>> objects_;
 };

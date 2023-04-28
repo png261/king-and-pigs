@@ -10,13 +10,13 @@
 #include "DoorIn.hpp"
 #include "DoorOut.hpp"
 #include "Game.hpp"
-#include "GameObjectFactory.hpp"
 #include "GameStateMachine.hpp"
 #include "Heart.hpp"
 #include "InputHandler.hpp"
 #include "KingPig.hpp"
 #include "LevelParser.hpp"
 #include "Log.hpp"
+#include "ObjectFactory.hpp"
 #include "PauseState.hpp"
 #include "Pig.hpp"
 #include "PigWithBomb.hpp"
@@ -34,7 +34,7 @@ PlayState::PlayState()
 bool PlayState::enter()
 {
     is_loaded_ = false;
-    GameObjectFactory& factory = GameObjectFactory::Instance();
+    ObjectFactory& factory = ObjectFactory::Instance();
     TextureManager& texture = TextureManager::Instance();
     SoundManager& sound = SoundManager::Instance();
 

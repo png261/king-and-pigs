@@ -13,7 +13,7 @@ Box::Box()
 void Box::load(std::unique_ptr<LoaderParams> const& params)
 {
     GameObject::load(std::move(params));
-    createBody(params->x(), params->y(), width_, height_);
+    createBody(params->x(), params->y(), getWidth(), getHeight());
 
     setFilterData(PhysicWorld::CAT_BOX, PhysicWorld::MASK_BOX);
     body_->SetFixedRotation(false);
@@ -67,10 +67,10 @@ void Box::breakIntoPieces()
     auto params = std::make_unique<LoaderParams>(
         LoaderParams(getPosition().x - 10 / 2.0f, getPosition().y - 10 / 2.0f - 20, 10, 10));
 
-    Game::Instance().getLevel()->spawnGameObject("Box", std::move(params));
-    Game::Instance().getLevel()->spawnGameObject("Box", std::move(params));
-    Game::Instance().getLevel()->spawnGameObject("Box", std::move(params));
-    Game::Instance().getLevel()->spawnGameObject("Box", std::move(params));
+    Game::Instance().getLevel()->spawnObject("Box", std::move(params));
+    Game::Instance().getLevel()->spawnObject("Box", std::move(params));
+    Game::Instance().getLevel()->spawnObject("Box", std::move(params));
+    Game::Instance().getLevel()->spawnObject("Box", std::move(params));
 }
 
 void Box::randomBonus()
@@ -78,12 +78,12 @@ void Box::randomBonus()
     auto params =
         std::make_unique<LoaderParams>(LoaderParams(getPosition().x, getPosition().y, 10, 10));
     if (Utils::isProbable(30)) {
-        Game::Instance().getLevel()->spawnGameObject("Heart", std::move(params));
+        Game::Instance().getLevel()->spawnObject("Heart", std::move(params));
         return;
     }
 
     if (Utils::isProbable(10)) {
-        Game::Instance().getLevel()->spawnGameObject("Diamond", std::move(params));
+        Game::Instance().getLevel()->spawnObject("Diamond", std::move(params));
         return;
     }
 }

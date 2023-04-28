@@ -3,7 +3,7 @@
 #include "AttackerObject.hpp"
 #include "DamageableObject.hpp"
 #include "GameObject.hpp"
-#include "GameObjectFactory.hpp"
+#include "ObjectFactory.hpp"
 #include "VisionObject.hpp"
 
 class Player final : public GameObject,
@@ -49,5 +49,5 @@ private:
 
 class PlayerCreator : public BaseCreator
 {
-    std::unique_ptr<GameObject> create() const { return std::make_unique<Player>(); }
+    std::unique_ptr<Object> create() const { return std::make_unique<Player>(); }
 };

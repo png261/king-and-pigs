@@ -197,7 +197,7 @@ void Window::print(
     SDL_FreeSurface(pSurface);
 };
 
-void Window::drawBox(const Rectangle& box, const Color& color) const
+void Window::drawBox(const Rectangle& box, const int border_radius, const Color& color) const
 {
     roundedBoxRGBA(
         renderer_,
@@ -205,7 +205,7 @@ void Window::drawBox(const Rectangle& box, const Color& color) const
         box.y(),
         box.rightmost(),
         box.bottom(),
-        box.border_radius(),
+        border_radius,
         color.r(),
         color.g(),
         color.b(),
@@ -214,7 +214,7 @@ void Window::drawBox(const Rectangle& box, const Color& color) const
 
 void Window::drawOverlay(const Color& color) const
 {
-    drawBox({0, 0, static_cast<int>(width_), static_cast<int>(height_)}, color);
+    drawBox({0, 0, static_cast<int>(width_), static_cast<int>(height_)}, 0, color);
 }
 
 SDL_Renderer* Window::getRenderer() const

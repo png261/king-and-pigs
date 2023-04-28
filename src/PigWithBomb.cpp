@@ -43,12 +43,13 @@ void PigWithBomb::throwBomb()
     auto params = std::make_unique<LoaderParams>(
         LoaderParams(getPosition().x - width_ / 2.0f, getPosition().y - height_ / 2.0f - 10, 7, 7));
 
-    GameObject* bomb = Game::Instance().getLevel()->spawnGameObject("Bomb", std::move(params));
+    auto bomb =
+        dynamic_cast<Bomb*>(Game::Instance().getLevel()->spawnObject("Bomb", std::move(params)));
     bomb->getBody()->ApplyForce(
         b2Vec2(direction_ * 50, -32),
         bomb->getBody()->GetWorldCenter(),
         true);
-    dynamic_cast<Bomb*>(bomb)->turnOn();
+    bomb->turnOn();
 }
 
 void PigWithBomb::becomeNormal()
@@ -56,5 +57,5 @@ void PigWithBomb::becomeNormal()
     disappear();
     auto params2 = std::make_unique<LoaderParams>(
         LoaderParams(getPosition().x - (20 * 0.5f), getPosition().y - (20 * 0.5f), 20, 20));
-    Game::Instance().getLevel()->spawnGameObject("Pig", std::move(params2));
+    Game::Instance().getLevel()->spawnObject("Pig", std::move(params2));
 }

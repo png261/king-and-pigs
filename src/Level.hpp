@@ -40,9 +40,7 @@ public:
 
     Player* getPlayer() const;
     void setPlayer(Player* const player);
-    GameObject* spawnGameObject(
-        const std::string& type,
-        std::unique_ptr<LoaderParams> const& params) const;
+    Object* spawnObject(const std::string& type, std::unique_ptr<LoaderParams> const& params) const;
 
     Color getBackgroundColor() const;
     int getMapWidth() const;

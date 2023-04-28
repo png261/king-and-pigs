@@ -50,7 +50,10 @@ public:
         const int size,
         const Color& color = Color(Color::BLACK),
         const int style = FontStyle::NORMAL) const;
-    void drawBox(const Rectangle& rect, const Color& color = Color(Color::WHITE)) const;
+    void drawBox(
+        const Rectangle& rect,
+        const int border_radius,
+        const Color& color = Color(Color::WHITE)) const;
     void drawOverlay(const Color& color = Color(Color::WHITE)) const;
 
     void setBackgroundColor(const Color& color = Color(Color::BLACK));

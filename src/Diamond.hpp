@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObjectFactory.hpp"
+#include "ObjectFactory.hpp"
 #include "ItemObject.hpp"
 
 class Diamond final : public ItemObject
@@ -17,5 +17,5 @@ private:
 
 class DiamondCreator : public BaseCreator
 {
-    std::unique_ptr<GameObject> create() const { return std::make_unique<Diamond>(); }
+    std::unique_ptr<Object> create() const { return std::make_unique<Diamond>(); }
 };

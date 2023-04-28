@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameObject.hpp"
-#include "GameObjectFactory.hpp"
+#include "ObjectFactory.hpp"
 
 class Candle : public GameObject
 {
@@ -17,5 +17,5 @@ private:
 
 class CandleCreator : public BaseCreator
 {
-    std::unique_ptr<GameObject> create() const { return std::make_unique<Candle>(); }
+    std::unique_ptr<Object> create() const { return std::make_unique<Candle>(); }
 };

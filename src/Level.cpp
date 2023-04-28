@@ -1,9 +1,9 @@
 #include "Level.hpp"
 
 #include "Game.hpp"
-#include "GameObjectFactory.hpp"
 #include "Layer.hpp"
 #include "Log.hpp"
+#include "ObjectFactory.hpp"
 #include "TextureManager.hpp"
 #include "TileLayer.hpp"
 
@@ -70,14 +70,13 @@ void Level::setPlayer(Player* const player)
     player_ = player;
 }
 
-GameObject* Level::spawnGameObject(
-    const std::string& type,
-    std::unique_ptr<LoaderParams> const& params) const
+Object* Level::spawnObject(const std::string& type, std::unique_ptr<LoaderParams> const& params)
+    const
 {
-    std::unique_ptr<GameObject> pGameObject = GameObjectFactory::Instance().create(type);
-    GameObject* newObject = pGameObject.get();
-    pGameObject->load(std::move(params));
-    spawn_layer_->addGameObject(std::move(pGameObject));
+    std::unique_ptr<Object> object = ObjectFactory::Instance().create(type);
+    Object* newObject = object.get();
+    object->load(std::move(params));
+    spawn_layer_->addObject(std::move(object));
     return newObject;
 }
 

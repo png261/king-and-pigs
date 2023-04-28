@@ -21,18 +21,12 @@ public:
     Rectangle();
     Rectangle(const Point topLeft, const Point bottomRight);
     Rectangle(Rectangle* const other);
-    Rectangle(
-        const float x,
-        const float y,
-        const int w,
-        const int h,
-        const float border_radius = 0);
+    Rectangle(const float x, const float y, const int w, const int h);
 
     float x() const;
     float y() const;
     int w() const;
     int h() const;
-    float border_radius() const;
 
     float top() const;
     float bottom() const;
@@ -54,7 +48,6 @@ public:
     void addY(const float y);
     void setX(const float x);
     void setY(const float y);
-    void setBorderRadius(const float border_radius);
     void stretch(const float scale);
     void stretch(const float scaleX, const float scaleY);
 
@@ -65,7 +58,6 @@ private:
     float _y;
     int _width;
     int _height;
-    float _border_radius;
 
     float _top;
     float _bottom;

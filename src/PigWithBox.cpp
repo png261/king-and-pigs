@@ -46,7 +46,8 @@ void PigWithBox::throwBox()
         20,
         20));
 
-    GameObject* box = Game::Instance().getLevel()->spawnGameObject("Box", std::move(params));
+    auto box =
+        dynamic_cast<Box*>(Game::Instance().getLevel()->spawnObject("Box", std::move(params)));
     box->getBody()->ApplyForce(
         b2Vec2(direction_ * 100, -32),
         box->getBody()->GetWorldCenter(),
@@ -58,5 +59,5 @@ void PigWithBox::becomeNormal()
     disappear();
     auto params2 = std::make_unique<LoaderParams>(
         LoaderParams(getPosition().x - (20 * 0.5f), getPosition().y - (20 * 0.5f), 20, 20));
-    Game::Instance().getLevel()->spawnGameObject("Pig", std::move(params2));
+    Game::Instance().getLevel()->spawnObject("Pig", std::move(params2));
 }

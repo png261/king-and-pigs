@@ -5,6 +5,7 @@
 
 #include "Animation.hpp"
 #include "LoaderParams.hpp"
+#include "Object.hpp"
 #include "PhysicObject.hpp"
 #include "PhysicWorld.hpp"
 #include "VisionObject.hpp"
@@ -15,18 +16,10 @@ public:
     GameObject();
     virtual ~GameObject() = default;
 
-    virtual void load(std::unique_ptr<LoaderParams> const& params);
-    virtual void update();
+    virtual void update() override;
     virtual void updateAnimation();
-    virtual void draw() const;
+    virtual void draw() const override;
     virtual void loadAnimation();
-
-    virtual int getWidth() const;
-    virtual int getHeight() const;
-
-    virtual bool isExist() const;
-
-    virtual void disappear();
 
 protected:
     enum direction {
@@ -34,10 +27,6 @@ protected:
         LEFT = -1,
     };
 
-    int width_;
-    int height_;
-
-    bool is_exist_;
     bool is_flip_;
 
     direction direction_;

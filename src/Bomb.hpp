@@ -2,7 +2,7 @@
 
 #include "AttackerObject.hpp"
 #include "GameObject.hpp"
-#include "GameObjectFactory.hpp"
+#include "ObjectFactory.hpp"
 
 class Bomb final : public GameObject, public AttackerObject
 {
@@ -28,5 +28,5 @@ private:
 
 class BombCreator : public BaseCreator
 {
-    std::unique_ptr<GameObject> create() const { return std::make_unique<Bomb>(); }
+    std::unique_ptr<Object> create() const { return std::make_unique<Bomb>(); }
 };

@@ -6,16 +6,15 @@
 #include <stdexcept>
 
 #include "CONSTANT.hpp"
-#include "GameObjectFactory.hpp"
 #include "Layer.hpp"
 #include "Level.hpp"
 #include "Log.hpp"
+#include "ObjectFactory.hpp"
 #include "ObjectLayer.hpp"
 #include "PhysicWorld.hpp"
 #include "TextureManager.hpp"
 #include "TileLayer.hpp"
 #include "Utils.hpp"
-
 
 using namespace tinyxml2;
 std::unique_ptr<Level> LevelParser::parseLevel(const std::string& path)
@@ -72,9 +71,8 @@ void LevelParser::loadTileset(const Json::Value& tileset_data, Level* const leve
     }
 }
 
-std::unique_ptr<GameObject> LevelParser::parseObject(
-    const Json::Value& object_data,
-    Level* const level) const
+std::unique_ptr<Object> LevelParser::parseObject(const Json::Value& object_data, Level* const level)
+    const
 {
     std::string type = "";
     int x = 0;
@@ -109,7 +107,7 @@ std::unique_ptr<GameObject> LevelParser::parseObject(
         h = object_data["height"].asInt();
     }
 
-    std::unique_ptr<GameObject> object = GameObjectFactory::Instance().create(type);
+    std::unique_ptr<Object> object = ObjectFactory::Instance().create(type);
     if (object == nullptr) {
         return nullptr;
     }
@@ -129,10 +127,10 @@ void LevelParser::parseObjectLayer(const Json::Value& layer, Level* const level)
 
     bool is_empty = true;
     for (auto& object : layer["objects"]) {
-        std::unique_ptr<GameObject> obj = parseObject(object, level);
+        std::unique_ptr<Object> obj = parseObject(object, level);
         if (obj != nullptr) {
             is_empty = false;
-            object_layer->addGameObject(std::move(obj));
+            object_layer->addObject(std::move(obj));
         }
     }
 

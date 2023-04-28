@@ -1,16 +1,17 @@
 #pragma once
 
+#include "Object.hpp"
 #include "PhysicWorld.hpp"
 
-class PhysicObject
+class PhysicObject : public Object
 {
 public:
     PhysicObject();
     virtual ~PhysicObject() = default;
-    virtual void update();
+    virtual void update() override;
 
     virtual b2Body* getBody() const;
-    virtual b2Vec2 getPosition() const;
+    virtual b2Vec2 getPosition() const override;
     virtual float getAngle() const;
     virtual int getFootContact() const;
     virtual bool isOnGround() const;

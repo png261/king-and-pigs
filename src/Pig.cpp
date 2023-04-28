@@ -218,7 +218,7 @@ void Pig::draw() const
 void Pig::drawHealthBar() const
 {
     const int kWidth = getMaxHp() * 10;
-    const int kHeight = 1;
+    const int kHeight = 2;
 
     const b2Vec2 position = {
         (getPosition().x - static_cast<float>(getWidth()) / 2 -
@@ -242,6 +242,6 @@ void Pig::drawHealthBar() const
         static_cast<int>(currentHpWidth * Camera::Instance().getZoom()),
         static_cast<int>(kHeight * Camera::Instance().getZoom())};
 
-    Game::Instance().getWindow()->drawBox(bar, Color::GRAY);
-    Game::Instance().getWindow()->drawBox(status, Color::GREEN);
+    Game::Instance().getWindow()->drawBox(bar, 2, Color::GRAY);
+    Game::Instance().getWindow()->drawBox(status, 2, Color::GREEN);
 }

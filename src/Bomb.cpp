@@ -14,7 +14,7 @@ Bomb::Bomb()
 
 void Bomb::load(std::unique_ptr<LoaderParams> const& params)
 {
-    GameObject::load(std::move(params));
+    Object::load(std::move(params));
 
     PhysicWorld::Instance().createCircleBody(
         body_,

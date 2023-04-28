@@ -1,5 +1,7 @@
 #include "MainMenuState.hpp"
 
+#include <memory>
+
 #include "Button.hpp"
 #include "CONSTANT.hpp"
 #include "Game.hpp"
@@ -69,19 +71,19 @@ bool MainMenuState::enter()
 {
     is_loaded_ = false;
 
-    auto new_game_button = std::make_unique<Button>(
-        "New Game",
+    auto new_game_button = std::make_unique<Button>("New Game");
+    new_game_button->load(std::make_unique<LoaderParams>(
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
-        70);
+        70));
 
-    auto exit_button = std::make_unique<Button>(
-        "Exit",
+    auto exit_button = std::make_unique<Button>("Exit");
+    exit_button->load(std::make_unique<LoaderParams>(
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
         250,
-        70);
+        70));
 
     new_game_button->onClick([this]() { is_enter_play_state = true; });
     exit_button->onClick([this]() { is_enter_quit_ = true; });

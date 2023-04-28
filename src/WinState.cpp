@@ -60,19 +60,19 @@ bool WinState::enter()
 {
     is_loaded_ = false;
 
-    auto main_menu_button = std::make_unique<Button>(
-        "Main Menu",
+    auto main_menu_button = std::make_unique<Button>("Main Menu");
+    main_menu_button->load(std::make_unique<LoaderParams>(
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
-        70);
+        70));
 
-    auto exit_button = std::make_unique<Button>(
-        "Exit",
+    auto exit_button = std::make_unique<Button>("Exit");
+    exit_button->load(std::make_unique<LoaderParams>(
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
         250,
-        70);
+        70));
 
     main_menu_button->onClick([this]() { is_enter_main_menu_ = true; });
     exit_button->onClick([this]() { is_enter_exit_ = true; });

@@ -5,28 +5,27 @@
 #include "InputHandler.hpp"
 #include "SoundManager.hpp"
 
-Button::Button(
-    const std::string& text,
-    const int x,
-    const int y,
-    const int width,
-    const int height,
-    const float border_radius)
+Button::Button(const std::string& text, const float border_radius)
     : UiObject()
     , is_disabled_(false)
     , text_(text)
-    , rectangle_(x, y, width, height, border_radius)
+    , border_radius_(border_radius)
     , callback_(nullptr)
 {
     SoundManager::Instance().loadSFX(SOUND_DIRECTORY + "button/clicked.mp3", "button clicked");
 }
 
+void Button::load(std::unique_ptr<LoaderParams> const& params)
+{
+    rectangle_ = Rectangle(params->x(), params->y(), params->width(), params->height());
+}
+
 void Button::draw() const
 {
     if (isDisabled()) {
-        Game::Instance().getWindow()->drawBox(rectangle_, Color::GRAY);
+        Game::Instance().getWindow()->drawBox(rectangle_, border_radius_, Color::GRAY);
     } else {
-        Game::Instance().getWindow()->drawBox(rectangle_);
+        Game::Instance().getWindow()->drawBox(rectangle_, border_radius_);
     }
 
     Game::Instance().getWindow()->print(

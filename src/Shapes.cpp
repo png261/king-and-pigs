@@ -29,17 +29,11 @@ void Point::setY(const float y)
     _y = y;
 };
 
-Rectangle::Rectangle(
-    const float x,
-    const float y,
-    const int width,
-    const int height,
-    const float border_radius)
+Rectangle::Rectangle(const float x, const float y, const int width, const int height)
     : _x(x)
     , _y(y)
     , _width(width)
     , _height(height)
-    , _border_radius(border_radius)
 {
     update();
 }
@@ -117,11 +111,6 @@ void Rectangle::stretch(const float scaleX, const float scaleY)
     update();
 }
 
-void Rectangle::setBorderRadius(const float border_radius)
-{
-    _border_radius = border_radius;
-}
-
 void Rectangle::update()
 {
     _top = _y;
@@ -154,10 +143,6 @@ int Rectangle::w() const
 int Rectangle::h() const
 {
     return _height;
-};
-float Rectangle::border_radius() const
-{
-    return _border_radius;
 };
 float Rectangle::top() const
 {

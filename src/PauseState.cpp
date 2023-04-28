@@ -57,19 +57,19 @@ bool PauseState::enter()
 {
     is_loaded_ = false;
 
-    auto resume_button = std::make_unique<Button>(
-        "Resume",
+    auto resume_button = std::make_unique<Button>("Resume");
+    resume_button->load(std::make_unique<LoaderParams>(
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2,
         250,
-        70);
+        70));
 
-    auto main_menu_button = std::make_unique<Button>(
-        "Main Menu",
+    auto main_menu_button = std::make_unique<Button>("Main Menu");
+    main_menu_button->load(std::make_unique<LoaderParams>(
         Game::Instance().getWindow()->getCenterX() - 250 / 2,
         Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
         250,
-        70);
+        70));
 
     resume_button->onClick([this]() { is_enterResume_ = true; });
     main_menu_button->onClick([this]() { is_enter_main_menu = true; });
