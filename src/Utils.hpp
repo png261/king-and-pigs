@@ -1,3 +1,4 @@
+#include <json/json.h>
 #include "PhysicWorld.hpp"
 #include "SDL.hpp"
 
@@ -12,4 +13,5 @@ float radToDeg(const float rad);
 float degToRad(const float deg);
 Color hexToRgba(const std::string& hex);
 void openLink(const std::string& link);
+Json::Value read_json_file(const std::string& path);
 } // namespace Utils

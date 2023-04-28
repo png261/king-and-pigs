@@ -20,18 +20,7 @@
 using namespace tinyxml2;
 std::unique_ptr<Level> LevelParser::parseLevel(const std::string& path)
 {
-    std::ifstream json_file(path);
-    if (!json_file.is_open()) {
-        throw std::runtime_error("LevelParser: " + std::string("fail to load: ") + path);
-    }
-
-    Json::Value map;
-    Json::CharReaderBuilder builder;
-    JSONCPP_STRING err;
-    if (!Json::parseFromStream(builder, json_file, &map, &err)) {
-        throw std::runtime_error("LevelParser: " + std::string("fail to load json data: ") + path);
-    }
-
+    const Json::Value& map = Utils::read_json_file(path);
     tile_size_ = map["tilewidth"].asInt();
     width_ = map["width"].asInt();
     height_ = map["height"].asInt();
