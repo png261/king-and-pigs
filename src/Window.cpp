@@ -162,16 +162,18 @@ void Window::delayFramerateIfNeeded()
 
 void Window::print(
     const std::string& text,
-    const int fontSize,
     const int x,
     const int y,
-    const Color& color) const
+    const int size,
+    const Color& color,
+    const int style) const
 {
     if (font_ == nullptr) {
         Log::error("Window::print: fail to load font");
         return;
     }
-    TTF_SetFontSize(font_, fontSize);
+    TTF_SetFontSize(font_, size);
+    TTF_SetFontStyle(font_, style);
 
     SDL_Surface* pSurface =
         TTF_RenderText_Blended(font_, text.c_str(), {color.r(), color.g(), color.b(), color.a()});

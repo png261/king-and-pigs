@@ -1,11 +1,21 @@
 #pragma once
 
+#include <SDL2/SDL_ttf.h>
 #include <string>
 
 #include "Color.hpp"
 #include "SDL.hpp"
 #include "Shapes.hpp"
 #include "Stopwatch.hpp"
+
+enum FontStyle {
+    NORMAL = TTF_STYLE_NORMAL,
+    BOLD = TTF_STYLE_BOLD,
+    ITALIC = TTF_STYLE_ITALIC,
+    UNDERLINE = TTF_STYLE_UNDERLINE,
+    STRIKETHROUGH = TTF_STYLE_STRIKETHROUGH
+};
+
 
 class Window final
 {
@@ -18,8 +28,8 @@ public:
 
     void renderImage(
         SDL_Texture* const texture,
-        const SDL_Rect* const srcrect,
-        const SDL_Rect* const dstrect,
+        const SDL_Rect* const src_dest,
+        const SDL_Rect* const dest_rect,
         const double angle = 0,
         const SDL_Point* center = 0,
         const SDL_RendererFlip flip = SDL_FLIP_NONE) const;
@@ -35,10 +45,11 @@ public:
     void fill(const Color& color);
     void print(
         const std::string& text,
-        const int fontSize,
         const int x,
         const int y,
-        const Color& color = Color(Color::BLACK)) const;
+        const int size,
+        const Color& color = Color(Color::BLACK),
+        const int style = FontStyle::NORMAL) const;
     void drawBox(const Rectangle& rect, const Color& color = Color(Color::WHITE)) const;
     void drawOverlay(const Color& color = Color(Color::WHITE)) const;
 

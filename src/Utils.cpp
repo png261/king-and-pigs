@@ -55,3 +55,14 @@ Color Utils::hexToRgba(const std::string& hex)
     uint8_t a = 1.0f;
     return {r, g, b, a};
 }
+
+void Utils::openLink(const std::string& link)
+{
+#ifdef _WIN32
+    // Windows command to open link
+    system(("start " + link).c_str());
+#elif __linux__
+    // Linux command to open link
+    system(("xdg-open " + link).c_str());
+#endif
+}

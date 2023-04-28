@@ -11,4 +11,5 @@ b2Vec2 pixelToMeter(const b2Vec2& pixel);
 float radToDeg(const float rad);
 float degToRad(const float deg);
 Color hexToRgba(const std::string& hex);
+void openLink(const std::string& link);
 } // namespace Utils

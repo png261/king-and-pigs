@@ -56,9 +56,9 @@ void LoseState::render() const
 
     Game::Instance().getWindow()->print(
         "You are died",
-        150,
         Game::Instance().getWindow()->getCenterX(),
         Game::Instance().getWindow()->getCenterY() - 150,
+        150,
         Color::WHITE);
 };
 

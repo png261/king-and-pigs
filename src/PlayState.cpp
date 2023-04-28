@@ -218,30 +218,30 @@ void PlayState::renderStatusBar() const
 
     Game::Instance().getWindow()->print(
         "level: " + std::to_string(Game::Instance().getLevelIndex() + 1),
-        40,
         300,
         50,
+        40,
         Color::WHITE);
 
     Game::Instance().getWindow()->print(
         "diamond: " + std::to_string(Game::Instance().getDiamond()),
-        40,
         300 + 200,
         50,
+        40,
         Color::WHITE);
 
     Game::Instance().getWindow()->print(
         "score: " + std::to_string(Game::Instance().getScore()),
-        40,
         300 + 400,
         50,
+        40,
         Color::WHITE);
 
     Game::Instance().getWindow()->print(
         "highest score: " + std::to_string(Game::Instance().getHighestScore()),
-        40,
         300 + 650,
         50,
+        40,
         Color::WHITE);
 }
 

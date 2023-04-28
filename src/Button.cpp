@@ -31,9 +31,9 @@ void Button::draw() const
 
     Game::Instance().getWindow()->print(
         text_,
-        40,
         rectangle_.x() + rectangle_.w() * 0.5f,
-        rectangle_.y() + rectangle_.h() * 0.5f);
+        rectangle_.y() + rectangle_.h() * 0.5f,
+        40);
 };
 
 void Button::update()

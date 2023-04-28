@@ -9,6 +9,8 @@
 #include "PauseState.hpp"
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
+#include "Utils.hpp"
+#include "Window.hpp"
 
 const std::string MainMenuState::kId_ = "MAIN_MENU";
 
@@ -49,10 +51,18 @@ void MainMenuState::render() const
     }
     Game::Instance().getWindow()->print(
         "King and Pigs",
-        150,
         Game::Instance().getWindow()->getCenterX(),
         Game::Instance().getWindow()->getCenterY() - 150,
+        150,
         Color::WHITE);
+
+    Game::Instance().getWindow()->print(
+        "github@png261 - nhphuong.code@gmail.com",
+        Game::Instance().getWindow()->getCenterX(),
+        Game::Instance().getWindow()->getHeight() - 50,
+        20,
+        Color::WHITE,
+        ITALIC);
 };
 
 bool MainMenuState::enter()
