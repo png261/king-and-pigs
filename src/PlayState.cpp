@@ -213,7 +213,7 @@ void PlayState::renderStatusBar() const
         TextureManager::Instance().draw("health_heart", {60 + i * 25.0f, 30}, 22, 19);
     }
 
-    const std::string status = "Top: " + std::to_string(Game::Instance().getHighestScore()) +
+    const std::string status = "Top: " + std::to_string(Game::Instance().getTopScore()) +
                                "        "
                                "Stage: " +
                                std::to_string(Game::Instance().getLevelIndex() + 1) +

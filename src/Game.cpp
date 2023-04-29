@@ -20,7 +20,7 @@ Game::Game()
     , is_debug_(false)
     , level_index_(0)
     , score_(0)
-    , highest_score_(0)
+    , top_score_(0)
 {}
 
 Game& Game::Instance()
@@ -184,13 +184,13 @@ void Game::resetScore()
     score_ = 0;
 }
 
-int Game::getHighestScore() const
+int Game::getTopScore() const
 {
-    return highest_score_;
+    return top_score_;
 }
 
 void Game::addScore(const int score)
 {
     score_ += score;
-    highest_score_ = std::max(highest_score_, score_);
+    top_score_ = std::max(top_score_, score_);
 }

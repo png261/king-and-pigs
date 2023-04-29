@@ -41,7 +41,7 @@ public:
 
     int getScore() const;
     void resetScore();
-    int getHighestScore() const;
+    int getTopScore() const;
     void addScore(int score);
 
     bool isDebug() const;
@@ -58,5 +58,5 @@ private:
     std::size_t level_index_;
     std::vector<std::string> level_files_;
     int score_;
-    int highest_score_;
+    int top_score_;
 };
