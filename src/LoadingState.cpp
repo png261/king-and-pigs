@@ -21,8 +21,8 @@ void LoadingState::render() const
     Game::Instance().getWindow()->drawOverlay({0, 0, 0, 100});
     Game::Instance().getWindow()->print(
         "Loading...",
-        Game::Instance().getWindow()->getCenterX(),
-        Game::Instance().getWindow()->getCenterY(),
+        Game::Instance().getWindow()->getCenter().x,
+        Game::Instance().getWindow()->getCenter().y,
         100,
         Color::WHITE);
 };

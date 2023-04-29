@@ -144,11 +144,6 @@ void Window::setBackgroundColor(const Color& color)
     background_color_ = color;
 }
 
-void Window::resetBackgroundColor()
-{
-    background_color_ = Color(Color::BLACK);
-}
-
 void Window::delayFramerateIfNeeded()
 {
     uint delta = framerate_stopwatch_.delta();
@@ -232,12 +227,7 @@ uint Window::getHeight() const
     return height_;
 }
 
-uint Window::getCenterX() const
+b2Vec2 Window::getCenter() const
 {
-    return width_ / 2;
-}
-
-uint Window::getCenterY() const
-{
-    return height_ / 2;
+    return {width_ / 2.0f, height_ / 2.0f};
 }

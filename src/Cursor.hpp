@@ -5,7 +5,7 @@ class Cursor final
 public:
     Cursor();
     void init();
-    void resetState();
+    void reset();
     void draw() const;
     void hover();
     bool isHover() const;

@@ -33,14 +33,18 @@ void TextureManager::draw(
     const b2Vec2& position,
     const int width,
     const int height,
-    const bool is_flip) const
+    const bool is_flip,
+    const int zoom) const
 {
-    SDL_Rect const src_rect{0, 0, width, height};
+    int src_width = 0;
+    int src_height = 0;
+    SDL_QueryTexture(textures_.at(id), NULL, NULL, &src_width, &src_height);
+    SDL_Rect const src_rect{0, 0, src_width, src_height};
     SDL_Rect const dest_rect{
         static_cast<int>(position.x),
         static_cast<int>(position.y),
-        width,
-        height};
+        width * zoom,
+        height * zoom};
 
     Game::Instance().getWindow()->renderImage(
         textures_.at(id),

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL2/SDL_ttf.h>
+#include <box2d/box2d.h>
 #include <string>
 
 #include "Color.hpp"
@@ -43,6 +43,7 @@ public:
     void resize(const std::string& title, const uint width, const uint height);
 
     void fill(const Color& color);
+
     void print(
         const std::string& text,
         const int x,
@@ -57,12 +58,10 @@ public:
     void drawOverlay(const Color& color = Color(Color::WHITE)) const;
 
     void setBackgroundColor(const Color& color = Color(Color::BLACK));
-    void resetBackgroundColor();
     void setTitle(const std::string& title);
 
     uint getWidth() const;
-    uint getCenterX() const;
-    uint getCenterY() const;
+    b2Vec2 getCenter() const;
     uint getHeight() const;
     SDL_Renderer* getRenderer() const;
 

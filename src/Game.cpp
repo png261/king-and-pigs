@@ -3,11 +3,11 @@
 #include <memory>
 
 #include "CONSTANT.hpp"
-#include "ObjectFactory.hpp"
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
 #include "LoadingState.hpp"
 #include "MainMenuState.hpp"
+#include "ObjectFactory.hpp"
 #include "PhysicWorld.hpp"
 #include "PlayState.hpp"
 #include "SoundManager.hpp"
@@ -51,7 +51,7 @@ void Game::handleEvents()
 
 void Game::update()
 {
-    cursor_->resetState();
+    cursor_->reset();
     GameStateMachine::Instance().update();
 }
 

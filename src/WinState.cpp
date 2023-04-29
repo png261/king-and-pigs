@@ -50,8 +50,8 @@ void WinState::render() const
     }
     Game::Instance().getWindow()->print(
         "You are win",
-        Game::Instance().getWindow()->getCenterX(),
-        Game::Instance().getWindow()->getCenterY() - 150,
+        Game::Instance().getWindow()->getCenter().x,
+        Game::Instance().getWindow()->getCenter().y - 150,
         150,
         Color::WHITE);
 };
@@ -60,17 +60,19 @@ bool WinState::enter()
 {
     is_loaded_ = false;
 
-    auto main_menu_button = std::make_unique<Button>("Main Menu");
+    auto main_menu_button = std::make_unique<Button>();
+    main_menu_button->setTitle("Main Menu");
     main_menu_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenterX() - 250 / 2,
-        Game::Instance().getWindow()->getCenterY() - 70 / 2,
+        Game::Instance().getWindow()->getCenter().x - 250 / 2,
+        Game::Instance().getWindow()->getCenter().y - 70 / 2,
         250,
         70));
 
-    auto exit_button = std::make_unique<Button>("Exit");
+    auto exit_button = std::make_unique<Button>();
+    exit_button->setTitle("Exit");
     exit_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenterX() - 250 / 2,
-        Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
+        Game::Instance().getWindow()->getCenter().x - 250 / 2,
+        Game::Instance().getWindow()->getCenter().y - 70 / 2 + 100,
         250,
         70));
 

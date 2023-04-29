@@ -109,8 +109,9 @@ bool PlayState::enter()
     texture.load(IMAGE_DIRECTORY + "item/bomb/off.png", "bomb_off");
     texture.load(IMAGE_DIRECTORY + "item/bomb/explode.png", "bomb_explode");
 
-    texture.load(IMAGE_DIRECTORY + "ui/healthbar/healthbar.png", "health_bar");
-    texture.load(IMAGE_DIRECTORY + "ui/healthbar/heart.png", "health_heart");
+    texture.load(IMAGE_DIRECTORY + "ui/status_bar/healthbar.png", "health_bar");
+    texture.load(IMAGE_DIRECTORY + "ui/status_bar/heart.png", "health_heart");
+    texture.load(IMAGE_DIRECTORY + "ui/status_bar/diamond.png", "status_diamond");
 
     sound.loadSFX(SOUND_DIRECTORY + "player/attack.wav", "player_attack");
     sound.loadSFX(SOUND_DIRECTORY + "player/dying.wav", "player_dying");
@@ -129,15 +130,14 @@ bool PlayState::enter()
 
     sound.loadSFX(SOUND_DIRECTORY + "heart/bonus.wav", "heart_bonus");
 
-    sound.loadMusic(SOUND_DIRECTORY + "playstate/background.wav", "playstate_background");
+    sound.loadMusic(SOUND_DIRECTORY + "playstate/background.wav", "playstate background");
 
     if (!loadLevel()) {
         return false;
     }
-    Game::Instance().resetScore();
 
-    /* sound.setVolume(0); */
-    sound.playMusic("playstate_background");
+    Game::Instance().resetScore();
+    sound.playMusic("playstate background");
     is_loaded_ = true;
 
     return true;
@@ -159,7 +159,6 @@ bool PlayState::loadLevel()
     Game::Instance().setLevel(level_.get());
     Camera::Instance().setTarget(level_->getPlayer());
     Camera::Instance().setZoom(3);
-    Game::Instance().getWindow()->setBackgroundColor(level_->getBackgroundColor());
 
     resume();
     return true;
@@ -168,7 +167,6 @@ bool PlayState::loadLevel()
 bool PlayState::exit()
 {
     pause();
-    Game::Instance().getWindow()->resetBackgroundColor();
     PhysicWorld::Instance().clean();
     InputHandler::Instance().reset();
 
@@ -200,6 +198,8 @@ void PlayState::render() const
         return;
     }
 
+    Game::Instance().getWindow()->fill(level_->getBackgroundColor());
+
     level_->render();
 
     if (Game::Instance().isDebug()) {
@@ -211,38 +211,21 @@ void PlayState::render() const
 
 void PlayState::renderStatusBar() const
 {
-    TextureManager::Instance().draw("health_bar", {20, 10}, 154, 62);
+    TextureManager::Instance().draw("health_bar", {20.0f, 10.0f}, 154, 62);
     for (int i = 0; i < level_->getPlayer()->getHp(); ++i) {
         TextureManager::Instance().draw("health_heart", {60 + i * 25.0f, 30}, 22, 19);
     }
 
-    Game::Instance().getWindow()->print(
-        "level: " + std::to_string(Game::Instance().getLevelIndex() + 1),
-        300,
-        50,
-        40,
-        Color::WHITE);
+    const std::string status = "Top: " + std::to_string(Game::Instance().getHighestScore()) +
+                               "        "
+                               "Stage: " +
+                               std::to_string(Game::Instance().getLevelIndex() + 1) +
+                               "        "
+                               "Score: " +
+                               std::to_string(Game::Instance().getScore());
 
-    Game::Instance().getWindow()->print(
-        "diamond: " + std::to_string(Game::Instance().getDiamond()),
-        300 + 200,
-        50,
-        40,
-        Color::WHITE);
 
-    Game::Instance().getWindow()->print(
-        "score: " + std::to_string(Game::Instance().getScore()),
-        300 + 400,
-        50,
-        40,
-        Color::WHITE);
-
-    Game::Instance().getWindow()->print(
-        "highest score: " + std::to_string(Game::Instance().getHighestScore()),
-        300 + 650,
-        50,
-        40,
-        Color::WHITE);
+    Game::Instance().getWindow()->print(status, 550, 50, 40, Color::WHITE);
 }
 
 std::string PlayState::getStateID() const

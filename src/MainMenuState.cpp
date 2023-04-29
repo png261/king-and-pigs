@@ -51,16 +51,18 @@ void MainMenuState::render() const
     for (const auto& obj : ui_objects_) {
         obj->draw();
     }
-    Game::Instance().getWindow()->print(
-        "King and Pigs",
-        Game::Instance().getWindow()->getCenterX(),
-        Game::Instance().getWindow()->getCenterY() - 150,
-        150,
-        Color::WHITE);
+
+    TextureManager::Instance().draw(
+        "logo",
+        Game::Instance().getWindow()->getCenter() - b2Vec2(400, 250),
+        134,
+        14,
+        false,
+        6);
 
     Game::Instance().getWindow()->print(
         "github@png261 - nhphuong.code@gmail.com",
-        Game::Instance().getWindow()->getCenterX(),
+        Game::Instance().getWindow()->getCenter().x,
         Game::Instance().getWindow()->getHeight() - 50,
         20,
         Color::WHITE,
@@ -71,18 +73,23 @@ bool MainMenuState::enter()
 {
     is_loaded_ = false;
 
-    auto new_game_button = std::make_unique<Button>("New Game");
+    TextureManager& texture = TextureManager::Instance();
+    texture.load(IMAGE_DIRECTORY + "ui/logo.png", "logo");
+
+    auto new_game_button = std::make_unique<Button>();
+    new_game_button->setTitle("New Game");
     new_game_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenterX() - 250 / 2,
-        Game::Instance().getWindow()->getCenterY() - 70 / 2,
-        250,
+        Game::Instance().getWindow()->getCenter().x - 300 / 2.0f,
+        Game::Instance().getWindow()->getCenter().y - 70 / 2.0f,
+        300,
         70));
 
-    auto exit_button = std::make_unique<Button>("Exit");
+    auto exit_button = std::make_unique<Button>();
+    exit_button->setTitle("Exit");
     exit_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenterX() - 250 / 2,
-        Game::Instance().getWindow()->getCenterY() - 70 / 2 + 100,
-        250,
+        Game::Instance().getWindow()->getCenter().x - 300 / 2.0f,
+        Game::Instance().getWindow()->getCenter().y - 70 / 2.0f + 100,
+        300,
         70));
 
     new_game_button->onClick([this]() { is_enter_play_state = true; });

@@ -20,7 +20,8 @@ public:
         const b2Vec2& position,
         const int width,
         const int height,
-        const bool is_flip = false) const;
+        const bool is_flip = false,
+        const int zoom = 1) const;
 
     void drawFrame(
         const std::string& id,

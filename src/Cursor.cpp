@@ -19,15 +19,14 @@ void Cursor::init()
 
 void Cursor::draw() const
 {
-    b2Vec2 position = InputHandler::Instance().getMousePosition();
-    if (isHover()) {
-        TextureManager::Instance().draw("cursor_hover", position, size_, size_);
-    } else {
-        TextureManager::Instance().draw("cursor_normal", position, size_, size_);
-    }
+    TextureManager::Instance().draw(
+        isHover() ? "cursor_hover" : "cursor_normal",
+        InputHandler::Instance().getMousePosition(),
+        size_,
+        size_);
 }
 
-void Cursor::resetState()
+void Cursor::reset()
 {
     is_hover_ = false;
 }
