@@ -116,18 +116,6 @@
          "name":"Door",
          "objects":[
                 {
-                 "id":143,
-                 "template":"template\/Candle.tx",
-                 "x":149,
-                 "y":172
-                }, 
-                {
-                 "id":144,
-                 "template":"template\/Candle.tx",
-                 "x":83,
-                 "y":172
-                }, 
-                {
                  "id":147,
                  "template":"template\/Pig.tx",
                  "x":259,
@@ -150,18 +138,6 @@
                  "template":"template\/Box.tx",
                  "x":170,
                  "y":192
-                }, 
-                {
-                 "id":154,
-                 "template":"template\/Candle.tx",
-                 "x":907,
-                 "y":172
-                }, 
-                {
-                 "id":155,
-                 "template":"template\/Candle.tx",
-                 "x":841,
-                 "y":172
                 }, 
                 {
                  "id":156,

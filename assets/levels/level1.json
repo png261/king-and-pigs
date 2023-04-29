@@ -122,30 +122,6 @@
          "name":"Door",
          "objects":[
                 {
-                 "id":143,
-                 "template":"template\/Candle.tx",
-                 "x":149,
-                 "y":172
-                }, 
-                {
-                 "id":144,
-                 "template":"template\/Candle.tx",
-                 "x":83,
-                 "y":172
-                }, 
-                {
-                 "id":154,
-                 "template":"template\/Candle.tx",
-                 "x":907,
-                 "y":172
-                }, 
-                {
-                 "id":155,
-                 "template":"template\/Candle.tx",
-                 "x":841,
-                 "y":172
-                }, 
-                {
                  "id":156,
                  "template":"template\/DoorIn.tx",
                  "x":859,

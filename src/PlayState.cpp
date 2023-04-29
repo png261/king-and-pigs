@@ -5,7 +5,6 @@
 #include "Button.hpp"
 #include "CONSTANT.hpp"
 #include "Camera.hpp"
-#include "Candle.hpp"
 #include "Diamond.hpp"
 #include "DoorIn.hpp"
 #include "DoorOut.hpp"
@@ -52,8 +51,6 @@ bool PlayState::enter()
 
     factory.registerType("DoorOut", std::make_unique<DoorOutCreator>());
     factory.registerType("DoorIn", std::make_unique<DoorInCreator>());
-
-    factory.registerType("Candle", std::make_unique<CandleCreator>());
 
     texture.load(IMAGE_DIRECTORY + "player/idle.png", "player_idle");
     texture.load(IMAGE_DIRECTORY + "player/run.png", "player_run");
