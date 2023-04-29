@@ -1,5 +1,5 @@
 # Includes the config.mk configurations
-include config.mk
+include make_config.mk
 
 # Default shell
 SHELL = bash

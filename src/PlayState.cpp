@@ -39,16 +39,20 @@ bool PlayState::enter()
     SoundManager& sound = SoundManager::Instance();
 
     factory.registerType("Player", std::make_unique<PlayerCreator>());
+
     factory.registerType("Pig", std::make_unique<PigCreator>());
     factory.registerType("KingPig", std::make_unique<KingPigCreator>());
     factory.registerType("PigWithBomb", std::make_unique<PigWithBombCreator>());
     factory.registerType("PigWithBox", std::make_unique<PigWithBoxCreator>());
+
     factory.registerType("Bomb", std::make_unique<BombCreator>());
     factory.registerType("Box", std::make_unique<BoxCreator>());
     factory.registerType("Heart", std::make_unique<HeartCreator>());
     factory.registerType("Diamond", std::make_unique<DiamondCreator>());
+
     factory.registerType("DoorOut", std::make_unique<DoorOutCreator>());
     factory.registerType("DoorIn", std::make_unique<DoorInCreator>());
+
     factory.registerType("Candle", std::make_unique<CandleCreator>());
 
     texture.load(IMAGE_DIRECTORY + "player/idle.png", "player_idle");
@@ -182,10 +186,6 @@ void PlayState::update()
     if (InputHandler::Instance().isKeyDown(KEY_ESCAPE)) {
         GameStateMachine::Instance().pushState(std::make_unique<PauseState>());
     }
-
-    if (InputHandler::Instance().isKeyDown(KEY_Q)) {
-        Game::Instance().toggleDebug();
-    };
 
     PhysicWorld::Instance().update();
     level_->update();

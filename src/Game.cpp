@@ -6,6 +6,7 @@
 #include "GameStateMachine.hpp"
 #include "InputHandler.hpp"
 #include "LoadingState.hpp"
+#include "Log.hpp"
 #include "MainMenuState.hpp"
 #include "ObjectFactory.hpp"
 #include "PhysicWorld.hpp"
@@ -28,10 +29,10 @@ Game& Game::Instance()
     return instance;
 }
 
-void Game::init()
+void Game::init(const int width, const int height, const std::string& title)
 {
     SDL::init();
-    window_ = std::make_unique<Window>(1280, 720, "King and Pig");
+    window_ = std::make_unique<Window>(width, height, title);
     PhysicWorld::Instance().init(window_.get());
 
     cursor_ = std::make_unique<Cursor>();
@@ -145,9 +146,12 @@ bool Game::isDebug() const
     return is_debug_;
 }
 
-void Game::toggleDebug()
+void Game::debugMode(const bool is_debug)
 {
-    is_debug_ = !is_debug_;
+    is_debug_ = is_debug;
+    if (isDebug()) {
+        Log::log(">Debug mode activated");
+    }
 }
 
 void Game::addDiamond(int n)

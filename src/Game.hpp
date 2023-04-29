@@ -15,7 +15,7 @@ public:
     Game(Game const&) = delete;
     Game& operator=(Game const&) = delete;
 
-    void init();
+    void init(const int width, const int height, const std::string& title);
     void handleEvents();
     void update();
     void render() const;
@@ -26,6 +26,7 @@ public:
 
     Window* getWindow() const;
     Level* getLevel() const;
+    void debugMode(bool is_debug);
     int getLevelIndex() const;
     std::string getLevelPath(const int level_index);
     Cursor* getCursor();
@@ -44,7 +45,6 @@ public:
     void addScore(int score);
 
     bool isDebug() const;
-    void toggleDebug();
 
 private:
     Game();

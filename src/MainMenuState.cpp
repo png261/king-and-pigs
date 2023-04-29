@@ -60,8 +60,12 @@ void MainMenuState::render() const
         false,
         6);
 
+    const Json::Value& config = Utils::read_json_file(CONFIG_FILE);
+    const std::string& github = config["author"]["github"].asString();
+    const std::string& email = config["author"]["email"].asString();
+
     Game::Instance().getWindow()->print(
-        "github@png261 - nhphuong.code@gmail.com",
+        github + " - " + email,
         Game::Instance().getWindow()->getCenter().x,
         Game::Instance().getWindow()->getHeight() - 50,
         20,
