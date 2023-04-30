@@ -1,5 +1,7 @@
 #include "SoundManager.hpp"
 
+#include <stdexcept>
+
 #include "Log.hpp"
 
 SoundManager& SoundManager::Instance()
@@ -37,7 +39,7 @@ bool SoundManager::loadMusic(const std::string& path, const std::string& id)
         Log::warning("can't load music: " + path);
         return false;
     }
-    if (musics_.find(id) != musics_.end()) {
+    if (musics_.count(id) != 0) {
         return false;
     }
     musics_[id] = pMusic;
@@ -51,7 +53,7 @@ bool SoundManager::loadSFX(const std::string& path, const std::string& id)
         Log::warning("can't load SFX: " + path);
         return false;
     }
-    if (musics_.find(id) != musics_.end()) {
+    if (musics_.count(id) == 0) {
         return false;
     }
     sfxs_[id] = pSFX;
@@ -60,20 +62,20 @@ bool SoundManager::loadSFX(const std::string& path, const std::string& id)
 
 void SoundManager::playMusic(const std::string& id, const int loop) const
 {
-    if (musics_.find(id) == musics_.end()) {
+    try {
+        Mix_PlayMusic(musics_.at(id), loop);
+    } catch (const std::out_of_range& oor) {
         Log::warning("MusicID not exist: " + id);
-        return;
     }
-    Mix_PlayMusic(musics_.at(id), loop);
 }
 
 void SoundManager::playSFX(const std::string& id, const int loop) const
 {
-    if (sfxs_.find(id) == sfxs_.end()) {
-        Log::warning("sfxID not exist: " + id);
-        return;
+    try {
+        Mix_PlayChannel(-1, sfxs_.at(id), loop);
+    } catch (const std::out_of_range& oor) {
+        Log::warning("SfxID not exist: " + id);
     }
-    Mix_PlayChannel(-1, sfxs_.at(id), loop);
 }
 
 void SoundManager::setVolume(const int percent)

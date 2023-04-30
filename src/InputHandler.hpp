@@ -16,6 +16,8 @@ public:
     InputHandler& operator=(InputHandler const&) = delete;
 
     void update();
+    void reset();
+    void clean();
 
     b2Vec2 getMousePosition() const;
 
@@ -27,9 +29,6 @@ public:
     bool isMouseUp(const MouseButton button) const;
     bool isMousePressed(const MouseButton button) const;
     bool isMouseInside(const Rectangle& rectangle) const;
-
-    void reset();
-    void clean();
 
 private:
     InputHandler();

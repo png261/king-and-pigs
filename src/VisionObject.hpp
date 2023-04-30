@@ -18,13 +18,13 @@ public:
         }
 
         seeing_category_ =
-            static_cast<PhysicWorld::Category>(fixture->GetFilterData().categoryBits);
+            static_cast<ContactCategory>(fixture->GetFilterData().categoryBits);
         fraction_ = fraction;
 
         return fraction;
     }
 
-    PhysicWorld::Category seeing_category_;
+    ContactCategory seeing_category_;
     float fraction_;
 };
 
@@ -40,7 +40,7 @@ public:
     VisionObject(float range);
     virtual void update();
     virtual void debugDraw() const;
-    bool isSeeing(PhysicWorld::Category category) const;
+    bool isSeeing(ContactCategory category) const;
 
 protected:
     uint16 seeing_category_;

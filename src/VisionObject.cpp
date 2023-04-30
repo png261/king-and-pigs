@@ -44,7 +44,7 @@ void VisionObject::debugDraw() const
     }
 }
 
-bool VisionObject::isSeeing(PhysicWorld::Category category) const
+bool VisionObject::isSeeing(ContactCategory category) const
 {
     return seeing_category_ & category;
 }

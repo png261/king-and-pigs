@@ -15,7 +15,7 @@ void Box::load(std::unique_ptr<LoaderParams> const& params)
     GameObject::load(std::move(params));
     createBody(params->x(), params->y(), getWidth(), getHeight());
 
-    setFilterData(PhysicWorld::CAT_BOX, PhysicWorld::MASK_BOX);
+    setFilterData(ContactCategory::CAT_BOX, ContactMask::MASK_BOX);
     body_->SetFixedRotation(false);
 
     loadAnimation();
@@ -65,7 +65,7 @@ void Box::updateAnimation()
 void Box::breakIntoPieces()
 {
     auto params = std::make_unique<LoaderParams>(
-        LoaderParams(getPosition().x - 10 / 2.0f, getPosition().y - 10 / 2.0f - 20, 10, 10));
+        LoaderParams(getPosition().x - 10 * 0.5f, getPosition().y - 10 * 0.5f - 20, 10, 10));
 
     Game::Instance().getLevel()->spawnObject("Box", std::move(params));
     Game::Instance().getLevel()->spawnObject("Box", std::move(params));

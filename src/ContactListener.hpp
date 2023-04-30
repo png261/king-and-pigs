@@ -10,7 +10,7 @@ public:
     void PreSolve(b2Contact* const contact, const b2Manifold* oldManifold) override;
     void PostSolve(b2Contact* const contact, const b2ContactImpulse* impulse) override;
 
-    void realTimeListener();
+    void realTimeListener(b2Contact* const contactList);
 
 private:
     void AttackListener(b2Contact* const contact);

@@ -105,8 +105,8 @@ void Rectangle::stretch(const float scaleX, const float scaleY)
     _height *= scaleY;
 
     // Centralizing one rectangle on the other
-    _x += std::abs(oldW - _width) / 2.0f;
-    _y += std::abs(oldH - _height) / 2.0f;
+    _x += std::abs(oldW - _width) * 0.5f;
+    _y += std::abs(oldH - _height) * 0.5f;
 
     update();
 }
@@ -117,7 +117,7 @@ void Rectangle::update()
     _bottom = _y + _height;
     _leftmost = _x;
     _rightmost = _x + _width;
-    _center = Point(_x + (_width / 2.0f), _y + (_height / 2.0f));
+    _center = Point(_x + (_width * 0.5f), _y + (_height * 0.5f));
     _topLeft = Point(_x, _y);
     _topRight = Point(_x + _width, _y);
     _bottomLeft = Point(_x, _y + _height);

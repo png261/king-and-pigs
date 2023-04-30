@@ -22,14 +22,17 @@ public:
     void handleFPS() const;
     void clean();
     void quit();
-    bool isRunning() const;
-
-    Window* getWindow() const;
-    Level* getLevel() const;
     void debugMode(bool is_debug);
+
+    bool isRunning() const;
+    Window* getWindow() const;
+    Cursor* getCursor();
+    Level* getLevel() const;
     int getLevelIndex() const;
     std::string getLevelPath(const int level_index);
-    Cursor* getCursor();
+    int getDiamond() const;
+    int getScore() const;
+    int getTopScore() const;
 
     void nextLevel();
     void setLevel(Level* const level);
@@ -37,11 +40,8 @@ public:
 
     void addDiamond(int n);
     void useDiamond(int n);
-    int getDiamond() const;
 
-    int getScore() const;
     void resetScore();
-    int getTopScore() const;
     void addScore(int score);
 
     bool isDebug() const;
@@ -57,6 +57,6 @@ private:
     bool is_debug_;
     std::size_t level_index_;
     std::vector<std::string> level_files_;
-    int score_;
     int top_score_;
+    int score_;
 };

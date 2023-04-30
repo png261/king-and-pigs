@@ -69,24 +69,24 @@ bool LoseState::enter()
     auto respawn_button = std::make_unique<Button>();
     respawn_button->setTitle("Respawn");
     respawn_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenter().x - 250 / 2,
-        Game::Instance().getWindow()->getCenter().y - 70 / 2,
+        Game::Instance().getWindow()->getCenter().x - 250 * 0.5f,
+        Game::Instance().getWindow()->getCenter().y - 70 * 0.5f,
         250,
         70));
 
     auto main_menu_button = std::make_unique<Button>();
     main_menu_button->setTitle("Main Menu");
     main_menu_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenter().x - 250 / 2,
-        Game::Instance().getWindow()->getCenter().y - 70 / 2 + 100,
+        Game::Instance().getWindow()->getCenter().x - 250 * 0.5f,
+        Game::Instance().getWindow()->getCenter().y - 70 * 0.5f + 100,
         250,
         70));
 
     auto exit_button = std::make_unique<Button>();
     exit_button->setTitle("Exit");
     exit_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenter().x - 250 / 2,
-        Game::Instance().getWindow()->getCenter().y - 70 / 2 + 200,
+        Game::Instance().getWindow()->getCenter().x - 250 * 0.5f,
+        Game::Instance().getWindow()->getCenter().y - 70 * 0.5f + 200,
         250,
         70));
 

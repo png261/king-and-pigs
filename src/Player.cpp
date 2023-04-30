@@ -30,19 +30,19 @@ void Player::load(std::unique_ptr<LoaderParams> const& params)
 {
     GameObject::load(std::move(params));
     createBody(params->x(), params->y(), width_, height_);
-    setFilterData(PhysicWorld::CAT_PLAYER, PhysicWorld::MASK_PLAYER);
+    setFilterData(ContactCategory::CAT_PLAYER, ContactMask::MASK_PLAYER);
 
     createCircleSensor(
         -b2Vec2((width_ * 0.5 + attack_range_) * 0.5, 0),
         attack_range_,
-        PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
+        ContactCategory::CAT_ATTACK_SENSOR,
+        ContactMask::MASK_PLAYER_ATTACK_SENSOR);
 
     createCircleSensor(
         b2Vec2((width_ * 0.5 + attack_range_) * 0.5, 0),
         attack_range_,
-        PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_PLAYER_ATTACK_SENSOR);
+        ContactCategory::CAT_ATTACK_SENSOR,
+        ContactMask::MASK_PLAYER_ATTACK_SENSOR);
 
     move_speed_ = 90;
     jump_height_ = 32.0f;
@@ -94,13 +94,13 @@ void Player::handleVision()
     raycast_.clear();
     float num_ray = 50.0f;
     for (int i = 0; i < num_ray; ++i) {
-        b2Vec2 start = getPosition() + direction_ * (b2Vec2(width_ / 2.0f, 0)) +
-                       b2Vec2(0, -height_ / 2.0f + i * height_ / num_ray);
+        b2Vec2 start = getPosition() + direction_ * (b2Vec2(width_ * 0.5f, 0)) +
+                       b2Vec2(0, -height_ * 0.5f + i * height_ / num_ray);
         b2Vec2 end = start + direction_ * b2Vec2(vision_range_, 0);
         raycast_.push_back({start, end});
     }
 
-    if (isSeeing(PhysicWorld::CAT_WALL) && vision_nearest_distance_ < 1) {
+    if (isSeeing(ContactCategory::CAT_WALL) && vision_nearest_distance_ < 1) {
         if (direction_ == RIGHT) {
             setMoveRight(false);
         } else {

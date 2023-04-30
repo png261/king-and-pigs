@@ -1,5 +1,7 @@
 #include "ObjectFactory.hpp"
 
+#include <stdexcept>
+
 #include "Log.hpp"
 
 ObjectFactory& ObjectFactory::Instance()
@@ -10,7 +12,7 @@ ObjectFactory& ObjectFactory::Instance()
 
 void ObjectFactory::registerType(const std::string& id, std::unique_ptr<BaseCreator> creator)
 {
-    if (creators_.find(id) != creators_.end()) {
+    if (creators_.count(id) != 0) {
         return;
     }
 
@@ -19,12 +21,12 @@ void ObjectFactory::registerType(const std::string& id, std::unique_ptr<BaseCrea
 
 std::unique_ptr<Object> ObjectFactory::create(const std::string& id) const
 {
-    if (creators_.find(id) == creators_.end()) {
+    try {
+        return creators_.at(id)->create();
+    } catch (const std::out_of_range& oor) {
         Log::warning("ObjectFactory: could not find type " + id);
         return nullptr;
     }
-
-    return creators_.at(id)->create();
 }
 
 void ObjectFactory::clean()

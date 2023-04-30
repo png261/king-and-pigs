@@ -101,8 +101,6 @@ bool PlayState::enter()
     texture.load(IMAGE_DIRECTORY + "item/door/open.png", "door_open");
     texture.load(IMAGE_DIRECTORY + "item/door/close.png", "door_close");
 
-    texture.load(IMAGE_DIRECTORY + "item/candle/idle.png", "candle_idle");
-
     texture.load(IMAGE_DIRECTORY + "item/box/idle.png", "box_idle");
     texture.load(IMAGE_DIRECTORY + "item/box/hit.png", "box_hit");
 

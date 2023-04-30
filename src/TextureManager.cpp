@@ -13,7 +13,7 @@ TextureManager& TextureManager::Instance()
 
 bool TextureManager::load(const std::string& path, const std::string& id)
 {
-    if (textures_.find(id) != textures_.end()) {
+    if (textures_.count(id) != 0) {
         return false;
     }
 

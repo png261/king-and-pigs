@@ -34,7 +34,7 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
 
     b2FixtureDef fixtureDef;
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(Utils::pixelToMeter(width) / 2.0f, Utils::pixelToMeter(height) / 2.0f);
+    dynamicBox.SetAsBox(Utils::pixelToMeter(width) * 0.5f, Utils::pixelToMeter(height) * 0.5f);
 
     fixtureDef.shape = &dynamicBox;
     fixtureDef.density = 1;
@@ -45,8 +45,8 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
         b2Vec2(0, height * 0.5),
         width - 0.5,
         1,
-        PhysicWorld::CAT_FOOT_SENSOR,
-        PhysicWorld::MASK_FOOT_SENSOR);
+        ContactCategory::CAT_FOOT_SENSOR,
+        ContactMask::MASK_FOOT_SENSOR);
 }
 
 void PhysicObject::changeFootContact(int n)
@@ -166,7 +166,7 @@ bool PhysicObject::isDisableJump() const
     return is_disabled_jump_;
 }
 
-void PhysicObject::setFilterData(PhysicWorld::Category category, PhysicWorld::Mask mask) const
+void PhysicObject::setFilterData(ContactCategory category, ContactMask mask) const
 {
     if (fixture_ == nullptr) {
         return;
@@ -182,8 +182,8 @@ b2Fixture* PhysicObject::createPolygonSensor(
     const b2Vec2& position,
     int width,
     int height,
-    PhysicWorld::Category category,
-    PhysicWorld::Mask mask) const
+    ContactCategory category,
+    ContactMask mask) const
 {
     b2PolygonShape polygon;
     polygon.SetAsBox(
@@ -203,8 +203,8 @@ b2Fixture* PhysicObject::createPolygonSensor(
 b2Fixture* PhysicObject::createCircleSensor(
     const b2Vec2& position,
     const int radius,
-    const PhysicWorld::Category category,
-    const PhysicWorld::Mask mask) const
+    const ContactCategory category,
+    const ContactMask mask) const
 {
     b2CircleShape circle;
     circle.m_p = Utils::pixelToMeter(position);

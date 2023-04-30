@@ -22,14 +22,14 @@ public:
     virtual void loadAnimation();
 
 protected:
-    enum direction {
+    enum Direction {
         RIGHT = 1,
         LEFT = -1,
     };
 
     bool is_flip_;
 
-    direction direction_;
+    Direction direction_;
 
     std::unordered_map<int, std::unique_ptr<Animation>> animations_;
     int current_animation_;

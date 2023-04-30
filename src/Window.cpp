@@ -229,5 +229,5 @@ uint Window::getHeight() const
 
 b2Vec2 Window::getCenter() const
 {
-    return {width_ / 2.0f, height_ / 2.0f};
+    return {width_ * 0.5f, height_ * 0.5f};
 }

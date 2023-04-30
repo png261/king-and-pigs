@@ -20,14 +20,14 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& params)
         body_,
         b2Vec2(params->x(), params->y()) + 0.5f * b2Vec2(width_, height_),
         width_,
-        PhysicWorld::CAT_BOMB,
-        PhysicWorld::MASK_BOMB);
+        ContactCategory::CAT_BOMB,
+        ContactMask::MASK_BOMB);
 
     createCircleSensor(
         {0, 0},
         attack_range_,
-        PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_PIG_ATTACK_SENSOR);
+        ContactCategory::CAT_ATTACK_SENSOR,
+        ContactMask::MASK_PIG_ATTACK_SENSOR);
 
     loadAnimation();
 }

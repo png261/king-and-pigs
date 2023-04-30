@@ -121,8 +121,8 @@ void DebugDraw::DrawPoint(const b2Vec2& p, const float size, const b2Color& colo
     const float pixel_size = zoom * Utils::meterToPixel(size);
 
     SDL_Rect rect{
-        static_cast<int>(point.x - pixel_size / 2.0f),
-        static_cast<int>(point.y - pixel_size / 2.0f),
+        static_cast<int>(point.x - pixel_size * 0.5f),
+        static_cast<int>(point.y - pixel_size * 0.5f),
         static_cast<int>(pixel_size),
         static_cast<int>(pixel_size)};
     SDL_RenderFillRect(renderer_, &rect);

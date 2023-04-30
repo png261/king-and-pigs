@@ -1,5 +1,4 @@
 #include "Pig.hpp"
-#include <iostream>
 
 #include "Camera.hpp"
 #include "DamageableObject.hpp"
@@ -19,20 +18,20 @@ void Pig::load(std::unique_ptr<LoaderParams> const& params)
 {
     GameObject::load(std::move(params));
     createBody(params->x(), params->y(), width_, height_);
-    setFilterData(PhysicWorld::CAT_PIG, PhysicWorld::MASK_PIG);
+    setFilterData(ContactCategory::CAT_PIG, ContactMask::MASK_PIG);
     fixture_->SetDensity(50);
 
     createCircleSensor(
         -b2Vec2((width_ * 0.5 + attack_range_) * 0.5, 0),
         attack_range_,
-        PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_PIG_ATTACK_SENSOR);
+        ContactCategory::CAT_ATTACK_SENSOR,
+        ContactMask::MASK_PIG_ATTACK_SENSOR);
 
     createCircleSensor(
         b2Vec2((width_ * 0.5 + attack_range_) * 0.5, 0),
         attack_range_,
-        PhysicWorld::CAT_ATTACK_SENSOR,
-        PhysicWorld::MASK_PIG_ATTACK_SENSOR);
+        ContactCategory::CAT_ATTACK_SENSOR,
+        ContactMask::MASK_PIG_ATTACK_SENSOR);
 
     move_speed_ = 40;
     jump_height_ = 32.0f;
@@ -68,8 +67,8 @@ void Pig::update()
     raycast_.clear();
     float nray = 50;
     for (int i = 0; i < nray; ++i) {
-        b2Vec2 start = getPosition() + direction_ * (b2Vec2(width_ / 2.0f, 0)) +
-                       b2Vec2(0, -height_ / 2.0f + i * height_ / nray);
+        b2Vec2 start = getPosition() + direction_ * (b2Vec2(width_ * 0.5f, 0)) +
+                       b2Vec2(0, -height_ * 0.5f + i * height_ / nray);
         b2Vec2 end = start + direction_ * b2Vec2(vision_range_, 0);
         raycast_.push_back({start, end});
     }
@@ -108,16 +107,16 @@ void Pig::handleMovement()
         moveLeft();
     }
 
-    if (isSeeing(PhysicWorld::CAT_PLAYER)) {
+    if (isSeeing(ContactCategory::CAT_PLAYER)) {
         seeingPlayer();
     }
-    if (isSeeing(PhysicWorld::CAT_WALL)) {
+    if (isSeeing(ContactCategory::CAT_WALL)) {
         seeingWall();
     }
-    if (isSeeing(PhysicWorld::CAT_BOX)) {
+    if (isSeeing(ContactCategory::CAT_BOX)) {
         seeingBox();
     }
-    if (isSeeing(PhysicWorld::CAT_PIG)) {
+    if (isSeeing(ContactCategory::CAT_PIG)) {
         seeingPig();
     }
 }
@@ -221,11 +220,9 @@ void Pig::drawHealthBar() const
     const int kHeight = 2;
 
     const b2Vec2 position = {
-        (getPosition().x - static_cast<float>(getWidth()) / 2 -
-         Camera::Instance().getPosition().x) *
+        (getPosition().x - getWidth() * 0.5f - Camera::Instance().getPosition().x) *
             Camera::Instance().getZoom(),
-        (getPosition().y - static_cast<float>(getHeight()) / 2 -
-         Camera::Instance().getPosition().y) *
+        (getPosition().y - getHeight() * 0.5f - Camera::Instance().getPosition().y) *
             Camera::Instance().getZoom()};
 
     Rectangle bar{

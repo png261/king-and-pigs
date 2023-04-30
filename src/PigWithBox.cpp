@@ -32,7 +32,7 @@ void PigWithBox::update()
         return;
     }
     Pig::update();
-    if (isSeeing(PhysicWorld::CAT_PLAYER) && vision_nearest_distance_ <= 100) {
+    if (isSeeing(ContactCategory::CAT_PLAYER) && vision_nearest_distance_ <= 100) {
         throwBox();
         becomeNormal();
     }
@@ -41,8 +41,8 @@ void PigWithBox::update()
 void PigWithBox::throwBox()
 {
     auto params = std::make_unique<LoaderParams>(LoaderParams(
-        getPosition().x - width_ / 2.0f,
-        getPosition().y - height_ / 2.0f - 20,
+        getPosition().x - width_ * 0.5f,
+        getPosition().y - height_ * 0.5f - 20,
         20,
         20));
 

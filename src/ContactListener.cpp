@@ -1,5 +1,6 @@
 #include "ContactListener.hpp"
 
+#include "AttackerObject.hpp"
 #include "DoorIn.hpp"
 #include "DoorOut.hpp"
 #include "Game.hpp"
@@ -9,11 +10,9 @@
 #include "PhysicWorld.hpp"
 #include "Pig.hpp"
 
-void ContactListener::realTimeListener()
+void ContactListener::realTimeListener(b2Contact* const contactList)
 {
-    for (b2Contact* contact = PhysicWorld::Instance().getWorld()->GetContactList();
-         contact != nullptr;
-         contact = contact->GetNext()) {
+    for (b2Contact* contact = contactList; contact != nullptr; contact = contact->GetNext()) {
         AttackListener(contact);
         EnterDoorListener(contact);
     }
@@ -41,10 +40,9 @@ void ContactListener::OneWayPreSolve(b2Contact* const contact, const b2Manifold*
 {
     b2Fixture* const fixtureA = contact->GetFixtureA();
     b2Fixture* const fixtureB = contact->GetFixtureB();
-    auto const categoryA =
-        static_cast<PhysicWorld::Category>(fixtureA->GetFilterData().categoryBits);
+    auto const categoryA = static_cast<ContactCategory>(fixtureA->GetFilterData().categoryBits);
 
-    if (categoryA == PhysicWorld::PhysicWorld::CAT_ONE_WAY_WALL) {
+    if (categoryA == ContactCategory::CAT_ONE_WAY_WALL) {
         if (oldManifold->localNormal.y < 0 && fixtureB->GetBody()->GetLinearVelocity().y >= 0) {
             contact->SetEnabled(true);
         } else {
@@ -58,18 +56,15 @@ void ContactListener::ItemBeginContact(b2Contact* const contact)
 {
     b2Fixture* const fixtureA = contact->GetFixtureA();
     b2Fixture* const fixtureB = contact->GetFixtureB();
-    auto const categoryA =
-        static_cast<PhysicWorld::Category>(fixtureA->GetFilterData().categoryBits);
-    auto const categoryB =
-        static_cast<PhysicWorld::Category>(fixtureB->GetFilterData().categoryBits);
+    auto const categoryA = static_cast<ContactCategory>(fixtureA->GetFilterData().categoryBits);
+    auto const categoryB = static_cast<ContactCategory>(fixtureB->GetFilterData().categoryBits);
 
-    if ((categoryA | categoryB) !=
-        (PhysicWorld::PhysicWorld::CAT_ITEM | PhysicWorld::PhysicWorld::CAT_PLAYER)) {
+    if ((categoryA | categoryB) != (ContactCategory::CAT_ITEM | ContactCategory::CAT_PLAYER)) {
         return;
     }
 
     ItemObject* bonusItem = nullptr;
-    if (categoryA == PhysicWorld::PhysicWorld::CAT_ITEM) {
+    if (categoryA == ContactCategory::CAT_ITEM) {
         bonusItem = ((ItemObject*)(fixtureA->GetBody()->GetUserData().pointer));
     } else {
         bonusItem = ((ItemObject*)(fixtureB->GetBody()->GetUserData().pointer));
@@ -86,20 +81,18 @@ void ContactListener::FootBeginContact(b2Contact* const contact)
 {
     b2Fixture* const fixtureA = contact->GetFixtureA();
     b2Fixture* const fixtureB = contact->GetFixtureB();
-    auto const categoryA =
-        static_cast<PhysicWorld::Category>(fixtureA->GetFilterData().categoryBits);
-    auto const categoryB =
-        static_cast<PhysicWorld::Category>(fixtureB->GetFilterData().categoryBits);
-    if (!((categoryA | categoryB) & PhysicWorld::PhysicWorld::CAT_FOOT_SENSOR)) {
+    auto const categoryA = static_cast<ContactCategory>(fixtureA->GetFilterData().categoryBits);
+    auto const categoryB = static_cast<ContactCategory>(fixtureB->GetFilterData().categoryBits);
+    if (!((categoryA | categoryB) & ContactCategory::CAT_FOOT_SENSOR)) {
         return;
     }
 
     auto* const A = (GameObject*)(fixtureA->GetBody()->GetUserData().pointer);
     auto* const B = (GameObject*)(fixtureB->GetBody()->GetUserData().pointer);
 
-    if (categoryA == PhysicWorld::PhysicWorld::CAT_FOOT_SENSOR) {
+    if (categoryA == ContactCategory::CAT_FOOT_SENSOR) {
         A->changeFootContact(+1);
-    } else if (categoryB == PhysicWorld::PhysicWorld::CAT_FOOT_SENSOR) {
+    } else if (categoryB == ContactCategory::CAT_FOOT_SENSOR) {
         B->changeFootContact(+1);
     }
 }
@@ -108,20 +101,18 @@ void ContactListener::FootEndContact(b2Contact* const contact)
 {
     b2Fixture* const fixtureA = contact->GetFixtureA();
     b2Fixture* const fixtureB = contact->GetFixtureB();
-    auto const categoryA =
-        static_cast<PhysicWorld::Category>(fixtureA->GetFilterData().categoryBits);
-    auto const categoryB =
-        static_cast<PhysicWorld::Category>(fixtureB->GetFilterData().categoryBits);
-    if (!((categoryA | categoryB) & PhysicWorld::PhysicWorld::CAT_FOOT_SENSOR)) {
+    auto const categoryA = static_cast<ContactCategory>(fixtureA->GetFilterData().categoryBits);
+    auto const categoryB = static_cast<ContactCategory>(fixtureB->GetFilterData().categoryBits);
+    if (!((categoryA | categoryB) & ContactCategory::CAT_FOOT_SENSOR)) {
         return;
     }
 
     auto* const A = (GameObject*)(fixtureA->GetBody()->GetUserData().pointer);
     auto* const B = (GameObject*)(fixtureB->GetBody()->GetUserData().pointer);
 
-    if (categoryA == PhysicWorld::PhysicWorld::CAT_FOOT_SENSOR) {
+    if (categoryA == ContactCategory::CAT_FOOT_SENSOR) {
         A->changeFootContact(-1);
-    } else if (categoryB == PhysicWorld::PhysicWorld::CAT_FOOT_SENSOR) {
+    } else if (categoryB == ContactCategory::CAT_FOOT_SENSOR) {
         B->changeFootContact(-1);
     }
 }
@@ -133,14 +124,14 @@ void ContactListener::EnterDoorListener(b2Contact* const contact)
     const uint16 catA = fixtureA->GetFilterData().categoryBits;
     const uint16 catB = fixtureB->GetFilterData().categoryBits;
 
-    if ((catA | catB) != (PhysicWorld::CAT_DOOR_IN | PhysicWorld::CAT_PLAYER)) {
+    if ((catA | catB) != (ContactCategory::CAT_DOOR_IN | ContactCategory::CAT_PLAYER)) {
         return;
     }
 
     DoorIn* door = nullptr;
     Player* player = nullptr;
 
-    if (catA == PhysicWorld::CAT_DOOR_IN) {
+    if (catA == ContactCategory::CAT_DOOR_IN) {
         door = (DoorIn*)(fixtureA->GetBody()->GetUserData().pointer);
         player = (Player*)(fixtureB->GetBody()->GetUserData().pointer);
     } else {
@@ -172,8 +163,9 @@ void ContactListener::AttackListener(b2Contact* const contact)
     uint16 const catA = A->GetFilterData().categoryBits;
     uint16 const catB = B->GetFilterData().categoryBits;
 
-    if (catB == PhysicWorld::CAT_ATTACK_SENSOR &&
-        catA & (PhysicWorld::CAT_PIG | PhysicWorld::CAT_PLAYER | PhysicWorld::CAT_BOX)) {
+    if (catB == ContactCategory::CAT_ATTACK_SENSOR &&
+        catA &
+            (ContactCategory::CAT_PIG | ContactCategory::CAT_PLAYER | ContactCategory::CAT_BOX)) {
         handleAttack(B, A);
     }
 }

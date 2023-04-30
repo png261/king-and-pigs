@@ -170,8 +170,9 @@ void LevelParser::parseTileLayer(const Json::Value& layer, Level* const level) c
                     tile_size_ * b2Vec2(col, row),
                     shape.width,
                     shape.height,
-                    shape.is_one_way ? PhysicWorld::CAT_ONE_WAY_WALL : PhysicWorld::CAT_WALL,
-                    PhysicWorld::MASK_WALL);
+                    shape.is_one_way ? ContactCategory::CAT_ONE_WAY_WALL
+                                     : ContactCategory::CAT_WALL,
+                    ContactMask::MASK_WALL);
             }
         }
     }

@@ -83,16 +83,16 @@ bool MainMenuState::enter()
     auto new_game_button = std::make_unique<Button>();
     new_game_button->setTitle("New Game");
     new_game_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenter().x - 300 / 2.0f,
-        Game::Instance().getWindow()->getCenter().y - 70 / 2.0f,
+        Game::Instance().getWindow()->getCenter().x - 300 * 0.5f,
+        Game::Instance().getWindow()->getCenter().y - 70 * 0.5f,
         300,
         70));
 
     auto exit_button = std::make_unique<Button>();
     exit_button->setTitle("Exit");
     exit_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenter().x - 300 / 2.0f,
-        Game::Instance().getWindow()->getCenter().y - 70 / 2.0f + 100,
+        Game::Instance().getWindow()->getCenter().x - 300 * 0.5f,
+        Game::Instance().getWindow()->getCenter().y - 70 * 0.5f + 100,
         300,
         70));
 

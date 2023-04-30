@@ -36,7 +36,7 @@ void PhysicWorld::init(Window* const window)
 void PhysicWorld::update()
 {
     getWorld()->Step(time_step_, velocity_iterations_, position_iterations_);
-    contactListener_->realTimeListener();
+    contactListener_->realTimeListener(getWorld()->GetContactList());
 }
 
 void PhysicWorld::clean()
@@ -68,8 +68,8 @@ b2Body* PhysicWorld::createStaticBody(
     const b2Vec2& position,
     const int width,
     const int height,
-    const Category category,
-    const Mask mask) const
+    const ContactCategory category,
+    const ContactMask mask) const
 {
     b2BodyDef bodyDef;
     bodyDef.position = Utils::pixelToMeter(position + b2Vec2(width * 0.5, height * 0.5));
@@ -81,10 +81,10 @@ b2Body* PhysicWorld::createStaticBody(
 
     b2ChainShape box;
     b2Vec2 vertices[4];
-    vertices[0].Set(-w / 2, -h / 2);
-    vertices[1].Set(w / 2, -h / 2);
-    vertices[2].Set(w / 2, h / 2);
-    vertices[3].Set(-w / 2, h / 2);
+    vertices[0].Set(-w * 0.5f, -h * 0.5f);
+    vertices[1].Set(w * 0.5f, -h * 0.5f);
+    vertices[2].Set(w * 0.5f, h * 0.5f);
+    vertices[3].Set(-w * 0.5f, h * 0.5f);
     box.CreateLoop(vertices, 4);
 
     b2FixtureDef fixture;
@@ -101,8 +101,8 @@ b2Fixture* PhysicWorld::createCircleBody(
     b2Body*& body,
     const b2Vec2& position,
     const int radius,
-    const PhysicWorld::Category category,
-    const PhysicWorld::Mask mask) const
+    const ContactCategory category,
+    const ContactMask mask) const
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;

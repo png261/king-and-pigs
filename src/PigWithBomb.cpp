@@ -32,7 +32,7 @@ void PigWithBomb::loadAnimation()
 void PigWithBomb::update()
 {
     Pig::update();
-    if (isSeeing(PhysicWorld::CAT_PLAYER) && vision_nearest_distance_ <= 100) {
+    if (isSeeing(ContactCategory::CAT_PLAYER) && vision_nearest_distance_ <= 100) {
         throwBomb();
         becomeNormal();
     }
@@ -41,7 +41,7 @@ void PigWithBomb::update()
 void PigWithBomb::throwBomb()
 {
     auto params = std::make_unique<LoaderParams>(
-        LoaderParams(getPosition().x - width_ / 2.0f, getPosition().y - height_ / 2.0f - 10, 7, 7));
+        LoaderParams(getPosition().x - width_ * 0.5f, getPosition().y - height_ * 0.5f - 10, 7, 7));
 
     auto bomb =
         dynamic_cast<Bomb*>(Game::Instance().getLevel()->spawnObject("Bomb", std::move(params)));

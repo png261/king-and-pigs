@@ -3,6 +3,8 @@
 
 Object::Object()
     : is_exist_(true)
+    , width_(0)
+    , height_(0)
 {}
 
 void Object::load(std::unique_ptr<LoaderParams> const& params)
@@ -12,15 +14,14 @@ void Object::load(std::unique_ptr<LoaderParams> const& params)
     height_ = params->height();
 };
 
+void Object::disappear()
+{
+    is_exist_ = false;
+}
 
 bool Object::isExist() const
 {
     return is_exist_;
-}
-
-void Object::disappear()
-{
-    is_exist_ = false;
 }
 
 int Object::getWidth() const

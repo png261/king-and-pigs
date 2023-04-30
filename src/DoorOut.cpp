@@ -4,7 +4,7 @@ void DoorOut::load(std::unique_ptr<LoaderParams> const& params)
 {
     Door::load(std::move(params));
 
-    setFilterData(PhysicWorld::CAT_DOOR_OUT, PhysicWorld::MASK_DOOR_OUT);
+    setFilterData(ContactCategory::CAT_DOOR_OUT, ContactMask::MASK_DOOR_OUT);
     open();
 }
 

@@ -68,13 +68,13 @@ bool PauseState::enter()
     auto resume_button = std::make_unique<Button>();
     resume_button->setTitle("Resume");
     resume_button->load(
-        std::make_unique<LoaderParams>(centerX - 300 / 2, centerY - 70 / 2, 300, 70));
+        std::make_unique<LoaderParams>(centerX - 300 * 0.5f, centerY - 70 * 0.5f, 300, 70));
     resume_button->onClick([this]() { is_enterResume_ = true; });
 
     auto main_menu_button = std::make_unique<Button>();
     main_menu_button->setTitle("Main Menu");
     main_menu_button->load(
-        std::make_unique<LoaderParams>(centerX - 300 / 2, centerY - 70 / 2 + 100, 300, 70));
+        std::make_unique<LoaderParams>(centerX - 300 * 0.5f, centerY - 70 * 0.5f + 100, 300, 70));
     main_menu_button->onClick([this]() { is_enter_main_menu = true; });
 
     auto mute_sfx = std::make_unique<Button>();

@@ -19,8 +19,8 @@ Game::Game()
     : is_running_(false)
     , is_debug_(false)
     , level_index_(0)
-    , score_(0)
     , top_score_(0)
+    , score_(0)
 {}
 
 Game& Game::Instance()
