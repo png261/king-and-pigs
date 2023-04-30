@@ -19,9 +19,9 @@ public:
     virtual bool isAttack() const;
     virtual bool isDaming() const;
 
-    virtual int GetAttackDamage();
-    virtual int GetAttackRange();
-    virtual int GetAttackSpeed();
+    virtual int getAttackDamage();
+    virtual int getAttackRange();
+    virtual int getAttackSpeed();
 
 protected:
     int attack_damage_;

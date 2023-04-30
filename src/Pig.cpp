@@ -242,6 +242,6 @@ void Pig::drawHealthBar() const
         static_cast<int>(currentHpWidth * Camera::Instance().getZoom()),
         static_cast<int>(kHeight * Camera::Instance().getZoom())};
 
-    Game::Instance().getWindow()->drawBox(bar, 2, Color::GRAY);
-    Game::Instance().getWindow()->drawBox(status, 2, Color::GREEN);
+    Game::Instance().getWindow()->drawBox(bar, 2, ColorName::GRAY);
+    Game::Instance().getWindow()->drawBox(status, 2, ColorName::GREEN);
 }

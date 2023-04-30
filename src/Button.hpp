@@ -19,8 +19,8 @@ public:
     void setTexture(const std::string& texture_id);
     void setBackgroundColor(
         const Color& normal_color,
-        const Color& hovered_color = Color::GRAY,
-        const Color& disabled_color = Color::GRAY);
+        const Color& hovered_color = ColorName::GRAY,
+        const Color& disabled_color = ColorName::GRAY);
     void setFontColor(const Color& color);
     void setBorderRadius(const int border_radius);
 

@@ -4,13 +4,14 @@
 
 #include <string>
 
+enum class ColorName { WHITE, GRAY, BLACK, RED, GREEN, BLUE, CYAN, YELLOW, MAGENTA };
+
 class Color final
 {
 public:
-    enum Colors { WHITE, GRAY, BLACK, RED, GREEN, BLUE, CYAN, YELLOW, MAGENTA };
     Color();
     Color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a = 255);
-    Color(Colors color);
+    Color(const ColorName color);
     uint8_t r() const;
     uint8_t g() const;
     uint8_t b() const;

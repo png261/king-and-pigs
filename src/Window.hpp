@@ -49,15 +49,15 @@ public:
         const int x,
         const int y,
         const int size,
-        const Color& color = Color(Color::BLACK),
+        const Color& color = Color(ColorName::BLACK),
         const int style = FontStyle::NORMAL) const;
     void drawBox(
         const Rectangle& rect,
         const int border_radius,
-        const Color& color = Color(Color::WHITE)) const;
-    void drawOverlay(const Color& color = Color(Color::WHITE)) const;
+        const Color& color = Color(ColorName::WHITE)) const;
+    void drawOverlay(const Color& color = Color(ColorName::WHITE)) const;
 
-    void setBackgroundColor(const Color& color = Color(Color::BLACK));
+    void setBackgroundColor(const Color& color = Color(ColorName::BLACK));
     void setTitle(const std::string& title);
 
     uint getWidth() const;

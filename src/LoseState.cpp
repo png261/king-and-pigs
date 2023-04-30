@@ -59,7 +59,7 @@ void LoseState::render() const
         Game::Instance().getWindow()->getCenter().x,
         Game::Instance().getWindow()->getCenter().y - 150,
         150,
-        Color::WHITE);
+        ColorName::WHITE);
 };
 
 bool LoseState::enter()

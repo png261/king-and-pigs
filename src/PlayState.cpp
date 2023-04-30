@@ -222,7 +222,7 @@ void PlayState::renderStatusBar() const
                                std::to_string(Game::Instance().getScore());
 
 
-    Game::Instance().getWindow()->print(status, 550, 50, 40, Color::WHITE);
+    Game::Instance().getWindow()->print(status, 550, 50, 40, ColorName::WHITE);
 }
 
 std::string PlayState::getStateID() const

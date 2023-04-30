@@ -14,52 +14,52 @@ Color::Color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a)
     , alpha_(a)
 {}
 
-Color::Color(Colors color)
+Color::Color(const ColorName color)
 {
     uint8_t r, g, b, a = 255;
     switch (color) {
     default:
-    case WHITE:
+    case ColorName::WHITE:
         r = 255;
         g = 255;
         b = 255;
         break;
-    case GRAY:
+    case ColorName::GRAY:
         r = 194;
         g = 214;
         b = 214;
         break;
-    case BLACK:
+    case ColorName::BLACK:
         r = 0;
         g = 0;
         b = 0;
         break;
-    case RED:
+    case ColorName::RED:
         r = 255;
         g = 0;
         b = 0;
         break;
-    case GREEN:
+    case ColorName::GREEN:
         r = 0;
         g = 255;
         b = 0;
         break;
-    case BLUE:
+    case ColorName::BLUE:
         r = 0;
         g = 0;
         b = 255;
         break;
-    case CYAN:
+    case ColorName::CYAN:
         r = 0;
         g = 255;
         b = 255;
         break;
-    case YELLOW:
+    case ColorName::YELLOW:
         r = 255;
         g = 255;
         b = 0;
         break;
-    case MAGENTA:
+    case ColorName::MAGENTA:
         r = 255;
         g = 0;
         b = 255;

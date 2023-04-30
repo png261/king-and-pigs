@@ -58,17 +58,17 @@ bool AttackerObject::isDaming() const
     return is_daming_;
 }
 
-int AttackerObject::GetAttackDamage()
+int AttackerObject::getAttackDamage()
 {
     return attack_damage_;
 }
 
-int AttackerObject::GetAttackRange()
+int AttackerObject::getAttackRange()
 {
     return attack_range_;
 }
 
-int AttackerObject::GetAttackSpeed()
+int AttackerObject::getAttackSpeed()
 {
     return attack_speed_;
 }

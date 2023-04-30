@@ -69,7 +69,7 @@ void MainMenuState::render() const
         Game::Instance().getWindow()->getCenter().x,
         Game::Instance().getWindow()->getHeight() - 50,
         20,
-        Color::WHITE,
+        ColorName::WHITE,
         ITALIC);
 };
 

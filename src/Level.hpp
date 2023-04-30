@@ -27,7 +27,7 @@ class Level final
 {
 public:
     Level();
-    Level(const int width, const int height, const Color& background_color = Color(Color::BLACK));
+    Level(const int width, const int height, const Color& background_color = Color(ColorName::BLACK));
 
     void update();
     void render() const;

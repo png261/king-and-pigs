@@ -24,7 +24,7 @@ void LoadingState::render() const
         Game::Instance().getWindow()->getCenter().x,
         Game::Instance().getWindow()->getCenter().y,
         100,
-        Color::WHITE);
+        ColorName::WHITE);
 };
 
 bool LoadingState::enter()
