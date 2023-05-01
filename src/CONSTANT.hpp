@@ -3,7 +3,7 @@
 #include <box2d/box2d.h>
 #include <string>
 
-const std::string CONFIG_FILE = "game_config.json";
+const std::string CONFIG_FILE = "data/game_config.json";
 const std::string ASSETS_DIRECTORY = "assets/";
 const std::string IMAGE_DIRECTORY = "assets/images/";
 const std::string SOUND_DIRECTORY = "assets/sounds/";

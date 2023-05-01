@@ -53,7 +53,7 @@ bool SoundManager::loadSFX(const std::string& path, const std::string& id)
         Log::warning("can't load SFX: " + path);
         return false;
     }
-    if (musics_.count(id) == 0) {
+    if (sfxs_.count(id) != 0) {
         return false;
     }
     sfxs_[id] = pSFX;

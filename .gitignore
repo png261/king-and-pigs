@@ -1,5 +1,1 @@
-lib/* 
-bin/*
-
-!lib/.gitkeep
-!bin/.gitkeep
+build/
