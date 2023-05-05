@@ -24,7 +24,7 @@ void ObjectLayer::update()
         }
 
         auto object = dynamic_cast<PhysicObject*>(it->get());
-        PhysicWorld::Instance().getWorld()->DestroyBody(object->getBody());
+        PhysicManager::Instance().getWorld()->DestroyBody(object->getBody());
         objects_.erase(it);
     }
 }

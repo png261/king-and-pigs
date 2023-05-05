@@ -3,7 +3,7 @@
 #include "Box.hpp"
 #include "DamageableObject.hpp"
 #include "Game.hpp"
-#include "InputHandler.hpp"
+#include "InputManager.hpp"
 
 PigWithBox::PigWithBox()
     : Pig()

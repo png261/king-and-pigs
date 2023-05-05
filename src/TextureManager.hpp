@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "SDL.hpp"
 
 class TextureManager final

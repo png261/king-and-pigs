@@ -3,7 +3,7 @@
 
 #include "CONSTANT.hpp"
 #include "Game.hpp"
-#include "InputHandler.hpp"
+#include "InputManager.hpp"
 #include "SoundManager.hpp"
 #include "TextureManager.hpp"
 
@@ -62,11 +62,11 @@ void Button::update()
         return;
     }
 
-    is_hovered_ = InputHandler::Instance().isMouseInside(rectangle_);
+    is_hovered_ = InputManager::Instance().isMouseInside(rectangle_);
 
     if (callback_ != nullptr && isHovered()) {
         Game::Instance().getCursor()->hover();
-        if (InputHandler::Instance().isMouseDown(MOUSE_LEFT)) {
+        if (InputManager::Instance().isMouseDown(MOUSE_LEFT)) {
             SoundManager::Instance().playSFX("button clicked");
             callback_();
         }

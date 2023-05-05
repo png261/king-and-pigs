@@ -1,7 +1,5 @@
 #include "AttackerObject.hpp"
 
-#include "PhysicWorld.hpp"
-
 AttackerObject::AttackerObject(const int damage, const int range, const int speed)
     : attack_damage_(damage)
     , attack_range_(range)

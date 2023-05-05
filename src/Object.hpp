@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "LoaderParams.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 
 class Object
 {

@@ -1,4 +1,4 @@
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 
 #include "AttackerObject.hpp"
 #include "CONSTANT.hpp"
@@ -8,24 +8,24 @@
 #include "DoorIn.hpp"
 #include "Game.hpp"
 #include "GameObject.hpp"
-#include "InputHandler.hpp"
+#include "InputManager.hpp"
 #include "Pig.hpp"
 #include "Player.hpp"
 #include "Utils.hpp"
 
-PhysicWorld::PhysicWorld()
+PhysicManager::PhysicManager()
     : time_step_(1.0f / 60.f)
     , velocity_iterations_(10)
     , position_iterations_(8)
 {}
 
-PhysicWorld& PhysicWorld::Instance()
+PhysicManager& PhysicManager::Instance()
 {
-    static PhysicWorld instance{};
+    static PhysicManager instance{};
     return instance;
 }
 
-void PhysicWorld::init(Window* const window)
+void PhysicManager::init(Window* const window)
 {
     world_ = std::make_unique<b2World>(b2Vec2(0, GRAVITY));
     debugDraw_ = std::make_unique<DebugDraw>(window);
@@ -33,13 +33,13 @@ void PhysicWorld::init(Window* const window)
     createContactListener();
 }
 
-void PhysicWorld::update()
+void PhysicManager::update()
 {
     getWorld()->Step(time_step_, velocity_iterations_, position_iterations_);
     contactListener_->realTimeListener(getWorld()->GetContactList());
 }
 
-void PhysicWorld::clean()
+void PhysicManager::clean()
 {
     world_->SetContactListener(nullptr);
     contactListener_.reset();
@@ -48,23 +48,23 @@ void PhysicWorld::clean()
     }
 }
 
-void PhysicWorld::debugDraw() const
+void PhysicManager::debugDraw() const
 {
     getWorld()->DebugDraw();
 }
 
-b2World* PhysicWorld::getWorld() const
+b2World* PhysicManager::getWorld() const
 {
     return world_.get();
 }
 
-void PhysicWorld::createContactListener()
+void PhysicManager::createContactListener()
 {
     contactListener_ = std::make_unique<ContactListener>(ContactListener());
     world_->SetContactListener(contactListener_.get());
 }
 
-b2Body* PhysicWorld::createStaticBody(
+b2Body* PhysicManager::createStaticBody(
     const b2Vec2& position,
     const int width,
     const int height,
@@ -97,7 +97,7 @@ b2Body* PhysicWorld::createStaticBody(
     return body;
 }
 
-b2Fixture* PhysicWorld::createCircleBody(
+b2Fixture* PhysicManager::createCircleBody(
     b2Body*& body,
     const b2Vec2& position,
     const int radius,

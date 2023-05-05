@@ -30,7 +30,7 @@ void PhysicObject::createBody(const int x, const int y, const int width, const i
     bodyDef.position = Utils::pixelToMeter(b2Vec2(x + width * 0.5f, y + height * 0.5f));
     bodyDef.fixedRotation = true;
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
-    body_ = PhysicWorld::Instance().getWorld()->CreateBody(&bodyDef);
+    body_ = PhysicManager::Instance().getWorld()->CreateBody(&bodyDef);
 
     b2FixtureDef fixtureDef;
     b2PolygonShape dynamicBox;

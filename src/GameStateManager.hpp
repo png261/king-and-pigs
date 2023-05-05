@@ -6,12 +6,12 @@
 #include "GameState.hpp"
 #include "Timer.hpp"
 
-class GameStateMachine final
+class GameStateManager final
 {
 public:
-    static GameStateMachine& Instance();
-    GameStateMachine(GameStateMachine const&) = delete;
-    GameStateMachine& operator=(GameStateMachine const&) = delete;
+    static GameStateManager& Instance();
+    GameStateManager(GameStateManager const&) = delete;
+    GameStateManager& operator=(GameStateManager const&) = delete;
 
     void update();
     void render() const;
@@ -32,6 +32,6 @@ private:
     Timer loading_timer_;
     bool is_loading_;
     std::unique_ptr<GameState> loading_state_;
-    GameStateMachine();
+    GameStateManager();
     std::vector<std::unique_ptr<GameState>> states_;
 };

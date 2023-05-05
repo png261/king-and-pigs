@@ -2,7 +2,7 @@
 
 #include "Camera.hpp"
 #include "Game.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 
 GameObject::GameObject()
     : PhysicObject()

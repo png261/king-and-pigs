@@ -1,22 +1,22 @@
-#include "GameStateMachine.hpp"
+#include "GameStateManager.hpp"
 
 #include <memory>
 
 #include "LoadingState.hpp"
 
-GameStateMachine::GameStateMachine()
+GameStateManager::GameStateManager()
     : loading_timer_(500)
 {
     loading_state_ = std::make_unique<LoadingState>();
 }
 
-GameStateMachine& GameStateMachine::Instance()
+GameStateManager& GameStateManager::Instance()
 {
-    static GameStateMachine instance{};
+    static GameStateManager instance{};
     return instance;
 }
 
-void GameStateMachine::clean()
+void GameStateManager::clean()
 {
     for (const auto& state : states_) {
         state->exit();
@@ -24,7 +24,7 @@ void GameStateMachine::clean()
     states_.clear();
 }
 
-void GameStateMachine::update()
+void GameStateManager::update()
 {
     if (isLoading()) {
         if (loading_timer_.isDone() && states_.back()->isLoaded()) {
@@ -38,7 +38,7 @@ void GameStateMachine::update()
     }
 }
 
-void GameStateMachine::render() const
+void GameStateManager::render() const
 {
     if (isLoading()) {
         loading_state_->render();
@@ -50,13 +50,13 @@ void GameStateMachine::render() const
     }
 }
 
-void GameStateMachine::pushState(std::unique_ptr<GameState> state)
+void GameStateManager::pushState(std::unique_ptr<GameState> state)
 {
     states_.push_back(std::move(state));
     states_.back()->enter();
 }
 
-void GameStateMachine::popState()
+void GameStateManager::popState()
 {
     if (states_.empty()) {
         return;
@@ -69,7 +69,7 @@ void GameStateMachine::popState()
     }
 }
 
-void GameStateMachine::changeState(std::unique_ptr<GameState> state)
+void GameStateManager::changeState(std::unique_ptr<GameState> state)
 {
     if (!states_.empty()) {
         if (states_.back()->getStateID() == state->getStateID()) {
@@ -84,22 +84,22 @@ void GameStateMachine::changeState(std::unique_ptr<GameState> state)
     states_.push_back(std::move(state));
 }
 
-GameState* GameStateMachine::getCurrentState() const
+GameState* GameStateManager::getCurrentState() const
 {
     return states_.back().get();
 }
 
-bool GameStateMachine::isLoading() const
+bool GameStateManager::isLoading() const
 {
     return is_loading_;
 }
 
-void GameStateMachine::setLoading(bool is_loading)
+void GameStateManager::setLoading(bool is_loading)
 {
     is_loading_ = is_loading;
 }
 
-void GameStateMachine::loading()
+void GameStateManager::loading()
 {
     setLoading(true);
     loading_timer_.restart();

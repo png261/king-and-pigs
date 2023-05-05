@@ -3,7 +3,7 @@
 #include "Camera.hpp"
 #include "DamageableObject.hpp"
 #include "Game.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "Shapes.hpp"
 #include "SoundManager.hpp"
 

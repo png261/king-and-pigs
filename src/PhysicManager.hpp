@@ -40,12 +40,12 @@ enum ContactMask : uint16 {
     MASK_PIG_VISION_SENSOR = CAT_ALL,
 };
 
-class PhysicWorld final
+class PhysicManager final
 {
 public:
-    static PhysicWorld& Instance();
-    PhysicWorld(PhysicWorld const&) = delete;
-    PhysicWorld& operator=(PhysicWorld const&) = delete;
+    static PhysicManager& Instance();
+    PhysicManager(PhysicManager const&) = delete;
+    PhysicManager& operator=(PhysicManager const&) = delete;
 
     void init(Window* const window);
     void update();
@@ -69,7 +69,7 @@ public:
         const ContactMask mask) const;
 
 private:
-    PhysicWorld();
+    PhysicManager();
 
     std::unique_ptr<b2World> world_;
     std::unique_ptr<DebugDraw> debugDraw_;

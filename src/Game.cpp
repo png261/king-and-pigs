@@ -3,13 +3,12 @@
 #include <memory>
 
 #include "CONSTANT.hpp"
-#include "GameStateMachine.hpp"
-#include "InputHandler.hpp"
-#include "LoadingState.hpp"
+#include "GameStateManager.hpp"
+#include "InputManager.hpp"
 #include "Log.hpp"
 #include "MainMenuState.hpp"
 #include "ObjectFactory.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "PlayState.hpp"
 #include "SoundManager.hpp"
 #include "TextureManager.hpp"
@@ -33,34 +32,34 @@ void Game::init(const int width, const int height, const std::string& title)
 {
     SDL::init();
     window_ = std::make_unique<Window>(width, height, title);
-    PhysicWorld::Instance().init(window_.get());
+    PhysicManager::Instance().init(window_.get());
 
     cursor_ = std::make_unique<Cursor>();
     cursor_->init();
 
     level_files_.push_back(LEVEL_DIRECTORY + "level1.json");
     level_files_.push_back(LEVEL_DIRECTORY + "level2.json");
-    GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
+    GameStateManager::Instance().changeState(std::make_unique<MainMenuState>());
 
     is_running_ = true;
 }
 
 void Game::handleEvents()
 {
-    InputHandler::Instance().update();
+    InputManager::Instance().update();
 }
 
 void Game::update()
 {
     cursor_->reset();
-    GameStateMachine::Instance().update();
+    GameStateManager::Instance().update();
 }
 
 void Game::render() const
 {
     window_->clear();
 
-    GameStateMachine::Instance().render();
+    GameStateManager::Instance().render();
     cursor_->draw();
 
     window_->refresh();
@@ -73,10 +72,10 @@ void Game::handleFPS() const
 
 void Game::clean()
 {
-    PhysicWorld::Instance().clean();
-    GameStateMachine::Instance().clean();
     ObjectFactory::Instance().clean();
-    InputHandler::Instance().clean();
+    PhysicManager::Instance().clean();
+    GameStateManager::Instance().clean();
+    InputManager::Instance().clean();
     TextureManager::Instance().clean();
     SoundManager::Instance().clean();
     SDL::exit();
@@ -100,19 +99,19 @@ void Game::setLevelIndex(const int level_index)
 void Game::nextLevel()
 {
     auto const play_state =
-        dynamic_cast<PlayState*>(GameStateMachine::Instance().getCurrentState());
+        dynamic_cast<PlayState*>(GameStateManager::Instance().getCurrentState());
     if (play_state == nullptr) {
         return;
     }
 
     level_index_ += 1;
     if (level_index_ >= level_files_.size()) {
-        GameStateMachine::Instance().pushState(std::make_unique<WinState>());
+        GameStateManager::Instance().pushState(std::make_unique<WinState>());
         level_index_ = 0;
         return;
     }
 
-    GameStateMachine::Instance().loading();
+    GameStateManager::Instance().loading();
     play_state->loadLevel();
 }
 

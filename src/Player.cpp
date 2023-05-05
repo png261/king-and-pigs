@@ -9,11 +9,11 @@
 #include "DebugDraw.hpp"
 #include "Game.hpp"
 #include "GameObject.hpp"
-#include "GameStateMachine.hpp"
-#include "InputHandler.hpp"
+#include "GameStateManager.hpp"
+#include "InputManager.hpp"
 #include "Log.hpp"
 #include "LoseState.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "SoundManager.hpp"
 #include "VisionObject.hpp"
 
@@ -75,7 +75,7 @@ void Player::loadAnimation()
 void Player::update()
 {
     if (isDead()) {
-        GameStateMachine::Instance().pushState(std::make_unique<LoseState>());
+        GameStateManager::Instance().pushState(std::make_unique<LoseState>());
         return;
     }
 
@@ -138,7 +138,7 @@ void Player::handleInput()
         return;
     }
 
-    InputHandler& input = InputHandler::Instance();
+    InputManager& input = InputManager::Instance();
 
     if (isOnGround()) {
         is_want_enter_door_ = input.isKeyDown(KEY_W);

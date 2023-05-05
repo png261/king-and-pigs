@@ -5,8 +5,8 @@
 #include "Button.hpp"
 #include "CONSTANT.hpp"
 #include "Game.hpp"
-#include "GameStateMachine.hpp"
-#include "InputHandler.hpp"
+#include "GameStateManager.hpp"
+#include "InputManager.hpp"
 #include "Log.hpp"
 #include "PauseState.hpp"
 #include "PlayState.hpp"
@@ -28,8 +28,8 @@ void MainMenuState::update()
 
     if (is_enter_play_state) {
         Game::Instance().setLevelIndex(0);
-        GameStateMachine::Instance().loading();
-        GameStateMachine::Instance().changeState(std::make_unique<PlayState>());
+        GameStateManager::Instance().loading();
+        GameStateManager::Instance().changeState(std::make_unique<PlayState>());
         return;
     }
 
@@ -109,7 +109,7 @@ bool MainMenuState::enter()
 bool MainMenuState::exit()
 {
     pause();
-    InputHandler::Instance().reset();
+    InputManager::Instance().reset();
     return true;
 };
 

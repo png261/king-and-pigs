@@ -9,9 +9,9 @@
 #include "DoorIn.hpp"
 #include "DoorOut.hpp"
 #include "Game.hpp"
-#include "GameStateMachine.hpp"
+#include "GameStateManager.hpp"
 #include "Heart.hpp"
-#include "InputHandler.hpp"
+#include "InputManager.hpp"
 #include "KingPig.hpp"
 #include "LevelParser.hpp"
 #include "Log.hpp"
@@ -154,7 +154,7 @@ bool PlayState::loadLevel()
         return false;
     }
 
-    PhysicWorld::Instance().createContactListener();
+    PhysicManager::Instance().createContactListener();
     Game::Instance().setLevel(level_.get());
     Camera::Instance().setTarget(level_->getPlayer());
     Camera::Instance().setZoom(3);
@@ -166,8 +166,8 @@ bool PlayState::loadLevel()
 bool PlayState::exit()
 {
     pause();
-    PhysicWorld::Instance().clean();
-    InputHandler::Instance().reset();
+    PhysicManager::Instance().clean();
+    InputManager::Instance().reset();
 
     return true;
 }
@@ -178,11 +178,11 @@ void PlayState::update()
         return;
     }
 
-    if (InputHandler::Instance().isKeyDown(KEY_ESCAPE)) {
-        GameStateMachine::Instance().pushState(std::make_unique<PauseState>());
+    if (InputManager::Instance().isKeyDown(KEY_ESCAPE)) {
+        GameStateManager::Instance().pushState(std::make_unique<PauseState>());
     }
 
-    PhysicWorld::Instance().update();
+    PhysicManager::Instance().update();
     level_->update();
     Camera::Instance().update();
 }
@@ -198,7 +198,7 @@ void PlayState::render() const
     level_->render();
 
     if (Game::Instance().isDebug()) {
-        PhysicWorld::Instance().debugDraw();
+        PhysicManager::Instance().debugDraw();
     }
 
     renderStatusBar();

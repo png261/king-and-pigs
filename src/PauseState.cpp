@@ -3,8 +3,8 @@
 #include "Button.hpp"
 #include "CONSTANT.hpp"
 #include "Game.hpp"
-#include "GameStateMachine.hpp"
-#include "InputHandler.hpp"
+#include "GameStateManager.hpp"
+#include "InputManager.hpp"
 #include "Log.hpp"
 #include "MainMenuState.hpp"
 #include "PlayState.hpp"
@@ -24,16 +24,16 @@ void PauseState::update()
     }
 
     if (is_enterResume_) {
-        GameStateMachine::Instance().popState();
+        GameStateManager::Instance().popState();
         return;
     }
     if (is_enter_main_menu) {
-        GameStateMachine::Instance().popState();
-        GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
+        GameStateManager::Instance().popState();
+        GameStateManager::Instance().changeState(std::make_unique<MainMenuState>());
         return;
     }
 
-    if (InputHandler::Instance().isKeyDown(KEY_ESCAPE)) {
+    if (InputManager::Instance().isKeyDown(KEY_ESCAPE)) {
         is_enterResume_ = true;
     }
 
@@ -99,7 +99,7 @@ bool PauseState::enter()
 bool PauseState::exit()
 {
     pause();
-    InputHandler::Instance().reset();
+    InputManager::Instance().reset();
     return true;
 };
 

@@ -1,7 +1,7 @@
 #include "Cursor.hpp"
 
 #include "CONSTANT.hpp"
-#include "InputHandler.hpp"
+#include "InputManager.hpp"
 #include "SDL.hpp"
 #include "TextureManager.hpp"
 
@@ -21,7 +21,7 @@ void Cursor::draw() const
 {
     TextureManager::Instance().draw(
         isHover() ? "cursor_hover" : "cursor_normal",
-        InputHandler::Instance().getMousePosition(),
+        InputManager::Instance().getMousePosition(),
         size_,
         size_);
 }

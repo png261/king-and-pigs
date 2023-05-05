@@ -1,7 +1,7 @@
 #include "Box.hpp"
 
 #include "Game.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "SoundManager.hpp"
 #include "Utils.hpp"
 

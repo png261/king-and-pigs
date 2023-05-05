@@ -1,7 +1,7 @@
 #include "Bomb.hpp"
 
-#include "InputHandler.hpp"
-#include "PhysicWorld.hpp"
+#include "InputManager.hpp"
+#include "PhysicManager.hpp"
 #include "SoundManager.hpp"
 #include "Utils.hpp"
 
@@ -16,7 +16,7 @@ void Bomb::load(std::unique_ptr<LoaderParams> const& params)
 {
     Object::load(std::move(params));
 
-    PhysicWorld::Instance().createCircleBody(
+    PhysicManager::Instance().createCircleBody(
         body_,
         b2Vec2(params->x(), params->y()) + 0.5f * b2Vec2(width_, height_),
         width_,

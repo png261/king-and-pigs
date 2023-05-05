@@ -11,7 +11,7 @@
 #include "Log.hpp"
 #include "ObjectFactory.hpp"
 #include "ObjectLayer.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "TextureManager.hpp"
 #include "TileLayer.hpp"
 #include "Utils.hpp"
@@ -166,7 +166,7 @@ void LevelParser::parseTileLayer(const Json::Value& layer, Level* const level) c
                 }
                 const TileCollision shape = it->second;
 
-                PhysicWorld::Instance().createStaticBody(
+                PhysicManager::Instance().createStaticBody(
                     tile_size_ * b2Vec2(col, row),
                     shape.width,
                     shape.height,

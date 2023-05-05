@@ -3,8 +3,8 @@
 #include "Button.hpp"
 #include "CONSTANT.hpp"
 #include "Game.hpp"
-#include "GameStateMachine.hpp"
-#include "InputHandler.hpp"
+#include "GameStateManager.hpp"
+#include "InputManager.hpp"
 #include "MainMenuState.hpp"
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
@@ -23,13 +23,13 @@ void LoseState::update()
 
     if (is_enter_respawn_) {
         Game::Instance().useDiamond(2);
-        GameStateMachine::Instance().changeState(std::make_unique<PlayState>());
+        GameStateManager::Instance().changeState(std::make_unique<PlayState>());
         return;
     }
 
     if (is_enter_main_menu) {
-        GameStateMachine::Instance().clean();
-        GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
+        GameStateManager::Instance().clean();
+        GameStateManager::Instance().changeState(std::make_unique<MainMenuState>());
         return;
     }
 
@@ -110,7 +110,7 @@ bool LoseState::enter()
 bool LoseState::exit()
 {
     pause();
-    InputHandler::Instance().reset();
+    InputManager::Instance().reset();
     return true;
 };
 

@@ -4,16 +4,16 @@
 #include <vector>
 
 #include "InputDefinitions.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "SDL.hpp"
 #include "Shapes.hpp"
 
-class InputHandler final
+class InputManager final
 {
 public:
-    static InputHandler& Instance();
-    InputHandler(InputHandler const&) = delete;
-    InputHandler& operator=(InputHandler const&) = delete;
+    static InputManager& Instance();
+    InputManager(InputManager const&) = delete;
+    InputManager& operator=(InputManager const&) = delete;
 
     void update();
     void reset();
@@ -31,7 +31,7 @@ public:
     bool isMouseInside(const Rectangle& rectangle) const;
 
 private:
-    InputHandler();
+    InputManager();
 
     void onKeyDown(SDL_Event const& event);
     void onKeyUp(SDL_Event const& event);

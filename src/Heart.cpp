@@ -1,7 +1,7 @@
 #include "Heart.hpp"
 
 #include "Game.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "SoundManager.hpp"
 
 void Heart::load(std::unique_ptr<LoaderParams> const& params)

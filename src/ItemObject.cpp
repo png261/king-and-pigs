@@ -1,6 +1,6 @@
 #include "ItemObject.hpp"
 
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 
 void ItemObject::load(std::unique_ptr<LoaderParams> const& params)
 {

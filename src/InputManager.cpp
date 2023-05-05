@@ -1,15 +1,15 @@
-#include "InputHandler.hpp"
+#include "InputManager.hpp"
 
 #include "Game.hpp"
 #include "InputDefinitions.hpp"
 
-InputHandler& InputHandler::Instance()
+InputManager& InputManager::Instance()
 {
-    static InputHandler instance{};
+    static InputManager instance{};
     return instance;
 }
 
-InputHandler::InputHandler()
+InputManager::InputManager()
     : keyboard_(nullptr)
     , mouse_(0)
     , mouse_position_(0, 0)
@@ -26,7 +26,7 @@ InputHandler::InputHandler()
     }
 }
 
-void InputHandler::update()
+void InputManager::update()
 {
     int i;
     for (i = 0; i < KEYBOARD_SIZE; ++i) {
@@ -64,7 +64,7 @@ void InputHandler::update()
     }
 }
 
-void InputHandler::onMouseDown(SDL_Event const& event)
+void InputManager::onMouseDown(SDL_Event const& event)
 {
     mouse_ = SDL_GetMouseState(nullptr, nullptr);
 
@@ -78,7 +78,7 @@ void InputHandler::onMouseDown(SDL_Event const& event)
     }
 }
 
-void InputHandler::onMouseUp(SDL_Event const& event)
+void InputManager::onMouseUp(SDL_Event const& event)
 {
     switch (event.button.button) {
     case SDL_BUTTON_LEFT:
@@ -90,7 +90,7 @@ void InputHandler::onMouseUp(SDL_Event const& event)
     }
 }
 
-void InputHandler::onKeyDown(SDL_Event const& event)
+void InputManager::onKeyDown(SDL_Event const& event)
 {
     keyboard_ = SDL_GetKeyboardState(0);
 
@@ -98,7 +98,7 @@ void InputHandler::onKeyDown(SDL_Event const& event)
     is_key_down_[index] = true;
 }
 
-void InputHandler::onKeyUp(SDL_Event const& event)
+void InputManager::onKeyUp(SDL_Event const& event)
 {
     keyboard_ = SDL_GetKeyboardState(0);
 
@@ -106,28 +106,28 @@ void InputHandler::onKeyUp(SDL_Event const& event)
     is_key_up_[index] = true;
 }
 
-void InputHandler::onMouseMove(SDL_Event const& event)
+void InputManager::onMouseMove(SDL_Event const& event)
 {
     mouse_position_.x = event.motion.x;
     mouse_position_.y = event.motion.y;
 }
 
-bool InputHandler::isKeyPressed(const KeyboardKey key) const
+bool InputManager::isKeyPressed(const KeyboardKey key) const
 {
     return keyboard_ != 0 && keyboard_[key] == 1;
 }
 
-bool InputHandler::isKeyDown(const KeyboardKey key) const
+bool InputManager::isKeyDown(const KeyboardKey key) const
 {
     return is_key_down_[key];
 }
 
-bool InputHandler::isKeyUp(const KeyboardKey key) const
+bool InputManager::isKeyUp(const KeyboardKey key) const
 {
     return is_key_up_[key];
 }
 
-void InputHandler::reset()
+void InputManager::reset()
 {
     keyboard_ = nullptr;
     int i;
@@ -143,22 +143,22 @@ void InputHandler::reset()
     }
 }
 
-b2Vec2 InputHandler::getMousePosition() const
+b2Vec2 InputManager::getMousePosition() const
 {
     return mouse_position_;
 }
 
-bool InputHandler::isMouseDown(const MouseButton button) const
+bool InputManager::isMouseDown(const MouseButton button) const
 {
     return is_mouse_down_[button];
 };
 
-bool InputHandler::isMouseUp(const MouseButton button) const
+bool InputManager::isMouseUp(const MouseButton button) const
 {
     return is_mouse_up_[button];
 };
 
-bool InputHandler::isMousePressed(const MouseButton button) const
+bool InputManager::isMousePressed(const MouseButton button) const
 {
     switch (button) {
     case MOUSE_LEFT:
@@ -176,7 +176,7 @@ bool InputHandler::isMousePressed(const MouseButton button) const
     return false;
 }
 
-bool InputHandler::isMouseInside(const Rectangle& rectangle) const
+bool InputManager::isMouseInside(const Rectangle& rectangle) const
 {
     if ((mouse_position_.x >= rectangle.x()) &&
         (mouse_position_.x <= rectangle.x() + rectangle.w()) &&
@@ -187,7 +187,7 @@ bool InputHandler::isMouseInside(const Rectangle& rectangle) const
     return false;
 }
 
-void InputHandler::clean()
+void InputManager::clean()
 {
     reset();
 }

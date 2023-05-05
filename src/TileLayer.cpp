@@ -1,7 +1,7 @@
 #include "TileLayer.hpp"
 #include "Camera.hpp"
 #include "Game.hpp"
-#include "InputHandler.hpp"
+#include "InputManager.hpp"
 #include "Log.hpp"
 #include "TextureManager.hpp"
 

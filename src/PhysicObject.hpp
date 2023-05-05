@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 
 class PhysicObject : public Object
 {

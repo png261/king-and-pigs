@@ -7,7 +7,7 @@
 #include "ItemObject.hpp"
 #include "Log.hpp"
 #include "PhysicObject.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "Pig.hpp"
 
 void ContactListener::realTimeListener(b2Contact* const contactList)

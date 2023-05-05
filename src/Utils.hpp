@@ -1,5 +1,5 @@
 #include <json/json.h>
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "SDL.hpp"
 
 namespace Utils {

@@ -3,8 +3,8 @@
 #include "Button.hpp"
 #include "CONSTANT.hpp"
 #include "Game.hpp"
-#include "GameStateMachine.hpp"
-#include "InputHandler.hpp"
+#include "GameStateManager.hpp"
+#include "InputManager.hpp"
 #include "MainMenuState.hpp"
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
@@ -23,8 +23,8 @@ void WinState::update()
 
 
     if (is_enter_main_menu_) {
-        GameStateMachine::Instance().clean();
-        GameStateMachine::Instance().changeState(std::make_unique<MainMenuState>());
+        GameStateManager::Instance().clean();
+        GameStateManager::Instance().changeState(std::make_unique<MainMenuState>());
         return;
     }
 
@@ -90,7 +90,7 @@ bool WinState::enter()
 bool WinState::exit()
 {
     pause();
-    InputHandler::Instance().reset();
+    InputManager::Instance().reset();
     return true;
 };
 

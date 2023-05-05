@@ -7,7 +7,7 @@
 #include "LoaderParams.hpp"
 #include "Object.hpp"
 #include "PhysicObject.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "VisionObject.hpp"
 
 class GameObject : public PhysicObject

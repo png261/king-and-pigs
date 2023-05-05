@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 #include "Stopwatch.hpp"
 
 class Animation final

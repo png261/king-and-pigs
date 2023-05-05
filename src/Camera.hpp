@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameObject.hpp"
-#include "PhysicWorld.hpp"
+#include "PhysicManager.hpp"
 
 class Camera
 {

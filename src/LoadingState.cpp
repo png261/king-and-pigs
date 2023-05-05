@@ -3,8 +3,8 @@
 #include "Button.hpp"
 #include "CONSTANT.hpp"
 #include "Game.hpp"
-#include "GameStateMachine.hpp"
-#include "InputHandler.hpp"
+#include "GameStateManager.hpp"
+#include "InputManager.hpp"
 #include "Log.hpp"
 #include "PauseState.hpp"
 #include "PlayState.hpp"
@@ -35,7 +35,7 @@ bool LoadingState::enter()
 bool LoadingState::exit()
 {
     pause();
-    InputHandler::Instance().reset();
+    InputManager::Instance().reset();
     return true;
 };
 

@@ -3,7 +3,7 @@
 #include "Bomb.hpp"
 #include "DamageableObject.hpp"
 #include "Game.hpp"
-#include "InputHandler.hpp"
+#include "InputManager.hpp"
 
 PigWithBomb::PigWithBomb()
     : Pig()
