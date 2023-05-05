@@ -10,9 +10,9 @@ class Animation final
 public:
     Animation(
         const std::string& texture_id,
-        const uint width,
-        const uint height,
-        const uint num_frames = 1,
+        const int width,
+        const int height,
+        const int num_frames = 1,
         const bool is_loop = true);
 
     void draw(
@@ -36,13 +36,13 @@ private:
     Stopwatch stopwatch_;
     std::string texture_id_;
 
-    uint width_;
-    uint height_;
-    uint framerate_;
+    int width_;
+    int height_;
+    int framerate_;
 
-    uint num_frames_;
-    uint current_frame_;
-    uint times_looped_;
+    int num_frames_;
+    int current_frame_;
+    int times_looped_;
 
     bool is_running_;
     bool is_finished_;

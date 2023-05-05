@@ -6,9 +6,9 @@
 
 Animation::Animation(
     const std::string& texture_id,
-    const uint width,
-    const uint height,
-    const uint num_frames,
+    const int width,
+    const int height,
+    const int num_frames,
     const bool bLoop)
     : texture_id_(texture_id)
     , width_(width)

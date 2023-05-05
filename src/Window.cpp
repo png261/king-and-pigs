@@ -5,7 +5,7 @@
 #include "CONSTANT.hpp"
 #include "Log.hpp"
 
-Window::Window(const uint width, const uint height, const std::string& title)
+Window::Window(const int width, const int height, const std::string& title)
     : window_(nullptr)
     , renderer_(nullptr)
     , font_(nullptr)
@@ -38,7 +38,7 @@ Window::~Window()
     destroy();
 }
 
-void Window::resize(const std::string& title, const uint width, const uint height)
+void Window::resize(const std::string& title, const int width, const int height)
 {
     // Just in case we already have a window
     destroy();
@@ -146,7 +146,7 @@ void Window::setBackgroundColor(const Color& color)
 
 void Window::delayFramerateIfNeeded()
 {
-    uint delta = framerate_stopwatch_.delta();
+    int delta = framerate_stopwatch_.delta();
 
     if (delta < frame_delay_) {
         SDL_Delay(frame_delay_ - delta);
@@ -217,12 +217,12 @@ SDL_Renderer* Window::getRenderer() const
     return renderer_;
 }
 
-uint Window::getWidth() const
+int Window::getWidth() const
 {
     return width_;
 }
 
-uint Window::getHeight() const
+int Window::getHeight() const
 {
     return height_;
 }

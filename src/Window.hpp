@@ -20,7 +20,7 @@ enum FontStyle {
 class Window final
 {
 public:
-    Window(const uint width, const uint height, const std::string& title = "");
+    Window(const int width, const int height, const std::string& title = "");
     ~Window();
 
     void clear();
@@ -40,7 +40,7 @@ public:
 
     void refresh() const;
 
-    void resize(const std::string& title, const uint width, const uint height);
+    void resize(const std::string& title, const int width, const int height);
 
     void fill(const Color& color);
 
@@ -60,9 +60,9 @@ public:
     void setBackgroundColor(const Color& color = Color(ColorName::BLACK));
     void setTitle(const std::string& title);
 
-    uint getWidth() const;
+    int getWidth() const;
     b2Vec2 getCenter() const;
-    uint getHeight() const;
+    int getHeight() const;
     SDL_Renderer* getRenderer() const;
 
     void delayFramerateIfNeeded();
@@ -72,11 +72,11 @@ private:
     SDL_Renderer* renderer_;
     TTF_Font* font_;
 
-    uint width_;
-    uint height_;
+    int width_;
+    int height_;
 
-    uint framerate_;
-    uint frame_delay_;
+    int framerate_;
+    int frame_delay_;
 
     std::string title_;
     Color background_color_;
