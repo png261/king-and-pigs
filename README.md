@@ -2,41 +2,12 @@
   <a href="https://github.com/png261/king-and-pigs">
     <img src="https://user-images.githubusercontent.com/63899044/226949086-c39646ef-9228-4561-900b-7be8635ea879.png" width="400"/>
   </a>
-  <img src="https://user-images.githubusercontent.com/63899044/226949294-75333ced-5a50-4fac-925c-50c47259b90a.gif"/>
 </div>
 
 # King and Pigs
 
+## Description
 **King and Pigs** is a 2D game written in C++ using the SDL2 libraries, Box2D physics engine, and JsonCpp for level parsing. In this game, the player controls a character who must navigate through various levels and defeat enemies.
-
-## Prerequisites
-
-To build and run the game, you will need the following libraries installed on your system:
-
-
-
-### Linux
-
-To install the prerequisites on Ubuntu, run the following commands in your terminal:
-  ```bash
-  sudo apt-get update
-  sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-gfx-dev libbox2d-dev libjsoncpp-dev
-  ```
-For Arch Linux, run:
-  ```bash
-  sudo pacman -S sdl2 sdl2-image sdl2-mixer sdl2-ttf sdl2_gfx box2d jsoncpp
-  ```
-
-### macOS
-
-On macOS, you can use Homebrew to install these libraries.
-  ```bash
-  brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf sdl2_gfx box2d jsoncpp
-  ```
-
-### Windows
-
-On Windows, you can download the precompiled binaries for each library and install them manually. You can find the binaries on the respective library's website.
 
 ## Installation
 
@@ -49,22 +20,16 @@ To build and run the game, follow these steps:
 
 2. Navigate to the king-and-pigs directory in a terminal or command prompt. Make sure you have installed all the prerequisites, then run the following command to build the game:
   ```
-  make
+  cmake -B build && cmake --build build
   ```
-The binary file will be placed in the `bin/` directory.
+The binary file will be placed in the `build/bin` directory.
 
 3. Run the game by executing the following command:
   ```
-  make run
-  ```
-  Alternatively, you can run the game by executing the binary file:
-  ```
-  ./bin/binary
+  ./build/bin/king-and-pigs
   ```
 
 ## Controls
-The controls for the game are shown in the table below:
-
 | Key                   | Action                           |
 | --------------------- | -------------------------------- |
 | D                     | Move right                       |
