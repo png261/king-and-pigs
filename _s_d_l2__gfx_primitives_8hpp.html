@@ -1,0 +1,3971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SDL2_gfxPrimitives.hpp file | King
+and
+Pigs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">King
+and
+Pigs</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="2">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          SDL2_gfxPrimitives.hpp <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#define-members">Defines</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2bdb83ac58c2e091ef26f720bdeb66bd" class="m-doc">pixelColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw pixel with blending enabled if a&lt;255.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6f4a05ba92bf39420280ee8ccf961e77" class="m-doc">pixelRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw pixel with blending enabled if a&lt;255.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0d1977c09c0bcfe77b4e1a792ce1e79a" class="m-doc">hlineColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 x2,
+              Sint16 y,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw horizontal line with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ace5a96b77edbccba3170852b093503aa" class="m-doc">hlineRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 x2,
+              Sint16 y,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw horizontal line with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af8cf6591ddc81242369e50cb3e159dfe" class="m-doc">vlineColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y1,
+              Sint16 y2,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw vertical line with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a60d71d2bc6e450d8063256ebc37f21f5" class="m-doc">vlineRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y1,
+              Sint16 y2,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw vertical line with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a53b996645c0acdf5cb74c969503e791e" class="m-doc">rectangleColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw rectangle with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa926924c3650d10d6a20cd7e4036a9a4" class="m-doc">rectangleRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw rectangle with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a314698defb7da3f3415ddc5468315d83" class="m-doc">roundedRectangleColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 rad,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw rounded-corner rectangle with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2b54ba16d7e7243fb1921a286156cad9" class="m-doc">roundedRectangleRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 rad,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw rounded-corner rectangle with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5799b0d1e99252b19d9acc77e7a94541" class="m-doc">boxColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw box (filled rectangle) with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a903bb79c5a03077047ff8820df263bd8" class="m-doc">boxRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw box (filled rectangle) with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a13ffcecd9c186d2522ae1e66bdedf8d7" class="m-doc">roundedBoxColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 rad,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw rounded-corner box (filled rectangle) with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3db064ca0f03a2c46852661494ff7a65" class="m-doc">roundedBoxRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 rad,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw rounded-corner box (filled rectangle) with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a84f917eb19ea41b586f1afa9eb4b552c" class="m-doc">lineColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw line with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab56ec3fb82b59f2ab1d1877b6adb3b82" class="m-doc">lineRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw line with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a86ab777f53655a509a3ac3c008941920" class="m-doc">aalineColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw anti-aliased line with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad7074bc1af414cea003712621b1c7d86" class="m-doc">aalineRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw anti-aliased line with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a613c16293c3571b695cc0c60358bb862" class="m-doc">thickLineColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 width,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw a thick line with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a247136a562abec2649718d38f5819b44" class="m-doc">thickLineRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 width,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw a thick line with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af68b52c59d2a7a6b7cc817158941ac54" class="m-doc">circleColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw circle with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1daab46976bf585477be1cfcef2fe1ad" class="m-doc">circleRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw circle with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a493fe37b39da582668431ab7e1e3dbf0" class="m-doc">arcColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Arc with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#acf0091a17501f375f2b55032134b3017" class="m-doc">arcRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Arc with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a46b037505b91133ae3bd18556092a632" class="m-doc">aacircleColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw anti-aliased circle with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa0b0f764826715353e9ca0fe937d0f0f" class="m-doc">aacircleRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw anti-aliased circle with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab973fd9868527fb13078c356d4a9c6f7" class="m-doc">filledCircleColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 r,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw filled circle with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a666bd764e2fe962656e5829d0aad5ba6" class="m-doc">filledCircleRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw filled circle with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9ac841634751689ddb1c26babe10f3f6" class="m-doc">ellipseColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw ellipse with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3ed26f8b2a25cb94a6412aa772f533aa" class="m-doc">ellipseRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw ellipse with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af676a520e9ea0deabe711da842bc1e55" class="m-doc">aaellipseColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw anti-aliased ellipse with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a12e9ff795a5b9996f07f5b0bc4f60f81" class="m-doc">aaellipseRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw anti-aliased ellipse with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa3119e2dd056874c0ca92ded41fea43c" class="m-doc">filledEllipseColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw filled ellipse with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5240918c243c3e60dd8ae1cef50dd529" class="m-doc">filledEllipseRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw filled ellipse with blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9f9070739e72ea242fd48239a4ff48e4" class="m-doc">pieColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw pie (outline) with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3b8baf3eecea4738ac2a1c28af4bfb41" class="m-doc">pieRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw pie (outline) with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a86f189dabaa2a26115ecb819ad7da8e5" class="m-doc">filledPieColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw filled pie with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#adad0f423ae093b5c3cad51a438954a50" class="m-doc">filledPieRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw filled pie with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af4fc0fdb33e57047d9347d3fe7b1bdbd" class="m-doc">trigonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw trigon (triangle outline) with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a152662f6985587d137837086aaa95311" class="m-doc">trigonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw trigon (triangle outline) with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a75bc7cc80beb53452c135e8c1a75d1c5" class="m-doc">aatrigonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw anti-aliased trigon (triangle outline) with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa7fddcf1aa339a825024544fb774aa8f" class="m-doc">aatrigonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw anti-aliased trigon (triangle outline) with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a57fd7355780a114b9d72b1e9591f955d" class="m-doc">filledTrigonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw filled trigon (triangle) with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a273cf4a88abf6c6a5e019b2c58ee2423" class="m-doc">filledTrigonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw filled trigon (triangle) with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3577e5aee374d5176a3587343e11c4aa" class="m-doc">polygonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw polygon with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a69baa68215840bb54ddd0281e6ad63a0" class="m-doc">polygonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw polygon with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a54c28d1e469b52483e952258c2f6f69b" class="m-doc">aapolygonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw anti-aliased polygon with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a18d7838305c636b8462e0ba587d859" class="m-doc">aapolygonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw anti-aliased polygon with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a97308e4f19363baee0e5bdecee3265f1" class="m-doc">filledPolygonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw filled polygon with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab80fe08abcf78a6ce8f037f3fdc15625" class="m-doc">filledPolygonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw filled polygon with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3b4c81592098da506f534d4a81b266f2" class="m-doc">texturedPolygon</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              SDL_Surface* texture,
+              int texture_dx,
+              int texture_dy) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draws a polygon filled with the given texture.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a74d59d17ba21ce5d8c84697989456bfb" class="m-doc">bezierColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              int s,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw a bezier curve with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6cb082e6eb4253d591927c6bf7eba06f" class="m-doc">bezierRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              int s,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw a bezier curve with alpha blending.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#adcbe6b74a9e0fef4165bc7bdb73294ec" class="m-doc">gfxPrimitivesSetFont</a>(</span><span class="m-doc-wrap">const void* fontdata,
+              Uint32 cw,
+              Uint32 ch) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> void</span>
+            </dt>
+            <dd>Sets or resets the current global font data.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2349bb02995a364f6b1069c46a09b7ba" class="m-doc">gfxPrimitivesSetFontRotation</a>(</span><span class="m-doc-wrap">Uint32 rotation) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> void</span>
+            </dt>
+            <dd>Sets current global font character rotation steps.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aaeed3ccb288e032856cff488bdba381d" class="m-doc">characterColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              char c,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw a character of the currently set font.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abff6cc81b9a35e9380e0b02da905714f" class="m-doc">characterRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              char c,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw a character of the currently set font.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a329e9c81b07e5af08d73e3b3d6078bf0" class="m-doc">stringColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              const char* s,
+              Uint32 color) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw a string in the currently set font.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a744afe14139c1c553204a47cc284e478" class="m-doc">stringRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              const char* s,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a) -&gt; <a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int</span>
+            </dt>
+            <dd>Draw a string in the currently set font.</dd>
+          </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt id="ae71449b1cc6e6250b91f539153a7a0d3">
+              <span class="m-doc-wrap-bumper">#define <a href="#ae71449b1cc6e6250b91f539153a7a0d3" class="m-doc-self">M_PI</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a652ca3876e3b17813f0b26b1593e2c5c">
+              <span class="m-doc-wrap-bumper">#define <a href="#a652ca3876e3b17813f0b26b1593e2c5c" class="m-doc-self">SDL2_GFXPRIMITIVES_MAJOR</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a86f87598dd73b7b7cc35ab62738210b2">
+              <span class="m-doc-wrap-bumper">#define <a href="#a86f87598dd73b7b7cc35ab62738210b2" class="m-doc-self">SDL2_GFXPRIMITIVES_MINOR</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5a3b721b25313c7eeade7adeb01ccf77">
+              <span class="m-doc-wrap-bumper">#define <a href="#a5a3b721b25313c7eeade7adeb01ccf77" class="m-doc-self">SDL2_GFXPRIMITIVES_MICRO</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1f7e825b4e02d861504929bf04f2ced2">
+              <span class="m-doc-wrap-bumper">#define <a href="#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc-self">SDL2_GFXPRIMITIVES_SCOPE</a></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a2bdb83ac58c2e091ef26f720bdeb66bd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2bdb83ac58c2e091ef26f720bdeb66bd" class="m-doc-self">pixelColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw pixel with blending enabled if a&lt;255.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X (horizontal) coordinate of the pixel.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y (vertical) coordinate of the pixel.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the pixel to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6f4a05ba92bf39420280ee8ccf961e77"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6f4a05ba92bf39420280ee8ccf961e77" class="m-doc-self">pixelRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw pixel with blending enabled if a&lt;255.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X (horizontal) coordinate of the pixel.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y (vertical) coordinate of the pixel.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red color value of the pixel to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green color value of the pixel to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue color value of the pixel to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the pixel to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0d1977c09c0bcfe77b4e1a792ce1e79a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0d1977c09c0bcfe77b4e1a792ce1e79a" class="m-doc-self">hlineColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 x2,
+              Sint16 y,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw horizontal line with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point (i.e. left) of the line.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point (i.e. right) of the line.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the points of the line.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the line to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ace5a96b77edbccba3170852b093503aa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ace5a96b77edbccba3170852b093503aa" class="m-doc-self">hlineRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 x2,
+              Sint16 y,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw horizontal line with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point (i.e. left) of the line.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point (i.e. right) of the line.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the points of the line.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the line to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the line to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the line to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the line to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af8cf6591ddc81242369e50cb3e159dfe"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8cf6591ddc81242369e50cb3e159dfe" class="m-doc-self">vlineColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y1,
+              Sint16 y2,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw vertical line with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the points of the line.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point (i.e. top) of the line.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point (i.e. bottom) of the line.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the line to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a60d71d2bc6e450d8063256ebc37f21f5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a60d71d2bc6e450d8063256ebc37f21f5" class="m-doc-self">vlineRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y1,
+              Sint16 y2,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw vertical line with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the points of the line.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point (i.e. top) of the line.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point (i.e. bottom) of the line.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the line to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the line to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the line to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the line to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a53b996645c0acdf5cb74c969503e791e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a53b996645c0acdf5cb74c969503e791e" class="m-doc-self">rectangleColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw rectangle with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point (i.e. top right) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point (i.e. top right) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point (i.e. bottom left) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point (i.e. bottom left) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the rectangle to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa926924c3650d10d6a20cd7e4036a9a4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa926924c3650d10d6a20cd7e4036a9a4" class="m-doc-self">rectangleRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw rectangle with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point (i.e. top right) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point (i.e. top right) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point (i.e. bottom left) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point (i.e. bottom left) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the rectangle to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the rectangle to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the rectangle to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the rectangle to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a314698defb7da3f3415ddc5468315d83"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a314698defb7da3f3415ddc5468315d83" class="m-doc-self">roundedRectangleColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 rad,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw rounded-corner rectangle with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point (i.e. top right) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point (i.e. top right) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point (i.e. bottom left) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point (i.e. bottom left) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>The radius of the corner arc.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the rectangle to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2b54ba16d7e7243fb1921a286156cad9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b54ba16d7e7243fb1921a286156cad9" class="m-doc-self">roundedRectangleRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 rad,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw rounded-corner rectangle with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point (i.e. top right) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point (i.e. top right) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point (i.e. bottom left) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point (i.e. bottom left) of the rectangle.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>The radius of the corner arc.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the rectangle to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the rectangle to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the rectangle to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the rectangle to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5799b0d1e99252b19d9acc77e7a94541"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5799b0d1e99252b19d9acc77e7a94541" class="m-doc-self">boxColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw box (filled rectangle) with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point (i.e. top right) of the box.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point (i.e. top right) of the box.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point (i.e. bottom left) of the box.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point (i.e. bottom left) of the box.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the box to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a903bb79c5a03077047ff8820df263bd8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a903bb79c5a03077047ff8820df263bd8" class="m-doc-self">boxRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw box (filled rectangle) with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point (i.e. top right) of the box.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point (i.e. top right) of the box.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point (i.e. bottom left) of the box.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point (i.e. bottom left) of the box.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the box to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the box to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the box to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the box to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a13ffcecd9c186d2522ae1e66bdedf8d7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13ffcecd9c186d2522ae1e66bdedf8d7" class="m-doc-self">roundedBoxColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 rad,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw rounded-corner box (filled rectangle) with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point (i.e. top right) of the box.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point (i.e. top right) of the box.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point (i.e. bottom left) of the box.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point (i.e. bottom left) of the box.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>The radius of the corner arcs of the box.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the box to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3db064ca0f03a2c46852661494ff7a65"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3db064ca0f03a2c46852661494ff7a65" class="m-doc-self">roundedBoxRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 rad,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw rounded-corner box (filled rectangle) with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point (i.e. top right) of the box.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point (i.e. top right) of the box.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point (i.e. bottom left) of the box.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point (i.e. bottom left) of the box.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>The radius of the corner arcs of the box.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the box to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the box to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the box to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the box to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a84f917eb19ea41b586f1afa9eb4b552c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a84f917eb19ea41b586f1afa9eb4b552c" class="m-doc-self">lineColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw line with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the line.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the line.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the line.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the seond point of the line.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the line to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab56ec3fb82b59f2ab1d1877b6adb3b82"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab56ec3fb82b59f2ab1d1877b6adb3b82" class="m-doc-self">lineRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw line with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the line.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the line.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the line.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point of the line.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the line to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the line to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the line to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the line to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a86ab777f53655a509a3ac3c008941920"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a86ab777f53655a509a3ac3c008941920" class="m-doc-self">aalineColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw anti-aliased line with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the aa-line.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the aa-line.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the aa-line.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point of the aa-line.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the aa-line to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad7074bc1af414cea003712621b1c7d86"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad7074bc1af414cea003712621b1c7d86" class="m-doc-self">aalineRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw anti-aliased line with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the aa-line.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the aa-line.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the aa-line.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point of the aa-line.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the aa-line to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the aa-line to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the aa-line to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the aa-line to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a613c16293c3571b695cc0c60358bb862"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a613c16293c3571b695cc0c60358bb862" class="m-doc-self">thickLineColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 width,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw a thick line with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the line.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the line.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the line.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point of the line.</td>
+                </tr>
+                <tr>
+                  <td>width</td>
+                  <td>Width of the line in pixels. Must be &gt;0.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the line to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a247136a562abec2649718d38f5819b44"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a247136a562abec2649718d38f5819b44" class="m-doc-self">thickLineRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Uint8 width,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw a thick line with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the line.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the line.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the line.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point of the line.</td>
+                </tr>
+                <tr>
+                  <td>width</td>
+                  <td>Width of the line in pixels. Must be &gt;0.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the character to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the character to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the character to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the character to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af68b52c59d2a7a6b7cc817158941ac54"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af68b52c59d2a7a6b7cc817158941ac54" class="m-doc-self">circleColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw circle with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the circle.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the circle.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>Radius in pixels of the circle.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the circle to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1daab46976bf585477be1cfcef2fe1ad"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1daab46976bf585477be1cfcef2fe1ad" class="m-doc-self">circleRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw circle with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the circle.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the circle.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>Radius in pixels of the circle.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the circle to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the circle to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the circle to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the circle to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a493fe37b39da582668431ab7e1e3dbf0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a493fe37b39da582668431ab7e1e3dbf0" class="m-doc-self">arcColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Arc with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the arc.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the arc.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>Radius in pixels of the arc.</td>
+                </tr>
+                <tr>
+                  <td>start</td>
+                  <td>Starting radius in degrees of the arc. 0 degrees is down, increasing counterclockwise.</td>
+                </tr>
+                <tr>
+                  <td>end</td>
+                  <td>Ending radius in degrees of the arc. 0 degrees is down, increasing counterclockwise.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the arc to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="acf0091a17501f375f2b55032134b3017"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acf0091a17501f375f2b55032134b3017" class="m-doc-self">arcRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Arc with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the arc.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the arc.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>Radius in pixels of the arc.</td>
+                </tr>
+                <tr>
+                  <td>start</td>
+                  <td>Starting radius in degrees of the arc. 0 degrees is down, increasing counterclockwise.</td>
+                </tr>
+                <tr>
+                  <td>end</td>
+                  <td>Ending radius in degrees of the arc. 0 degrees is down, increasing counterclockwise.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the arc to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the arc to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the arc to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the arc to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a46b037505b91133ae3bd18556092a632"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a46b037505b91133ae3bd18556092a632" class="m-doc-self">aacircleColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw anti-aliased circle with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the aa-circle.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the aa-circle.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>Radius in pixels of the aa-circle.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the aa-circle to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa0b0f764826715353e9ca0fe937d0f0f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa0b0f764826715353e9ca0fe937d0f0f" class="m-doc-self">aacircleRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw anti-aliased circle with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the aa-circle.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the aa-circle.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>Radius in pixels of the aa-circle.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the aa-circle to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the aa-circle to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the aa-circle to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the aa-circle to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab973fd9868527fb13078c356d4a9c6f7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab973fd9868527fb13078c356d4a9c6f7" class="m-doc-self">filledCircleColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 r,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw filled circle with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the filled circle.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the filled circle.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the filled circle to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a666bd764e2fe962656e5829d0aad5ba6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a666bd764e2fe962656e5829d0aad5ba6" class="m-doc-self">filledCircleRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw filled circle with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the filled circle.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the filled circle.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>Radius in pixels of the filled circle.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the filled circle to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the filled circle to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the filled circle to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the filled circle to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9ac841634751689ddb1c26babe10f3f6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9ac841634751689ddb1c26babe10f3f6" class="m-doc-self">ellipseColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw ellipse with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the ellipse.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the ellipse.</td>
+                </tr>
+                <tr>
+                  <td>rx</td>
+                  <td>Horizontal radius in pixels of the ellipse.</td>
+                </tr>
+                <tr>
+                  <td>ry</td>
+                  <td>Vertical radius in pixels of the ellipse.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the ellipse to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3ed26f8b2a25cb94a6412aa772f533aa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3ed26f8b2a25cb94a6412aa772f533aa" class="m-doc-self">ellipseRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw ellipse with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the ellipse.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the ellipse.</td>
+                </tr>
+                <tr>
+                  <td>rx</td>
+                  <td>Horizontal radius in pixels of the ellipse.</td>
+                </tr>
+                <tr>
+                  <td>ry</td>
+                  <td>Vertical radius in pixels of the ellipse.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the ellipse to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the ellipse to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the ellipse to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the ellipse to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af676a520e9ea0deabe711da842bc1e55"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af676a520e9ea0deabe711da842bc1e55" class="m-doc-self">aaellipseColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw anti-aliased ellipse with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the aa-ellipse.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the aa-ellipse.</td>
+                </tr>
+                <tr>
+                  <td>rx</td>
+                  <td>Horizontal radius in pixels of the aa-ellipse.</td>
+                </tr>
+                <tr>
+                  <td>ry</td>
+                  <td>Vertical radius in pixels of the aa-ellipse.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the aa-ellipse to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a12e9ff795a5b9996f07f5b0bc4f60f81"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a12e9ff795a5b9996f07f5b0bc4f60f81" class="m-doc-self">aaellipseRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw anti-aliased ellipse with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the aa-ellipse.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the aa-ellipse.</td>
+                </tr>
+                <tr>
+                  <td>rx</td>
+                  <td>Horizontal radius in pixels of the aa-ellipse.</td>
+                </tr>
+                <tr>
+                  <td>ry</td>
+                  <td>Vertical radius in pixels of the aa-ellipse.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the aa-ellipse to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the aa-ellipse to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the aa-ellipse to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the aa-ellipse to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa3119e2dd056874c0ca92ded41fea43c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa3119e2dd056874c0ca92ded41fea43c" class="m-doc-self">filledEllipseColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw filled ellipse with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the filled ellipse.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the filled ellipse.</td>
+                </tr>
+                <tr>
+                  <td>rx</td>
+                  <td>Horizontal radius in pixels of the filled ellipse.</td>
+                </tr>
+                <tr>
+                  <td>ry</td>
+                  <td>Vertical radius in pixels of the filled ellipse.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the filled ellipse to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5240918c243c3e60dd8ae1cef50dd529"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5240918c243c3e60dd8ae1cef50dd529" class="m-doc-self">filledEllipseRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rx,
+              Sint16 ry,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw filled ellipse with blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the filled ellipse.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the filled ellipse.</td>
+                </tr>
+                <tr>
+                  <td>rx</td>
+                  <td>Horizontal radius in pixels of the filled ellipse.</td>
+                </tr>
+                <tr>
+                  <td>ry</td>
+                  <td>Vertical radius in pixels of the filled ellipse.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the filled ellipse to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the filled ellipse to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the filled ellipse to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the filled ellipse to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9f9070739e72ea242fd48239a4ff48e4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9f9070739e72ea242fd48239a4ff48e4" class="m-doc-self">pieColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw pie (outline) with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the pie.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the pie.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>Radius in pixels of the pie.</td>
+                </tr>
+                <tr>
+                  <td>start</td>
+                  <td>Starting radius in degrees of the pie.</td>
+                </tr>
+                <tr>
+                  <td>end</td>
+                  <td>Ending radius in degrees of the pie.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the pie to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3b8baf3eecea4738ac2a1c28af4bfb41"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b8baf3eecea4738ac2a1c28af4bfb41" class="m-doc-self">pieRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw pie (outline) with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the pie.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the pie.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>Radius in pixels of the pie.</td>
+                </tr>
+                <tr>
+                  <td>start</td>
+                  <td>Starting radius in degrees of the pie.</td>
+                </tr>
+                <tr>
+                  <td>end</td>
+                  <td>Ending radius in degrees of the pie.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the pie to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the pie to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the pie to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the pie to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a86f189dabaa2a26115ecb819ad7da8e5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a86f189dabaa2a26115ecb819ad7da8e5" class="m-doc-self">filledPieColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw filled pie with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the filled pie.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the filled pie.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>Radius in pixels of the filled pie.</td>
+                </tr>
+                <tr>
+                  <td>start</td>
+                  <td>Starting radius in degrees of the filled pie.</td>
+                </tr>
+                <tr>
+                  <td>end</td>
+                  <td>Ending radius in degrees of the filled pie.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the filled pie to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adad0f423ae093b5c3cad51a438954a50"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adad0f423ae093b5c3cad51a438954a50" class="m-doc-self">filledPieRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              Sint16 rad,
+              Sint16 start,
+              Sint16 end,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw filled pie with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X coordinate of the center of the filled pie.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y coordinate of the center of the filled pie.</td>
+                </tr>
+                <tr>
+                  <td>rad</td>
+                  <td>Radius in pixels of the filled pie.</td>
+                </tr>
+                <tr>
+                  <td>start</td>
+                  <td>Starting radius in degrees of the filled pie.</td>
+                </tr>
+                <tr>
+                  <td>end</td>
+                  <td>Ending radius in degrees of the filled pie.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the filled pie to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the filled pie to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the filled pie to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the filled pie to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af4fc0fdb33e57047d9347d3fe7b1bdbd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af4fc0fdb33e57047d9347d3fe7b1bdbd" class="m-doc-self">trigonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw trigon (triangle outline) with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>x3</td>
+                  <td>X coordinate of the third point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>y3</td>
+                  <td>Y coordinate of the third point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the trigon to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Note: Creates vertex array and uses polygon routine to render.</p>
+          </div></section>
+          <section class="m-doc-details" id="a152662f6985587d137837086aaa95311"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a152662f6985587d137837086aaa95311" class="m-doc-self">trigonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw trigon (triangle outline) with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>x3</td>
+                  <td>X coordinate of the third point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>y3</td>
+                  <td>Y coordinate of the third point of the trigon.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the trigon to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the trigon to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the trigon to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the trigon to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a75bc7cc80beb53452c135e8c1a75d1c5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a75bc7cc80beb53452c135e8c1a75d1c5" class="m-doc-self">aatrigonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw anti-aliased trigon (triangle outline) with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>x3</td>
+                  <td>X coordinate of the third point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>y3</td>
+                  <td>Y coordinate of the third point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the aa-trigon to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Note: Creates vertex array and uses aapolygon routine to render.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa7fddcf1aa339a825024544fb774aa8f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa7fddcf1aa339a825024544fb774aa8f" class="m-doc-self">aatrigonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw anti-aliased trigon (triangle outline) with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>x3</td>
+                  <td>X coordinate of the third point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>y3</td>
+                  <td>Y coordinate of the third point of the aa-trigon.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the aa-trigon to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the aa-trigon to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the aa-trigon to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the aa-trigon to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a57fd7355780a114b9d72b1e9591f955d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a57fd7355780a114b9d72b1e9591f955d" class="m-doc-self">filledTrigonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw filled trigon (triangle) with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>x3</td>
+                  <td>X coordinate of the third point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>y3</td>
+                  <td>Y coordinate of the third point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the filled trigon to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Note: Creates vertex array and uses aapolygon routine to render.</p>
+          </div></section>
+          <section class="m-doc-details" id="a273cf4a88abf6c6a5e019b2c58ee2423"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a273cf4a88abf6c6a5e019b2c58ee2423" class="m-doc-self">filledTrigonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x1,
+              Sint16 y1,
+              Sint16 x2,
+              Sint16 y2,
+              Sint16 x3,
+              Sint16 y3,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw filled trigon (triangle) with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>X coordinate of the first point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>y1</td>
+                  <td>Y coordinate of the first point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>X coordinate of the second point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>y2</td>
+                  <td>Y coordinate of the second point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>x3</td>
+                  <td>X coordinate of the third point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>y3</td>
+                  <td>Y coordinate of the third point of the filled trigon.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the filled trigon to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the filled trigon to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the filled trigon to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the filled trigon to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Note: Creates vertex array and uses aapolygon routine to render.</p>
+          </div></section>
+          <section class="m-doc-details" id="a3577e5aee374d5176a3587343e11c4aa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3577e5aee374d5176a3587343e11c4aa" class="m-doc-self">polygonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw polygon with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>vx</td>
+                  <td>Vertex array containing X coordinates of the points of the polygon.</td>
+                </tr>
+                <tr>
+                  <td>vy</td>
+                  <td>Vertex array containing Y coordinates of the points of the polygon.</td>
+                </tr>
+                <tr>
+                  <td>n</td>
+                  <td>Number of points in the vertex array. Minimum number is 3.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the polygon to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a69baa68215840bb54ddd0281e6ad63a0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a69baa68215840bb54ddd0281e6ad63a0" class="m-doc-self">polygonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw polygon with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>vx</td>
+                  <td>Vertex array containing X coordinates of the points of the polygon.</td>
+                </tr>
+                <tr>
+                  <td>vy</td>
+                  <td>Vertex array containing Y coordinates of the points of the polygon.</td>
+                </tr>
+                <tr>
+                  <td>n</td>
+                  <td>Number of points in the vertex array. Minimum number is 3.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the polygon to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the polygon to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the polygon to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the polygon to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a54c28d1e469b52483e952258c2f6f69b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a54c28d1e469b52483e952258c2f6f69b" class="m-doc-self">aapolygonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw anti-aliased polygon with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>vx</td>
+                  <td>Vertex array containing X coordinates of the points of the aa-polygon.</td>
+                </tr>
+                <tr>
+                  <td>vy</td>
+                  <td>Vertex array containing Y coordinates of the points of the aa-polygon.</td>
+                </tr>
+                <tr>
+                  <td>n</td>
+                  <td>Number of points in the vertex array. Minimum number is 3.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the aa-polygon to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6a18d7838305c636b8462e0ba587d859"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a18d7838305c636b8462e0ba587d859" class="m-doc-self">aapolygonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw anti-aliased polygon with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>vx</td>
+                  <td>Vertex array containing X coordinates of the points of the aa-polygon.</td>
+                </tr>
+                <tr>
+                  <td>vy</td>
+                  <td>Vertex array containing Y coordinates of the points of the aa-polygon.</td>
+                </tr>
+                <tr>
+                  <td>n</td>
+                  <td>Number of points in the vertex array. Minimum number is 3.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the aa-polygon to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the aa-polygon to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the aa-polygon to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the aa-polygon to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a97308e4f19363baee0e5bdecee3265f1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a97308e4f19363baee0e5bdecee3265f1" class="m-doc-self">filledPolygonColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw filled polygon with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>vx</td>
+                  <td>Vertex array containing X coordinates of the points of the filled polygon.</td>
+                </tr>
+                <tr>
+                  <td>vy</td>
+                  <td>Vertex array containing Y coordinates of the points of the filled polygon.</td>
+                </tr>
+                <tr>
+                  <td>n</td>
+                  <td>Number of points in the vertex array. Minimum number is 3.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the filled polygon to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab80fe08abcf78a6ce8f037f3fdc15625"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab80fe08abcf78a6ce8f037f3fdc15625" class="m-doc-self">filledPolygonRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw filled polygon with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>vx</td>
+                  <td>Vertex array containing X coordinates of the points of the filled polygon.</td>
+                </tr>
+                <tr>
+                  <td>vy</td>
+                  <td>Vertex array containing Y coordinates of the points of the filled polygon.</td>
+                </tr>
+                <tr>
+                  <td>n</td>
+                  <td>Number of points in the vertex array. Minimum number is 3.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the filled polygon to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the filled polygon to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the filed polygon to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the filled polygon to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3b4c81592098da506f534d4a81b266f2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b4c81592098da506f534d4a81b266f2" class="m-doc-self">texturedPolygon</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              SDL_Surface* texture,
+              int texture_dx,
+              int texture_dy)</span></span>
+            </h3>
+            <p>Draws a polygon filled with the given texture.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>vx</td>
+                  <td>array of x vector components</td>
+                </tr>
+                <tr>
+                  <td>vy</td>
+                  <td>array of x vector components</td>
+                </tr>
+                <tr>
+                  <td>n</td>
+                  <td>the amount of vectors in the vx and vy array</td>
+                </tr>
+                <tr>
+                  <td>texture</td>
+                  <td>the sdl surface to use to fill the polygon</td>
+                </tr>
+                <tr>
+                  <td>texture_dx</td>
+                  <td>the offset of the texture relative to the screeen. if you move the polygon 10 pixels to the left and want the texture to apear the same you need to increase the texture_dx value</td>
+                </tr>
+                <tr>
+                  <td>texture_dy</td>
+                  <td>see texture_dx</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This standard version is calling multithreaded versions with NULL cache parameters.</p>
+          </div></section>
+          <section class="m-doc-details" id="a74d59d17ba21ce5d8c84697989456bfb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a74d59d17ba21ce5d8c84697989456bfb" class="m-doc-self">bezierColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              int s,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw a bezier curve with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>vx</td>
+                  <td>Vertex array containing X coordinates of the points of the bezier curve.</td>
+                </tr>
+                <tr>
+                  <td>vy</td>
+                  <td>Vertex array containing Y coordinates of the points of the bezier curve.</td>
+                </tr>
+                <tr>
+                  <td>n</td>
+                  <td>Number of points in the vertex array. Minimum number is 3.</td>
+                </tr>
+                <tr>
+                  <td>s</td>
+                  <td>Number of steps for the interpolation. Minimum number is 2.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the bezier curve to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6cb082e6eb4253d591927c6bf7eba06f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6cb082e6eb4253d591927c6bf7eba06f" class="m-doc-self">bezierRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              const Sint16* vx,
+              const Sint16* vy,
+              int n,
+              int s,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw a bezier curve with alpha blending.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>vx</td>
+                  <td>Vertex array containing X coordinates of the points of the bezier curve.</td>
+                </tr>
+                <tr>
+                  <td>vy</td>
+                  <td>Vertex array containing Y coordinates of the points of the bezier curve.</td>
+                </tr>
+                <tr>
+                  <td>n</td>
+                  <td>Number of points in the vertex array. Minimum number is 3.</td>
+                </tr>
+                <tr>
+                  <td>s</td>
+                  <td>Number of steps for the interpolation. Minimum number is 2.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the bezier curve to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the bezier curve to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the bezier curve to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the bezier curve to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adcbe6b74a9e0fef4165bc7bdb73294ec"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adcbe6b74a9e0fef4165bc7bdb73294ec" class="m-doc-self">gfxPrimitivesSetFont</a>(</span><span class="m-doc-wrap">const void* fontdata,
+              Uint32 cw,
+              Uint32 ch)</span></span>
+            </h3>
+            <p>Sets or resets the current global font data.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">fontdata</td>
+                  <td>Pointer to array of font data. Set to NULL, to reset global font to the default 8x8 font.</td>
+                </tr>
+                <tr>
+                  <td>cw</td>
+                  <td>Width of character in bytes. Ignored if fontdata==NULL.</td>
+                </tr>
+                <tr>
+                  <td>ch</td>
+                  <td>Height of character in bytes. Ignored if fontdata==NULL.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The font data array is organized in follows: [fontdata] = [character 0][character 1]...[character 255] where [character n] = [byte 1 row 1][byte 2 row 1]...[byte {pitch} row 1][byte 1 row 2] ...[byte {pitch} row height] where [byte n] = [bit 0]...[bit 7] where [bit n] = [0 for transparent pixel|1 for colored pixel]</p>
+          </div></section>
+          <section class="m-doc-details" id="a2349bb02995a364f6b1069c46a09b7ba"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2349bb02995a364f6b1069c46a09b7ba" class="m-doc-self">gfxPrimitivesSetFontRotation</a>(</span><span class="m-doc-wrap">Uint32 rotation)</span></span>
+            </h3>
+            <p>Sets current global font character rotation steps.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rotation</td>
+                  <td>Number of 90deg clockwise steps to rotate</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Default is 0 (no rotation). 1 = 90deg clockwise. 2 = 180deg clockwise. 3 = 270deg clockwise. Changing the rotation, will reset the character cache.</p>
+          </div></section>
+          <section class="m-doc-details" id="aaeed3ccb288e032856cff488bdba381d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaeed3ccb288e032856cff488bdba381d" class="m-doc-self">characterColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              char c,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw a character of the currently set font.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X (horizontal) coordinate of the upper left corner of the character.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y (vertical) coordinate of the upper left corner of the character.</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>The character to draw.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the character to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abff6cc81b9a35e9380e0b02da905714f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abff6cc81b9a35e9380e0b02da905714f" class="m-doc-self">characterRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              char c,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw a character of the currently set font.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The Renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X (horizontal) coordinate of the upper left corner of the character.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y (vertical) coordinate of the upper left corner of the character.</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>The character to draw.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the character to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the character to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the character to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the character to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a329e9c81b07e5af08d73e3b3d6078bf0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a329e9c81b07e5af08d73e3b3d6078bf0" class="m-doc-self">stringColor</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              const char* s,
+              Uint32 color)</span></span>
+            </h3>
+            <p>Draw a string in the currently set font.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X (horizontal) coordinate of the upper left corner of the string.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y (vertical) coordinate of the upper left corner of the string.</td>
+                </tr>
+                <tr>
+                  <td>s</td>
+                  <td>The string to draw.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>The color value of the string to draw (0xRRGGBBAA).</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The spacing between consequtive characters in the string is the fixed number of pixels of the character width of the current global font.</p>
+          </div></section>
+          <section class="m-doc-details" id="a744afe14139c1c553204a47cc284e478"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__gfx_primitives_8hpp.html#a1f7e825b4e02d861504929bf04f2ced2" class="m-doc">SDL2_<wbr />GFXPRIMITIVES_<wbr />SCOPE</a> int </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a744afe14139c1c553204a47cc284e478" class="m-doc-self">stringRGBA</a>(</span><span class="m-doc-wrap">SDL_Renderer* renderer,
+              Sint16 x,
+              Sint16 y,
+              const char* s,
+              Uint8 r,
+              Uint8 g,
+              Uint8 b,
+              Uint8 a)</span></span>
+            </h3>
+            <p>Draw a string in the currently set font.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderer</td>
+                  <td>The renderer to draw on.</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>X (horizontal) coordinate of the upper left corner of the string.</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>Y (vertical) coordinate of the upper left corner of the string.</td>
+                </tr>
+                <tr>
+                  <td>s</td>
+                  <td>The string to draw.</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>The red value of the string to draw.</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>The green value of the string to draw.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>The blue value of the string to draw.</td>
+                </tr>
+                <tr>
+                  <td>a</td>
+                  <td>The alpha value of the string to draw.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Returns 0 on success, -1 on failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>King
+and
+Pigs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.6 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

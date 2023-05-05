@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SDL2_rotozoom.hpp file | King
+and
+Pigs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">King
+and
+Pigs</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="2">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          SDL2_rotozoom.hpp <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#define-members">Defines</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a5573d553a90abfb9c6de31c6326dab" class="m-doc">rotozoomSurface</a>(</span><span class="m-doc-wrap">SDL_Surface* src,
+              double angle,
+              double zoom,
+              int smooth) -&gt; <a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> SDL_Surface*</span>
+            </dt>
+            <dd>Rotates and zooms a surface and optional anti-aliasing.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a85c88ad53ae9208146cc7edc0833254d" class="m-doc">rotozoomSurfaceXY</a>(</span><span class="m-doc-wrap">SDL_Surface* src,
+              double angle,
+              double zoomx,
+              double zoomy,
+              int smooth) -&gt; <a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> SDL_Surface*</span>
+            </dt>
+            <dd>Rotates and zooms a surface with different horizontal and vertival scaling factors and optional anti-aliasing.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9097c513174e2d97603292c08a9db923" class="m-doc">rotozoomSurfaceSize</a>(</span><span class="m-doc-wrap">int width,
+              int height,
+              double angle,
+              double zoom,
+              int* dstwidth,
+              int* dstheight) -&gt; <a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> void</span>
+            </dt>
+            <dd>Returns the size of the resulting target surface for a <a href="_s_d_l2__rotozoom_8cpp.html#a3364620bf93ca53d27322bb1250a2c86" class="m-doc">rotozoomSurface()</a> call.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa0126562efa572575e3962fe51d69e7c" class="m-doc">rotozoomSurfaceSizeXY</a>(</span><span class="m-doc-wrap">int width,
+              int height,
+              double angle,
+              double zoomx,
+              double zoomy,
+              int* dstwidth,
+              int* dstheight) -&gt; <a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> void</span>
+            </dt>
+            <dd>Returns the size of the resulting target surface for a <a href="_s_d_l2__rotozoom_8cpp.html#a00e6a5c42d941d3be1972534d95f5431" class="m-doc">rotozoomSurfaceXY()</a> call.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a908c167a105d74d8a771ecfe029d03a8" class="m-doc">zoomSurface</a>(</span><span class="m-doc-wrap">SDL_Surface* src,
+              double zoomx,
+              double zoomy,
+              int smooth) -&gt; <a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> SDL_Surface*</span>
+            </dt>
+            <dd>Zoom a surface by independent horizontal and vertical factors with optional smoothing.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a87a121da75a099fd980295c759a7005d" class="m-doc">zoomSurfaceSize</a>(</span><span class="m-doc-wrap">int width,
+              int height,
+              double zoomx,
+              double zoomy,
+              int* dstwidth,
+              int* dstheight) -&gt; <a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> void</span>
+            </dt>
+            <dd>Calculates the size of the target surface for a <a href="_s_d_l2__rotozoom_8cpp.html#a5c6382cf358b1faae6ae3a09839df53f" class="m-doc">zoomSurface()</a> call.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac19a85174c3bc202d62ab112e752fccc" class="m-doc">shrinkSurface</a>(</span><span class="m-doc-wrap">SDL_Surface* src,
+              int factorx,
+              int factory) -&gt; <a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> SDL_Surface*</span>
+            </dt>
+            <dd>Shrink a surface by an integer ratio using averaging.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad01481193e22c671e691a2b625333331" class="m-doc">rotateSurface90Degrees</a>(</span><span class="m-doc-wrap">SDL_Surface* src,
+              int numClockwiseTurns) -&gt; <a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> SDL_Surface*</span>
+            </dt>
+            <dd>Rotates a 8/16/24/32 bit surface in increments of 90 degrees.</dd>
+          </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
+            <dt id="ae71449b1cc6e6250b91f539153a7a0d3">
+              <span class="m-doc-wrap-bumper">#define <a href="#ae71449b1cc6e6250b91f539153a7a0d3" class="m-doc-self">M_PI</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6541cd06edcce77d8a6f1c6350c988af">
+              <span class="m-doc-wrap-bumper">#define <a href="#a6541cd06edcce77d8a6f1c6350c988af" class="m-doc-self">SMOOTHING_OFF</a></span>
+            </dt>
+            <dd>Disable anti-aliasing (no smoothing).</dd>
+            <dt id="abeb6ae7618fcb315d0399fe65849a2e8">
+              <span class="m-doc-wrap-bumper">#define <a href="#abeb6ae7618fcb315d0399fe65849a2e8" class="m-doc-self">SMOOTHING_ON</a></span>
+            </dt>
+            <dd>Enable anti-aliasing (smoothing).</dd>
+            <dt id="ab3316f8a2f78ed696bbe0242c75b6ee7">
+              <span class="m-doc-wrap-bumper">#define <a href="#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc-self">SDL2_ROTOZOOM_SCOPE</a></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a6a5573d553a90abfb9c6de31c6326dab"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> SDL_Surface* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a5573d553a90abfb9c6de31c6326dab" class="m-doc-self">rotozoomSurface</a>(</span><span class="m-doc-wrap">SDL_Surface* src,
+              double angle,
+              double zoom,
+              int smooth)</span></span>
+            </h3>
+            <p>Rotates and zooms a surface and optional anti-aliasing.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">src</td>
+                  <td>The surface to rotozoom.</td>
+                </tr>
+                <tr>
+                  <td>angle</td>
+                  <td>The angle to rotate in degrees.</td>
+                </tr>
+                <tr>
+                  <td>zoom</td>
+                  <td>The scaling factor.</td>
+                </tr>
+                <tr>
+                  <td>smooth</td>
+                  <td>Antialiasing flag; set to SMOOTHING_ON to enable.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The new rotozoomed surface.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Rotates and zoomes a 32bit or 8bit &#x27;src&#x27; surface to newly created &#x27;dst&#x27; surface. &#x27;angle&#x27; is the rotation in degrees and &#x27;zoom&#x27; a scaling factor. If &#x27;smooth&#x27; is set then the destination 32bit surface is anti-aliased. If the surface is not 8bit or 32bit RGBA/ABGR it will be converted into a 32bit RGBA format on the fly.</p>
+          </div></section>
+          <section class="m-doc-details" id="a85c88ad53ae9208146cc7edc0833254d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> SDL_Surface* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a85c88ad53ae9208146cc7edc0833254d" class="m-doc-self">rotozoomSurfaceXY</a>(</span><span class="m-doc-wrap">SDL_Surface* src,
+              double angle,
+              double zoomx,
+              double zoomy,
+              int smooth)</span></span>
+            </h3>
+            <p>Rotates and zooms a surface with different horizontal and vertival scaling factors and optional anti-aliasing.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">src</td>
+                  <td>The surface to rotozoom.</td>
+                </tr>
+                <tr>
+                  <td>angle</td>
+                  <td>The angle to rotate in degrees.</td>
+                </tr>
+                <tr>
+                  <td>zoomx</td>
+                  <td>The horizontal scaling factor.</td>
+                </tr>
+                <tr>
+                  <td>zoomy</td>
+                  <td>The vertical scaling factor.</td>
+                </tr>
+                <tr>
+                  <td>smooth</td>
+                  <td>Antialiasing flag; set to SMOOTHING_ON to enable.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The new rotozoomed surface.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Rotates and zooms a 32bit or 8bit &#x27;src&#x27; surface to newly created &#x27;dst&#x27; surface. &#x27;angle&#x27; is the rotation in degrees, &#x27;zoomx and &#x27;zoomy&#x27; scaling factors. If &#x27;smooth&#x27; is set then the destination 32bit surface is anti-aliased. If the surface is not 8bit or 32bit RGBA/ABGR it will be converted into a 32bit RGBA format on the fly.</p>
+          </div></section>
+          <section class="m-doc-details" id="a9097c513174e2d97603292c08a9db923"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9097c513174e2d97603292c08a9db923" class="m-doc-self">rotozoomSurfaceSize</a>(</span><span class="m-doc-wrap">int width,
+              int height,
+              double angle,
+              double zoom,
+              int* dstwidth,
+              int* dstheight)</span></span>
+            </h3>
+            <p>Returns the size of the resulting target surface for a <a href="_s_d_l2__rotozoom_8cpp.html#a3364620bf93ca53d27322bb1250a2c86" class="m-doc">rotozoomSurface()</a> call.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">width</td>
+                  <td>The source surface width.</td>
+                </tr>
+                <tr>
+                  <td>height</td>
+                  <td>The source surface height.</td>
+                </tr>
+                <tr>
+                  <td>angle</td>
+                  <td>The angle to rotate in degrees.</td>
+                </tr>
+                <tr>
+                  <td>zoom</td>
+                  <td>The scaling factor.</td>
+                </tr>
+                <tr>
+                  <td>dstwidth</td>
+                  <td>The calculated width of the rotozoomed destination surface.</td>
+                </tr>
+                <tr>
+                  <td>dstheight</td>
+                  <td>The calculated height of the rotozoomed destination surface.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa0126562efa572575e3962fe51d69e7c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa0126562efa572575e3962fe51d69e7c" class="m-doc-self">rotozoomSurfaceSizeXY</a>(</span><span class="m-doc-wrap">int width,
+              int height,
+              double angle,
+              double zoomx,
+              double zoomy,
+              int* dstwidth,
+              int* dstheight)</span></span>
+            </h3>
+            <p>Returns the size of the resulting target surface for a <a href="_s_d_l2__rotozoom_8cpp.html#a00e6a5c42d941d3be1972534d95f5431" class="m-doc">rotozoomSurfaceXY()</a> call.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">width</td>
+                  <td>The source surface width.</td>
+                </tr>
+                <tr>
+                  <td>height</td>
+                  <td>The source surface height.</td>
+                </tr>
+                <tr>
+                  <td>angle</td>
+                  <td>The angle to rotate in degrees.</td>
+                </tr>
+                <tr>
+                  <td>zoomx</td>
+                  <td>The horizontal scaling factor.</td>
+                </tr>
+                <tr>
+                  <td>zoomy</td>
+                  <td>The vertical scaling factor.</td>
+                </tr>
+                <tr>
+                  <td>dstwidth</td>
+                  <td>The calculated width of the rotozoomed destination surface.</td>
+                </tr>
+                <tr>
+                  <td>dstheight</td>
+                  <td>The calculated height of the rotozoomed destination surface.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a908c167a105d74d8a771ecfe029d03a8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> SDL_Surface* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a908c167a105d74d8a771ecfe029d03a8" class="m-doc-self">zoomSurface</a>(</span><span class="m-doc-wrap">SDL_Surface* src,
+              double zoomx,
+              double zoomy,
+              int smooth)</span></span>
+            </h3>
+            <p>Zoom a surface by independent horizontal and vertical factors with optional smoothing.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">src</td>
+                  <td>The surface to zoom.</td>
+                </tr>
+                <tr>
+                  <td>zoomx</td>
+                  <td>The horizontal zoom factor.</td>
+                </tr>
+                <tr>
+                  <td>zoomy</td>
+                  <td>The vertical zoom factor.</td>
+                </tr>
+                <tr>
+                  <td>smooth</td>
+                  <td>Antialiasing flag; set to SMOOTHING_ON to enable.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The new, zoomed surface.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Zooms a 32bit or 8bit &#x27;src&#x27; surface to newly created &#x27;dst&#x27; surface. &#x27;zoomx&#x27; and &#x27;zoomy&#x27; are scaling factors for width and height. If &#x27;smooth&#x27; is on then the destination 32bit surface is anti-aliased. If the surface is not 8bit or 32bit RGBA/ABGR it will be converted into a 32bit RGBA format on the fly. If zoom factors are negative, the image is flipped on the axes.</p>
+          </div></section>
+          <section class="m-doc-details" id="a87a121da75a099fd980295c759a7005d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a87a121da75a099fd980295c759a7005d" class="m-doc-self">zoomSurfaceSize</a>(</span><span class="m-doc-wrap">int width,
+              int height,
+              double zoomx,
+              double zoomy,
+              int* dstwidth,
+              int* dstheight)</span></span>
+            </h3>
+            <p>Calculates the size of the target surface for a <a href="_s_d_l2__rotozoom_8cpp.html#a5c6382cf358b1faae6ae3a09839df53f" class="m-doc">zoomSurface()</a> call.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">width</td>
+                  <td>The width of the source surface to zoom.</td>
+                </tr>
+                <tr>
+                  <td>height</td>
+                  <td>The height of the source surface to zoom.</td>
+                </tr>
+                <tr>
+                  <td>zoomx</td>
+                  <td>The horizontal zoom factor.</td>
+                </tr>
+                <tr>
+                  <td>zoomy</td>
+                  <td>The vertical zoom factor.</td>
+                </tr>
+                <tr>
+                  <td>dstwidth</td>
+                  <td>Pointer to an integer to store the calculated width of the zoomed target surface.</td>
+                </tr>
+                <tr>
+                  <td>dstheight</td>
+                  <td>Pointer to an integer to store the calculated height of the zoomed target surface.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The minimum size of the target surface is 1. The input factors can be positive or negative.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac19a85174c3bc202d62ab112e752fccc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> SDL_Surface* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac19a85174c3bc202d62ab112e752fccc" class="m-doc-self">shrinkSurface</a>(</span><span class="m-doc-wrap">SDL_Surface* src,
+              int factorx,
+              int factory)</span></span>
+            </h3>
+            <p>Shrink a surface by an integer ratio using averaging.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">src</td>
+                  <td>The surface to shrink.</td>
+                </tr>
+                <tr>
+                  <td>factorx</td>
+                  <td>The horizontal shrinking ratio.</td>
+                </tr>
+                <tr>
+                  <td>factory</td>
+                  <td>The vertical shrinking ratio.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The new, shrunken surface.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Shrinks a 32bit or 8bit &#x27;src&#x27; surface to a newly created &#x27;dst&#x27; surface. &#x27;factorx&#x27; and &#x27;factory&#x27; are the shrinking ratios (i.e. 2=1/2 the size, 3=1/3 the size, etc.) The destination surface is antialiased by averaging the source box RGBA or Y information. If the surface is not 8bit or 32bit RGBA/ABGR it will be converted into a 32bit RGBA format on the fly. The input surface is not modified. The output surface is newly allocated.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad01481193e22c671e691a2b625333331"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_s_d_l2__rotozoom_8hpp.html#ab3316f8a2f78ed696bbe0242c75b6ee7" class="m-doc">SDL2_<wbr />ROTOZOOM_<wbr />SCOPE</a> SDL_Surface* </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad01481193e22c671e691a2b625333331" class="m-doc-self">rotateSurface90Degrees</a>(</span><span class="m-doc-wrap">SDL_Surface* src,
+              int numClockwiseTurns)</span></span>
+            </h3>
+            <p>Rotates a 8/16/24/32 bit surface in increments of 90 degrees.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">src</td>
+                  <td>Source surface to rotate.</td>
+                </tr>
+                <tr>
+                  <td>numClockwiseTurns</td>
+                  <td>Number of clockwise 90 degree turns to apply to the source.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The new, rotated surface; or NULL for surfaces with incorrect input format.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Specialized 90 degree rotator which rotates a &#x27;src&#x27; surface in 90 degree increments clockwise returning a new surface. Faster than rotozoomer since no scanning or interpolation takes place. Input surface must be 8/16/24/32 bit. (code contributed by J. Schiller, improved by C. Allport and A. Schiffler)</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>King
+and
+Pigs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.6 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

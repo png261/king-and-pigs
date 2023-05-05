@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PhysicManager.hpp file | King
+and
+Pigs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">King
+and
+Pigs</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="2">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          PhysicManager.hpp <span class="m-thin">file</span>
+        </h1>
+        <p><span></span></p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_physic_manager.html" class="m-doc">PhysicManager</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt id="a02e73aee71bfff282ed342c9b8f05519">
+              <span class="m-doc-wrap-bumper">enum <a href="#a02e73aee71bfff282ed342c9b8f05519" class="m-doc-self">ContactCategory</a>: uint16 { </span><span class="m-doc-wrap"><a href="#a02e73aee71bfff282ed342c9b8f05519ae146e4f32db90484a77fc70638a0e0ed" class="m-doc">CAT_NONE</a> = 0x0000,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519a41815966cd88b9fd09c654765edbd9ff" class="m-doc">CAT_WALL</a> = 0x0001,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519aa33d97135d916d02966582b1acf2c9ce" class="m-doc">CAT_ONE_WAY_WALL</a> = 0x0002,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519a70455665dc63e22d0fd62a07196dde5a" class="m-doc">CAT_PLAYER</a> = 0x0004,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519ad1e48e3d8127b2d1b36f45debbe79291" class="m-doc">CAT_DOOR_IN</a> = 0x0008,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519a84ff98948ad2264b4f2b6466ca535c6f" class="m-doc">CAT_DOOR_OUT</a> = 0x0010,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519a6e3e10b28cddd9c2f1545effaff828e1" class="m-doc">CAT_PIG</a> = 0x0020,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519a61dbe42b5e8ed903243c9681b9d45473" class="m-doc">CAT_BOX</a> = 0x0040,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519ae4736b80345aeadf35eb8b5742fc233b" class="m-doc">CAT_ITEM</a> = 0x0080,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519a6bb8d4cbd1e38a5c4ac3efbc02ccff9e" class="m-doc">CAT_BOMB</a> = 0x0100,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519a970e74b2521dc91a4ad89c9b59980477" class="m-doc">CAT_FOOT_SENSOR</a> = 0x0200,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519a0d753e353dc6352344ee2be609c6d08c" class="m-doc">CAT_ATTACK_SENSOR</a> = 0x0400,
+              <a href="#a02e73aee71bfff282ed342c9b8f05519a64b28ecca58d6cb342853b6bdb5dec31" class="m-doc">CAT_ALL</a> = 0xFFFF }</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abdee9dfe8cddd855cd0e49d9d52759d7">
+              <span class="m-doc-wrap-bumper">enum <a href="#abdee9dfe8cddd855cd0e49d9d52759d7" class="m-doc-self">ContactMask</a>: uint16 { </span><span class="m-doc-wrap"><a href="#abdee9dfe8cddd855cd0e49d9d52759d7a885cf9206a0616bff9e9db6079805acb" class="m-doc">MASK_NONE</a> = CAT_NONE,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7ae4a6082b7586ae5a73f21757ff2c11a4" class="m-doc">MASK_PLAYER</a> = CAT_ALL,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7ad45619311023d863c2e1692a4f312a03" class="m-doc">MASK_WALL</a> = CAT_ALL,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7a0df7cb14c6ebe0de3e44dc92c942718b" class="m-doc">MASK_DOOR_OUT</a> = CAT_PLAYER,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7a7ca9ce9634a7d6dedd66a7bbcc095eb2" class="m-doc">MASK_DOOR_IN</a> = CAT_PLAYER,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7a14dccdda95bc379b0a9612a5e8e763cf" class="m-doc">MASK_PIG</a> = CAT_ALL &amp; ~CAT_ITEM,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7ac98fb39169d7294660e1f2643effbba3" class="m-doc">MASK_BOX</a> = CAT_ALL &amp; ~CAT_ITEM,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7af87323f9d5a14eb2d44a7f5d6a9dd538" class="m-doc">MASK_ITEM</a> = CAT_PLAYER | CAT_WALL,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7ab81bd84d37351bb2c6dfe51da6b90414" class="m-doc">MASK_BOMB</a> = CAT_ALL,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7a8f7c90d359e540d1e2a744365a63a8e8" class="m-doc">MASK_FOOT_SENSOR</a> = CAT_ALL,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7a8abdafe1a22d24410c06696103ecc840" class="m-doc">MASK_PLAYER_ATTACK_SENSOR</a> = CAT_PIG | CAT_BOX,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7aa390dbac698fbf92ecdeca1cc3e935dc" class="m-doc">MASK_PIG_ATTACK_SENSOR</a> = CAT_PLAYER,
+              <a href="#abdee9dfe8cddd855cd0e49d9d52759d7aa8d5b11e9e6dd89a5c10b00a25c89ce1" class="m-doc">MASK_PIG_VISION_SENSOR</a> = CAT_ALL }</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>King
+and
+Pigs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.6 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
