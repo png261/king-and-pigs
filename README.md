@@ -38,6 +38,8 @@ The binary file will be placed in the `build/bin` directory.
 ## Features
 ### Editing Maps
 ![image](https://user-images.githubusercontent.com/63899044/236370724-cb10cea1-d5d7-47a1-9519-6489f199102b.png)
+### Debug Mode
+![image](https://user-images.githubusercontent.com/63899044/236508399-361a0159-6882-4b9c-8054-5d2060bfe179.png)
 
 ## Documentation
 https://png261.github.io/king-and-pigs/
