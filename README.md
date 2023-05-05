@@ -13,13 +13,7 @@
 
 To build and run the game, you will need the following libraries installed on your system:
 
-- [SDL2](https://www.libsdl.org/)
-- [SDL2_image](https://www.libsdl.org/projects/SDL_image/)
-- [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
-- [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/)
-- [SDL2_gfx](https://www.ferzkopp.net/Software/SDL2_gfx/Docs/html/index.html)
-- [Box2D](https://box2d.org/)
-- [JsonCpp](http://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html)
+
 
 ### Linux
 
@@ -69,7 +63,6 @@ The binary file will be placed in the `bin/` directory.
   ```
 
 ## Controls
-
 The controls for the game are shown in the table below:
 
 | Key                   | Action                           |
@@ -87,8 +80,26 @@ You can edit the game maps using Tiled Map Editor. The maps are stored in the `a
 To edit a map, open it in Tiled, make your changes, and save the file. The game will automatically reload the updated map the next time you start the game.
 
 
-# Documentation
+## Documentation
 For more details please see documents generate by Doxygen: https://png261.github.io/king-and-pigs/
+
+## Credits
+- [Kings and Pigs asset pack](https://pixelfrog-assets.itch.io/kings-and-pigs)
+
+- [SDL2](https://www.libsdl.org/)
+- [SDL2_image](https://www.libsdl.org/projects/SDL_image/)
+- [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
+- [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/)
+- [SDL2_gfx](https://www.ferzkopp.net/Software/SDL2_gfx/Docs/html/index.html)
+- [Box2D](https://box2d.org/)
+- [JsonCpp](http://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html)
+- [TinyXML-2](https://github.com/leethomason/tinyxml2)
+
+- [SDL Game Development](https://www.packtpub.com/product/sdl-game-development/9781849696821)
+- [Game Programming Patterns](gameprogrammingpatterns.com)
+
+- [alexdantas/sdl2-platformer](https://github.com/alexdantas/sdl2-platformer)
+- [AdriaPm/GameDevelopment_Platformer_Game](https://github.com/AdriaPm/GameDevelopment_Platformer_Game)
 
 <!-- CONTACT -->
 ## Contact
