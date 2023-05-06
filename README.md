@@ -46,11 +46,7 @@ https://png261.github.io/king-and-pigs/
 
 ## Credits
 - [Kings and Pigs asset pack](https://pixelfrog-assets.itch.io/kings-and-pigs)
-- [SDL Game Development](https://www.packtpub.com/product/sdl-game-development/9781849696821)
-- [Game Programming Patterns](https://gameprogrammingpatterns.com)
-- [alexdantas/sdl2-platformer](https://github.com/alexdantas/sdl2-platformer)
-- [AdriaPm/GameDevelopment_Platformer_Game](https://github.com/AdriaPm/GameDevelopment_Platformer_Game)
-- [TheLartians/ModernCppStarter](https://github.com/TheLartians/ModernCppStarter)
+
 - [SDL2](https://www.libsdl.org/)
 - [SDL2_image](https://www.libsdl.org/projects/SDL_image/)
 - [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
@@ -59,7 +55,14 @@ https://png261.github.io/king-and-pigs/
 - [Box2D](https://box2d.org/)
 - [JsonCpp](http://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html)
 - [TinyXML-2](https://github.com/leethomason/tinyxml2)
- 
+
+- [SDL Game Development](https://www.packtpub.com/product/sdl-game-development/9781849696821)
+- [Game Programming Patterns](https://gameprogrammingpatterns.com)
+- [alexdantas/sdl2-platformer](https://github.com/alexdantas/sdl2-platformer)
+- [AdriaPm/GameDevelopment_Platformer_Game](https://github.com/AdriaPm/GameDevelopment_Platformer_Game)
+- [TheLartians/ModernCppStarter](https://github.com/TheLartians/ModernCppStarter)
+- [SDL2-CPM-CMake-Example](https://github.com/InfiniBrains/SDL2-CPM-CMake-Example)
+
 ## Contact
 Phuong Nguyen - [nhphuong.code@gmail.com](mailto:nhphuong.code@gmail.com)
 
