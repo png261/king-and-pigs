@@ -3,9 +3,9 @@
     "width": 1280,
     "height": 768,
     "title": "King and Pigs",
-    "author":{
+    "author": {
         "name": "Phuong Nguyen",
         "github": "https://github.com/png261",
-        "email": "nhphuong.code@gmail.com",
-    },
+        "email": "nhphuong.code@gmail.com"
+    }
 }

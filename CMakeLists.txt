@@ -82,12 +82,11 @@ CPMAddPackage(
     OPTIONS "BOX2D_BUILD_TESTBED OFF" "BOX2D_BUILD_UNIT_TESTS OFF"
 )
 
-# JsonCpp
+# nlohmann/json
 CPMAddPackage(
-    NAME jsoncpp
-    GIT_TAG 1.9.5
-    GITHUB_REPOSITORY open-source-parsers/jsoncpp
-    OPTIONS "JSONCPP_WITH_POST_BUILD_UNITTEST OFF" "JSONCPP_WITH_TESTS OFF"
+  NAME nlohmann_json
+  VERSION 3.10.4
+  GITHUB_REPOSITORY nlohmann/json
 )
 
 # TinyXML2
@@ -115,15 +114,18 @@ target_link_libraries(
            SDL2_mixer
            SDL2_ttf
            box2d
-           jsoncpp
+           nlohmann_json::nlohmann_json
            tinyxml2
 )
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/assets/" DESTINATION "assets")
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/data/" DESTINATION "data")
+install(DIRECTORY ${SDL2_INCLUDE_DIRS} DESTINATION "include")
+install(FILES ${SDL2_LIBRARIES} DESTINATION "lib")
 
 # ---- Create Installer ----
+include(InstallRequiredSystemLibraries)
 set(CPACK_GENERATOR "NSIS") # This will create a NSIS installer
 set(CPACK_PACKAGE_NAME "King and Pigs")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")

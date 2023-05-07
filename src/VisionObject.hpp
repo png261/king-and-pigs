@@ -17,8 +17,7 @@ public:
             return 1;
         }
 
-        seeing_category_ =
-            static_cast<ContactCategory>(fixture->GetFilterData().categoryBits);
+        seeing_category_ = static_cast<ContactCategory>(fixture->GetFilterData().categoryBits);
         fraction_ = fraction;
 
         return fraction;

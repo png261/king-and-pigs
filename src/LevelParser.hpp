@@ -1,6 +1,6 @@
 #pragma once
 
-#include <json/json.h>
+#include <nlohmann/json.hpp>
 
 #include "Level.hpp"
 
@@ -10,10 +10,11 @@ public:
     std::unique_ptr<Level> parseLevel(const std::string& path);
 
 private:
-    void loadTileset(const Json::Value& tileset_data, Level* const level) const;
-    void parseObjectLayer(const Json::Value& layer, Level* const level) const;
-    void parseTileLayer(const Json::Value& layer, Level* const level) const;
-    std::unique_ptr<Object> parseObject(const Json::Value& object_data, Level* const level) const;
+    void loadTileset(const nlohmann::json& tileset_data, Level* const level) const;
+    void parseObjectLayer(const nlohmann::json& layer, Level* const level) const;
+    void parseTileLayer(const nlohmann::json& layer, Level* const level) const;
+    std::unique_ptr<Object> parseObject(const nlohmann::json& object_data, Level* const level)
+        const;
 
     int tile_size_;
     int width_;

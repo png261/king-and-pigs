@@ -6,11 +6,11 @@
 int main(int, char*[])
 {
     try {
-        const Json::Value& config = Utils::read_json_file(CONFIG_FILE);
-        const int width = config["width"].asInt();
-        const int height = config["height"].asInt();
-        const std::string title = config["title"].asString();
-        const bool is_debug = config["debug"].asBool();
+        const auto& config = Utils::read_json_file(CONFIG_FILE);
+        const auto width = config["width"].get<int>();
+        const auto height = config["height"].get<int>();
+        const auto title = config["title"].get<std::string>();
+        const auto is_debug = config["debug"].get<bool>();
 
         Game& game = Game::Instance();
         game.init(width, height, title);

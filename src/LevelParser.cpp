@@ -1,4 +1,5 @@
 #include "LevelParser.hpp"
+#include <nlohmann/json.hpp>
 
 #include <tinyxml2.h>
 #include <fstream>
@@ -8,7 +9,6 @@
 #include "CONSTANT.hpp"
 #include "Layer.hpp"
 #include "Level.hpp"
-#include "Log.hpp"
 #include "ObjectFactory.hpp"
 #include "ObjectLayer.hpp"
 #include "PhysicManager.hpp"
@@ -16,27 +16,26 @@
 #include "TileLayer.hpp"
 #include "Utils.hpp"
 
-using namespace tinyxml2;
 std::unique_ptr<Level> LevelParser::parseLevel(const std::string& path)
 {
-    const Json::Value& map = Utils::read_json_file(path);
-    tile_size_ = map["tilewidth"].asInt();
-    width_ = map["width"].asInt();
-    height_ = map["height"].asInt();
+    const nlohmann::json& map = Utils::read_json_file(path);
+    tile_size_ = map["tilewidth"].get<int>();
+    width_ = map["width"].get<int>();
+    height_ = map["height"].get<int>();
 
     auto level = std::make_unique<Level>(
         width_ * tile_size_,
         height_ * tile_size_,
-        Utils::hexToRgba(map["backgroundcolor"].asString()));
+        Utils::hexToRgba(map["backgroundcolor"].get<std::string>()));
 
     for (const auto& tileset : map["tilesets"]) {
         loadTileset(tileset, level.get());
     }
 
     for (const auto& layer : map["layers"]) {
-        if (layer["type"].asString() == "tilelayer") {
+        if (layer["type"].get<std::string>() == "tilelayer") {
             parseTileLayer(layer, level.get());
-        } else if (layer["type"].asString() == "objectgroup") {
+        } else if (layer["type"].get<std::string>() == "objectgroup") {
             parseObjectLayer(layer, level.get());
         }
     }
@@ -44,35 +43,37 @@ std::unique_ptr<Level> LevelParser::parseLevel(const std::string& path)
     return level;
 }
 
-void LevelParser::loadTileset(const Json::Value& tileset_data, Level* const level) const
+void LevelParser::loadTileset(const nlohmann::json& tileset_data, Level* const level) const
 {
-    if (!tileset_data.isMember("image")) {
+    if (!tileset_data.contains("image")) {
         return;
     }
 
     Tileset tileset;
-    tileset.name = tileset_data["name"].asString();
-    tileset.first_grid_id = tileset_data["firstgid"].asInt();
-    tileset.spacing = tileset_data["spacing"].asInt();
-    tileset.margin = tileset_data["margin"].asInt();
-    tileset.columns = tileset_data["columns"].asInt();
+    tileset.name = tileset_data["name"].get<std::string>();
+    tileset.first_grid_id = tileset_data["firstgid"].get<int>();
+    tileset.spacing = tileset_data["spacing"].get<int>();
+    tileset.margin = tileset_data["margin"].get<int>();
+    tileset.columns = tileset_data["columns"].get<int>();
 
     TextureManager::Instance().load(
-        LEVEL_DIRECTORY + tileset_data["image"].asString(),
+        LEVEL_DIRECTORY + tileset_data["image"].get<std::string>(),
         tileset.name);
     level->addTileSet(tileset);
 
     for (const auto& tile : tileset_data["tiles"]) {
-        const int id = tile["id"].asInt() + tileset.first_grid_id;
-        const bool is_one_way = tile["type"].asString() == std::string("oneway");
-        const int width = tile["objectgroup"]["objects"][0]["width"].asInt();
-        const int height = tile["objectgroup"]["objects"][0]["height"].asInt();
+        const int id = tile["id"].get<int>() + tileset.first_grid_id;
+        const bool is_one_way =
+            tile.contains("type") && (tile["type"].get<std::string>() == ONE_WAY_TYPE);
+        const int width = tile["objectgroup"]["objects"][0]["width"].get<int>();
+        const int height = tile["objectgroup"]["objects"][0]["height"].get<int>();
         level->addTileCollision(id, {is_one_way, width, height});
     }
 }
 
-std::unique_ptr<Object> LevelParser::parseObject(const Json::Value& object_data, Level* const level)
-    const
+std::unique_ptr<Object> LevelParser::parseObject(
+    const nlohmann::json& object_data,
+    Level* const level) const
 {
     std::string type = "";
     int x = 0;
@@ -80,18 +81,20 @@ std::unique_ptr<Object> LevelParser::parseObject(const Json::Value& object_data,
     int w = 0;
     int h = 0;
 
-    if (object_data.isMember("template")) {
-        x = object_data["x"].asInt();
-        y = object_data["y"].asInt();
-        const std::string templatePath = LEVEL_DIRECTORY + object_data["template"].asString();
-        XMLDocument document;
-        if (document.LoadFile(templatePath.c_str()) != XML_SUCCESS) {
+    if (object_data.contains("template")) {
+        x = object_data["x"].get<int>();
+        y = object_data["y"].get<int>();
+        const std::string templatePath =
+            LEVEL_DIRECTORY + object_data["template"].get<std::string>();
+        tinyxml2::XMLDocument document;
+        if (document.LoadFile(templatePath.c_str()) != tinyxml2::XML_SUCCESS) {
             throw std::runtime_error(
                 "LevelParser: " + std::string("fail to load template object: ") + templatePath);
         }
 
-        XMLElement* const root = document.RootElement();
-        for (XMLElement* e = root->FirstChildElement(); e != nullptr; e = e->NextSiblingElement()) {
+        tinyxml2::XMLElement* const root = document.RootElement();
+        for (tinyxml2::XMLElement* e = root->FirstChildElement(); e != nullptr;
+             e = e->NextSiblingElement()) {
             if (e->Value() == std::string("object")) {
                 type = e->Attribute("type");
                 w = std::stoi(e->Attribute("width"));
@@ -100,11 +103,11 @@ std::unique_ptr<Object> LevelParser::parseObject(const Json::Value& object_data,
         }
         y -= h;
     } else {
-        type = object_data["type"].asString();
-        x = object_data["x"].asInt();
-        y = object_data["y"].asInt();
-        w = object_data["width"].asInt();
-        h = object_data["height"].asInt();
+        type = object_data["type"].get<std::string>();
+        x = object_data["x"].get<int>();
+        y = object_data["y"].get<int>();
+        w = object_data["width"].get<int>();
+        h = object_data["height"].get<int>();
     }
 
     std::unique_ptr<Object> object = ObjectFactory::Instance().create(type);
@@ -121,7 +124,7 @@ std::unique_ptr<Object> LevelParser::parseObject(const Json::Value& object_data,
     return object;
 }
 
-void LevelParser::parseObjectLayer(const Json::Value& layer, Level* const level) const
+void LevelParser::parseObjectLayer(const nlohmann::json& layer, Level* const level) const
 {
     auto object_layer = std::make_unique<ObjectLayer>();
 
@@ -139,41 +142,39 @@ void LevelParser::parseObjectLayer(const Json::Value& layer, Level* const level)
     }
 }
 
-void LevelParser::parseTileLayer(const Json::Value& layer, Level* const level) const
+void LevelParser::parseTileLayer(const nlohmann::json& layer, Level* const level) const
 {
     auto tile_layer =
         std::make_unique<TileLayer>(tile_size_, width_, height_, *level->getTilesets());
 
-    std::vector<int> data;
-    for (const auto& id : layer["data"]) {
-        data.push_back(id.asInt());
-    }
+    auto data = layer["data"].get<std::vector<int>>();
 
     tile_layer->setTileData(data);
     level->addLayer(std::move(tile_layer));
 
-    std::unordered_map<int, TileCollision>* collision_shape = level->getTileCollisions();
-    if (!collision_shape->empty()) {
-        for (int row = 0; row < height_; ++row) {
-            for (int col = 0; col < width_; ++col) {
-                const int id = data[row * width_ + col];
-                if (id == 0) {
-                    continue;
-                }
-                std::unordered_map<int, TileCollision>::iterator it = collision_shape->find(id);
-                if (it == collision_shape->end()) {
-                    continue;
-                }
-                const TileCollision shape = it->second;
+    std::unordered_map<int, TileCollision>* tile_collisions = level->getTileCollisions();
+    if (tile_collisions->empty()) {
+        return;
+    }
 
-                PhysicManager::Instance().createStaticBody(
-                    tile_size_ * b2Vec2(col, row),
-                    shape.width,
-                    shape.height,
-                    shape.is_one_way ? ContactCategory::CAT_ONE_WAY_WALL
-                                     : ContactCategory::CAT_WALL,
-                    ContactMask::MASK_WALL);
+    for (int row = 0; row < height_; ++row) {
+        for (int col = 0; col < width_; ++col) {
+            const int id = data[row * width_ + col];
+            if (id == 0) {
+                continue;
             }
+            std::unordered_map<int, TileCollision>::iterator it = tile_collisions->find(id);
+            if (it == tile_collisions->end()) {
+                continue;
+            }
+            const TileCollision shape = it->second;
+
+            PhysicManager::Instance().createStaticBody(
+                tile_size_ * b2Vec2(col, row),
+                shape.width,
+                shape.height,
+                shape.is_one_way ? ContactCategory::CAT_ONE_WAY_WALL : ContactCategory::CAT_WALL,
+                ContactMask::MASK_WALL);
         }
     }
 }

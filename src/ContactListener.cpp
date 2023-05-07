@@ -6,8 +6,8 @@
 #include "Game.hpp"
 #include "ItemObject.hpp"
 #include "Log.hpp"
-#include "PhysicObject.hpp"
 #include "PhysicManager.hpp"
+#include "PhysicObject.hpp"
 #include "Pig.hpp"
 
 void ContactListener::realTimeListener(b2Contact* const contactList)

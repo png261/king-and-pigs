@@ -60,9 +60,9 @@ void MainMenuState::render() const
         false,
         6);
 
-    const Json::Value& config = Utils::read_json_file(CONFIG_FILE);
-    const std::string& github = config["author"]["github"].asString();
-    const std::string& email = config["author"]["email"].asString();
+    const nlohmann::json& config = Utils::read_json_file(CONFIG_FILE);
+    const std::string& github = config["author"]["github"].get<std::string>();
+    const std::string& email = config["author"]["email"].get<std::string>();
 
     Game::Instance().getWindow()->print(
         github + " - " + email,

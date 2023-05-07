@@ -69,18 +69,11 @@ void Utils::openLink(const std::string& link)
 #endif
 }
 
-Json::Value Utils::read_json_file(const std::string& path)
+nlohmann::json Utils::read_json_file(const std::string& path)
 {
     std::ifstream json_file(path);
     if (!json_file.is_open()) {
         throw std::runtime_error("LevelParser: " + std::string("fail to load: ") + path);
     }
-
-    Json::Value data;
-    Json::CharReaderBuilder builder;
-    JSONCPP_STRING err;
-    if (!Json::parseFromStream(builder, json_file, &data, &err)) {
-        throw std::runtime_error("LevelParser: " + std::string("fail to load json data: ") + path);
-    }
-    return data;
+    return nlohmann::json::parse(json_file);
 }

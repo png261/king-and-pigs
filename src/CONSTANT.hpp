@@ -17,3 +17,5 @@ const float RAD_PER_DEG = 180.0f / b2_pi;
 const float DEG_PER_RAD = b2_pi / 180.0f;
 const float GROUND_FRICTION = 5.0f;
 const float GRAVITY = 10.0f;
+
+const std::string ONE_WAY_TYPE = "oneway";

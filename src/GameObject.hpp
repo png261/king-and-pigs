@@ -6,8 +6,8 @@
 #include "Animation.hpp"
 #include "LoaderParams.hpp"
 #include "Object.hpp"
-#include "PhysicObject.hpp"
 #include "PhysicManager.hpp"
+#include "PhysicObject.hpp"
 #include "VisionObject.hpp"
 
 class GameObject : public PhysicObject
