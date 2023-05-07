@@ -97,6 +97,8 @@ CPMAddPackage(
     OPTIONS "tinyxml2_BUILD_TESTING OFF"
 )
 
+add_definitions("-DSDL_MAIN_HANDLED")
+
 # ---- Add source files ----
 file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp")
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
@@ -116,6 +118,9 @@ target_link_libraries(
            box2d
            nlohmann_json::nlohmann_json
            tinyxml2
+           -static 
+           -static-libgcc 
+           -static-libstdc++
 )
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
