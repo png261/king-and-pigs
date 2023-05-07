@@ -48,6 +48,9 @@ void MainMenuState::render() const
     if (!isLoaded() || isPaused()) {
         return;
     }
+
+    Game::Instance().getWindow()->fill(Utils::hexToRgba("#3f3851"));
+
     for (const auto& obj : ui_objects_) {
         obj->draw();
     }
