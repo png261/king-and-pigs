@@ -84,9 +84,9 @@ CPMAddPackage(
 
 # nlohmann/json
 CPMAddPackage(
-  NAME nlohmann_json
-  VERSION 3.10.4
-  GITHUB_REPOSITORY nlohmann/json
+    NAME nlohmann_json
+    VERSION 3.10.4
+    GITHUB_REPOSITORY nlohmann/json
 )
 
 # TinyXML2
@@ -118,16 +118,14 @@ target_link_libraries(
            box2d
            nlohmann_json::nlohmann_json
            tinyxml2
-           -static 
-           -static-libgcc 
+           -static
+           -static-libgcc
            -static-libstdc++
 )
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/assets/" DESTINATION "assets")
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/data/" DESTINATION "data")
-install(DIRECTORY ${SDL2_INCLUDE_DIRS} DESTINATION "include")
-install(FILES ${SDL2_LIBRARIES} DESTINATION "lib")
 
 # ---- Create Installer ----
 include(InstallRequiredSystemLibraries)
@@ -137,7 +135,7 @@ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "C++ game")
 set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "KingAndPigs")
-set( CPACK_PACKAGE_NAME "KingAndPigs" )
+set(CPACK_PACKAGE_NAME "KingAndPigs")
 set(CPACK_PACKAGE_EXECUTABLES "${PROJECT_NAME};KingAndPigs")
 
 include(CPack)
