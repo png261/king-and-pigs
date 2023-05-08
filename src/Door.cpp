@@ -1,6 +1,5 @@
 #include "Door.hpp"
 
-#include "Log.hpp"
 #include "SoundManager.hpp"
 
 Door::Door()

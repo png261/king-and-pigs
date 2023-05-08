@@ -10,7 +10,7 @@
 Pig::Pig()
     : GameObject()
     , VisionObject(100)
-    , DamageableObject(2, 300, 500)
+    , DamageableObject(2, 300, 700)
     , AttackerObject(1, 20, 500)
 {}
 

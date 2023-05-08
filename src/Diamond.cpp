@@ -31,7 +31,7 @@ void Diamond::update()
 
 void Diamond::bonus()
 {
-    SoundManager::Instance().playSFX("heart bonus");
+    SoundManager::Instance().playSFX("diamond_bonus");
     Game::Instance().addDiamond(+1);
     current_animation_ = HIT;
     animations_[current_animation_]->start();

@@ -1,6 +1,5 @@
 #include "Bomb.hpp"
 
-#include "InputManager.hpp"
 #include "PhysicManager.hpp"
 #include "SoundManager.hpp"
 #include "Utils.hpp"
@@ -52,7 +51,7 @@ void Bomb::update()
     GameObject::update();
     AttackerObject::update();
 
-    if (isOn() && on_timer_.isDone()) {
+    if (isOn() && on_timer_.isDone() && current_animation_ != EXPLODE) {
         explode();
     }
 

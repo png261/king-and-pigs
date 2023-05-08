@@ -32,7 +32,7 @@ void PigWithBomb::loadAnimation()
 void PigWithBomb::update()
 {
     Pig::update();
-    if (isSeeing(ContactCategory::CAT_PLAYER) && vision_nearest_distance_ <= 100) {
+    if (isSeeing(ContactCategory::CAT_PLAYER) && vision_nearest_distance_ <= 80) {
         throwBomb();
         becomeNormal();
     }

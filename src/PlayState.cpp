@@ -115,6 +115,7 @@ bool PlayState::enter()
     sound.loadSFX(SOUND_DIRECTORY + "player/attack.wav", "player_attack");
     sound.loadSFX(SOUND_DIRECTORY + "player/dying.wav", "player_dying");
     sound.loadSFX(SOUND_DIRECTORY + "player/jump.wav", "player_jump");
+    sound.loadSFX(SOUND_DIRECTORY + "player/hurt.wav", "player_hurt");
 
     sound.loadSFX(SOUND_DIRECTORY + "pig/attack.wav", "pig_attack");
     sound.loadSFX(SOUND_DIRECTORY + "pig/dying.wav", "pig_dying");
@@ -128,15 +129,16 @@ bool PlayState::enter()
     sound.loadSFX(SOUND_DIRECTORY + "box/break.wav", "box_broken");
 
     sound.loadSFX(SOUND_DIRECTORY + "heart/bonus.wav", "heart_bonus");
+    sound.loadSFX(SOUND_DIRECTORY + "diamond/bonus.wav", "diamond_bonus");
 
-    sound.loadMusic(SOUND_DIRECTORY + "playstate/background.wav", "playstate background");
+    sound.loadMusic(SOUND_DIRECTORY + "playstate/background.mp3", "playstate_background");
 
     if (!loadLevel()) {
         return false;
     }
 
     Game::Instance().resetScore();
-    sound.playMusic("playstate background");
+    sound.playMusic("playstate_background", 9999);
     is_loaded_ = true;
 
     return true;

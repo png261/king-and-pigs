@@ -5,7 +5,6 @@
 #include "DoorOut.hpp"
 #include "Game.hpp"
 #include "ItemObject.hpp"
-#include "Log.hpp"
 #include "PhysicManager.hpp"
 #include "PhysicObject.hpp"
 #include "Pig.hpp"

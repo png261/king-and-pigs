@@ -1,9 +1,7 @@
 #include "PigWithBox.hpp"
 
 #include "Box.hpp"
-#include "DamageableObject.hpp"
 #include "Game.hpp"
-#include "InputManager.hpp"
 
 PigWithBox::PigWithBox()
     : Pig()
@@ -32,7 +30,7 @@ void PigWithBox::update()
         return;
     }
     Pig::update();
-    if (isSeeing(ContactCategory::CAT_PLAYER) && vision_nearest_distance_ <= 100) {
+    if (isSeeing(ContactCategory::CAT_PLAYER) && vision_nearest_distance_ <= 80) {
         throwBox();
         becomeNormal();
     }

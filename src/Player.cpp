@@ -3,19 +3,13 @@
 #include <memory>
 
 #include "Animation.hpp"
-#include "AttackerObject.hpp"
-#include "Camera.hpp"
-#include "DamageableObject.hpp"
-#include "DebugDraw.hpp"
 #include "Game.hpp"
-#include "GameObject.hpp"
 #include "GameStateManager.hpp"
 #include "InputManager.hpp"
 #include "Log.hpp"
 #include "LoseState.hpp"
 #include "PhysicManager.hpp"
 #include "SoundManager.hpp"
-#include "VisionObject.hpp"
 
 Player::Player()
     : GameObject()
@@ -130,6 +124,9 @@ void Player::handleSound()
     if (isAttack()) {
         SoundManager::Instance().playSFX("player_attack");
     }
+    if (isInvulnerable()) {
+        SoundManager::Instance().playSFX("hurt");
+    }
 }
 
 void Player::handleInput()
@@ -143,22 +140,22 @@ void Player::handleInput()
     if (isOnGround()) {
         is_want_enter_door_ = input.isKeyDown(KEY_UP) || input.isKeyDown(KEY_W);
 
-        if (input.isMousePressed(MOUSE_RIGHT) || input.isKeyPressed(KEY_K)) {
+        if (canJump() && input.isMousePressed(MOUSE_RIGHT) || input.isKeyPressed(KEY_K)) {
             jump();
             SoundManager::Instance().playSFX("player_jump");
         }
     }
-    if (input.isKeyPressed(KEY_RIGHT) || input.isKeyPressed(KEY_D)) {
+    if (canMoveRight() && input.isKeyPressed(KEY_RIGHT) || input.isKeyPressed(KEY_D)) {
         moveRight();
         direction_ = RIGHT;
     }
-    if (input.isKeyPressed(KEY_LEFT) || input.isKeyPressed(KEY_A)) {
+    if (canMoveLeft() && input.isKeyPressed(KEY_LEFT) || input.isKeyPressed(KEY_A)) {
         moveLeft();
         direction_ = LEFT;
     }
-    if (input.isMouseDown(MOUSE_LEFT) || input.isKeyDown(KEY_J)) {
+    if (canAttack() && input.isMouseDown(MOUSE_LEFT) || input.isKeyDown(KEY_J)) {
         attack();
-        SoundManager::Instance().playSFX("player_attack");
+        SoundManager::Instance().playSFX("player_attack", 0);
     }
 
     is_flip_ = direction_ == LEFT;
