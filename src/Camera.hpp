@@ -3,7 +3,7 @@
 #include "GameObject.hpp"
 #include "PhysicManager.hpp"
 
-class Camera
+class Camera final
 {
 public:
     static Camera& Instance();

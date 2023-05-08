@@ -4,7 +4,7 @@
 
 #include "PhysicManager.hpp"
 
-class VisionRayCastCallback : public b2RayCastCallback
+class VisionRayCastCallback final : public b2RayCastCallback
 {
 public:
     VisionRayCastCallback()
@@ -36,10 +36,10 @@ struct raycast
 class VisionObject
 {
 public:
-    VisionObject(float range);
+    VisionObject(const float range);
     virtual void update();
     virtual void debugDraw() const;
-    bool isSeeing(ContactCategory category) const;
+    bool isSeeing(const ContactCategory category) const;
 
 protected:
     uint16 seeing_category_;

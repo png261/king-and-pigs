@@ -2,7 +2,7 @@
 
 #include "Pig.hpp"
 
-class PigWithBox : public Pig
+class PigWithBox final : public Pig
 {
 public:
     PigWithBox();

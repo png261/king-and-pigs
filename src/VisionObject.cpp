@@ -2,8 +2,6 @@
 
 #include "DebugDraw.hpp"
 #include "Game.hpp"
-#include "GameState.hpp"
-#include "GameStateManager.hpp"
 #include "Utils.hpp"
 
 VisionObject::VisionObject(float range)
@@ -17,8 +15,8 @@ void VisionObject::update()
     seeing_category_ = 0;
     vision_nearest_distance_ = vision_range_;
     for (auto& raycast : raycast_) {
-        b2Vec2 start = Utils::pixelToMeter(raycast.start);
-        b2Vec2 end = Utils::pixelToMeter(raycast.end);
+        const b2Vec2 start = Utils::pixelToMeter(raycast.start);
+        const b2Vec2 end = Utils::pixelToMeter(raycast.end);
 
         VisionRayCastCallback callback;
         PhysicManager::Instance().getWorld()->RayCast(&callback, start, end);
@@ -38,13 +36,13 @@ void VisionObject::debugDraw() const
 
     DebugDraw debug(Game::Instance().getWindow());
     for (auto& raycast : raycast_) {
-        b2Vec2 start = Utils::pixelToMeter(raycast.start);
-        b2Vec2 end = Utils::pixelToMeter(raycast.end);
+        const b2Vec2 start = Utils::pixelToMeter(raycast.start);
+        const b2Vec2 end = Utils::pixelToMeter(raycast.end);
         debug.DrawSegment(start, end, {1, 1, 1, 1});
     }
 }
 
-bool VisionObject::isSeeing(ContactCategory category) const
+bool VisionObject::isSeeing(const ContactCategory category) const
 {
     return seeing_category_ & category;
 }

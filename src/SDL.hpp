@@ -6,6 +6,7 @@
 #include <SDL_ttf.h> // SDL2_TTF
 
 #include "SDL2_gfxPrimitives.hpp" // SDL2_GFX
+
 namespace SDL {
 void init();
 void exit();

@@ -6,10 +6,7 @@
 
 #include "SDL.hpp"
 
-// music: .ogg
-// sfx: .wav
-
-class SoundManager
+class SoundManager final
 {
 public:
     static SoundManager& Instance();

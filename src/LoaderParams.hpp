@@ -2,7 +2,7 @@
 
 #include <string>
 
-class LoaderParams
+class LoaderParams final
 {
 public:
     LoaderParams(const int x, const int y, const int width, const int height);
