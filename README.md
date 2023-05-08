@@ -16,6 +16,7 @@
 
 ## Table of Contents
 - [Installation](#installation)
+- [Build from source](#build-from-source)
 - [How to play](#how-to-play)
 - [Documentation](#documentation)
 - [Credits](#credits)
@@ -29,6 +30,20 @@ To install the game on your computer, follow these steps:
 3. Run the downloaded installer and follow the instructions.
 4. Once the installation is complete, launch the game from the start menu or desktop icon
 
+## Build from source 
+1. Clone this repo:
+  ```
+  git clone https://github.com/png261/king-and-pigs.git
+  ```
+2. Navigate to the `king-and-pigs` directory, run the following command to build the game:
+  ```
+  cmake -B build && cmake --build build
+  ```
+3. Run the game by executing the following command:
+  ```
+  ./build/king-and-pigs
+  ```
+  
 ## How to play
 | Action                           | Setup 1               | Setup 2               |
 | -------------------------------- | --------------------- | --------------------- |
