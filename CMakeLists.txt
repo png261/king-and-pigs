@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.14...3.22)
 # ---- Project ----
 
 project(
-    king-and-pigs
+    king_and_pigs
     VERSION 1.0
     LANGUAGES CXX
 )
@@ -97,16 +97,12 @@ CPMAddPackage(
     OPTIONS "tinyxml2_BUILD_TESTING OFF"
 )
 
-add_definitions("-DSDL_MAIN_HANDLED")
-
 # ---- Add source files ----
 file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp")
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 # ---- Create executable ----
 add_executable(${PROJECT_NAME} ${sources} ${headers})
-
-target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 
 # Link dependencies
 target_link_libraries(
@@ -118,10 +114,12 @@ target_link_libraries(
            box2d
            nlohmann_json::nlohmann_json
            tinyxml2
-           -static
-           -static-libgcc
-           -static-libstdc++
 )
+
+if(WIN32)
+    target_link_libraries(${PROJECT_NAME} PUBLIC -static -static-libgcc -static-libstdc++)
+    add_definitions("-DSDL_MAIN_HANDLED") # fix Undefined reference to 'WinMain'
+endif(WIN32)
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/assets/" DESTINATION "assets")
@@ -129,13 +127,23 @@ install(DIRECTORY "${PROJECT_SOURCE_DIR}/data/" DESTINATION "data")
 
 # ---- Create Installer ----
 include(InstallRequiredSystemLibraries)
-set(CPACK_GENERATOR "NSIS") # This will create a NSIS installer
-set(CPACK_PACKAGE_NAME "King and Pigs")
+
+set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
+set(CPACK_PACKAGE_CONTACT "nhphuong.code@gmail.com")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "C++ game")
 set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "KingAndPigs")
-set(CPACK_PACKAGE_NAME "KingAndPigs")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY ${PROJECT_NAME})
 set(CPACK_PACKAGE_EXECUTABLES "${PROJECT_NAME};KingAndPigs")
+
+if(WIN32)
+    set(CPACK_GENERATOR "NSIS")
+endif(WIN32)
+
+if(UNIX)
+    set(CPACK_GENERATOR "DEB")
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "phuongnguyen <${CPACK_PACKAGE_CONTACT}>")
+    set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+endif(UNIX)
 
 include(CPack)
