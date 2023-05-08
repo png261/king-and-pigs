@@ -14,13 +14,12 @@ InputManager::InputManager()
     , mouse_(0)
     , mouse_position_(0, 0)
 {
-    int i;
-    for (i = 0; i < KEYBOARD_SIZE; ++i) {
+    for (int i = 0; i < KEYBOARD_SIZE; ++i) {
         is_key_down_[i] = false;
         is_key_up_[i] = false;
     }
 
-    for (i = 0; i < MOUSE_MAX; ++i) {
+    for (int i = 0; i < MOUSE_MAX; ++i) {
         is_mouse_down_[i] = false;
         is_mouse_up_[i] = false;
     }
@@ -28,13 +27,12 @@ InputManager::InputManager()
 
 void InputManager::update()
 {
-    int i;
-    for (i = 0; i < KEYBOARD_SIZE; ++i) {
+    for (int i = 0; i < KEYBOARD_SIZE; ++i) {
         is_key_down_[i] = false;
         is_key_up_[i] = false;
     }
 
-    for (i = 0; i < MOUSE_MAX; ++i) {
+    for (int i = 0; i < MOUSE_MAX; ++i) {
         is_mouse_down_[i] = false;
         is_mouse_up_[i] = false;
     }
@@ -80,6 +78,8 @@ void InputManager::onMouseDown(SDL_Event const& event)
 
 void InputManager::onMouseUp(SDL_Event const& event)
 {
+    mouse_ = SDL_GetMouseState(nullptr, nullptr);
+
     switch (event.button.button) {
     case SDL_BUTTON_LEFT:
         is_mouse_up_[MOUSE_LEFT] = false;
