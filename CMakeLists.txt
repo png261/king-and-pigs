@@ -117,7 +117,7 @@ target_link_libraries(
 )
 
 if(WIN32)
-    target_link_libraries(${PROJECT_NAME} PUBLIC -static -static-libgcc -static-libstdc++)
+    target_link_libraries(${PROJECT_NAME} PUBLIC -static -static-libgcc -static-libstdc++ -mwindows)
     add_definitions("-DSDL_MAIN_HANDLED") # fix Undefined reference to 'WinMain'
 endif(WIN32)
 
