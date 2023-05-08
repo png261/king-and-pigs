@@ -30,13 +30,15 @@ To install the game on your computer, follow these steps:
 4. Once the installation is complete, launch the game from the start menu or desktop icon
 
 ## How to play
-| Key                   | Action                           |
-| --------------------- | -------------------------------- |
-| D                     | Move right                       |
-| A                     | Move left                        |
-| W                     | Enter door                       |
-| K                     | Jump                             |
-| J                     | Attack                           |
+| Action                           | Setup 1               | Setup 2               |
+| -------------------------------- | --------------------- | --------------------- |
+| Move right                       | Arrow Right           | D                     |
+| Move left                        | Arrow Left            | A                     |
+| Enter door                       | Arrow Up              | W                     |
+| Jump                             | Mouse Left            | K                     |
+| Attack                           | Mouse Right           | J                     |
+
+***Note***: Setup 2 only work with English keyboard 
 
 ## Documentation
 Please see https://png261.github.io/king-and-pigs/ for more informations

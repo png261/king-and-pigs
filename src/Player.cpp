@@ -141,23 +141,22 @@ void Player::handleInput()
     InputManager& input = InputManager::Instance();
 
     if (isOnGround()) {
-        is_want_enter_door_ = input.isKeyDown(KEY_W);
+        is_want_enter_door_ = input.isKeyDown(KEY_UP) || input.isKeyDown(KEY_W);
 
-        if (input.isKeyPressed(KEY_K)) {
+        if (input.isMousePressed(MOUSE_RIGHT) || input.isKeyPressed(KEY_K)) {
             jump();
             SoundManager::Instance().playSFX("player_jump");
         }
     }
-    if (input.isKeyPressed(KEY_D)) {
+    if (input.isKeyPressed(KEY_RIGHT) || input.isKeyPressed(KEY_D)) {
         moveRight();
         direction_ = RIGHT;
     }
-    if (input.isKeyPressed(KEY_A)) {
+    if (input.isKeyPressed(KEY_LEFT) || input.isKeyPressed(KEY_A)) {
         moveLeft();
         direction_ = LEFT;
     }
-
-    if (input.isKeyPressed(KEY_J)) {
+    if (input.isMouseDown(MOUSE_LEFT) || input.isKeyDown(KEY_J)) {
         attack();
         SoundManager::Instance().playSFX("player_attack");
     }
