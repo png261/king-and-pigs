@@ -4,7 +4,6 @@
     "height": 768,
     "title": "King and Pigs",
     "levels": [
-        "assets/levels/test.json",
         "assets/levels/level1.json",
         "assets/levels/level2.json"
     ],
