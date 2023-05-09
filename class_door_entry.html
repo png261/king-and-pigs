@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>DoorOutCreator class | King
+  <title>DoorEntry class | King
 and
 Pigs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
@@ -47,8 +47,8 @@ Pigs</a>
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          DoorOutCreator <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="_door_out_8hpp.html">&lt;DoorOut.hpp&gt;</a></div>
+          DoorEntry <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="_door_entry_8hpp.html">&lt;DoorEntry.hpp&gt;</a></div>
         </h1>
         <p><span></span></p>
         <nav class="m-block m-default">
@@ -58,7 +58,7 @@ Pigs</a>
               Reference
               <ul>
                 <li><a href="#base-classes">Base classes</a></li>
-                <li><a href="#pri-methods">Private functions</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
@@ -67,16 +67,20 @@ Pigs</a>
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="class_base_creator.html" class="m-doc">BaseCreator</a>
+              class <a href="class_door.html" class="m-doc">Door</a>
             </dt>
             <dd><span></span></dd>
           </dl>
         </section>
-        <section id="pri-methods">
-          <h2><a href="#pri-methods">Private functions</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a21b518f87ed31c7a7d9b130229876ed0">
-              <span class="m-doc-wrap-bumper">auto <a href="#a21b518f87ed31c7a7d9b130229876ed0" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">) const -&gt; std::unique_ptr&lt;<a href="class_object.html" class="m-doc">Object</a>&gt; <span class="m-label m-flat m-warning">virtual</span></span>
+            <dt id="af47013916f2824477dd69d0a018c6621">
+              <span class="m-doc-wrap-bumper">void <a href="#af47013916f2824477dd69d0a018c6621" class="m-doc-self">load</a>(</span><span class="m-doc-wrap">std::unique_ptr&lt;<a href="class_loader_params.html" class="m-doc">LoaderParams</a>&gt; const&amp; params) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae447b09a0c5b7b0f2024f4890cf5117b">
+              <span class="m-doc-wrap-bumper">void <a href="#ae447b09a0c5b7b0f2024f4890cf5117b" class="m-doc-self">update</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
             <dd><span></span></dd>
           </dl>

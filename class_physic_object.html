@@ -144,13 +144,6 @@ Pigs</a>
               <span class="m-doc-wrap-bumper">auto <a href="#a1dee7671c8ebd5a3d397ebbb6451f697" class="m-doc-self">isDisableJump</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a8c6460816afb3524184fa2f2f495ca4c">
-              <span class="m-doc-wrap-bumper">void <a href="#a8c6460816afb3524184fa2f2f495ca4c" class="m-doc-self">createBody</a>(</span><span class="m-doc-wrap">const int x,
-              const int y,
-              const int width,
-              const int height) <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd><span></span></dd>
             <dt id="a3dfef828c73f2c16244ce196171710b4">
               <span class="m-doc-wrap-bumper">void <a href="#a3dfef828c73f2c16244ce196171710b4" class="m-doc-self">changeFootContact</a>(</span><span class="m-doc-wrap">const int n) <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
@@ -167,32 +160,54 @@ Pigs</a>
               <span class="m-doc-wrap-bumper">void <a href="#ac4954d7f91bc1ec2f861a71c21fe41c6" class="m-doc-self">jump</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a5dcc72a521a9b64f09c01446abc31ef0">
-              <span class="m-doc-wrap-bumper">void <a href="#a5dcc72a521a9b64f09c01446abc31ef0" class="m-doc-self">setMoveRight</a>(</span><span class="m-doc-wrap">bool can_move_right) <span class="m-label m-flat m-warning">virtual</span></span>
+            <dt id="affaa6acdcf0cd32046e5a7b501a63016">
+              <span class="m-doc-wrap-bumper">void <a href="#affaa6acdcf0cd32046e5a7b501a63016" class="m-doc-self">setMoveRight</a>(</span><span class="m-doc-wrap">const bool can_move_right) <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd><span></span></dd>
-            <dt id="aec58b08cc6e0f3ed4860712dbb14f552">
-              <span class="m-doc-wrap-bumper">void <a href="#aec58b08cc6e0f3ed4860712dbb14f552" class="m-doc-self">setMoveLeft</a>(</span><span class="m-doc-wrap">bool can_move_left) <span class="m-label m-flat m-warning">virtual</span></span>
+            <dt id="a2dc4e45471f5b1847532be583e29449e">
+              <span class="m-doc-wrap-bumper">void <a href="#a2dc4e45471f5b1847532be583e29449e" class="m-doc-self">setMoveLeft</a>(</span><span class="m-doc-wrap">const bool can_move_left) <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a02d2c2a21047b3706df58acd83848e53">
-              <span class="m-doc-wrap-bumper">void <a href="#a02d2c2a21047b3706df58acd83848e53" class="m-doc-self">setFilterData</a>(</span><span class="m-doc-wrap"><a href="_physic_manager_8hpp.html#a02e73aee71bfff282ed342c9b8f05519" class="m-doc">ContactCategory</a> category,
-              <a href="_physic_manager_8hpp.html#abdee9dfe8cddd855cd0e49d9d52759d7" class="m-doc">ContactMask</a> mask) const <span class="m-label m-flat m-warning">virtual</span></span>
+            <dt id="a739331559cf61ccd89d31a1645a4660e">
+              <span class="m-doc-wrap-bumper">void <a href="#a739331559cf61ccd89d31a1645a4660e" class="m-doc-self">setFilterData</a>(</span><span class="m-doc-wrap">const <a href="_physic_manager_8hpp.html#a02e73aee71bfff282ed342c9b8f05519" class="m-doc">ContactCategory</a> category,
+              const <a href="_physic_manager_8hpp.html#abdee9dfe8cddd855cd0e49d9d52759d7" class="m-doc">ContactMask</a> mask) const <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd><span></span></dd>
-            <dt id="ad108ea5a52db626d9804c311ff1bbb36">
-              <span class="m-doc-wrap-bumper">auto <a href="#ad108ea5a52db626d9804c311ff1bbb36" class="m-doc-self">createPolygonSensor</a>(</span><span class="m-doc-wrap">const b2Vec2&amp; position,
+            <dt id="a8c6460816afb3524184fa2f2f495ca4c">
+              <span class="m-doc-wrap-bumper">void <a href="#a8c6460816afb3524184fa2f2f495ca4c" class="m-doc-self">createBody</a>(</span><span class="m-doc-wrap">const int x,
+              const int y,
+              const int width,
+              const int height) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a384bf5f0bf663fd436899d3d7865c7ba">
+              <span class="m-doc-wrap-bumper">void <a href="#a384bf5f0bf663fd436899d3d7865c7ba" class="m-doc-self">createRectangleFixture</a>(</span><span class="m-doc-wrap">const b2Vec2&amp; position,
               const int width,
               const int height,
               const <a href="_physic_manager_8hpp.html#a02e73aee71bfff282ed342c9b8f05519" class="m-doc">ContactCategory</a> category,
-              const <a href="_physic_manager_8hpp.html#abdee9dfe8cddd855cd0e49d9d52759d7" class="m-doc">ContactMask</a> mask) const -&gt; b2Fixture*</span>
+              const <a href="_physic_manager_8hpp.html#abdee9dfe8cddd855cd0e49d9d52759d7" class="m-doc">ContactMask</a> mask) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abfc4e1144bd1cfb87b553b8cad062964">
+              <span class="m-doc-wrap-bumper">void <a href="#abfc4e1144bd1cfb87b553b8cad062964" class="m-doc-self">createCircleFixture</a>(</span><span class="m-doc-wrap">const b2Vec2&amp; position,
+              const int radius,
+              const <a href="_physic_manager_8hpp.html#a02e73aee71bfff282ed342c9b8f05519" class="m-doc">ContactCategory</a> category,
+              const <a href="_physic_manager_8hpp.html#abdee9dfe8cddd855cd0e49d9d52759d7" class="m-doc">ContactMask</a> mask) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a91ae7b845d8bce262415f1a017b370ed">
+              <span class="m-doc-wrap-bumper">auto <a href="#a91ae7b845d8bce262415f1a017b370ed" class="m-doc-self">createRectangleSensor</a>(</span><span class="m-doc-wrap">const b2Vec2&amp; position,
+              const int width,
+              const int height,
+              const <a href="_physic_manager_8hpp.html#a02e73aee71bfff282ed342c9b8f05519" class="m-doc">ContactCategory</a> category,
+              const <a href="_physic_manager_8hpp.html#abdee9dfe8cddd855cd0e49d9d52759d7" class="m-doc">ContactMask</a> mask) const -&gt; b2Fixture* <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd><span></span></dd>
             <dt id="aa384026bca9f1a8b1ada8e06ecfddc8c">
               <span class="m-doc-wrap-bumper">auto <a href="#aa384026bca9f1a8b1ada8e06ecfddc8c" class="m-doc-self">createCircleSensor</a>(</span><span class="m-doc-wrap">const b2Vec2&amp; position,
               const int radius,
               const <a href="_physic_manager_8hpp.html#a02e73aee71bfff282ed342c9b8f05519" class="m-doc">ContactCategory</a> category,
-              const <a href="_physic_manager_8hpp.html#abdee9dfe8cddd855cd0e49d9d52759d7" class="m-doc">ContactMask</a> mask) const -&gt; b2Fixture*</span>
+              const <a href="_physic_manager_8hpp.html#abdee9dfe8cddd855cd0e49d9d52759d7" class="m-doc">ContactMask</a> mask) const -&gt; b2Fixture* <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd><span></span></dd>
           </dl>
