@@ -32,7 +32,7 @@ void PigWithBomb::loadAnimation()
 void PigWithBomb::update()
 {
     Pig::update();
-    if (isSeeing(ContactCategory::CAT_PLAYER) && vision_nearest_distance_ <= 80) {
+    if (isSeeing(ContactCategory::CAT_PLAYER) && vision_nearest_distance_ <= 100) {
         throwBomb();
         becomeNormal();
     }
@@ -40,13 +40,17 @@ void PigWithBomb::update()
 
 void PigWithBomb::throwBomb()
 {
-    auto params = std::make_unique<LoaderParams>(
-        LoaderParams(getX() - width_ * 0.5f, getY() - height_ * 0.5f - 10, 7, 7));
+    const int bomb_size = 7;
+    auto params = std::make_unique<LoaderParams>(LoaderParams(
+        getX() - width_ * 0.5f,
+        getY() - height_ * 0.5f - bomb_size,
+        bomb_size,
+        bomb_size));
 
     auto bomb =
         dynamic_cast<Bomb*>(Game::Instance().getLevel()->spawnObject("Bomb", std::move(params)));
     bomb->getBody()->ApplyForce(
-        b2Vec2(direction_ * 50, -32),
+        b2Vec2(direction_ * 7, -7),
         bomb->getBody()->GetWorldCenter(),
         true);
     bomb->turnOn();
@@ -54,8 +58,9 @@ void PigWithBomb::throwBomb()
 
 void PigWithBomb::becomeNormal()
 {
+    const int pig_size = 20;
     disappear();
-    auto params2 = std::make_unique<LoaderParams>(
-        LoaderParams(getX() - (20 * 0.5f), getY() - (20 * 0.5f), 20, 20));
-    Game::Instance().getLevel()->spawnObject("Pig", std::move(params2));
+    auto params = std::make_unique<LoaderParams>(
+        LoaderParams(getX() - (pig_size * 0.5f), getY() - (pig_size * 0.5f), pig_size, pig_size));
+    Game::Instance().getLevel()->spawnObject("Pig", std::move(params));
 }

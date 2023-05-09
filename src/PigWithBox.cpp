@@ -30,7 +30,7 @@ void PigWithBox::update()
         return;
     }
     Pig::update();
-    if (isSeeing(ContactCategory::CAT_PLAYER) && vision_nearest_distance_ <= 80) {
+    if (isSeeing(ContactCategory::CAT_PLAYER) && vision_nearest_distance_ <= 100) {
         throwBox();
         becomeNormal();
     }
@@ -51,8 +51,9 @@ void PigWithBox::throwBox()
 
 void PigWithBox::becomeNormal()
 {
+    const int pig_size = 20;
     disappear();
-    auto params2 = std::make_unique<LoaderParams>(
-        LoaderParams(getX() - (20 * 0.5f), getY() - (20 * 0.5f), 20, 20));
-    Game::Instance().getLevel()->spawnObject("Pig", std::move(params2));
+    auto params = std::make_unique<LoaderParams>(
+        LoaderParams(getX() - (pig_size * 0.5f), getY() - (pig_size * 0.5f), pig_size, pig_size));
+    Game::Instance().getLevel()->spawnObject("Pig", std::move(params));
 }
