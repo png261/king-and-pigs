@@ -5,7 +5,7 @@
 #include "ContactListener.hpp"
 #include "DamageableObject.hpp"
 #include "DebugDraw.hpp"
-#include "DoorIn.hpp"
+#include "DoorExit.hpp"
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "InputManager.hpp"

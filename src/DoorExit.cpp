@@ -1,17 +1,17 @@
-#include "DoorIn.hpp"
+#include "DoorExit.hpp"
 
 #include "Utils.hpp"
 
-DoorIn::DoorIn() {}
+DoorExit::DoorExit() {}
 
-void DoorIn::load(std::unique_ptr<LoaderParams> const& params)
+void DoorExit::load(std::unique_ptr<LoaderParams> const& params)
 {
     Door::load(std::move(params));
     createSensor();
-    setFilterData(ContactCategory::CAT_DOOR_IN, ContactMask::MASK_DOOR_IN);
+    setFilterData(ContactCategory::CAT_DOOR_EXIT, ContactMask::MASK_DOOR_EXIT);
 }
 
-void DoorIn::createSensor()
+void DoorExit::createSensor()
 {
     float sensorSize = 5;
     b2PolygonShape dynamicBox;
@@ -26,7 +26,7 @@ void DoorIn::createSensor()
     b2FixtureDef sensorDef;
     sensorDef.shape = &dynamicBox;
     sensorDef.isSensor = true;
-    sensorDef.filter.categoryBits = ContactCategory::CAT_DOOR_IN;
-    sensorDef.filter.maskBits = ContactMask::MASK_DOOR_IN;
+    sensorDef.filter.categoryBits = ContactCategory::CAT_DOOR_ENTRY;
+    sensorDef.filter.maskBits = ContactMask::MASK_DOOR_EXIT;
     body_->CreateFixture(&sensorDef);
 }

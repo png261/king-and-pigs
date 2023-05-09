@@ -1,8 +1,8 @@
 #include "ContactListener.hpp"
 
 #include "AttackerObject.hpp"
-#include "DoorIn.hpp"
-#include "DoorOut.hpp"
+#include "DoorEntry.hpp"
+#include "DoorExit.hpp"
 #include "Game.hpp"
 #include "ItemObject.hpp"
 #include "PhysicManager.hpp"
@@ -123,18 +123,18 @@ void ContactListener::EnterDoorListener(b2Contact* const contact)
     const uint16 catA = fixtureA->GetFilterData().categoryBits;
     const uint16 catB = fixtureB->GetFilterData().categoryBits;
 
-    if ((catA | catB) != (ContactCategory::CAT_DOOR_IN | ContactCategory::CAT_PLAYER)) {
+    if ((catA | catB) != (ContactCategory::CAT_DOOR_EXIT | ContactCategory::CAT_PLAYER)) {
         return;
     }
 
-    DoorIn* door = nullptr;
+    DoorExit* door = nullptr;
     Player* player = nullptr;
 
-    if (catA == ContactCategory::CAT_DOOR_IN) {
-        door = (DoorIn*)(fixtureA->GetBody()->GetUserData().pointer);
+    if (catA == ContactCategory::CAT_DOOR_EXIT) {
+        door = (DoorExit*)(fixtureA->GetBody()->GetUserData().pointer);
         player = (Player*)(fixtureB->GetBody()->GetUserData().pointer);
     } else {
-        door = (DoorIn*)(fixtureB->GetBody()->GetUserData().pointer);
+        door = (DoorExit*)(fixtureB->GetBody()->GetUserData().pointer);
         player = (Player*)(fixtureA->GetBody()->GetUserData().pointer);
     }
 

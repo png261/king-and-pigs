@@ -6,8 +6,8 @@
 #include "CONSTANT.hpp"
 #include "Camera.hpp"
 #include "Diamond.hpp"
-#include "DoorIn.hpp"
-#include "DoorOut.hpp"
+#include "DoorEntry.hpp"
+#include "DoorExit.hpp"
 #include "Game.hpp"
 #include "GameStateManager.hpp"
 #include "Heart.hpp"
@@ -50,8 +50,8 @@ bool PlayState::enter()
     factory.registerType("Heart", std::make_unique<HeartCreator>());
     factory.registerType("Diamond", std::make_unique<DiamondCreator>());
 
-    factory.registerType("DoorOut", std::make_unique<DoorOutCreator>());
-    factory.registerType("DoorIn", std::make_unique<DoorInCreator>());
+    factory.registerType("DoorEntry", std::make_unique<DoorEntryCreator>());
+    factory.registerType("DoorExit", std::make_unique<DoorExitCreator>());
 
     texture.load(IMAGE_DIRECTORY + "player/idle.png", "player_idle");
     texture.load(IMAGE_DIRECTORY + "player/run.png", "player_run");
