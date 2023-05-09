@@ -1,6 +1,5 @@
 #include "InputManager.hpp"
 
-#include "Game.hpp"
 #include "InputDefinitions.hpp"
 
 InputManager& InputManager::Instance()
@@ -25,40 +24,24 @@ InputManager::InputManager()
     }
 }
 
-void InputManager::update()
+void InputManager::update(SDL_Event& event)
 {
-    for (int i = 0; i < KEYBOARD_SIZE; ++i) {
-        is_key_down_[i] = false;
-        is_key_up_[i] = false;
-    }
-
-    for (int i = 0; i < MOUSE_MAX; ++i) {
-        is_mouse_down_[i] = false;
-        is_mouse_up_[i] = false;
-    }
-
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        switch (event.type) {
-        case SDL_QUIT:
-            Game::Instance().quit();
-            break;
-        case SDL_KEYDOWN:
-            onKeyDown(event);
-            break;
-        case SDL_KEYUP:
-            onKeyUp(event);
-            break;
-        case SDL_MOUSEMOTION:
-            onMouseMove(event);
-            break;
-        case SDL_MOUSEBUTTONDOWN:
-            onMouseDown(event);
-            break;
-        case SDL_MOUSEBUTTONUP:
-            onMouseUp(event);
-            break;
-        }
+    switch (event.type) {
+    case SDL_KEYDOWN:
+        onKeyDown(event);
+        break;
+    case SDL_KEYUP:
+        onKeyUp(event);
+        break;
+    case SDL_MOUSEMOTION:
+        onMouseMove(event);
+        break;
+    case SDL_MOUSEBUTTONDOWN:
+        onMouseDown(event);
+        break;
+    case SDL_MOUSEBUTTONUP:
+        onMouseUp(event);
+        break;
     }
 }
 
@@ -127,20 +110,23 @@ bool InputManager::isKeyUp(const KeyboardKey key) const
     return is_key_up_[key];
 }
 
-void InputManager::reset()
+void InputManager::refresh()
 {
-    keyboard_ = nullptr;
-    int i;
-    for (i = 0; i < KEYBOARD_SIZE; ++i) {
+    for (int i = 0; i < KEYBOARD_SIZE; ++i) {
         is_key_down_[i] = false;
         is_key_up_[i] = false;
     }
 
-    mouse_ = 0;
-    for (i = 0; i < MOUSE_MAX; ++i) {
+    for (int i = 0; i < MOUSE_MAX; ++i) {
         is_mouse_down_[i] = false;
         is_mouse_up_[i] = false;
     }
+}
+void InputManager::reset()
+{
+    keyboard_ = nullptr;
+    mouse_ = 0;
+    refresh();
 }
 
 b2Vec2 InputManager::getMousePosition() const

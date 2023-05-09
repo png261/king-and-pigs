@@ -1,5 +1,6 @@
 #include "Window.hpp"
 
+#include <iostream>
 #include <stdexcept>
 
 #include "CONSTANT.hpp"
@@ -16,7 +17,23 @@ Window::Window(const int width, const int height, const std::string& title)
     , title_(title)
     , background_color_(0, 0, 0)
 {
-    resize(title, width, height);
+    SDL_CreateWindowAndRenderer(
+        width,
+        height,
+        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE,
+        &window_,
+        &renderer_);
+
+    if (window_ == nullptr || renderer_ == nullptr) {
+        Log::error("Window::resize: Couldn't create SDL_Window or SDL_Renderer");
+        return;
+    }
+
+    SDL_RenderSetLogicalSize(renderer_, width, height);
+    setTitle(title);
+
+    width_ = width;
+    height_ = height;
 
     if (!window_ || !renderer_) {
         throw std::runtime_error("Window: Couldn't create Window");
@@ -27,6 +44,7 @@ Window::Window(const int width, const int height, const std::string& title)
         throw std::runtime_error("Window: Fail load font");
     }
 
+    frame_delay_ = 1000.f / framerate_;
     framerate_stopwatch_.start();
 
     clear();
@@ -38,37 +56,56 @@ Window::~Window()
     destroy();
 }
 
-void Window::resize(const std::string& title, const int width, const int height)
+void Window::handleEvents(SDL_Event& event)
 {
-    // Just in case we already have a window
-    destroy();
-
-    // Taken from the Migration Guide
-    // (http://wiki.libsdl.org/MigrationGuide)
-    //
-    // It creates a nice window independent of the user's monitor size.
-    SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_SHOWN, &window_, &renderer_);
-
-    if (window_ == nullptr || renderer_ == nullptr) {
-        Log::error("Window::resize: Couldn't create SDL_Window or SDL_Renderer");
+    if (event.type != SDL_WINDOWEVENT) {
         return;
     }
 
-    // And here we fake a "logical" size of the window, independent of it's real size.
-    /* SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear"); */
-    SDL_RenderSetLogicalSize(renderer_, width, height);
+    switch (event.window.event) {
+    /* case SDL_WINDOWEVENT_RESIZED: */
+    /* case SDL_WINDOWEVENT_SIZE_CHANGED: */
+    /*     resize(title_, event.window.data1, event.window.data2); */
+    /*     break; */
+    case SDL_WINDOWEVENT_MINIMIZED:
+        minimize();
+        break;
+    case SDL_WINDOWEVENT_MAXIMIZED:
+        maximize();
+        break;
+    }
+}
 
-    setTitle(title);
+void Window::resize(const std::string& title, const int width, const int height)
+{
+    SDL_RenderSetLogicalSize(renderer_, width, height);
+    SDL_SetWindowSize(window_, width, height);
 
     width_ = width;
     height_ = height;
-
-    frame_delay_ = 1000.f / framerate_;
 }
+
+void Window::minimize() const
+{
+    SDL_MinimizeWindow(window_);
+}
+
+void Window::maximize() const
+{
+    SDL_MaximizeWindow(window_);
+}
+
+void Window::setIcon(const std::string& path) const
+{
+    SDL_Surface* icon = IMG_Load(path.c_str());
+    if (icon == nullptr) {
+        return;
+    }
+    SDL_SetWindowIcon(window_, icon);
+};
 
 void Window::destroy()
 {
-    Log::log("window destroy");
     if (renderer_) {
         SDL_DestroyRenderer(renderer_);
         renderer_ = nullptr;

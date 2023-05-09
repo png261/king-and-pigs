@@ -10,6 +10,7 @@
 #include "ObjectFactory.hpp"
 #include "PhysicManager.hpp"
 #include "PlayState.hpp"
+#include "SDL.hpp"
 #include "SoundManager.hpp"
 #include "TextureManager.hpp"
 #include "Utils.hpp"
@@ -33,6 +34,7 @@ void Game::init(const int width, const int height, const std::string& title)
 {
     SDL::init();
     window_ = std::make_unique<Window>(width, height, title);
+    window_->setIcon("assets/icon/icon.png");
     PhysicManager::Instance().init(window_.get());
 
     cursor_ = std::make_unique<Cursor>();
@@ -48,7 +50,16 @@ void Game::init(const int width, const int height, const std::string& title)
 
 void Game::handleEvents()
 {
-    InputManager::Instance().update();
+    InputManager::Instance().refresh();
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT) {
+            quit();
+        }
+
+        InputManager::Instance().update(event);
+        window_->handleEvents(event);
+    }
 }
 
 void Game::update()

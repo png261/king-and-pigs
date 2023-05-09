@@ -15,7 +15,8 @@ public:
     InputManager(InputManager const&) = delete;
     InputManager& operator=(InputManager const&) = delete;
 
-    void update();
+    void update(SDL_Event& event);
+    void refresh();
     void reset();
     void clean();
 

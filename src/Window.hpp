@@ -24,6 +24,7 @@ public:
     ~Window();
 
     void clear();
+    void handleEvents(SDL_Event& event);
     void destroy();
 
     void renderImage(
@@ -42,6 +43,12 @@ public:
 
     void resize(const std::string& title, const int width, const int height);
 
+    void minimize() const;
+
+    void maximize() const;
+
+    void setIcon(const std::string& filepath) const;
+
     void fill(const Color& color);
 
     void print(
@@ -51,10 +58,12 @@ public:
         const int size,
         const Color& color = Color(ColorName::BLACK),
         const int style = FontStyle::NORMAL) const;
+
     void drawBox(
         const Rectangle& rect,
         const int border_radius,
         const Color& color = Color(ColorName::WHITE)) const;
+
     void drawOverlay(const Color& color = Color(ColorName::WHITE)) const;
 
     void setBackgroundColor(const Color& color = Color(ColorName::BLACK));
