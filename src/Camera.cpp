@@ -42,6 +42,16 @@ b2Vec2 Camera::getPosition() const
     return pos;
 }
 
+float Camera::getX() const
+{
+    return getPosition().x;
+}
+
+float Camera::getY() const
+{
+    return getPosition().y;
+}
+
 void Camera::update()
 {
     Game& game = Game::Instance();

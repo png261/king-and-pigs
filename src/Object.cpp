@@ -38,3 +38,12 @@ b2Vec2 Object::getPosition() const
 {
     return position_;
 }
+
+float Object::getX() const
+{
+    return getPosition().x;
+};
+float Object::getY() const
+{
+    return getPosition().y;
+};

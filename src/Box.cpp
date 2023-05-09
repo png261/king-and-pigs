@@ -63,8 +63,7 @@ void Box::updateAnimation()
 
 void Box::randomBonus()
 {
-    auto params =
-        std::make_unique<LoaderParams>(LoaderParams(getPosition().x, getPosition().y, 10, 10));
+    auto params = std::make_unique<LoaderParams>(LoaderParams(getX(), getY(), 10, 10));
     if (Utils::isProbable(30)) {
         Game::Instance().getLevel()->spawnObject("Heart", std::move(params));
         return;

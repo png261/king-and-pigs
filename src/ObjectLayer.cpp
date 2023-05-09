@@ -7,10 +7,9 @@
 void ObjectLayer::update()
 {
     for (const auto& object : objects_) {
-        if (object->getPosition().x >
-                Camera::Instance().getPosition().x + Game::Instance().getWindow()->getWidth() &&
-            object->getPosition().y >
-                Camera::Instance().getPosition().y + Game::Instance().getWindow()->getHeight()) {
+        if (object->getX() > Camera::Instance().getX() + Game::Instance().getWindow()->getWidth() &&
+            object->getY() >
+                Camera::Instance().getY() + Game::Instance().getWindow()->getHeight()) {
             continue;
         }
 

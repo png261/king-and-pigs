@@ -11,7 +11,9 @@ public:
     virtual void update() override;
 
     virtual b2Body* getBody() const;
+
     virtual b2Vec2 getPosition() const override;
+
     virtual float getAngle() const;
     virtual int getFootContact() const;
     virtual bool isOnGround() const;

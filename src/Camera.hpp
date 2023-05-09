@@ -13,6 +13,8 @@ public:
     void update();
 
     b2Vec2 getPosition() const;
+    float getX() const;
+    float getY() const;
     float getZoom() const;
 
     void setTarget(GameObject* const target);

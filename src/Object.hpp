@@ -17,7 +17,11 @@ public:
 
     virtual int getWidth() const;
     virtual int getHeight() const;
+
     virtual b2Vec2 getPosition() const;
+    virtual float getX() const;
+    virtual float getY() const;
+
     virtual bool isExist() const;
     virtual void disappear();
 

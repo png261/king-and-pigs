@@ -41,7 +41,7 @@ void PigWithBomb::update()
 void PigWithBomb::throwBomb()
 {
     auto params = std::make_unique<LoaderParams>(
-        LoaderParams(getPosition().x - width_ * 0.5f, getPosition().y - height_ * 0.5f - 10, 7, 7));
+        LoaderParams(getX() - width_ * 0.5f, getY() - height_ * 0.5f - 10, 7, 7));
 
     auto bomb =
         dynamic_cast<Bomb*>(Game::Instance().getLevel()->spawnObject("Bomb", std::move(params)));
@@ -56,6 +56,6 @@ void PigWithBomb::becomeNormal()
 {
     disappear();
     auto params2 = std::make_unique<LoaderParams>(
-        LoaderParams(getPosition().x - (20 * 0.5f), getPosition().y - (20 * 0.5f), 20, 20));
+        LoaderParams(getX() - (20 * 0.5f), getY() - (20 * 0.5f), 20, 20));
     Game::Instance().getLevel()->spawnObject("Pig", std::move(params2));
 }

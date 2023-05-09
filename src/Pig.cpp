@@ -220,10 +220,8 @@ void Pig::drawHealthBar() const
     const int kHeight = 2;
 
     const b2Vec2 position = {
-        (getPosition().x - getWidth() * 0.5f - Camera::Instance().getPosition().x) *
-            Camera::Instance().getZoom(),
-        (getPosition().y - getHeight() * 0.5f - Camera::Instance().getPosition().y) *
-            Camera::Instance().getZoom()};
+        (getX() - getWidth() * 0.5f - Camera::Instance().getX()) * Camera::Instance().getZoom(),
+        (getY() - getHeight() * 0.5f - Camera::Instance().getY()) * Camera::Instance().getZoom()};
 
     Rectangle bar{
         position.x,
