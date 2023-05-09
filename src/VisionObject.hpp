@@ -9,21 +9,22 @@ class VisionRayCastCallback final : public b2RayCastCallback
 public:
     VisionRayCastCallback()
         : fraction_(1)
+        , seeing_category_(0)
     {}
 
-    float ReportFixture(b2Fixture* fixture, const b2Vec2&, const b2Vec2&, float fraction)
+    float ReportFixture(b2Fixture* fixture, const b2Vec2&, const b2Vec2&, float fraction) override
     {
         if (fixture->IsSensor()) {
             return 1;
         }
 
-        seeing_category_ = static_cast<ContactCategory>(fixture->GetFilterData().categoryBits);
+        seeing_category_ = fixture->GetFilterData().categoryBits;
         fraction_ = fraction;
 
         return fraction;
     }
 
-    ContactCategory seeing_category_;
+    uint16 seeing_category_;
     float fraction_;
 };
 
