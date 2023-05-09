@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<template>
- <tileset firstgid="1" source="../sticker/sticker.tsx"/>
- <object name="Door" type="Door" gid="15" width="46" height="56"/>
-</template>

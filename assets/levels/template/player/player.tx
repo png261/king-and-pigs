@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
- <tileset firstgid="1" source="../sticker/sticker.tsx"/>
+ <tileset firstgid="1" source="../../sticker/sticker.tsx"/>
  <object name="Player" type="Player" gid="21" width="37" height="26"/>
 </template>

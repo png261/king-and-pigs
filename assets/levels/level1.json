@@ -16,7 +16,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":10,
          "id":13,
-         "name":"Ground",
+         "name":"ground",
          "opacity":1,
          "properties":[
                 {
@@ -43,7 +43,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":10,
          "id":14,
-         "name":"Wall",
+         "name":"wall background",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -64,7 +64,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":10,
          "id":15,
-         "name":"Decor",
+         "name":"decor",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -85,7 +85,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":10,
          "id":16,
-         "name":"Collision",
+         "name":"collision(oneway)",
          "opacity":1,
          "properties":[
                 {
@@ -102,11 +102,11 @@
         {
          "draworder":"topdown",
          "id":20,
-         "name":"Item",
+         "name":"items",
          "objects":[
                 {
                  "id":161,
-                 "template":"template\/Box.tx",
+                 "template":"template\/item\/box.tx",
                  "x":171,
                  "y":192
                 }],
@@ -119,19 +119,19 @@
         {
          "draworder":"topdown",
          "id":18,
-         "name":"Door",
+         "name":"door(entry & exit)",
          "objects":[
                 {
                  "id":156,
-                 "template":"template\/DoorIn.tx",
-                 "x":859,
-                 "y":193
+                 "template":"template\/door\/door_entry.tx",
+                 "x":96,
+                 "y":192
                 }, 
                 {
                  "id":157,
-                 "template":"template\/DoorOut.tx",
-                 "x":100,
-                 "y":193
+                 "template":"template\/door\/door_exit.tx",
+                 "x":864,
+                 "y":192
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -142,31 +142,31 @@
         {
          "draworder":"topdown",
          "id":12,
-         "name":"Enemy",
+         "name":"pigs",
          "objects":[
                 {
                  "gid":309,
                  "id":145,
-                 "template":"template\/Pig.tx",
+                 "template":"template\/pig\/pig.tx",
                  "visible":true,
                  "x":214,
                  "y":224
                 }, 
                 {
                  "id":158,
-                 "template":"template\/Pig.tx",
+                 "template":"template\/pig\/pig.tx",
                  "x":279,
                  "y":223
                 }, 
                 {
                  "id":159,
-                 "template":"template\/Pig.tx",
+                 "template":"template\/pig\/pig.tx",
                  "x":339,
                  "y":223
                 }, 
                 {
                  "id":160,
-                 "template":"template\/Pig.tx",
+                 "template":"template\/pig\/pig.tx",
                  "x":393,
                  "y":223
                 }],
@@ -179,12 +179,12 @@
         {
          "draworder":"topdown",
          "id":19,
-         "name":"Player",
+         "name":"player",
          "objects":[
                 {
                  "id":123,
                  "name":"Player",
-                 "template":"template\/Player.tx",
+                 "template":"template\/player\/player.tx",
                  "type":"Player",
                  "x":101,
                  "y":193
@@ -196,7 +196,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":176,
+ "nextobjectid":178,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
