@@ -18,8 +18,20 @@ void Pig::load(std::unique_ptr<LoaderParams> const& params)
 {
     GameObject::load(std::move(params));
     createBody(params->x(), params->y(), width_, height_);
-    setFilterData(ContactCategory::CAT_PIG, ContactMask::MASK_PIG);
-    fixture_->SetDensity(50);
+
+    createRectangleFixture(
+        {0, 0},
+        width_,
+        height_,
+        ContactCategory::CAT_PIG,
+        ContactMask::MASK_PIG);
+
+    createRectangleSensor(
+        b2Vec2(0, height_ * 0.5),
+        width_ - 0.5,
+        1,
+        ContactCategory::CAT_FOOT_SENSOR,
+        ContactMask::MASK_FOOT_SENSOR);
 
     createCircleSensor(
         -b2Vec2((width_ * 0.5 + attack_range_) * 0.5, 0),

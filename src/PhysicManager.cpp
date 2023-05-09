@@ -96,29 +96,3 @@ b2Body* PhysicManager::createStaticBody(
 
     return body;
 }
-
-b2Fixture* PhysicManager::createCircleBody(
-    b2Body*& body,
-    const b2Vec2& position,
-    const int radius,
-    const ContactCategory category,
-    const ContactMask mask) const
-{
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position = Utils::pixelToMeter(b2Vec2(position) + 0.5 * b2Vec2(radius, radius));
-    bodyDef.fixedRotation = true;
-    body = getWorld()->CreateBody(&bodyDef);
-
-    b2CircleShape circle;
-    circle.m_radius = Utils::pixelToMeter(radius);
-
-    b2FixtureDef fixture;
-    fixture.shape = &circle;
-    fixture.density = 1;
-    fixture.friction = 0.3;
-    fixture.filter.categoryBits = category;
-    fixture.filter.maskBits = mask;
-
-    return body->CreateFixture(&fixture);
-}

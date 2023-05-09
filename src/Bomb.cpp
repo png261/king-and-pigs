@@ -1,8 +1,8 @@
 #include "Bomb.hpp"
 
+#include "InputManager.hpp"
 #include "PhysicManager.hpp"
 #include "SoundManager.hpp"
-#include "Utils.hpp"
 
 Bomb::Bomb()
     : GameObject()
@@ -14,11 +14,11 @@ Bomb::Bomb()
 void Bomb::load(std::unique_ptr<LoaderParams> const& params)
 {
     Object::load(std::move(params));
+    createBody(params->x(), params->y(), width_, height_);
 
-    PhysicManager::Instance().createCircleBody(
-        body_,
-        b2Vec2(params->x(), params->y()) + 0.5f * b2Vec2(width_, height_),
-        width_,
+    createCircleFixture(
+        {0, width_ / 4.0f},
+        width_ / 2,
         ContactCategory::CAT_BOMB,
         ContactMask::MASK_BOMB);
 
@@ -50,6 +50,11 @@ void Bomb::update()
 
     GameObject::update();
     AttackerObject::update();
+
+    if (InputManager::Instance().isKeyDown(KEY_B)) {
+        turnOn();
+    }
+
 
     if (isOn() && on_timer_.isDone() && current_animation_ != EXPLODE) {
         explode();

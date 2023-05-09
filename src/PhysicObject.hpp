@@ -23,7 +23,6 @@ public:
     virtual bool canJump() const;
     virtual bool isDisableJump() const;
 
-    virtual void createBody(const int x, const int y, const int width, const int height);
     virtual void changeFootContact(const int n);
 
     virtual void moveLeft();
@@ -35,7 +34,22 @@ public:
 
     virtual void setFilterData(const ContactCategory category, const ContactMask mask) const;
 
-    virtual b2Fixture* createPolygonSensor(
+    virtual void createBody(const int x, const int y, const int width, const int height);
+
+    virtual void createRectangleFixture(
+        const b2Vec2& position,
+        const int width,
+        const int height,
+        const ContactCategory category,
+        const ContactMask mask);
+
+    virtual void createCircleFixture(
+        const b2Vec2& position,
+        const int radius,
+        const ContactCategory category,
+        const ContactMask mask);
+
+    virtual b2Fixture* createRectangleSensor(
         const b2Vec2& position,
         const int width,
         const int height,

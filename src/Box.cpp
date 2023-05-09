@@ -15,7 +15,13 @@ void Box::load(std::unique_ptr<LoaderParams> const& params)
     GameObject::load(std::move(params));
     createBody(params->x(), params->y(), getWidth(), getHeight());
 
-    setFilterData(ContactCategory::CAT_BOX, ContactMask::MASK_BOX);
+    createRectangleFixture(
+        {0, 0},
+        getWidth(),
+        getHeight(),
+        ContactCategory::CAT_BOX,
+        ContactMask::MASK_BOX);
+
     body_->SetFixedRotation(false);
 
     loadAnimation();

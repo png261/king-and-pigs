@@ -23,32 +23,6 @@ void PhysicObject::update()
     is_running_ = false;
 }
 
-void PhysicObject::createBody(const int x, const int y, const int width, const int height)
-{
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position = Utils::pixelToMeter(b2Vec2(x + width * 0.5f, y + height * 0.5f));
-    bodyDef.fixedRotation = true;
-    bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
-    body_ = PhysicManager::Instance().getWorld()->CreateBody(&bodyDef);
-
-    b2FixtureDef fixtureDef;
-    b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(Utils::pixelToMeter(width) * 0.5f, Utils::pixelToMeter(height) * 0.5f);
-
-    fixtureDef.shape = &dynamicBox;
-    fixtureDef.density = 1;
-    fixtureDef.friction = 1;
-    fixture_ = body_->CreateFixture(&fixtureDef);
-
-    createPolygonSensor(
-        b2Vec2(0, height * 0.5),
-        width - 0.5,
-        1,
-        ContactCategory::CAT_FOOT_SENSOR,
-        ContactMask::MASK_FOOT_SENSOR);
-}
-
 void PhysicObject::changeFootContact(int n)
 {
     num_foot_touch_ += n;
@@ -178,7 +152,59 @@ void PhysicObject::setFilterData(ContactCategory category, ContactMask mask) con
     fixture_->SetFilterData(filter);
 }
 
-b2Fixture* PhysicObject::createPolygonSensor(
+void PhysicObject::createBody(const int x, const int y, const int width, const int height)
+{
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position = Utils::pixelToMeter(b2Vec2(x + width * 0.5f, y + height * 0.5f));
+    bodyDef.fixedRotation = true;
+    bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
+    body_ = PhysicManager::Instance().getWorld()->CreateBody(&bodyDef);
+}
+
+void PhysicObject::createRectangleFixture(
+    const b2Vec2& position,
+    const int width,
+    const int height,
+    const ContactCategory category,
+    const ContactMask mask)
+{
+    b2PolygonShape polygon;
+    polygon.SetAsBox(
+        Utils::pixelToMeter(width * 0.5),
+        Utils::pixelToMeter(height * 0.5),
+        Utils::pixelToMeter(position),
+        0);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &polygon;
+    fixtureDef.density = 1;
+    fixtureDef.friction = 1;
+    fixtureDef.filter.categoryBits = category;
+    fixtureDef.filter.maskBits = mask;
+    fixture_ = getBody()->CreateFixture(&fixtureDef);
+}
+
+void PhysicObject::createCircleFixture(
+    const b2Vec2& position,
+    const int radius,
+    const ContactCategory category,
+    const ContactMask mask)
+{
+    b2CircleShape circle;
+    circle.m_p = Utils::pixelToMeter(position);
+    circle.m_radius = Utils::pixelToMeter(radius);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &circle;
+    fixtureDef.density = 1;
+    fixtureDef.friction = 1;
+    fixtureDef.filter.categoryBits = category;
+    fixtureDef.filter.maskBits = mask;
+    fixture_ = getBody()->CreateFixture(&fixtureDef);
+}
+
+b2Fixture* PhysicObject::createRectangleSensor(
     const b2Vec2& position,
     const int width,
     const int height,
@@ -194,9 +220,9 @@ b2Fixture* PhysicObject::createPolygonSensor(
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &polygon;
-    fixtureDef.isSensor = true;
     fixtureDef.filter.categoryBits = category;
     fixtureDef.filter.maskBits = mask;
+    fixtureDef.isSensor = true;
     return getBody()->CreateFixture(&fixtureDef);
 }
 
@@ -212,9 +238,8 @@ b2Fixture* PhysicObject::createCircleSensor(
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &circle;
-    fixtureDef.isSensor = true;
     fixtureDef.filter.categoryBits = category;
     fixtureDef.filter.maskBits = mask;
-
+    fixtureDef.isSensor = true;
     return getBody()->CreateFixture(&fixtureDef);
 }

@@ -3,7 +3,6 @@
 void DoorEntry::load(std::unique_ptr<LoaderParams> const& params)
 {
     Door::load(std::move(params));
-    setFilterData(ContactCategory::CAT_DOOR_ENTRY, ContactMask::MASK_DOOR_ENTRY);
     open();
 }
 

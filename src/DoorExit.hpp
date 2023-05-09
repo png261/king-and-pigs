@@ -8,7 +8,6 @@ class DoorExit final : public Door
 public:
     DoorExit();
     void load(std::unique_ptr<LoaderParams> const& params) override;
-    void createSensor();
 };
 
 class DoorExitCreator : public BaseCreator

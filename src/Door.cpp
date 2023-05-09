@@ -12,8 +12,12 @@ void Door::load(std::unique_ptr<LoaderParams> const& params)
     GameObject::load(std::move(params));
     createBody(params->x(), params->y(), width_, height_);
 
-    body_->SetGravityScale(0);
-    fixture_->SetSensor(true);
+    createRectangleSensor(
+        {0, 0},
+        width_,
+        height_,
+        ContactCategory::CAT_NONE,
+        ContactMask::MASK_NONE);
 
     loadAnimation();
 }

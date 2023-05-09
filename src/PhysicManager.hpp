@@ -61,13 +61,6 @@ public:
         const ContactCategory category,
         const ContactMask mask) const;
 
-    b2Fixture* createCircleBody(
-        b2Body*& body,
-        const b2Vec2& position,
-        const int radius,
-        const ContactCategory category,
-        const ContactMask mask) const;
-
 private:
     PhysicManager();
 
