@@ -39,7 +39,7 @@ public:
     VisionObject(const float range);
     virtual void update();
     virtual void debugDraw() const;
-    bool isSeeing(const ContactCategory category) const;
+    virtual bool isSeeing(const ContactCategory category) const;
 
 protected:
     uint16 seeing_category_;
