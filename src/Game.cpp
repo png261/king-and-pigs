@@ -106,13 +106,18 @@ void Game::nextLevel()
 
     level_index_ += 1;
     if (level_index_ >= level_files_.size()) {
-        GameStateManager::Instance().pushState(std::make_unique<WinState>());
-        level_index_ = 0;
+        handleWin();
         return;
     }
 
     GameStateManager::Instance().loading();
     play_state->loadLevel();
+}
+
+void Game::handleWin()
+{
+    GameStateManager::Instance().pushState(std::make_unique<WinState>());
+    level_index_ = 0;
 }
 
 int Game::getLevelIndex() const

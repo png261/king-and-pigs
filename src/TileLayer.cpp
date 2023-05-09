@@ -21,25 +21,25 @@ void TileLayer::update() {}
 void TileLayer::render() const
 {
     for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < columns_; j++) {
+        for (int j = 0; j < columns_; ++j) {
             const int id = tile_ids_[i * columns_ + j];
             if (id == 0) {
                 continue;
             }
 
-            const b2Vec2 position =
+            const auto position =
                 b2Vec2(j * tile_size_, i * tile_size_) - Camera::Instance().getPosition();
 
-            const bool isInViewPort =
-                position.x > -tile_size_ && position.x < Game::Instance().getWindow()->getWidth() &&
-                position.y > -tile_size_ && position.y < Game::Instance().getWindow()->getHeight();
+            const bool is_in_view = (position.x >= -tile_size_ &&
+                                     position.x < Game::Instance().getWindow()->getWidth()) &&
+                                    (position.y > -tile_size_ &&
+                                     position.y < Game::Instance().getWindow()->getHeight());
 
-            if (!isInViewPort) {
+            if (!is_in_view) {
                 continue;
             }
 
             const Tileset tileset = getTilesetByID(id);
-
             TextureManager::Instance().drawTile(
                 tileset.name,
                 tileset.margin,
@@ -57,17 +57,14 @@ void TileLayer::render() const
 Tileset TileLayer::getTilesetByID(int const tile_id) const
 {
     for (std::size_t i = 0; i < tile_sets_.size(); ++i) {
-        if (i == tile_sets_.size() - 1) {
-            return tile_sets_[i];
-        }
-
-        if (tile_id >= tile_sets_[i].first_grid_id && tile_id < tile_sets_[i + 1].first_grid_id) {
+        const bool is_in_tileset =
+            (tile_id >= tile_sets_[i].first_grid_id && tile_id < tile_sets_[i + 1].first_grid_id);
+        if (is_in_tileset) {
             return tile_sets_[i];
         }
     }
 
-    Log::warning("can't find tileset, return empty tileset");
-    return {};
+    return tile_sets_.back();
 }
 
 void TileLayer::setTileData(const std::vector<int>& data)

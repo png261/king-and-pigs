@@ -33,9 +33,10 @@ PlayState::PlayState()
 bool PlayState::enter()
 {
     is_loaded_ = false;
-    ObjectFactory& factory = ObjectFactory::Instance();
-    TextureManager& texture = TextureManager::Instance();
-    SoundManager& sound = SoundManager::Instance();
+
+    auto& factory = ObjectFactory::Instance();
+    auto& texture = TextureManager::Instance();
+    auto& sound = SoundManager::Instance();
 
     factory.registerType("Player", std::make_unique<PlayerCreator>());
 

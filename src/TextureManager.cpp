@@ -36,10 +36,9 @@ void TextureManager::draw(
     const bool is_flip,
     const int zoom) const
 {
-    int src_width = 0;
-    int src_height = 0;
-    SDL_QueryTexture(textures_.at(id), NULL, NULL, &src_width, &src_height);
-    SDL_Rect const src_rect{0, 0, src_width, src_height};
+    SDL_Rect src_rect{0, 0, 0, 0};
+    SDL_QueryTexture(textures_.at(id), NULL, NULL, &src_rect.w, &src_rect.h);
+
     SDL_Rect const dest_rect{
         static_cast<int>(position.x),
         static_cast<int>(position.y),

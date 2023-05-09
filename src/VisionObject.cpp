@@ -14,12 +14,14 @@ void VisionObject::update()
 {
     seeing_category_ = 0;
     vision_nearest_distance_ = vision_range_;
-    for (auto& raycast : raycast_) {
-        const b2Vec2 start = Utils::pixelToMeter(raycast.start);
-        const b2Vec2 end = Utils::pixelToMeter(raycast.end);
 
+    for (auto& raycast : raycast_) {
         VisionRayCastCallback callback;
-        PhysicManager::Instance().getWorld()->RayCast(&callback, start, end);
+        PhysicManager::Instance().getWorld()->RayCast(
+            &callback,
+            Utils::pixelToMeter(raycast.start),
+            Utils::pixelToMeter(raycast.end));
+
         seeing_category_ = seeing_category_ | callback.seeing_category_;
 
         vision_nearest_distance_ = callback.fraction_ * vision_range_ < vision_nearest_distance_
@@ -36,9 +38,10 @@ void VisionObject::debugDraw() const
 
     DebugDraw debug(Game::Instance().getWindow());
     for (auto& raycast : raycast_) {
-        const b2Vec2 start = Utils::pixelToMeter(raycast.start);
-        const b2Vec2 end = Utils::pixelToMeter(raycast.end);
-        debug.DrawSegment(start, end, {1, 1, 1, 1});
+        debug.DrawSegment(
+            Utils::pixelToMeter(raycast.start),
+            Utils::pixelToMeter(raycast.end),
+            {1, 1, 1, 1});
     }
 }
 

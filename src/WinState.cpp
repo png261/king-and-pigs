@@ -45,9 +45,11 @@ void WinState::render() const
     }
 
     Game::Instance().getWindow()->drawOverlay({0, 0, 0, 100});
+
     for (const auto& obj : ui_objects_) {
         obj->draw();
     }
+
     Game::Instance().getWindow()->print(
         "You are win",
         Game::Instance().getWindow()->getCenter().x,
@@ -67,6 +69,7 @@ bool WinState::enter()
         Game::Instance().getWindow()->getCenter().y - 70 * 0.5f,
         250,
         70));
+    main_menu_button->onClick([this]() { is_enter_main_menu_ = true; });
 
     auto exit_button = std::make_unique<Button>();
     exit_button->setTitle("Exit");
@@ -75,8 +78,6 @@ bool WinState::enter()
         Game::Instance().getWindow()->getCenter().y - 70 * 0.5f + 100,
         250,
         70));
-
-    main_menu_button->onClick([this]() { is_enter_main_menu_ = true; });
     exit_button->onClick([this]() { is_enter_exit_ = true; });
 
     ui_objects_.push_back(std::move(main_menu_button));

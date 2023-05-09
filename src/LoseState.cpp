@@ -50,6 +50,7 @@ void LoseState::render() const
     }
 
     Game::Instance().getWindow()->drawOverlay({0, 0, 0, 100});
+
     for (const auto& obj : ui_objects_) {
         obj->draw();
     }
@@ -73,6 +74,10 @@ bool LoseState::enter()
         Game::Instance().getWindow()->getCenter().y - 70 * 0.5f,
         250,
         70));
+    respawn_button->onClick([this]() { is_enter_respawn_ = true; });
+    if (Game::Instance().getDiamond() < 2) {
+        respawn_button->disable();
+    }
 
     auto main_menu_button = std::make_unique<Button>();
     main_menu_button->setTitle("Main Menu");
@@ -81,6 +86,7 @@ bool LoseState::enter()
         Game::Instance().getWindow()->getCenter().y - 70 * 0.5f + 100,
         250,
         70));
+    main_menu_button->onClick([this]() { is_enter_main_menu = true; });
 
     auto exit_button = std::make_unique<Button>();
     exit_button->setTitle("Exit");
@@ -89,13 +95,6 @@ bool LoseState::enter()
         Game::Instance().getWindow()->getCenter().y - 70 * 0.5f + 200,
         250,
         70));
-
-    if (Game::Instance().getDiamond() < 2) {
-        respawn_button->disable();
-    }
-    respawn_button->onClick([this]() { is_enter_respawn_ = true; });
-
-    main_menu_button->onClick([this]() { is_enter_main_menu = true; });
     exit_button->onClick([this]() { is_enter_exit_ = true; });
 
     ui_objects_.push_back(std::move(respawn_button));

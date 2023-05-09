@@ -14,4 +14,14 @@ float degToRad(const float deg);
 Color hexToRgba(const std::string& hex);
 void openLink(const std::string& link);
 nlohmann::json read_json_file(const std::string& path);
+
+template <typename T>
+void limitInRange(T& var, const T min, const T max)
+{
+    if (var > max) {
+        var = max;
+    } else if (var < min) {
+        var = min;
+    }
+}
 } // namespace Utils

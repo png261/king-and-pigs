@@ -80,7 +80,7 @@ bool MainMenuState::enter()
 {
     is_loaded_ = false;
 
-    TextureManager& texture = TextureManager::Instance();
+    auto& texture = TextureManager::Instance();
     texture.load(IMAGE_DIRECTORY + "ui/logo.png", "logo");
 
     auto new_game_button = std::make_unique<Button>();
@@ -90,6 +90,7 @@ bool MainMenuState::enter()
         Game::Instance().getWindow()->getCenter().y - 70 * 0.5f,
         300,
         70));
+    new_game_button->onClick([this]() { is_enter_play_state = true; });
 
     auto exit_button = std::make_unique<Button>();
     exit_button->setTitle("Exit");
@@ -98,8 +99,6 @@ bool MainMenuState::enter()
         Game::Instance().getWindow()->getCenter().y - 70 * 0.5f + 100,
         300,
         70));
-
-    new_game_button->onClick([this]() { is_enter_play_state = true; });
     exit_button->onClick([this]() { is_enter_quit_ = true; });
 
     ui_objects_.push_back(std::move(new_game_button));

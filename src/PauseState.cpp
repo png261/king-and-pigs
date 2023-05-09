@@ -28,7 +28,7 @@ void PauseState::update()
         return;
     }
     if (is_enter_main_menu) {
-        GameStateManager::Instance().popState();
+        GameStateManager::Instance().clean();
         GameStateManager::Instance().changeState(std::make_unique<MainMenuState>());
         return;
     }
@@ -58,7 +58,7 @@ bool PauseState::enter()
 {
     is_loaded_ = false;
 
-    TextureManager& texture = TextureManager::Instance();
+    auto& texture = TextureManager::Instance();
     texture.load(IMAGE_DIRECTORY + "ui/button/muteSFX.png", "icon mute_sfx");
     texture.load(IMAGE_DIRECTORY + "ui/button/muteMusic.png", "icon mute_music");
 

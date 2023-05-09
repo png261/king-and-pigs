@@ -48,6 +48,7 @@ public:
 
 private:
     Game();
+    void handleWin();
 
     std::unique_ptr<Window> window_;
     Level* level_;

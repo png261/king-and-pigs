@@ -1,6 +1,7 @@
 #include "Camera.hpp"
 
 #include "Game.hpp"
+#include "Utils.hpp"
 
 Camera::Camera()
     : target_(nullptr)
@@ -54,29 +55,16 @@ float Camera::getY() const
 
 void Camera::update()
 {
-    Game& game = Game::Instance();
+    const Game& game = Game::Instance();
     position_ = target_->getPosition();
 
-    float maxX = game.getLevel()->getMapWidth() -
-                 (game.getWindow()->getWidth() / zoom_ + target_->getWidth()) * 0.5;
-    float maxY = game.getLevel()->getMapHeight() -
-                 (game.getWindow()->getHeight() / zoom_ + target_->getHeight()) * 0.5;
+    const float maxX = game.getLevel()->getMapWidth() -
+                       (game.getWindow()->getWidth() / zoom_ + target_->getWidth()) * 0.5;
+    const float maxY = game.getLevel()->getMapHeight() -
+                       (game.getWindow()->getHeight() / zoom_ + target_->getHeight()) * 0.5;
 
-    if (position_.x > maxX) {
-        position_.x = maxX;
-    }
-
-    if (position_.y > maxY) {
-        position_.y = maxY;
-    }
-
-    if (position_.x < 0) {
-        position_.x = 0;
-    }
-
-    if (position_.y < 0) {
-        position_.y = 0;
-    }
+    Utils::limitInRange<float>(position_.x, 0, maxX);
+    Utils::limitInRange<float>(position_.y, 0, maxY);
 }
 
 void Camera::setTarget(GameObject* const target)

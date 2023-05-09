@@ -7,10 +7,10 @@ int main(int, char*[])
 {
     try {
         const auto& config = Utils::read_json_file(CONFIG_FILE);
-        const auto width = config["width"].get<int>();
-        const auto height = config["height"].get<int>();
-        const auto title = config["title"].get<std::string>();
-        const auto is_debug = config["debug"].get<bool>();
+        const auto& width = config["width"].get<int>();
+        const auto& height = config["height"].get<int>();
+        const auto& title = config["title"].get<std::string>();
+        const auto& is_debug = config["debug"].get<bool>();
 
         Game& game = Game::Instance();
         game.init(width, height, title);
