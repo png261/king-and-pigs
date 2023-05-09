@@ -30,19 +30,19 @@ public:
     virtual void moveRight();
     virtual void jump() const;
 
-    virtual void setMoveRight(bool can_move_right);
-    virtual void setMoveLeft(bool can_move_left);
+    virtual void setMoveRight(const bool can_move_right);
+    virtual void setMoveLeft(const bool can_move_left);
 
-    virtual void setFilterData(ContactCategory category, ContactMask mask) const;
+    virtual void setFilterData(const ContactCategory category, const ContactMask mask) const;
 
-    b2Fixture* createPolygonSensor(
+    virtual b2Fixture* createPolygonSensor(
         const b2Vec2& position,
         const int width,
         const int height,
         const ContactCategory category,
         const ContactMask mask) const;
 
-    b2Fixture* createCircleSensor(
+    virtual b2Fixture* createCircleSensor(
         const b2Vec2& position,
         const int radius,
         const ContactCategory category,
@@ -55,6 +55,7 @@ protected:
     bool can_move_right_;
     bool can_move_left_;
     bool can_jump_;
+
     bool is_ground_;
     bool is_running_;
     bool is_disabled_jump_;

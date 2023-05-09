@@ -180,10 +180,10 @@ void PhysicObject::setFilterData(ContactCategory category, ContactMask mask) con
 
 b2Fixture* PhysicObject::createPolygonSensor(
     const b2Vec2& position,
-    int width,
-    int height,
-    ContactCategory category,
-    ContactMask mask) const
+    const int width,
+    const int height,
+    const ContactCategory category,
+    const ContactMask mask) const
 {
     b2PolygonShape polygon;
     polygon.SetAsBox(
