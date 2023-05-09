@@ -10,11 +10,11 @@ int main(int, char*[])
         const auto& width = config["width"].get<int>();
         const auto& height = config["height"].get<int>();
         const auto& title = config["title"].get<std::string>();
-        const auto& is_debug = config["debug"].get<bool>();
+        const auto& is_debug_mode = config["debug_mode"].get<bool>();
 
         Game& game = Game::Instance();
         game.init(width, height, title);
-        game.debugMode(is_debug);
+        game.debugMode(is_debug_mode);
 
         while (game.isRunning()) {
             game.handleEvents();

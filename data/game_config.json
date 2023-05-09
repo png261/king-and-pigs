@@ -1,8 +1,13 @@
 {
-    "debug": false,
+    "debug_mode": false,
     "width": 1280,
     "height": 768,
     "title": "King and Pigs",
+    "levels": [
+        "assets/levels/test.json",
+        "assets/levels/level1.json",
+        "assets/levels/level2.json"
+    ],
     "author": {
         "name": "Phuong Nguyen",
         "github": "https://github.com/png261",

@@ -12,6 +12,7 @@
 #include "PlayState.hpp"
 #include "SoundManager.hpp"
 #include "TextureManager.hpp"
+#include "Utils.hpp"
 #include "WinState.hpp"
 
 Game::Game()
@@ -37,8 +38,9 @@ void Game::init(const int width, const int height, const std::string& title)
     cursor_ = std::make_unique<Cursor>();
     cursor_->init();
 
-    level_files_.push_back(LEVEL_DIRECTORY + "level1.json");
-    level_files_.push_back(LEVEL_DIRECTORY + "level2.json");
+    const auto& config = Utils::read_json_file(CONFIG_FILE);
+    level_files_ = config["levels"].get<std::vector<std::string>>();
+
     GameStateManager::Instance().changeState(std::make_unique<MainMenuState>());
 
     is_running_ = true;
