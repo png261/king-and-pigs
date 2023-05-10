@@ -11,48 +11,11 @@
 #include "SoundManager.hpp"
 #include "TextureManager.hpp"
 
-const std::string PauseState::kId_ = "PAUSE_STATE";
+const std::string PauseState::kStateID_ = "PAUSE_STATE";
 
 PauseState::PauseState()
     : is_enterResume_(false)
     , is_enter_main_menu(false){};
-
-void PauseState::update()
-{
-    if (!isLoaded() || isPaused()) {
-        return;
-    }
-
-    if (is_enterResume_) {
-        GameStateManager::Instance().popState();
-        return;
-    }
-    if (is_enter_main_menu) {
-        GameStateManager::Instance().clean();
-        GameStateManager::Instance().changeState(std::make_unique<MainMenuState>());
-        return;
-    }
-
-    if (InputManager::Instance().isKeyDown(KEY_ESCAPE)) {
-        is_enterResume_ = true;
-    }
-
-    for (const auto& obj : ui_objects_) {
-        obj->update();
-    }
-};
-
-void PauseState::render() const
-{
-    if (!isLoaded() || isPaused()) {
-        return;
-    }
-
-    Game::Instance().getWindow()->drawOverlay({0, 0, 0, 100});
-    for (const auto& obj : ui_objects_) {
-        obj->draw();
-    }
-};
 
 bool PauseState::enter()
 {
@@ -96,6 +59,44 @@ bool PauseState::enter()
     return true;
 };
 
+void PauseState::update()
+{
+    if (!isLoaded() || isPaused()) {
+        return;
+    }
+
+    if (is_enterResume_) {
+        GameStateManager::Instance().popState();
+        return;
+    }
+    if (is_enter_main_menu) {
+        GameStateManager::Instance().clean();
+        GameStateManager::Instance().changeState(std::make_unique<MainMenuState>());
+        return;
+    }
+
+    if (InputManager::Instance().isKeyDown(KEY_ESCAPE)) {
+        is_enterResume_ = true;
+    }
+
+    for (const auto& obj : ui_objects_) {
+        obj->update();
+    }
+};
+
+void PauseState::render() const
+{
+    if (!isLoaded() || isPaused()) {
+        return;
+    }
+
+    Game::Instance().getWindow()->drawOverlay({0, 0, 0, 100});
+    for (const auto& obj : ui_objects_) {
+        obj->draw();
+    }
+};
+
+
 bool PauseState::exit()
 {
     pause();
@@ -105,5 +106,5 @@ bool PauseState::exit()
 
 std::string PauseState::getStateID() const
 {
-    return kId_;
+    return kStateID_;
 };

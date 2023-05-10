@@ -24,7 +24,7 @@
 #include "SoundManager.hpp"
 #include "TextureManager.hpp"
 
-const std::string PlayState::kId_ = "PLAY_STATE";
+const std::string PlayState::kStateID_ = "PLAY_STATE";
 
 PlayState::PlayState()
     : GameState()
@@ -166,15 +166,6 @@ bool PlayState::loadLevel()
     return true;
 }
 
-bool PlayState::exit()
-{
-    pause();
-    PhysicManager::Instance().clean();
-    InputManager::Instance().reset();
-
-    return true;
-}
-
 void PlayState::update()
 {
     if (!isLoaded() || isPaused() || level_ == nullptr) {
@@ -226,7 +217,16 @@ void PlayState::renderStatusBar() const
     Game::Instance().getWindow()->print(status, 550, 50, 40, ColorName::WHITE);
 }
 
+bool PlayState::exit()
+{
+    pause();
+    PhysicManager::Instance().clean();
+    InputManager::Instance().reset();
+
+    return true;
+}
+
 std::string PlayState::getStateID() const
 {
-    return kId_;
+    return kStateID_;
 }

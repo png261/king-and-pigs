@@ -17,7 +17,7 @@ public:
 
 private:
     std::vector<std::unique_ptr<UiObject>> ui_objects_;
-    static const std::string kId_;
+    static const std::string kStateID_;
     bool is_enterResume_;
     bool is_enter_main_menu;
 };

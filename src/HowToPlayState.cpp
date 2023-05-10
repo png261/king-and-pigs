@@ -12,10 +12,34 @@
 #include "TextureManager.hpp"
 #include "Utils.hpp"
 
-const std::string HowToPlayState::kId_ = "HOW_TO_PLAY_STATE";
+const std::string HowToPlayState::kStateID_ = "HOW_TO_PLAY_STATE";
 
 HowToPlayState::HowToPlayState()
     : is_enter_main_menu(false){};
+
+bool HowToPlayState::enter()
+{
+    is_loaded_ = false;
+
+    TextureManager::Instance().load(
+        IMAGE_DIRECTORY + "ui/how_to_play/background.png",
+        "how_to_play_background");
+
+    const int button_width = 100;
+    const int button_height = 50;
+    auto back_button = std::make_unique<Button>();
+    back_button->setTitle("back");
+    back_button->load(std::make_unique<LoaderParams>(
+        Game::Instance().getWindow()->getCenter().x - 400,
+        Game::Instance().getWindow()->getCenter().y - 300,
+        button_width,
+        button_height));
+    back_button->onClick([this]() { is_enter_main_menu = true; });
+    ui_objects_.push_back(std::move(back_button));
+
+    is_loaded_ = true;
+    return true;
+};
 
 void HowToPlayState::update()
 {
@@ -66,32 +90,6 @@ void HowToPlayState::render() const
     }
 };
 
-void HowToPlayState::renderControlTable() {}
-
-bool HowToPlayState::enter()
-{
-    is_loaded_ = false;
-
-    TextureManager::Instance().load(
-        IMAGE_DIRECTORY + "ui/how_to_play/background.png",
-        "how_to_play_background");
-
-    const int button_width = 100;
-    const int button_height = 50;
-    auto back_button = std::make_unique<Button>();
-    back_button->setTitle("back");
-    back_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenter().x - 400,
-        Game::Instance().getWindow()->getCenter().y - 300,
-        button_width,
-        button_height));
-    back_button->onClick([this]() { is_enter_main_menu = true; });
-    ui_objects_.push_back(std::move(back_button));
-
-    is_loaded_ = true;
-    return true;
-};
-
 bool HowToPlayState::exit()
 {
     pause();
@@ -101,5 +99,5 @@ bool HowToPlayState::exit()
 
 std::string HowToPlayState::getStateID() const
 {
-    return kId_;
+    return kStateID_;
 };

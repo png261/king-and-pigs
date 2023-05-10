@@ -1,5 +1,4 @@
 #include "LoadingState.hpp"
-
 #include "Button.hpp"
 #include "CONSTANT.hpp"
 #include "Game.hpp"
@@ -10,9 +9,14 @@
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
-const std::string LoadingState::kId_ = "LOADING_STATE";
+const std::string LoadingState::kStateID_ = "LOADING_STATE";
 
 LoadingState::LoadingState() {}
+
+bool LoadingState::enter()
+{
+    return true;
+};
 
 void LoadingState::update(){};
 
@@ -27,11 +31,6 @@ void LoadingState::render() const
         ColorName::WHITE);
 };
 
-bool LoadingState::enter()
-{
-    return true;
-};
-
 bool LoadingState::exit()
 {
     pause();
@@ -41,5 +40,5 @@ bool LoadingState::exit()
 
 std::string LoadingState::getStateID() const
 {
-    return kId_;
+    return kStateID_;
 };

@@ -17,5 +17,5 @@ public:
 
 private:
     std::vector<std::unique_ptr<UiObject>> ui_objects_;
-    static const std::string kId_;
+    static const std::string kStateID_;
 };
