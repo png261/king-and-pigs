@@ -137,9 +137,6 @@ void Player::handleSound()
     if (isAttack()) {
         SoundManager::Instance().playSFX("player_attack");
     }
-    if (isInvulnerable()) {
-        SoundManager::Instance().playSFX("hurt");
-    }
 }
 
 void Player::handleInput()

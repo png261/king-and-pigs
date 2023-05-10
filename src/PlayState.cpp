@@ -116,7 +116,6 @@ bool PlayState::enter()
     sound.loadSFX(SOUND_DIRECTORY + "player/attack.wav", "player_attack");
     sound.loadSFX(SOUND_DIRECTORY + "player/dying.wav", "player_dying");
     sound.loadSFX(SOUND_DIRECTORY + "player/jump.wav", "player_jump");
-    sound.loadSFX(SOUND_DIRECTORY + "player/hurt.wav", "player_hurt");
 
     sound.loadSFX(SOUND_DIRECTORY + "pig/attack.wav", "pig_attack");
     sound.loadSFX(SOUND_DIRECTORY + "pig/dying.wav", "pig_dying");
@@ -133,6 +132,7 @@ bool PlayState::enter()
     sound.loadSFX(SOUND_DIRECTORY + "diamond/bonus.wav", "diamond_bonus");
 
     sound.loadMusic(SOUND_DIRECTORY + "playstate/background.mp3", "playstate_background");
+    sound.setVolumeMusic(80);
 
     if (!loadLevel()) {
         return false;
@@ -204,6 +204,14 @@ void PlayState::renderStatusBar() const
     for (int i = 0; i < level_->getPlayer()->getHp(); ++i) {
         TextureManager::Instance().draw("health_heart", {60 + i * 25.0f, 30}, 22, 19);
     }
+
+    TextureManager::Instance().draw("status_diamond", {30, 70}, 18, 14, false, 4);
+    Game::Instance().getWindow()->print(
+        std::to_string(Game::Instance().getDiamond()),
+        130,
+        95,
+        40,
+        ColorName::WHITE);
 
     const std::string status = "Top: " + std::to_string(Game::Instance().getTopScore()) +
                                "        "

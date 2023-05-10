@@ -12,46 +12,51 @@
 const std::string LoseState::kStateID_ = "LOSE_STATE";
 
 LoseState::LoseState()
-    : is_enter_main_menu(false)
-    , is_enter_exit_(false){};
+    : is_enter_respawn_(false)
+    , is_enter_new_game_(false)
+    , is_enter_main_menu_(false)
+{}
 
 bool LoseState::enter()
 {
     is_loaded_ = false;
 
     auto respawn_button = std::make_unique<Button>();
-    respawn_button->setTitle("Respawn");
+    respawn_button->setTitle("Respawn (2 diamond)");
     respawn_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenter().x - 250 * 0.5f,
+        Game::Instance().getWindow()->getCenter().x - 340 * 0.5f,
         Game::Instance().getWindow()->getCenter().y - 70 * 0.5f,
-        250,
+        340,
         70));
     respawn_button->onClick([this]() { is_enter_respawn_ = true; });
     if (Game::Instance().getDiamond() < 2) {
         respawn_button->disable();
     }
+    const int button_width = 300;
+    const int button_height = 70;
+    const int margin_y = 100;
+
+    auto new_game_button = std::make_unique<Button>();
+    new_game_button->setTitle("New Game");
+    new_game_button->load(std::make_unique<LoaderParams>(
+        Game::Instance().getWindow()->getCenter().x - button_width * 0.5f,
+        Game::Instance().getWindow()->getCenter().y - button_height * 0.5f + margin_y,
+        button_width,
+        button_height));
+    new_game_button->onClick([this]() { is_enter_new_game_ = true; });
 
     auto main_menu_button = std::make_unique<Button>();
     main_menu_button->setTitle("Main Menu");
     main_menu_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenter().x - 250 * 0.5f,
-        Game::Instance().getWindow()->getCenter().y - 70 * 0.5f + 100,
-        250,
-        70));
-    main_menu_button->onClick([this]() { is_enter_main_menu = true; });
-
-    auto exit_button = std::make_unique<Button>();
-    exit_button->setTitle("Exit");
-    exit_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenter().x - 250 * 0.5f,
-        Game::Instance().getWindow()->getCenter().y - 70 * 0.5f + 200,
-        250,
-        70));
-    exit_button->onClick([this]() { is_enter_exit_ = true; });
+        Game::Instance().getWindow()->getCenter().x - button_width * 0.5f,
+        Game::Instance().getWindow()->getCenter().y - button_height * 0.5f + margin_y * 2,
+        button_width,
+        button_height));
+    main_menu_button->onClick([this]() { is_enter_main_menu_ = true; });
 
     ui_objects_.push_back(std::move(respawn_button));
+    ui_objects_.push_back(std::move(new_game_button));
     ui_objects_.push_back(std::move(main_menu_button));
-    ui_objects_.push_back(std::move(exit_button));
 
     is_loaded_ = true;
 
@@ -70,14 +75,15 @@ void LoseState::update()
         return;
     }
 
-    if (is_enter_main_menu) {
-        GameStateManager::Instance().clean();
-        GameStateManager::Instance().changeState(std::make_unique<MainMenuState>());
+    if (is_enter_new_game_) {
+        Game::Instance().setLevelIndex(0);
+        GameStateManager::Instance().changeState(std::make_unique<PlayState>());
         return;
     }
 
-    if (is_enter_exit_) {
-        Game::Instance().quit();
+    if (is_enter_main_menu_) {
+        GameStateManager::Instance().clean();
+        GameStateManager::Instance().changeState(std::make_unique<MainMenuState>());
         return;
     }
 

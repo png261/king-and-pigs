@@ -19,8 +19,7 @@ const std::string MainMenuState::kStateID_ = "MAIN_MENU_STATE";
 
 MainMenuState::MainMenuState()
     : is_enter_play_state(false)
-    , is_enter_how_to_play_state(false)
-    , is_enter_quit_(false){};
+    , is_enter_how_to_play_state(false){};
 
 bool MainMenuState::enter()
 {
@@ -51,18 +50,8 @@ bool MainMenuState::enter()
         button_height));
     how_to_play_button->onClick([this]() { is_enter_how_to_play_state = true; });
 
-    auto exit_button = std::make_unique<Button>();
-    exit_button->setTitle("Exit");
-    exit_button->load(std::make_unique<LoaderParams>(
-        Game::Instance().getWindow()->getCenter().x - button_width * 0.5f,
-        Game::Instance().getWindow()->getCenter().y - button_height * 0.5f + margin_y * 2,
-        button_width,
-        button_height));
-    exit_button->onClick([this]() { is_enter_quit_ = true; });
-
     ui_objects_.push_back(std::move(new_game_button));
     ui_objects_.push_back(std::move(how_to_play_button));
-    ui_objects_.push_back(std::move(exit_button));
 
     is_loaded_ = true;
     return true;
@@ -83,11 +72,6 @@ void MainMenuState::update()
 
     if (is_enter_how_to_play_state) {
         GameStateManager::Instance().pushState(std::make_unique<HowToPlayState>());
-        return;
-    }
-
-    if (is_enter_quit_) {
-        Game::Instance().quit();
         return;
     }
 

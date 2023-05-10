@@ -7,8 +7,6 @@
 void Diamond::load(std::unique_ptr<LoaderParams> const& params)
 {
     ItemObject::load(params);
-    body_->SetGravityScale(0);
-    fixture_->SetSensor(true);
     loadAnimation();
 }
 

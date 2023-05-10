@@ -20,5 +20,4 @@ private:
     static const std::string kStateID_;
     bool is_enter_play_state;
     bool is_enter_how_to_play_state;
-    bool is_enter_quit_;
 };
