@@ -22,6 +22,8 @@ public:
     void setVolume(const int percent);
     void changeVolume(const int percent);
     int getVolume() const;
+    void setVolumeMusic(const float percent);
+    void setVolumeSFX(const float percent);
 
     void muteSFX();
     void unMuteSFX();
@@ -37,8 +39,6 @@ public:
 
 private:
     SoundManager();
-    void setVolumeMusic(const float percent);
-    void setVolumeSFX(const float percent);
 
     bool is_muted_music_;
     bool is_muted_sfx_;
