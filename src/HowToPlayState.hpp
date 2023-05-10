@@ -5,10 +5,10 @@
 #include "GameState.hpp"
 #include "UiObject.hpp"
 
-class MainMenuState final : public GameState
+class HowToPlayState final : public GameState
 {
 public:
-    MainMenuState();
+    HowToPlayState();
     void update() override;
     void render() const override;
     bool enter() override;
@@ -16,9 +16,8 @@ public:
     std::string getStateID() const override;
 
 private:
+    void renderControlTable();
     std::vector<std::unique_ptr<UiObject>> ui_objects_;
     static const std::string kId_;
-    bool is_enter_play_state;
-    bool is_enter_how_to_play_state;
-    bool is_enter_quit_;
+    bool is_enter_main_menu;
 };
