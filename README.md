@@ -1,15 +1,15 @@
-<div align="center">
+<h1 align="center">
   <a href="https://github.com/png261/king-and-pigs">
-    <img src="https://user-images.githubusercontent.com/63899044/226949086-c39646ef-9228-4561-900b-7be8635ea879.png" width="400"/>
+    <img src="https://github.com/png261/king-and-pigs/blob/main/assets/images/ui/logo.png" width="400"/>
   </a>
+</h1>
+<div align="center">
+
+  ![GitHub all releases](https://img.shields.io/github/downloads/png261/king-and-pigs/total)
+  ![GitHub Repo stars](https://img.shields.io/github/stars/png261/king-and-pigs)
+  ![GitHub](https://img.shields.io/github/license/png261/king-and-pigs)
   
-  ![GitHub all releases](https://img.shields.io/github/downloads/png261/king-and-pigs/total?style=for-the-badge)
-  ![GitHub](https://img.shields.io/github/license/png261/king-and-pigs?style=for-the-badge)
-  ![GitHub Repo stars](https://img.shields.io/github/stars/png261/king-and-pigs?style=for-the-badge)
-
-</div>
-
-# King and Pigs
+ </div>
 
 ## Description
 **King and Pigs** is a 2D game written in C++. In this game, the player controls a character who must navigate through various levels and defeat enemies.
