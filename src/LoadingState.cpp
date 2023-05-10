@@ -10,7 +10,7 @@
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
-const std::string LoadingState::kId_ = "LOADING";
+const std::string LoadingState::kId_ = "LOADING_STATE";
 
 LoadingState::LoadingState() {}
 

@@ -9,7 +9,7 @@
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
-const std::string WinState::kId_ = "WIN";
+const std::string WinState::kId_ = "WIN_STATE";
 
 WinState::WinState()
     : is_enter_main_menu_(false)

@@ -24,7 +24,7 @@
 #include "SoundManager.hpp"
 #include "TextureManager.hpp"
 
-const std::string PlayState::kId_ = "PLAY";
+const std::string PlayState::kId_ = "PLAY_STATE";
 
 PlayState::PlayState()
     : GameState()

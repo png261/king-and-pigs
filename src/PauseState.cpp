@@ -11,7 +11,7 @@
 #include "SoundManager.hpp"
 #include "TextureManager.hpp"
 
-const std::string PauseState::kId_ = "PAUSE";
+const std::string PauseState::kId_ = "PAUSE_STATE";
 
 PauseState::PauseState()
     : is_enterResume_(false)

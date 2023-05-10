@@ -9,7 +9,7 @@
 #include "PlayState.hpp"
 #include "TextureManager.hpp"
 
-const std::string LoseState::kId_ = "LOSE";
+const std::string LoseState::kId_ = "LOSE_STATE";
 
 LoseState::LoseState()
     : is_enter_main_menu(false)
