@@ -1,11 +1,10 @@
 #pragma once
 
-#include <SDL.h> // SDL2
-#include <SDL_image.h> // SDL2_Image
-#include <SDL_mixer.h> // SDL2_Mixer
-#include <SDL_ttf.h> // SDL2_TTF
-
-#include "SDL2_gfxPrimitives.hpp" // SDL2_GFX
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h> 
+#include <SDL_ttf.h> 
+#include "SDL2_gfxPrimitives.hpp" 
 
 namespace SDL {
 void init();
