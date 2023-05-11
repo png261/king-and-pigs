@@ -101,29 +101,6 @@
         }, 
         {
          "draworder":"topdown",
-         "id":20,
-         "name":"items",
-         "objects":[
-                {
-                 "id":161,
-                 "template":"template\/item\/box.tx",
-                 "x":171,
-                 "y":192
-                }, 
-                {
-                 "id":184,
-                 "template":"template\/item\/diamond.tx",
-                 "x":326,
-                 "y":121
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
          "id":18,
          "name":"door(entry & exit)",
          "objects":[
@@ -138,6 +115,29 @@
                  "template":"template\/door\/door_exit.tx",
                  "x":864,
                  "y":192
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":20,
+         "name":"items",
+         "objects":[
+                {
+                 "id":161,
+                 "template":"template\/item\/box.tx",
+                 "x":171,
+                 "y":192
+                }, 
+                {
+                 "id":184,
+                 "template":"template\/item\/diamond.tx",
+                 "x":326,
+                 "y":121
                 }],
          "opacity":1,
          "type":"objectgroup",

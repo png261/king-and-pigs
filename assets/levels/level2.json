@@ -129,6 +129,30 @@
         }, 
         {
          "draworder":"topdown",
+         "id":18,
+         "locked":true,
+         "name":"door(entry & exit)",
+         "objects":[
+                {
+                 "id":178,
+                 "template":"template\/door\/door_entry.tx",
+                 "x":64,
+                 "y":480
+                }, 
+                {
+                 "id":179,
+                 "template":"template\/door\/door_exit.tx",
+                 "x":1184,
+                 "y":480
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":20,
          "name":"items",
          "objects":[
@@ -227,30 +251,6 @@
                  "template":"template\/item\/bomb.tx",
                  "x":366,
                  "y":351
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":18,
-         "locked":true,
-         "name":"door(entry & exit)",
-         "objects":[
-                {
-                 "id":178,
-                 "template":"template\/door\/door_entry.tx",
-                 "x":64,
-                 "y":480
-                }, 
-                {
-                 "id":179,
-                 "template":"template\/door\/door_exit.tx",
-                 "x":1184,
-                 "y":480
                 }],
          "opacity":1,
          "type":"objectgroup",
