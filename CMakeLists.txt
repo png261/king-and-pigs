@@ -98,7 +98,13 @@ file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 # ---- Create executable ----
-add_executable(${PROJECT_NAME} ${sources} ${headers})
+if(WIN32)
+    add_executable(
+        ${PROJECT_NAME} ${sources} ${headers} "${CMAKE_CURRENT_SOURCE_DIR}/assets/icon/icon.rc"
+    )
+else()
+    add_executable(${PROJECT_NAME} ${sources} ${headers})
+endif(WIN32)
 
 # Link dependencies
 target_link_libraries(
@@ -124,7 +130,7 @@ install(DIRECTORY "${PROJECT_SOURCE_DIR}/data/" DESTINATION "data")
 
 include(InstallRequiredSystemLibraries)
 
-set(ICON_PATH "${PROJECT_SOURCE_DIR}/assets/icon/logo.ico")
+set(ICON_PATH "${PROJECT_SOURCE_DIR}/assets/icon/icon.ico")
 
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
 set(CPACK_PACKAGE_VENDOR "png261")
