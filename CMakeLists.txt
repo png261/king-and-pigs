@@ -2,11 +2,7 @@ cmake_minimum_required(VERSION 3.14...3.22)
 
 # ---- Project ----
 
-project(
-    king_and_pigs
-    VERSION 1.0
-    LANGUAGES CXX
-)
+project(KingAndPigs LANGUAGES CXX)
 
 # ---- Include guards ----
 
@@ -121,11 +117,11 @@ if(WIN32)
     add_definitions("-DSDL_MAIN_HANDLED") # fix Undefined reference to 'WinMain'
 endif(WIN32)
 
+# ---- Create Installer ----
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/assets/" DESTINATION "assets")
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/data/" DESTINATION "data")
 
-# ---- Create Installer ----
 include(InstallRequiredSystemLibraries)
 
 set(ICON_PATH "${PROJECT_SOURCE_DIR}/assets/icon/logo.ico")
@@ -141,12 +137,20 @@ set(CPACK_PACKAGE_EXECUTABLES "${PROJECT_NAME};${PROJECT_NAME}")
 
 if(WIN32)
     set(CPACK_GENERATOR "NSIS")
+    set(CPACK_NSIS_DISPLAY_NAME ${PROJECT_NAME})
+    set(CPACK_NSIS_PACKAGE_NAME ${PROIJECT_NAME})
     set(CPACK_NSIS_MODIFY_PATH "ON")
+    set(CPACK_NSIS_WELCOME_TITLE ${PROJECT_NAME})
+    set(CPACK_NSIS_FINISH_TITLE "Everything is done")
+    set(CPACK_NSIS_BRANDING_TEXT "phuongnguyen-png261")
+    set(CPACK_NSIS_URL_INFO_ABOUT "https://github.com/png261/king-and-pigs")
+    set(CPACK_NSIS_CONTACT "nhphuong.code@gmail.com")
+    set(CPACK_NSIS_MENU_LINKS "https://github.com/png261/king-and-pigs" "Github")
     set(CPACK_NSIS_MUI_ICON "${ICON_PATH}")
     set(CPACK_NSIS_MUI_UNIICON "${ICON_PATH}")
     set(CPACK_NSIS_INSTALLED_ICON_NAME "${ICON_PATH}")
     set(CPACK_NSIS_CREATE_ICONS_EXTRA
-        "CreateShortCut '$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\${PROJECT_NAME}.lnk' '$INSTDIR\\\\bin\\\\${PROJECT_NAME}.exe' "
+        "CreateShortCut '$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\${PROJECT_NAME}.lnk' '$INSTDIR\\\\bin\\\\${PROJECT_NAME}.exe' '${ICON_PATH}'"
     )
 endif(WIN32)
 
