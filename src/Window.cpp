@@ -9,40 +9,37 @@
 Window::Window(const int width, const int height, const std::string& title)
     : window_(nullptr)
     , renderer_(nullptr)
-    , font_(nullptr)
     , width_(width)
     , height_(height)
+    , font_(nullptr)
     , framerate_(60)
     , frame_delay_(0)
     , title_(title)
     , background_color_(0, 0, 0)
+{}
+
+Window::~Window()
+{
+    destroy();
+}
+
+void Window::init()
 {
     SDL_CreateWindowAndRenderer(
-        width,
-        height,
+        width_,
+        height_,
         SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE,
         &window_,
         &renderer_);
-
-    if (window_ == nullptr || renderer_ == nullptr) {
-        Log::error("Window::resize: Couldn't create SDL_Window or SDL_Renderer");
-        return;
-    }
-
-    SDL_RenderSetLogicalSize(renderer_, width, height);
-    setTitle(title);
-
-    width_ = width;
-    height_ = height;
 
     if (!window_ || !renderer_) {
         throw std::runtime_error("Window: Couldn't create Window");
     }
 
-    font_ = TTF_OpenFont((FONT_DIRECTORY + "m6x11.ttf").c_str(), 28);
-    if (font_ == nullptr) {
-        throw std::runtime_error("Window: Fail load font");
-    }
+    SDL_RenderSetLogicalSize(getRenderer(), width_, height_);
+    setTitle(title_);
+
+    loadFont(FONT_DIRECTORY + "m6x11.ttf");
 
     frame_delay_ = 1000.f / framerate_;
     framerate_stopwatch_.start();
@@ -51,9 +48,12 @@ Window::Window(const int width, const int height, const std::string& title)
     refresh();
 }
 
-Window::~Window()
+void Window::loadFont(const std::string& font_path)
 {
-    destroy();
+    font_ = TTF_OpenFont((font_path).c_str(), 28);
+    if (font_ == nullptr) {
+        throw std::runtime_error("Window: Fail load font");
+    }
 }
 
 void Window::handleEvents(SDL_Event& event)
@@ -63,10 +63,6 @@ void Window::handleEvents(SDL_Event& event)
     }
 
     switch (event.window.event) {
-    /* case SDL_WINDOWEVENT_RESIZED: */
-    /* case SDL_WINDOWEVENT_SIZE_CHANGED: */
-    /*     resize(title_, event.window.data1, event.window.data2); */
-    /*     break; */
     case SDL_WINDOWEVENT_MINIMIZED:
         minimize();
         break;
@@ -97,7 +93,7 @@ void Window::maximize() const
 
 void Window::setIcon(const std::string& path) const
 {
-    SDL_Surface* icon = IMG_Load(path.c_str());
+    SDL_Surface* const icon = IMG_Load(path.c_str());
     if (icon == nullptr) {
         return;
     }
@@ -156,13 +152,13 @@ void Window::renderImage(
     SDL_RenderCopyEx(renderer_, texture, src_rect, dest_rect, angle, center, flip);
 }
 
-void Window::fill(const Color& color)
+void Window::fill(const Color& color) const
 {
     SDL_SetRenderDrawColor(renderer_, color.r(), color.g(), color.b(), color.a());
     SDL_RenderClear(renderer_);
 }
 
-void Window::clear()
+void Window::clear() const
 {
     fill(background_color_);
 }
@@ -183,7 +179,7 @@ void Window::setBackgroundColor(const Color& color)
 
 void Window::delayFramerateIfNeeded()
 {
-    int delta = framerate_stopwatch_.delta();
+    const int delta = framerate_stopwatch_.delta();
 
     if (delta < frame_delay_) {
         SDL_Delay(frame_delay_ - delta);
@@ -207,14 +203,14 @@ void Window::print(
     TTF_SetFontSize(font_, size);
     TTF_SetFontStyle(font_, style);
 
-    SDL_Surface* pSurface =
+    SDL_Surface* const pSurface =
         TTF_RenderText_Blended(font_, text.c_str(), {color.r(), color.g(), color.b(), color.a()});
     if (pSurface == nullptr) {
         Log::error("Window::print: fail to create surface");
         return;
     }
 
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer_, pSurface);
+    SDL_Texture* const texture = SDL_CreateTextureFromSurface(renderer_, pSurface);
 
     if (texture == nullptr) {
         SDL_FreeSurface(pSurface);
@@ -222,7 +218,7 @@ void Window::print(
         return;
     }
 
-    SDL_Rect dest_rect = {x - pSurface->w / 2, y - pSurface->h / 2, pSurface->w, pSurface->h};
+    SDL_Rect const dest_rect = {x - pSurface->w / 2, y - pSurface->h / 2, pSurface->w, pSurface->h};
     SDL_RenderCopy(renderer_, texture, nullptr, &dest_rect);
 
     SDL_DestroyTexture(texture);

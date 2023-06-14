@@ -82,7 +82,7 @@ void Player::loadAnimation()
 void Player::update()
 {
     if (isDead()) {
-        GameStateManager::Instance().pushState(std::make_unique<LoseState>());
+        Game::Instance().handleLose();
         return;
     }
 
@@ -99,11 +99,11 @@ void Player::update()
 void Player::handleVision()
 {
     raycast_.clear();
-    float num_ray = 50.0f;
+    const float num_ray = 50.0f;
     for (int i = 0; i < num_ray; ++i) {
-        b2Vec2 start = getPosition() + direction_ * (b2Vec2(width_ * 0.5f, 0)) +
-                       b2Vec2(0, -height_ * 0.5f + i * height_ / num_ray);
-        b2Vec2 end = start + direction_ * b2Vec2(vision_range_, 0);
+        const b2Vec2 start = getPosition() + direction_ * (b2Vec2(width_ * 0.5f, 0)) +
+                             b2Vec2(0, -height_ * 0.5f + i * height_ / num_ray);
+        const b2Vec2 end = start + direction_ * b2Vec2(vision_range_, 0);
         raycast_.push_back({start, end});
     }
 
@@ -205,12 +205,10 @@ void Player::updateAnimation()
         new_animation = ENTERING_DOOR;
     }
 
-    if (leaving_door_timer_.isDone()) {
-        if (new_animation != current_animation_) {
-            animations_[current_animation_]->stop();
-            current_animation_ = new_animation;
-            animations_[current_animation_]->start();
-        }
+    if (leaving_door_timer_.isDone() && new_animation != current_animation_) {
+        animations_[current_animation_]->stop();
+        current_animation_ = new_animation;
+        animations_[current_animation_]->start();
     }
 }
 

@@ -9,6 +9,7 @@ const std::string IMAGE_DIRECTORY = "assets/images/";
 const std::string SOUND_DIRECTORY = "assets/sounds/";
 const std::string FONT_DIRECTORY = "assets/fonts/";
 const std::string LEVEL_DIRECTORY = "assets/levels/";
+const std::string ICON_DIRECTORY = "assets/icon/";
 
 
 const float PIXEL_PER_METER = 32.0f;

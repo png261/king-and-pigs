@@ -13,7 +13,6 @@
 #include "Heart.hpp"
 #include "InputManager.hpp"
 #include "KingPig.hpp"
-#include "LevelParser.hpp"
 #include "Log.hpp"
 #include "ObjectFactory.hpp"
 #include "PauseState.hpp"
@@ -129,6 +128,7 @@ bool PlayState::enter()
     sound.loadSFX(SOUND_DIRECTORY + "box/break.wav", "box_broken");
 
     sound.loadSFX(SOUND_DIRECTORY + "heart/bonus.wav", "heart_bonus");
+
     sound.loadSFX(SOUND_DIRECTORY + "diamond/bonus.wav", "diamond_bonus");
 
     sound.loadMusic(SOUND_DIRECTORY + "playstate/background.mp3", "playstate_background");
@@ -149,17 +149,14 @@ bool PlayState::loadLevel()
 {
     exit();
 
-    LevelParser levelParser;
-    level_ = levelParser.parseLevel(
-        Game::Instance().getLevelPath(Game::Instance().getLevelIndex()).c_str());
-
-    if (level_ == nullptr) {
+    level_ = level_parser_.parseLevel(Game::Instance().getCurrentLevelPath());
+    if (getLevel() == nullptr) {
         return false;
     }
 
     PhysicManager::Instance().createContactListener();
-    Game::Instance().setLevel(level_.get());
-    Camera::Instance().setTarget(level_->getPlayer());
+    Game::Instance().setLevel(getLevel());
+    Camera::Instance().setTarget(getLevel()->getPlayer());
     Camera::Instance().setZoom(3);
 
     resume();
@@ -168,7 +165,7 @@ bool PlayState::loadLevel()
 
 void PlayState::update()
 {
-    if (!isLoaded() || isPaused() || level_ == nullptr) {
+    if (!isLoaded() || isPaused() || getLevel() == nullptr) {
         return;
     }
 
@@ -177,19 +174,19 @@ void PlayState::update()
     }
 
     PhysicManager::Instance().update();
-    level_->update();
+    getLevel()->update();
     Camera::Instance().update();
 }
 
 void PlayState::render() const
 {
-    if (!isLoaded() || isPaused() || level_ == nullptr) {
+    if (!isLoaded() || isPaused() || getLevel() == nullptr) {
         return;
     }
 
-    Game::Instance().getWindow()->fill(level_->getBackgroundColor());
+    Game::Instance().getWindow()->fill(getLevel()->getBackgroundColor());
 
-    level_->render();
+    getLevel()->render();
 
     if (Game::Instance().isDebug()) {
         PhysicManager::Instance().debugDraw();
@@ -201,7 +198,7 @@ void PlayState::render() const
 void PlayState::renderStatusBar() const
 {
     TextureManager::Instance().draw("health_bar", {20.0f, 10.0f}, 154, 62);
-    for (int i = 0; i < level_->getPlayer()->getHp(); ++i) {
+    for (int i = 0; i < getLevel()->getPlayer()->getHp(); ++i) {
         TextureManager::Instance().draw("health_heart", {60 + i * 25.0f, 30}, 22, 19);
     }
 
@@ -237,4 +234,9 @@ bool PlayState::exit()
 std::string PlayState::getStateID() const
 {
     return kStateID_;
+}
+
+Level* PlayState::getLevel() const
+{
+    return level_.get();
 }

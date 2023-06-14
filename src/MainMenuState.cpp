@@ -100,7 +100,7 @@ void MainMenuState::render() const
         false,
         6);
 
-    const nlohmann::json& config = Utils::read_json_file(CONFIG_FILE);
+    const auto& config = Game::Instance().getConfig();
     const std::string& github = config["author"]["github"].get<std::string>();
     const std::string& email = config["author"]["email"].get<std::string>();
 

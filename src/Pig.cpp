@@ -77,11 +77,11 @@ void Pig::update()
 
     GameObject::update();
     raycast_.clear();
-    float nray = 50;
+    const float nray = 50;
     for (int i = 0; i < nray; ++i) {
-        b2Vec2 start = getPosition() + direction_ * (b2Vec2(width_ * 0.5f, 0)) +
+        const b2Vec2 start = getPosition() + direction_ * (b2Vec2(width_ * 0.5f, 0)) +
                        b2Vec2(0, -height_ * 0.5f + i * height_ / nray);
-        b2Vec2 end = start + direction_ * b2Vec2(vision_range_, 0);
+        const b2Vec2 end = start + direction_ * b2Vec2(vision_range_, 0);
         raycast_.push_back({start, end});
     }
 

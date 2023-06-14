@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include <nlohmann/json.hpp>
+
 #include "Cursor.hpp"
 #include "Level.hpp"
 #include "Window.hpp"
@@ -15,7 +17,7 @@ public:
     Game(Game const&) = delete;
     Game& operator=(Game const&) = delete;
 
-    void init(const int width, const int height, const std::string& title);
+    void init();
     void handleEvents();
     void update();
     void render() const;
@@ -24,12 +26,18 @@ public:
     void quit();
     void debugMode(bool is_debug);
 
+    void handleWin();
+    void handleLose();
+
     bool isRunning() const;
+    bool isDebug() const;
+    nlohmann::json getConfig() const;
     Window* getWindow() const;
-    Cursor* getCursor();
+    Cursor* getCursor() const;
     Level* getLevel() const;
     int getLevelIndex() const;
-    std::string getLevelPath(const int level_index);
+    std::string getLevelPath(const int level_index) const;
+    std::string getCurrentLevelPath() const;
     int getDiamond() const;
     int getScore() const;
     int getTopScore() const;
@@ -37,22 +45,28 @@ public:
     void nextLevel();
     void setLevel(Level* const level);
     void setLevelIndex(int const level_index);
+    void resetLevel();
+    bool isLastLevel() const;
 
-    void addDiamond(int n);
-    void useDiamond(int n);
+    void addDiamond(const int n);
+    void useDiamond(const int n);
 
     void resetScore();
-    void addScore(int score);
-
-    bool isDebug() const;
+    void addScore(const int score);
 
 private:
     Game();
-    void handleWin();
+    void readConfig();
+    void createWindow();
+    void createCursor();
+    void loadLevel();
+
+    nlohmann::json config_;
+    SDL_Event event_;
 
     std::unique_ptr<Window> window_;
-    Level* level_;
     std::unique_ptr<Cursor> cursor_;
+    Level* level_;
     int num_diamond_;
     bool is_running_;
     bool is_debug_;

@@ -1,11 +1,10 @@
 #include "Game.hpp"
 
-#include <memory>
-
 #include "CONSTANT.hpp"
 #include "GameStateManager.hpp"
 #include "InputManager.hpp"
 #include "Log.hpp"
+#include "LoseState.hpp"
 #include "MainMenuState.hpp"
 #include "ObjectFactory.hpp"
 #include "PhysicManager.hpp"
@@ -17,7 +16,9 @@
 #include "WinState.hpp"
 
 Game::Game()
-    : is_running_(false)
+    : level_(nullptr)
+    , num_diamond_(0)
+    , is_running_(false)
     , is_debug_(false)
     , level_index_(0)
     , top_score_(0)
@@ -30,57 +31,77 @@ Game& Game::Instance()
     return instance;
 }
 
-void Game::init(const int width, const int height, const std::string& title)
+void Game::readConfig()
 {
+    config_ = Utils::read_json_file(CONFIG_FILE);
+}
+
+void Game::init()
+{
+    readConfig();
     SDL::init();
-    window_ = std::make_unique<Window>(width, height, title);
-    window_->setIcon("assets/icon/icon.png");
-    PhysicManager::Instance().init(window_.get());
-
-    cursor_ = std::make_unique<Cursor>();
-    cursor_->init();
-
-    const auto& config = Utils::read_json_file(CONFIG_FILE);
-    level_files_ = config["levels"].get<std::vector<std::string>>();
-
+    createWindow();
+    PhysicManager::Instance().init(getWindow());
+    createCursor();
+    loadLevel();
     GameStateManager::Instance().changeState(std::make_unique<MainMenuState>());
-
     is_running_ = true;
+}
+
+void Game::createWindow()
+{
+    const auto& width = config_["width"].get<int>();
+    const auto& height = config_["height"].get<int>();
+    const auto& title = config_["title"].get<std::string>();
+
+    window_ = std::make_unique<Window>(width, height, title);
+    getWindow()->init();
+    getWindow()->setIcon(ICON_DIRECTORY + "icon.png");
+}
+
+void Game::createCursor()
+{
+    cursor_ = std::make_unique<Cursor>();
+    getCursor()->init();
+}
+
+void Game::loadLevel()
+{
+    level_files_ = config_["levels"].get<std::vector<std::string>>();
 }
 
 void Game::handleEvents()
 {
     InputManager::Instance().refresh();
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
+    while (SDL_PollEvent(&event_)) {
+        if (event_.type == SDL_QUIT) {
             quit();
         }
 
-        InputManager::Instance().update(event);
-        window_->handleEvents(event);
+        InputManager::Instance().update(event_);
+        getWindow()->handleEvents(event_);
     }
 }
 
 void Game::update()
 {
-    cursor_->reset();
+    getCursor()->reset();
     GameStateManager::Instance().update();
 }
 
 void Game::render() const
 {
-    window_->clear();
+    getWindow()->clear();
 
     GameStateManager::Instance().render();
-    cursor_->draw();
+    getCursor()->draw();
 
-    window_->refresh();
+    getWindow()->refresh();
 }
 
 void Game::handleFPS() const
 {
-    window_->delayFramerateIfNeeded();
+    getWindow()->delayFramerateIfNeeded();
 }
 
 void Game::clean()
@@ -91,7 +112,7 @@ void Game::clean()
     InputManager::Instance().clean();
     TextureManager::Instance().clean();
     SoundManager::Instance().clean();
-    SDL::exit();
+    SDL::quit();
 }
 
 void Game::quit()
@@ -111,26 +132,40 @@ void Game::setLevelIndex(const int level_index)
 
 void Game::nextLevel()
 {
-    auto const play_state =
-        dynamic_cast<PlayState*>(GameStateManager::Instance().getCurrentState());
-    if (play_state == nullptr) {
+    GameState* const current_state = GameStateManager::Instance().getCurrentState();
+    if (current_state->getStateID() != "PLAY_STATE") {
         return;
     }
 
-    level_index_ += 1;
-    if (level_index_ >= level_files_.size()) {
+    if (isLastLevel()) {
         handleWin();
         return;
     }
 
+    level_index_ += 1;
     GameStateManager::Instance().loading();
-    play_state->loadLevel();
+    dynamic_cast<PlayState*>(current_state)->loadLevel();
+}
+
+bool Game::isLastLevel() const
+{
+    return level_index_ == level_files_.size() - 1;
+}
+
+void Game::resetLevel()
+{
+    setLevelIndex(0);
 }
 
 void Game::handleWin()
 {
     GameStateManager::Instance().pushState(std::make_unique<WinState>());
-    level_index_ = 0;
+    resetLevel();
+}
+
+void Game::handleLose()
+{
+    GameStateManager::Instance().pushState(std::make_unique<LoseState>());
 }
 
 int Game::getLevelIndex() const
@@ -143,9 +178,14 @@ bool Game::isRunning() const
     return is_running_;
 }
 
-std::string Game::getLevelPath(int level_index)
+std::string Game::getLevelPath(int level_index) const
 {
-    return level_files_[level_index];
+    return level_files_.at(level_index);
+}
+
+std::string Game::getCurrentLevelPath() const
+{
+    return level_files_.at(getLevelIndex());
 }
 
 Window* Game::getWindow() const
@@ -171,7 +211,7 @@ void Game::debugMode(const bool is_debug)
     }
 }
 
-void Game::addDiamond(int n)
+void Game::addDiamond(const int n)
 {
     num_diamond_ += n;
 }
@@ -181,12 +221,12 @@ int Game::getDiamond() const
     return num_diamond_;
 }
 
-void Game::useDiamond(int n)
+void Game::useDiamond(const int n)
 {
     num_diamond_ -= n;
 }
 
-Cursor* Game::getCursor()
+Cursor* Game::getCursor() const
 {
     return cursor_.get();
 }
@@ -210,4 +250,9 @@ void Game::addScore(const int score)
 {
     score_ += score;
     top_score_ = std::max(top_score_, score_);
+}
+
+nlohmann::json Game::getConfig() const
+{
+    return config_;
 }

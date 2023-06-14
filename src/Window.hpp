@@ -23,9 +23,12 @@ public:
     Window(const int width, const int height, const std::string& title = "");
     ~Window();
 
-    void clear();
+    void init();
+    void clear() const;
     void handleEvents(SDL_Event& event);
     void destroy();
+
+    void loadFont(const std::string& font_path);
 
     void renderImage(
         SDL_Texture* const texture,
@@ -49,7 +52,7 @@ public:
 
     void setIcon(const std::string& filepath) const;
 
-    void fill(const Color& color);
+    void fill(const Color& color) const;
 
     void print(
         const std::string& text,

@@ -4,17 +4,18 @@
 
 #include "Log.hpp"
 
-
 void SDL::init()
 {
-    // Will initialize subsystems separatedly
-
     if (SDL_Init(0) < 0) {
         throw std::runtime_error("SDL_Init: Couldn't start SDL" + std::string(SDL_GetError()));
     }
+    initAudio();
+    initVideo();
+    initFont();
+};
 
-    // Initializing everything related to AUDIO
-
+void SDL::initAudio()
+{
     if (SDL_WasInit(SDL_INIT_AUDIO) != 0) {
         throw std::runtime_error(
             "SDL_WasInit: Tried to reinitailize Audio" + std::string(SDL_GetError()));
@@ -33,37 +34,51 @@ void SDL::init()
         throw std::runtime_error(
             "Mix_OpenAudio: Couldn't start Audio" + std::string(Mix_GetError()));
     }
+}
 
-    // Reserving 16 channels (meaning 16 simultaneous SFXs playing)sdl
-    Mix_AllocateChannels(16);
-
-    // Initializing everything related to VIDEO
-
+void SDL::initVideo()
+{
     if (SDL_WasInit(SDL_INIT_VIDEO) != 0) {
         throw std::runtime_error(
             "SDL_WasInit: Tried to reinitailize Video" + std::string(SDL_GetError()));
     }
+
     if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0) {
         throw std::runtime_error("SDL_Init: Couldn't start Video" + std::string(SDL_GetError()));
     }
+
     if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
         throw std::runtime_error(
             "IMG_Init: Couldn't start PNG support" + std::string(IMG_GetError()));
     }
+}
+
+void SDL::initFont()
+{
     if (TTF_Init() == -1) {
         throw std::runtime_error(
             "TTF_Init: Couldn't start TTF support" + std::string(TTF_GetError()));
     }
+}
+
+void SDL::quit()
+{
+    quitAudio();
+    quitFont();
+    SDL_Quit();
 };
 
-void SDL::exit()
+void SDL::quitAudio()
 {
     Mix_AllocateChannels(0);
     Mix_Quit();
     Mix_CloseAudio();
+}
+
+void SDL::quitFont()
+{
     TTF_Quit();
-    SDL_Quit();
-};
+}
 
 void SDL::hideCursor()
 {
