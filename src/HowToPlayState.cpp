@@ -29,7 +29,7 @@ bool HowToPlayState::enter()
     const int button_height = 50;
     auto back_button = std::make_unique<Button>();
     back_button->setTitle("back");
-    back_button->load(std::make_unique<LoaderParams>(
+    back_button->load(LoaderParams(
         Game::Instance().getWindow()->getCenter().x - 400,
         Game::Instance().getWindow()->getCenter().y - 300,
         button_width,

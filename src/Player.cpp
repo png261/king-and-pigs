@@ -20,10 +20,10 @@ Player::Player()
     , is_want_enter_door_(false)
 {}
 
-void Player::load(std::unique_ptr<LoaderParams> const& params)
+void Player::load(const LoaderParams& params)
 {
-    GameObject::load(std::move(params));
-    createBody(params->x(), params->y(), width_, height_);
+    GameObject::load(params);
+    createBody(params.x(), params.y(), width_, height_);
 
     createRectangleFixture(
         {0, 0},

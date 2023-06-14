@@ -4,7 +4,7 @@
 #include "PhysicManager.hpp"
 #include "SoundManager.hpp"
 
-void Heart::load(std::unique_ptr<LoaderParams> const& params)
+void Heart::load(const LoaderParams& params)
 {
     ItemObject::load(params);
     loadAnimation();

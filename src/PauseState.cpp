@@ -33,27 +33,23 @@ bool PauseState::enter()
 
     auto resume_button = std::make_unique<Button>();
     resume_button->setTitle("Resume");
-    resume_button->load(
-        std::make_unique<LoaderParams>(x - width * 0.5f, y - height * 0.5f, width, height));
+    resume_button->load(LoaderParams(x - width * 0.5f, y - height * 0.5f, width, height));
     resume_button->onClick([this]() { is_enterResume_ = true; });
 
     auto main_menu_button = std::make_unique<Button>();
     main_menu_button->setTitle("Main Menu");
-    main_menu_button->load(std::make_unique<LoaderParams>(
-        x - width * 0.5f,
-        y - height * 0.5f + margin_y,
-        width,
-        height));
+    main_menu_button->load(
+        LoaderParams(x - width * 0.5f, y - height * 0.5f + margin_y, width, height));
     main_menu_button->onClick([this]() { is_enter_main_menu = true; });
 
     auto mute_sfx_button = std::make_unique<Button>();
     mute_sfx_button->setTexture("icon mute_sfx");
-    mute_sfx_button->load(std::make_unique<LoaderParams>(x - 50 - 20, y + 200, 50, 50));
+    mute_sfx_button->load(LoaderParams(x - 50 - 20, y + 200, 50, 50));
     mute_sfx_button->onClick([]() { SoundManager::Instance().toggleMuteSFX(); });
 
     auto mute_music_button = std::make_unique<Button>();
     mute_music_button->setTexture("icon mute_music");
-    mute_music_button->load(std::make_unique<LoaderParams>(x + 20, y + 200, 50, 50));
+    mute_music_button->load(LoaderParams(x + 20, y + 200, 50, 50));
     mute_music_button->onClick([]() { SoundManager::Instance().toggleMuteMusic(); });
 
     ui_objects_.push_back(std::move(resume_button));

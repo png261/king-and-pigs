@@ -11,10 +11,10 @@ Bomb::Bomb()
     , on_timer_(1000)
 {}
 
-void Bomb::load(std::unique_ptr<LoaderParams> const& params)
+void Bomb::load(const LoaderParams& params)
 {
-    Object::load(std::move(params));
-    createBody(params->x(), params->y(), width_, height_);
+    Object::load(params);
+    createBody(params.x(), params.y(), width_, height_);
 
     createCircleFixture(
         {0, width_ / 4.0f},

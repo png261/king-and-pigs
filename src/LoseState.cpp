@@ -23,7 +23,7 @@ bool LoseState::enter()
 
     auto respawn_button = std::make_unique<Button>();
     respawn_button->setTitle("Respawn (2 diamond)");
-    respawn_button->load(std::make_unique<LoaderParams>(
+    respawn_button->load(LoaderParams(
         Game::Instance().getWindow()->getCenter().x - 340 * 0.5f,
         Game::Instance().getWindow()->getCenter().y - 70 * 0.5f,
         340,
@@ -38,7 +38,7 @@ bool LoseState::enter()
 
     auto new_game_button = std::make_unique<Button>();
     new_game_button->setTitle("New Game");
-    new_game_button->load(std::make_unique<LoaderParams>(
+    new_game_button->load(LoaderParams(
         Game::Instance().getWindow()->getCenter().x - button_width * 0.5f,
         Game::Instance().getWindow()->getCenter().y - button_height * 0.5f + margin_y,
         button_width,
@@ -47,7 +47,7 @@ bool LoseState::enter()
 
     auto main_menu_button = std::make_unique<Button>();
     main_menu_button->setTitle("Main Menu");
-    main_menu_button->load(std::make_unique<LoaderParams>(
+    main_menu_button->load(LoaderParams(
         Game::Instance().getWindow()->getCenter().x - button_width * 0.5f,
         Game::Instance().getWindow()->getCenter().y - button_height * 0.5f + margin_y * 2,
         button_width,

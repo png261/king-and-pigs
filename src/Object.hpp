@@ -11,7 +11,7 @@ public:
     Object();
     virtual ~Object() = default;
 
-    virtual void load(std::unique_ptr<LoaderParams> const& params);
+    virtual void load(const LoaderParams& params);
     virtual void update() = 0;
     virtual void draw() const = 0;
 

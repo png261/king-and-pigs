@@ -115,7 +115,7 @@ std::unique_ptr<Object> LevelParser::parseObject(
         return nullptr;
     }
 
-    object->load(std::make_unique<LoaderParams>(LoaderParams(x, y, w, h)));
+    object->load(LoaderParams(x, y, w, h));
 
     if (type == "Player") {
         level->setPlayer(dynamic_cast<Player*>(object.get()));

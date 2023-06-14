@@ -7,11 +7,11 @@ Object::Object()
     , height_(0)
 {}
 
-void Object::load(std::unique_ptr<LoaderParams> const& params)
+void Object::load(const LoaderParams& params)
 {
-    position_ = b2Vec2(params->x(), params->y());
-    width_ = params->width();
-    height_ = params->height();
+    position_ = b2Vec2(params.x(), params.y());
+    width_ = params.width();
+    height_ = params.height();
 };
 
 void Object::disappear()

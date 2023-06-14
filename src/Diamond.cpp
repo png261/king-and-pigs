@@ -4,7 +4,7 @@
 #include "PhysicManager.hpp"
 #include "SoundManager.hpp"
 
-void Diamond::load(std::unique_ptr<LoaderParams> const& params)
+void Diamond::load(const LoaderParams& params)
 {
     ItemObject::load(params);
     loadAnimation();

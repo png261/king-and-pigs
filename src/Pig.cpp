@@ -14,10 +14,10 @@ Pig::Pig()
     , AttackerObject(1, 20, 500)
 {}
 
-void Pig::load(std::unique_ptr<LoaderParams> const& params)
+void Pig::load(const LoaderParams& params)
 {
-    GameObject::load(std::move(params));
-    createBody(params->x(), params->y(), width_, height_);
+    GameObject::load(params);
+    createBody(params.x(), params.y(), width_, height_);
 
     createRectangleFixture(
         {0, 0},

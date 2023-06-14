@@ -10,10 +10,10 @@ Box::Box()
     , DamageableObject(1, 200, 100)
 {}
 
-void Box::load(std::unique_ptr<LoaderParams> const& params)
+void Box::load(const LoaderParams& params)
 {
-    GameObject::load(std::move(params));
-    createBody(params->x(), params->y(), getWidth(), getHeight());
+    GameObject::load(params);
+    createBody(params.x(), params.y(), getWidth(), getHeight());
 
     createRectangleFixture(
         {0, 0},
@@ -69,14 +69,14 @@ void Box::updateAnimation()
 
 void Box::randomBonus()
 {
-    auto params = std::make_unique<LoaderParams>(LoaderParams(getX(), getY(), 10, 10));
+    LoaderParams params(getX(), getY(), 10, 10);
     if (Utils::isProbable(30)) {
-        Game::Instance().getLevel()->spawnObject("Heart", std::move(params));
+        Game::Instance().getLevel()->spawnObject("Heart", params);
         return;
     }
 
     if (Utils::isProbable(10)) {
-        Game::Instance().getLevel()->spawnObject("Diamond", std::move(params));
+        Game::Instance().getLevel()->spawnObject("Diamond", params);
         return;
     }
 }

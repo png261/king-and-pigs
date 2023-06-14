@@ -43,7 +43,7 @@ public:
 
     Player* getPlayer() const;
     void setPlayer(Player* const player);
-    Object* spawnObject(const std::string& type, std::unique_ptr<LoaderParams> const& params) const;
+    Object* spawnObject(const std::string& type, const LoaderParams& params) const;
 
     Color getBackgroundColor() const;
     int getMapWidth() const;

@@ -24,7 +24,7 @@ bool WinState::enter()
 
     auto main_menu_button = std::make_unique<Button>();
     main_menu_button->setTitle("Main Menu");
-    main_menu_button->load(std::make_unique<LoaderParams>(
+    main_menu_button->load(LoaderParams(
         Game::Instance().getWindow()->getCenter().x - width * 0.5f,
         Game::Instance().getWindow()->getCenter().y - height * 0.5f,
         width,
@@ -33,7 +33,7 @@ bool WinState::enter()
 
     auto exit_button = std::make_unique<Button>();
     exit_button->setTitle("Exit");
-    exit_button->load(std::make_unique<LoaderParams>(
+    exit_button->load(LoaderParams(
         Game::Instance().getWindow()->getCenter().x - width * 0.5f,
         Game::Instance().getWindow()->getCenter().y - height * 0.5f + margin_y,
         width,

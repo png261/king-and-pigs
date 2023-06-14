@@ -2,10 +2,10 @@
 
 #include "PhysicManager.hpp"
 
-void ItemObject::load(std::unique_ptr<LoaderParams> const& params)
+void ItemObject::load(const LoaderParams& params)
 {
-    GameObject::load(std::move(params));
-    createBody(params->x(), params->y(), width_, height_);
+    GameObject::load(params);
+    createBody(params.x(), params.y(), width_, height_);
 
     createRectangleSensor(
         {0, 0},

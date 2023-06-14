@@ -70,12 +70,12 @@ void Level::setPlayer(Player* const player)
     player_ = player;
 }
 
-Object* Level::spawnObject(const std::string& type, std::unique_ptr<LoaderParams> const& params)
+Object* Level::spawnObject(const std::string& type, const LoaderParams& params)
     const
 {
     std::unique_ptr<Object> object = ObjectFactory::Instance().create(type);
     Object* newObject = object.get();
-    object->load(std::move(params));
+    object->load(params);
     spawn_layer_->addObject(std::move(object));
     return newObject;
 }

@@ -18,9 +18,9 @@ Button::Button()
     , disabled_color_(ColorName::GRAY)
 {}
 
-void Button::load(std::unique_ptr<LoaderParams> const& params)
+void Button::load(const LoaderParams& params)
 {
-    rectangle_ = Rectangle(params->x(), params->y(), params->width(), params->height());
+    rectangle_ = Rectangle(params.x(), params.y(), params.width(), params.height());
     SoundManager::Instance().loadSFX(SOUND_DIRECTORY + "button/clicked.mp3", "button clicked");
 }
 

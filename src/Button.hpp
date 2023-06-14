@@ -11,7 +11,7 @@ class Button final : public UiObject
 public:
     Button();
 
-    void load(std::unique_ptr<LoaderParams> const& params) override;
+    void load(const LoaderParams& params) override;
     void update() override;
     void draw() const override;
 

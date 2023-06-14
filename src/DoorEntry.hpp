@@ -6,7 +6,7 @@
 class DoorEntry final : public Door
 {
 public:
-    void load(std::unique_ptr<LoaderParams> const& params) override;
+    void load(const LoaderParams& params) override;
     void update() override;
 };
 

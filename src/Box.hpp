@@ -9,7 +9,7 @@ class Box final : public GameObject, public DamageableObject
 public:
     Box();
 
-    void load(std::unique_ptr<LoaderParams> const& params) override;
+    void load(const LoaderParams& params) override;
     void update() override;
     void loadAnimation() override;
     void updateAnimation() override;

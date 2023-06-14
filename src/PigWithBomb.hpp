@@ -7,7 +7,7 @@ class PigWithBomb final : public Pig
 public:
     PigWithBomb();
 
-    void load(std::unique_ptr<LoaderParams> const& params) override;
+    void load(const LoaderParams& params) override;
     void update() override;
     void loadAnimation() override;
 

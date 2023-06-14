@@ -1,8 +1,8 @@
 #include "DoorEntry.hpp"
 
-void DoorEntry::load(std::unique_ptr<LoaderParams> const& params)
+void DoorEntry::load(const LoaderParams& params)
 {
-    Door::load(std::move(params));
+    Door::load(params);
     open();
 }
 

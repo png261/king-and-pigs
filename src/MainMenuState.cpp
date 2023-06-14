@@ -34,7 +34,7 @@ bool MainMenuState::enter()
 
     auto new_game_button = std::make_unique<Button>();
     new_game_button->setTitle("New Game");
-    new_game_button->load(std::make_unique<LoaderParams>(
+    new_game_button->load(LoaderParams(
         Game::Instance().getWindow()->getCenter().x - button_width * 0.5f,
         Game::Instance().getWindow()->getCenter().y - button_height * 0.5f,
         button_width,
@@ -43,7 +43,7 @@ bool MainMenuState::enter()
 
     auto how_to_play_button = std::make_unique<Button>();
     how_to_play_button->setTitle("How To Play");
-    how_to_play_button->load(std::make_unique<LoaderParams>(
+    how_to_play_button->load(LoaderParams(
         Game::Instance().getWindow()->getCenter().x - button_width * 0.5f,
         Game::Instance().getWindow()->getCenter().y - button_height * 0.5f + margin_y,
         button_width,
