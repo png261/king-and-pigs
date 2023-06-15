@@ -1,0 +1,23 @@
+#pragma once
+
+#include <box2d/box2d.h>
+#include <string>
+
+const std::string CONFIG_FILE = "@CONFIG_FILE@";
+const std::string IMAGE_DIRECTORY = "@IMAGE_DIRECTORY@";
+const std::string SOUND_DIRECTORY = "@SOUND_DIRECTORY@";
+const std::string FONT_DIRECTORY = "@FONT_DIRECTORY@";
+const std::string LEVEL_DIRECTORY = "@LEVEL_DIRECTORY@";
+const std::string ICON_DIRECTORY = "@ICON_DIRECTORY@";
+const std::string AUTHOR_NAME = "@AUTHOR_NAME@";
+const std::string AUTHOR_GITHUB = "@AUTHOR_GITHUB@";
+const std::string AUTHOR_EMAIL = "@AUTHOR_EMAIL@";
+
+const float PIXEL_PER_METER = 32.0f;
+const float METER_PER_PIXEL = 1 / PIXEL_PER_METER;
+const float RAD_PER_DEG = 180.0f / b2_pi;
+const float DEG_PER_RAD = b2_pi / 180.0f;
+const float GROUND_FRICTION = 5.0f;
+const float GRAVITY = 10.0f;
+
+const std::string ONE_WAY_TYPE = "oneway";

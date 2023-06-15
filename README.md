@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/png261/king-and-pigs">
-    <img style="image-rendering: pixelated" src="https://github.com/png261/king-and-pigs/blob/main/assets/images/ui/logo.png" width="700"/>
+    <img style="image-rendering: pixelated" src="https://github.com/png261/king-and-pigs/blob/main/data/images/ui/logo.png" width="700"/>
   </a>
 </h1>
 <div align="center">
@@ -65,6 +65,7 @@ Please see https://png261.github.io/king-and-pigs/ for more informations
 - [alexdantas/sdl2-platformer](https://github.com/alexdantas/sdl2-platformer)
 - [AdriaPm/GameDevelopment_Platformer_Game](https://github.com/AdriaPm/GameDevelopment_Platformer_Game)
 - [TheLartians/ModernCppStarter](https://github.com/TheLartians/ModernCppStarter)
+- [kracejic/cleanCppProject](https://github.com/kracejic/cleanCppProject)
 - [SDL2](https://www.libsdl.org/)
 - [SDL2_image](https://www.libsdl.org/projects/SDL_image/)
 - [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
