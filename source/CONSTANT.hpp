@@ -4,12 +4,11 @@
 #include <string>
 
 const std::string CONFIG_FILE = "data/game_config.json";
-const std::string ASSETS_DIRECTORY = "assets/";
-const std::string IMAGE_DIRECTORY = "assets/images/";
-const std::string SOUND_DIRECTORY = "assets/sounds/";
-const std::string FONT_DIRECTORY = "assets/fonts/";
-const std::string LEVEL_DIRECTORY = "assets/levels/";
-const std::string ICON_DIRECTORY = "assets/icon/";
+const std::string IMAGE_DIRECTORY = "data/images/";
+const std::string SOUND_DIRECTORY = "data/sounds/";
+const std::string FONT_DIRECTORY = "data/fonts/";
+const std::string LEVEL_DIRECTORY = "data/levels/";
+const std::string ICON_DIRECTORY = "data/icon/";
 
 
 const float PIXEL_PER_METER = 32.0f;

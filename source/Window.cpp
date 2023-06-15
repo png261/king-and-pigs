@@ -50,6 +50,7 @@ void Window::init()
 
 void Window::loadFont(const std::string& font_path)
 {
+    std::cout << "font_path:" << font_path << std::endl;
     font_ = TTF_OpenFont((font_path).c_str(), 28);
     if (font_ == nullptr) {
         throw std::runtime_error("Window: Fail load font");
