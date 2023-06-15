@@ -71,3 +71,7 @@ CPMAddPackage(
     GITHUB_REPOSITORY leethomason/tinyxml2
     OPTIONS "tinyxml2_BUILD_TESTING OFF"
 )
+
+# ---- Static libraries ----
+# SDL2_gfx
+add_subdirectory(SDL2_gfx)

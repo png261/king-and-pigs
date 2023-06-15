@@ -1,1 +1,3 @@
 build/
+source/CONSTANT.hpp
+data/config.json

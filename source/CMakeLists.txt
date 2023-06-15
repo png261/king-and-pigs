@@ -10,12 +10,15 @@ else()
 endif(WIN32)
 
 # Link dependencies
+target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_gfx_INCLUDE_DIR})
+
 target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC SDL2-static
            SDL2_image
            SDL2_mixer
            SDL2_ttf
+           SDL2_gfx
            box2d
            nlohmann_json::nlohmann_json
            tinyxml2
