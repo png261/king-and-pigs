@@ -15,6 +15,10 @@ set(AUTHOR_GMAIL "nhphuong.code@gmail.com")
 set(PROJECT_GITHUB_URL "https://github.com/png261/king-and-pigs")
 set(PROJECT_SUMMARY "C++ game")
 set(PROJECT_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")
+set(PROJECT_DESCRIPTION "${PROJECT_SOURCE_DIR}/README.md")
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(useGoldLinker)
 
 add_subdirectory(external)
 add_subdirectory(data)
