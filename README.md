@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/png261/king-and-pigs">
-    <img style="image-rendering: pixelated" src="https://github.com/png261/king-and-pigs/blob/main/assets/images/ui/logo.png" width="700"/>
+    <img style="image-rendering: pixelated" src="https://github.com/png261/king-and-pigs/blob/main/data/images/ui/logo.png" width="700"/>
   </a>
 </h1>
 <div align="center">
