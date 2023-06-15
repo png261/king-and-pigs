@@ -10,6 +10,7 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 set(AUTHOR_NAME "phuong nguyen")
+set(AUTHOR_GITHUB "https://github.com/png261")
 set(AUTHOR_GMAIL "nhphuong.code@gmail.com")
 set(PROJECT_GITHUB_URL "https://github.com/png261/king-and-pigs")
 set(PROJECT_SUMMARY "C++ game")

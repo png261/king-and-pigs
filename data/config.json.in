@@ -1,0 +1,9 @@
+{
+    "debug_mode": @GAME_DEBUG@,
+    "width": @GAME_WIDTH@,
+    "height": @GAME_HEIGHT@,
+    "title": "@GAME_TITLE@",
+    "levels": [
+        @GAME_LEVELS@
+    ]
+}

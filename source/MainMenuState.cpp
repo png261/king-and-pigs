@@ -100,12 +100,8 @@ void MainMenuState::render() const
         false,
         6);
 
-    const auto& config = Game::Instance().getConfig();
-    const std::string& github = config["author"]["github"].get<std::string>();
-    const std::string& email = config["author"]["email"].get<std::string>();
-
     Game::Instance().getWindow()->print(
-        github + " - " + email,
+        AUTHOR_GITHUB + " - " + AUTHOR_EMAIL,
         Game::Instance().getWindow()->getCenter().x,
         Game::Instance().getWindow()->getHeight() - 50,
         20,
