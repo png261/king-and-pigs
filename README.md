@@ -14,6 +14,8 @@
 ## Description
 **King and Pigs** is a 2D game written in C++. In this game, the player controls a character who must navigate through various levels and defeat enemies.
 
+
+
 ## Table of Contents
 - [Installation](#installation)
 - [Build from source](#build-from-source)
@@ -55,6 +57,10 @@ To install the game on your computer, follow these steps:
 
 ***Note***: Setup 2 only work with English keyboard 
 
+## Screenshots
+#### Map editting with [Tiled Map Editor](https://www.mapeditor.org/)
+![image](https://github.com/png261/king-and-pigs/assets/63899044/b1d9b49e-a740-489b-b906-98f713de7268)
+
 ## Documentation
 Please see https://png261.github.io/king-and-pigs/ for more informations
 
@@ -74,6 +80,7 @@ Please see https://png261.github.io/king-and-pigs/ for more informations
 - [Box2D](https://box2d.org/)
 - [JsonCpp](http://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html)
 - [TinyXML-2](https://github.com/leethomason/tinyxml2)
+- [Tiled Map Editor](https://www.mapeditor.org/)
 
 ## Contact
 If you have any questions or suggestions about this project, feel free to contact me at:
